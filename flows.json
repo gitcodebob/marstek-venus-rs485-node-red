@@ -1,0 +1,38 @@
+[
+    {
+        "id": "3794cac417adfc3c",
+        "type": "function",
+        "z": "06b3944959a8c9e5",
+        "g": "01ba2e0cd261fb0b",
+        "name": "Load distribution",
+        "func": "// INPUT\nvar batteries = flow.get(\"batteries\");\nvar isCharging = flow.get(\"batteries_charging\"); // Are we in a battery charging scenario?\nvar logdata = `Charging?=${isCharging} | `; // logging\n// how much power do the batteries need to compensate?\nvar unassigned_power = Math.abs(msg.payload); // Power in W to compensate using batteries\n\n// inits \nvar output_array = []; // node outputs\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// battery life improvement (slow charge near max SoC)\n/**\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    logdata += `soc ${soc}, max ${max_power} | `;\n    if(max_power < 0) max_power = 0;\n    if (soc >= 98) return Math.min(200, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 90) return Math.min(1500, max_power);\n    return max_power;\n}\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ soc: number; soc_max: number; soc_min: number; rs485: string; id: any; charging_max: any; discharging_max: any; }} */ battery) =>{\n    // Step 1. remove unfit batteries\n    if(\n        (battery.soc >= battery.soc_max && isCharging) || \n        (battery.soc <= battery.soc_min && !isCharging) || \n        battery.rs485 !== \"enable\") {\n            // stop forced control \n            output_array.push({payload:\"stop\"});  // forcible mode\n            output_array.push({payload: 0});       // power\n            logdata += `${battery.id}: [inactive] SoC=${battery.soc_max}>**${battery.soc}**>${battery.soc_min}%, rs485=${battery.rs485} | `;\n            // skip this battery\n            return;\n        }\n\n    // Step 2. assign available (dis)charging power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power); // commit\n\n    // Step 3. set output values\n    output_array.push({payload: isCharging?\"charge\":assign<=0?\"stop\":\"discharge\"});  // forcible mode\n    output_array.push({payload: Math.round(assign * 10) / 10}); // power, round to 1 decimal\n\n    // update tally\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n});\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power);\nlogdata += `batteries_total_assignable_power ${batteries_total_assignable_power} | `;\n\n// OUTPUT\noutput_array.push({payload: logdata, logtitle: \"Battery charge scenario\"});\nreturn output_array;",
+        "outputs": 5,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 640,
+        "wires": [
+            [
+                "00843655a926c41b"
+            ],
+            [
+                "d9e04b7a7e98960f"
+            ],
+            [
+                "6745cb48407597aa"
+            ],
+            [
+                "dfe983225f1fe7e7"
+            ],
+            [
+                "4cd5d6d88cc41a09"
+            ]
+        ],
+        "inputLabels": [
+            "isCharging (boolean)"
+        ]
+    }
+]
