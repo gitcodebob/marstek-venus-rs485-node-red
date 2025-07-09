@@ -1,0 +1,12 @@
+# This file is an example for the main Home Assistant configuration.
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder if you have one.
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Add the following lines if you want to use the example sensors and input/output controls.
+template: !include template_sensor.yaml
+input_number: !include input_numbers.yaml

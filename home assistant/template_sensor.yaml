@@ -1,0 +1,14 @@
+sensor:
+# This file contains template sensors for Home Assistant.
+# It is included in the main configuration.yaml file.
+# You can add your own sensors here.
+# Example sensor for single-phase power meter.:
+  - name: "P1 Meter Vermogen"
+    unique_id: "p1_meter_vermogen_totaal"
+    unit_of_measurement: "W"
+    device_class: "power"
+    state_class: "measurement"
+    state: >
+      {% set consumption = states('sensor.electricity_meter_power_consumption_phase_l1') | float(0) %}
+      {% set production = states('sensor.electricity_meter_power_production_phase_l1') | float(0) %}
+      {{ (consumption - production) | round(2) }}

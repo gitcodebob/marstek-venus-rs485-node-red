@@ -1,0 +1,103 @@
+house_battery_control_error_signal:
+  # PID control error
+  name: "House Battery Control Error Signal"
+  min: -3600 # the maximum power any inhouse transmission line is allowed to carry
+  max: 3600 # the maximum power any inhouse transmission line is allowed to carry
+  step: 0.1
+  unit_of_measurement: "W"
+  mode: box
+  initial: 0
+  icon: mdi:chart-timeline-variant-shimmer # shimmering line chart
+
+house_battery_control_pid_output:
+  # PID output = manipulated variable = battery power setpoint
+  # Batteries are commanded to deliver or charge by this amount
+  name: "House Battery Control PID Output"
+  min: -3600 # the maximum power any inhouse transmission line is allowed to carry
+  max: 3600 # the maximum power any inhouse transmission line is allowed to carry
+  step: 0.1
+  unit_of_measurement: "W"
+  mode: box
+  initial: 0
+  icon: mdi:chart-timeline-variant-shimmer # shimmering line chart
+
+house_battery_control_hysteresis_in_w:
+  # PID optimization
+  # Prevents excessive switching between (dis)charge mode around the zero point.
+  # Let the battery switch from charge/discharge only when the demand is larger than the hysteresis.
+  name: "House Battery Control Hysteresis in W"
+  min: 0 # no hysteresis. The control system switches instantly from charge to discharge and back again when crossing the 0 point.
+  max: 200
+  step: 1
+  unit_of_measurement: "W"
+  mode: slider # 'box' of 'slider'
+  initial: 0
+  icon: mdi:numeric
+
+house_battery_control_kp:
+  # PID proportional amplification Kp
+  name: "House Battery Control Proportional (Kp)"
+  min: 0 # no proportional control
+  max: 2 # ecsessive proportional amplification
+  step: 0.1
+  unit_of_measurement: ""
+  mode: box # 'box' of 'slider'
+  initial: 0.5
+  icon: mdi:amplifier
+
+house_battery_control_ki:
+  # PID integral amplification Ki
+  # removes residual offset / steady state errors
+  name: "House Battery Control Integral (Ki)"
+  min: 0 # no integrating control
+  max: 5
+  step: 0.1
+  unit_of_measurement: ""
+  mode: box # 'box' of 'slider'
+  initial: 0
+  icon: mdi:amplifier
+
+house_battery_control_kd:
+  # PID differential amplification Kd
+  # help anticipate next value based on rate of change
+  name: "House Battery Control Differential (Kd)"
+  min: 0 # no integrating control
+  max: 5
+  step: 0.1
+  unit_of_measurement: ""
+  mode: box # 'box' of 'slider'
+  initial: 0
+  icon: mdi:amplifier
+
+house_battery_control_p_term:
+  # output only, calculated p_term
+  name: "House Battery Control P-term"
+  min: -10000 # arbitrary
+  max: 10000 # arbitrary
+  step: 1
+  unit_of_measurement: "W"
+  mode: box
+  initial: 0
+  icon: mdi:chart-timeline-variant-shimmer # shimmering line chart
+
+house_battery_control_i_term:
+  # output only, calculated i_term
+  name: "House Battery Control I-term"
+  min: -10000 # arbitrary
+  max: 10000 # arbitrary
+  step: 1
+  unit_of_measurement: "W"
+  mode: box
+  initial: 0
+  icon: mdi:chart-timeline-variant-shimmer # shimmering line chart
+
+house_battery_control_d_term:
+  # output only, calculated p_term
+  name: "House Battery Control D-term"
+  min: -10000 # arbitrary
+  max: 10000 # arbitrary
+  step: 1
+  unit_of_measurement: "W"
+  mode: box
+  initial: 0
+  icon: mdi:chart-timeline-variant-shimmer # shimmering line chart
