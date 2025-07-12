@@ -27,6 +27,12 @@ A proportional–integral–derivative controller (PID controller or three-term 
 4. **Configure Home Assistant**
    - Use the provided YAML files in the `home assistant` folder as examples for your own configuration.
 
+### Good to know
+- The P1 value is expected in Watt (w). If your meter supplies kW, multiply the P1 input * 1000
+- The sensors have safety limits. Configured to 3600W: the maximum power any inhouse transmission line is allowed to carry.
+   - These can be found in `home assistant\input_numbers.yaml`
+   - If there are other devices on the fuse box group of your battery: set it to 800W
+   - If you have each battery on its own fuse box group: set the value to 3600W x the number of batteries.
 
 ## Tuning and Operation (minimal)
 In Home Assistant:
@@ -63,6 +69,11 @@ Use the [Ziegler-Nichols method]((https://en.wikipedia.org/wiki/Proportional%E2%
 
 Note: every system is different and your home is unique. Tune in small increments from here. 
 
+## Troubleshooting
+1. The controller barely responds and (dis)charges only with a few Watts
+   - A: check if the P1 input is in Watt and not in kW.
+1. I get an error `"HomeAssistantError: Invalid value for input_number.house_battery_control_pid_output: 4249 (range -3600.0 - 3600.0)"`
+   - A: read [good to know](#good-to-know) for instructions to set safety limits correctly.
 
 ## Credits
 This PID controller flow is based on the approach by Ruald Ordelman. Many thanks for sharing your work and ideas with the community!
