@@ -1,0 +1,65 @@
+# Home Assistant Dashboard Configuration
+# This file defines a dashboard layout and components for PID home battery control, as an example.
+views:
+  - type: sections
+    path: home-battery-control
+    max_columns: 3
+    title: Home battery control
+    icon: mdi:home-battery-outline
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Master control
+            heading_style: title
+          - type: tile
+            entity: input_select.marstek_master_battery_mode
+            features_position: bottom
+            vertical: true
+            show_entity_picture: false
+            hide_state: false
+            grid_options:
+              columns: full
+          - type: history-graph
+            entities:
+              - entity: input_number.house_battery_control_pid_output
+              - entity: select.marstek_m1_forcible_charge_discharge
+                name: M1
+              - entity: select.marstek_m2_forcible_charge_discharge
+                name: M2
+            hours_to_show: 0.05
+          - type: entities
+            entities:
+              - entity: input_number.house_battery_control_hysteresis_in_w
+                name: 'Hysteresis '
+                secondary_info: none
+              - entity: input_number.house_battery_control_kp
+                name: Proportional gain (Kp)
+              - entity: input_number.house_battery_control_ki
+                name: Integral gain (Ki)
+              - entity: input_number.house_battery_control_kd
+                name: Differential gain (Kd)
+            title: PID controls
+      - cards:
+          - type: heading
+            heading: Histrory
+          - title: PID analysis
+            type: history-graph
+            entities:
+              - input_number.house_battery_control_error_signal
+              - sensor.p1_meter_vermogen
+              - input_number.house_battery_control_pid_output
+              - input_number.house_battery_control_p_term
+              - input_number.house_battery_control_i_term
+              - input_number.house_battery_control_d_term
+            grid_options:
+              columns: full
+            hours_to_show: 0.1
+        column_span: 3
+    header:
+      card:
+        type: markdown
+        content: |-
+          # Home batteries
+          Status en settings
+        text_only: true
