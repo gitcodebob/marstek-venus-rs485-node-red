@@ -31,7 +31,6 @@ house_battery_control_hysteresis_in_w:
   step: 1
   unit_of_measurement: "W"
   mode: slider # 'box' of 'slider'
-  initial: 0
   icon: mdi:numeric
 
 house_battery_control_kp:
@@ -39,10 +38,9 @@ house_battery_control_kp:
   name: "House Battery Control Proportional (Kp)"
   min: 0 # no proportional control
   max: 2 # ecsessive proportional amplification
-  step: 0.1
+  step: 0.05
   unit_of_measurement: ""
   mode: box # 'box' of 'slider'
-  initial: 0.5
   icon: mdi:amplifier
 
 house_battery_control_ki:
@@ -51,10 +49,9 @@ house_battery_control_ki:
   name: "House Battery Control Integral (Ki)"
   min: 0 # no integrating control
   max: 5
-  step: 0.1
+  step: 0.05
   unit_of_measurement: ""
   mode: box # 'box' of 'slider'
-  initial: 0
   icon: mdi:amplifier
 
 house_battery_control_kd:
@@ -63,10 +60,9 @@ house_battery_control_kd:
   name: "House Battery Control Differential (Kd)"
   min: 0 # no integrating control
   max: 5
-  step: 0.1
+  step: 0.05
   unit_of_measurement: ""
   mode: box # 'box' of 'slider'
-  initial: 0
   icon: mdi:amplifier
 
 house_battery_control_p_term:

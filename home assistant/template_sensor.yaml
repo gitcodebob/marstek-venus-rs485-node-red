@@ -2,6 +2,7 @@ sensor:
 # This file contains template sensors for Home Assistant.
 # It is included in the main configuration.yaml file.
 # You can add your own sensors here.
+
 # Example sensor for single-phase power meter.:
   - name: "P1 Meter Vermogen"
     unique_id: "p1_meter_vermogen_totaal"

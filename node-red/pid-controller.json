@@ -84,7 +84,7 @@
             "e6ec61caa46eaf0a"
         ],
         "x": 24,
-        "y": 919,
+        "y": 1199,
         "w": 912,
         "h": 242
     },
@@ -192,7 +192,7 @@
             "31978133ce1ee951"
         ],
         "x": 694,
-        "y": 279,
+        "y": 479,
         "w": 332,
         "h": 182
     },
@@ -211,7 +211,7 @@
             "b9ec9489dc15110c"
         ],
         "x": 694,
-        "y": 479,
+        "y": 679,
         "w": 332,
         "h": 242
     },
@@ -500,7 +500,7 @@
         "z": "06b3944959a8c9e5",
         "g": "66935d9bb6f3d9e5",
         "name": "Mapping",
-        "func": "\n\nvar M1_power = flow.get(\"marstek_m1_battery_power\");    // charging is positive, discharge is negative\nvar M2_power = flow.get(\"marstek_m2_battery_power\");    // charging is positive, discharge is negative\n\nvar M1_charging_max = flow.get(\"marstek_m1_max_charge_power\"); // W\nvar M2_charging_max = flow.get(\"marstek_m2_max_charge_power\"); // W\nvar M1_discharging_max = flow.get(\"marstek_m1_max_discharge_power\");\nvar M2_discharging_max = flow.get(\"marstek_m2_max_discharge_power\");\n\nvar M1_control_mode = flow.get(\"marstek_m1_rs485_control_mode\"); // enable/disable\nvar M2_control_mode = flow.get(\"marstek_m2_rs485_control_mode\"); // enable/disable\n\nvar M1_soc = Number(flow.get(\"marstek_m1_battery_state_of_charge\"));         //%\nvar M1_soc_min = Number(flow.get(\"marstek_m1_discharging_cutoff_capacity\")); //%\nvar M1_soc_max = Number(flow.get(\"marstek_m1_charging_cutoff_capacity\"));    //%\nvar M2_soc = Number(flow.get(\"marstek_m2_battery_state_of_charge\"));         //%\nvar M2_soc_min = Number(flow.get(\"marstek_m2_discharging_cutoff_capacity\")); //%\nvar M2_soc_max = Number(flow.get(\"marstek_m2_charging_cutoff_capacity\"));    //%\n\n//--    Battery list\n// Note: the order of the batteries in the `battery_array` determines priority in (dis)charging.\n// e.g. the first battery gets priority to charge, when it is at capacity the next battery gets what remains.\n// Batteries with built-in converters are most efficient at peak power. \n// The efficiency is optimized by prioritizing batteries instead of spreading load evenly accross al batteries. \n// Manipulating the order of the array allows you to control which battery is in the lead.\nlet battery_array = [\n    { id: \"M1\", \n      power: M1_power, charging_max: M1_charging_max, discharging_max: M1_discharging_max,\n      soc: M1_soc, soc_min: M1_soc_min, soc_max: M1_soc_max,\n      rs485: M1_control_mode \n    },\n    { id: \"M2\", \n      power: M2_power, charging_max: M2_charging_max, discharging_max: M2_discharging_max,\n      soc: M2_soc, soc_min: M2_soc_min, soc_max: M2_soc_max,\n      rs485: M2_control_mode \n    }//,\n    // { id: \"M3\", \n    //   power: M3_power, charging_max: M3_charging_max, discharging_max: M3_discharging_max,\n    //   power_set: 0, // what power level should be set next\n    //   soc: M3_soc, soc_min: M3_soc_min, soc_max: M3_soc_max,\n    //   rs485: M3_control_mode \n    // }\n];\n\n// -- payload\nreturn {payload: battery_array};",
+        "func": "var M1_power = flow.get(\"marstek_m1_battery_power\");    // charging is positive, discharge is negative\nvar M2_power = flow.get(\"marstek_m2_battery_power\");    // charging is positive, discharge is negative\n\nvar M1_charging_max = flow.get(\"marstek_m1_max_charge_power\"); // W\nvar M2_charging_max = flow.get(\"marstek_m2_max_charge_power\"); // W\nvar M1_discharging_max = flow.get(\"marstek_m1_max_discharge_power\");\nvar M2_discharging_max = flow.get(\"marstek_m2_max_discharge_power\");\n\nvar M1_control_mode = flow.get(\"marstek_m1_rs485_control_mode\"); // enable/disable\nvar M2_control_mode = flow.get(\"marstek_m2_rs485_control_mode\"); // enable/disable\n\nvar M1_soc = Number(flow.get(\"marstek_m1_battery_state_of_charge\"));         //%\nvar M1_soc_min = Number(flow.get(\"marstek_m1_discharging_cutoff_capacity\")); //%\nvar M1_soc_max = Number(flow.get(\"marstek_m1_charging_cutoff_capacity\"));    //%\nvar M2_soc = Number(flow.get(\"marstek_m2_battery_state_of_charge\"));         //%\nvar M2_soc_min = Number(flow.get(\"marstek_m2_discharging_cutoff_capacity\")); //%\nvar M2_soc_max = Number(flow.get(\"marstek_m2_charging_cutoff_capacity\"));    //%\n\n//--    Battery list\n// Note: the order of the batteries in the `battery_array` determines priority in (dis)charging.\n// e.g. the first battery gets priority to charge, when it is at capacity the next battery gets what remains.\n// Batteries with built-in converters are most efficient at peak power. \n// The efficiency is optimized by prioritizing batteries instead of spreading load evenly accross al batteries. \n// Manipulating the order of the array allows you to control which battery is in the lead.\nlet battery_array = [\n    { id: \"M1\", \n      power: M1_power, charging_max: M1_charging_max, discharging_max: M1_discharging_max,\n      soc: M1_soc, soc_min: M1_soc_min, soc_max: M1_soc_max,\n      rs485: M1_control_mode \n    },\n    { id: \"M2\", \n      power: M2_power, charging_max: M2_charging_max, discharging_max: M2_discharging_max,\n      soc: M2_soc, soc_min: M2_soc_min, soc_max: M2_soc_max,\n      rs485: M2_control_mode \n    }//,\n    // { id: \"M3\", \n    //   power: M3_power, charging_max: M3_charging_max, discharging_max: M3_discharging_max,\n    //   power_set: 0, // what power level should be set next\n    //   soc: M3_soc, soc_min: M3_soc_min, soc_max: M3_soc_max,\n    //   rs485: M3_control_mode \n    // }\n];\n\n// -- payload\nreturn {payload: battery_array};",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -800,7 +800,7 @@
         "repair": false,
         "outputs": 3,
         "x": 265,
-        "y": 1000,
+        "y": 1280,
         "wires": [
             [
                 "ce4876fe4fba284a",
@@ -830,7 +830,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 790,
-        "y": 1120,
+        "y": 1400,
         "wires": []
     },
     {
@@ -1453,7 +1453,7 @@
         "z": "06b3944959a8c9e5",
         "g": "01ba2e0cd261fb0b",
         "name": "Logdata",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1650,7 +1650,7 @@
         "service": "select_option",
         "mergecontext": "",
         "x": 430,
-        "y": 1000,
+        "y": 1280,
         "wires": [
             [
                 "96b45840d80866f2",
@@ -1687,7 +1687,7 @@
         "service": "select_option",
         "mergecontext": "",
         "x": 460,
-        "y": 960,
+        "y": 1240,
         "wires": [
             [
                 "7357d7320f160192"
@@ -1723,7 +1723,7 @@
         "service": "select_option",
         "mergecontext": "",
         "x": 430,
-        "y": 1040,
+        "y": 1320,
         "wires": [
             [
                 "7357d7320f160192"
@@ -1808,7 +1808,7 @@
             }
         ],
         "x": 140,
-        "y": 1000,
+        "y": 1280,
         "wires": [
             [
                 "571d056cdce47d40"
@@ -1909,7 +1909,7 @@
         "z": "06b3944959a8c9e5",
         "g": "01ba2e0cd261fb0b",
         "name": "Load distribution",
-        "func": "// INPUT\nvar batteries = flow.get(\"batteries\");\nvar isCharging = flow.get(\"batteries_charging\"); // Are we in a battery charging scenario?\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\nvar hasReverseDischargePriority = flow.get(\"has_reverse_priority_discharge\") || false; // Prioritize (dis)charging the same battery\nvar logdata = `Charging=${isCharging} | `; // logging\n// how much power do the batteries need to compensate?\nvar unassigned_power = Math.abs(msg.payload); // Power in W to compensate using batteries\n\n// inits \nvar solution_array = []; // load distribution solutions\nvar output_array = []; // node outputs\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// battery life improvement (slow charge near max SoC)\n/**\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    if(max_power < 0) max_power = 0;\n    if (!hasChargingLimiter) return max_power;\n    if (soc >= 98) return Math.min(200, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 90) return Math.min(1500, max_power);\n    return max_power;\n}\nif(isCharging) logdata += `charge limiting based on SoC is active | `;\n\n// -- BATTERY DISCHARGE PRIORITY\nif (!isCharging && hasReverseDischargePriority) {\n    batteries.reverse();\n}\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ soc: number; soc_max: number; soc_min: number; rs485: string; id: any; charging_max: any; discharging_max: any; }} */ battery) =>{\n    logdata += `${battery.id} | `;\n\n    // Step 1. remove unfit batteries\n    if(\n        (battery.soc >= battery.soc_max && isCharging) || \n        (battery.soc <= battery.soc_min && !isCharging) || \n        battery.rs485 !== \"enable\") {\n            // stop forced control \n            output_array.push({payload:\"stop\"});  // forcible mode\n            output_array.push({payload: 0});       // power\n            logdata += `${battery.id}: [inactive] SoC=${battery.soc_max}>**${battery.soc}**>${battery.soc_min}%, rs485=${battery.rs485} | `;\n            // skip this battery\n            return;\n        }\n\n    // Step 2. assign available (dis)charging power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power); // commit\n\n    // Step 3. set output values\n    let solution = [\n        battery.id,                                                                 // solution of battery ...\n        { payload: isCharging ? \"charge\" : assign <= 0 ? \"stop\" : \"discharge\" },    // forcible mode\n        { payload: Math.round(assign) }                                             // power\n    ]\n    solution_array.push(solution);\n    \n    // update tally\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n});\n\n// battery discharge priority - put solutions back in initial order\nif (!isCharging && hasReverseDischargePriority) {\n    solution_array.reverse();\n}\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power);\nlogdata += `batteries_total_assignable_power ${batteries_total_assignable_power} | `;\n\n// OUTPUT\nsolution_array.forEach(solution => { // solution per battery produces 2 outputs\n    output_array.push(\n        solution[1], // forcible mode\n        solution[2]  // assigned power\n        );\n});\noutput_array.push({payload: logdata, logtitle: \"Battery charge scenario\"}); // logdata produces 1 output\nreturn output_array; // 2 outputs per battery + 1 for logdata = X; Set this value in the Setup tab of this node.\n// e.g. 2 batteries + 1 for logdata = 5 outputs to be set in Setup tab.",
+        "func": "// INPUT\nvar batteries = flow.get(\"batteries\");\nvar isCharging = flow.get(\"batteries_charging\"); // Are we in a battery charging scenario?\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\nvar hasReverseDischargePriority = flow.get(\"has_reverse_priority_discharge\") || false; // Prioritize (dis)charging the same battery\nvar logdata = `Charging=${isCharging} | `; // logging\n// how much power do the batteries need to compensate?\nvar unassigned_power = Math.abs(msg.payload); // Power in W to compensate using batteries\n\n// inits \nvar solution_array = []; // load distribution solutions\nvar output_array = []; // node outputs\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// enums\nconst CMODE = {\n    STOP: \"stop\",\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// battery life improvement (slow charge near max SoC)\n/**\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    if(max_power < 0) max_power = 0;\n    if (!hasChargingLimiter) return max_power;\n    if (soc >= 98) return Math.min(200, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 90) return Math.min(1500, max_power);\n    return max_power;\n}\nif(isCharging) logdata += `charge limiting based on SoC is active | `;\n\n// -- BATTERY DISCHARGE PRIORITY\nif (!isCharging && hasReverseDischargePriority) {\n    batteries.reverse();\n}\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ soc: number; soc_max: number; soc_min: number; rs485: string; id: any; charging_max: any; discharging_max: any; }} */ battery) =>{\n    logdata += `${battery.id} | `;\n\n    // Step 1. remove unfit batteries\n    if(\n        (battery.soc >= battery.soc_max && isCharging) || \n        (battery.soc <= battery.soc_min && !isCharging) || \n        battery.rs485 !== \"enable\") {\n            // configure a STOP solution\n            let solution = {\n                id: battery.id,\n                mode: CMODE.STOP,\n                power: 0\n            };\n            // push solution\n            solution_array.push(solution);\n            // log we are stopping forced control for this battery \n            logdata += `${battery.id}: [inactive] SoC=${battery.soc_max}>[${battery.soc}]>${battery.soc_min}%, rs485=${battery.rs485} | `;\n            // skip further processing of this battery\n            return;\n        }\n\n    // Step 2. assign available (dis)charging power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power); // commit\n\n    // Step 3. set output values\n    // configure a CHARGE or DISCHARGE solution \n    let solution = {\n        id: battery.id,\n        mode: isCharging ? CMODE.CHARGE : (assign <= 0 ? CMODE.STOP : CMODE.DISCHARGE), // forcible mode\n        power: Math.round(assign)\n    };\n    // push solution\n    solution_array.push(solution);\n    \n    // update tally\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n});\n\n// battery discharge priority - put solutions back in initial order\nif (!isCharging && hasReverseDischargePriority) {\n    solution_array.reverse();\n}\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power);\nlogdata += `batteries_total_assignable_power ${batteries_total_assignable_power} | `;\n\n// OUTPUT\n// convert battery solutions to Node-RED output nodes\nsolution_array.forEach(solution => { // solution per battery produces 2 outputs\n    output_array.push(\n        {payload: solution.mode}, // forcible mode\n        {payload: solution.power}  // assigned power\n        );\n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;\n});\n// add logdata as an output node\noutput_array.push({payload: logdata, logtitle: \"Battery charge scenario\"}); // logdata produces 1 output\n\n// to output nodes\n// 2 outputs per battery + 1 for logdata = X; Set this value in the Setup tab of this node.\n// e.g. 2 batteries + 1 for logdata = 5 outputs to be set in Setup tab.\nreturn output_array; ",
         "outputs": 5,
         "timeout": 0,
         "noerr": 0,
@@ -2337,7 +2337,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 780,
-        "y": 1000,
+        "y": 1280,
         "wires": [
             [
                 "b272d2ca7fc1536b"
@@ -2371,7 +2371,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 790,
-        "y": 1040,
+        "y": 1320,
         "wires": [
             [
                 "e6ec61caa46eaf0a"
@@ -2405,7 +2405,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 790,
-        "y": 960,
+        "y": 1240,
         "wires": [
             [
                 "d8b6fed17f997bf4"
@@ -2439,7 +2439,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 780,
-        "y": 1080,
+        "y": 1360,
         "wires": [
             []
         ]
@@ -2496,7 +2496,7 @@
             }
         ],
         "x": 800,
-        "y": 560,
+        "y": 760,
         "wires": [
             [
                 "1a08421e85940890"
@@ -2517,7 +2517,7 @@
         "finalize": "",
         "libs": [],
         "x": 810,
-        "y": 620,
+        "y": 820,
         "wires": [
             [
                 "b9ec9489dc15110c"
@@ -2530,8 +2530,8 @@
         "z": "06b3944959a8c9e5",
         "name": "Gain scheduling",
         "info": "https://en.wikipedia.org/wiki/Gain_scheduling\n\nLow power stable usage has a different optimum\nthan high power usage with devices switch on and off\n\nGain scheduling based on power usage and std deveation could \nbring optimal response behavior to both scenarios.",
-        "x": 820,
-        "y": 840,
+        "x": 1280,
+        "y": 1140,
         "wires": []
     },
     {
@@ -2540,8 +2540,8 @@
         "z": "06b3944959a8c9e5",
         "name": "Setpoint ramping / afzwakking",
         "info": "In ramping, the setpoint is gradually moved from its old value to a newly specified value using a linear or first-order differential ramp function. This avoids the discontinuity present in a simple step change.\n\nWith 'afzwakking', as applied by R. Ordelman, the current battery power and the setpoint battery power are combined to a weighted steering value ",
-        "x": 860,
-        "y": 880,
+        "x": 1320,
+        "y": 1020,
         "wires": []
     },
     {
@@ -2552,7 +2552,7 @@
         "name": "Bumpless target consumption",
         "info": "Instead of the error value, we use the process variable.\nThis prevents irratic behavior during sudden changes of the error or setpoint value.\n\ne.g. you change the setpoint from 0 to 100W \nThe error would make an instantanious jump and cause a huge derivative-term.\nThe pv stays continous and fluent.",
         "x": 840,
-        "y": 320,
+        "y": 520,
         "wires": []
     },
     {
@@ -2569,7 +2569,7 @@
         "finalize": "",
         "libs": [],
         "x": 920,
-        "y": 360,
+        "y": 560,
         "wires": [
             [
                 "3a2bdfa9202326b9"
@@ -2594,7 +2594,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 920,
-        "y": 420,
+        "y": 620,
         "wires": []
     },
     {
@@ -2605,7 +2605,7 @@
         "name": "Bumpless Ki changes",
         "info": "Recalc I-term whenever Ki changes\n\nNote: always be mindful of making changes to control parameters of systems in operation.",
         "x": 820,
-        "y": 520,
+        "y": 720,
         "wires": []
     },
     {
@@ -2623,7 +2623,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 920,
-        "y": 680,
+        "y": 880,
         "wires": []
     },
     {
@@ -2632,7 +2632,7 @@
         "z": "06b3944959a8c9e5",
         "g": "eba6a1267294eb9c",
         "name": "Advanced settings",
-        "func": "flow.set(\"has_soc_charging_limiter\", true); // slowly charges to 100% to improve battery life\n\n// has_reverse_priority_discharge\n// Batteries get charged in the priority given in the `mapping` node, see: 'battery_array'\n// When this setting is FALSE, batteries get discharged in the same priority.\n// When this setting is TRUE, the batteries get discharged in reversed priority\n// --\n// Example: given 2 batteries, the first is 100% SoC and the second 50% SoC.\n// When power is surplus, only the second battery is charging. \n// When power is requested, the second battery stops charging and the first battery starts discharging (per priority).\n// With this setting set to TRUE, the second battery would discharge instead. Keeping battery 1 idle. \nflow.set(\"has_reverse_priority_discharge\", true); // Prioritize (dis)charging the same battery\n\nreturn msg;",
+        "func": "flow.set(\"has_soc_charging_limiter\", true); // slowly charges to 100% to improve battery life\nflow.set(\"has_reverse_priority_discharge\", true); // Prioritize discharging and charging the same battery when possible\n// Batteries get charged in the priority given in the `mapping` node, see: 'battery_array'\n// --\n// Example: given 2 batteries, the first is 100% SoC and the second 50% SoC.\n// When power is surplus, only the second battery is charging. \n// When power is requested, normally the second battery stops charging and the first battery starts discharging (per priority).\n// With this setting set to TRUE, the second battery would discharge instead. Keeping battery 1 idle. \n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
