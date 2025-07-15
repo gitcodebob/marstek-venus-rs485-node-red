@@ -1,11 +1,14 @@
 # Home Battery Control with Home Assistant & Node-RED
 
-This project is designed for hobbyists who want to control home battery systems using Home Assistant and Node-RED. It provides ready-to-use flows and configuration examples, including a PID controller for advanced battery management.
+This project is designed for hobbyists who want to control home battery systems using Home Assistant and Node-RED. It provides ready-to-use flows and configuration examples, including a PID controller for advanced battery management. Use at your own discretion.
 
 ## Features
 - **Node-RED PID Controller Flow:** Easily import and use a PID controller for battery charge/discharge control.
 - **Home Assistant Integration:** Example configuration for seamless integration with your smart home setup.
 - **Customizable:** Adapt the flows and configuration to your specific battery hardware and automation needs.
+- **Updating:** Grab the latest control flow, without losing your personal configurations.
+
+[Release notes](RELEASE_NOTES.md)
 
 ### What is a PID Controller
 A proportional–integral–derivative controller (PID controller or three-term controller) is a feedback-based control loop mechanism commonly used to manage machines and processes that require continuous control and automatic adjustment. See [Wikipedia - Fundamental operation](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller#Fundamental_operation)
@@ -20,12 +23,26 @@ A proportional–integral–derivative controller (PID controller or three-term 
    git clone https://github.com/gitcodebob/marstek-venus-rs485-node-red.git
    ```
 
-3. **Import Node-RED Flows**
-   - In Node-RED, go to the menu > Import > select the JSON files from the `node-red` folder (e.g., `pid-controller.json`).
+3. **Configure Home Assistant**
+   - Use the provided YAML files in the `home assistant` folder as examples for your own configuration.
+   - Adjust safety limits in `input_numbers.yaml` for the `error signal` and `PID output`. 
+      - See instruction [good to know](#good-to-know)  
+   - Know issue: `input_select.marstek_master_battery_mode` is missing in this project.
+
+4. **Import Node-RED Flows**
+   - In Node-RED, go to the menu > Import > and select all three JSON files from the `node-red` folder:
+     - `batteries-flow.json` 
+     - `control-flow.json`
+     - `master-switch-flow.json`
+   - Go to tab `Home Battery IO` and add/adjust nodes per instruction
+      - Don't forget to update the `mapping` node to match your added/adjusted nodes.
    - Deploy the flows.
 
-4. **Configure Home Assistant**
-   - Use the provided YAML files in the `home assistant` folder as examples for your own configuration.
+5. **Firing up**
+   - In Home Assistant import `dashboard.yaml` to create a dashboard, if you have not done so already.
+   - Continue reading before switch the master battery mode to `Full Control` to activate.
+   
+   Disclaimer: You are responsible for configuring and operating your system safely. Monitor carefully. Be prepared to switch off battery control or disengage physically. 
 
 ### Good to know
 - The P1 value is expected in Watt (w). If your meter supplies kW, multiply the P1 input * 1000
@@ -34,9 +51,10 @@ A proportional–integral–derivative controller (PID controller or three-term 
    - If there are other devices on the fuse box group of your battery: set it to 800W
    - If you have each battery on its own fuse box group: set the value to 3600W x the number of batteries.
 
-## Tuning and Operation (minimal)
+## Operation and tuning (minimal)
+### Operation
 In Home Assistant:
-   - Place Kp, Ki, Kd controls onto a dashboard.
+   - Find the Kp, Ki, Kd controls on the dashboard.
       - Set Kp = 0.5
       - Ki and Kd = 0
    - Configure batteries to RS485 enable
@@ -48,7 +66,7 @@ In Home Assistant:
 
 Now the controller will start managing the batteries.
 
-Tip, open a HA history graph and add:
+Tip, observe the HA history graph containing:
    - P1 sensor (positive = drawing power from grid, negative = delivering power back to grid)
    - PID output (positive = batteries are charging, negative = discharging)
    - P-term, I-term, D-term (P+I+D = PID Output)
@@ -74,6 +92,9 @@ Note: every system is different and your home is unique. Tune in small increment
    - A: check if the P1 input is in Watt and not in kW.
 1. I get an error `"HomeAssistantError: Invalid value for input_number.house_battery_control_pid_output: 4249 (range -3600.0 - 3600.0)"`
    - A: read [good to know](#good-to-know) for instructions to set safety limits correctly.
+
+## Updating
+Import the `control-flow.json` into the `Home Batteries IO` flow. Done!
 
 ## Credits
 This PID controller flow is based on the approach by Ruald Ordelman. Many thanks for sharing your work and ideas with the community!

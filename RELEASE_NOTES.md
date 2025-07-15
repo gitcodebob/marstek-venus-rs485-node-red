@@ -2,11 +2,13 @@
 
 All releases follow Semantic Versioning (SemVer).
 
----
-
+## 0.2.0
+- Major improvement: Split the all-in-one Node-RED flow into three separate flows (`batteries-flow.json`, `control-flow.json`, `master-switch-flow.json`).
+- This allows the PID-control flow to be updated independently, without affecting user battery configurations.
 
 ## 0.1.11
 - Important bugfix: Fix configuration issue causing PID control values to reset after Home Assistant restart
+- See: [input_number docs](https://www.home-assistant.io/integrations/input_number/#restore-state)
 
 ## 0.1.10
 - bugfix: solutions for full/empty battery added

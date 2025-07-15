@@ -1,0 +1,267 @@
+[
+    {
+        "id": "acde727d4cb42aaa",
+        "type": "tab",
+        "label": "Home Battery Master Switch",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "93d1d471c0016719",
+        "type": "group",
+        "z": "acde727d4cb42aaa",
+        "name": "Master control switch",
+        "style": {
+            "stroke": "#0070c0",
+            "label": true
+        },
+        "nodes": [
+            "1cde041dc77d885c",
+            "b4700d09c83cf100",
+            "68d6f13efbfa32af",
+            "61ddfc5fa28addf1",
+            "df504dd4079fd7dd",
+            "5a83c17b562e0462"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 852,
+        "h": 202
+    },
+    {
+        "id": "1cde041dc77d885c",
+        "type": "switch",
+        "z": "acde727d4cb42aaa",
+        "g": "93d1d471c0016719",
+        "name": "Check for custom/auto mode",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Manual control",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Marstek control",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Full control",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 275,
+        "y": 120,
+        "wires": [
+            [
+                "68d6f13efbfa32af",
+                "61ddfc5fa28addf1"
+            ],
+            [
+                "68d6f13efbfa32af"
+            ],
+            [
+                "df504dd4079fd7dd"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "b4700d09c83cf100",
+        "type": "debug",
+        "z": "acde727d4cb42aaa",
+        "g": "93d1d471c0016719",
+        "name": "Master control switch",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "68d6f13efbfa32af",
+        "type": "api-call-service",
+        "z": "acde727d4cb42aaa",
+        "g": "93d1d471c0016719",
+        "name": "Set ALL Rs485 disable",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "select.select_option",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "select.marstek_m1_rs485_control_mode",
+            "select.marstek_m2_rs485_control_mode"
+        ],
+        "labelId": [],
+        "data": "{   \"option\": \"disable\" }",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": false,
+        "domain": "select",
+        "service": "select_option",
+        "mergecontext": "",
+        "x": 440,
+        "y": 120,
+        "wires": [
+            [
+                "b4700d09c83cf100"
+            ]
+        ]
+    },
+    {
+        "id": "61ddfc5fa28addf1",
+        "type": "api-call-service",
+        "z": "acde727d4cb42aaa",
+        "g": "93d1d471c0016719",
+        "name": "Set ALL to manual work mode",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "select.select_option",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "select.marstek_m1_user_work_mode",
+            "select.marstek_m2_user_work_mode"
+        ],
+        "labelId": [],
+        "data": "{   \"option\": \"manual\" }",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": false,
+        "domain": "select",
+        "service": "select_option",
+        "mergecontext": "",
+        "x": 470,
+        "y": 60,
+        "wires": [
+            [
+                "b4700d09c83cf100"
+            ]
+        ]
+    },
+    {
+        "id": "df504dd4079fd7dd",
+        "type": "api-call-service",
+        "z": "acde727d4cb42aaa",
+        "g": "93d1d471c0016719",
+        "name": "Set ALL Rs485 enable",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "select.select_option",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "select.marstek_m1_rs485_control_mode",
+            "select.marstek_m2_rs485_control_mode"
+        ],
+        "labelId": [],
+        "data": "{   \"option\": \"enable\" }",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": false,
+        "domain": "select",
+        "service": "select_option",
+        "mergecontext": "",
+        "x": 440,
+        "y": 180,
+        "wires": [
+            [
+                "b4700d09c83cf100"
+            ]
+        ]
+    },
+    {
+        "id": "5a83c17b562e0462",
+        "type": "server-state-changed",
+        "z": "acde727d4cb42aaa",
+        "g": "93d1d471c0016719",
+        "name": "Master control mode",
+        "server": "176d29a.6f648d6",
+        "version": 6,
+        "outputs": 1,
+        "exposeAsEntityConfig": "",
+        "entities": {
+            "entity": [
+                "input_select.marstek_master_battery_mode"
+            ],
+            "substring": [],
+            "regex": []
+        },
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "1cde041dc77d885c"
+            ]
+        ]
+    },
+    {
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true
+    }
+]
