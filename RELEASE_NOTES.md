@@ -1,6 +1,11 @@
 # Release Notes
 
+
 All releases follow Semantic Versioning (SemVer).
+
+## 0.2.1
+- Node-RED control flow: Added output filtering, error signal dampening, and deviation analytics nodes.
+- Home Assistant: Updated dashboard and expanded input_numbers.yaml with PID tuning, dampening, and analytics controls for improved battery management.
 
 ## 0.2.0
 - Major improvement: Split the all-in-one Node-RED flow into three separate flows (`batteries-flow.json`, `control-flow.json`, `master-switch-flow.json`).
