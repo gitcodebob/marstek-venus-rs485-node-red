@@ -19,19 +19,23 @@
             "4c9a7bf109ed3b83",
             "8988910187d6d28f",
             "c4258f28e4d4cc85",
-            "312f728b2b5cae20",
             "ce9b099aa8a67ee6",
-            "b41cb1748eba5037",
             "0fe026ddcef8a4b9",
             "48174a22ab6075bc",
             "3fa5c5f135d538eb",
             "d6a40360d0255053",
-            "25841bbae4c94335"
+            "25841bbae4c94335",
+            "deac749b7d64bfdd",
+            "4f2717cdeacca93a",
+            "e4f0d15152b91782",
+            "3fdcc2ae9329392a",
+            "313a275b02859e78",
+            "d70af088456c1912"
         ],
         "x": 134,
-        "y": 441.5,
-        "w": 852,
-        "h": 479.5
+        "y": 439,
+        "w": 872,
+        "h": 482
     },
     {
         "id": "94a41a1b6072d1d0",
@@ -73,7 +77,8 @@
         "z": "12a97c65ca14f3e2",
         "name": "Bumpless operation",
         "style": {
-            "label": true
+            "label": true,
+            "stroke": "#bfdbef"
         },
         "nodes": [
             "c4d930ac5428f39f",
@@ -174,7 +179,7 @@
         "z": "12a97c65ca14f3e2",
         "g": "708abd55c0ed5536",
         "name": "Calculate corrections",
-        "func": "var logdata = \"\";\n\n// Timing\nlet time_last = context.get('time_last') || Date.now(); // Milliseconds\nlet time_current = Date.now(); // Milliseconds\nlet time_delta = (time_current - time_last) / 1000; // Convert to seconds\n// note: due to inherent 1 sec intervals of P1 meter we omit dt terms. This is mostly for bug checking and optimizations.\n\n// Batteries\nvar batteries = flow.get(\"batteries\"); // array of battery configurations\nvar B_power = flow.get(\"batteries_total_power\"); // charging is positive, discharging negative\nvar anti_windup_threshold = Number(flow.get(\"batteries_total_assignable_power\")) || 0; // max available charge/discharge power.\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = flow.get(\"p1_power\"); // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\nvar P1_error = P1_setpoint - P1_power;  // W (watt), error signal = SP - PV\nvar P1_derivative = flow.get(\"p1_derivative\"); // Derivative of PV, not the error\n\n// PID values\nvar Kp = flow.get(\"house_battery_control_kp\") || 0.75;  // Proportional gain\nvar Ki = flow.get(\"house_battery_control_ki\") || 0;     // Integral gain        Ki = Kp/Ti\nvar Kd = flow.get(\"house_battery_control_kd\") || 0;     // Derivative gain      Kd = Kp*Td\n\n// helpers\nvar integral_sum = flow.get('I_integral_sum') || 0;\nvar P1_last_error = context.get('P1_last_error') || 0;\n\n// optimizations\nvar hysteresis = flow.get(\"house_battery_control_hysteresis_in_w\"); // W (watt)\n\n// -- PID regulator --\n// Proportional term\nlet p_term = Kp * P1_error;\n\n// Integral term\nintegral_sum += P1_error; \n\n// apply anti-windup \nlet integral_max = anti_windup_threshold / Ki; // improve: anti-windup should only trigger when exceeding the max controlable range\nintegral_sum = Math.min(Math.max(integral_sum, -integral_max), integral_max);\nlet i_term = Ki * integral_sum;\n\n// Differential term\nlet d_term = Kd * (-P1_derivative); // omitted '/time_delta'. inherent P1 refresh fequency.\n\n// Total PID output\nvar PID_output = p_term + i_term + d_term; // W (watt), the control input for the battery packs\nlogdata += `U(${time_delta}s)[${PID_output}] = P(${Kp})[${p_term}] + I(${Ki})[${i_term}] + D(${Kd})[${d_term}] | `;\n\n// Charging or Discharging states\nvar B_was_charging = context.get(\"batteries_charging_last\") || false;\nvar B_is_charging = PID_output > 0 ? true : false;\n\n// Hysteresis mode: prevents excessive switching between (dis)charge mode around the zero point.\n// if new PID_output lies within hysteresis, it will not switch. 0 = apply no hysteresis\nif (B_is_charging !== B_was_charging && Math.abs(PID_output) < hysteresis){\n    // log explain\n    logdata += `Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst) | `;\n    // prevent negative charging or positive discharging values (not allowed)\n    PID_output = (PID_output < 0 && B_is_charging) || ((PID_output > 0 && !B_is_charging)) ? 0 : PID_output;\n    // maintain previous scenario\n    B_is_charging = B_was_charging;\n    \n} else {\n    // save for next iteration\n    context.set(\"batteries_charging_last\", B_is_charging); //boolean\n}\n\n// OUTPUT\nflow.set(\"batteries\", batteries);\nflow.set(\"p1_error\", P1_error);\nflow.set(\"batteries_charging\", B_is_charging)\nflow.set(\"I_integral_sum\", integral_sum);\ncontext.set(\"time_last\", Date.now());\ncontext.set(\"P1_last_error\", P1_error);\n\nreturn [{ payload: Number(PID_output) },\n        { payload: Number(P1_error)},\n        { payload: parseFloat(p_term)},\n        { payload: parseFloat(i_term)},\n        { payload: parseFloat(d_term)},\n        { payload: B_is_charging},\n        { payload: logdata }];",
+        "func": "var logdata = \"\";\n\n// Timing\nlet time_last = context.get('time_last') || Date.now(); // Milliseconds\nlet time_current = Date.now(); // Milliseconds\nlet time_delta = (time_current - time_last) / 1000; // Convert to seconds\n// note: due to inherent 1 sec intervals of P1 meter we omit dt terms. This is mostly for bug checking and optimizations.\n\n// Batteries\nvar batteries = flow.get(\"batteries\"); // array of battery configurations\nvar B_power = flow.get(\"batteries_total_power\"); // charging is positive, discharging negative\nvar anti_windup_threshold = Number(flow.get(\"batteries_total_assignable_power\")) || 0; // max available charge/discharge power.\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = flow.get(\"p1_power\"); // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\nvar P1_error = flow.get(\"p1_error\");  // W (watt), error signal = SP - PV\nvar P1_derivative = flow.get(\"p1_derivative\"); // Derivative of PV, not the error\n\n// PID values\nvar Kp = flow.get(\"house_battery_control_kp\") || 0.75;  // Proportional gain\nvar Ki = flow.get(\"house_battery_control_ki\") || 0;     // Integral gain        Ki = Kp/Ti\nvar Kd = flow.get(\"house_battery_control_kd\") || 0;     // Derivative gain      Kd = Kp*Td\n\n// helpers\nvar integral_sum = flow.get('I_integral_sum') || 0;\n\n// optimizations\nvar hysteresis = flow.get(\"house_battery_control_hysteresis_in_w\"); // W (watt)\n\n// -- PID regulator --\n// Proportional term\nlet p_term = Kp * P1_error;\n\n// Integral term\nintegral_sum += P1_error; \n\n// apply anti-windup \nlet integral_max = anti_windup_threshold / Ki; // improve: anti-windup should only trigger when exceeding the max controlable range\nintegral_sum = Math.min(Math.max(integral_sum, -integral_max), integral_max);\nlet i_term = Ki * integral_sum;\n\n// Differential term\nlet d_term = Kd * (-P1_derivative); // omitted '/time_delta'. inherent P1 refresh fequency.\n\n// Total PID output\nvar PID_output = p_term + i_term + d_term; // W (watt), the control input for the battery packs\nlogdata += `U(${time_delta}s)[${PID_output}] = P(${Kp})[${p_term}] + I(${Ki})[${i_term}] + D(${Kd})[${d_term}] | `;\n\n// Charging or Discharging states\nvar B_was_charging = context.get(\"batteries_charging_last\") || false;\nvar B_is_charging = PID_output > 0 ? true : false;\n\n// Hysteresis mode: prevents excessive switching between (dis)charge mode around the zero point.\n// if new PID_output lies within hysteresis, it will not switch. 0 = apply no hysteresis\nif (B_is_charging !== B_was_charging && Math.abs(PID_output) < hysteresis){\n    // log explain\n    logdata += `Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst) | `;\n    // prevent negative charging or positive discharging values (not allowed)\n    PID_output = (PID_output < 0 && B_is_charging) || ((PID_output > 0 && !B_is_charging)) ? 0 : PID_output;\n    // maintain previous scenario\n    B_is_charging = B_was_charging;\n    \n} else {\n    // save for next iteration\n    context.set(\"batteries_charging_last\", B_is_charging); //boolean\n}\n\n// OUTPUT\nflow.set(\"batteries\", batteries);\nflow.set(\"p1_error\", P1_error);\nflow.set(\"batteries_charging\", B_is_charging)\nflow.set(\"I_integral_sum\", integral_sum);\ncontext.set(\"time_last\", Date.now());\n\nreturn [{ payload: Number(PID_output) },\n        { payload: Number(P1_error)},\n        { payload: parseFloat(p_term)},\n        { payload: parseFloat(i_term)},\n        { payload: parseFloat(d_term)},\n        { payload: B_is_charging},\n        { payload: logdata }];",
         "outputs": 7,
         "timeout": 0,
         "noerr": 0,
@@ -182,11 +187,10 @@
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 520,
+        "y": 600,
         "wires": [
             [
-                "ce9b099aa8a67ee6",
-                "88f8151a5e7a23df"
+                "313a275b02859e78"
             ],
             [
                 "c4258f28e4d4cc85"
@@ -259,28 +263,10 @@
         "y": 580,
         "wires": [
             [
-                "312f728b2b5cae20",
-                "d6a40360d0255053"
+                "d6a40360d0255053",
+                "e4f0d15152b91782"
             ]
         ]
-    },
-    {
-        "id": "312f728b2b5cae20",
-        "type": "debug",
-        "z": "12a97c65ca14f3e2",
-        "g": "708abd55c0ed5536",
-        "name": "(e) error signal",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 820,
-        "y": 580,
-        "wires": []
     },
     {
         "id": "ce9b099aa8a67ee6",
@@ -312,28 +298,10 @@
         "y": 520,
         "wires": [
             [
-                "b41cb1748eba5037",
-                "d6a40360d0255053"
+                "d6a40360d0255053",
+                "deac749b7d64bfdd"
             ]
         ]
-    },
-    {
-        "id": "b41cb1748eba5037",
-        "type": "debug",
-        "z": "12a97c65ca14f3e2",
-        "g": "708abd55c0ed5536",
-        "name": "MV manipulated value",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 840,
-        "y": 520,
-        "wires": []
     },
     {
         "id": "0fe026ddcef8a4b9",
@@ -452,7 +420,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 810,
-        "y": 640,
+        "y": 760,
         "wires": []
     },
     {
@@ -563,8 +531,8 @@
         "y": 120,
         "wires": [
             [
-                "4c9a7bf109ed3b83",
-                "72237d7adf9ce6ea"
+                "72237d7adf9ce6ea",
+                "85fe42a6589a7425"
             ]
         ]
     },
@@ -1377,7 +1345,7 @@
         "id": "f8eddb3e25aa30f8",
         "type": "comment",
         "z": "12a97c65ca14f3e2",
-        "name": "Setpoint ramping / verzwakken",
+        "name": "Setpoint ramping / damping / etc",
         "info": "Todo or try\n\n- P1 ramping / verzwakken\n- PID MV ramping / verzwakken",
         "x": 290,
         "y": 240,
@@ -1392,6 +1360,253 @@
         "x": 640,
         "y": 240,
         "wires": []
+    },
+    {
+        "id": "deac749b7d64bfdd",
+        "type": "smooth",
+        "z": "12a97c65ca14f3e2",
+        "g": "708abd55c0ed5536",
+        "name": "",
+        "property": "payload",
+        "action": "sd",
+        "count": "8",
+        "round": "",
+        "mult": "single",
+        "reduce": false,
+        "x": 720,
+        "y": 520,
+        "wires": [
+            [
+                "4f2717cdeacca93a"
+            ]
+        ]
+    },
+    {
+        "id": "4f2717cdeacca93a",
+        "type": "api-call-service",
+        "z": "12a97c65ca14f3e2",
+        "g": "708abd55c0ed5536",
+        "name": "PID deviation",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_control_pid_output_deviation"
+        ],
+        "labelId": [],
+        "data": "{\"value\": \"{{payload}}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 890,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e4f0d15152b91782",
+        "type": "smooth",
+        "z": "12a97c65ca14f3e2",
+        "g": "708abd55c0ed5536",
+        "name": "",
+        "property": "payload",
+        "action": "sd",
+        "count": "8",
+        "round": "",
+        "mult": "single",
+        "reduce": false,
+        "x": 720,
+        "y": 580,
+        "wires": [
+            [
+                "3fdcc2ae9329392a"
+            ]
+        ]
+    },
+    {
+        "id": "3fdcc2ae9329392a",
+        "type": "api-call-service",
+        "z": "12a97c65ca14f3e2",
+        "g": "708abd55c0ed5536",
+        "name": "Error deviation",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_control_error_deviation"
+        ],
+        "labelId": [],
+        "data": "{\"value\": \"{{payload}}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 900,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "313a275b02859e78",
+        "type": "function",
+        "z": "12a97c65ca14f3e2",
+        "g": "708abd55c0ed5536",
+        "name": "Output filtering",
+        "func": "// INPUT\nlet PID_unfiltered = msg.payload; // W Watt\nlet PID_last = context.get(\"PID_last\")||0; // W watt\nlet PID_damp = Number(flow.get(\"house_battery_control_pid_output_dampening\"))||0; // 0% - 100%\nPID_damp = PID_damp/100; // to Number\n\n// simple averaging filter\nlet PID_filtered = (1-PID_damp)*PID_unfiltered + (PID_damp)*PID_last;\n\n// OUTFLOW\ncontext.set(\"PID_last\", PID_filtered);\n\n// OUTPUT\nreturn { payload: Number(PID_filtered)};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 480,
+        "wires": [
+            [
+                "ce9b099aa8a67ee6",
+                "88f8151a5e7a23df"
+            ]
+        ]
+    },
+    {
+        "id": "85fe42a6589a7425",
+        "type": "api-current-state",
+        "z": "12a97c65ca14f3e2",
+        "name": "Error signal dampening",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_control_error_signal_dampening",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_control_error_signal_dampening",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 270,
+        "y": 300,
+        "wires": [
+            [
+                "e4cd3e96c64ab764"
+            ]
+        ]
+    },
+    {
+        "id": "e4cd3e96c64ab764",
+        "type": "api-current-state",
+        "z": "12a97c65ca14f3e2",
+        "name": "Output signal dampening",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_control_pid_output_dampening",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_control_pid_output_dampening",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 270,
+        "y": 360,
+        "wires": [
+            [
+                "d70af088456c1912"
+            ]
+        ]
+    },
+    {
+        "id": "d70af088456c1912",
+        "type": "function",
+        "z": "12a97c65ca14f3e2",
+        "g": "708abd55c0ed5536",
+        "name": "Error signal",
+        "func": "// INPUTS\nlet P1_error_last = Number(context.get(\"p1_error_last\"))||0; // last error signal level in W\nlet dampening = Number(flow.get(\"house_battery_control_error_signal_dampening\")) || 0; // 0% - 100%\ndampening = dampening / 100; // to Number\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = flow.get(\"p1_power\"); // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\n\n// Calc error signal\nlet P1_error_unfiltered = P1_setpoint - P1_power;\n\n// Simple averaging filter\nlet P1_error_filtered = (1 - dampening) * P1_error_unfiltered + (dampening) * P1_error_last;\n\n// OUTFLOW\nflow.set(\"p1_error\", P1_error_filtered); // W (watt), error signal = SP - PV\ncontext.set(\"p1_error_last\", P1_error_filtered);\n\n// OUTPUT\nreturn {payload: (dampening) * P1_error_last};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 480,
+        "wires": [
+            [
+                "4c9a7bf109ed3b83"
+            ]
+        ]
     },
     {
         "id": "176d29a.6f648d6",

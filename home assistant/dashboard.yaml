@@ -39,6 +39,11 @@ views:
                 name: Integral gain (Ki)
               - entity: input_number.house_battery_control_kd
                 name: Differential gain (Kd)
+              - entity: input_number.house_battery_control_error_signal_dampening
+                name: Input smoothing
+                secondary_info: none
+              - entity: input_number.house_battery_control_pid_output_dampening
+                name: Output smoothing
             title: PID controls
       - cards:
           - type: heading
