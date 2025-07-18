@@ -1,0 +1,7 @@
+marstek_master_battery_mode:
+  name: Master Battery Mode
+  options:
+    - Manual control # Forces Marstek into Manual Work mode. Follows the schedule configured in the Marstek App
+    - Marstek control # Lets Marstek's own control algorithm take over. Remember to set the work mode: manual, anti-feed or ai. 
+    - Full control # Full control over the battery, no Marstek control
+  icon: mdi:battery-heart

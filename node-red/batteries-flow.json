@@ -69,12 +69,13 @@
         },
         "nodes": [
             "31718411354ec91e",
-            "85d84b11a51b81b9"
+            "85d84b11a51b81b9",
+            "a283764303f31dc8"
         ],
-        "x": 704,
-        "y": 39,
-        "w": 162,
-        "h": 82
+        "x": 674,
+        "y": 139,
+        "w": 272,
+        "h": 142
     },
     {
         "id": "b6de692f9d62224d",
@@ -97,10 +98,10 @@
             "08133ce712e6094f",
             "e55cb977e1795872"
         ],
-        "x": 894,
-        "y": 16.5,
+        "x": 954,
+        "y": 19,
         "w": 812,
-        "h": 384.5
+        "h": 382
     },
     {
         "id": "47ee2cacda9c1168",
@@ -1113,8 +1114,8 @@
         "links": [
             "caf766d444794032"
         ],
-        "x": 745,
-        "y": 80,
+        "x": 715,
+        "y": 180,
         "wires": []
     },
     {
@@ -1126,8 +1127,8 @@
         "links": [
             "a97aef91d36d4397"
         ],
-        "x": 825,
-        "y": 80,
+        "x": 895,
+        "y": 180,
         "wires": [
             [
                 "26560f17ffdcdf34"
@@ -1148,7 +1149,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1570,
+        "x": 1630,
         "y": 60,
         "wires": []
     },
@@ -1166,7 +1167,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1540,
+        "x": 1600,
         "y": 120,
         "wires": []
     },
@@ -1184,7 +1185,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1570,
+        "x": 1630,
         "y": 180,
         "wires": []
     },
@@ -1202,7 +1203,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1540,
+        "x": 1600,
         "y": 240,
         "wires": []
     },
@@ -1232,7 +1233,7 @@
         "blockInputOverrides": true,
         "domain": "select",
         "service": "select_option",
-        "x": 1320,
+        "x": 1380,
         "y": 60,
         "wires": [
             [
@@ -1266,7 +1267,7 @@
         "blockInputOverrides": true,
         "domain": "select",
         "service": "select_option",
-        "x": 1320,
+        "x": 1380,
         "y": 180,
         "wires": [
             [
@@ -1301,7 +1302,7 @@
         "blockInputOverrides": true,
         "domain": "number",
         "service": "set_value",
-        "x": 1300,
+        "x": 1360,
         "y": 120,
         "wires": [
             [
@@ -1336,7 +1337,7 @@
         "blockInputOverrides": true,
         "domain": "number",
         "service": "set_value",
-        "x": 1300,
+        "x": 1360,
         "y": 240,
         "wires": [
             [
@@ -1357,8 +1358,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 990,
-        "y": 80,
+        "x": 1050,
+        "y": 180,
         "wires": [
             [
                 "b706fac8a42803f4"
@@ -1401,7 +1402,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1240,
+        "x": 1300,
         "y": 300,
         "wires": []
     },
@@ -1410,10 +1411,21 @@
         "type": "comment",
         "z": "a099d47fc07b3cee",
         "g": "b6de692f9d62224d",
-        "name": "3. Add action nodes",
+        "name": "3. Add action nodes to all batteries",
         "info": "",
-        "x": 1270,
+        "x": 1380,
         "y": 360,
+        "wires": []
+    },
+    {
+        "id": "a283764303f31dc8",
+        "type": "comment",
+        "z": "a099d47fc07b3cee",
+        "g": "8725e551f88f9081",
+        "name": "4. Link to control flow",
+        "info": "# Link Out and Link In nodes\n\n**Requirements**\nImport the `Home Battery Control` flow into Node-RED,\nbefore linking in or linking out.\n\n## Link Out\nSelect `Mapping` under `Home Battery Control`\n_This will send the battery configuration to the PID control_\n\n## Link In\nSelect `Load distribution out` under `Home Battery Control`\n_Here we receive back the calculated charge/discharge requirements_",
+        "x": 820,
+        "y": 240,
         "wires": []
     },
     {

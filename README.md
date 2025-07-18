@@ -24,10 +24,15 @@ A proportional–integral–derivative controller (PID controller or three-term 
    ```
 
 3. **Configure Home Assistant**
-   - Use the provided YAML files in the `home assistant` folder as examples for your own configuration.
-   - Adjust safety limits in `input_numbers.yaml` for the `error signal` and `PID output`. 
-      - See instruction [good to know](#good-to-know)  
-   - Know issue: `input_select.marstek_master_battery_mode` is missing in this project.
+   - Use the provided YAML files in the `home assistant` folder as follows.
+     - Configuration files are grouped by type in subfolders:
+       - `input_numbers/` for all numeric controls (e.g., PID tuning, limits)
+       - `input_selects/` for selectable options (e.g., battery mode)
+       - `template_sensors/` for custom sensors
+     - The main `configuration.yaml` automatically includes all files from these directories, so you can add or move your own configuration files into these folders aswell.
+     - This structure makes it easier to maintain, extend, and share your configuration.
+   - **Adjust safety limits** in `input_numbers/input_number_house_battery_control.yaml` for the `error signal` and `PID output`.
+     - See instruction [good to know](#good-to-know) for tips on this.
 
 4. **Import Node-RED Flows**
    - In Node-RED, go to the menu > Import > and select all three JSON files from the `node-red` folder:

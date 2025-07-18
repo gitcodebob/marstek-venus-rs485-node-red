@@ -1,3 +1,8 @@
+# 0.2.3
+- Refactor: Modularize Home Assistant configuration using directory-based includes for input numbers, input selects, and template sensors.
+- Split configuration into separate files for easier management and extension.
+- Update Node-RED batteries flow with new group, node positions, and linking instructions.
+- Clarify and expand Copilot instructions for commit workflow.
 # Release Notes
 
 

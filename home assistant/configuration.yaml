@@ -8,5 +8,7 @@ frontend:
   themes: !include_dir_merge_named themes
 
 # Add the following lines if you want to use the example sensors and input/output controls.
-template: !include template_sensor.yaml
-input_number: !include input_numbers.yaml
+# The following lines will include all files from the specified directories.
+template: !include_dir_merge_named template_sensors/
+input_number: !include_dir_merge_named input_numbers/
+input_select: !include_dir_merge_named input_selects/
