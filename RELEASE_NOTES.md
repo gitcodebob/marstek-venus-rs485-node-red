@@ -1,7 +1,16 @@
 # Release Notes
 
 
+
 All releases follow Semantic Versioning (SemVer).
+
+## 0.2.2
+- Feat: Add gain scheduling and stability monitoring to control flow.
+    - Implement gain scheduling logic for PID controller, including master gain switching based on standard deviation and disturbance detection.
+    - Add stability monitoring nodes and debug outputs for rapid loss/regaining of control.
+    - Refine battery charge limiting thresholds and update function logic.
+    - Rename and reorganize groups and nodes for clarity.
+    - Changed file: node-red/control-flow.json
 
 ## 0.2.1
 - Node-RED control flow: Added output filtering, error signal dampening, and deviation analytics nodes.
