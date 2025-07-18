@@ -29,8 +29,7 @@
             "4f2717cdeacca93a",
             "e4f0d15152b91782",
             "3fdcc2ae9329392a",
-            "313a275b02859e78",
-            "d70af088456c1912"
+            "313a275b02859e78"
         ],
         "x": 134,
         "y": 439,
@@ -75,7 +74,7 @@
         "id": "da197078febec251",
         "type": "group",
         "z": "12a97c65ca14f3e2",
-        "name": "Bumpless operation",
+        "name": "Bumpless operation - changing target grid consumption",
         "style": {
             "label": true,
             "stroke": "#bfdbef"
@@ -179,7 +178,7 @@
         "z": "12a97c65ca14f3e2",
         "g": "708abd55c0ed5536",
         "name": "Calculate corrections",
-        "func": "var logdata = \"\";\n\n// Timing\nlet time_last = context.get('time_last') || Date.now(); // Milliseconds\nlet time_current = Date.now(); // Milliseconds\nlet time_delta = (time_current - time_last) / 1000; // Convert to seconds\n// note: due to inherent 1 sec intervals of P1 meter we omit dt terms. This is mostly for bug checking and optimizations.\n\n// Batteries\nvar batteries = flow.get(\"batteries\"); // array of battery configurations\nvar B_power = flow.get(\"batteries_total_power\"); // charging is positive, discharging negative\nvar anti_windup_threshold = Number(flow.get(\"batteries_total_assignable_power\")) || 0; // max available charge/discharge power.\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = flow.get(\"p1_power\"); // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\nvar P1_error = flow.get(\"p1_error\");  // W (watt), error signal = SP - PV\nvar P1_derivative = flow.get(\"p1_derivative\"); // Derivative of PV, not the error\n\n// PID values\nvar Kp = flow.get(\"house_battery_control_kp\") || 0.75;  // Proportional gain\nvar Ki = flow.get(\"house_battery_control_ki\") || 0;     // Integral gain        Ki = Kp/Ti\nvar Kd = flow.get(\"house_battery_control_kd\") || 0;     // Derivative gain      Kd = Kp*Td\n\n// helpers\nvar integral_sum = flow.get('I_integral_sum') || 0;\n\n// optimizations\nvar hysteresis = flow.get(\"house_battery_control_hysteresis_in_w\"); // W (watt)\n\n// -- PID regulator --\n// Proportional term\nlet p_term = Kp * P1_error;\n\n// Integral term\nintegral_sum += P1_error; \n\n// apply anti-windup \nlet integral_max = anti_windup_threshold / Ki; // improve: anti-windup should only trigger when exceeding the max controlable range\nintegral_sum = Math.min(Math.max(integral_sum, -integral_max), integral_max);\nlet i_term = Ki * integral_sum;\n\n// Differential term\nlet d_term = Kd * (-P1_derivative); // omitted '/time_delta'. inherent P1 refresh fequency.\n\n// Total PID output\nvar PID_output = p_term + i_term + d_term; // W (watt), the control input for the battery packs\nlogdata += `U(${time_delta}s)[${PID_output}] = P(${Kp})[${p_term}] + I(${Ki})[${i_term}] + D(${Kd})[${d_term}] | `;\n\n// Charging or Discharging states\nvar B_was_charging = context.get(\"batteries_charging_last\") || false;\nvar B_is_charging = PID_output > 0 ? true : false;\n\n// Hysteresis mode: prevents excessive switching between (dis)charge mode around the zero point.\n// if new PID_output lies within hysteresis, it will not switch. 0 = apply no hysteresis\nif (B_is_charging !== B_was_charging && Math.abs(PID_output) < hysteresis){\n    // log explain\n    logdata += `Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst) | `;\n    // prevent negative charging or positive discharging values (not allowed)\n    PID_output = (PID_output < 0 && B_is_charging) || ((PID_output > 0 && !B_is_charging)) ? 0 : PID_output;\n    // maintain previous scenario\n    B_is_charging = B_was_charging;\n    \n} else {\n    // save for next iteration\n    context.set(\"batteries_charging_last\", B_is_charging); //boolean\n}\n\n// OUTPUT\nflow.set(\"batteries\", batteries);\nflow.set(\"p1_error\", P1_error);\nflow.set(\"batteries_charging\", B_is_charging)\nflow.set(\"I_integral_sum\", integral_sum);\ncontext.set(\"time_last\", Date.now());\n\nreturn [{ payload: Number(PID_output) },\n        { payload: Number(P1_error)},\n        { payload: parseFloat(p_term)},\n        { payload: parseFloat(i_term)},\n        { payload: parseFloat(d_term)},\n        { payload: B_is_charging},\n        { payload: logdata }];",
+        "func": "var logdata = \"\";\n\n// Timing\nlet time_last = context.get('time_last') || Date.now(); // Milliseconds\nlet time_current = Date.now(); // Milliseconds\nlet time_delta = (time_current - time_last) / 1000; // Convert to seconds\n// note: due to inherent 1 sec intervals of P1 meter we omit dt terms. This is mostly for bug checking and optimizations.\n\n// Batteries\nvar batteries = flow.get(\"batteries\"); // array of battery configurations\nvar B_power = flow.get(\"batteries_total_power\"); // charging is positive, discharging negative\nvar anti_windup_threshold = Number(flow.get(\"batteries_total_assignable_power\")) || 0; // max available charge/discharge power.\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = flow.get(\"p1_power\"); // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\nvar P1_error = flow.get(\"p1_error\");  // W (watt), error signal = SP - PV\nvar P1_derivative = flow.get(\"p1_derivative\"); // Derivative of PV, not the error\n\n// PID values\nvar Kp = flow.get(\"house_battery_control_kp\") || 0.75;  // Proportional gain\nvar Ki = flow.get(\"house_battery_control_ki\") || 0;     // Integral gain        Ki = Kp/Ti\nvar Kd = flow.get(\"house_battery_control_kd\") || 0;     // Derivative gain      Kd = Kp*Td\n\n// helpers\nvar integral_sum = flow.get('I_integral_sum') || 0;\nvar Gm = flow.get(\"master_gain\")||1; // gain scheduling\n\n// optimizations\nvar hysteresis = flow.get(\"house_battery_control_hysteresis_in_w\"); // W (watt)\n\n// -- PID regulator --\n// Proportional term\nlet p_term = Gm * Kp * P1_error;\n\n// Integral term\nintegral_sum += P1_error; \n\n// apply anti-windup \nlet integral_max = anti_windup_threshold / Ki; // improve: anti-windup should only trigger when exceeding the max controlable range\nintegral_sum = Math.min(Math.max(integral_sum, -integral_max), integral_max);\nlet i_term = Ki * integral_sum;\n\n// Differential term\nlet d_term = Gm * Kd * (-P1_derivative); // omitted '/time_delta'. inherent P1 refresh fequency.\n\n// Total PID output\nvar PID_output = p_term + i_term + d_term; // W (watt), the control input for the battery packs\nlogdata += `U(${time_delta}s)[${PID_output}] = P(${Kp})[${p_term}] + I(${Ki})[${i_term}] + D(${Kd})[${d_term}] | `;\n\n// Charging or Discharging states\nvar B_was_charging = context.get(\"batteries_charging_last\") || false;\nvar B_is_charging = PID_output > 0 ? true : false;\n\n// Hysteresis mode: prevents excessive switching between (dis)charge mode around the zero point.\n// if new PID_output lies within hysteresis, it will not switch. 0 = apply no hysteresis\nif (B_is_charging !== B_was_charging && Math.abs(PID_output) < hysteresis){\n    // log explain\n    logdata += `Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst) | `;\n    // prevent negative charging or positive discharging values (not allowed)\n    PID_output = (PID_output < 0 && B_is_charging) || ((PID_output > 0 && !B_is_charging)) ? 0 : PID_output;\n    // maintain previous scenario\n    B_is_charging = B_was_charging;\n    \n} else {\n    // save for next iteration\n    context.set(\"batteries_charging_last\", B_is_charging); //boolean\n}\n\n// OUTPUT\nflow.set(\"batteries\", batteries);\nflow.set(\"p1_error\", P1_error);\nflow.set(\"batteries_charging\", B_is_charging)\nflow.set(\"I_integral_sum\", integral_sum);\ncontext.set(\"time_last\", Date.now());\n\nreturn [{ payload: Number(PID_output) },\n        { payload: Number(P1_error)},\n        { payload: parseFloat(p_term)},\n        { payload: parseFloat(i_term)},\n        { payload: parseFloat(d_term)},\n        { payload: B_is_charging},\n        { payload: logdata }];",
         "outputs": 7,
         "timeout": 0,
         "noerr": 0,
@@ -669,7 +668,7 @@
         "z": "12a97c65ca14f3e2",
         "g": "3ded72deba4915d8",
         "name": "Load distribution",
-        "func": "// INPUT\nvar batteries = flow.get(\"batteries\");\nvar isCharging = flow.get(\"batteries_charging\"); // Are we in a battery charging scenario?\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\nvar hasReverseDischargePriority = flow.get(\"has_reverse_priority_discharge\") || false; // Prioritize (dis)charging the same battery\nvar logdata = `Charging=${isCharging} | `; // logging\n// how much power do the batteries need to compensate?\nvar unassigned_power = Math.abs(msg.payload); // Power in W to compensate using batteries\nlogdata += `Unassigned power ${unassigned_power} W | `;\n\n// inits \nvar solution_array = []; // load distribution solutions\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// enums\nconst CMODE = {\n    STOP: \"stop\",\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// battery life improvement (slow charge near max SoC)\n/**\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    if(max_power < 0) max_power = 0;\n    if (!hasChargingLimiter) return max_power;\n    if (soc >= 98) return Math.min(200, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 90) return Math.min(1500, max_power);\n    return max_power;\n}\nif(isCharging) logdata += `charge limiting based on SoC is active | `;\n\n// -- BATTERY DISCHARGE PRIORITY\nif (!isCharging && hasReverseDischargePriority) {\n    batteries.reverse();\n}\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ soc: number; soc_max: number; soc_min: number; rs485: string; id: any; charging_max: any; discharging_max: any; }} */ battery) =>{\n\n    // Step 1. remove unfit batteries\n    if(\n        (battery.soc >= battery.soc_max && isCharging) || \n        (battery.soc <= battery.soc_min && !isCharging) || \n        battery.rs485 !== \"enable\") {\n            // configure a STOP solution\n            let solution = {\n                id: battery.id,\n                mode: CMODE.STOP,\n                power: 0\n            };\n            // push solution\n            solution_array.push(solution);\n            // log we are stopping forced control for this battery \n            logdata += `${battery.id}: [skipped] SoC limits=${battery.soc_max}>[${battery.soc}]>${battery.soc_min}%, rs485=${battery.rs485} | `;\n            // skip further processing of this battery\n            return;\n        }\n\n    // Step 2. assign available (dis)charging power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power); // commit\n\n    // Step 3. set output values\n    // configure a CHARGE or DISCHARGE solution \n    let solution = {\n        id: battery.id,\n        mode: isCharging ? CMODE.CHARGE : (assign <= 0 ? CMODE.STOP : CMODE.DISCHARGE), // forcible mode\n        power: Math.round(assign)\n    };\n    // push solution\n    solution_array.push(solution);\n    \n    // update tally\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n});\n\n// battery discharge priority - put solutions back in initial order\nif (!isCharging && hasReverseDischargePriority) {\n    solution_array.reverse();\n}\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power);\nlogdata += `batteries_total_assignable_power ${batteries_total_assignable_power} | `;\n\n// OUTPUT\nsolution_array.forEach(solution => { \n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;\n});\n\n// TWO OUTPUTS\nreturn [\n    { payload: solution_array }, // to Home Battery IO\n    { payload: logdata, logtitle: \"Battery charge scenario\" }    // debug output\n    ]; ",
+        "func": "// INPUT\nvar batteries = flow.get(\"batteries\");\nvar isCharging = flow.get(\"batteries_charging\"); // Are we in a battery charging scenario?\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\nvar hasReverseDischargePriority = flow.get(\"has_reverse_priority_discharge\") || false; // Prioritize (dis)charging the same battery\nvar logdata = `Charging=${isCharging} | `; // logging\n// how much power do the batteries need to compensate?\nvar unassigned_power = Math.abs(msg.payload); // Power in W to compensate using batteries\nlogdata += `Unassigned power ${unassigned_power} W | `;\n\n// inits \nvar solution_array = []; // load distribution solutions\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// enums\nconst CMODE = {\n    STOP: \"stop\",\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// battery life improvement (slow charge near max SoC)\n/**\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    if(max_power < 0) max_power = 0;\n    if (!hasChargingLimiter) return max_power;\n    if (soc >= 98) return Math.min(250, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 85) return Math.min(1500, max_power);\n    return max_power;\n}\nif(isCharging) logdata += `charge limiting based on SoC is active | `;\n\n// -- BATTERY DISCHARGE PRIORITY\nif (!isCharging && hasReverseDischargePriority) {\n    batteries.reverse();\n}\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ soc: number; soc_max: number; soc_min: number; rs485: string; id: any; charging_max: any; discharging_max: any; }} */ battery) =>{\n\n    // Step 1. remove unfit batteries\n    if(\n        (battery.soc >= battery.soc_max && isCharging) || \n        (battery.soc <= battery.soc_min && !isCharging) || \n        battery.rs485 !== \"enable\") {\n            // configure a STOP solution\n            let solution = {\n                id: battery.id,\n                mode: CMODE.STOP,\n                power: 0\n            };\n            // push solution\n            solution_array.push(solution);\n            // log we are stopping forced control for this battery \n            logdata += `${battery.id}: [skipped] SoC limits=${battery.soc_max}>[${battery.soc}]>${battery.soc_min}%, rs485=${battery.rs485} | `;\n            // skip further processing of this battery\n            return;\n        }\n\n    // Step 2. assign available (dis)charging power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power); // commit\n\n    // Step 3. set output values\n    // configure a CHARGE or DISCHARGE solution \n    let solution = {\n        id: battery.id,\n        mode: isCharging ? CMODE.CHARGE : (assign <= 0 ? CMODE.STOP : CMODE.DISCHARGE), // forcible mode\n        power: Math.round(assign)\n    };\n    // push solution\n    solution_array.push(solution);\n    \n    // update tally\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n});\n\n// battery discharge priority - put solutions back in initial order\nif (!isCharging && hasReverseDischargePriority) {\n    solution_array.reverse();\n}\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power);\nlogdata += `batteries_total_assignable_power ${batteries_total_assignable_power} | `;\n\n// OUTPUT\nsolution_array.forEach(solution => { \n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;\n});\n\n// TWO OUTPUTS\nreturn [\n    { payload: solution_array }, // to Home Battery IO\n    { payload: logdata, logtitle: \"Battery charge scenario\" }    // debug output\n    ]; ",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1355,9 +1354,9 @@
         "id": "e426f2cc283e99db",
         "type": "comment",
         "z": "12a97c65ca14f3e2",
-        "name": "Gain switching",
-        "info": "todo",
-        "x": 640,
+        "name": "Gain scheduling",
+        "info": "",
+        "x": 1060,
         "y": 240,
         "wires": []
     },
@@ -1530,7 +1529,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 270,
-        "y": 300,
+        "y": 280,
         "wires": [
             [
                 "e4cd3e96c64ab764"
@@ -1580,7 +1579,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 270,
-        "y": 360,
+        "y": 320,
         "wires": [
             [
                 "d70af088456c1912"
@@ -1591,9 +1590,8 @@
         "id": "d70af088456c1912",
         "type": "function",
         "z": "12a97c65ca14f3e2",
-        "g": "708abd55c0ed5536",
         "name": "Error signal",
-        "func": "// INPUTS\nlet P1_error_last = Number(context.get(\"p1_error_last\"))||0; // last error signal level in W\nlet dampening = Number(flow.get(\"house_battery_control_error_signal_dampening\")) || 0; // 0% - 100%\ndampening = dampening / 100; // to Number\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = flow.get(\"p1_power\"); // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\n\n// Calc error signal\nlet P1_error_unfiltered = P1_setpoint - P1_power;\n\n// Simple averaging filter\nlet P1_error_filtered = (1 - dampening) * P1_error_unfiltered + (dampening) * P1_error_last;\n\n// OUTFLOW\nflow.set(\"p1_error\", P1_error_filtered); // W (watt), error signal = SP - PV\ncontext.set(\"p1_error_last\", P1_error_filtered);\n\n// OUTPUT\nreturn {payload: (dampening) * P1_error_last};",
+        "func": "// INPUTS\nlet P1_error_last = Number(context.get(\"p1_error_last\"))||0; // last error signal level in W\nlet dampening = Number(flow.get(\"house_battery_control_error_signal_dampening\")) || 0; // 0% - 100%\ndampening = dampening / 100; // to Number\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = flow.get(\"p1_power\"); // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\n\n// Calc error signal\nlet P1_error_unfiltered = P1_setpoint - P1_power;\n\n// Simple averaging filter\nlet P1_error_filtered = (1 - dampening) * P1_error_unfiltered + (dampening) * P1_error_last;\n\n// OUTFLOW\nflow.set(\"p1_error\", P1_error_filtered); // W (watt), error signal = SP - PV\ncontext.set(\"p1_error_last\", P1_error_filtered);\n\n// OUTPUT\nreturn {payload: P1_error_filtered};",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1601,7 +1599,302 @@
         "finalize": "",
         "libs": [],
         "x": 230,
-        "y": 480,
+        "y": 360,
+        "wires": [
+            [
+                "a964917e64b814b6"
+            ]
+        ]
+    },
+    {
+        "id": "a964917e64b814b6",
+        "type": "smooth",
+        "z": "12a97c65ca14f3e2",
+        "name": "Std deviation",
+        "property": "payload",
+        "action": "sd",
+        "count": "8",
+        "round": "",
+        "mult": "single",
+        "reduce": false,
+        "x": 630,
+        "y": 280,
+        "wires": [
+            [
+                "1b349dfd440b7328"
+            ]
+        ]
+    },
+    {
+        "id": "754fcd7edc8bd3cc",
+        "type": "function",
+        "z": "12a97c65ca14f3e2",
+        "name": "Derivative (abs)",
+        "func": "let value_last = context.get(\"value_last\")||0;\nlet value_now = Number(msg.payload)||0;\nlet derivative = value_now - value_last;\n\n// OUTFLOW\ncontext.set(\"value_last\", value_now);\n\n// OUTPUT\nreturn {payload: derivative};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\ncontext.set(\"value_last\",0);",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 320,
+        "wires": [
+            [
+                "881dd9d17ca52236",
+                "af9dc0fdbcd97cad"
+            ]
+        ]
+    },
+    {
+        "id": "af9dc0fdbcd97cad",
+        "type": "switch",
+        "z": "12a97c65ca14f3e2",
+        "name": "Disturbance driver",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "100",
+                "vt": "num"
+            },
+            {
+                "t": "lt",
+                "v": "-100",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 850,
+        "y": 320,
+        "wires": [
+            [
+                "250c79d5777fc1a9"
+            ],
+            [
+                "03c3e0d2c5105bd8"
+            ]
+        ]
+    },
+    {
+        "id": "881dd9d17ca52236",
+        "type": "api-call-service",
+        "z": "12a97c65ca14f3e2",
+        "name": "Debug",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_control_debug"
+        ],
+        "labelId": [],
+        "data": "{\"value\": \"{{payload}}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 610,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "11dc06d6ca119bae",
+        "type": "debug",
+        "z": "12a97c65ca14f3e2",
+        "name": "Rappid loss of stability",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1280,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "03c3e0d2c5105bd8",
+        "type": "debug",
+        "z": "12a97c65ca14f3e2",
+        "name": "Regaining control",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1270,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "c72be52034560bc2",
+        "type": "comment",
+        "z": "12a97c65ca14f3e2",
+        "name": "Stability monitoring",
+        "info": "",
+        "x": 650,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "1b349dfd440b7328",
+        "type": "switch",
+        "z": "12a97c65ca14f3e2",
+        "name": "Nominal driver",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "100",
+                "vt": "num"
+            },
+            {
+                "t": "gte",
+                "v": "100",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 840,
+        "y": 280,
+        "wires": [
+            [
+                "a01e5b8b2c0ba08b"
+            ],
+            [
+                "754fcd7edc8bd3cc"
+            ]
+        ],
+        "info": "When Std deviation is below this value, \r\nswitch to nominal gain configuration"
+    },
+    {
+        "id": "a01e5b8b2c0ba08b",
+        "type": "change",
+        "z": "12a97c65ca14f3e2",
+        "name": "Nominal gain",
+        "rules": [
+            {
+                "t": "set",
+                "p": "master_gain",
+                "pt": "flow",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 280,
+        "wires": [
+            [
+                "e20cbbea7ee23b37",
+                "65f5f44e4a6d4937"
+            ]
+        ]
+    },
+    {
+        "id": "250c79d5777fc1a9",
+        "type": "change",
+        "z": "12a97c65ca14f3e2",
+        "name": "High gain",
+        "rules": [
+            {
+                "t": "set",
+                "p": "master_gain",
+                "pt": "flow",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1040,
+        "y": 320,
+        "wires": [
+            [
+                "11dc06d6ca119bae",
+                "65f5f44e4a6d4937"
+            ]
+        ]
+    },
+    {
+        "id": "e20cbbea7ee23b37",
+        "type": "debug",
+        "z": "12a97c65ca14f3e2",
+        "name": "Nominal",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1240,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "65f5f44e4a6d4937",
+        "type": "function",
+        "z": "12a97c65ca14f3e2",
+        "name": "dummy",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1240,
+        "y": 400,
+        "wires": [
+            [
+                "70262252fcba3074"
+            ]
+        ]
+    },
+    {
+        "id": "70262252fcba3074",
+        "type": "function",
+        "z": "12a97c65ca14f3e2",
+        "name": "dummy",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 420,
         "wires": [
             [
                 "4c9a7bf109ed3b83"
