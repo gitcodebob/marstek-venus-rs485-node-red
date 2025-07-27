@@ -6,7 +6,8 @@
 
 ## Commit Workflow:
 - When asked to commit, always:
-    1. Perform `git status` and stage all relevant modified and new files.
+    1. Stage all relevant modified and new files in git.
+    1. Perform `git status` to check the current state of the repository.
     1. Generate a concise, descriptive commit message in the imperative mood (e.g., "Fix: Resolve login issue," "Feat: Add user profiles").
     1. Discuss the proposed commit message with the user for approval, but do not commit yet. First:
     1. If documentation related to the changes exists (e.g., in `README.md`), suggest updates or ask if updates are needed.

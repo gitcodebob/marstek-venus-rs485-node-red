@@ -1,13 +1,20 @@
+# 0.2.4
+- Patch: Improve derivative term and bumpless operation logic in control flow
+    - The derivative term now takes the derivative of the (input) smoothed error.
+        - This allows for more aggressive D-term tuning at higher input smoothing levels.
+        - This combats oscillations and overshoot, without causing runaways because of noise amplification (which is smoothed out at 50% and higher levels).
+    - Implementation result: changed the "Bumpless operation - changing target grid consumption" group:
+        - Added logic to distinguish between setpoint changes and steady-state, using a new switch node.
+        - Added a function to calculate the derivative of the error when the setpoint changes, and another for the process variable otherwise.
+    - Changed files: node-red/control-flow.json, RELEASE_NOTES.md
+# Release Notes
+All releases follow Semantic Versioning (SemVer).
+
 # 0.2.3
 - Refactor: Modularize Home Assistant configuration using directory-based includes for input numbers, input selects, and template sensors.
 - Split configuration into separate files for easier management and extension.
 - Update Node-RED batteries flow with new group, node positions, and linking instructions.
 - Clarify and expand Copilot instructions for commit workflow.
-# Release Notes
-
-
-
-All releases follow Semantic Versioning (SemVer).
 
 ## 0.2.2
 - Feat: Add gain scheduling and stability monitoring to control flow.

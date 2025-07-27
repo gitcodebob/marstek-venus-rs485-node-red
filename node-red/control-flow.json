@@ -77,17 +77,20 @@
         "name": "Bumpless operation - changing target grid consumption",
         "style": {
             "label": true,
-            "stroke": "#bfdbef"
+            "stroke": "#bfdbef",
+            "fill": "#ffffff"
         },
         "nodes": [
             "c4d930ac5428f39f",
             "27d5a3f876af3355",
-            "72237d7adf9ce6ea"
+            "5efa1a1255e88532",
+            "59d53689dbbb9f60",
+            "44e172ef9b366538"
         ],
-        "x": 1494,
-        "y": 19,
-        "w": 412,
-        "h": 142
+        "x": 434,
+        "y": 179,
+        "w": 512,
+        "h": 162
     },
     {
         "id": "753403731f001682",
@@ -171,6 +174,34 @@
         "y": 439,
         "w": 592,
         "h": 282
+    },
+    {
+        "id": "af0736bedb2befc1",
+        "type": "group",
+        "z": "12a97c65ca14f3e2",
+        "name": "Experimental",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e426f2cc283e99db",
+            "a964917e64b814b6",
+            "754fcd7edc8bd3cc",
+            "af9dc0fdbcd97cad",
+            "881dd9d17ca52236",
+            "11dc06d6ca119bae",
+            "03c3e0d2c5105bd8",
+            "c72be52034560bc2",
+            "1b349dfd440b7328",
+            "a01e5b8b2c0ba08b",
+            "250c79d5777fc1a9",
+            "e20cbbea7ee23b37",
+            "65f5f44e4a6d4937"
+        ],
+        "x": 1314,
+        "y": 779,
+        "w": 892,
+        "h": 242
     },
     {
         "id": "4c9a7bf109ed3b83",
@@ -498,7 +529,7 @@
         "y": 120,
         "wires": [
             [
-                "27d5a3f876af3355"
+                "85fe42a6589a7425"
             ]
         ]
     },
@@ -509,8 +540,8 @@
         "g": "da197078febec251",
         "name": "Bumpless target grid consumption",
         "info": "Instead of the error value, we use the process variable.\nThis prevents irratic behavior during sudden changes of the error or setpoint value.\n\ne.g. you change the setpoint from 0 to 100W \nThe error would make an instantanious jump and cause a huge derivative-term.\nThe pv stays continous and fluent.",
-        "x": 1660,
-        "y": 60,
+        "x": 600,
+        "y": 220,
         "wires": []
     },
     {
@@ -526,32 +557,13 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1600,
-        "y": 120,
+        "x": 840,
+        "y": 280,
         "wires": [
             [
-                "72237d7adf9ce6ea",
-                "85fe42a6589a7425"
+                "44e172ef9b366538"
             ]
         ]
-    },
-    {
-        "id": "72237d7adf9ce6ea",
-        "type": "debug",
-        "z": "12a97c65ca14f3e2",
-        "g": "da197078febec251",
-        "name": "PV derive",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1800,
-        "y": 120,
-        "wires": []
     },
     {
         "id": "2570fc471fcdacea",
@@ -1347,17 +1359,18 @@
         "name": "Setpoint ramping / damping / etc",
         "info": "Todo or try\n\n- P1 ramping / verzwakken\n- PID MV ramping / verzwakken",
         "x": 290,
-        "y": 240,
+        "y": 200,
         "wires": []
     },
     {
         "id": "e426f2cc283e99db",
         "type": "comment",
         "z": "12a97c65ca14f3e2",
+        "g": "af0736bedb2befc1",
         "name": "Gain scheduling",
         "info": "",
-        "x": 1060,
-        "y": 240,
+        "x": 1840,
+        "y": 820,
         "wires": []
     },
     {
@@ -1529,7 +1542,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 270,
-        "y": 280,
+        "y": 240,
         "wires": [
             [
                 "e4cd3e96c64ab764"
@@ -1579,7 +1592,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 270,
-        "y": 320,
+        "y": 280,
         "wires": [
             [
                 "d70af088456c1912"
@@ -1599,10 +1612,10 @@
         "finalize": "",
         "libs": [],
         "x": 230,
-        "y": 360,
+        "y": 320,
         "wires": [
             [
-                "a964917e64b814b6"
+                "5efa1a1255e88532"
             ]
         ]
     },
@@ -1610,6 +1623,7 @@
         "id": "a964917e64b814b6",
         "type": "smooth",
         "z": "12a97c65ca14f3e2",
+        "g": "af0736bedb2befc1",
         "name": "Std deviation",
         "property": "payload",
         "action": "sd",
@@ -1617,8 +1631,8 @@
         "round": "",
         "mult": "single",
         "reduce": false,
-        "x": 630,
-        "y": 280,
+        "x": 1410,
+        "y": 860,
         "wires": [
             [
                 "1b349dfd440b7328"
@@ -1629,6 +1643,7 @@
         "id": "754fcd7edc8bd3cc",
         "type": "function",
         "z": "12a97c65ca14f3e2",
+        "g": "af0736bedb2befc1",
         "name": "Derivative (abs)",
         "func": "let value_last = context.get(\"value_last\")||0;\nlet value_now = Number(msg.payload)||0;\nlet derivative = value_now - value_last;\n\n// OUTFLOW\ncontext.set(\"value_last\", value_now);\n\n// OUTPUT\nreturn {payload: derivative};",
         "outputs": 1,
@@ -1637,8 +1652,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\n\ncontext.set(\"value_last\",0);",
         "finalize": "",
         "libs": [],
-        "x": 640,
-        "y": 320,
+        "x": 1420,
+        "y": 900,
         "wires": [
             [
                 "881dd9d17ca52236",
@@ -1650,6 +1665,7 @@
         "id": "af9dc0fdbcd97cad",
         "type": "switch",
         "z": "12a97c65ca14f3e2",
+        "g": "af0736bedb2befc1",
         "name": "Disturbance driver",
         "property": "payload",
         "propertyType": "msg",
@@ -1668,14 +1684,15 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 850,
-        "y": 320,
+        "x": 1630,
+        "y": 900,
         "wires": [
             [
                 "250c79d5777fc1a9"
             ],
             [
-                "03c3e0d2c5105bd8"
+                "03c3e0d2c5105bd8",
+                "a01e5b8b2c0ba08b"
             ]
         ]
     },
@@ -1683,6 +1700,7 @@
         "id": "881dd9d17ca52236",
         "type": "api-call-service",
         "z": "12a97c65ca14f3e2",
+        "g": "af0736bedb2befc1",
         "name": "Debug",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1704,8 +1722,8 @@
         "blockInputOverrides": true,
         "domain": "input_number",
         "service": "set_value",
-        "x": 610,
-        "y": 360,
+        "x": 1390,
+        "y": 940,
         "wires": [
             []
         ]
@@ -1714,6 +1732,7 @@
         "id": "11dc06d6ca119bae",
         "type": "debug",
         "z": "12a97c65ca14f3e2",
+        "g": "af0736bedb2befc1",
         "name": "Rappid loss of stability",
         "active": true,
         "tosidebar": true,
@@ -1723,14 +1742,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1280,
-        "y": 300,
+        "x": 2060,
+        "y": 880,
         "wires": []
     },
     {
         "id": "03c3e0d2c5105bd8",
         "type": "debug",
         "z": "12a97c65ca14f3e2",
+        "g": "af0736bedb2befc1",
         "name": "Regaining control",
         "active": true,
         "tosidebar": true,
@@ -1740,24 +1760,26 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1270,
-        "y": 340,
+        "x": 2050,
+        "y": 920,
         "wires": []
     },
     {
         "id": "c72be52034560bc2",
         "type": "comment",
         "z": "12a97c65ca14f3e2",
+        "g": "af0736bedb2befc1",
         "name": "Stability monitoring",
         "info": "",
-        "x": 650,
-        "y": 240,
+        "x": 1430,
+        "y": 820,
         "wires": []
     },
     {
         "id": "1b349dfd440b7328",
         "type": "switch",
         "z": "12a97c65ca14f3e2",
+        "g": "af0736bedb2befc1",
         "name": "Nominal driver",
         "property": "payload",
         "propertyType": "msg",
@@ -1776,8 +1798,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 840,
-        "y": 280,
+        "x": 1620,
+        "y": 860,
         "wires": [
             [
                 "a01e5b8b2c0ba08b"
@@ -1792,6 +1814,7 @@
         "id": "a01e5b8b2c0ba08b",
         "type": "change",
         "z": "12a97c65ca14f3e2",
+        "g": "af0736bedb2befc1",
         "name": "Nominal gain",
         "rules": [
             {
@@ -1807,8 +1830,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1050,
-        "y": 280,
+        "x": 1830,
+        "y": 860,
         "wires": [
             [
                 "e20cbbea7ee23b37",
@@ -1820,7 +1843,8 @@
         "id": "250c79d5777fc1a9",
         "type": "change",
         "z": "12a97c65ca14f3e2",
-        "name": "High gain",
+        "g": "af0736bedb2befc1",
+        "name": "Disturbed gain",
         "rules": [
             {
                 "t": "set",
@@ -1835,8 +1859,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1040,
-        "y": 320,
+        "x": 1840,
+        "y": 900,
         "wires": [
             [
                 "11dc06d6ca119bae",
@@ -1848,6 +1872,7 @@
         "id": "e20cbbea7ee23b37",
         "type": "debug",
         "z": "12a97c65ca14f3e2",
+        "g": "af0736bedb2befc1",
         "name": "Nominal",
         "active": true,
         "tosidebar": true,
@@ -1857,15 +1882,16 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1240,
-        "y": 260,
+        "x": 2020,
+        "y": 840,
         "wires": []
     },
     {
         "id": "65f5f44e4a6d4937",
         "type": "function",
         "z": "12a97c65ca14f3e2",
-        "name": "dummy",
+        "g": "af0736bedb2befc1",
+        "name": "output processing",
         "func": "\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -1873,19 +1899,73 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1240,
-        "y": 400,
+        "x": 2050,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5efa1a1255e88532",
+        "type": "switch",
+        "z": "12a97c65ca14f3e2",
+        "g": "da197078febec251",
+        "name": "Target grid consumption unchanged",
+        "property": "house_target_grid_consumption_in_w",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "prev"
+            },
+            {
+                "t": "neq",
+                "v": "",
+                "vt": "prev"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 600,
+        "y": 260,
         "wires": [
             [
-                "70262252fcba3074"
+                "59d53689dbbb9f60"
+            ],
+            [
+                "27d5a3f876af3355"
             ]
         ]
     },
     {
-        "id": "70262252fcba3074",
+        "id": "59d53689dbbb9f60",
         "type": "function",
         "z": "12a97c65ca14f3e2",
-        "name": "dummy",
+        "g": "da197078febec251",
+        "name": "Derivative Error",
+        "func": "var P1_error = flow.get(\"p1_error\")||0;\nvar P1_last_error = Number(context.get(\"p1_last_error\")) ||0;\n\n// Error derivative\n// note: error = -PV\nvar p1_derivative = -(P1_error - P1_last_error); // devided by unity seconds\n\n// OUTFLOW\nflow.set(\"p1_derivative\", p1_derivative);\ncontext.set(\"p1_last_error\", P1_error);\n\n// OUTPUT\nreturn {payload: p1_derivative};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 240,
+        "wires": [
+            [
+                "44e172ef9b366538"
+            ]
+        ]
+    },
+    {
+        "id": "44e172ef9b366538",
+        "type": "function",
+        "z": "12a97c65ca14f3e2",
+        "g": "da197078febec251",
+        "name": "Derivative final value",
         "func": "\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -1893,8 +1973,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 220,
-        "y": 420,
+        "x": 560,
+        "y": 300,
         "wires": [
             [
                 "4c9a7bf109ed3b83"
