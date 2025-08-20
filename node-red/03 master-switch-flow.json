@@ -106,7 +106,8 @@
         "deviceId": [],
         "entityId": [
             "select.marstek_m1_rs485_control_mode",
-            "select.marstek_m2_rs485_control_mode"
+            "select.marstek_m2_rs485_control_mode",
+            "select.marstek_m3_rs485_control_mode"
         ],
         "labelId": [],
         "data": "{   \"option\": \"disable\" }",
@@ -142,7 +143,8 @@
         "deviceId": [],
         "entityId": [
             "select.marstek_m1_user_work_mode",
-            "select.marstek_m2_user_work_mode"
+            "select.marstek_m2_user_work_mode",
+            "select.marstek_m3_user_work_mode"
         ],
         "labelId": [],
         "data": "{   \"option\": \"manual\" }",
@@ -178,7 +180,8 @@
         "deviceId": [],
         "entityId": [
             "select.marstek_m1_rs485_control_mode",
-            "select.marstek_m2_rs485_control_mode"
+            "select.marstek_m2_rs485_control_mode",
+            "select.marstek_m3_rs485_control_mode"
         ],
         "labelId": [],
         "data": "{   \"option\": \"enable\" }",
@@ -262,6 +265,14 @@
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
-        "addon": true
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "",
+        "connectionDelay": false,
+        "cacheJson": false,
+        "heartbeat": false,
+        "heartbeatInterval": "",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
     }
 ]

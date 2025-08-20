@@ -33,6 +33,18 @@ house_battery_control_hysteresis_in_w:
   mode: slider # 'box' of 'slider'
   icon: mdi:numeric
 
+house_battery_control_idle_time:
+  # Distribution optimization
+  # Prevents excessive ON/OFF switching of the inverter relay.
+  # The inverter switches OFF after being idle for the configured duration
+  name: "House Battery Control Stop after Idle for Minutes"
+  min: 0 # no idling, battery inverter instantly latches OFF when 0 Watt is requested.
+  max: 60 # STOPS after 1 hour.
+  step: 1
+  unit_of_measurement: "min"
+  mode: box # 'box' of 'slider'
+  icon: mdi:timer-lock
+
 house_battery_control_kp:
   # PID proportional amplification Kp
   name: "House Battery Control Proportional (Kp)"

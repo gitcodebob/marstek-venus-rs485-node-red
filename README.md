@@ -3,9 +3,12 @@
 This project is designed for hobbyists who want to control home battery systems using Home Assistant and Node-RED. It provides ready-to-use flows and configuration examples, including a PID controller for advanced battery management. Use at your own discretion.
 
 ## Features
-- **Node-RED PID Controller Flow:** Easily import and use a PID controller for battery charge/discharge control.
-- **Home Assistant Integration:** Example configuration for seamless integration with your smart home setup.
-- **Customizable:** Adapt the flows and configuration to your specific battery hardware and automation needs.
+- **Advanced PID Controller Flow:** Sophisticated PID controller with gain scheduling, stability monitoring, and performance optimizations.
+- **Battery Life Protection:** Minimum idle time feature reduces relay wear and eliminates switching noise during zero-power operation.
+- **Performance Optimized:** 40W deadband and reporting by exception significantly reduce CPU load during stable operation.
+- **Multi-Battery Support:** Enhanced layouts for easy addition/removal of batteries with alphabetical ordering.
+- **Home Assistant Integration:** Comprehensive dashboard with advanced monitoring including idle time and battery analytics.
+- **Modular Design:** Three numbered flows (01, 02, 03) for intuitive setup and maintenance.
 - **Updating:** Grab the latest control flow, without losing your personal configurations.
 
 [Release notes](RELEASE_NOTES.md)
@@ -36,9 +39,9 @@ A proportional–integral–derivative controller (PID controller or three-term 
 
 4. **Import Node-RED Flows**
    - In Node-RED, go to the menu > Import > and select all three JSON files from the `node-red` folder:
-     - `batteries-flow.json` 
-     - `control-flow.json`
-     - `master-switch-flow.json`
+     - `01 start-flow.json` 
+     - `02 control-flow.json`
+     - `03 master-switch-flow.json`
    - Go to tab `Home Battery IO` and add/adjust nodes per instruction
       - Don't forget to update the `mapping` node to match your added/adjusted nodes.
    - Deploy the flows.
@@ -55,6 +58,29 @@ A proportional–integral–derivative controller (PID controller or three-term 
    - These can be found in `home assistant\input_numbers.yaml`
    - If there are other devices on the fuse box group of your battery: set it to 800W
    - If you have each battery on its own fuse box group: set the value to 3600W x the number of batteries.
+
+## Advanced Features
+
+### Battery Life Protection
+- **Minimum Idle Time:** Configurable minimum time before allowing battery grid relay disengagement
+  - Reduces relay wear and extends battery life
+  - Eliminates clicking/clacking noises during frequent charge/discharge transitions around 0W
+  - Configurable through Home Assistant dashboard
+- **Controller Output Protection:** Automatic protection based on battery maximum charge/discharge values
+  - Prevents system from exceeding individual battery safety limits
+  - Dynamically adjusts control output to stay within configured battery capabilities
+
+### Performance Optimizations
+- **40W Deadband:** Control loop only activates when P1 changes by more than 40W since last calculation
+  - Significantly reduces CPU load during stable operation
+  - Maintains precision while improving system efficiency
+- **Reporting by Exception:** Action nodes only trigger when values actually change
+  - Reduces unnecessary Home Assistant calls and system load
+
+### Multi-Battery Management
+- **Alphabetical Battery Ordering:** System automatically sorts batteries (M1, M2, M3) regardless of input order
+- **Easy Battery Addition/Removal:** Enhanced Node-RED layouts for quick battery configuration changes
+- **Advanced Dashboard:** Comprehensive monitoring including idle time, battery analytics, and performance metrics
 
 ## Operation and tuning (minimal)
 ### Operation

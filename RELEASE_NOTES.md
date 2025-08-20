@@ -1,6 +1,31 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer).
 
+## 0.3.0
+- **New Feature: Minimum Idle Time for Battery Grid Relay Disengagement**
+  - Introduced minimum idle time before allowing a battery to disengage its grid relay
+  - Improves battery life by reducing wear and tear on relay components
+  - Enables seamless operation around the 0W regime - Marstek batteries now switch from charge/discharge without clacking noises
+  - Home Assistant dashboard now displays idle time and other advanced features
+
+- **New Feature: Controller Output Protection**
+  - Added controller output protection based on maximum charge/discharge values of the batteries
+  - Prevents system from exceeding battery safety limits
+  - Automatically adjusts control output to stay within configured battery capabilities
+
+- **Improved: Node-RED Layout for Multi-Battery Setup**
+  - Enhanced Node-RED layouts to quickly add/remove 3rd battery
+  - Node-RED flow `Home Battery Start > Set Batteries` now always outputs in alphabetical order of battery.id (e.g., "M1", "M2", "M3") regardless of solution_array order
+
+- **Performance Optimizations**
+  - Reduced CPU load and action calls by adding Reporting by Exception on Action Nodes
+  - Introduced 40W deadband to reduce CPU load - control loop only triggers if P1 changes by more than 40W since last successful calculation
+  - Significantly decreases control loop frequency during stable usage situations
+
+- **User Experience Improvements**
+  - Renamed Node-RED flows with numbered filenames (01, 02, 03) for more intuitive use
+  - Updated documentation to reflect new flow naming convention
+
 ## 0.2.4
 - Patch: Improve derivative term and bumpless operation logic in control flow
     - The derivative term now takes the derivative of the (input) smoothed error.

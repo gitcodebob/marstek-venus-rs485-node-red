@@ -1,5 +1,3 @@
-# Home Assistant Dashboard Configuration
-# This file defines a dashboard layout and components for PID home battery control, as an example.
 views:
   - type: sections
     path: home-battery-control
@@ -27,12 +25,11 @@ views:
                 name: M1
               - entity: select.marstek_m2_forcible_charge_discharge
                 name: M2
+              - entity: select.marstek_m3_forcible_charge_discharge
+                name: M3
             hours_to_show: 0.05
           - type: entities
             entities:
-              - entity: input_number.house_battery_control_hysteresis_in_w
-                name: 'Hysteresis '
-                secondary_info: none
               - entity: input_number.house_battery_control_kp
                 name: Proportional gain (Kp)
               - entity: input_number.house_battery_control_ki
@@ -45,18 +42,26 @@ views:
               - entity: input_number.house_battery_control_pid_output_dampening
                 name: Output smoothing
             title: PID controls
+          - type: entities
+            entities:
+              - entity: input_number.house_battery_control_idle_time
+                name: Stop after Idle for
+              - entity: input_number.house_battery_control_hysteresis_in_w
+                name: 'Hysteresis '
+                secondary_info: none
+              - entity: input_number.house_target_grid_consumption_in_w
       - cards:
           - type: heading
             heading: Histrory
           - title: PID analysis
             type: history-graph
             entities:
-              - input_number.house_battery_control_error_signal
-              - sensor.p1_meter_vermogen
-              - input_number.house_battery_control_pid_output
-              - input_number.house_battery_control_p_term
-              - input_number.house_battery_control_i_term
-              - input_number.house_battery_control_d_term
+              - entity: input_number.house_battery_control_error_signal
+              - entity: sensor.p1_meter_vermogen
+              - entity: input_number.house_battery_control_pid_output
+              - entity: input_number.house_battery_control_p_term
+              - entity: input_number.house_battery_control_i_term
+              - entity: input_number.house_battery_control_d_term
             grid_options:
               columns: full
             hours_to_show: 0.1

@@ -1,0 +1,2028 @@
+[
+    {
+        "id": "a099d47fc07b3cee",
+        "type": "tab",
+        "label": "Home Battery Start",
+        "disabled": false,
+        "info": "# Home battery control\r\nConsists of three flows:\r\n 1.  Start flow\r\n 1.  Control flow\r\n 1.  Master switch flow\r\n\r\n## Start flow\r\nThis is the starting point of your home battery control.\r\n\r\nIt starts with P1 measurement as a trigger.\r\nIt allows you to connect your battery sensors to the flow.\r\nIt ends with a function node, mapping your batteries to a battery_array\r\n\r\nThe battery_array is passed on to the control flow.\r\n\r\nWhen the control flow has calculated the desired corrections,\r\nit is passed back to this flow and applied to your batteries.",
+        "env": []
+    },
+    {
+        "id": "fc3b0636793881be",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Start",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "1d0932b9cdfe2cc0",
+            "057b9222c17d4046",
+            "b5940f2c8939de70",
+            "27ede02d64789dd0"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 832,
+        "h": 82
+    },
+    {
+        "id": "8725e551f88f9081",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Home Battery Control",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "31718411354ec91e",
+            "85d84b11a51b81b9",
+            "a283764303f31dc8"
+        ],
+        "x": 34,
+        "y": 539,
+        "w": 332,
+        "h": 202
+    },
+    {
+        "id": "b6de692f9d62224d",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Set Batteries",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "b706fac8a42803f4",
+            "c19da731efd01879",
+            "a63c224511f9a290",
+            "65a545d97c500c67",
+            "26560f17ffdcdf34",
+            "08133ce712e6094f",
+            "e55cb977e1795872",
+            "f87d47d9106a8c81",
+            "5d5d9ca7bad200b8",
+            "a51532b11396dc76",
+            "71a31fa2d354930d",
+            "e91efce6718ed360",
+            "2f1cf4b46554262c",
+            "4edbb9aa9dc6c61b",
+            "31e7b90d99bcb9cd"
+        ],
+        "x": 34,
+        "y": 759,
+        "w": 752,
+        "h": 402
+    },
+    {
+        "id": "8ff447faf151d1ad",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Map sensor values to Controler input",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "47ee2cacda9c1168",
+            "8b3a617cd7648d30",
+            "6071fecf347d7ffb"
+        ],
+        "x": 34,
+        "y": 399,
+        "w": 452,
+        "h": 122
+    },
+    {
+        "id": "a3737ef067eb71c9",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Get Batteries",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "d10131d83ea31ec7",
+            "6a5bb8e0bd06a760",
+            "32b0526b3704d95b",
+            "e584d384f4209bb8",
+            "2fcd541db21a09fc",
+            "51deca5227d4f189",
+            "518594eab0fa60a2",
+            "d7e64de819b7f383",
+            "a8fce67479138a4c",
+            "8dc283d927a2a703",
+            "fe27da0dfa90382d",
+            "80bacf2e0ad2e5cf",
+            "187d1689dae3ab42",
+            "fe379cf97ff9bbf7",
+            "9dca98f0cd2c66f5",
+            "127c03843f2e17a1",
+            "9e1f8745fee1b381",
+            "766c395354ed7fce",
+            "d470ca11879f0f6f",
+            "07893125ca854f5d",
+            "977e8b2b8e8c88ae",
+            "90239401a2240d0e",
+            "90546f0176ca54d7",
+            "b5391bab46e62ef0",
+            "e16e1f7d81a2b641"
+        ],
+        "x": 34,
+        "y": 119,
+        "w": 1492,
+        "h": 262
+    },
+    {
+        "id": "47ee2cacda9c1168",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "8ff447faf151d1ad",
+        "name": "Mapping",
+        "func": "// Home power \nvar P1_power = flow.get(\"p1_power\"); // Watt, grid power drawn or delivered\n\n// Battery properties\nvar M1_power = flow.get(\"marstek_m1_battery_power\");    // charging is positive, discharge is negative\nvar M2_power = flow.get(\"marstek_m2_battery_power\");    // charging is positive, discharge is negative\nvar M3_power = flow.get(\"marstek_m3_battery_power\");    // charging is positive, discharge is negative\n\nvar M1_charging_max = flow.get(\"marstek_m1_max_charge_power\"); // W\nvar M2_charging_max = flow.get(\"marstek_m2_max_charge_power\"); // W\nvar M3_charging_max = flow.get(\"marstek_m3_max_charge_power\"); // W\n\nvar M1_discharging_max = flow.get(\"marstek_m1_max_discharge_power\"); // W\nvar M2_discharging_max = flow.get(\"marstek_m2_max_discharge_power\"); // W\nvar M3_discharging_max = flow.get(\"marstek_m3_max_discharge_power\"); // W\n\nvar M1_control_mode = flow.get(\"marstek_m1_rs485_control_mode\"); // enable/disable\nvar M2_control_mode = flow.get(\"marstek_m2_rs485_control_mode\"); // enable/disable\nvar M3_control_mode = flow.get(\"marstek_m3_rs485_control_mode\"); // enable/disable\n\nvar M1_soc = Number(flow.get(\"marstek_m1_battery_state_of_charge\"));         //%\nvar M1_soc_min = Number(flow.get(\"marstek_m1_discharging_cutoff_capacity\")); //%\nvar M1_soc_max = Number(flow.get(\"marstek_m1_charging_cutoff_capacity\"));    //%\n\nvar M2_soc = Number(flow.get(\"marstek_m2_battery_state_of_charge\"));         //%\nvar M2_soc_min = Number(flow.get(\"marstek_m2_discharging_cutoff_capacity\")); //%\nvar M2_soc_max = Number(flow.get(\"marstek_m2_charging_cutoff_capacity\"));    //%\n\nvar M3_soc = Number(flow.get(\"marstek_m3_battery_state_of_charge\"));         //%\nvar M3_soc_min = Number(flow.get(\"marstek_m3_discharging_cutoff_capacity\")); //%\nvar M3_soc_max = Number(flow.get(\"marstek_m3_charging_cutoff_capacity\"));    //%\n\n\n//--    Battery list\n// Note: the order of the batteries in the `battery_array` determines priority in (dis)charging.\n// e.g. the first battery gets priority to charge, when it is at capacity the next battery gets what remains.\n// Batteries with built-in converters are most efficient at peak power. \n// The efficiency is optimized by prioritizing batteries instead of spreading load evenly accross al batteries. \n// Manipulating the order of the array allows you to control which battery is in the lead.\nlet battery_array = [\n    { id: \"M1\", \n      power: M1_power, charging_max: M1_charging_max, discharging_max: M1_discharging_max,\n      soc: M1_soc, soc_min: M1_soc_min, soc_max: M1_soc_max,\n      rs485: M1_control_mode \n    }\n    ,\n    { id: \"M2\", \n      power: M2_power, charging_max: M2_charging_max, discharging_max: M2_discharging_max,\n      soc: M2_soc, soc_min: M2_soc_min, soc_max: M2_soc_max,\n      rs485: M2_control_mode \n    }\n    //,\n    // { id: \"M3\", \n    //   power: M3_power, charging_max: M3_charging_max, discharging_max: M3_discharging_max,\n    //   power_set: 0, // what power level should be set next\n    //   soc: M3_soc, soc_min: M3_soc_min, soc_max: M3_soc_max,\n    //   rs485: M3_control_mode \n    // }\n];\n\n// -- payload\nreturn {\n  payload: battery_array, \n  power: P1_power\n  };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 120,
+        "y": 480,
+        "wires": [
+            [
+                "8b3a617cd7648d30",
+                "31718411354ec91e"
+            ]
+        ]
+    },
+    {
+        "id": "8b3a617cd7648d30",
+        "type": "debug",
+        "z": "a099d47fc07b3cee",
+        "g": "8ff447faf151d1ad",
+        "name": "Batteries",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "1d0932b9cdfe2cc0",
+        "type": "server-state-changed",
+        "z": "a099d47fc07b3cee",
+        "g": "fc3b0636793881be",
+        "name": "P1 meter",
+        "server": "176d29a.6f648d6",
+        "version": 6,
+        "outputs": 1,
+        "exposeAsEntityConfig": "",
+        "entities": {
+            "entity": [
+                "sensor.p1_meter_vermogen"
+            ],
+            "substring": [],
+            "regex": []
+        },
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": true,
+        "ignorePrevStateUnknown": true,
+        "ignorePrevStateUnavailable": true,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "p1_power",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            },
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "x": 120,
+        "y": 60,
+        "wires": [
+            [
+                "27ede02d64789dd0"
+            ]
+        ]
+    },
+    {
+        "id": "057b9222c17d4046",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "fc3b0636793881be",
+        "name": "Master Control Mode",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.marstek_master_battery_mode",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "master_mode",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 480,
+        "y": 60,
+        "wires": [
+            [
+                "b5940f2c8939de70"
+            ]
+        ]
+    },
+    {
+        "id": "b5940f2c8939de70",
+        "type": "switch",
+        "z": "a099d47fc07b3cee",
+        "g": "fc3b0636793881be",
+        "name": "when in \"Full Control\" mode",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Full control",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 720,
+        "y": 60,
+        "wires": [
+            [
+                "766c395354ed7fce"
+            ]
+        ]
+    },
+    {
+        "id": "e16e1f7d81a2b641",
+        "type": "comment",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "1. Configure your batteries here",
+        "info": "# Add as many batteries as you like.\n\n## Important\nReview the Mapping area to hook your \nsensors to the batteries_array and the\ncorrect properties.",
+        "x": 190,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "31718411354ec91e",
+        "type": "link out",
+        "z": "a099d47fc07b3cee",
+        "g": "8725e551f88f9081",
+        "name": "Mapping out",
+        "mode": "link",
+        "links": [
+            "84b2ca31a7edccf6"
+        ],
+        "x": 195,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "85d84b11a51b81b9",
+        "type": "link in",
+        "z": "a099d47fc07b3cee",
+        "g": "8725e551f88f9081",
+        "name": "Load distribution in",
+        "links": [
+            "748f9abb441bc2a3"
+        ],
+        "x": 195,
+        "y": 700,
+        "wires": [
+            [
+                "26560f17ffdcdf34"
+            ]
+        ]
+    },
+    {
+        "id": "b706fac8a42803f4",
+        "type": "api-call-service",
+        "z": "a099d47fc07b3cee",
+        "g": "b6de692f9d62224d",
+        "name": "Output charge/discharge/stop M1",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "select.select_option",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "select.marstek_m1_forcible_charge_discharge"
+        ],
+        "labelId": [],
+        "data": "{\"option\":\"{{ payload }}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "select",
+        "service": "select_option",
+        "x": 620,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c19da731efd01879",
+        "type": "api-call-service",
+        "z": "a099d47fc07b3cee",
+        "g": "b6de692f9d62224d",
+        "name": "Output charge/discharge/stop M2",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "select.select_option",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "select.marstek_m2_forcible_charge_discharge"
+        ],
+        "labelId": [],
+        "data": "{\"option\":\"{{ payload }}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "select",
+        "service": "select_option",
+        "x": 620,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a63c224511f9a290",
+        "type": "api-call-service",
+        "z": "a099d47fc07b3cee",
+        "g": "b6de692f9d62224d",
+        "name": "Output (dis)charge power M1",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "number.marstek_m1_forcible_discharge_power",
+            "number.marstek_m1_forcible_charge_power"
+        ],
+        "labelId": [],
+        "data": "{\"value\":\"{{ payload }}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "number",
+        "service": "set_value",
+        "x": 600,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "65a545d97c500c67",
+        "type": "api-call-service",
+        "z": "a099d47fc07b3cee",
+        "g": "b6de692f9d62224d",
+        "name": "Output (dis)charge power M2",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "number.marstek_m2_forcible_discharge_power",
+            "number.marstek_m2_forcible_charge_power"
+        ],
+        "labelId": [],
+        "data": "{\"value\":\"{{ payload }}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "number",
+        "service": "set_value",
+        "x": 600,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "26560f17ffdcdf34",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "b6de692f9d62224d",
+        "name": "Set batteries",
+        "func": "/* Convert battery solutions and push the settings to your batteries\n *\n * Node configuration:\n * Set # of outputs to 2 x {your number of batteries} + 1\n * Example: 2 batteries: 2 x 2 + 1 = 5 outputs\n * \n * Output order will be:\n * - Logdata node\n * - Battery 1 mode \n * - Battery 1 power\n * - Battery 2 mode\n * - Battery 2 power\n * \n * Set the number of output nodes in the SETUP tab\n */\n\n// Init\nvar logdata = '';\n\n// INPUT\n// array of load distribution solutions\nlet solution_array = msg.payload;\n\n// sort battery solutions by alphabetical order of their ID\nsolution_array.sort(function (/** @type {{ id: string; }} */ a, /** @type {{ id: string; }} */ b) {\n    return a.id.localeCompare(b.id);\n});\n\n// OUTPUT\nlet output_array = [];\nsolution_array.forEach((/** @type {{ id: String; mode: String; power: Number; }} */ solution) => {\n    output_array.push(\n        {payload: solution.mode},   // forced charge mode\n        {payload: solution.power}   // power in Watt\n    );\n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;    \n});\n\n// Add logdata as the first output\noutput_array.unshift({payload: logdata});\n\n// Node outputs\nreturn output_array;",
+        "outputs": 7,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 130,
+        "y": 960,
+        "wires": [
+            [
+                "08133ce712e6094f"
+            ],
+            [
+                "f87d47d9106a8c81"
+            ],
+            [
+                "5d5d9ca7bad200b8"
+            ],
+            [
+                "a51532b11396dc76"
+            ],
+            [
+                "71a31fa2d354930d"
+            ],
+            [
+                "e91efce6718ed360"
+            ],
+            [
+                "2f1cf4b46554262c"
+            ]
+        ]
+    },
+    {
+        "id": "6071fecf347d7ffb",
+        "type": "comment",
+        "z": "a099d47fc07b3cee",
+        "g": "8ff447faf151d1ad",
+        "name": "2. Update the mapping to correspond with your batteries",
+        "info": "",
+        "x": 260,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "08133ce712e6094f",
+        "type": "debug",
+        "z": "a099d47fc07b3cee",
+        "g": "b6de692f9d62224d",
+        "name": "Logdata",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "e55cb977e1795872",
+        "type": "comment",
+        "z": "a099d47fc07b3cee",
+        "g": "b6de692f9d62224d",
+        "name": "4. Add action nodes to all batteries",
+        "info": "",
+        "x": 460,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "a283764303f31dc8",
+        "type": "comment",
+        "z": "a099d47fc07b3cee",
+        "g": "8725e551f88f9081",
+        "name": "3. Link to Home Battery Control flow",
+        "info": "# Link Out and Link In nodes\n\n**Requirements**\nImport the `Home Battery Control` flow into Node-RED,\nbefore linking in or linking out.\n\n## Link Out\nSelect `Mapping` under `Home Battery Control`\n_This will send the battery configuration to the PID control_\n\n## Link In\nSelect `Load distribution out` under `Home Battery Control`\n_Here we receive back the calculated charge/discharge requirements_",
+        "x": 200,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "f87d47d9106a8c81",
+        "type": "rbe",
+        "z": "a099d47fc07b3cee",
+        "g": "b6de692f9d62224d",
+        "name": "on change",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 390,
+        "y": 880,
+        "wires": [
+            [
+                "b706fac8a42803f4"
+            ]
+        ]
+    },
+    {
+        "id": "5d5d9ca7bad200b8",
+        "type": "rbe",
+        "z": "a099d47fc07b3cee",
+        "g": "b6de692f9d62224d",
+        "name": "on change",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 390,
+        "y": 920,
+        "wires": [
+            [
+                "a63c224511f9a290"
+            ]
+        ]
+    },
+    {
+        "id": "a51532b11396dc76",
+        "type": "rbe",
+        "z": "a099d47fc07b3cee",
+        "g": "b6de692f9d62224d",
+        "name": "on change",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 390,
+        "y": 980,
+        "wires": [
+            [
+                "c19da731efd01879"
+            ]
+        ]
+    },
+    {
+        "id": "71a31fa2d354930d",
+        "type": "rbe",
+        "z": "a099d47fc07b3cee",
+        "g": "b6de692f9d62224d",
+        "name": "on change",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 390,
+        "y": 1020,
+        "wires": [
+            [
+                "65a545d97c500c67"
+            ]
+        ]
+    },
+    {
+        "id": "e91efce6718ed360",
+        "type": "rbe",
+        "z": "a099d47fc07b3cee",
+        "d": true,
+        "g": "b6de692f9d62224d",
+        "name": "on change",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 390,
+        "y": 1080,
+        "wires": [
+            [
+                "4edbb9aa9dc6c61b"
+            ]
+        ]
+    },
+    {
+        "id": "2f1cf4b46554262c",
+        "type": "rbe",
+        "z": "a099d47fc07b3cee",
+        "d": true,
+        "g": "b6de692f9d62224d",
+        "name": "on change",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 390,
+        "y": 1120,
+        "wires": [
+            [
+                "31e7b90d99bcb9cd"
+            ]
+        ]
+    },
+    {
+        "id": "4edbb9aa9dc6c61b",
+        "type": "api-call-service",
+        "z": "a099d47fc07b3cee",
+        "d": true,
+        "g": "b6de692f9d62224d",
+        "name": "Output charge/discharge/stop M3",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "select.select_option",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "select.marstek_m3_forcible_charge_discharge"
+        ],
+        "labelId": [],
+        "data": "{\"option\":\"{{ payload }}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "select",
+        "service": "select_option",
+        "x": 620,
+        "y": 1080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "31e7b90d99bcb9cd",
+        "type": "api-call-service",
+        "z": "a099d47fc07b3cee",
+        "d": true,
+        "g": "b6de692f9d62224d",
+        "name": "Output (dis)charge power M3",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "number.marstek_m3_forcible_discharge_power",
+            "number.marstek_m3_forcible_charge_power"
+        ],
+        "labelId": [],
+        "data": "{\"value\":\"{{ payload }}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "number",
+        "service": "set_value",
+        "x": 600,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "27ede02d64789dd0",
+        "type": "rbe",
+        "z": "a099d47fc07b3cee",
+        "g": "fc3b0636793881be",
+        "name": "on 40W change",
+        "func": "deadbandEq",
+        "gap": "40",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 280,
+        "y": 60,
+        "wires": [
+            [
+                "057b9222c17d4046"
+            ]
+        ]
+    },
+    {
+        "id": "d10131d83ea31ec7",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "d": true,
+        "g": "a3737ef067eb71c9",
+        "name": "M3 control mode",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "select.marstek_m3_rs485_control_mode",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m3_rs485_control_mode",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 150,
+        "y": 340,
+        "wires": [
+            [
+                "6a5bb8e0bd06a760"
+            ]
+        ]
+    },
+    {
+        "id": "6a5bb8e0bd06a760",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "d": true,
+        "g": "a3737ef067eb71c9",
+        "name": "M3 power",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m3_battery_power",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m3_battery_power",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 320,
+        "y": 340,
+        "wires": [
+            [
+                "32b0526b3704d95b"
+            ]
+        ]
+    },
+    {
+        "id": "32b0526b3704d95b",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "d": true,
+        "g": "a3737ef067eb71c9",
+        "name": "M3 max charge power",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m3_max_charge_power",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m3_max_charge_power",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 500,
+        "y": 340,
+        "wires": [
+            [
+                "e584d384f4209bb8"
+            ]
+        ]
+    },
+    {
+        "id": "e584d384f4209bb8",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "d": true,
+        "g": "a3737ef067eb71c9",
+        "name": "M3 max discharge power",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m3_max_discharge_power",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m3_max_discharge_power",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 730,
+        "y": 340,
+        "wires": [
+            [
+                "2fcd541db21a09fc"
+            ]
+        ]
+    },
+    {
+        "id": "2fcd541db21a09fc",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "d": true,
+        "g": "a3737ef067eb71c9",
+        "name": "M3 SoC",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m3_battery_state_of_charge",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m3_battery_state_of_charge",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 920,
+        "y": 340,
+        "wires": [
+            [
+                "518594eab0fa60a2"
+            ]
+        ]
+    },
+    {
+        "id": "51deca5227d4f189",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "d": true,
+        "g": "a3737ef067eb71c9",
+        "name": "M3 inverter state",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m3_inverter_state",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m3_inverter_state",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1410,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "518594eab0fa60a2",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "d": true,
+        "g": "a3737ef067eb71c9",
+        "name": "M3 SoC min",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m3_discharging_cutoff_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m3_discharging_cutoff_capacity",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1070,
+        "y": 340,
+        "wires": [
+            [
+                "d7e64de819b7f383"
+            ]
+        ]
+    },
+    {
+        "id": "d7e64de819b7f383",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "d": true,
+        "g": "a3737ef067eb71c9",
+        "name": "M3 SoC max",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m3_charging_cutoff_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m3_charging_cutoff_capacity",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1230,
+        "y": 340,
+        "wires": [
+            [
+                "51deca5227d4f189"
+            ]
+        ]
+    },
+    {
+        "id": "a8fce67479138a4c",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M2 power",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m2_battery_power",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m2_battery_power",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 320,
+        "y": 280,
+        "wires": [
+            [
+                "9dca98f0cd2c66f5"
+            ]
+        ]
+    },
+    {
+        "id": "8dc283d927a2a703",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M2 control mode",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "select.marstek_m2_rs485_control_mode",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m2_rs485_control_mode",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 150,
+        "y": 280,
+        "wires": [
+            [
+                "a8fce67479138a4c"
+            ]
+        ]
+    },
+    {
+        "id": "fe27da0dfa90382d",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M2 SoC",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m2_battery_state_of_charge",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m2_battery_state_of_charge",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 920,
+        "y": 280,
+        "wires": [
+            [
+                "187d1689dae3ab42"
+            ]
+        ]
+    },
+    {
+        "id": "80bacf2e0ad2e5cf",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M2 inverter state",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m2_inverter_state",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "M2_inverter_state",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1410,
+        "y": 280,
+        "wires": [
+            [
+                "47ee2cacda9c1168",
+                "d10131d83ea31ec7"
+            ]
+        ]
+    },
+    {
+        "id": "187d1689dae3ab42",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M2 SoC min",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m2_discharging_cutoff_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m2_discharging_cutoff_capacity",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1070,
+        "y": 280,
+        "wires": [
+            [
+                "fe379cf97ff9bbf7"
+            ]
+        ]
+    },
+    {
+        "id": "fe379cf97ff9bbf7",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M2 SoC max",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m2_charging_cutoff_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m2_charging_cutoff_capacity",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1230,
+        "y": 280,
+        "wires": [
+            [
+                "80bacf2e0ad2e5cf"
+            ]
+        ]
+    },
+    {
+        "id": "9dca98f0cd2c66f5",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M2 max charge power",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m2_max_charge_power",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m2_max_charge_power",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 500,
+        "y": 280,
+        "wires": [
+            [
+                "127c03843f2e17a1"
+            ]
+        ]
+    },
+    {
+        "id": "127c03843f2e17a1",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M2 max discharge power",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m2_max_discharge_power",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m2_max_discharge_power",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 730,
+        "y": 280,
+        "wires": [
+            [
+                "fe27da0dfa90382d"
+            ]
+        ]
+    },
+    {
+        "id": "9e1f8745fee1b381",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M1 power",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m1_battery_power",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "marstek_m1_battery_power",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 320,
+        "y": 220,
+        "wires": [
+            [
+                "90546f0176ca54d7"
+            ]
+        ]
+    },
+    {
+        "id": "766c395354ed7fce",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M1 control mode",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "select.marstek_m1_rs485_control_mode",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m1_rs485_control_mode",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "9e1f8745fee1b381"
+            ]
+        ]
+    },
+    {
+        "id": "d470ca11879f0f6f",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M1 SoC",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m1_battery_state_of_charge",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m1_battery_state_of_charge",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 920,
+        "y": 220,
+        "wires": [
+            [
+                "977e8b2b8e8c88ae"
+            ]
+        ]
+    },
+    {
+        "id": "07893125ca854f5d",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M1 inverter state",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m1_inverter_state",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "M1_inverter_state",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1410,
+        "y": 220,
+        "wires": [
+            [
+                "8dc283d927a2a703"
+            ]
+        ]
+    },
+    {
+        "id": "977e8b2b8e8c88ae",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M1 SoC min",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m1_discharging_cutoff_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m1_discharging_cutoff_capacity",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1070,
+        "y": 220,
+        "wires": [
+            [
+                "90239401a2240d0e"
+            ]
+        ]
+    },
+    {
+        "id": "90239401a2240d0e",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M1 SoC max",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m1_charging_cutoff_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m1_charging_cutoff_capacity",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1230,
+        "y": 220,
+        "wires": [
+            [
+                "07893125ca854f5d"
+            ]
+        ]
+    },
+    {
+        "id": "90546f0176ca54d7",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M1 max charge power",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m1_max_charge_power",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m1_max_charge_power",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 500,
+        "y": 220,
+        "wires": [
+            [
+                "b5391bab46e62ef0"
+            ]
+        ]
+    },
+    {
+        "id": "b5391bab46e62ef0",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a3737ef067eb71c9",
+        "name": "M1 max discharge power",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m1_max_discharge_power",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m1_max_discharge_power",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 730,
+        "y": 220,
+        "wires": [
+            [
+                "d470ca11879f0f6f"
+            ]
+        ]
+    },
+    {
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "",
+        "connectionDelay": false,
+        "cacheJson": false,
+        "heartbeat": false,
+        "heartbeatInterval": "",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
+    }
+]
