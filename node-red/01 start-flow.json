@@ -19,30 +19,13 @@
             "1d0932b9cdfe2cc0",
             "057b9222c17d4046",
             "b5940f2c8939de70",
-            "27ede02d64789dd0"
+            "27ede02d64789dd0",
+            "ea9b2d167f67f9b6"
         ],
         "x": 34,
         "y": 19,
         "w": 832,
-        "h": 82
-    },
-    {
-        "id": "8725e551f88f9081",
-        "type": "group",
-        "z": "a099d47fc07b3cee",
-        "name": "Home Battery Control",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "31718411354ec91e",
-            "85d84b11a51b81b9",
-            "a283764303f31dc8"
-        ],
-        "x": 34,
-        "y": 539,
-        "w": 332,
-        "h": 202
+        "h": 122
     },
     {
         "id": "b6de692f9d62224d",
@@ -70,7 +53,7 @@
             "31e7b90d99bcb9cd"
         ],
         "x": 34,
-        "y": 759,
+        "y": 719,
         "w": 752,
         "h": 402
     },
@@ -88,7 +71,7 @@
             "6071fecf347d7ffb"
         ],
         "x": 34,
-        "y": 399,
+        "y": 439,
         "w": 452,
         "h": 122
     },
@@ -128,9 +111,29 @@
             "e16e1f7d81a2b641"
         ],
         "x": 34,
-        "y": 119,
+        "y": 159,
         "w": 1492,
         "h": 262
+    },
+    {
+        "id": "a5b8a03b1e2f2371",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Strategy selection",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e63433bdfbdd57e9",
+            "06dd855a34065b5d",
+            "d1bd5fbe28bdd070",
+            "b658a34d31bcd8f3",
+            "712cd7b2343eead6"
+        ],
+        "x": 34,
+        "y": 579,
+        "w": 752,
+        "h": 122
     },
     {
         "id": "47ee2cacda9c1168",
@@ -138,7 +141,7 @@
         "z": "a099d47fc07b3cee",
         "g": "8ff447faf151d1ad",
         "name": "Mapping",
-        "func": "// Home power \nvar P1_power = flow.get(\"p1_power\"); // Watt, grid power drawn or delivered\n\n// Battery properties\nvar M1_power = flow.get(\"marstek_m1_battery_power\");    // charging is positive, discharge is negative\nvar M2_power = flow.get(\"marstek_m2_battery_power\");    // charging is positive, discharge is negative\nvar M3_power = flow.get(\"marstek_m3_battery_power\");    // charging is positive, discharge is negative\n\nvar M1_charging_max = flow.get(\"marstek_m1_max_charge_power\"); // W\nvar M2_charging_max = flow.get(\"marstek_m2_max_charge_power\"); // W\nvar M3_charging_max = flow.get(\"marstek_m3_max_charge_power\"); // W\n\nvar M1_discharging_max = flow.get(\"marstek_m1_max_discharge_power\"); // W\nvar M2_discharging_max = flow.get(\"marstek_m2_max_discharge_power\"); // W\nvar M3_discharging_max = flow.get(\"marstek_m3_max_discharge_power\"); // W\n\nvar M1_control_mode = flow.get(\"marstek_m1_rs485_control_mode\"); // enable/disable\nvar M2_control_mode = flow.get(\"marstek_m2_rs485_control_mode\"); // enable/disable\nvar M3_control_mode = flow.get(\"marstek_m3_rs485_control_mode\"); // enable/disable\n\nvar M1_soc = Number(flow.get(\"marstek_m1_battery_state_of_charge\"));         //%\nvar M1_soc_min = Number(flow.get(\"marstek_m1_discharging_cutoff_capacity\")); //%\nvar M1_soc_max = Number(flow.get(\"marstek_m1_charging_cutoff_capacity\"));    //%\n\nvar M2_soc = Number(flow.get(\"marstek_m2_battery_state_of_charge\"));         //%\nvar M2_soc_min = Number(flow.get(\"marstek_m2_discharging_cutoff_capacity\")); //%\nvar M2_soc_max = Number(flow.get(\"marstek_m2_charging_cutoff_capacity\"));    //%\n\nvar M3_soc = Number(flow.get(\"marstek_m3_battery_state_of_charge\"));         //%\nvar M3_soc_min = Number(flow.get(\"marstek_m3_discharging_cutoff_capacity\")); //%\nvar M3_soc_max = Number(flow.get(\"marstek_m3_charging_cutoff_capacity\"));    //%\n\n\n//--    Battery list\n// Note: the order of the batteries in the `battery_array` determines priority in (dis)charging.\n// e.g. the first battery gets priority to charge, when it is at capacity the next battery gets what remains.\n// Batteries with built-in converters are most efficient at peak power. \n// The efficiency is optimized by prioritizing batteries instead of spreading load evenly accross al batteries. \n// Manipulating the order of the array allows you to control which battery is in the lead.\nlet battery_array = [\n    { id: \"M1\", \n      power: M1_power, charging_max: M1_charging_max, discharging_max: M1_discharging_max,\n      soc: M1_soc, soc_min: M1_soc_min, soc_max: M1_soc_max,\n      rs485: M1_control_mode \n    }\n    ,\n    { id: \"M2\", \n      power: M2_power, charging_max: M2_charging_max, discharging_max: M2_discharging_max,\n      soc: M2_soc, soc_min: M2_soc_min, soc_max: M2_soc_max,\n      rs485: M2_control_mode \n    }\n    //,\n    // { id: \"M3\", \n    //   power: M3_power, charging_max: M3_charging_max, discharging_max: M3_discharging_max,\n    //   power_set: 0, // what power level should be set next\n    //   soc: M3_soc, soc_min: M3_soc_min, soc_max: M3_soc_max,\n    //   rs485: M3_control_mode \n    // }\n];\n\n// -- payload\nreturn {\n  payload: battery_array, \n  power: P1_power\n  };",
+        "func": "// Home power \nvar P1_power = flow.get(\"p1_power\"); // Watt, grid power drawn or delivered\n\n// Battery properties\nvar M1_power = flow.get(\"marstek_m1_battery_power\");    // charging is positive, discharge is negative\nvar M2_power = flow.get(\"marstek_m2_battery_power\");    // charging is positive, discharge is negative\nvar M3_power = flow.get(\"marstek_m3_battery_power\");    // charging is positive, discharge is negative\n\nvar M1_charging_max = flow.get(\"marstek_m1_max_charge_power\"); // W\nvar M2_charging_max = flow.get(\"marstek_m2_max_charge_power\"); // W\nvar M3_charging_max = flow.get(\"marstek_m3_max_charge_power\"); // W\n\nvar M1_discharging_max = flow.get(\"marstek_m1_max_discharge_power\"); // W\nvar M2_discharging_max = flow.get(\"marstek_m2_max_discharge_power\"); // W\nvar M3_discharging_max = flow.get(\"marstek_m3_max_discharge_power\"); // W\n\nvar M1_control_mode = flow.get(\"marstek_m1_rs485_control_mode\"); // enable/disable\nvar M2_control_mode = flow.get(\"marstek_m2_rs485_control_mode\"); // enable/disable\nvar M3_control_mode = flow.get(\"marstek_m3_rs485_control_mode\"); // enable/disable\n\nvar M1_soc = Number(flow.get(\"marstek_m1_battery_state_of_charge\"));         //%\nvar M1_soc_min = Number(flow.get(\"marstek_m1_discharging_cutoff_capacity\")); //%\nvar M1_soc_max = Number(flow.get(\"marstek_m1_charging_cutoff_capacity\"));    //%\n\nvar M2_soc = Number(flow.get(\"marstek_m2_battery_state_of_charge\"));         //%\nvar M2_soc_min = Number(flow.get(\"marstek_m2_discharging_cutoff_capacity\")); //%\nvar M2_soc_max = Number(flow.get(\"marstek_m2_charging_cutoff_capacity\"));    //%\n\nvar M3_soc = Number(flow.get(\"marstek_m3_battery_state_of_charge\"));         //%\nvar M3_soc_min = Number(flow.get(\"marstek_m3_discharging_cutoff_capacity\")); //%\nvar M3_soc_max = Number(flow.get(\"marstek_m3_charging_cutoff_capacity\"));    //%\n\n\n//--    Battery list\n// Note: the order of the batteries in the `battery_array` determines priority in (dis)charging.\n// e.g. the first battery gets priority to charge, when it is at capacity the next battery gets what remains.\n// Batteries with built-in converters are most efficient at peak power. \n// The efficiency is optimized by prioritizing batteries instead of spreading load evenly accross al batteries. \n// Manipulating the order of the array allows you to control which battery is in the lead.\nlet battery_array = [\n    { id: \"M1\", \n      power: M1_power, charging_max: M1_charging_max, discharging_max: M1_discharging_max,\n      soc: M1_soc, soc_min: M1_soc_min, soc_max: M1_soc_max,\n      rs485: M1_control_mode \n    }\n    ,\n    { id: \"M2\", \n      power: M2_power, charging_max: M2_charging_max, discharging_max: M2_discharging_max,\n      soc: M2_soc, soc_min: M2_soc_min, soc_max: M2_soc_max,\n      rs485: M2_control_mode \n    }\n    //,\n    // { id: \"M3\", \n    //   power: M3_power, charging_max: M3_charging_max, discharging_max: M3_discharging_max,\n    //   power_set: 0, // what power level should be set next\n    //   soc: M3_soc, soc_min: M3_soc_min, soc_max: M3_soc_max,\n    //   rs485: M3_control_mode \n    // }\n];\n\n// OUTPUT\n// -- home energy configuration\nlet mapping = {\n  payload: false, // not null\n  batteries: battery_array, \n  grid_power: P1_power\n  };\n\n// -- outflow\nflow.set(\"battery_configuration\", mapping);\n// -- output\nreturn mapping;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -146,11 +149,11 @@
         "finalize": "",
         "libs": [],
         "x": 120,
-        "y": 480,
+        "y": 520,
         "wires": [
             [
                 "8b3a617cd7648d30",
-                "31718411354ec91e"
+                "e63433bdfbdd57e9"
             ]
         ]
     },
@@ -169,7 +172,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 380,
-        "y": 480,
+        "y": 520,
         "wires": []
     },
     {
@@ -194,15 +197,15 @@
         "ifState": "",
         "ifStateType": "str",
         "ifStateOperator": "is",
-        "outputOnlyOnStateChange": true,
+        "outputOnlyOnStateChange": false,
         "for": "0",
         "forType": "num",
         "forUnits": "minutes",
         "ignorePrevStateNull": true,
         "ignorePrevStateUnknown": true,
         "ignorePrevStateUnavailable": true,
-        "ignoreCurrentStateUnknown": false,
-        "ignoreCurrentStateUnavailable": false,
+        "ignoreCurrentStateUnknown": true,
+        "ignoreCurrentStateUnavailable": true,
         "outputProperties": [
             {
                 "property": "p1_power",
@@ -322,39 +325,8 @@
         "name": "1. Configure your batteries here",
         "info": "# Add as many batteries as you like.\n\n## Important\nReview the Mapping area to hook your \nsensors to the batteries_array and the\ncorrect properties.",
         "x": 190,
-        "y": 160,
+        "y": 200,
         "wires": []
-    },
-    {
-        "id": "31718411354ec91e",
-        "type": "link out",
-        "z": "a099d47fc07b3cee",
-        "g": "8725e551f88f9081",
-        "name": "Mapping out",
-        "mode": "link",
-        "links": [
-            "84b2ca31a7edccf6"
-        ],
-        "x": 195,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "85d84b11a51b81b9",
-        "type": "link in",
-        "z": "a099d47fc07b3cee",
-        "g": "8725e551f88f9081",
-        "name": "Load distribution in",
-        "links": [
-            "748f9abb441bc2a3"
-        ],
-        "x": 195,
-        "y": 700,
-        "wires": [
-            [
-                "26560f17ffdcdf34"
-            ]
-        ]
     },
     {
         "id": "b706fac8a42803f4",
@@ -383,7 +355,7 @@
         "domain": "select",
         "service": "select_option",
         "x": 620,
-        "y": 880,
+        "y": 840,
         "wires": [
             []
         ]
@@ -415,7 +387,7 @@
         "domain": "select",
         "service": "select_option",
         "x": 620,
-        "y": 980,
+        "y": 940,
         "wires": [
             []
         ]
@@ -448,7 +420,7 @@
         "domain": "number",
         "service": "set_value",
         "x": 600,
-        "y": 920,
+        "y": 880,
         "wires": [
             []
         ]
@@ -481,7 +453,7 @@
         "domain": "number",
         "service": "set_value",
         "x": 600,
-        "y": 1020,
+        "y": 980,
         "wires": [
             []
         ]
@@ -492,7 +464,7 @@
         "z": "a099d47fc07b3cee",
         "g": "b6de692f9d62224d",
         "name": "Set batteries",
-        "func": "/* Convert battery solutions and push the settings to your batteries\n *\n * Node configuration:\n * Set # of outputs to 2 x {your number of batteries} + 1\n * Example: 2 batteries: 2 x 2 + 1 = 5 outputs\n * \n * Output order will be:\n * - Logdata node\n * - Battery 1 mode \n * - Battery 1 power\n * - Battery 2 mode\n * - Battery 2 power\n * \n * Set the number of output nodes in the SETUP tab\n */\n\n// Init\nvar logdata = '';\n\n// INPUT\n// array of load distribution solutions\nlet solution_array = msg.payload;\n\n// sort battery solutions by alphabetical order of their ID\nsolution_array.sort(function (/** @type {{ id: string; }} */ a, /** @type {{ id: string; }} */ b) {\n    return a.id.localeCompare(b.id);\n});\n\n// OUTPUT\nlet output_array = [];\nsolution_array.forEach((/** @type {{ id: String; mode: String; power: Number; }} */ solution) => {\n    output_array.push(\n        {payload: solution.mode},   // forced charge mode\n        {payload: solution.power}   // power in Watt\n    );\n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;    \n});\n\n// Add logdata as the first output\noutput_array.unshift({payload: logdata});\n\n// Node outputs\nreturn output_array;",
+        "func": "/* Convert battery solutions and push the settings to your batteries\n *\n * Node configuration:\n * Set # of outputs to 2 x {your number of batteries} + 1\n * Example: 2 batteries: 2 x 2 + 1 = 5 outputs\n * \n * Output order will be:\n * - Logdata node\n * - Battery 1 mode \n * - Battery 1 power\n * - Battery 2 mode\n * - Battery 2 power\n * \n * Set the number of output nodes in the SETUP tab\n */\n\n// Init\nvar logdata = '';\n\n// INPUT\n// array of load distribution solutions\nlet solution_array = msg.payload;\n\n// sort battery solutions by alphabetical order of their ID\nsolution_array.sort(function (/** @type {{ id: string; }} */ a, /** @type {{ id: string; }} */ b) {\n    return a.id.localeCompare(b.id);\n});\n\n// OUTPUT\nlet output_array = [];\nsolution_array.forEach((/** @type {{ id: String; mode: String; power: Number; }} */ solution) => {\n    output_array.push(\n        {payload: solution.mode},   // forced charge mode (stop, charge, discharge)\n        {payload: solution.power}   // power in Watt\n    );\n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;    \n});\n\n// Add logdata as the first output\noutput_array.unshift({payload: logdata});\n\n// Node outputs\nreturn output_array;",
         "outputs": 7,
         "timeout": 0,
         "noerr": 0,
@@ -500,7 +472,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 960,
+        "y": 920,
         "wires": [
             [
                 "08133ce712e6094f"
@@ -533,7 +505,7 @@
         "name": "2. Update the mapping to correspond with your batteries",
         "info": "",
         "x": 260,
-        "y": 440,
+        "y": 480,
         "wires": []
     },
     {
@@ -551,7 +523,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 380,
-        "y": 840,
+        "y": 800,
         "wires": []
     },
     {
@@ -559,21 +531,10 @@
         "type": "comment",
         "z": "a099d47fc07b3cee",
         "g": "b6de692f9d62224d",
-        "name": "4. Add action nodes to all batteries",
+        "name": "3. Add action nodes to all batteries",
         "info": "",
         "x": 460,
-        "y": 800,
-        "wires": []
-    },
-    {
-        "id": "a283764303f31dc8",
-        "type": "comment",
-        "z": "a099d47fc07b3cee",
-        "g": "8725e551f88f9081",
-        "name": "3. Link to Home Battery Control flow",
-        "info": "# Link Out and Link In nodes\n\n**Requirements**\nImport the `Home Battery Control` flow into Node-RED,\nbefore linking in or linking out.\n\n## Link Out\nSelect `Mapping` under `Home Battery Control`\n_This will send the battery configuration to the PID control_\n\n## Link In\nSelect `Load distribution out` under `Home Battery Control`\n_Here we receive back the calculated charge/discharge requirements_",
-        "x": 200,
-        "y": 640,
+        "y": 760,
         "wires": []
     },
     {
@@ -590,7 +551,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 390,
-        "y": 880,
+        "y": 840,
         "wires": [
             [
                 "b706fac8a42803f4"
@@ -611,7 +572,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 390,
-        "y": 920,
+        "y": 880,
         "wires": [
             [
                 "a63c224511f9a290"
@@ -632,7 +593,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 390,
-        "y": 980,
+        "y": 940,
         "wires": [
             [
                 "c19da731efd01879"
@@ -653,7 +614,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 390,
-        "y": 1020,
+        "y": 980,
         "wires": [
             [
                 "65a545d97c500c67"
@@ -675,7 +636,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 390,
-        "y": 1080,
+        "y": 1040,
         "wires": [
             [
                 "4edbb9aa9dc6c61b"
@@ -697,7 +658,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 390,
-        "y": 1120,
+        "y": 1080,
         "wires": [
             [
                 "31e7b90d99bcb9cd"
@@ -732,7 +693,7 @@
         "domain": "select",
         "service": "select_option",
         "x": 620,
-        "y": 1080,
+        "y": 1040,
         "wires": [
             []
         ]
@@ -766,7 +727,7 @@
         "domain": "number",
         "service": "set_value",
         "x": 600,
-        "y": 1120,
+        "y": 1080,
         "wires": [
             []
         ]
@@ -776,9 +737,9 @@
         "type": "rbe",
         "z": "a099d47fc07b3cee",
         "g": "fc3b0636793881be",
-        "name": "on 40W change",
+        "name": "on 20W change",
         "func": "deadbandEq",
-        "gap": "40",
+        "gap": "20",
         "start": "",
         "inout": "out",
         "septopics": false,
@@ -788,7 +749,8 @@
         "y": 60,
         "wires": [
             [
-                "057b9222c17d4046"
+                "057b9222c17d4046",
+                "ea9b2d167f67f9b6"
             ]
         ]
     },
@@ -831,7 +793,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 150,
-        "y": 340,
+        "y": 380,
         "wires": [
             [
                 "6a5bb8e0bd06a760"
@@ -883,7 +845,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 320,
-        "y": 340,
+        "y": 380,
         "wires": [
             [
                 "32b0526b3704d95b"
@@ -935,7 +897,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 500,
-        "y": 340,
+        "y": 380,
         "wires": [
             [
                 "e584d384f4209bb8"
@@ -987,7 +949,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 730,
-        "y": 340,
+        "y": 380,
         "wires": [
             [
                 "2fcd541db21a09fc"
@@ -1039,7 +1001,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 920,
-        "y": 340,
+        "y": 380,
         "wires": [
             [
                 "518594eab0fa60a2"
@@ -1091,7 +1053,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1410,
-        "y": 340,
+        "y": 380,
         "wires": [
             []
         ]
@@ -1141,7 +1103,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1070,
-        "y": 340,
+        "y": 380,
         "wires": [
             [
                 "d7e64de819b7f383"
@@ -1193,7 +1155,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1230,
-        "y": 340,
+        "y": 380,
         "wires": [
             [
                 "51deca5227d4f189"
@@ -1244,7 +1206,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 320,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "9dca98f0cd2c66f5"
@@ -1289,7 +1251,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 150,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "a8fce67479138a4c"
@@ -1340,7 +1302,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 920,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "187d1689dae3ab42"
@@ -1391,7 +1353,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1410,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "47ee2cacda9c1168",
@@ -1443,7 +1405,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1070,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "fe379cf97ff9bbf7"
@@ -1494,7 +1456,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1230,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "80bacf2e0ad2e5cf"
@@ -1545,7 +1507,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 500,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "127c03843f2e17a1"
@@ -1596,7 +1558,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 730,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "fe27da0dfa90382d"
@@ -1647,7 +1609,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 320,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "90546f0176ca54d7"
@@ -1698,7 +1660,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 150,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "9e1f8745fee1b381"
@@ -1749,7 +1711,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 920,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "977e8b2b8e8c88ae"
@@ -1800,7 +1762,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1410,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "8dc283d927a2a703"
@@ -1851,7 +1813,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1070,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "90239401a2240d0e"
@@ -1902,7 +1864,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1230,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "07893125ca854f5d"
@@ -1953,7 +1915,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 500,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "b5391bab46e62ef0"
@@ -2004,12 +1966,157 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 730,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "d470ca11879f0f6f"
             ]
         ]
+    },
+    {
+        "id": "ea9b2d167f67f9b6",
+        "type": "debug",
+        "z": "a099d47fc07b3cee",
+        "g": "fc3b0636793881be",
+        "name": "Last process value",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 290,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "e63433bdfbdd57e9",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "a5b8a03b1e2f2371",
+        "name": "Battery Strategy",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 140,
+        "y": 620,
+        "wires": [
+            [
+                "06dd855a34065b5d"
+            ]
+        ]
+    },
+    {
+        "id": "06dd855a34065b5d",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "a5b8a03b1e2f2371",
+        "name": "Strategy selection",
+        "func": "// INFLOW\nlet battery_configuration = flow.get(\"battery_configuration\");\nlet strategy = flow.get(\"house_battery_strategy\");\n\n// stop on error\nif(battery_configuration === undefined) {\n    node.error(\"Battery configuration undefined\", msg);\n    return null;\n}\nif(strategy === undefined) {\n    node.error(\"Battery strategy undefined\", msg);\n    return null;\n}\n\n// select target flow based on the input_select `house_battery_strategy`\nbattery_configuration.target = `${strategy}`;\n\n// OUTPUT\nreturn battery_configuration;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 620,
+        "wires": [
+            [
+                "b658a34d31bcd8f3",
+                "d1bd5fbe28bdd070"
+            ]
+        ]
+    },
+    {
+        "id": "d1bd5fbe28bdd070",
+        "type": "link call",
+        "z": "a099d47fc07b3cee",
+        "g": "a5b8a03b1e2f2371",
+        "name": "Call \"Link in\" node",
+        "links": [],
+        "linkType": "dynamic",
+        "timeout": "5",
+        "x": 410,
+        "y": 660,
+        "wires": [
+            [
+                "712cd7b2343eead6",
+                "26560f17ffdcdf34"
+            ]
+        ]
+    },
+    {
+        "id": "b658a34d31bcd8f3",
+        "type": "debug",
+        "z": "a099d47fc07b3cee",
+        "g": "a5b8a03b1e2f2371",
+        "name": "Input parameters",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "712cd7b2343eead6",
+        "type": "debug",
+        "z": "a099d47fc07b3cee",
+        "g": "a5b8a03b1e2f2371",
+        "name": "Returned solutions",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 660,
+        "wires": []
     },
     {
         "id": "176d29a.6f648d6",

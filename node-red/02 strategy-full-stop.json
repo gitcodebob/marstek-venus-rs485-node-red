@@ -1,0 +1,167 @@
+[
+    {
+        "id": "9c775009242a5a6b",
+        "type": "tab",
+        "label": "Strategy Full stop ",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0bd042d837a592d2",
+        "type": "group",
+        "z": "9c775009242a5a6b",
+        "name": "Configuration",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "26460a293ad3466a",
+            "c018018965f1c171",
+            "fd021c46fa86cb98"
+        ],
+        "x": 14,
+        "y": 79,
+        "w": 212,
+        "h": 142
+    },
+    {
+        "id": "cd31f39c38ae6c21",
+        "type": "group",
+        "z": "9c775009242a5a6b",
+        "name": "Battery solutions",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "c1e3cac395f0b1cb",
+            "687f26d6a40a1b3a",
+            "5b9d0683cbf0cf39"
+        ],
+        "x": 464,
+        "y": 79,
+        "w": 212,
+        "h": 142
+    },
+    {
+        "id": "26460a293ad3466a",
+        "type": "link in",
+        "z": "9c775009242a5a6b",
+        "g": "0bd042d837a592d2",
+        "name": "Full stop",
+        "links": [],
+        "x": 55,
+        "y": 180,
+        "wires": [
+            [
+                "c018018965f1c171"
+            ]
+        ]
+    },
+    {
+        "id": "c1e3cac395f0b1cb",
+        "type": "link out",
+        "z": "9c775009242a5a6b",
+        "g": "cd31f39c38ae6c21",
+        "name": "Return",
+        "mode": "return",
+        "links": [],
+        "x": 635,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e8765c8c2f9d4414",
+        "type": "function",
+        "z": "9c775009242a5a6b",
+        "name": "Stop all batteries",
+        "func": "// INPUT\n// Home Battery Start payload\n\n// Process\nlet solution_array = [];\n\n// Add a solution per battery\nmsg.batteries.forEach(battery => {\n    solution_array.push({ id: battery.id, \n    mode: \"stop\", // disengages Marstek Battery\n    power: 0 }); // set power to 0W\n});\n\n// OUTPUT\nreturn { payload: solution_array };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 180,
+        "wires": [
+            [
+                "687f26d6a40a1b3a"
+            ]
+        ]
+    },
+    {
+        "id": "9972c8e39e2f5320",
+        "type": "comment",
+        "z": "9c775009242a5a6b",
+        "name": "Home Battery Strategy",
+        "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
+        "x": 120,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "c018018965f1c171",
+        "type": "function",
+        "z": "9c775009242a5a6b",
+        "g": "0bd042d837a592d2",
+        "name": "start",
+        "func": "flow.set(\"_linkSource\", msg._linkSource); // calling node information\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "e8765c8c2f9d4414"
+            ]
+        ]
+    },
+    {
+        "id": "687f26d6a40a1b3a",
+        "type": "function",
+        "z": "9c775009242a5a6b",
+        "g": "cd31f39c38ae6c21",
+        "name": "end",
+        "func": "// Add return node information\nlet return_to = flow.get(\"_linkSource\");\nmsg._linkSource = return_to;\n\n// return to calling flow\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 180,
+        "wires": [
+            [
+                "c1e3cac395f0b1cb"
+            ]
+        ]
+    },
+    {
+        "id": "5b9d0683cbf0cf39",
+        "type": "comment",
+        "z": "9c775009242a5a6b",
+        "g": "cd31f39c38ae6c21",
+        "name": "End (readme)",
+        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {payload: solution_array};\n` ",
+        "x": 560,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "fd021c46fa86cb98",
+        "type": "comment",
+        "z": "9c775009242a5a6b",
+        "g": "0bd042d837a592d2",
+        "name": "Start (readme)",
+        "info": "# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the <select> option configured in your\nselect_input.house_battery_strategy\n\nfound in the file:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select 'AcmE example'\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
+        "x": 110,
+        "y": 120,
+        "wires": []
+    }
+]

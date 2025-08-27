@@ -1,0 +1,172 @@
+[
+    {
+        "id": "af2320cea835a8dc",
+        "type": "tab",
+        "label": "Strategy Trading",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "03c1fc37808554c6",
+        "type": "group",
+        "z": "af2320cea835a8dc",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "f913c137f675e2f4",
+            "6f0dd3239ce98f4e",
+            "6c9cda12aabad604"
+        ],
+        "x": 34,
+        "y": 79,
+        "w": 212,
+        "h": 142
+    },
+    {
+        "id": "130eb56c7911dbeb",
+        "type": "group",
+        "z": "af2320cea835a8dc",
+        "name": "Battery solutions",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "af733ba04feaa478",
+            "9def8416b4da8d34",
+            "2099ecad20093124"
+        ],
+        "x": 484,
+        "y": 79,
+        "w": 212,
+        "h": 142
+    },
+    {
+        "id": "c3734605bd2fe49d",
+        "type": "function",
+        "z": "af2320cea835a8dc",
+        "name": "Your code here",
+        "func": "// INPUT\n// Home Battery Start payload\n\n// Process\nlet solution_array = [];\n\n// Add a solution per battery\nmsg.batteries.forEach(battery => {\n    solution_array.push(\n        { \n            id: battery.id,     // Battery label\n            mode: \"stop\",       // \"stop\", \"charge\", \"discharge\"\n            power: 0            // Watt\n        }); \n});\n\n// OUTPUT\nreturn { payload: solution_array };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 180,
+        "wires": [
+            [
+                "9def8416b4da8d34"
+            ]
+        ]
+    },
+    {
+        "id": "fe557eb5dc3813d6",
+        "type": "comment",
+        "z": "af2320cea835a8dc",
+        "name": "Home Battery Strategy",
+        "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
+        "x": 140,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "f913c137f675e2f4",
+        "type": "link in",
+        "z": "af2320cea835a8dc",
+        "g": "03c1fc37808554c6",
+        "name": "Trading",
+        "links": [],
+        "x": 75,
+        "y": 180,
+        "wires": [
+            [
+                "6f0dd3239ce98f4e"
+            ]
+        ]
+    },
+    {
+        "id": "6f0dd3239ce98f4e",
+        "type": "function",
+        "z": "af2320cea835a8dc",
+        "g": "03c1fc37808554c6",
+        "name": "start",
+        "func": "flow.set(\"_linkSource\", msg._linkSource); // calling node information\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "c3734605bd2fe49d"
+            ]
+        ]
+    },
+    {
+        "id": "6c9cda12aabad604",
+        "type": "comment",
+        "z": "af2320cea835a8dc",
+        "g": "03c1fc37808554c6",
+        "name": "Start (readme)",
+        "info": "# Setting up your battery strategy flow\n\n## Setup\nName the Link In in the start group exactly after the option configured in your\nselect_input.house_battery_strategy\n\nfound in the file:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nWill point to the flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
+        "x": 130,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "af733ba04feaa478",
+        "type": "link out",
+        "z": "af2320cea835a8dc",
+        "g": "130eb56c7911dbeb",
+        "name": "Return",
+        "mode": "return",
+        "links": [],
+        "x": 655,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "9def8416b4da8d34",
+        "type": "function",
+        "z": "af2320cea835a8dc",
+        "g": "130eb56c7911dbeb",
+        "name": "end",
+        "func": "// Add return node information\nlet return_to = flow.get(\"_linkSource\");\nmsg._linkSource = return_to;\n\n// return to calling flow\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 180,
+        "wires": [
+            [
+                "af733ba04feaa478"
+            ]
+        ]
+    },
+    {
+        "id": "2099ecad20093124",
+        "type": "comment",
+        "z": "af2320cea835a8dc",
+        "g": "130eb56c7911dbeb",
+        "name": "End (readme)",
+        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {payload: solution_array};\n` ",
+        "x": 580,
+        "y": 120,
+        "wires": []
+    }
+]

@@ -1,8 +1,8 @@
 house_battery_control_error_signal:
   # PID control error
   name: "House Battery Control Error Signal"
-  min: -3600 # the maximum power any inhouse transmission line is allowed to carry
-  max: 3600 # the maximum power any inhouse transmission line is allowed to carry
+  min: -15000 
+  max: 15000 
   step: 0.1
   unit_of_measurement: "W"
   mode: box
@@ -13,8 +13,8 @@ house_battery_control_pid_output:
   # PID output = manipulated variable = battery power setpoint
   # Batteries are commanded to deliver or charge by this amount
   name: "House Battery Control PID Output"
-  min: -3600 # the maximum power any inhouse transmission line is allowed to carry
-  max: 3600 # the maximum power any inhouse transmission line is allowed to carry
+  min: -15000
+  max: 15000
   step: 0.1
   unit_of_measurement: "W"
   mode: box

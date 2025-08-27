@@ -8,16 +8,27 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Master control
+            heading: Master Battery Control
             heading_style: title
-          - type: tile
+          - features:
+              - type: select-options
+            type: tile
             entity: input_select.marstek_master_battery_mode
             features_position: bottom
-            vertical: true
+            vertical: false
             show_entity_picture: false
-            hide_state: false
-            grid_options:
-              columns: full
+            hide_state: true
+            name: Control Mode
+            icon: mdi:camera-control
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.house_battery_strategy
+            features_position: bottom
+            vertical: false
+            hide_state: true
+            show_entity_picture: false
+            name: Full Control Strategy
           - type: history-graph
             entities:
               - entity: input_number.house_battery_control_pid_output

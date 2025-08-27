@@ -10,7 +10,7 @@ All releases follow Semantic Versioning (SemVer).
 
 - **New Feature: Controller Output Protection**
   - Added controller output protection based on maximum charge/discharge values of the batteries
-  - Prevents system from exceeding battery safety limits
+  - Shows status at NodeRED node and debug log
   - Automatically adjusts control output to stay within configured battery capabilities
 
 - **Improved: Node-RED Layout for Multi-Battery Setup**
@@ -24,7 +24,6 @@ All releases follow Semantic Versioning (SemVer).
 
 - **User Experience Improvements**
   - Renamed Node-RED flows with numbered filenames (01, 02, 03) for more intuitive use
-  - Updated documentation to reflect new flow naming convention
 
 ## 0.2.4
 - Patch: Improve derivative term and bumpless operation logic in control flow
