@@ -1,6 +1,15 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer).
 
+## 1.0.1
+- **Bugfix: Timeout messages of self-consumption strategy in start flow**
+  - Fixed timeout message handling in the initialization flow for self-consumption strategy
+  - Improved error messaging and flow reliability
+
+- **Files Changed:**
+  - `node-red/01 start-flow.json` - Fixed timeout message handling
+  - `node-red/02 strategy-self-consumption.json` - Updated self-consumption strategy
+
 ## 1.0.0 - Strategy-Based Architecture
 - **Major Feature: Multi-Strategy Battery Control System**
   - Complete restructure to strategy-based architecture for enhanced flexibility
