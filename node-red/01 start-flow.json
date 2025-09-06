@@ -50,7 +50,8 @@
             "e91efce6718ed360",
             "2f1cf4b46554262c",
             "4edbb9aa9dc6c61b",
-            "31e7b90d99bcb9cd"
+            "31e7b90d99bcb9cd",
+            "dff0ccb86295d04e"
         ],
         "x": 34,
         "y": 719,
@@ -132,7 +133,7 @@
         ],
         "x": 34,
         "y": 579,
-        "w": 752,
+        "w": 812,
         "h": 122
     },
     {
@@ -187,7 +188,7 @@
         "exposeAsEntityConfig": "",
         "entities": {
             "entity": [
-                "sensor.p1_meter_vermogen"
+                "sensor.p1_meter_power"
             ],
             "substring": [],
             "regex": []
@@ -464,7 +465,7 @@
         "z": "a099d47fc07b3cee",
         "g": "b6de692f9d62224d",
         "name": "Set batteries",
-        "func": "/* Convert battery solutions and push the settings to your batteries\n *\n * Node configuration:\n * Set # of outputs to 2 x {your number of batteries} + 1\n * Example: 2 batteries: 2 x 2 + 1 = 5 outputs\n * \n * Output order will be:\n * - Logdata node\n * - Battery 1 mode \n * - Battery 1 power\n * - Battery 2 mode\n * - Battery 2 power\n * \n * Set the number of output nodes in the SETUP tab\n */\n\n// Init\nvar logdata = '';\n\n// INPUT\n// array of load distribution solutions\nlet solution_array = msg.payload;\n\n// sort battery solutions by alphabetical order of their ID\nsolution_array.sort(function (/** @type {{ id: string; }} */ a, /** @type {{ id: string; }} */ b) {\n    return a.id.localeCompare(b.id);\n});\n\n// OUTPUT\nlet output_array = [];\nsolution_array.forEach((/** @type {{ id: String; mode: String; power: Number; }} */ solution) => {\n    output_array.push(\n        {payload: solution.mode},   // forced charge mode (stop, charge, discharge)\n        {payload: solution.power}   // power in Watt\n    );\n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;    \n});\n\n// Add logdata as the first output\noutput_array.unshift({payload: logdata});\n\n// Node outputs\nreturn output_array;",
+        "func": "/* Convert battery solutions and push the settings to your batteries\n *\n * Node configuration:\n * Set # of outputs to 2 x {your number of batteries} + 1\n * Example: 2 batteries: 2 x 2 + 1 = 5 outputs\n * \n * Output order will be:\n * - Logdata node\n * - Battery 1 mode \n * - Battery 1 power\n * - Battery 2 mode\n * - Battery 2 power\n * \n * Set the number of output nodes in the SETUP tab\n */\n\n// Init\nvar logdata = '';\n\n// INPUT\n// array of load distribution solutions\nlet solution_array = msg.solutions;\n\n// sort battery solutions by alphabetical order of their ID\nsolution_array.sort(function (/** @type {{ id: string; }} */ a, /** @type {{ id: string; }} */ b) {\n    return a.id.localeCompare(b.id);\n});\n\n// OUTPUT\nlet output_array = [];\nsolution_array.forEach((/** @type {{ id: String; mode: String; power: Number; }} */ solution) => {\n    output_array.push(\n        {payload: solution.mode},   // forced charge mode (stop, charge, discharge)\n        {payload: solution.power}   // power in Watt\n    );\n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;    \n});\n\n// Add logdata as the first output\noutput_array.unshift({payload: logdata});\n\n// Node outputs\nreturn output_array;",
         "outputs": 7,
         "timeout": 0,
         "noerr": 0,
@@ -737,9 +738,9 @@
         "type": "rbe",
         "z": "a099d47fc07b3cee",
         "g": "fc3b0636793881be",
-        "name": "on 20W change",
+        "name": "on 0W change",
         "func": "deadbandEq",
-        "gap": "20",
+        "gap": "0",
         "start": "",
         "inout": "out",
         "septopics": false,
@@ -2072,13 +2073,13 @@
         "name": "Call \"Link in\" node",
         "links": [],
         "linkType": "dynamic",
-        "timeout": "5",
+        "timeout": "1.2",
         "x": 410,
         "y": 660,
         "wires": [
             [
                 "712cd7b2343eead6",
-                "26560f17ffdcdf34"
+                "dff0ccb86295d04e"
             ]
         ]
     },
@@ -2096,7 +2097,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 650,
+        "x": 710,
         "y": 620,
         "wires": []
     },
@@ -2114,9 +2115,35 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 650,
+        "x": 710,
         "y": 660,
         "wires": []
+    },
+    {
+        "id": "dff0ccb86295d04e",
+        "type": "switch",
+        "z": "a099d47fc07b3cee",
+        "g": "b6de692f9d62224d",
+        "name": "solutions present",
+        "property": "solutions",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "undefined",
+                "vt": "jsonata"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 150,
+        "y": 760,
+        "wires": [
+            [
+                "26560f17ffdcdf34"
+            ]
+        ]
     },
     {
         "id": "176d29a.6f648d6",

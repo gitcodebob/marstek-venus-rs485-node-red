@@ -40,8 +40,8 @@
             "5c6de6a291b4c63e",
             "999fa888c5e5e56b"
         ],
-        "x": 24,
-        "y": 1059,
+        "x": 54,
+        "y": 1099,
         "w": 212,
         "h": 142
     },
@@ -144,8 +144,8 @@
         ],
         "x": 288,
         "y": 233,
-        "w": 1304,
-        "h": 254
+        "w": 1104,
+        "h": 294
     },
     {
         "id": "2884d4b5e34912da",
@@ -162,7 +162,7 @@
             "7242528b056e3c47"
         ],
         "x": 288,
-        "y": 513,
+        "y": 553,
         "w": 924,
         "h": 654
     },
@@ -265,8 +265,8 @@
             "e8409a2a051286bf",
             "5b44917d48154dea"
         ],
-        "x": 814,
-        "y": 299,
+        "x": 614,
+        "y": 359,
         "w": 752,
         "h": 142
     },
@@ -281,11 +281,13 @@
             "fill": "#ffffff"
         },
         "nodes": [
-            "9b70f054ec8bbbb1"
+            "9b70f054ec8bbbb1",
+            "735046e00914a975",
+            "7636353795317949"
         ],
-        "x": 594,
-        "y": 339,
-        "w": 232,
+        "x": 614,
+        "y": 259,
+        "w": 562,
         "h": 82
     },
     {
@@ -316,7 +318,7 @@
             "cfa0372c07314b8d"
         ],
         "x": 314,
-        "y": 539,
+        "y": 579,
         "w": 872,
         "h": 482
     },
@@ -335,7 +337,7 @@
             "3640364ae79b69ec"
         ],
         "x": 314,
-        "y": 1039,
+        "y": 1079,
         "w": 452,
         "h": 102
     },
@@ -395,50 +397,6 @@
         "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
         "x": 120,
         "y": 40,
-        "wires": []
-    },
-    {
-        "id": "67116260f2e09362",
-        "type": "link out",
-        "z": "c1a9925591b564a7",
-        "g": "419f0c8ca2d0601a",
-        "name": "Return",
-        "mode": "return",
-        "links": [],
-        "x": 195,
-        "y": 1160,
-        "wires": []
-    },
-    {
-        "id": "5c6de6a291b4c63e",
-        "type": "function",
-        "z": "c1a9925591b564a7",
-        "g": "419f0c8ca2d0601a",
-        "name": "return",
-        "func": "// Add return node information\nlet return_to = flow.get(\"_linkSource\");\nmsg._linkSource = return_to;\n\n// return to calling flow\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 100,
-        "y": 1160,
-        "wires": [
-            [
-                "67116260f2e09362"
-            ]
-        ]
-    },
-    {
-        "id": "999fa888c5e5e56b",
-        "type": "comment",
-        "z": "c1a9925591b564a7",
-        "g": "419f0c8ca2d0601a",
-        "name": "End (readme)",
-        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {payload: solution_array};\n` ",
-        "x": 120,
-        "y": 1100,
         "wires": []
     },
     {
@@ -1416,8 +1374,8 @@
         "g": "991409971787deec",
         "name": "Bumpless target grid consumption",
         "info": "The error value is used by default to calculate the derivative.\nWhen the target grid consumption (tgc) is changed, the system is takes the derivative of the process variable instead.\nThis prevents irratic behavior during sudden changes of the error or setpoint value.\n\ne.g. you change the setpoint from 0 to 100W \nThe error would make an instantanious jump and cause a huge derivative-term.\nThe pv stays continous and fluent.\n\nAfter 1 control tick the derivative is taken from error again.\nUntil the `tgc` is changed again.",
-        "x": 980,
-        "y": 340,
+        "x": 780,
+        "y": 400,
         "wires": []
     },
     {
@@ -1433,8 +1391,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1240,
-        "y": 400,
+        "x": 1040,
+        "y": 460,
         "wires": [
             [
                 "5b44917d48154dea"
@@ -1464,8 +1422,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 980,
-        "y": 380,
+        "x": 780,
+        "y": 440,
         "wires": [
             [
                 "e8409a2a051286bf"
@@ -1488,8 +1446,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1240,
-        "y": 360,
+        "x": 1040,
+        "y": 420,
         "wires": [
             [
                 "5b44917d48154dea"
@@ -1509,8 +1467,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1440,
-        "y": 380,
+        "x": 1240,
+        "y": 440,
         "wires": [
             [
                 "028f43a44d1bec69"
@@ -1522,19 +1480,19 @@
         "type": "function",
         "z": "c1a9925591b564a7",
         "g": "1fadb46f18a01ebe",
-        "name": "Deadband (30W)",
-        "func": "// Deadband\n// Stop processing if error is within .. Watt of target grid consumption.\n// This to reduce CPU loads \n\nlet P1_error = flow.get(\"p1_error\"); // Watt\nlet P1_deadband = 30; // Watt\n\n// Within Deadband\nif(Math.abs(P1_error) < P1_deadband) {\n    // stop processing\n    node.status({fill:\"yellow\",shape:\"dot\",text:`Halted, ${Math.round(Math.abs(P1_error))} W`});\n    node.log(`Stopped processing | error is within deadband of ${P1_deadband}`);\n    return null;\n} \n\n// Outside deadband\nnode.status({fill:\"green\",shape:\"dot\",text:`Passed, ${Math.round(Math.abs(P1_error))} W`});\nreturn msg;\n",
+        "name": "Deadband (15W)",
+        "func": "// Deadband\n// Stop processing if error is within .. Watt of target grid consumption.\n// This to reduce CPU loads \n\nlet P1_error = flow.get(\"p1_error\"); // Watt\nlet P1_deadband = 15; // Watt\n\n// Within Deadband\nif(Math.abs(P1_error) < P1_deadband) {\n    // stop processing\n    node.status({fill:\"yellow\",shape:\"dot\",text:`Halt, ${Math.round(Math.abs(P1_error))} W`});\n    node.log(`Stopped processing | error is within deadband of ${P1_deadband}`);\n    return {payload: 'halted by deadband'};\n} \n\n// Outside deadband\nnode.status({fill:\"green\",shape:\"dot\",text:`Pass, ${Math.round(Math.abs(P1_error))} W`});\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 710,
-        "y": 380,
+        "x": 730,
+        "y": 300,
         "wires": [
             [
-                "6f0b3716cc693cd6"
+                "735046e00914a975"
             ]
         ]
     },
@@ -1552,7 +1510,7 @@
         "finalize": "",
         "libs": [],
         "x": 440,
-        "y": 620,
+        "y": 660,
         "wires": [
             [
                 "4cafd473afb89158"
@@ -1595,7 +1553,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 720,
-        "y": 980,
+        "y": 1020,
         "wires": []
     },
     {
@@ -1625,7 +1583,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 730,
-        "y": 680,
+        "y": 720,
         "wires": [
             [
                 "4854534dc7c83892"
@@ -1659,7 +1617,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 730,
-        "y": 620,
+        "y": 660,
         "wires": [
             [
                 "bc8a24344b2ae2ca"
@@ -1693,7 +1651,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 740,
-        "y": 740,
+        "y": 780,
         "wires": [
             []
         ]
@@ -1725,7 +1683,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 910,
-        "y": 800,
+        "y": 840,
         "wires": [
             []
         ]
@@ -1757,7 +1715,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 740,
-        "y": 860,
+        "y": 900,
         "wires": [
             []
         ]
@@ -1777,7 +1735,7 @@
         "statusVal": "payload",
         "statusType": "auto",
         "x": 720,
-        "y": 920,
+        "y": 960,
         "wires": []
     },
     {
@@ -1793,7 +1751,7 @@
         "mult": "single",
         "reduce": false,
         "x": 900,
-        "y": 620,
+        "y": 660,
         "wires": [
             [
                 "a79b2b6c56ce7751"
@@ -1827,7 +1785,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 1070,
-        "y": 620,
+        "y": 660,
         "wires": [
             []
         ]
@@ -1845,7 +1803,7 @@
         "mult": "single",
         "reduce": false,
         "x": 900,
-        "y": 680,
+        "y": 720,
         "wires": [
             [
                 "7cdef29145623758"
@@ -1879,7 +1837,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 1080,
-        "y": 680,
+        "y": 720,
         "wires": [
             []
         ]
@@ -1898,7 +1856,7 @@
         "finalize": "",
         "libs": [],
         "x": 750,
-        "y": 580,
+        "y": 620,
         "wires": [
             [
                 "cbc863ac4c6ce1b8"
@@ -1919,7 +1877,7 @@
         "finalize": "",
         "libs": [],
         "x": 1080,
-        "y": 580,
+        "y": 620,
         "wires": [
             [
                 "2ef3fc5bd6a33686",
@@ -1941,7 +1899,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 730,
-        "y": 800,
+        "y": 840,
         "wires": [
             [
                 "9f823db632bbd13f"
@@ -1954,7 +1912,7 @@
         "z": "c1a9925591b564a7",
         "g": "7242528b056e3c47",
         "name": "Load distribution",
-        "func": "//Debug toggle\nlet debugLog = flow.get(\"LoadDistribution_debug_enabled\") === true;\n\n// INPUT\nvar batteries = flow.get(\"batteries\"); // Battery configuration as provided by `Home Batteries IO` flow\nvar isCharging = flow.get(\"batteries_charging\"); // Are we in a battery charging scenario?\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\nvar hasReverseDischargePriority = flow.get(\"has_reverse_priority_discharge\") || false; // Prioritize (dis)charging the same battery\nvar logdata = `Charging=${isCharging} | `; // logging for node-red debug node\n\n// how much power do the batteries need to compensate?\nvar unassigned_power = Math.round(Math.abs(msg.payload)); // Power in W to compensate using batteries\nlogdata += `Unassigned power ${unassigned_power} W | `;\n\n// inits \nvar solution_array = []; // load distribution solutions\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// debug output function\nfunction debug(message) {\n    if (debugLog) {\n        node.warn(message);\n        node.status({fill:\"yellow\",shape:\"ring\",text:\"debugging\"});\n    } else {\n        node.status({fill:\"green\",shape:\"dot\",text:\"operating\"});\n    }\n}\ndebug(`=== Cycle #${Date.now()} ===`);\n\n// battery life improvement (slow charge near max SoC)\n/**\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    if(max_power < 0) max_power = 0;\n    if (!hasChargingLimiter) return max_power;\n    if (soc >= 98) return Math.min(300, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 85) return Math.min(1500, max_power);\n    return max_power;\n}\nif (isCharging) logdata += `💡Charge limiting based on SoC | `;\n\n/**\n* battery life improvement (disconnects battery only if the battery is not used for ... seconds)\n* @param {string | number} batteryID\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getStopSolution(batteryID) {\n    // idle time, before stop is given to inverter relay.\n    let time_idle_minimum = flow.get(\"idle_time_minutes\")*60*1000||0; // Milliseconds\n\n    // retrieve last registered active times for each battery based on their ids\n    let lasttime_active = context.get(\"lasttime_active\");\n    \n    // battery exists in register \n    if(lasttime_active[batteryID] !== undefined){\n        // timing\n        let time_last = lasttime_active[batteryID]; // Milliseconds \n        let time_now = Date.now();                  // Milliseconds \n        let time_idle = (time_now - time_last); // Milliseconds\n        \n        // battery is ready for STOP\n        if (time_idle >= time_idle_minimum) return {id: batteryID, mode: CMODE.STOP, power:0}; // STOP or 0 Watt disconnects relay\n        // battery is kept IDLE, while awaiting minimum inactive time\n        logdata += `Idle: ${batteryID} ${Math.round(time_idle/1000)}s | `;\n        return { id: batteryID, mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE, power: 1 }; // 1 Watt keeps battery IDLE, keeping relay engaged\n    }\n\n    // battery missing in register\n    logdata += `'Idle: ${batteryID}' unknown last active time | `;\n    debug(`[IDLE] Battery '${batteryID}' unknown last active time`);\n    return getActiveSolution(batteryID, 1); // set a last active time and engage idle state\n}\nlogdata += \"💡Idle before stop | \";\n\n/**\n* Get battery solution and register a last active time.\n* @param {any} batteryID\n* @param {number} assigned_power\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getActiveSolution(batteryID, assigned_power){\n    // register battery as active\n    let lasttime_active = context.get(\"lasttime_active\")||[]; // last registered active times for each battery based on their ids\n    lasttime_active[batteryID] = Date.now();\n    context.set(\"lasttime_active\", lasttime_active);\n\n    // solution\n    return {\n        id: batteryID,\n        mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE,\n        power: Math.round(assigned_power)\n    };\n}\n\n// -- BATTERY DISCHARGE PRIORITY\nif (!isCharging && hasReverseDischargePriority) {\n   batteries.reverse();\n}\n// In feite triggert dit maar 1x de reverse charging order. Aan de achterkant wordt alles weer terug gereversed. Dus de accus krijgen dezelfde oplossing (alleen met de IDs een keer verwisseld) ongeacht wat hier gebeurt.\n// Grootste raadsel, waar verhielp dit jouw issues of zag je de issues tijdelijk niet. Misschien zien we iets anders over het hoofd.\n// let lastChargingState = flow.get(\"last_isCharging\");\n// if (lastChargingState !== isCharging) {\n//     flow.set(\"last_isCharging\", isCharging);\n//     if (!isCharging && hasReverseDischargePriority) {\n//         batteries.reverse();\n//         debug(`Battery order reversed once for discharge priority`);\n//     }\n// }\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ id: any; soc: number; soc_min: number; soc_max: number; rs485: string; charging_max: number; discharging_max: any; }} */ battery) => {\n  \n    debug(`[CHECK] Battery ${battery.id}: SoC=${battery.soc}%, Min=${battery.soc_min}%, Max=${battery.soc_max}%, RS485=${battery.rs485}, isCharging=${isCharging}`);\n    \n    // check if battery is available for (dis)charging\n    if ((battery.soc >= battery.soc_max && isCharging) || \n        (battery.soc <= battery.soc_min && !isCharging) || \n        battery.rs485 !== \"enable\") {\n        \n        // battery is NOT available\n        debug(`[SKIP] Battery ${battery.id}: skipped due to SoC/RS485 limit`);\n        let solution = getStopSolution(battery.id); // get a soft stop solution\n        // add solution, do not update last active time.\n        solution_array.push(solution);\n        return;\n    }\n\n    // battery is AVAILABLE, assign power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power);\n    \n    // select solution\n    var solution;\n    if (assign <= 0 ) {\n        // no power solution\n        solution = getStopSolution(battery.id); // a soft stop solution\n        assign = 0;\n    } else {\n        // assigned power solution\n        solution = getActiveSolution(battery.id, Math.round(assign));\n    }\n    solution_array.push(solution);\n    \n    // log\n    debug(`[ASSIGN] Battery ${solution.id}: allowed to ${solution.mode} with ${solution.power}W`);\n\n    // remaining power to assign\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n    //node.warn(`[BATTERY] UPDATE: ID=${battery.id}, new_unassigned=${unassigned_power}W, total_assignable=${batteries_total_assignable_power}W`);\n});\n\n// battery discharge priority - put solutions back in initial order\nif (!isCharging && hasReverseDischargePriority) {\n    solution_array.reverse();\n}\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power);\nlogdata += `batteries_total_assignable_power ${batteries_total_assignable_power} | `;\n\n// OUTPUT\nsolution_array.forEach(solution => { \n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;\n});\n\n// TWO OUTPUTS\nreturn [\n    { payload: logdata },    // debug output\n    { payload: solution_array }, // to Home Battery flow\n    ]; ",
+        "func": "//Debug toggle\nlet debugLog = flow.get(\"LoadDistribution_debug_enabled\") === true;\n\n// INPUT\nvar batteries = flow.get(\"batteries\"); // Battery configuration as provided by `Home Batteries IO` flow\nvar isCharging = flow.get(\"batteries_charging\"); // Are we in a battery charging scenario?\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\nvar hasReverseDischargePriority = flow.get(\"has_reverse_priority_discharge\") || false; // Prioritize (dis)charging the same battery\nvar logdata = `Charging=${isCharging} | `; // logging for node-red debug node\n\n// how much power do the batteries need to compensate?\nvar unassigned_power = Math.round(Math.abs(msg.payload)); // Power in W to compensate using batteries\nlogdata += `Unassigned power ${unassigned_power} W | `;\n\n// inits \nvar solution_array = []; // load distribution solutions\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// debug output function\nfunction debug(message) {\n    if (debugLog) {\n        node.warn(message);\n        node.status({fill:\"yellow\",shape:\"ring\",text:\"debugging\"});\n    } else {\n        node.status({fill:\"green\",shape:\"dot\",text:\"operating\"});\n    }\n}\ndebug(`=== Cycle #${Date.now()} ===`);\n\n// battery life improvement (slow charge near max SoC)\n/**\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    if(max_power < 0) max_power = 0;\n    if (!hasChargingLimiter) return max_power;\n    if (soc >= 98) return Math.min(300, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 85) return Math.min(1500, max_power);\n    return max_power;\n}\nif (isCharging) logdata += `💡Charge limiting based on SoC | `;\n\n/**\n* battery life improvement (disconnects battery only if the battery is not used for ... seconds)\n* @param {string | number} batteryID\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getStopSolution(batteryID) {\n    // idle time, before stop is given to inverter relay.\n    let time_idle_minimum = flow.get(\"idle_time_minutes\")*60*1000||0; // Milliseconds\n\n    // retrieve last registered active times for each battery based on their ids\n    let lasttime_active = context.get(\"lasttime_active\");\n    \n    // battery exists in register \n    if(lasttime_active[batteryID] !== undefined){\n        // timing\n        let time_last = lasttime_active[batteryID]; // Milliseconds \n        let time_now = Date.now();                  // Milliseconds \n        let time_idle = (time_now - time_last); // Milliseconds\n        \n        // battery is ready for STOP\n        if (time_idle >= time_idle_minimum) return {id: batteryID, mode: CMODE.STOP, power:0}; // STOP or 0 Watt disconnects relay\n        // battery is kept IDLE, while awaiting minimum inactive time\n        logdata += `Idle: ${batteryID} ${Math.round(time_idle/1000)}s | `;\n        return { id: batteryID, mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE, power: 1 }; // 1 Watt keeps battery IDLE, keeping relay engaged\n    }\n\n    // battery missing in register\n    logdata += `'Idle: ${batteryID}' unknown last active time | `;\n    debug(`[IDLE] Battery '${batteryID}' unknown last active time`);\n    return getActiveSolution(batteryID, 1); // set a last active time and engage idle state\n}\nlogdata += \"💡Idle before stop | \";\n\n/**\n* Get battery solution and register a last active time.\n* @param {any} batteryID\n* @param {number} assigned_power\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getActiveSolution(batteryID, assigned_power){\n    // register battery as active\n    let lasttime_active = context.get(\"lasttime_active\")||[]; // last registered active times for each battery based on their ids\n    lasttime_active[batteryID] = Date.now();\n    context.set(\"lasttime_active\", lasttime_active);\n\n    // solution\n    return {\n        id: batteryID,\n        mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE,\n        power: Math.round(assigned_power)\n    };\n}\n\n// -- BATTERY DISCHARGE PRIORITY\nif (!isCharging && hasReverseDischargePriority) {\n   batteries.reverse();\n}\n// In feite triggert dit maar 1x de reverse charging order. Aan de achterkant wordt alles weer terug gereversed. Dus de accus krijgen dezelfde oplossing (alleen met de IDs een keer verwisseld) ongeacht wat hier gebeurt.\n// Grootste raadsel, waar verhielp dit jouw issues of zag je de issues tijdelijk niet. Misschien zien we iets anders over het hoofd.\n// let lastChargingState = flow.get(\"last_isCharging\");\n// if (lastChargingState !== isCharging) {\n//     flow.set(\"last_isCharging\", isCharging);\n//     if (!isCharging && hasReverseDischargePriority) {\n//         batteries.reverse();\n//         debug(`Battery order reversed once for discharge priority`);\n//     }\n// }\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ id: any; soc: number; soc_min: number; soc_max: number; rs485: string; charging_max: number; discharging_max: any; }} */ battery) => {\n  \n    debug(`[CHECK] Battery ${battery.id}: SoC=${battery.soc}%, Min=${battery.soc_min}%, Max=${battery.soc_max}%, RS485=${battery.rs485}, isCharging=${isCharging}`);\n    \n    // check if battery is available for (dis)charging\n    if ((battery.soc >= battery.soc_max && isCharging) || \n        (battery.soc <= battery.soc_min && !isCharging) || \n        battery.rs485 !== \"enable\") {\n        \n        // battery is NOT available\n        debug(`[SKIP] Battery ${battery.id}: skipped due to SoC/RS485 limit`);\n        let solution = getStopSolution(battery.id); // get a soft stop solution\n        // add solution, do not update last active time.\n        solution_array.push(solution);\n        return;\n    }\n\n    // battery is AVAILABLE, assign power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power);\n    \n    // select solution\n    var solution;\n    if (assign <= 0 ) {\n        // no power solution\n        solution = getStopSolution(battery.id); // a soft stop solution\n        assign = 0;\n    } else {\n        // assigned power solution\n        solution = getActiveSolution(battery.id, Math.round(assign));\n    }\n    solution_array.push(solution);\n    \n    // log\n    debug(`[ASSIGN] Battery ${solution.id}: allowed to ${solution.mode} with ${solution.power}W`);\n\n    // remaining power to assign\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n    //node.warn(`[BATTERY] UPDATE: ID=${battery.id}, new_unassigned=${unassigned_power}W, total_assignable=${batteries_total_assignable_power}W`);\n});\n\n// battery discharge priority - put solutions back in initial order\nif (!isCharging && hasReverseDischargePriority) {\n    solution_array.reverse();\n}\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power);\nlogdata += `batteries_total_assignable_power ${batteries_total_assignable_power} | `;\n\n// OUTPUT\nsolution_array.forEach(solution => { \n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;\n});\n\n// TWO OUTPUTS\nreturn [\n    { payload: logdata },    // debug output\n    { solutions: solution_array }, // to Home Battery flow\n    ]; ",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1962,7 +1920,7 @@
         "finalize": "",
         "libs": [],
         "x": 420,
-        "y": 1100,
+        "y": 1140,
         "wires": [
             [
                 "3640364ae79b69ec"
@@ -1990,8 +1948,120 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 640,
-        "y": 1080,
+        "y": 1120,
         "wires": []
+    },
+    {
+        "id": "735046e00914a975",
+        "type": "switch",
+        "z": "c1a9925591b564a7",
+        "g": "1fadb46f18a01ebe",
+        "name": "Pass or Halt",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "halted by deadband",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "halted by deadband",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 910,
+        "y": 300,
+        "wires": [
+            [
+                "7636353795317949"
+            ],
+            [
+                "6f0b3716cc693cd6"
+            ]
+        ]
+    },
+    {
+        "id": "67116260f2e09362",
+        "type": "link out",
+        "z": "c1a9925591b564a7",
+        "g": "419f0c8ca2d0601a",
+        "name": "Return",
+        "mode": "return",
+        "links": [],
+        "x": 225,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "5c6de6a291b4c63e",
+        "type": "function",
+        "z": "c1a9925591b564a7",
+        "g": "419f0c8ca2d0601a",
+        "name": "end",
+        "func": "// Add return node information\nlet return_to = flow.get(\"_linkSource\");\nmsg._linkSource = return_to;\n\n// return to calling flow\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 130,
+        "y": 1200,
+        "wires": [
+            [
+                "67116260f2e09362"
+            ]
+        ]
+    },
+    {
+        "id": "999fa888c5e5e56b",
+        "type": "comment",
+        "z": "c1a9925591b564a7",
+        "g": "419f0c8ca2d0601a",
+        "name": "End (readme)",
+        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
+        "x": 150,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "7636353795317949",
+        "type": "link out",
+        "z": "c1a9925591b564a7",
+        "g": "1fadb46f18a01ebe",
+        "name": "go to End",
+        "mode": "link",
+        "links": [
+            "fb0eeeb7ddf70b28"
+        ],
+        "x": 1090,
+        "y": 300,
+        "wires": [],
+        "inputLabels": [
+            "Halt"
+        ],
+        "l": true
+    },
+    {
+        "id": "fb0eeeb7ddf70b28",
+        "type": "link in",
+        "z": "c1a9925591b564a7",
+        "name": "link to End",
+        "links": [
+            "7636353795317949"
+        ],
+        "x": 25,
+        "y": 1200,
+        "wires": [
+            [
+                "5c6de6a291b4c63e"
+            ]
+        ]
     },
     {
         "id": "176d29a.6f648d6",

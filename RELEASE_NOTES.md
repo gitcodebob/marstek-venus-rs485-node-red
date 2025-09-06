@@ -1,6 +1,30 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer).
 
+## 1.0.0 - Strategy-Based Architecture
+- **Major Feature: Multi-Strategy Battery Control System**
+  - Complete restructure to strategy-based architecture for enhanced flexibility
+  - Added multiple battery control strategies: custom, full-stop, self-consumption, time-of-use, and trading
+  - Improved flow organization with numbered prefixes for logical ordering and better maintainability
+  - Enhanced Home Assistant configuration and dashboard with new strategy controls
+
+- **Breaking Changes:**
+  - Node-RED flow file structure completely reorganized
+  - Flow naming convention changed to numbered strategy-based system
+  - Enhanced configuration structure may require adjustment of existing setups
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml` - Enhanced dashboard with new controls
+  - `home assistant/input_numbers/input_number_house_battery_control.yaml` - Updated configuration
+  - `home assistant/input_selects/input_select_house_battery_control.yaml` - Enhanced selects
+  - `node-red/00 master-switch-flow.json` - Renamed from 03 master-switch-flow.json
+  - `node-red/01 start-flow.json` - Updated initialization flow
+  - `node-red/02 strategy-custom.json` - New custom strategy flow
+  - `node-red/02 strategy-full-stop.json` - New full-stop strategy flow
+  - `node-red/02 strategy-self-consumption.json` - Renamed from 02 control-flow.json
+  - `node-red/02 strategy-time-of-use.json` - New time-of-use strategy flow
+  - `node-red/02 strategy-trading.json` - New trading strategy flow
+
 ## 0.3.0
 - **New Feature: Minimum Idle Time for Battery Grid Relay Disengagement**
   - Introduced minimum idle time before allowing a battery to disengage its grid relay
