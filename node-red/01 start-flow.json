@@ -20,11 +20,12 @@
             "057b9222c17d4046",
             "b5940f2c8939de70",
             "27ede02d64789dd0",
-            "ea9b2d167f67f9b6"
+            "ea9b2d167f67f9b6",
+            "981ff4f5a93db632"
         ],
         "x": 34,
         "y": 19,
-        "w": 832,
+        "w": 1012,
         "h": 122
     },
     {
@@ -54,7 +55,7 @@
             "dff0ccb86295d04e"
         ],
         "x": 34,
-        "y": 719,
+        "y": 759,
         "w": 752,
         "h": 402
     },
@@ -129,12 +130,13 @@
             "06dd855a34065b5d",
             "d1bd5fbe28bdd070",
             "b658a34d31bcd8f3",
-            "712cd7b2343eead6"
+            "712cd7b2343eead6",
+            "7f303dfb944dfc04"
         ],
         "x": 34,
         "y": 579,
         "w": 812,
-        "h": 122
+        "h": 162
     },
     {
         "id": "47ee2cacda9c1168",
@@ -142,7 +144,7 @@
         "z": "a099d47fc07b3cee",
         "g": "8ff447faf151d1ad",
         "name": "Mapping",
-        "func": "// Home power \nvar P1_power = flow.get(\"p1_power\"); // Watt, grid power drawn or delivered\n\n// Battery properties\nvar M1_power = flow.get(\"marstek_m1_battery_power\");    // charging is positive, discharge is negative\nvar M2_power = flow.get(\"marstek_m2_battery_power\");    // charging is positive, discharge is negative\nvar M3_power = flow.get(\"marstek_m3_battery_power\");    // charging is positive, discharge is negative\n\nvar M1_charging_max = flow.get(\"marstek_m1_max_charge_power\"); // W\nvar M2_charging_max = flow.get(\"marstek_m2_max_charge_power\"); // W\nvar M3_charging_max = flow.get(\"marstek_m3_max_charge_power\"); // W\n\nvar M1_discharging_max = flow.get(\"marstek_m1_max_discharge_power\"); // W\nvar M2_discharging_max = flow.get(\"marstek_m2_max_discharge_power\"); // W\nvar M3_discharging_max = flow.get(\"marstek_m3_max_discharge_power\"); // W\n\nvar M1_control_mode = flow.get(\"marstek_m1_rs485_control_mode\"); // enable/disable\nvar M2_control_mode = flow.get(\"marstek_m2_rs485_control_mode\"); // enable/disable\nvar M3_control_mode = flow.get(\"marstek_m3_rs485_control_mode\"); // enable/disable\n\nvar M1_soc = Number(flow.get(\"marstek_m1_battery_state_of_charge\"));         //%\nvar M1_soc_min = Number(flow.get(\"marstek_m1_discharging_cutoff_capacity\")); //%\nvar M1_soc_max = Number(flow.get(\"marstek_m1_charging_cutoff_capacity\"));    //%\n\nvar M2_soc = Number(flow.get(\"marstek_m2_battery_state_of_charge\"));         //%\nvar M2_soc_min = Number(flow.get(\"marstek_m2_discharging_cutoff_capacity\")); //%\nvar M2_soc_max = Number(flow.get(\"marstek_m2_charging_cutoff_capacity\"));    //%\n\nvar M3_soc = Number(flow.get(\"marstek_m3_battery_state_of_charge\"));         //%\nvar M3_soc_min = Number(flow.get(\"marstek_m3_discharging_cutoff_capacity\")); //%\nvar M3_soc_max = Number(flow.get(\"marstek_m3_charging_cutoff_capacity\"));    //%\n\n\n//--    Battery list\n// Note: the order of the batteries in the `battery_array` determines priority in (dis)charging.\n// e.g. the first battery gets priority to charge, when it is at capacity the next battery gets what remains.\n// Batteries with built-in converters are most efficient at peak power. \n// The efficiency is optimized by prioritizing batteries instead of spreading load evenly accross al batteries. \n// Manipulating the order of the array allows you to control which battery is in the lead.\nlet battery_array = [\n    { id: \"M1\", \n      power: M1_power, charging_max: M1_charging_max, discharging_max: M1_discharging_max,\n      soc: M1_soc, soc_min: M1_soc_min, soc_max: M1_soc_max,\n      rs485: M1_control_mode \n    }\n    ,\n    { id: \"M2\", \n      power: M2_power, charging_max: M2_charging_max, discharging_max: M2_discharging_max,\n      soc: M2_soc, soc_min: M2_soc_min, soc_max: M2_soc_max,\n      rs485: M2_control_mode \n    }\n    //,\n    // { id: \"M3\", \n    //   power: M3_power, charging_max: M3_charging_max, discharging_max: M3_discharging_max,\n    //   power_set: 0, // what power level should be set next\n    //   soc: M3_soc, soc_min: M3_soc_min, soc_max: M3_soc_max,\n    //   rs485: M3_control_mode \n    // }\n];\n\n// OUTPUT\n// -- home energy configuration\nlet mapping = {\n  payload: false, // not null\n  batteries: battery_array, \n  grid_power: P1_power\n  };\n\n// -- outflow\nflow.set(\"battery_configuration\", mapping);\n// -- output\nreturn mapping;",
+        "func": "// Home power \nvar P1_power = flow.get(\"p1_power\"); // Watt, grid power drawn or delivered\n\n// Battery properties\nvar M1_power = flow.get(\"marstek_m1_battery_power\");    // charging is positive, discharge is negative\nvar M2_power = flow.get(\"marstek_m2_battery_power\");    // charging is positive, discharge is negative\nvar M3_power = flow.get(\"marstek_m3_battery_power\");    // charging is positive, discharge is negative\n\nvar M1_charging_max = flow.get(\"marstek_m1_max_charge_power\"); // W\nvar M2_charging_max = flow.get(\"marstek_m2_max_charge_power\"); // W\nvar M3_charging_max = flow.get(\"marstek_m3_max_charge_power\"); // W\n\nvar M1_discharging_max = flow.get(\"marstek_m1_max_discharge_power\"); // W\nvar M2_discharging_max = flow.get(\"marstek_m2_max_discharge_power\"); // W\nvar M3_discharging_max = flow.get(\"marstek_m3_max_discharge_power\"); // W\n\nvar M1_control_mode = flow.get(\"marstek_m1_rs485_control_mode\"); // enable/disable\nvar M2_control_mode = flow.get(\"marstek_m2_rs485_control_mode\"); // enable/disable\nvar M3_control_mode = flow.get(\"marstek_m3_rs485_control_mode\"); // enable/disable\n\nvar M1_soc = Number(flow.get(\"marstek_m1_battery_state_of_charge\"));         //%\nvar M1_soc_min = Number(flow.get(\"marstek_m1_discharging_cutoff_capacity\")); //%\nvar M1_soc_max = Number(flow.get(\"marstek_m1_charging_cutoff_capacity\"));    //%\n\nvar M2_soc = Number(flow.get(\"marstek_m2_battery_state_of_charge\"));         //%\nvar M2_soc_min = Number(flow.get(\"marstek_m2_discharging_cutoff_capacity\")); //%\nvar M2_soc_max = Number(flow.get(\"marstek_m2_charging_cutoff_capacity\"));    //%\n\nvar M3_soc = Number(flow.get(\"marstek_m3_battery_state_of_charge\"));         //%\nvar M3_soc_min = Number(flow.get(\"marstek_m3_discharging_cutoff_capacity\")); //%\nvar M3_soc_max = Number(flow.get(\"marstek_m3_charging_cutoff_capacity\"));    //%\n\n\n//--    Battery list\n// Note: the order of the batteries in the `battery_array` determines priority in (dis)charging.\n// e.g. the first battery gets priority to charge, when it is at capacity the next battery gets what remains.\n// Batteries with built-in converters are most efficient at peak power. \n// The efficiency is optimized by prioritizing batteries instead of spreading load evenly accross al batteries. \n// Manipulating the order of the array allows you to control which battery is in the lead.\nlet battery_array = [\n    { id: \"M1\", \n      power: M1_power, charging_max: M1_charging_max, discharging_max: M1_discharging_max,\n      soc: M1_soc, soc_min: M1_soc_min, soc_max: M1_soc_max,\n      rs485: M1_control_mode \n    }\n    ,\n    { id: \"M2\", \n      power: M2_power, charging_max: M2_charging_max, discharging_max: M2_discharging_max,\n      soc: M2_soc, soc_min: M2_soc_min, soc_max: M2_soc_max,\n      rs485: M2_control_mode \n    }\n    //,\n    // { id: \"M3\", \n    //   power: M3_power, charging_max: M3_charging_max, discharging_max: M3_discharging_max,\n    //   power_set: 0, // what power level should be set next\n    //   soc: M3_soc, soc_min: M3_soc_min, soc_max: M3_soc_max,\n    //   rs485: M3_control_mode \n    // }\n];\n\n// OUTPUT\n// -- home energy configuration\nmsg = {\n  payload: false, // not null\n  batteries: battery_array, \n  grid_power: P1_power\n  };\n\n// -- output\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -284,7 +286,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 480,
+        "x": 660,
         "y": 60,
         "wires": [
             [
@@ -310,7 +312,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 720,
+        "x": 900,
         "y": 60,
         "wires": [
             [
@@ -351,12 +353,12 @@
         "mergeContext": "",
         "mustacheAltTags": false,
         "outputProperties": [],
-        "queue": "none",
+        "queue": "last",
         "blockInputOverrides": true,
         "domain": "select",
         "service": "select_option",
         "x": 620,
-        "y": 840,
+        "y": 880,
         "wires": [
             []
         ]
@@ -383,12 +385,12 @@
         "mergeContext": "",
         "mustacheAltTags": false,
         "outputProperties": [],
-        "queue": "none",
+        "queue": "last",
         "blockInputOverrides": true,
         "domain": "select",
         "service": "select_option",
         "x": 620,
-        "y": 940,
+        "y": 980,
         "wires": [
             []
         ]
@@ -421,7 +423,7 @@
         "domain": "number",
         "service": "set_value",
         "x": 600,
-        "y": 880,
+        "y": 920,
         "wires": [
             []
         ]
@@ -454,7 +456,7 @@
         "domain": "number",
         "service": "set_value",
         "x": 600,
-        "y": 980,
+        "y": 1020,
         "wires": [
             []
         ]
@@ -465,7 +467,7 @@
         "z": "a099d47fc07b3cee",
         "g": "b6de692f9d62224d",
         "name": "Set batteries",
-        "func": "/* Convert battery solutions and push the settings to your batteries\n *\n * Node configuration:\n * Set # of outputs to 2 x {your number of batteries} + 1\n * Example: 2 batteries: 2 x 2 + 1 = 5 outputs\n * \n * Output order will be:\n * - Logdata node\n * - Battery 1 mode \n * - Battery 1 power\n * - Battery 2 mode\n * - Battery 2 power\n * \n * Set the number of output nodes in the SETUP tab\n */\n\n// Init\nvar logdata = '';\n\n// INPUT\n// array of load distribution solutions\nlet solution_array = msg.solutions;\n\n// sort battery solutions by alphabetical order of their ID\nsolution_array.sort(function (/** @type {{ id: string; }} */ a, /** @type {{ id: string; }} */ b) {\n    return a.id.localeCompare(b.id);\n});\n\n// OUTPUT\nlet output_array = [];\nsolution_array.forEach((/** @type {{ id: String; mode: String; power: Number; }} */ solution) => {\n    output_array.push(\n        {payload: solution.mode},   // forced charge mode (stop, charge, discharge)\n        {payload: solution.power}   // power in Watt\n    );\n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;    \n});\n\n// Add logdata as the first output\noutput_array.unshift({payload: logdata});\n\n// Node outputs\nreturn output_array;",
+        "func": "/* Convert battery solutions and push the settings to your batteries\n *\n * Node configuration:\n * Set # of outputs to 2 x {your number of batteries} + 1\n * Example: 2 batteries: 2 x 2 + 1 = 5 outputs\n * \n * Output order will be:\n * - msg node (incl. logdata)\n * - Battery 1 mode \n * - Battery 1 power\n * - Battery 2 mode\n * - Battery 2 power\n * \n * Set the number of output nodes in the SETUP tab\n */\n\n// Init\nvar logdata = '';\n\n// INPUT\n// array of load distribution solutions\nlet solution_array = msg.solutions;\n\n// sort battery solutions by alphabetical order of their ID\nsolution_array.sort(function (/** @type {{ id: string; }} */ a, /** @type {{ id: string; }} */ b) {\n    return a.id.localeCompare(b.id);\n});\n\n// OUTPUT\nlet output_array = [];\nsolution_array.forEach((/** @type {{ id: String; mode: String; power: Number; }} */ solution) => {\n    output_array.push(\n        {payload: String(solution.mode)},   // forced charge mode (stop, charge, discharge)\n        {payload: Number(solution.power)}   // power in Watt\n    );\n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;    \n});\n\n// Add msg object as the first output\nmsg.logdata = logdata;\noutput_array.unshift(msg);\n\n// Node outputs\nreturn output_array;",
         "outputs": 7,
         "timeout": 0,
         "noerr": 0,
@@ -473,7 +475,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 920,
+        "y": 960,
         "wires": [
             [
                 "08133ce712e6094f"
@@ -519,12 +521,12 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
+        "complete": "logdata",
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
         "x": 380,
-        "y": 800,
+        "y": 840,
         "wires": []
     },
     {
@@ -535,7 +537,7 @@
         "name": "3. Add action nodes to all batteries",
         "info": "",
         "x": 460,
-        "y": 760,
+        "y": 800,
         "wires": []
     },
     {
@@ -552,7 +554,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 390,
-        "y": 840,
+        "y": 880,
         "wires": [
             [
                 "b706fac8a42803f4"
@@ -573,7 +575,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 390,
-        "y": 880,
+        "y": 920,
         "wires": [
             [
                 "a63c224511f9a290"
@@ -594,7 +596,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 390,
-        "y": 940,
+        "y": 980,
         "wires": [
             [
                 "c19da731efd01879"
@@ -615,7 +617,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 390,
-        "y": 980,
+        "y": 1020,
         "wires": [
             [
                 "65a545d97c500c67"
@@ -637,7 +639,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 390,
-        "y": 1040,
+        "y": 1080,
         "wires": [
             [
                 "4edbb9aa9dc6c61b"
@@ -659,7 +661,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 390,
-        "y": 1080,
+        "y": 1120,
         "wires": [
             [
                 "31e7b90d99bcb9cd"
@@ -694,7 +696,7 @@
         "domain": "select",
         "service": "select_option",
         "x": 620,
-        "y": 1040,
+        "y": 1080,
         "wires": [
             []
         ]
@@ -728,7 +730,7 @@
         "domain": "number",
         "service": "set_value",
         "x": 600,
-        "y": 1080,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -750,8 +752,8 @@
         "y": 60,
         "wires": [
             [
-                "057b9222c17d4046",
-                "ea9b2d167f67f9b6"
+                "ea9b2d167f67f9b6",
+                "981ff4f5a93db632"
             ]
         ]
     },
@@ -2049,7 +2051,7 @@
         "z": "a099d47fc07b3cee",
         "g": "a5b8a03b1e2f2371",
         "name": "Strategy selection",
-        "func": "// INFLOW\nlet battery_configuration = flow.get(\"battery_configuration\");\nlet strategy = flow.get(\"house_battery_strategy\");\n\n// stop on error\nif(battery_configuration === undefined) {\n    node.error(\"Battery configuration undefined\", msg);\n    return null;\n}\nif(strategy === undefined) {\n    node.error(\"Battery strategy undefined\", msg);\n    return null;\n}\n\n// select target flow based on the input_select `house_battery_strategy`\nbattery_configuration.target = `${strategy}`;\n\n// OUTPUT\nreturn battery_configuration;",
+        "func": "// INFLOW\nlet strategy = flow.get(\"house_battery_strategy\");\n\n// stop on error\nif(msg.batteries === undefined) {\n    node.error(\"Battery configuration undefined\", msg);\n    return null;\n}\nif(strategy === undefined) {\n    node.error(\"Battery strategy undefined\", msg);\n    return null;\n}\n\n// select target flow based on the input_select `house_battery_strategy`\nmsg.target = `${strategy}`;\n\n// add execution marker\nRED.util.setMessageProperty(msg,\"strategy.execution_start\",Date.now()); // when do we start executing the selected strategy\n\n// OUTPUT\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2079,7 +2081,7 @@
         "wires": [
             [
                 "712cd7b2343eead6",
-                "dff0ccb86295d04e"
+                "7f303dfb944dfc04"
             ]
         ]
     },
@@ -2138,10 +2140,57 @@
         "repair": false,
         "outputs": 1,
         "x": 150,
-        "y": 760,
+        "y": 800,
         "wires": [
             [
                 "26560f17ffdcdf34"
+            ]
+        ]
+    },
+    {
+        "id": "7f303dfb944dfc04",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "a5b8a03b1e2f2371",
+        "name": "Strategy evaluation",
+        "func": "// add execution marker\nlet execution_end = Date.now();\nRED.util.setMessageProperty(msg, \"strategy.execution_end\", execution_end);\n\n// retrieve execution markers\nlet execution_start = RED.util.getMessageProperty(msg,\"strategy.execution_start\");\n\n// report execution time\nif (execution_start !== undefined && execution_end !== undefined) {\n    // exec time\n    let execution_time = (execution_end - execution_start) / 1000; // seconds\n    // report\n    if (execution_time <= 0) node.status({ fill: \"red\", shape: \"dot\", text: `negative or zero timing` });\n    if (execution_time > 0) node.status({ fill: \"green\", shape: \"dot\", text: `${execution_time} sec`});\n    if (execution_time >= 0.7) node.status({ fill: \"yellow\", shape: \"dot\", text: `${execution_time} sec` });\n    if (execution_time >= 1) node.status({ fill: \"red\", shape: \"dot\", text: `${execution_time} sec` });\n\n} else {\n    node.status({fill:\"grey\",shape:\"dot\",text:\"timing error\"});\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 700,
+        "wires": [
+            [
+                "dff0ccb86295d04e"
+            ]
+        ]
+    },
+    {
+        "id": "981ff4f5a93db632",
+        "type": "delay",
+        "z": "a099d47fc07b3cee",
+        "g": "fc3b0636793881be",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "0.8",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 60,
+        "wires": [
+            [
+                "057b9222c17d4046"
             ]
         ]
     },
