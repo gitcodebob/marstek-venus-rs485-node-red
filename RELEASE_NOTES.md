@@ -1,6 +1,21 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer).
 
+## 1.1.0
+- **Feature: Refactor to 'msg' based flows to prevent race conditions**
+  - Eliminated race conditions when using flow-level variables by moving to message-based architecture
+  - Enhanced start flow with strategy execution time monitoring and rate limiter functionality
+  - Improved reliability and performance across all battery control strategies
+  - Better flow state management and reduced potential for timing conflicts
+
+- **Files Changed:**
+  - `node-red/01 start-flow.json` - Added execution time monitoring and rate limiter
+  - `node-red/02 strategy-custom.json` - Refactored to use msg object instead of flow variables
+  - `node-red/02 strategy-full-stop.json` - Refactored to use msg object instead of flow variables
+  - `node-red/02 strategy-self-consumption.json` - Refactored to use msg object instead of flow variables
+  - `node-red/02 strategy-time-of-use.json` - Refactored to use msg object instead of flow variables
+  - `node-red/02 strategy-trading.json` - Refactored to use msg object instead of flow variables
+
 ## 1.0.1
 - **Bugfix: Timeout messages of self-consumption strategy in start flow**
   - Fixed timeout message handling in the initialization flow for self-consumption strategy
