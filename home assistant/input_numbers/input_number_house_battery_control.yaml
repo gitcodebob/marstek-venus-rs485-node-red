@@ -1,3 +1,14 @@
+house_target_grid_consumption_in_w:
+  # Target grid consumption control
+  name: "House Target Grid Consumption"
+  min: -15000 
+  max: 15000 
+  step: 1
+  unit_of_measurement: "W"
+  mode: box
+  initial: -10
+  icon: mdi:chart-timeline-variant # line chart
+
 house_battery_control_error_signal:
   # PID control error
   name: "House Battery Control Error Signal"
