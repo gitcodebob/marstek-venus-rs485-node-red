@@ -61,6 +61,21 @@ views:
                 name: 'Hysteresis '
                 secondary_info: none
               - entity: input_number.house_target_grid_consumption_in_w
+          - type: entities
+            title: Marstek grid charge or wait strategy
+            show_header_toggle: false
+            entities:
+              - entity: input_datetime.strategy_accu_grid_charge_or_wait_start_at
+                name: Start grid charging / wait at
+              - entity: input_datetime.strategy_accu_grid_charge_or_wait_stop_at
+                name: Stop grid charging / wait at
+              - entity: input_boolean.strategy_accu_grid_charge_or_wait_charge_enabled
+                name: Charge during strategy
+              - entity: input_number.strategy_accu_grid_charge_or_wait_total_target_capacity
+                name: Grid charging target capacity
+              - entity: input_select.strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished
+                name: Switch to strategy when finished
+
       - cards:
           - type: heading
             heading: Histrory
