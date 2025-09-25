@@ -6,7 +6,6 @@ house_target_grid_consumption_in_w:
   step: 1
   unit_of_measurement: "W"
   mode: box
-  initial: -10
   icon: mdi:chart-timeline-variant # line chart
 
 house_battery_control_error_signal:
