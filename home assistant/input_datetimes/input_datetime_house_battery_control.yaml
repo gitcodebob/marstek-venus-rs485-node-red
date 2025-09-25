@@ -1,0 +1,11 @@
+strategy_accu_grid_charge_or_wait_start_at:
+  name: Strategy grid charge or wait, Start at
+  has_date: false
+  has_time: true
+  icon: mdi:clock-end
+
+strategy_accu_grid_charge_or_wait_stop_at:
+  name: Strategy grid charge or wait, Stop at
+  has_date: false
+  has_time: true
+  icon: mdi:clock-end

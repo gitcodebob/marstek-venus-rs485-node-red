@@ -1,0 +1,764 @@
+[
+    {
+        "id": "d1a8be3132db3866",
+        "type": "comment",
+        "z": "4f7eee7707ce0c53",
+        "name": "Home Battery Strategy",
+        "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
+        "x": 120,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "6e5fe7b3393c94d3",
+        "type": "api-current-state",
+        "z": "4f7eee7707ce0c53",
+        "name": "strategy_accu_grid_charge_or_wait_total_target_capacity",
+        "server": "b9d10367867e38e6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.strategy_accu_grid_charge_or_wait_total_target_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "strategy_accu_grid_charge_or_wait_total_target_capacity",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 470,
+        "y": 100,
+        "wires": [
+            [
+                "10ba9579ca1fcf94"
+            ]
+        ]
+    },
+    {
+        "id": "10ba9579ca1fcf94",
+        "type": "api-current-state",
+        "z": "4f7eee7707ce0c53",
+        "name": "strategy_accu_grid_charge_or_wait_start_at",
+        "server": "b9d10367867e38e6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.strategy_accu_grid_charge_or_wait_start_at",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "strategy_accu_grid_charge_or_wait_start_at",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 430,
+        "y": 160,
+        "wires": [
+            [
+                "6b6a9f31dd88f760"
+            ]
+        ]
+    },
+    {
+        "id": "6b6a9f31dd88f760",
+        "type": "api-current-state",
+        "z": "4f7eee7707ce0c53",
+        "name": "strategy_accu_grid_charge_or_wait_stop_at",
+        "server": "b9d10367867e38e6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.strategy_accu_grid_charge_or_wait_stop_at",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "strategy_accu_grid_charge_or_wait_stop_at",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 430,
+        "y": 220,
+        "wires": [
+            [
+                "d19dc19b4622b088"
+            ]
+        ]
+    },
+    {
+        "id": "d19dc19b4622b088",
+        "type": "api-current-state",
+        "z": "4f7eee7707ce0c53",
+        "name": "strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished",
+        "server": "b9d10367867e38e6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 510,
+        "y": 280,
+        "wires": [
+            [
+                "25a61022b0d6b3f7"
+            ]
+        ]
+    },
+    {
+        "id": "166327eae232a59c",
+        "type": "function",
+        "z": "4f7eee7707ce0c53",
+        "name": "Sum current  battery capacity",
+        "func": "\n// batteries | calculate total and max. power delivered by batteries\n//let batteries_total_power = 0;\n//let batteries = msg.batteries;\n\n//batteries.forEach(battery => {\n//    batteries_total_power += Number(battery.power);\n//});\n\nlet total_current_capacity = \n    Number(flow.get('marstek_m1_battery_remaining_capacity')) +\n    Number(flow.get('marstek_m2_battery_remaining_capacity')) +\n    Number(flow.get('marstek_m3_battery_remaining_capacity'));\n\nmsg.payload = total_current_capacity;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 700,
+        "wires": [
+            [
+                "d9ca2aebfc80e1ad"
+            ]
+        ],
+        "inputLabels": [
+            "Mapping (from Home Battery IO)"
+        ]
+    },
+    {
+        "id": "b04229c8db375147",
+        "type": "api-current-state",
+        "z": "4f7eee7707ce0c53",
+        "name": "marstek_m1_battery_remaining_capacity",
+        "server": "b9d10367867e38e6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m1_battery_remaining_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m1_battery_remaining_capacity",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1020,
+        "y": 160,
+        "wires": [
+            [
+                "8d62af7ffef0d77c"
+            ]
+        ]
+    },
+    {
+        "id": "8d62af7ffef0d77c",
+        "type": "api-current-state",
+        "z": "4f7eee7707ce0c53",
+        "name": "marstek_m2_battery_remaining_capacity",
+        "server": "b9d10367867e38e6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m2_battery_remaining_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m2_battery_remaining_capacity",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1020,
+        "y": 220,
+        "wires": [
+            [
+                "701f2075a64814fb"
+            ]
+        ]
+    },
+    {
+        "id": "701f2075a64814fb",
+        "type": "api-current-state",
+        "z": "4f7eee7707ce0c53",
+        "name": "marstek_m3_battery_remaining_capacity",
+        "server": "b9d10367867e38e6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m3_battery_remaining_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_m3_battery_remaining_capacity",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1020,
+        "y": 280,
+        "wires": [
+            [
+                "f6be2f1b4c3d7a90"
+            ]
+        ]
+    },
+    {
+        "id": "d9ca2aebfc80e1ad",
+        "type": "switch",
+        "z": "4f7eee7707ce0c53",
+        "name": "Check target capacity ",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "strategy_accu_grid_charge_or_wait_total_target_capacity",
+                "vt": "flow"
+            },
+            {
+                "t": "lt",
+                "v": "strategy_accu_grid_charge_or_wait_total_target_capacity",
+                "vt": "flow"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 460,
+        "y": 700,
+        "wires": [
+            [
+                "e80d61f75fc340ae"
+            ],
+            [
+                "b6afd75c0d92e3ad"
+            ]
+        ]
+    },
+    {
+        "id": "b6afd75c0d92e3ad",
+        "type": "function",
+        "z": "4f7eee7707ce0c53",
+        "name": "Build battery charge array",
+        "func": "\nlet batteries = msg.batteries;\nlet solution_array = [];\n\nmsg.batteries.forEach(battery => {\n    let mode;\n    let power;\n\n    if (battery.soc < 100) {\n        mode = \"charge\";\n        if (battery.soc >= 98) {\n            power = 500;\n        } else if (battery.soc >= 85) {\n            power = 1000;\n        } else {\n            power = 2500;\n        }\n\n    } else {\n        mode = \"stop\";\n        power = 0;\n    }\n\n    solution_array.push({\n        id: battery.id,\n        mode: mode,\n        power: power\n    });\n});\n\nmsg.solutions = solution_array;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 700,
+        "wires": [
+            [
+                "0738d093da40cebc",
+                "35d2a3e6627e603c"
+            ]
+        ],
+        "inputLabels": [
+            "Mapping (from Home Battery IO)"
+        ]
+    },
+    {
+        "id": "35d2a3e6627e603c",
+        "type": "debug",
+        "z": "4f7eee7707ce0c53",
+        "name": "Output solution array",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "e80d61f75fc340ae",
+        "type": "api-call-service",
+        "z": "4f7eee7707ce0c53",
+        "name": "Set strategy when done",
+        "server": "b9d10367867e38e6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_select.select_option",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_select.house_battery_strategy"
+        ],
+        "labelId": [],
+        "data": "{\"option\":\"{{flow.strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished}}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": false,
+        "domain": "input_select",
+        "service": "select_option",
+        "x": 850,
+        "y": 480,
+        "wires": [
+            [
+                "0738d093da40cebc"
+            ]
+        ]
+    },
+    {
+        "id": "25a61022b0d6b3f7",
+        "type": "api-current-state",
+        "z": "4f7eee7707ce0c53",
+        "name": "strategy_accu_grid_charge_or_wait_charge_enabled",
+        "server": "b9d10367867e38e6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.strategy_accu_grid_charge_or_wait_charge_enabled",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "strategy_accu_grid_charge_or_wait_charge_enabled",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1060,
+        "y": 100,
+        "wires": [
+            [
+                "b04229c8db375147"
+            ]
+        ]
+    },
+    {
+        "id": "051bdff425838b13",
+        "type": "switch",
+        "z": "4f7eee7707ce0c53",
+        "name": "Carge enabled?",
+        "property": "strategy_accu_grid_charge_or_wait_charge_enabled",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 160,
+        "y": 580,
+        "wires": [
+            [
+                "0738d093da40cebc"
+            ],
+            [
+                "166327eae232a59c"
+            ]
+        ]
+    },
+    {
+        "id": "93fe8c3245b5ccc9",
+        "type": "debug",
+        "z": "4f7eee7707ce0c53",
+        "name": "Output",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "8822294ee37b7edd",
+        "type": "group",
+        "z": "4f7eee7707ce0c53",
+        "name": "Configuration",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "c39a86f8add30621",
+            "659f0f10b15bf87e"
+        ],
+        "x": 24,
+        "y": 79,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "c39a86f8add30621",
+        "type": "link in",
+        "z": "4f7eee7707ce0c53",
+        "g": "8822294ee37b7edd",
+        "name": "Grid-Charge-Or-Wait",
+        "links": [],
+        "x": 175,
+        "y": 180,
+        "wires": [
+            [
+                "6e5fe7b3393c94d3"
+            ]
+        ]
+    },
+    {
+        "id": "659f0f10b15bf87e",
+        "type": "comment",
+        "z": "4f7eee7707ce0c53",
+        "g": "8822294ee37b7edd",
+        "name": "Start (readme)",
+        "info": "# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the <select> option configured in your\nselect_input.house_battery_strategy\n\nconfigure select options in:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select 'AcmE example'\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
+        "x": 120,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c3ec9387d0acc1ae",
+        "type": "group",
+        "z": "4f7eee7707ce0c53",
+        "name": "Battery solutions",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "0738d093da40cebc",
+            "41daa2cbc301af71"
+        ],
+        "x": 1184,
+        "y": 479,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "0738d093da40cebc",
+        "type": "link out",
+        "z": "4f7eee7707ce0c53",
+        "g": "c3ec9387d0acc1ae",
+        "name": "Return",
+        "mode": "return",
+        "links": [],
+        "x": 1225,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "41daa2cbc301af71",
+        "type": "comment",
+        "z": "4f7eee7707ce0c53",
+        "g": "c3ec9387d0acc1ae",
+        "name": "End (readme)",
+        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
+        "x": 1280,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "1fd52ed3e1f3258f",
+        "type": "group",
+        "z": "4f7eee7707ce0c53",
+        "name": "Configuration",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "f6be2f1b4c3d7a90",
+            "691cfc462a5b7791"
+        ],
+        "x": 54,
+        "y": 359,
+        "w": 232,
+        "h": 149.5
+    },
+    {
+        "id": "f6be2f1b4c3d7a90",
+        "type": "function",
+        "z": "4f7eee7707ce0c53",
+        "g": "1fd52ed3e1f3258f",
+        "name": "Check time window",
+        "func": "// Verwacht tijden als \"HH:MM\" of \"HH:MM:SS\" in flow context\nconst startRaw = flow.get('strategy_accu_grid_charge_or_wait_start_at');\nconst stopRaw = flow.get('strategy_accu_grid_charge_or_wait_stop_at');\n\nif (!startRaw || !stopRaw) {\n  node.status({ fill: \"yellow\", shape: \"ring\", text: \"start/stop niet gezet\" });\n  return [null, null, null];\n}\n\nfunction parseHM(raw) {\n  const [h, m, s] = raw.trim().split(':').map(Number);\n  if (Number.isInteger(h) && Number.isInteger(m)) return { h, m, s: s || 0 };\n  throw new Error(\"Onbekend tijdformaat: \" + raw);\n}\nfunction todSeconds(d) { return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds(); }\n\nconst now = new Date(); // lokale tijd\nconst { h: sh, m: sm, s: ss } = parseHM(startRaw);\nconst { h: eh, m: em, s: es } = parseHM(stopRaw);\n\nconst nowTOD = todSeconds(now);\nconst startTOD = sh * 3600 + sm * 60 + ss;\nconst stopTOD = eh * 3600 + em * 60 + es;\n\nlet start, stop, state;\n\n// CASE A: zelfde-dag venster (bv. 14:00 → 18:00)\nif (stopTOD > startTOD) {\n  start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  stop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD < startTOD) state = \"planned\"; // nog niet begonnen\n  else if (nowTOD < stopTOD) state = \"inside\";  // actief\n  else state = \"after\";   // voorbij\n\n  // CASE B: overnight venster (bv. 22:00 → 09:00)\n} else {\n  const eveningStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  const morningStop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD >= startTOD) {\n    // Avonddeel\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"inside\";\n  } else if (nowTOD < stopTOD) {\n    // Ochtenddeel\n    start = new Date(eveningStart); start.setDate(start.getDate() - 1);\n    stop = morningStop;\n    state = \"inside\";\n  } else {\n    // Overdag tussen stop en start\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"planned\";\n  }\n}\n\n// Vul message\nmsg.state = state; // \"planned\" | \"inside\" | \"after\"\nmsg.window = {\n  now: now.toISOString(),\n  start: start.toISOString(),\n  stop: stop.toISOString(),\n  start_raw: startRaw,\n  stop_raw: stopRaw\n};\nmsg.payload = { state, window: msg.window };\n\n// Node status kleuren\nif (state === \"planned\") {\n  node.status({ fill: \"blue\", shape: \"dot\", text: `PLANNED ${startRaw}→${stopRaw}` });\n  return [msg, null, null];\n}\nif (state === \"inside\") {\n  node.status({ fill: \"green\", shape: \"dot\", text: `INSIDE ${startRaw}→${stopRaw}` });\n  return [null, msg, null];\n}\n// Anders = after\nnode.status({ fill: \"grey\", shape: \"dot\", text: `AFTER ${startRaw}→${stopRaw}` });\nreturn [null, null, msg];",
+        "outputs": 3,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 460,
+        "wires": [
+            [
+                "0738d093da40cebc",
+                "93fe8c3245b5ccc9"
+            ],
+            [
+                "051bdff425838b13",
+                "93fe8c3245b5ccc9"
+            ],
+            [
+                "e80d61f75fc340ae",
+                "93fe8c3245b5ccc9"
+            ]
+        ]
+    },
+    {
+        "id": "691cfc462a5b7791",
+        "type": "comment",
+        "z": "4f7eee7707ce0c53",
+        "g": "1fd52ed3e1f3258f",
+        "name": "(readme)",
+        "info": "This function evaluates whether the current \ntime falls before, inside, or after a \nconfigured time window (supports same-day and \novernight windows).\n\nOutputs\n\t1.\tPlanned – \n      Current time is before the start of the \n      window (the window is scheduled but not \n      active yet). So end the flow and do noting. \n\t2.\tInside – \n      Current time is within the window \n      (strategy should be active). So check for \n      charging is enabled. \n\t3.\tAfter – \n      Current time is past the window (the \n      window has finished).\n      So, intension of the flow is finished and \n      switch to new strategy\n\n",
+        "x": 140,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "b9d10367867e38e6",
+        "type": "server",
+        "name": "Home Assistant(container)",
+        "version": 5,
+        "addon": false,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": true,
+        "heartbeatInterval": 30,
+        "areaSelector": "friendlyName",
+        "deviceSelector": "friendlyName",
+        "entitySelector": "friendlyName",
+        "statusSeparator": ": ",
+        "statusYear": "hidden",
+        "statusMonth": "short",
+        "statusDay": "numeric",
+        "statusHourCycle": "default",
+        "statusTimeFormat": "h:m",
+        "enableGlobalContextStore": false
+    },
+    {
+        "id": "4354e360e092a62c",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.77.2"
+        }
+    }
+]

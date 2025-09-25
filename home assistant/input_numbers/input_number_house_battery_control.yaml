@@ -173,3 +173,11 @@ house_battery_control_debug:
   mode: box
   initial: 0
   icon: mdi:chart-timeline-variant-shimmer # shimmering line chart
+
+strategy_accu_grid_charge_or_wait_total_target_capacity:
+  name: House Battery Target (kWh) in grid charge from the grid
+  min: 1.8    # +/- 11%
+  max: 15.36  # pas dit aan naar totale capaciteit van je 3 accu's
+  step: 0.1
+  unit_of_measurement: "kWh"
+  icon: mdi:battery-charging
