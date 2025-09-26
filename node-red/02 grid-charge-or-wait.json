@@ -378,19 +378,19 @@
         "type": "function",
         "z": "4f7eee7707ce0c53",
         "name": "Build battery charge array",
-        "func": "\nlet batteries = msg.batteries;\nlet solution_array = [];\n\nmsg.batteries.forEach(battery => {\n    let mode;\n    let power;\n\n    if (battery.soc < 100) {\n        mode = \"charge\";\n        if (battery.soc >= 98) {\n            power = 500;\n        } else if (battery.soc >= 85) {\n            power = 1000;\n        } else {\n            power = 2500;\n        }\n\n    } else {\n        mode = \"stop\";\n        power = 0;\n    }\n\n    solution_array.push({\n        id: battery.id,\n        mode: mode,\n        power: power\n    });\n});\n\nmsg.solutions = solution_array;\nreturn msg;",
+        "func": "\nlet batteries = msg.batteries;\nlet solution_array = [];\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\n\nfunction chargingLimiter(soc, max_power, hasChargingLimiter) {\n    if (!hasChargingLimiter) return max_power;\n    if (soc == 100) return Math.min(0, max_power);\n    if (soc >= 98) return Math.min(300, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 85) return Math.min(1500, max_power);\n    return max_power;\n}\n\nmsg.batteries.forEach(battery => {\n    solution_array.push({\n        id: battery.id,\n        mode: \"charge\",\n        power: chargingLimiter(battery.soc, battery.charging_max, true)\n    });\n});\n\nmsg.solutions = solution_array;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 710,
+        "x": 830,
         "y": 700,
         "wires": [
             [
-                "0738d093da40cebc",
-                "35d2a3e6627e603c"
+                "35d2a3e6627e603c",
+                "0738d093da40cebc"
             ]
         ],
         "inputLabels": [
@@ -402,7 +402,7 @@
         "type": "debug",
         "z": "4f7eee7707ce0c53",
         "name": "Output solution array",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -410,7 +410,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 960,
+        "x": 1120,
         "y": 720,
         "wires": []
     },
@@ -612,7 +612,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "7bb264bd1dbe3c65",
+        "id": "b44d2b6283f8d12c",
         "type": "global-config",
         "env": [],
         "modules": {
