@@ -36,27 +36,36 @@
             "0738d093da40cebc",
             "41daa2cbc301af71"
         ],
-        "x": 1184,
-        "y": 479,
+        "x": 1204,
+        "y": 439,
         "w": 192,
         "h": 142
     },
     {
-        "id": "1fd52ed3e1f3258f",
+        "id": "35c04704b6078d07",
         "type": "group",
         "z": "4f7eee7707ce0c53",
-        "name": "Configuration",
+        "name": "Strategy Scheduler ",
         "style": {
             "label": true
         },
         "nodes": [
-            "f6be2f1b4c3d7a90",
-            "691cfc462a5b7791"
+            "4b55233012713f97",
+            "511f633c936a4816",
+            "cb5b20c0a28be8e4",
+            "0e6d4d5154e7cb24",
+            "63a9cc048c5e4099",
+            "1f21e404d4132dc4",
+            "d24429f61cfddf9d",
+            "a8145a8ebe88b68f",
+            "6c1e2b90b57a57bf",
+            "0d6eb5744e975be5",
+            "3d357ff2c532de84"
         ],
-        "x": 54,
-        "y": 359,
-        "w": 232,
-        "h": 149.5
+        "x": 254,
+        "y": 699,
+        "w": 1152,
+        "h": 302
     },
     {
         "id": "d1a8be3132db3866",
@@ -102,8 +111,8 @@
         "name": "Return",
         "mode": "return",
         "links": [],
-        "x": 1225,
-        "y": 580,
+        "x": 1245,
+        "y": 540,
         "wires": []
     },
     {
@@ -113,8 +122,8 @@
         "g": "c3ec9387d0acc1ae",
         "name": "End (readme)",
         "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
-        "x": 1280,
-        "y": 520,
+        "x": 1300,
+        "y": 480,
         "wires": []
     },
     {
@@ -329,8 +338,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 200,
-        "y": 700,
+        "x": 380,
+        "y": 520,
         "wires": [
             [
                 "d9ca2aebfc80e1ad"
@@ -362,8 +371,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 460,
-        "y": 700,
+        "x": 640,
+        "y": 520,
         "wires": [
             [
                 "e80d61f75fc340ae"
@@ -385,8 +394,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 830,
-        "y": 700,
+        "x": 890,
+        "y": 540,
         "wires": [
             [
                 "35d2a3e6627e603c",
@@ -410,8 +419,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1120,
-        "y": 720,
+        "x": 1080,
+        "y": 620,
         "wires": []
     },
     {
@@ -439,8 +448,8 @@
         "blockInputOverrides": false,
         "domain": "input_select",
         "service": "select_option",
-        "x": 850,
-        "y": 480,
+        "x": 1030,
+        "y": 340,
         "wires": [
             [
                 "0738d093da40cebc"
@@ -519,8 +528,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 160,
-        "y": 580,
+        "x": 340,
+        "y": 440,
         "wires": [
             [
                 "0738d093da40cebc"
@@ -531,10 +540,35 @@
         ]
     },
     {
-        "id": "93fe8c3245b5ccc9",
+        "id": "cb5b20c0a28be8e4",
+        "type": "function",
+        "z": "4f7eee7707ce0c53",
+        "g": "35c04704b6078d07",
+        "name": "After start time?",
+        "func": "// Verwacht tijd als \"HH:MM\" of \"HH:MM:SS\" in flow context\nconst startRaw = flow.get('strategy_accu_grid_charge_or_wait_start_at');\nif (!startRaw) {\n  node.status({ fill: \"yellow\", shape: \"ring\", text: \"start niet gezet\" });\n  return [null, null];\n}\n\nfunction parseHM(raw) {\n  const [h, m, s] = raw.trim().split(':').map(Number);\n  return h * 3600 + m * 60 + (s || 0);\n}\n\nfunction todSeconds(d) {\n  return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();\n}\n\nconst nowTOD = todSeconds(new Date());\nconst startTOD = parseHM(startRaw);\n\nif (nowTOD < startTOD) {\n  node.status({ fill: \"blue\", shape: \"dot\", text: `BEFORE ${startRaw}` });\n  return [msg, null];   // Output 1 = before\n} else {\n  node.status({ fill: \"grey\", shape: \"dot\", text: `AFTER ${startRaw}` });\n  return [null, msg];   // Output 2 = after\n}",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 940,
+        "wires": [
+            [
+                "0e6d4d5154e7cb24"
+            ],
+            [
+                "3d357ff2c532de84"
+            ]
+        ]
+    },
+    {
+        "id": "0e6d4d5154e7cb24",
         "type": "debug",
         "z": "4f7eee7707ce0c53",
-        "name": "Output",
+        "g": "35c04704b6078d07",
+        "name": "Before",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -543,50 +577,380 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 430,
-        "y": 520,
+        "x": 1250,
+        "y": 920,
         "wires": []
     },
     {
-        "id": "691cfc462a5b7791",
+        "id": "511f633c936a4816",
+        "type": "inject",
+        "z": "4f7eee7707ce0c53",
+        "g": "35c04704b6078d07",
+        "name": "Every 60s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "on",
+        "payload": "",
+        "payloadType": "str",
+        "x": 370,
+        "y": 800,
+        "wires": [
+            [
+                "d24429f61cfddf9d"
+            ]
+        ]
+    },
+    {
+        "id": "63a9cc048c5e4099",
+        "type": "api-current-state",
+        "z": "4f7eee7707ce0c53",
+        "g": "35c04704b6078d07",
+        "name": "strategy_accu_grid_charge_or_wait_start_at",
+        "server": "b9d10367867e38e6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.strategy_accu_grid_charge_or_wait_start_at",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "strategy_accu_grid_charge_or_wait_start_at",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1030,
+        "y": 800,
+        "wires": [
+            [
+                "1f21e404d4132dc4"
+            ]
+        ]
+    },
+    {
+        "id": "1f21e404d4132dc4",
+        "type": "switch",
+        "z": "4f7eee7707ce0c53",
+        "g": "35c04704b6078d07",
+        "name": "Grid charge or wait strategy planned?",
+        "property": "strategy_accu_grid_charge_or_wait_planned",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 880,
+        "wires": [
+            [
+                "6c1e2b90b57a57bf"
+            ],
+            [
+                "cb5b20c0a28be8e4"
+            ]
+        ]
+    },
+    {
+        "id": "d24429f61cfddf9d",
+        "type": "api-current-state",
+        "z": "4f7eee7707ce0c53",
+        "g": "35c04704b6078d07",
+        "name": "strategy_accu_grid_charge_or_wait_planned",
+        "server": "b9d10367867e38e6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.strategy_accu_grid_charge_or_wait_planned",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "strategy_accu_grid_charge_or_wait_planned",
+                "propertyType": "flow",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 650,
+        "y": 800,
+        "wires": [
+            [
+                "63a9cc048c5e4099"
+            ]
+        ]
+    },
+    {
+        "id": "a8145a8ebe88b68f",
+        "type": "debug",
+        "z": "4f7eee7707ce0c53",
+        "g": "35c04704b6078d07",
+        "name": "After",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "6c1e2b90b57a57bf",
+        "type": "debug",
+        "z": "4f7eee7707ce0c53",
+        "g": "35c04704b6078d07",
+        "name": "Not plannend",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1280,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "0d6eb5744e975be5",
+        "type": "api-call-service",
+        "z": "4f7eee7707ce0c53",
+        "g": "35c04704b6078d07",
+        "name": "Enable Grid-charge strategy",
+        "server": "b9d10367867e38e6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_select.select_option",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_select.house_battery_strategy"
+        ],
+        "labelId": [],
+        "data": "{\"option\":\"Grid-Charge-Or-Wait\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": false,
+        "domain": "input_select",
+        "service": "select_option",
+        "x": 1000,
+        "y": 960,
+        "wires": [
+            [
+                "a8145a8ebe88b68f"
+            ]
+        ]
+    },
+    {
+        "id": "3d357ff2c532de84",
+        "type": "api-call-service",
+        "z": "4f7eee7707ce0c53",
+        "g": "35c04704b6078d07",
+        "name": "Turn off planned",
+        "server": "b9d10367867e38e6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_boolean.turn_off",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_boolean.strategy_accu_grid_charge_or_wait_planned"
+        ],
+        "labelId": [],
+        "data": "",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": false,
+        "domain": "input_boolean",
+        "service": "turn_off",
+        "x": 780,
+        "y": 960,
+        "wires": [
+            [
+                "0d6eb5744e975be5"
+            ]
+        ]
+    },
+    {
+        "id": "4b55233012713f97",
         "type": "comment",
         "z": "4f7eee7707ce0c53",
-        "g": "1fd52ed3e1f3258f",
+        "g": "35c04704b6078d07",
         "name": "(readme)",
-        "info": "This function evaluates whether the current \ntime falls before, inside, or after a \nconfigured time window (supports same-day and \novernight windows).\n\nOutputs\n\t1.\tPlanned – \n      Current time is before the start of the \n      window (the window is scheduled but not \n      active yet). So end the flow and do noting. \n\t2.\tInside – \n      Current time is within the window \n      (strategy should be active). So check for \n      charging is enabled. \n\t3.\tAfter – \n      Current time is past the window (the \n      window has finished).\n      So, intension of the flow is finished and \n      switch to new strategy\n\n",
-        "x": 140,
-        "y": 400,
+        "info": "New feature: Planned start for Grid-charge-or-wait strategy\n\nYou can now schedule a planned start of the Grid-charge-or-wait strategy using the new Home Assistant boolean:\n\t•\tinput_boolean.strategy_accu_grid_charge_or_wait_planned\n\nHow it works:\n\t•\tEvery minute Node-RED checks if this boolean is ON and if the current time has passed the configured start time.\n\t•\tIf both conditions are true, Node-RED automatically switches the active strategy to Grid-charge-or-wait.\n\t•\tAfter the switch, the boolean is set back to OFF to prevent repeated toggling.\n\nThis makes it possible to prepare a delayed start for grid charging (for example when low tariffs begin later), without manually switching the strategy at the exact time.",
+        "x": 400,
+        "y": 740,
         "wires": []
     },
     {
         "id": "f6be2f1b4c3d7a90",
         "type": "function",
         "z": "4f7eee7707ce0c53",
-        "g": "1fd52ed3e1f3258f",
         "name": "Check time window",
-        "func": "// Verwacht tijden als \"HH:MM\" of \"HH:MM:SS\" in flow context\nconst startRaw = flow.get('strategy_accu_grid_charge_or_wait_start_at');\nconst stopRaw = flow.get('strategy_accu_grid_charge_or_wait_stop_at');\n\nif (!startRaw || !stopRaw) {\n  node.status({ fill: \"yellow\", shape: \"ring\", text: \"start/stop niet gezet\" });\n  return [null, null, null];\n}\n\nfunction parseHM(raw) {\n  const [h, m, s] = raw.trim().split(':').map(Number);\n  if (Number.isInteger(h) && Number.isInteger(m)) return { h, m, s: s || 0 };\n  throw new Error(\"Onbekend tijdformaat: \" + raw);\n}\nfunction todSeconds(d) { return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds(); }\n\nconst now = new Date(); // lokale tijd\nconst { h: sh, m: sm, s: ss } = parseHM(startRaw);\nconst { h: eh, m: em, s: es } = parseHM(stopRaw);\n\nconst nowTOD = todSeconds(now);\nconst startTOD = sh * 3600 + sm * 60 + ss;\nconst stopTOD = eh * 3600 + em * 60 + es;\n\nlet start, stop, state;\n\n// CASE A: zelfde-dag venster (bv. 14:00 → 18:00)\nif (stopTOD > startTOD) {\n  start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  stop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD < startTOD) state = \"planned\"; // nog niet begonnen\n  else if (nowTOD < stopTOD) state = \"inside\";  // actief\n  else state = \"after\";   // voorbij\n\n  // CASE B: overnight venster (bv. 22:00 → 09:00)\n} else {\n  const eveningStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  const morningStop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD >= startTOD) {\n    // Avonddeel\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"inside\";\n  } else if (nowTOD < stopTOD) {\n    // Ochtenddeel\n    start = new Date(eveningStart); start.setDate(start.getDate() - 1);\n    stop = morningStop;\n    state = \"inside\";\n  } else {\n    // Overdag tussen stop en start\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"planned\";\n  }\n}\n\n// Vul message\nmsg.state = state; // \"planned\" | \"inside\" | \"after\"\nmsg.window = {\n  now: now.toISOString(),\n  start: start.toISOString(),\n  stop: stop.toISOString(),\n  start_raw: startRaw,\n  stop_raw: stopRaw\n};\nmsg.payload = { state, window: msg.window };\n\n// Node status kleuren\nif (state === \"planned\") {\n  node.status({ fill: \"blue\", shape: \"dot\", text: `PLANNED ${startRaw}→${stopRaw}` });\n  return [msg, null, null];\n}\nif (state === \"inside\") {\n  node.status({ fill: \"green\", shape: \"dot\", text: `INSIDE ${startRaw}→${stopRaw}` });\n  return [null, msg, null];\n}\n// Anders = after\nnode.status({ fill: \"grey\", shape: \"dot\", text: `AFTER ${startRaw}→${stopRaw}` });\nreturn [null, null, msg];",
+        "func": "// Verwacht tijden als \"HH:MM\" of \"HH:MM:SS\" in flow context\nconst startRaw = flow.get('strategy_accu_grid_charge_or_wait_start_at');\nconst stopRaw = flow.get('strategy_accu_grid_charge_or_wait_stop_at');\n\nif (!startRaw || !stopRaw) {\n  node.status({ fill: \"yellow\", shape: \"ring\", text: \"start/stop niet gezet\" });\n  return [null, null, null];\n}\n\nfunction parseHM(raw) {\n  const [h, m, s] = raw.trim().split(':').map(Number);\n  if (Number.isInteger(h) && Number.isInteger(m)) return { h, m, s: s || 0 };\n  throw new Error(\"Onbekend tijdformaat: \" + raw);\n}\nfunction todSeconds(d) { return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds(); }\n\nconst now = new Date(); // lokale tijd\nconst { h: sh, m: sm, s: ss } = parseHM(startRaw);\nconst { h: eh, m: em, s: es } = parseHM(stopRaw);\n\nconst nowTOD = todSeconds(now);\nconst startTOD = sh * 3600 + sm * 60 + ss;\nconst stopTOD = eh * 3600 + em * 60 + es;\n\nlet start, stop, state;\n\n// CASE A: zelfde-dag venster (bv. 14:00 → 18:00)\nif (stopTOD > startTOD) {\n  start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  stop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD < startTOD) state = \"planned\"; // nog niet begonnen\n  else if (nowTOD < stopTOD) state = \"inside\";  // actief\n  else state = \"after\";   // voorbij\n\n  // CASE B: overnight venster (bv. 22:00 → 09:00)\n} else {\n  const eveningStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  const morningStop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD >= startTOD) {\n    // Avonddeel\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"inside\";\n  } else if (nowTOD < stopTOD) {\n    // Ochtenddeel\n    start = new Date(eveningStart); start.setDate(start.getDate() - 1);\n    stop = morningStop;\n    state = \"inside\";\n  } else {\n    // Overdag tussen stop en start\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"planned\";\n  }\n}\n\n// Vul message\nmsg.state = state; // \"planned\" | \"inside\" | \"after\"\nmsg.window = {\n  now: now.toISOString(),\n  start: start.toISOString(),\n  stop: stop.toISOString(),\n  start_raw: startRaw,\n  stop_raw: stopRaw\n};\nmsg.payload = { state, window: msg.window };\n\n// Node status kleuren\n\nif (state === \"after\") {\n  node.status({ fill: \"grey\", shape: \"dot\", text: `AFTER ${startRaw}→${stopRaw}` });\n  return [msg, null, null];\n}\nif (state === \"planned\") {\n  node.status({ fill: \"blue\", shape: \"dot\", text: `PLANNED ${startRaw}→${stopRaw}` });\n  return [null, msg, null];\n}\nif (state === \"inside\") {\n  node.status({ fill: \"green\", shape: \"dot\", text: `INSIDE ${startRaw}→${stopRaw}` });\n  return [null, null, msg];\n}",
         "outputs": 3,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 170,
-        "y": 460,
+        "x": 350,
+        "y": 360,
         "wires": [
             [
+                "e80d61f75fc340ae",
+                "7924aba65025dcfd"
+            ],
+            [
                 "0738d093da40cebc",
-                "93fe8c3245b5ccc9"
+                "ece4aea5ea178655"
             ],
             [
                 "051bdff425838b13",
-                "93fe8c3245b5ccc9"
-            ],
-            [
-                "e80d61f75fc340ae",
-                "93fe8c3245b5ccc9"
+                "250b14f7d49956c8"
             ]
         ]
+    },
+    {
+        "id": "691cfc462a5b7791",
+        "type": "comment",
+        "z": "4f7eee7707ce0c53",
+        "name": "(readme)",
+        "info": "This function evaluates whether the current \ntime falls before, inside, or after a \nconfigured time window (supports same-day and \novernight windows).\n\nOutputs\n\t1.\tPlanned – \n      Current time is before the start of the \n      window (the window is scheduled but not \n      active yet). So end the flow and do noting. \n\t2.\tInside – \n      Current time is within the window \n      (strategy should be active). So check for \n      charging is enabled. \n\t3.\tAfter – \n      Current time is past the window (the \n      window has finished).\n      So, intension of the flow is finished and \n      switch to new strategy\n\n",
+        "x": 320,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "7924aba65025dcfd",
+        "type": "debug",
+        "z": "4f7eee7707ce0c53",
+        "name": "After",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "ece4aea5ea178655",
+        "type": "debug",
+        "z": "4f7eee7707ce0c53",
+        "name": "planned",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "250b14f7d49956c8",
+        "type": "debug",
+        "z": "4f7eee7707ce0c53",
+        "name": "inside",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 420,
+        "wires": []
     },
     {
         "id": "b9d10367867e38e6",
@@ -612,7 +976,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "b44d2b6283f8d12c",
+        "id": "a80aa897818c1e36",
         "type": "global-config",
         "env": [],
         "modules": {
