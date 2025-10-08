@@ -9,12 +9,6 @@ All releases follow Semantic Versioning (SemVer).
   - **IMPORTANT**: Existing users need to reconfigure their P1 sensor using the new dashboard guidance
   - Import the new dashboard and follow the install instructions to configure the P1 sensor properly
 
-- **Features:**
-  - Enhanced Node-RED flows for improved grid charging and self-consumption strategies
-  - New house battery dashboard template sensor for better monitoring
-  - Improved Home Assistant configuration structure and organization
-  - Enhanced battery control input parameters and sensors
-
 - **Files Changed:**
   - `.github/copilot-instructions.md` - Updated GitHub Copilot instructions
   - `.gitignore` - Updated ignore patterns
