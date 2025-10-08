@@ -1,0 +1,14 @@
+# Sensor that calculates how long the batteries can still discharge, keeping in mind that batteries should not go below 11%
+- name: "Battery time remaining"
+  unique_id: house_battery_time_remaining
+  state: >
+    {% set power = max(0, states('sensor.house_total_battery_power_in_w') | float(0)) %}
+    {% set capacity_kwh = states('sensor.house_total_battery_energy_remaining') | float(0) %}
+    {% if power > 0 and capacity_kwh > 0 %}
+      {% set time_hrs = (capacity_kwh * 1000) / power %}
+      {% set hrs = time_hrs | int %}
+      {% set minutes = ((time_hrs - hrs) * 60) | round(0) | int %}
+      {{ hrs }}:{{ minutes }}hrs
+    {% else %}
+      Charging/Idle
+    {% endif %}

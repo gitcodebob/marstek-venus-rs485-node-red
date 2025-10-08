@@ -17,40 +17,45 @@ This project is designed for hobbyists who want to control home battery systems 
 1. **Install Node-RED in Home Assistant**
    - Follow the official guide: [How to install Node-RED in Home Assistant](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/guide/installation.html)
 
-2. **Clone this repository**
+1. **Clone this repository**
    ```sh
    git clone https://github.com/gitcodebob/marstek-venus-rs485-node-red.git
    ```
 
-3. **Configure Home Assistant**
+1. **Configure Home Assistant**
    - Use the provided YAML files in the `home assistant` folder as follows.
      - Configuration files are grouped by type in subfolders:
+       - `input_datetimes` for time based strategies (e.g. grid-change-or-wait)
        - `input_numbers/` for all numeric controls (e.g., PID tuning, limits)
        - `input_selects/` for selectable options (e.g., battery mode)
        - `template_sensors/` for custom sensors
-     - The main `configuration.yaml` automatically includes all files from these directories, so you can add or move your own configuration files into these folders aswell.
+     - The main `configuration.yaml` automatically includes all files from these directories, 
+       - Tip: you can add or move your own configuration files into these folders aswell. They will be loaded.
      - This structure makes it easier to maintain, extend, and share your configuration.
-   - **Adjust safety limits** in `input_numbers/input_number_house_battery_control.yaml` for the `error signal` and `PID output`.
-     - See instruction [good to know](#good-to-know) for tips on this.
+     - See instruction [good to know](#good-to-know--safety) for safety tips.
 
-4. **Import Node-RED Flows**
+1. **Home Assistant DASHBOARD - continue installation with guidance**
+   - In Home Assistant import `dashboard.yaml` to create a dashboard.
+   - Follow the **additional guidance** on this interactive dashboard.
+      1. Set your desired number of batteries (the system can handle any number of batteries, but the dash is designed for max. 3)
+      1. Set your P1 sensor (`template_sensors\template_sensor_house_battery_control.yaml`)
+      1. Import NR flows, see instructions below.
+
+1. **Import Node-RED Flows**
     - In Node-RED, go to the menu > Import > and select the relevant JSON files from the `node-red` folder:
        - `00 master-switch-flow.json` (enable/disable control)
-       - `01 start-flow.json` (the main flow -> requires config)
+       - `01 start-flow.json` (the main flow)
    - Import charging strategies:
        - `02 strategy-custom.json` (custom strategy)
        - `02 strategy-full-stop.json` (full stop strategy)
        - `02 strategy-self-consumption.json` (self-consumption strategy)
+       - `02 grid-charge-or-wait.json` (manual timer based strategy, author: R. Ordelman)
        - `02 strategy-time-of-use.json` (time-of-use strategy)
        - `02 strategy-trading.json` (trading strategy)
-
-   - Go to the flow `Home Battery Start` and add/adjust nodes as needed per instructions.
-       - Double click the white comment balloons to get help.
-       - There are 3 steps to configure the flow. Complete all of them.
-   - Deploy all flows.
+   - Deploy all flows. No edits required.
 
 5. **Firing up**
-   - In Home Assistant import `dashboard.yaml` to create a dashboard, if you have not done so already.
+   - Check the dashboard if all checks are green, if you have not done so already.
    - Continue reading **before** switching the master battery mode to `Full Control` to activate.
 
 
@@ -58,8 +63,11 @@ This project is designed for hobbyists who want to control home battery systems 
 >
 > You are responsible for configuring and operating your system safely. Monitor carefully. Be prepared to switch off battery control or disengage physically. 
 
-### Good to know
+### Good to know / Safety
 - The P1 value is expected in Watt (w). If your meter supplies kW, multiply the P1 input * 1000
+- Test your first time setup in 800W mode
+- Set the appropiate Max. Charge and Max. Discharge values for each battery via the dashboard, by clicking on the glance charts.
+- Always consult a professional electrician when going above 800W.
 
 ## Advanced Features
 
@@ -73,11 +81,13 @@ This project is designed for hobbyists who want to control home battery systems 
   - Dynamically adjusts control output to stay within configured battery capabilities
 
 ### Performance Optimizations
-- **40W Deadband:** Control loop only activates when P1 changes by more than 40W since last calculation
+- **Deadbands:** Control loop only activates when _P1 error_ is outside the deadband and _P1 changes_ of more than 2%.
   - Significantly reduces CPU load during stable operation
-  - Maintains precision while improving system efficiency
+  - Changing the P1 change for triggering the loop is done in `Home Battery Start` -> `RBE:node 'On change (2%)'` 
+  - Changing the deadband can be done in `Strategy Self-consumption` -> `F:node Deadband(15W)` 
 - **Reporting by Exception:** Action nodes only trigger when values actually change
   - Reduces unnecessary Home Assistant calls and system load
+  - Note: the SET MODE action nodes have proven unreliable, for _safety reasons_ the `On Change` RBE has been left out.
 
 ### Multi-Battery Management
 - **Easy Battery Addition/Removal:** only the `Home Battery Start` flow requires editing to add/remove batteries. Strategy execution should remain unaltered.
@@ -86,7 +96,8 @@ This project is designed for hobbyists who want to control home battery systems 
       Note: most homes get billed for the net total of all phases. If that is the case for you as well, ignore these instructions.
 
    - Duplicate `Home Battery Start` to `Home Battery Start L1`, `Home Battery Start L2`, `Home Battery Start L3` (one for each phase).
-   - Configure batteries as per normal instruction. Keeping an eye on which battery is on which phase and thus which flow.
+   - Set the correct battery index in the `Start Loop` node. Keeping an eye on which battery is on which phase and thus which flow.
+   - Remove the `Loop step` and `Loop until`, tie the `Mapping` to the `Battery strategy` directly.
    - Deploy as per normal instructions.
 
 ## Operation and tuning (minimal)
@@ -144,7 +155,7 @@ Note: every system is different and your home is unique. Tune in small increment
 Check the release notes which files have changed. In most cases your `Battery Start` flow stays unchanged which contain your handmade changes. Copy the other files and import Node-RED flows as per instruction.
 
 ## Credits
-This PID controller flow is based on the approach by Ruald Ordelman. Many thanks for sharing your work and ideas with the community!
+The Node-RED + HA control schema is based on the approach by Ruald Ordelman. Many thanks for sharing your work and ideas with the community!
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -153,5 +164,5 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Specify your license here (e.g., MIT, Apache 2.0, etc.)
 
 ---
-For questions or suggestions, open an issue on GitHub.
+For questions or suggestions, open an issue on GitHub or Join our `Marstek RS485/Node-Red besturing` Discord.
  

@@ -1,16 +1,24 @@
-# This file is an example for the main Home Assistant configuration.
-
 # Loads default set of integrations. Do not remove.
 default_config:
 
-# Load frontend themes from the themes folder if you have one.
+# Load frontend themes from the themes folder
 frontend:
   themes: !include_dir_merge_named themes
 
-# Add the following lines if you want to use the example sensors and input/output controls.
+# Text to speech
+tts:
+  - platform: google_translate
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
 # The following lines will include all files from the specified directories.
-template: !include_dir_merge_named template_sensors/
+template: !include_dir_merge_list template_sensors/
 input_number: !include_dir_merge_named input_numbers/
 input_select: !include_dir_merge_named input_selects/
 input_boolean: !include_dir_merge_named input_booleans/
 input_datetime: !include_dir_merge_named input_datetimes/
+input_text: !include_dir_merge_named input_texts/
+
+# Enable My for HACS
+my:

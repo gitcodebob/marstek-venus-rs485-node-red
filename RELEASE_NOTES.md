@@ -1,12 +1,37 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer).
 
+## 2.0.0
+- **BREAKING CHANGES: New Interactive Dashboard and Improved Installation Experience**
+  - Complete dashboard redesign with guided installation steps and configuration validation
+  - Dashboard now guides users through install steps and ensures correct configuration
+  - Unlimited battery count support - add/remove batteries with one click
+  - **IMPORTANT**: Existing users need to reconfigure their P1 sensor using the new dashboard guidance
+  - Import the new dashboard and follow the install instructions to configure the P1 sensor properly
+
+- **Features:**
+  - Enhanced Node-RED flows for improved grid charging and self-consumption strategies
+  - New house battery dashboard template sensor for better monitoring
+  - Improved Home Assistant configuration structure and organization
+  - Enhanced battery control input parameters and sensors
+
+- **Files Changed:**
+  - `.github/copilot-instructions.md` - Updated GitHub Copilot instructions
+  - `.gitignore` - Updated ignore patterns
+  - `README.md` - Updated documentation and installation instructions
+  - `home assistant/configuration.yaml` - Enhanced configuration structure
+  - `home assistant/dashboard.yaml` - Complete dashboard redesign with guided setup
+  - `home assistant/input_booleans/input_boolean_house_battery_control.yaml` - Updated boolean controls
+  - `home assistant/input_numbers/input_number_house_battery_control.yaml` - Enhanced numeric controls
+  - `home assistant/template_sensors/template_sensor_house_battery_control.yaml` - Improved control sensors
+  - `home assistant/template_sensors/template_sensor_house_battery_dashboard.yaml` - New dashboard template sensor
+  - `node-red/01 start-flow.json` - Enhanced main flow logic
+  - `node-red/02 grid-charge-or-wait.json` - Improved grid charging strategy
+  - `node-red/02 strategy-self-consumption.json` - Enhanced self-consumption strategy
+
 ## 1.2.0
 - **Feature: Added Grid-Charge-or-Wait Strategy**
-  - Introduced new battery control strategy for optimized grid charging management
-  - Enhanced strategy portfolio with intelligent grid interaction capabilities
-  - Improved battery control flexibility with wait-based charging logic
-  - Updated Home Assistant server configurations to use standardized Bob configuration
+  - Introduced new battery control strategy for _Timed grid charging_ management
 
 - **Files Changed:**
   - `node-red/02 grid-charge-or-wait.json` - New grid-charge-or-wait strategy flow

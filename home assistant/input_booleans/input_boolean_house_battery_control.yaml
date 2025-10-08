@@ -1,5 +1,11 @@
+# Analytics
+house_battery_control_has_node_red:
+  name: Node Red Ready
+  initial: false
+
+house_battery_control_is_charging:
+  name: Charging
+
+# Supported strategies
 strategy_accu_grid_charge_or_wait_charge_enabled:
   name: Charge batteries during Grid charge or wait strategy
-
-strategy_accu_grid_charge_or_wait_planned:
-  name: Grid charge or wait strategy planned, used for strategy switcher  

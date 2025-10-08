@@ -8,8 +8,103 @@ views:
       - type: grid
         cards:
           - type: heading
+            heading: Configuration
+            heading_style: title
+            icon: mdi:cog-outline
+          - type: markdown
+            content: '### Step 1'
+            text_only: true
+          - type: entities
+            entities:
+              - entity: input_number.house_battery_count
+          - type: markdown
+            content: '### Step 2'
+            text_only: true
+          - type: markdown
+            content: >-
+              <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> **Grid
+              power n/a**</font>
+
+
+              Configure your P1 power sensor. 
+
+
+              1. Edit the file
+
+              `template_sensors/template_sensor_house_battery_control.yaml` 
+
+              1. Find the `<< YOUR GRID POWER SENSOR HERE` tag 
+
+              1. Enter your sensor indicating your grid power usage in Watts.
+            visibility:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity: sensor.p1_meter_power
+                    state: unavailable
+                  - condition: state
+                    entity: sensor.p1_meter_power
+                    state: unknown
+          - type: markdown
+            content: >+
+              <font color=green><ha-icon icon="mdi:check"></ha-icon></font> Grid
+              power sensor
+
+
+            visibility:
+              - condition: not
+                conditions:
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unavailable
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unknown
+          - type: heading
+            icon: mdi:pen
+            heading: Open file editor
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: /core_configurator/ingress
+          - type: markdown
+            content: '### Step 3'
+            text_only: true
+          - type: markdown
+            content: >-
+              <ha-icon icon="mdi:alert"></ha-icon> Import and deploy <font
+              color=red>Node-RED</font> scripts.
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_control_has_node_red
+                state_not: 'on'
+          - type: markdown
+            content: >-
+              <font color=green><ha-icon icon="mdi:check"></ha-icon></font>
+              Node-RED ready
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_control_has_node_red
+                state: 'on'
+          - type: markdown
+            content: '### Step 4'
+            text_only: true
+          - type: markdown
+            content: >-
+              Set the Master Battery Control to `Full Control` only after
+              reviewing and checking all installation instructions. 
+
+
+              Pick a battery charging strategy e.g. `self-consumption` and you
+              are done!
+      - type: grid
+        cards:
+          - type: heading
             heading: Master Battery Control
             heading_style: title
+            icon: mdi:gamepad-variant-outline
           - features:
               - type: select-options
             type: tile
@@ -53,7 +148,7 @@ views:
                 secondary_info: none
               - entity: input_number.house_battery_control_pid_output_dampening
                 name: Output smoothing
-            title: PID controls
+            title: PID settings
           - type: entities
             entities:
               - entity: input_number.house_battery_control_idle_time
@@ -72,11 +167,93 @@ views:
                 name: Stop grid charging / wait at
               - entity: input_boolean.strategy_accu_grid_charge_or_wait_charge_enabled
                 name: Charge during strategy
-              - entity: input_number.strategy_accu_grid_charge_or_wait_total_target_capacity
+              - entity: >-
+                  input_number.strategy_accu_grid_charge_or_wait_total_target_capacity
                 name: Grid charging target capacity
-              - entity: input_select.strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished
+              - entity: >-
+                  input_select.strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished
                 name: Switch to strategy when finished
-
+      - type: grid
+        cards:
+          - type: heading
+            heading: Basic battery information
+            heading_style: title
+            icon: mdi:home-battery-outline
+          - type: tile
+            entity: sensor.battery_time_remaining
+            icon: mdi:battery-clock
+            show_entity_picture: false
+            hide_state: false
+            vertical: false
+            features_position: bottom
+            grid_options:
+              columns: full
+          - type: heading
+            heading: Marstek M1
+            heading_style: subtitle
+            icon: ''
+            visibility:
+              - condition: state
+                entity: sensor.marstek_m1_device_name
+                state_not: unknown
+          - type: glance
+            entities:
+              - entity: sensor.marstek_m1_battery_state_of_charge
+                name: M1 SoC
+              - entity: sensor.marstek_m1_battery_power
+                name: M1 Power
+              - entity: number.marstek_m1_max_charge_power
+                name: Max Charge
+              - entity: number.marstek_m1_max_discharge_power
+                name: Max Discharge
+            visibility:
+              - condition: state
+                entity: sensor.marstek_m1_device_name
+                state_not: unknown
+          - type: heading
+            heading: Marstek M2
+            heading_style: subtitle
+            icon: ''
+            visibility:
+              - condition: state
+                entity: sensor.marstek_m2_device_name
+                state_not: unknown
+          - type: glance
+            entities:
+              - entity: sensor.marstek_m2_battery_state_of_charge
+                name: M2 SoC
+              - entity: sensor.marstek_m2_battery_power
+                name: M2 Power
+              - entity: number.marstek_m2_max_charge_power
+                name: Max Charge
+              - entity: number.marstek_m2_max_discharge_power
+                name: Max Discharge
+            visibility:
+              - condition: state
+                entity: sensor.marstek_m2_device_name
+                state_not: unknown
+          - type: heading
+            heading: Marstek M3
+            heading_style: subtitle
+            icon: ''
+            visibility:
+              - condition: state
+                entity: sensor.marstek_m3_device_name
+                state_not: unknown
+          - type: glance
+            entities:
+              - entity: sensor.marstek_m3_battery_state_of_charge
+                name: M3 SoC
+              - entity: sensor.marstek_m3_battery_power
+                name: M3 Power
+              - entity: number.marstek_m3_max_charge_power
+                name: Max Charge
+              - entity: number.marstek_m3_max_discharge_power
+                name: Max Discharge
+            visibility:
+              - condition: state
+                entity: sensor.marstek_m3_device_name
+                state_not: unknown
       - cards:
           - type: heading
             heading: Histrory
@@ -98,5 +275,5 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Status en settings
+          Configuration and settings (v2.0.0)
         text_only: true
