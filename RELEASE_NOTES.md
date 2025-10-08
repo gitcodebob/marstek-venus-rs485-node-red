@@ -1,6 +1,19 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer).
 
+## 1.2.0
+- **Feature: Added Grid-Charge-or-Wait Strategy**
+  - Introduced new battery control strategy for optimized grid charging management
+  - Enhanced strategy portfolio with intelligent grid interaction capabilities
+  - Improved battery control flexibility with wait-based charging logic
+  - Updated Home Assistant server configurations to use standardized Bob configuration
+
+- **Files Changed:**
+  - `node-red/02 grid-charge-or-wait.json` - New grid-charge-or-wait strategy flow
+  - `node-red/01 start-flow.json` - Updated server configuration and enhanced compatibility
+  - `home assistant/configuration.yaml` - Configuration updates for new strategy support
+  - `home assistant/dashboard.yaml` - Dashboard enhancements for improved user interface
+
 ## 1.1.0
 - **Feature: Refactor to 'msg' based flows to prevent race conditions**
   - Eliminated race conditions when using flow-level variables by moving to message-based architecture

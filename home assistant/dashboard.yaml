@@ -32,6 +32,7 @@ views:
           - type: history-graph
             entities:
               - entity: input_number.house_battery_control_pid_output
+              - entity: sensor.p1_meter_power
               - entity: select.marstek_m1_forcible_charge_discharge
                 name: M1
               - entity: select.marstek_m2_forcible_charge_discharge

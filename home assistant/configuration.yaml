@@ -12,3 +12,5 @@ frontend:
 template: !include_dir_merge_named template_sensors/
 input_number: !include_dir_merge_named input_numbers/
 input_select: !include_dir_merge_named input_selects/
+input_boolean: !include_dir_merge_named input_booleans/
+input_datetime: !include_dir_merge_named input_datetimes/
