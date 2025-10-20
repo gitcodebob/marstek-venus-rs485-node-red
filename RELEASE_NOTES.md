@@ -1,6 +1,17 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer).
 
+## 2.0.1
+- **Bugfixes and Battery Monitoring Improvements**
+  - Fixed dashboard node-red deployment status after Home Assistant restart (Issue #8)
+  - Battery energy remaining sensor now supports 1 to 3 batteries without requiring Home Assistant YAML editing
+  - Time display format improved to consistent HH:MM format
+  
+- **Files Changed:**
+  - `home assistant/input_booleans/input_boolean_house_battery_control.yaml` - Removed initial state from Node Red Ready boolean
+  - `home assistant/template_sensors/template_sensor_house_battery_dashboard.yaml` - Enhanced battery monitoring sensors
+  - `home assistant/dashboard.yaml` - version number
+
 ## 2.0.0
 - **BREAKING CHANGES: New Interactive Dashboard and Improved Installation Experience**
   - Complete dashboard redesign with guided installation steps and configuration validation

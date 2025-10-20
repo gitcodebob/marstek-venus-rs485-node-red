@@ -1,7 +1,6 @@
 # Analytics
 house_battery_control_has_node_red:
   name: Node Red Ready
-  initial: false
 
 house_battery_control_is_charging:
   name: Charging
