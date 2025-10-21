@@ -9,16 +9,14 @@ frontend:
 tts:
   - platform: google_translate
 
+# System
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
-# The following lines will include all files from the specified directories.
-template: !include_dir_merge_list template_sensors/
-input_number: !include_dir_merge_named input_numbers/
-input_select: !include_dir_merge_named input_selects/
-input_boolean: !include_dir_merge_named input_booleans/
-input_datetime: !include_dir_merge_named input_datetimes/
-input_text: !include_dir_merge_named input_texts/
+
+# Packages
+homeassistant:
+  packages: !include_dir_named packages
 
 # Enable My for HACS
 my:

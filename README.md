@@ -24,14 +24,12 @@ This project is designed for hobbyists who want to control home battery systems 
 
 1. **Configure Home Assistant**
    - Use the provided YAML files in the `home assistant` folder as follows.
-     - Configuration files are grouped by type in subfolders:
-       - `input_datetimes` for time based strategies (e.g. grid-change-or-wait)
-       - `input_numbers/` for all numeric controls (e.g., PID tuning, limits)
-       - `input_selects/` for selectable options (e.g., battery mode)
-       - `template_sensors/` for custom sensors
-     - The main `configuration.yaml` automatically includes all files from these directories, 
-       - Tip: you can add or move your own configuration files into these folders aswell. They will be loaded.
-     - This structure makes it easier to maintain, extend, and share your configuration.
+     - Configuration files are now organized using the package-based structure:
+       - `packages/house_battery_control.yaml` contains all input entities (booleans, datetimes, numbers, selects) and template sensors for battery control
+       - `packages/house_battery_control_config.yaml` contains configuration-related entities and dashboard template sensors
+     - The main `configuration.yaml` automatically loads all package files from the `packages/` directory
+       - Tip: you can add your own package files to the `packages/` folder as well. They will be loaded automatically.
+     - This package-based structure provides better organization, easier maintenance, and improved configuration sharing.
      - See instruction [good to know](#good-to-know--safety) for safety tips.
 
 1. **Home Assistant DASHBOARD - continue installation with guidance**
