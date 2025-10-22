@@ -1,6 +1,27 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer).
 
+## 2.1.0
+- **Feature: Migrate to Package-Based Home Assistant Configuration**
+  - Consolidated scattered configuration files into organized packages directory
+  - Moved all input entities (booleans, datetimes, numbers, selects) and template sensors into structured package files
+  - Improved configuration organization and maintainability using Home Assistant package system
+  - Enhanced sharing and version control of configuration components
+  - Removed individual configuration files from separate type-based directories
+
+- **Files Changed:**
+  - `README.md` - Updated documentation to reflect new package-based structure
+  - `home assistant/configuration.yaml` - Modified to use package-based configuration loading
+  - `home assistant/dashboard.yaml` - Updated version number to 2.1.0
+  - `home assistant/packages/house_battery_control.yaml` - New package containing core battery control entities
+  - `home assistant/packages/house_battery_control_config.yaml` - New package containing configuration and dashboard entities
+  - `home assistant/input_booleans/input_boolean_house_battery_control.yaml` - Removed (migrated to packages)
+  - `home assistant/input_datetimes/input_datetime_house_battery_control.yaml` - Removed (migrated to packages)
+  - `home assistant/input_numbers/input_number_house_battery_control.yaml` - Removed (migrated to packages)
+  - `home assistant/input_selects/input_select_house_battery_control.yaml` - Removed (migrated to packages)
+  - `home assistant/template_sensors/template_sensor_house_battery_control.yaml` - Removed (migrated to packages)
+  - `home assistant/template_sensors/template_sensor_house_battery_dashboard.yaml` - Removed (migrated to packages)
+
 ## 2.0.1
 - **Bugfixes and Battery Monitoring Improvements**
   - Fixed dashboard node-red deployment status after Home Assistant restart (Issue #8)
