@@ -31,7 +31,7 @@ views:
 
               1. Edit the file
 
-              `template_sensors/template_sensor_house_battery_control.yaml` 
+              `packages/house_battery_control_config.yaml` 
 
               1. Find the `<< YOUR GRID POWER SENSOR HERE` tag 
 
@@ -215,9 +215,14 @@ views:
             heading_style: subtitle
             icon: ''
             visibility:
-              - condition: state
-                entity: sensor.marstek_m2_device_name
-                state_not: unknown
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m2_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 1
           - type: glance
             entities:
               - entity: sensor.marstek_m2_battery_state_of_charge
@@ -229,17 +234,27 @@ views:
               - entity: number.marstek_m2_max_discharge_power
                 name: Max Discharge
             visibility:
-              - condition: state
-                entity: sensor.marstek_m2_device_name
-                state_not: unknown
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m2_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 1
           - type: heading
             heading: Marstek M3
             heading_style: subtitle
             icon: ''
             visibility:
-              - condition: state
-                entity: sensor.marstek_m3_device_name
-                state_not: unknown
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m3_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 2
           - type: glance
             entities:
               - entity: sensor.marstek_m3_battery_state_of_charge
@@ -251,9 +266,14 @@ views:
               - entity: number.marstek_m3_max_discharge_power
                 name: Max Discharge
             visibility:
-              - condition: state
-                entity: sensor.marstek_m3_device_name
-                state_not: unknown
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m3_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 2
       - cards:
           - type: heading
             heading: Histrory
