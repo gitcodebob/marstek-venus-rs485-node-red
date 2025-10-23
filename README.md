@@ -26,6 +26,8 @@ This project is designed for hobbyists who want to control home battery systems 
 1. **Home Assistant Add-ons**
    - Go to settings > Add-ons and confirm [`File editor`](https://github.com/home-assistant/addons/tree/master/configurator) or `Visual Studio Server` are installed
    - Confirm `Node-RED` is running
+   - (Optional) install [`B2500 Meter`](https://github.com/tomquist/b2500-meter) to enable the `Marstek control` option.
+      - This sends grid power usage via the ESPHome boards to Martek's own control algorithms.
 
 1. **Configure Home Assistant**
    - Use the provided YAML files in the `home assistant` folder as follows.
@@ -164,7 +166,7 @@ The Node-RED + HA control schema is based on the approach by Ruald Ordelman. Man
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
-Specify your license here (e.g., MIT, Apache 2.0, etc.)
+MIT
 
 ---
 For questions or suggestions, open an issue on GitHub or Join our `Marstek RS485/Node-Red besturing` Discord.
