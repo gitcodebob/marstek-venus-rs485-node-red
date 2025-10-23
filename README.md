@@ -13,7 +13,8 @@ This project is designed for hobbyists who want to control home battery systems 
 [Release notes](RELEASE_NOTES.md)
 
 ## Getting Started
-
+[Video instructions (NL)](https://youtu.be/PQo_1QyyrGo?si=wEI7CChgbtWXV8Ue)
+### Step by step
 1. **Install Node-RED in Home Assistant**
    - Follow the official guide: [How to install Node-RED in Home Assistant](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/guide/installation.html)
 
@@ -21,6 +22,10 @@ This project is designed for hobbyists who want to control home battery systems 
    ```sh
    git clone https://github.com/gitcodebob/marstek-venus-rs485-node-red.git
    ```
+   
+1. **Home Assistant Add-ons**
+   - Go to settings > Add-ons and confirm [`File editor`](https://github.com/home-assistant/addons/tree/master/configurator) or `Visual Studio Server` are installed
+   - Confirm `Node-RED` is running
 
 1. **Configure Home Assistant**
    - Use the provided YAML files in the `home assistant` folder as follows.
