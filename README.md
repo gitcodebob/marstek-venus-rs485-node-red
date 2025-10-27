@@ -13,7 +13,10 @@ This project is designed for hobbyists who want to control home battery systems 
 [Release notes](RELEASE_NOTES.md)
 
 ## Getting Started
-[Video instructions (NL)](https://youtu.be/PQo_1QyyrGo?si=wEI7CChgbtWXV8Ue)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/PQo_1QyyrGo/0.jpg)](https://www.youtube.com/watch?v=PQo_1QyyrGo)
+
+[Video instructions (NL with ENG subs)](https://youtu.be/PQo_1QyyrGo?si=wEI7CChgbtWXV8Ue)
+
 ### Step by step
 1. **Install Node-RED in Home Assistant**
    - Follow the official guide: [How to install Node-RED in Home Assistant](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/guide/installation.html)
@@ -81,9 +84,8 @@ This project is designed for hobbyists who want to control home battery systems 
   - Reduces relay wear and extends battery life
   - Eliminates clicking/clacking noises during frequent charge/discharge transitions around 0W
   - Configurable through Home Assistant dashboard
-- **Controller Output Protection:** Automatic protection based on battery maximum charge/discharge values
-  - Prevents system from exceeding individual battery safety limits
-  - Dynamically adjusts control output to stay within configured battery capabilities
+- **Controller Output Protection:** Software protection based on battery maximum charge/discharge values
+  - Adjusts control output to stay within configured battery capabilities
 
 ### Performance Optimizations
 - **Deadbands:** Control loop only activates when _P1 error_ is outside the deadband and _P1 changes_ of more than 2%.
