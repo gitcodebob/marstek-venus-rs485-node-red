@@ -1,6 +1,22 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer).
 
+## 2.2.0
+- **Feature: Battery Prioritization and Auto-Cycling**
+  - Added battery charge order rotation to optimize battery wear during multi-battery setups
+  - Implemented automatic priority cycling with configurable intervals (daily, weekly, never)
+  - Auto-cycling occurs at 02:00 hrs daily or Sunday morning depending on configuration
+
+- **Dashboard Improvements**
+  - Added new battery priority settings section with intuitive controls
+  - Reorganized settings for better user experience
+
+- **Files Changed:**
+  - `README.md` - Enhanced battery life documentation with detailed feature explanations
+  - `home assistant/dashboard.yaml` - Added battery priority controls and reorganized settings (v2.2.0)
+  - `home assistant/packages/house_battery_control.yaml` - Added priority and auto-cycling input entities
+  - `node-red/01 start-flow.json` - Implemented battery priority management functionality
+
 ## 2.1.0
 - **Feature: Migrate to Package-Based Home Assistant Configuration**
   - Consolidated scattered configuration files into organized packages directory

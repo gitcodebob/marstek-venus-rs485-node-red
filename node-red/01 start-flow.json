@@ -1,5 +1,13 @@
 [
     {
+        "id": "a099d47fc07b3cee",
+        "type": "tab",
+        "label": "Home Battery Start",
+        "disabled": false,
+        "info": "# Home battery control\r\nConsists of three flows:\r\n 1.  Start flow\r\n 1.  Control flow\r\n 1.  Master switch flow\r\n\r\n## Start flow\r\nThis is the starting point of your home battery control.\r\n\r\nIt starts with P1 measurement as a trigger.\r\nIt allows you to connect your battery sensors to the flow.\r\nIt ends with a function node, mapping your batteries to a battery_array\r\n\r\nThe battery_array is passed on to the control flow.\r\n\r\nWhen the control flow has calculated the desired corrections,\r\nit is passed back to this flow and applied to your batteries.",
+        "env": []
+    },
+    {
         "id": "fc3b0636793881be",
         "type": "group",
         "z": "a099d47fc07b3cee",
@@ -19,6 +27,159 @@
         "y": 19,
         "w": 992,
         "h": 122
+    },
+    {
+        "id": "a5b8a03b1e2f2371",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Strategy selection",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e63433bdfbdd57e9",
+            "06dd855a34065b5d",
+            "d1bd5fbe28bdd070",
+            "b658a34d31bcd8f3",
+            "712cd7b2343eead6",
+            "7f303dfb944dfc04"
+        ],
+        "x": 34,
+        "y": 519,
+        "w": 812,
+        "h": 162
+    },
+    {
+        "id": "6fad59f7a8530963",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Get batteries information",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "dbe474c91266b428",
+            "7d6705c1829e0683",
+            "1933f2623fa0fffb",
+            "ceb31920f185d64b",
+            "b63f2e905b829e5b",
+            "64a533741de02153",
+            "bbe037f4bc3425fc"
+        ],
+        "x": 28,
+        "y": 159,
+        "w": 1564,
+        "h": 242
+    },
+    {
+        "id": "ea78c084bba20424",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "On start",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "ad80dc99baec6552",
+            "42d70237afb8b3a7"
+        ],
+        "x": 1074,
+        "y": 19,
+        "w": 412,
+        "h": 82
+    },
+    {
+        "id": "5778369e644d84d7",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Set Batteries",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "95295516124d818d",
+            "4d6fd96944872ba1",
+            "15830b9747f8132e",
+            "d77f3b233b9d9a45",
+            "8b0aa863bb6493fd",
+            "77163ca9f43e8fb7"
+        ],
+        "x": 34,
+        "y": 699,
+        "w": 838,
+        "h": 342
+    },
+    {
+        "id": "0a3ea32230e8832c",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Battery priority",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "db8e14c359673211",
+            "b98d8b6d56dc5e39",
+            "9f9dd1b6c8a68339",
+            "1cc51c4bd0523e93",
+            "1c419030271bee64",
+            "c9b6b8b729161188",
+            "64c9954af597093d",
+            "1dac3194a67aeec2",
+            "641cc1cf21ace75a"
+        ],
+        "x": 34,
+        "y": 419,
+        "w": 1852,
+        "h": 82
+    },
+    {
+        "id": "b63f2e905b829e5b",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "g": "6fad59f7a8530963",
+        "name": "Loop",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "a91127871ba39241",
+            "325f396f7e8ad2a8",
+            "d01fc0ee854e249a",
+            "a49e9a91bbfcb11d",
+            "22123f145efcd95c",
+            "f384e6c0da2834c8",
+            "08d4efea54467ac1",
+            "7831dd84510fdfaa",
+            "4e53830356f33b07"
+        ],
+        "x": 54,
+        "y": 239,
+        "w": 1512,
+        "h": 82
+    },
+    {
+        "id": "d77f3b233b9d9a45",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "g": "5778369e644d84d7",
+        "name": "Loop",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e1927196c4198cbf",
+            "047542bb597a3048",
+            "df4b99688f85df0a",
+            "e25994f6e85e901c",
+            "4decf8d91d6ccacb",
+            "084ac27446297f16",
+            "1e4f762143a12bba"
+        ],
+        "x": 294,
+        "y": 739,
+        "w": 552,
+        "h": 222
     },
     {
         "id": "1d0932b9cdfe2cc0",
@@ -163,108 +324,6 @@
         ]
     },
     {
-        "id": "981ff4f5a93db632",
-        "type": "delay",
-        "z": "a099d47fc07b3cee",
-        "g": "fc3b0636793881be",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "1",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "0.8",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": true,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 450,
-        "y": 60,
-        "wires": [
-            [
-                "057b9222c17d4046"
-            ]
-        ],
-        "info": "Due to reports of 3 phase connections sending at \r\nintermittend message intervals.\r\n\r\nThis does not improve quality much and mostly\r\nincreases load. \r\n\r\nWe therefor employ a rate limiter."
-    },
-    {
-        "id": "bcecc2d9b0fe6cad",
-        "type": "rbe",
-        "z": "a099d47fc07b3cee",
-        "g": "fc3b0636793881be",
-        "name": "On change (2%)",
-        "func": "deadband",
-        "gap": "2%",
-        "start": "",
-        "inout": "out",
-        "septopics": false,
-        "property": "payload",
-        "topi": "topic",
-        "x": 280,
-        "y": 60,
-        "wires": [
-            [
-                "981ff4f5a93db632",
-                "5faf7aae9da0801e"
-            ]
-        ]
-    },
-    {
-        "id": "5faf7aae9da0801e",
-        "type": "debug",
-        "z": "a099d47fc07b3cee",
-        "g": "fc3b0636793881be",
-        "name": "Last processed",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "payload",
-        "statusType": "auto",
-        "x": 280,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "176d29a.6f648d6",
-        "type": "server",
-        "name": "Home Assistant",
-        "addon": true,
-        "rejectUnauthorizedCerts": true,
-        "ha_boolean": "",
-        "connectionDelay": false,
-        "cacheJson": false,
-        "heartbeat": false,
-        "heartbeatInterval": "",
-        "statusSeparator": "",
-        "enableGlobalContextStore": false
-    },
-    {
-        "id": "a5b8a03b1e2f2371",
-        "type": "group",
-        "z": "a099d47fc07b3cee",
-        "name": "Strategy selection",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "e63433bdfbdd57e9",
-            "06dd855a34065b5d",
-            "d1bd5fbe28bdd070",
-            "b658a34d31bcd8f3",
-            "712cd7b2343eead6",
-            "7f303dfb944dfc04"
-        ],
-        "x": 34,
-        "y": 419,
-        "w": 812,
-        "h": 162
-    },
-    {
         "id": "e63433bdfbdd57e9",
         "type": "api-current-state",
         "z": "a099d47fc07b3cee",
@@ -308,7 +367,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 140,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "06dd855a34065b5d"
@@ -329,7 +388,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "b658a34d31bcd8f3",
@@ -347,7 +406,7 @@
         "linkType": "dynamic",
         "timeout": "1.2",
         "x": 410,
-        "y": 500,
+        "y": 600,
         "wires": [
             [
                 "712cd7b2343eead6",
@@ -370,7 +429,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 710,
-        "y": 460,
+        "y": 560,
         "wires": []
     },
     {
@@ -388,7 +447,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 710,
-        "y": 500,
+        "y": 600,
         "wires": []
     },
     {
@@ -405,7 +464,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 540,
+        "y": 640,
         "wires": [
             [
                 "15830b9747f8132e"
@@ -413,26 +472,31 @@
         ]
     },
     {
-        "id": "6fad59f7a8530963",
-        "type": "group",
+        "id": "981ff4f5a93db632",
+        "type": "delay",
         "z": "a099d47fc07b3cee",
-        "name": "Get batteries information",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "dbe474c91266b428",
-            "7d6705c1829e0683",
-            "1933f2623fa0fffb",
-            "ceb31920f185d64b",
-            "b63f2e905b829e5b",
-            "64a533741de02153",
-            "bbe037f4bc3425fc"
+        "g": "fc3b0636793881be",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "0.8",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 60,
+        "wires": [
+            [
+                "057b9222c17d4046"
+            ]
         ],
-        "x": 28,
-        "y": 159,
-        "w": 1564,
-        "h": 242
+        "info": "Due to reports of 3 phase connections sending at \r\nintermittend message intervals.\r\n\r\nThis does not improve quality much and mostly\r\nincreases load. \r\n\r\nWe therefor employ a rate limiter."
     },
     {
         "id": "dbe474c91266b428",
@@ -452,6 +516,27 @@
         "wires": [
             [
                 "a91127871ba39241"
+            ]
+        ]
+    },
+    {
+        "id": "64a533741de02153",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "6fad59f7a8530963",
+        "name": "Mapping",
+        "func": "// Map to batteries array\nmsg.batteries.push({\n    id: `M${msg.battery_index}`,\n    power: parseInt(msg.battery_power,10),\n    charging_max: parseInt(msg.max_charge_power,10),\n    discharging_max: parseInt(msg.max_discharge_power,10),\n    soc: parseInt(msg.battery_state_of_charge,10),\n    soc_max: parseInt(msg.charging_cutoff_capacity,10),\n    soc_min: parseInt(msg.discharging_cutoff_capacity,10),\n    inverter: String(msg.inverter_state),\n    cap_remaining: Number(msg.battery_remaining_capacity),\n    rs485: String(msg.rs485_control_mode)\n    });\n\n// Continue\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 360,
+        "wires": [
+            [
+                "bbe037f4bc3425fc"
             ]
         ]
     },
@@ -484,7 +569,7 @@
             ],
             [
                 "1933f2623fa0fffb",
-                "e63433bdfbdd57e9"
+                "1c419030271bee64"
             ]
         ]
     },
@@ -556,31 +641,6 @@
                 "dbe474c91266b428"
             ]
         ]
-    },
-    {
-        "id": "b63f2e905b829e5b",
-        "type": "group",
-        "z": "a099d47fc07b3cee",
-        "g": "6fad59f7a8530963",
-        "name": "Loop",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "a91127871ba39241",
-            "325f396f7e8ad2a8",
-            "d01fc0ee854e249a",
-            "a49e9a91bbfcb11d",
-            "22123f145efcd95c",
-            "f384e6c0da2834c8",
-            "08d4efea54467ac1",
-            "7831dd84510fdfaa",
-            "4e53830356f33b07"
-        ],
-        "x": 54,
-        "y": 239,
-        "w": 1512,
-        "h": 82
     },
     {
         "id": "a91127871ba39241",
@@ -1042,65 +1102,6 @@
         ]
     },
     {
-        "id": "64a533741de02153",
-        "type": "function",
-        "z": "a099d47fc07b3cee",
-        "g": "6fad59f7a8530963",
-        "name": "Mapping",
-        "func": "// Map to batteries array\nmsg.batteries.push({\n    id: `M${msg.battery_index}`,\n    power: parseInt(msg.battery_power,10),\n    charging_max: parseInt(msg.max_charge_power,10),\n    discharging_max: parseInt(msg.max_discharge_power,10),\n    soc: parseInt(msg.battery_state_of_charge,10),\n    soc_max: parseInt(msg.charging_cutoff_capacity,10),\n    soc_min: parseInt(msg.discharging_cutoff_capacity,10),\n    inverter: String(msg.inverter_state),\n    cap_remaining: Number(msg.battery_remaining_capacity),\n    rs485: String(msg.rs485_control_mode)\n    });\n\n// Continue\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 140,
-        "y": 360,
-        "wires": [
-            [
-                "bbe037f4bc3425fc"
-            ]
-        ]
-    },
-    {
-        "id": "bbe037f4bc3425fc",
-        "type": "function",
-        "z": "a099d47fc07b3cee",
-        "g": "6fad59f7a8530963",
-        "name": "Loop step",
-        "func": "// Step index down\nmsg.battery_index += 1;\n\n// Continue\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 280,
-        "y": 360,
-        "wires": [
-            [
-                "7d6705c1829e0683"
-            ]
-        ]
-    },
-    {
-        "id": "ea78c084bba20424",
-        "type": "group",
-        "z": "a099d47fc07b3cee",
-        "name": "On start",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "ad80dc99baec6552",
-            "42d70237afb8b3a7"
-        ],
-        "x": 1074,
-        "y": 19,
-        "w": 412,
-        "h": 82
-    },
-    {
         "id": "ad80dc99baec6552",
         "type": "api-call-service",
         "z": "a099d47fc07b3cee",
@@ -1163,118 +1164,6 @@
         ]
     },
     {
-        "id": "5778369e644d84d7",
-        "type": "group",
-        "z": "a099d47fc07b3cee",
-        "name": "Set Batteries",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "95295516124d818d",
-            "4d6fd96944872ba1",
-            "15830b9747f8132e",
-            "d77f3b233b9d9a45",
-            "8b0aa863bb6493fd",
-            "77163ca9f43e8fb7"
-        ],
-        "x": 54,
-        "y": 599,
-        "w": 838,
-        "h": 342
-    },
-    {
-        "id": "95295516124d818d",
-        "type": "function",
-        "z": "a099d47fc07b3cee",
-        "g": "5778369e644d84d7",
-        "name": "Loop start",
-        "func": "// loop through the number of batteries set by the user\nmsg.battery_index = msg.battery_count;\n\n// Debug\nRED.util.setMessageProperty(msg, \"debug\", `## Cohort ${Date.now()} ##`);\n\n// Continue\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 140,
-        "y": 720,
-        "wires": [
-            [
-                "047542bb597a3048"
-            ]
-        ]
-    },
-    {
-        "id": "4d6fd96944872ba1",
-        "type": "function",
-        "z": "a099d47fc07b3cee",
-        "g": "5778369e644d84d7",
-        "name": "timing start",
-        "func": "RED.util.setMessageProperty(msg,\"setbatteries.execution_start\",Date.now());\nRED.util.setMessageProperty(msg,\"setbatteries.marker\", `M1_${Date.now()}`);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 150,
-        "y": 680,
-        "wires": [
-            [
-                "95295516124d818d"
-            ]
-        ]
-    },
-    {
-        "id": "15830b9747f8132e",
-        "type": "switch",
-        "z": "a099d47fc07b3cee",
-        "g": "5778369e644d84d7",
-        "name": "solutions present",
-        "property": "solutions",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "undefined",
-                "vt": "jsonata"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 170,
-        "y": 640,
-        "wires": [
-            [
-                "4d6fd96944872ba1"
-            ]
-        ]
-    },
-    {
-        "id": "d77f3b233b9d9a45",
-        "type": "group",
-        "z": "a099d47fc07b3cee",
-        "g": "5778369e644d84d7",
-        "name": "Loop",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "e1927196c4198cbf",
-            "047542bb597a3048",
-            "df4b99688f85df0a",
-            "e25994f6e85e901c",
-            "4decf8d91d6ccacb",
-            "084ac27446297f16",
-            "1e4f762143a12bba"
-        ],
-        "x": 314,
-        "y": 639,
-        "w": 552,
-        "h": 222
-    },
-    {
         "id": "e1927196c4198cbf",
         "type": "api-call-service",
         "z": "a099d47fc07b3cee",
@@ -1298,8 +1187,8 @@
         "blockInputOverrides": false,
         "domain": "input_text",
         "service": "set_value",
-        "x": 660,
-        "y": 680,
+        "x": 640,
+        "y": 780,
         "wires": [
             []
         ]
@@ -1317,8 +1206,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
-        "y": 720,
+        "x": 390,
+        "y": 820,
         "wires": [
             [
                 "e1927196c4198cbf"
@@ -1337,6 +1226,27 @@
             "Select MODE",
             "Set POWER",
             "Msg"
+        ]
+    },
+    {
+        "id": "95295516124d818d",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "5778369e644d84d7",
+        "name": "Loop start",
+        "func": "// loop through the number of batteries set by the user\nmsg.battery_index = msg.battery_count;\n\n// Debug\nRED.util.setMessageProperty(msg, \"debug\", `## Cohort ${Date.now()} ##`);\n\n// Continue\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 120,
+        "y": 820,
+        "wires": [
+            [
+                "047542bb597a3048"
+            ]
         ]
     },
     {
@@ -1360,8 +1270,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 740,
-        "y": 780,
+        "x": 720,
+        "y": 880,
         "wires": [
             [
                 "047542bb597a3048"
@@ -1384,8 +1294,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 580,
-        "y": 780,
+        "x": 560,
+        "y": 880,
         "wires": [
             [
                 "df4b99688f85df0a",
@@ -1417,48 +1327,56 @@
         "blockInputOverrides": false,
         "domain": "input_text",
         "service": "set_value",
-        "x": 760,
-        "y": 720,
+        "x": 740,
+        "y": 820,
         "wires": [
             []
         ]
     },
     {
-        "id": "084ac27446297f16",
-        "type": "debug",
+        "id": "4d6fd96944872ba1",
+        "type": "function",
         "z": "a099d47fc07b3cee",
-        "g": "d77f3b233b9d9a45",
-        "name": "Step result",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "loop_result",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 750,
-        "y": 820,
-        "wires": []
-    },
-    {
-        "id": "1e4f762143a12bba",
-        "type": "rbe",
-        "z": "a099d47fc07b3cee",
-        "g": "d77f3b233b9d9a45",
-        "name": "on change",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": true,
-        "property": "payload",
-        "topi": "topic",
-        "x": 590,
-        "y": 720,
+        "g": "5778369e644d84d7",
+        "name": "timing start",
+        "func": "RED.util.setMessageProperty(msg,\"setbatteries.execution_start\",Date.now());\nRED.util.setMessageProperty(msg,\"setbatteries.marker\", `M1_${Date.now()}`);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 130,
+        "y": 780,
         "wires": [
             [
-                "4decf8d91d6ccacb"
+                "95295516124d818d"
+            ]
+        ]
+    },
+    {
+        "id": "15830b9747f8132e",
+        "type": "switch",
+        "z": "a099d47fc07b3cee",
+        "g": "5778369e644d84d7",
+        "name": "solutions present",
+        "property": "solutions",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "undefined",
+                "vt": "jsonata"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 150,
+        "y": 740,
+        "wires": [
+            [
+                "4d6fd96944872ba1"
             ]
         ]
     },
@@ -1475,11 +1393,50 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 150,
-        "y": 840,
+        "x": 130,
+        "y": 940,
         "wires": [
             [
                 "77163ca9f43e8fb7"
+            ]
+        ]
+    },
+    {
+        "id": "084ac27446297f16",
+        "type": "debug",
+        "z": "a099d47fc07b3cee",
+        "g": "d77f3b233b9d9a45",
+        "name": "Step result",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "loop_result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "1e4f762143a12bba",
+        "type": "rbe",
+        "z": "a099d47fc07b3cee",
+        "g": "d77f3b233b9d9a45",
+        "name": "on change",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 570,
+        "y": 820,
+        "wires": [
+            [
+                "4decf8d91d6ccacb"
             ]
         ]
     },
@@ -1497,8 +1454,406 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 130,
-        "y": 900,
+        "x": 110,
+        "y": 1000,
         "wires": []
+    },
+    {
+        "id": "bbe037f4bc3425fc",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "6fad59f7a8530963",
+        "name": "Loop step",
+        "func": "// Step index down\nmsg.battery_index += 1;\n\n// Continue\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 360,
+        "wires": [
+            [
+                "7d6705c1829e0683"
+            ]
+        ]
+    },
+    {
+        "id": "bcecc2d9b0fe6cad",
+        "type": "rbe",
+        "z": "a099d47fc07b3cee",
+        "g": "fc3b0636793881be",
+        "name": "On change (2%)",
+        "func": "deadband",
+        "gap": "2%",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 280,
+        "y": 60,
+        "wires": [
+            [
+                "981ff4f5a93db632",
+                "5faf7aae9da0801e"
+            ]
+        ]
+    },
+    {
+        "id": "5faf7aae9da0801e",
+        "type": "debug",
+        "z": "a099d47fc07b3cee",
+        "g": "fc3b0636793881be",
+        "name": "Last processed",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 280,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "db8e14c359673211",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "0a3ea32230e8832c",
+        "name": "Update battery order",
+        "func": "// Cycles battery priority as follows\n// M=1 [1,2,3,4] | M=2 [2,3,4,1] | M=3 [3,4,1,2] | etc.\n// With M the battery to prioritize\n\n// msg.batteries (original order)\nlet currentArray = msg.batteries;\n\n// Prioritize the Mth battery\nconst M = RED.util.getMessageProperty(msg,\"prioritize_battery\") || 1;\n\n// 1st battery has prio? Skip and continue without change\nif (M==1) return msg;\n\n// N equals the number of items to take from the front to the back of the array, effectivly rotating battery priority\nconst N = M - 1; // base-0 version of M\nnode.status({fill:\"blue\",shape:\"ring\",text:`N = ${N}`});\n\n// 1. Check if the array is valid and long enough\nif (!Array.isArray(currentArray) || currentArray.length < N) {\n    // Send an error or the original array back if the array is invalid/too short\n    node.error(`Array is not valid or shorter than ${N} items.`, msg);\n    return null;\n}\n\n// 2. Get the first N items (these will go to the back)\n// slice(0, N) retrieves elements from the start (index 0) up to index N (exclusive).\nlet firstN = currentArray.slice(0, N);\n\n// 3. Get the remaining items (these will stay at the front)\n// slice(N) retrieves elements from index N to the end of the array.\nlet remaining = currentArray.slice(N);\n\n// 4. Concatenate them: remaining items (front) + first N items (back)\nlet newArray = remaining.concat(firstN);\n\n// 5. Place the new array back into msg.batteries\nmsg.batteries = newArray;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 460,
+        "wires": [
+            [
+                "e63433bdfbdd57e9"
+            ]
+        ]
+    },
+    {
+        "id": "b98d8b6d56dc5e39",
+        "type": "inject",
+        "z": "a099d47fc07b3cee",
+        "g": "0a3ea32230e8832c",
+        "name": "Every day 02:00",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 02 * * *",
+        "once": false,
+        "onceDelay": "5",
+        "topic": "cycle_battery_priority",
+        "payload": "",
+        "payloadType": "date",
+        "x": 610,
+        "y": 460,
+        "wires": [
+            [
+                "64c9954af597093d"
+            ]
+        ]
+    },
+    {
+        "id": "9f9dd1b6c8a68339",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "0a3ea32230e8832c",
+        "name": "Change priority",
+        "func": "// Current prioritized battery is the Mth battery\nlet M = RED.util.getMessageProperty(msg,\"prioritize_battery\") || 1;\n\n// Prioritize the next battery\nM += 1;\n\n// If the next battery does not exist, prioritize the first again\nif(M > msg.battery_count) M = 1;\n\n// Pass along as payload\nmsg.payload = M;\n\n// Show which battery has priority\nnode.status({fill:\"green\",shape:\"dot\",text:`Prioritize battery #${M}`});\n\n// Done\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 460,
+        "wires": [
+            [
+                "c9b6b8b729161188"
+            ]
+        ]
+    },
+    {
+        "id": "1cc51c4bd0523e93",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "0a3ea32230e8832c",
+        "name": "Your battery count",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_count",
+        "state_type": "num",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "battery_count",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1350,
+        "y": 460,
+        "wires": [
+            [
+                "9f9dd1b6c8a68339"
+            ]
+        ]
+    },
+    {
+        "id": "1c419030271bee64",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "0a3ea32230e8832c",
+        "name": "Prioritize battery M",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_control_prioritize_battery",
+        "state_type": "num",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "prioritize_battery",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "db8e14c359673211"
+            ]
+        ]
+    },
+    {
+        "id": "c9b6b8b729161188",
+        "type": "api-call-service",
+        "z": "a099d47fc07b3cee",
+        "g": "0a3ea32230e8832c",
+        "name": "Update prioritized battery",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_control_prioritize_battery"
+        ],
+        "labelId": [],
+        "data": "{\"value\": \"{{payload}}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 1750,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "64c9954af597093d",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "0a3ea32230e8832c",
+        "name": "Desired interval",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_control_priority_change_interval",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 800,
+        "y": 460,
+        "wires": [
+            [
+                "1dac3194a67aeec2"
+            ]
+        ]
+    },
+    {
+        "id": "1dac3194a67aeec2",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "0a3ea32230e8832c",
+        "name": "Check interval ",
+        "func": "// Manual priority, never pass\nif(msg.payload == \"Never\") {\n    node.status({fill:\"yellow\",shape:\"dot\",text:\"Auto cycle disabled\"});\n    return null;\n}\n\n// Daily interval, always pass\nif(msg.payload == \"Daily\") {\n    node.status({ fill: \"green\", shape: \"dot\", text: `Pass` });\n    return msg;\n}\n\n// Weekly interval\nconst today = new Date();\n// Get the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)\nconst dayOfWeek = today.getDay();\n\n// Check if the day is Sunday (which is represented by the number 0)\nif (dayOfWeek === 0) {\n    // If it is Sunday, pass\n    node.status({ fill: \"green\", shape: \"dot\", text: `Passed on Sunday` });\n    return msg;\n} else {\n    // If it is not Sunday, stop\n    node.status({ fill: \"yellow\", shape: \"dot\", text: `Halted, not Sunday` });\n    return null;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 460,
+        "wires": [
+            [
+                "641cc1cf21ace75a"
+            ]
+        ]
+    },
+    {
+        "id": "641cc1cf21ace75a",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "0a3ea32230e8832c",
+        "name": "Current priority",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_control_prioritize_battery",
+        "state_type": "num",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "prioritize_battery",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1160,
+        "y": 460,
+        "wires": [
+            [
+                "1cc51c4bd0523e93"
+            ]
+        ]
+    },
+    {
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "",
+        "connectionDelay": false,
+        "cacheJson": false,
+        "heartbeat": false,
+        "heartbeatInterval": "",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
     }
 ]

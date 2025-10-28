@@ -135,6 +135,53 @@ views:
               - entity: select.marstek_m3_forcible_charge_discharge
                 name: M3
             hours_to_show: 0.05
+          - type: markdown
+            content: '### Settings'
+            text_only: true
+          - type: heading
+            icon: mdi:information
+            heading: Charge this battery first
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://github.com/gitcodebob/marstek-venus-rs485-node-red/blob/main/README.md#advanced-features
+          - show_name: true
+            show_icon: true
+            show_state: true
+            type: glance
+            entities:
+              - entity: input_number.house_battery_control_prioritize_battery
+                name: 'Battery #'
+              - entity: input_select.house_battery_control_priority_change_interval
+            state_color: false
+            columns: 3
+          - type: heading
+            icon: mdi:information
+            heading: Battery life improvement
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://github.com/gitcodebob/marstek-venus-rs485-node-red?tab=readme-ov-file#battery-life
+          - type: entities
+            entities:
+              - entity: input_number.house_battery_control_idle_time
+                name: Stop after Idle for
+              - entity: input_number.house_battery_control_hysteresis_in_w
+                name: 'Hysteresis '
+                secondary_info: none
+          - type: markdown
+            content: '### PID settings'
+            text_only: true
+          - type: heading
+            icon: mdi:information
+            heading: PID setup and tuning (howto)
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://github.com/gitcodebob/marstek-venus-rs485-node-red?tab=readme-ov-file#operation-and-tuning-minimal
           - type: entities
             entities:
               - entity: input_number.house_battery_control_kp
@@ -148,17 +195,12 @@ views:
                 secondary_info: none
               - entity: input_number.house_battery_control_pid_output_dampening
                 name: Output smoothing
-            title: PID settings
-          - type: entities
-            entities:
-              - entity: input_number.house_battery_control_idle_time
-                name: Stop after Idle for
-              - entity: input_number.house_battery_control_hysteresis_in_w
-                name: 'Hysteresis '
-                secondary_info: none
               - entity: input_number.house_target_grid_consumption_in_w
+                name: Target grid consumption
+          - type: markdown
+            content: '#### "Grid charge or Wait" strategy'
+            text_only: true
           - type: entities
-            title: Marstek grid charge or wait strategy
             show_header_toggle: false
             entities:
               - entity: input_datetime.strategy_accu_grid_charge_or_wait_start_at
@@ -295,5 +337,5 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Configuration and settings (v2.1.0)
+          Configuration and settings (v2.2.0)
         text_only: true

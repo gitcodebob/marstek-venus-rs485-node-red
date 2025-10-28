@@ -79,14 +79,24 @@ This project is designed for hobbyists who want to control home battery systems 
 
 ## Advanced Features
 
-### Battery Life Protection
+### Battery Life
 - **Minimum Idle Time:** Configurable minimum time before allowing battery grid relay disengagement
   - Reduces relay wear and extends battery life
   - Eliminates clicking/clacking noises during frequent charge/discharge transitions around 0W
   - Configurable through Home Assistant dashboard
+- **Hysteresis:** Prevents excessive switching between charge and discharge mode around the 0 Watt line. 
+   - If the PID output level lies within hysteresis, it will not switch from charge to discharge or vise versa. 
+   - 0 = apply no hysteresis
+- **Battery charge order:** determines which battery gets charged first (Multi-battery only)
+   - Batteries gets charged in order. By changing which battery is first in order, you can optimize battery wear.
+   - Espescially during cloudy periods when the first battery takes the grunt of the charging and discharing.
+   - The **Auto Cycle** feature changes the order of the batteries automatically each night or each week
+      - Auto Cycling occurs at 02:00 hrs daily, or 02:00 hrs Sunday morning.
+      - Don't want auto cycling? Select Cycle priority "Never". 
 - **Controller Output Protection:** Software protection based on battery maximum charge/discharge values
   - Adjusts control output to stay within configured battery capabilities
 
+   
 ### Performance Optimizations
 - **Deadbands:** Control loop only activates when _P1 error_ is outside the deadband and _P1 changes_ of more than 2%.
   - Significantly reduces CPU load during stable operation

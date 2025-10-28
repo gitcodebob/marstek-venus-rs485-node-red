@@ -46,7 +46,17 @@ input_number:
     step: 1
     unit_of_measurement: ""
     mode: slider
-    icon: mdi:battery-plus-variant # line chart
+    icon: mdi:battery-plus-variant
+
+  # Which battery has priority (this battery will go first in the charging order)
+  house_battery_control_prioritize_battery:
+    name: "Prioritize battery"
+    min: 1
+    max: 3
+    step: 1
+    unit_of_measurement: ""
+    mode: box
+    icon: mdi:battery-arrow-up
 
   # Strategy | self consumption (NoM)
   house_target_grid_consumption_in_w:
@@ -256,6 +266,15 @@ input_select:
       - Grid-Charge-Or-Wait #charge from the grid during (very) low or negative price hours to cover upcoming expensive hours when PV is insufficient
       - Custom 1 # Your own strategy here
     icon: mdi:home-battery
+
+  # How often is battery priority cycled automatically?
+  house_battery_control_priority_change_interval:
+    name: "Auto Cycle"
+    options:
+      - Weekly
+      - Daily
+      - Never
+    icon: mdi:battery-clock
 
   strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished:
     name: Strategy when finished grid charge or wait
