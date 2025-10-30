@@ -284,8 +284,6 @@ input_select:
       - Very safe
       - Safe
       - Regular
-      - Agressive
-      - Very agressive
     icon: mdi:list-box
 
   strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished:

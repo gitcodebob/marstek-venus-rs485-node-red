@@ -3,11 +3,10 @@ All releases follow Semantic Versioning (SemVer).
 
 ## 2.3.0
 - **Feature: PID Preset System for Simplified Tuning**
-  - Added PID presets dropdown with 6 preset options: Custom, Very safe, Safe, Regular, Aggressive, Very aggressive
-  - Implemented automatic PID parameter switching based on preset selection through new Node-RED flow
-  - Added safety warning display in dashboard for high PID values
-  - Enhanced PID tuning section in dashboard with preset selector and improved organization
+  - Added PID presets dropdown with 4 preset options: Custom, Very safe, Safe, Regular
   - Simplified setup process for new users while maintaining advanced manual tuning options
+  - Added safety warning display in dashboard for high PID values
+  - Note: a new flow was added for presets to work
 
 - **Files Changed:**
   - `README.md` - Added PID presets documentation with concise setup guidance
