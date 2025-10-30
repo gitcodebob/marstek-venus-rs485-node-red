@@ -276,6 +276,18 @@ input_select:
       - Never
     icon: mdi:battery-clock
 
+  # Self consumption strategy | PID presets
+  house_battery_control_pid_presets:
+    name: "PID presets"
+    options:
+      - Custom
+      - Very safe
+      - Safe
+      - Regular
+      - Agressive
+      - Very agressive
+    icon: mdi:list-box
+
   strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished:
     name: Strategy when finished grid charge or wait
     options:
