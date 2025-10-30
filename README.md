@@ -146,18 +146,21 @@ Tip, observe the HA history graph containing:
    - P-term, I-term, D-term (P+I+D = PID Output)
    - Error signal (what error is observed in Watts)
 
-### PID Presets (Simplified Tuning)
+### PID Tuning
+#### PID Presets (Simplified Tuning)
 For easier setup, use the **PID Presets** dropdown in the Home Assistant dashboard. Choose from predefined configurations:
 - **Very safe**: Conservative settings, slower response
 - **Safe**: Moderate settings, balanced performance  
-- **Regular**: Standard settings for most systems
-- **Aggressive**: Faster response, requires monitoring
-- **Very aggressive**: Advanced users only, monitor closely
+- **Regular**: Faster settings, monitoring required
 - **Custom**: Manual tuning using individual parameters
 
-The system automatically applies the selected preset values and displays safety warnings for high parameter values.
+The system automatically applies the selected preset values on selection. After that, you can tune values to your liking.
 
-### PID Tuning (Advanced)
+> **IMPORTANT** Every home and system is different. Carefully monitor for **system instabilaty** and tune down values accordingly. 
+
+Your home needs unique settings. What's marked as 'Safe' for one, can be unstable for others. Keep this in mind.
+
+#### PID Tuning (Advanced)
 Use the [Ziegler-Nichols method]((https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller#Ziegler%E2%80%93Nichols_method)) for a starting point. 
 
 1. Set Kp to say 1.0, and be prepared to decrease it fast if needed.
