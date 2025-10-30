@@ -52,6 +52,7 @@ This project is designed for hobbyists who want to control home battery systems 
 1. **Import Node-RED Flows**
     - In Node-RED, go to the menu > Import > and select the relevant JSON files from the `node-red` folder:
        - `00 master-switch-flow.json` (enable/disable control)
+       - `00 presets-switch-flow.json` (pid control presets)
        - `01 start-flow.json` (the main flow)
    - Import charging strategies:
        - `02 strategy-custom.json` (custom strategy)
