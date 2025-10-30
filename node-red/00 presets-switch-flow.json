@@ -1,0 +1,298 @@
+[
+    {
+        "id": "900dac71a5028dca",
+        "type": "tab",
+        "label": "Home Battery PID presets",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e44a5d4c33f3cab1",
+        "type": "group",
+        "z": "900dac71a5028dca",
+        "name": "PID presets",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "4ea9a477ecf0c446",
+            "25b5a08a5bf89ac0",
+            "8feaf80456317a3e",
+            "570ba6efb8eb8dc7",
+            "f91f14aa5a48bda6",
+            "6ef258c42572df05",
+            "54fa9aa06d0d9224"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 632,
+        "h": 242
+    },
+    {
+        "id": "4ea9a477ecf0c446",
+        "type": "server-state-changed",
+        "z": "900dac71a5028dca",
+        "g": "e44a5d4c33f3cab1",
+        "name": "PID preset selected",
+        "server": "176d29a.6f648d6",
+        "version": 6,
+        "outputs": 1,
+        "exposeAsEntityConfig": "",
+        "entities": {
+            "entity": [
+                "input_select.house_battery_control_pid_presets"
+            ],
+            "substring": [],
+            "regex": []
+        },
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "f91f14aa5a48bda6"
+            ]
+        ]
+    },
+    {
+        "id": "25b5a08a5bf89ac0",
+        "type": "api-call-service",
+        "z": "900dac71a5028dca",
+        "g": "e44a5d4c33f3cab1",
+        "name": "Kp",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_control_kp"
+        ],
+        "labelId": [],
+        "data": "{\"value\": \"{{payload}}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 510,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8feaf80456317a3e",
+        "type": "api-call-service",
+        "z": "900dac71a5028dca",
+        "g": "e44a5d4c33f3cab1",
+        "name": "Ki",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_control_ki"
+        ],
+        "labelId": [],
+        "data": "{\"value\": \"{{payload}}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 510,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "570ba6efb8eb8dc7",
+        "type": "api-call-service",
+        "z": "900dac71a5028dca",
+        "g": "e44a5d4c33f3cab1",
+        "name": "Kd",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_control_kd"
+        ],
+        "labelId": [],
+        "data": "{\"value\": \"{{payload}}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 510,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f91f14aa5a48bda6",
+        "type": "function",
+        "z": "900dac71a5028dca",
+        "g": "e44a5d4c33f3cab1",
+        "name": "Presets",
+        "func": "// See: house_battery_control.yaml > input_select: > house_battery_control_pid_presets\nconst preset = RED.util.getMessageProperty(msg,\"payload\");\nnode.status({fill:\"green\",shape:\"dot\",text:`${preset}`});\n\n\n// Default values\nlet Kp = 0; // Proportional gain\nlet Ki = 0; // Integral gain\nlet Kd = 0; // Differentiating gain\nlet Si = 0; // % Input smoothing (a Low pass moving average filter)\nlet So = 0; // % Output smoothing (a Low pass moving average filter)\n\nswitch (preset) {\n    // For people who have unstable systems with every other preset\n    case \"Very safe\":\n        Kp = 0.1;\n        Ki = 0.1;\n        Si = 0; // without Kd, this is preferred to be zero.\n        So = 10; // %\n        break;\n    // Good starting point for most\n    case \"Safe\":\n        Kp = 0.3;\n        Ki = 0.3;\n        Kd = 0.1;\n        Si = 20; // %\n        So = 0; // %\n        break;\n    // Gitcodebob's October 2025 settings for 3.2kWp PV and 5kW battery transformer power\n    case \"Regular\":\n        Kp = 0.3;\n        Ki = 0.4;\n        Kd = 0.8;\n        Si = 50; // % This high amount of filtering allows the stronger Kd\n        So = 10; // %\n        break;\n    default:\n        // Don't change values\n        return null;\n}\n\n// Prepare for three outputs\nreturn [\n    { \"payload\": Kp },\n    { \"payload\": Ki },\n    { \"payload\": Kd },\n    { \"payload\": Si },\n    { \"payload\": So }\n];",
+        "outputs": 5,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 100,
+        "wires": [
+            [
+                "25b5a08a5bf89ac0"
+            ],
+            [
+                "8feaf80456317a3e"
+            ],
+            [
+                "570ba6efb8eb8dc7"
+            ],
+            [
+                "6ef258c42572df05"
+            ],
+            [
+                "54fa9aa06d0d9224"
+            ]
+        ]
+    },
+    {
+        "id": "6ef258c42572df05",
+        "type": "api-call-service",
+        "z": "900dac71a5028dca",
+        "g": "e44a5d4c33f3cab1",
+        "name": "Input Smooth",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_control_error_signal_dampening"
+        ],
+        "labelId": [],
+        "data": "{\"value\": \"{{payload}}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 530,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "54fa9aa06d0d9224",
+        "type": "api-call-service",
+        "z": "900dac71a5028dca",
+        "g": "e44a5d4c33f3cab1",
+        "name": "Output Smoothing",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_control_pid_output_dampening"
+        ],
+        "labelId": [],
+        "data": "{\"value\": \"{{payload}}\"}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 550,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "",
+        "connectionDelay": false,
+        "cacheJson": false,
+        "heartbeat": false,
+        "heartbeatInterval": "",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
+    }
+]
