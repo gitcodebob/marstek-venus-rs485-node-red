@@ -130,8 +130,8 @@ Open Node-RED (in an extra browser tab):
 - Open the debug bar to monitor messages.
 
 In Home Assistant:
-   - Find the Kp, Ki, Kd controls on the dashboard.
-      - Set Kp = 0.5
+   - Find the PID controls on the dashboard and select the `very safe` preset. Or set the Kp, Ki, Kd values manually to something like: 
+      - Kp = 0.5
       - Ki = 0
       - Kd = 0
    - Double check min/max SoC of your batteries
@@ -156,9 +156,11 @@ For easier setup, use the **PID Presets** dropdown in the Home Assistant dashboa
 
 The system automatically applies the selected preset values on selection. After that, you can tune values to your liking.
 
-> **IMPORTANT** Every home and system is different. Carefully monitor for **system instabilaty** and tune down values accordingly. 
+> **IMPORTANT SAFETY** Carefully monitor for **system instabilaty** and standby to tune down Kp, Ki, Kd values or disengage batteries when large oscillations persist.
 
-Your home needs unique settings. What's marked as 'Safe' for one, can be unstable for others. Keep this in mind.
+Every system is different and your home requires unique settings. What's marked as 'Regular' for one, can be unstable for others. Keep this in mind. This is also why this system can easily outperform Marstek software, as Marstek needs to put in a healthy safety margin to accomodate these differences between homes. 
+
+> **ADVISE** Keep the max. charge/discharge settings low (< 800 W) until you have experience with how your system reacts to coffee machines, hair straighteners, old washing machines and other 'horrifically noisy devices'.   
 
 #### PID Tuning (Advanced)
 Use the [Ziegler-Nichols method]((https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller#Ziegler%E2%80%93Nichols_method)) for a starting point. 
