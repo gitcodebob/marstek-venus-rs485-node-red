@@ -1,6 +1,20 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer).
 
+## 2.3.0
+- **Feature: PID Preset System for Simplified Tuning**
+  - Added PID presets dropdown with 6 preset options: Custom, Very safe, Safe, Regular, Aggressive, Very aggressive
+  - Implemented automatic PID parameter switching based on preset selection through new Node-RED flow
+  - Added safety warning display in dashboard for high PID values
+  - Enhanced PID tuning section in dashboard with preset selector and improved organization
+  - Simplified setup process for new users while maintaining advanced manual tuning options
+
+- **Files Changed:**
+  - `README.md` - Added PID presets documentation with concise setup guidance
+  - `home assistant/dashboard.yaml` - Added preset selector, safety warnings, and updated version to 2.3.0
+  - `home assistant/packages/house_battery_control.yaml` - Added PID presets input select entity
+  - `node-red/00 presets-switch-flow.json` - New flow for automatic preset-based PID parameter management
+
 ## 2.2.0
 - **Feature: Battery Prioritization and Auto-Cycling**
   - Added battery charge order rotation to optimize battery wear during multi-battery setups
