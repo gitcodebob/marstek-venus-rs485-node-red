@@ -1,6 +1,18 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer).
 
+## 2.4.1
+- **Fix: Resolve full-stop strategy issues and remove deprecated strategies**
+  - Fixed issues with the full-stop strategy functionality
+  - Removed deprecated time-of-use and trading strategies to clean up codebase
+  - Updated custom strategy configuration
+
+- **Files Changed:**
+  - `node-red/02 strategy-custom.json` - Updated custom strategy configuration
+  - `node-red/02 strategy-full-stop.json` - Fixed full-stop strategy issues
+  - `node-red/02 strategy-time-of-use.json` - Removed deprecated strategy
+  - `node-red/02 strategy-trading.json` - Removed deprecated strategy
+
 ## 2.4.0
 - **Fix: Timeout on Grid Charge or Wait Strategy**
   - Fixed timeout issues in grid charge or wait strategy flow
