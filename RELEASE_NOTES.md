@@ -1,5 +1,5 @@
 # Release Notes
-All releases follow Semantic Versioning (SemVer).
+All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
 ## 2.4.1
 - **Fix: Resolve full-stop strategy issues and remove deprecated strategies**
