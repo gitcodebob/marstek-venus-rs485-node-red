@@ -134,6 +134,8 @@ views:
                 name: M2
               - entity: select.marstek_m3_forcible_charge_discharge
                 name: M3
+              - entity: select.marstek_m4_forcible_charge_discharge
+                name: M4
             hours_to_show: 0.05
           - type: markdown
             content: '### Settings'
@@ -177,9 +179,7 @@ views:
           - type: markdown
             content: >-
               <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> **High
-              values - monitor your system**</font>
-
-              Use at your own risk.
+              values - monitor your system**</font>, use at your own risk.
             visibility:
               - condition: or
                 conditions:
@@ -344,6 +344,38 @@ views:
                   - condition: numeric_state
                     entity: input_number.house_battery_count
                     above: 2
+          - type: heading
+            heading: Marstek M4
+            heading_style: subtitle
+            icon: ''
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m4_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 3
+          - type: glance
+            entities:
+              - entity: sensor.marstek_m4_battery_state_of_charge
+                name: M4 SoC
+              - entity: sensor.marstek_m4_battery_power
+                name: M4 Power
+              - entity: number.marstek_m4_max_charge_power
+                name: Max Charge
+              - entity: number.marstek_m4_max_discharge_power
+                name: Max Discharge
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m4_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 3
       - cards:
           - type: heading
             heading: Histrory
@@ -351,7 +383,7 @@ views:
             type: history-graph
             entities:
               - entity: input_number.house_battery_control_error_signal
-              - entity: sensor.p1_meter_vermogen
+              - entity: sensor.p1_meter_power
               - entity: input_number.house_battery_control_pid_output
               - entity: input_number.house_battery_control_p_term
               - entity: input_number.house_battery_control_i_term
@@ -365,5 +397,5 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Configuration and settings (v2.4.1)
+          Configuration and settings (v2.5.0)
         text_only: true

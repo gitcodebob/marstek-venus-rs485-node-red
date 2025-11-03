@@ -42,7 +42,7 @@ input_number:
     # Number of Marstek batteries
     name: "Number of batteries"
     min: 1
-    max: 3
+    max: 4
     step: 1
     unit_of_measurement: ""
     mode: slider
@@ -52,7 +52,7 @@ input_number:
   house_battery_control_prioritize_battery:
     name: "Prioritize battery"
     min: 1
-    max: 3
+    max: 4
     step: 1
     unit_of_measurement: ""
     mode: box
@@ -120,7 +120,7 @@ input_number:
     # PID proportional amplification Kp
     name: "House Battery Control Proportional (Kp)"
     min: 0 # no proportional control
-    max: 2 # ecsessive proportional amplification
+    max: 2 # excessive proportional amplification
     step: 0.05
     unit_of_measurement: ""
     mode: box # 'box' of 'slider'
@@ -309,7 +309,8 @@ template:
           {% set bat_entities = [
             'sensor.marstek_m1_battery_power', 
             'sensor.marstek_m2_battery_power',
-            'sensor.marstek_m3_battery_power' 
+            'sensor.marstek_m3_battery_power', 
+            'sensor.marstek_m4_battery_power',
           ] %}
 
           {# Filter entities on valid values and retrieve power #}
@@ -342,7 +343,8 @@ template:
           {% set bat_entities = [
             'sensor.marstek_m1_battery_state_of_charge', 
             'sensor.marstek_m2_battery_state_of_charge',
-            'sensor.marstek_m3_battery_state_of_charge' 
+            'sensor.marstek_m3_battery_state_of_charge', 
+            'sensor.marstek_m4_battery_state_of_charge'
           ] %}
 
           {# Filter entities on valid values and retrieve SoC #}

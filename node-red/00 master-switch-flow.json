@@ -107,7 +107,8 @@
         "entityId": [
             "select.marstek_m1_rs485_control_mode",
             "select.marstek_m2_rs485_control_mode",
-            "select.marstek_m3_rs485_control_mode"
+            "select.marstek_m3_rs485_control_mode",
+            "select.marstek_m4_rs485_control_mode"
         ],
         "labelId": [],
         "data": "{   \"option\": \"disable\" }",
@@ -144,7 +145,8 @@
         "entityId": [
             "select.marstek_m1_user_work_mode",
             "select.marstek_m2_user_work_mode",
-            "select.marstek_m3_user_work_mode"
+            "select.marstek_m3_user_work_mode",
+            "select.marstek_m4_user_work_mode"
         ],
         "labelId": [],
         "data": "{   \"option\": \"manual\" }",
@@ -181,7 +183,8 @@
         "entityId": [
             "select.marstek_m1_rs485_control_mode",
             "select.marstek_m2_rs485_control_mode",
-            "select.marstek_m3_rs485_control_mode"
+            "select.marstek_m3_rs485_control_mode",
+            "select.marstek_m4_rs485_control_mode"
         ],
         "labelId": [],
         "data": "{   \"option\": \"enable\" }",
