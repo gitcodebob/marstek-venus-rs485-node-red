@@ -1,6 +1,16 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer).
 
+## 2.4.0
+- **Fix: Timeout on Grid Charge or Wait Strategy**
+  - Fixed timeout issues in grid charge or wait strategy flow
+  - Moved calculation of some totals to the start flow for better performance and reliability
+
+- **Files Changed:**
+  - `node-red/01 start-flow.json` - Moved some summations to here, to help all strategies use consistent values.
+  - `node-red/02 grid-charge-or-wait.json` - Fixed timeout issues in grid charge or wait strategy
+  - `node-red/02 strategy-self-consumption.json` - Updated to use summation totals from start-flow
+
 ## 2.3.0
 - **Feature: PID Preset System for Simplified Tuning**
   - Added PID presets dropdown with 4 preset options: Custom, Very safe, Safe, Regular

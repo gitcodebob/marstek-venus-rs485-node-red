@@ -45,7 +45,7 @@
             "7f303dfb944dfc04"
         ],
         "x": 34,
-        "y": 519,
+        "y": 619,
         "w": 812,
         "h": 162
     },
@@ -105,7 +105,7 @@
             "77163ca9f43e8fb7"
         ],
         "x": 34,
-        "y": 699,
+        "y": 799,
         "w": 838,
         "h": 342
     },
@@ -129,7 +129,7 @@
             "641cc1cf21ace75a"
         ],
         "x": 34,
-        "y": 419,
+        "y": 519,
         "w": 1852,
         "h": 82
     },
@@ -177,9 +177,30 @@
             "1e4f762143a12bba"
         ],
         "x": 294,
-        "y": 739,
+        "y": 839,
         "w": 552,
         "h": 222
+    },
+    {
+        "id": "c1e44a160c59f1a9",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "0be9d3b9ef3576fd"
+        ],
+        "x": 34,
+        "y": 419,
+        "w": 212,
+        "h": 82
     },
     {
         "id": "1d0932b9cdfe2cc0",
@@ -367,7 +388,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 140,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "06dd855a34065b5d"
@@ -388,7 +409,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "b658a34d31bcd8f3",
@@ -406,7 +427,7 @@
         "linkType": "dynamic",
         "timeout": "1.2",
         "x": 410,
-        "y": 600,
+        "y": 700,
         "wires": [
             [
                 "712cd7b2343eead6",
@@ -429,7 +450,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 710,
-        "y": 560,
+        "y": 660,
         "wires": []
     },
     {
@@ -447,7 +468,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 710,
-        "y": 600,
+        "y": 700,
         "wires": []
     },
     {
@@ -464,7 +485,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 640,
+        "y": 740,
         "wires": [
             [
                 "15830b9747f8132e"
@@ -525,7 +546,7 @@
         "z": "a099d47fc07b3cee",
         "g": "6fad59f7a8530963",
         "name": "Mapping",
-        "func": "// Map to batteries array\nmsg.batteries.push({\n    id: `M${msg.battery_index}`,\n    power: parseInt(msg.battery_power,10),\n    charging_max: parseInt(msg.max_charge_power,10),\n    discharging_max: parseInt(msg.max_discharge_power,10),\n    soc: parseInt(msg.battery_state_of_charge,10),\n    soc_max: parseInt(msg.charging_cutoff_capacity,10),\n    soc_min: parseInt(msg.discharging_cutoff_capacity,10),\n    inverter: String(msg.inverter_state),\n    cap_remaining: Number(msg.battery_remaining_capacity),\n    rs485: String(msg.rs485_control_mode)\n    });\n\n// Continue\nreturn msg;",
+        "func": "// Map to batteries array\nmsg.batteries.push({\n    id: `M${msg.battery_index}`,\n    power: parseInt(msg.battery_power,10),\n    charging_max: parseInt(msg.max_charge_power,10),\n    discharging_max: parseInt(msg.max_discharge_power,10),\n    soc: parseInt(msg.battery_state_of_charge,10),\n    soc_max: parseInt(msg.charging_cutoff_capacity,10),\n    soc_min: parseInt(msg.discharging_cutoff_capacity,10),\n    inverter: String(msg.inverter_state),\n    remaining_capacity: Number(msg.battery_remaining_capacity),\n    rs485: String(msg.rs485_control_mode)\n    });\n\n// Continue\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -569,7 +590,7 @@
             ],
             [
                 "1933f2623fa0fffb",
-                "1c419030271bee64"
+                "0be9d3b9ef3576fd"
             ]
         ]
     },
@@ -1188,7 +1209,7 @@
         "domain": "input_text",
         "service": "set_value",
         "x": 640,
-        "y": 780,
+        "y": 880,
         "wires": [
             []
         ]
@@ -1207,7 +1228,7 @@
         "finalize": "",
         "libs": [],
         "x": 390,
-        "y": 820,
+        "y": 920,
         "wires": [
             [
                 "e1927196c4198cbf"
@@ -1242,7 +1263,7 @@
         "finalize": "",
         "libs": [],
         "x": 120,
-        "y": 820,
+        "y": 920,
         "wires": [
             [
                 "047542bb597a3048"
@@ -1271,7 +1292,7 @@
         "repair": false,
         "outputs": 2,
         "x": 720,
-        "y": 880,
+        "y": 980,
         "wires": [
             [
                 "047542bb597a3048"
@@ -1295,7 +1316,7 @@
         "finalize": "",
         "libs": [],
         "x": 560,
-        "y": 880,
+        "y": 980,
         "wires": [
             [
                 "df4b99688f85df0a",
@@ -1328,7 +1349,7 @@
         "domain": "input_text",
         "service": "set_value",
         "x": 740,
-        "y": 820,
+        "y": 920,
         "wires": [
             []
         ]
@@ -1347,7 +1368,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 780,
+        "y": 880,
         "wires": [
             [
                 "95295516124d818d"
@@ -1373,7 +1394,7 @@
         "repair": false,
         "outputs": 1,
         "x": 150,
-        "y": 740,
+        "y": 840,
         "wires": [
             [
                 "4d6fd96944872ba1"
@@ -1394,7 +1415,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 940,
+        "y": 1040,
         "wires": [
             [
                 "77163ca9f43e8fb7"
@@ -1416,7 +1437,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 730,
-        "y": 920,
+        "y": 1020,
         "wires": []
     },
     {
@@ -1433,7 +1454,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 570,
-        "y": 820,
+        "y": 920,
         "wires": [
             [
                 "4decf8d91d6ccacb"
@@ -1455,7 +1476,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 110,
-        "y": 1000,
+        "y": 1100,
         "wires": []
     },
     {
@@ -1533,7 +1554,7 @@
         "finalize": "",
         "libs": [],
         "x": 360,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "e63433bdfbdd57e9"
@@ -1563,7 +1584,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 610,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "64c9954af597093d"
@@ -1584,7 +1605,7 @@
         "finalize": "",
         "libs": [],
         "x": 1540,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "c9b6b8b729161188"
@@ -1635,7 +1656,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1350,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "9f9dd1b6c8a68339"
@@ -1686,7 +1707,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 150,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "db8e14c359673211"
@@ -1720,7 +1741,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 1750,
-        "y": 460,
+        "y": 560,
         "wires": [
             []
         ]
@@ -1763,7 +1784,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 800,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "1dac3194a67aeec2"
@@ -1784,7 +1805,7 @@
         "finalize": "",
         "libs": [],
         "x": 980,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "641cc1cf21ace75a"
@@ -1835,11 +1856,35 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1160,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "1cc51c4bd0523e93"
             ]
+        ]
+    },
+    {
+        "id": "0be9d3b9ef3576fd",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "c1e44a160c59f1a9",
+        "name": "Batteries (totals)",
+        "func": "// batteries | calculate total and max. power delivered by batteries\nlet batteries = msg.batteries;\nlet batteries_total_power = 0;\nlet batteries_max_charging_power = 0;\nlet batteries_max_discharging_power = 0;\nlet batteries_remaining_capacity = 0;\n\nbatteries.forEach(battery => {\n    batteries_total_power += Number(battery.power);\n    batteries_max_charging_power += Number(battery.charging_max);\n    batteries_max_discharging_power += Number(battery.discharging_max);\n    batteries_remaining_capacity += Number(battery.remaining_capacity);\n});\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries_total_power\", batteries_total_power, true); // W\nRED.util.setMessageProperty(msg, \"batteries_max_charge_power\", batteries_max_charging_power,true); // W\nRED.util.setMessageProperty(msg, \"batteries_max_discharge_power\", batteries_max_discharging_power,true); // W\nRED.util.setMessageProperty(msg, \"batteries_remaining_capacity\",batteries_remaining_capacity,true); // kWh\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 460,
+        "wires": [
+            [
+                "1c419030271bee64"
+            ]
+        ],
+        "inputLabels": [
+            "Mapping (from Home Battery IO)"
         ]
     },
     {

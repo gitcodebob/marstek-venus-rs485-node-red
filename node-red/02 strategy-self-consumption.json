@@ -1,13 +1,11 @@
 [
     {
-        "id": "5188a2bc82313c2e",
-        "type": "comment",
-        "z": "c1a9925591b564a7",
-        "name": "Home Battery Strategy",
-        "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
-        "x": 120,
-        "y": 40,
-        "wires": []
+        "id": "c1a9925591b564a7",
+        "type": "tab",
+        "label": "Strategy Self-consumption",
+        "disabled": false,
+        "info": "",
+        "env": []
     },
     {
         "id": "e2c385d3b03e57bc",
@@ -26,33 +24,6 @@
         "y": 79,
         "w": 192,
         "h": 122
-    },
-    {
-        "id": "7a0cd93e9df76c48",
-        "type": "link in",
-        "z": "c1a9925591b564a7",
-        "g": "e2c385d3b03e57bc",
-        "name": "Self-consumption",
-        "links": [],
-        "x": 225,
-        "y": 160,
-        "wires": [
-            [
-                "f211567bf1aebc3d",
-                "f03b5e2d839f9828"
-            ]
-        ]
-    },
-    {
-        "id": "a56daa760b9feeb1",
-        "type": "comment",
-        "z": "c1a9925591b564a7",
-        "g": "e2c385d3b03e57bc",
-        "name": "Start (readme)",
-        "info": "# Setting up your battery strategy flow\n\n## Setup\nName the Link In in this start group exactly after the option configured in your\nselect_input.house_battery_strategy\n\nfound in the file:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nWill point to the flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
-        "x": 170,
-        "y": 120,
-        "wires": []
     },
     {
         "id": "419f0c8ca2d0601a",
@@ -74,46 +45,6 @@
         "h": 142
     },
     {
-        "id": "67116260f2e09362",
-        "type": "link out",
-        "z": "c1a9925591b564a7",
-        "g": "419f0c8ca2d0601a",
-        "name": "Return",
-        "mode": "return",
-        "links": [],
-        "x": 225,
-        "y": 1200,
-        "wires": []
-    },
-    {
-        "id": "999fa888c5e5e56b",
-        "type": "comment",
-        "z": "c1a9925591b564a7",
-        "g": "419f0c8ca2d0601a",
-        "name": "End (readme)",
-        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
-        "x": 170,
-        "y": 1140,
-        "wires": []
-    },
-    {
-        "id": "fb0eeeb7ddf70b28",
-        "type": "link in",
-        "z": "c1a9925591b564a7",
-        "g": "419f0c8ca2d0601a",
-        "name": "link to End",
-        "links": [
-            "7636353795317949"
-        ],
-        "x": 105,
-        "y": 1200,
-        "wires": [
-            [
-                "67116260f2e09362"
-            ]
-        ]
-    },
-    {
         "id": "3be8354628cecb12",
         "type": "group",
         "z": "c1a9925591b564a7",
@@ -132,6 +63,302 @@
         "y": 159,
         "w": 252,
         "h": 242
+    },
+    {
+        "id": "94b7ae0409093e17",
+        "type": "group",
+        "z": "c1a9925591b564a7",
+        "name": "Bumpless operation - switching control modes",
+        "style": {
+            "stroke": "#bfdbef",
+            "label": true
+        },
+        "nodes": [
+            "787d4a4302cc3783",
+            "58b3c35be6a1ea9c",
+            "5a05ae43285d5398",
+            "eca69e12794c1c0b",
+            "f5e5091687ccc093",
+            "cfc64f84a4532120",
+            "8a50bc3d63d7a248",
+            "a414c1013e9b72aa"
+        ],
+        "x": 1614,
+        "y": 419,
+        "w": 592,
+        "h": 282
+    },
+    {
+        "id": "7ab490ceca7cff35",
+        "type": "group",
+        "z": "c1a9925591b564a7",
+        "name": "Load distribution debug option",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "7ca8801a84b11ae8",
+            "95f5050249137fbc",
+            "6a1707cb3cef46f2"
+        ],
+        "x": 1614,
+        "y": 19,
+        "w": 452,
+        "h": 122
+    },
+    {
+        "id": "81135409fdd98a36",
+        "type": "group",
+        "z": "c1a9925591b564a7",
+        "name": "Inputs",
+        "style": {
+            "fill": "#7fb7df",
+            "label": true,
+            "color": "#ffffff"
+        },
+        "nodes": [
+            "d3eeef5879f195b1",
+            "54cf41d4c27eeebe"
+        ],
+        "x": 288,
+        "y": 13,
+        "w": 884,
+        "h": 194
+    },
+    {
+        "id": "83d2c9113c9411c2",
+        "type": "group",
+        "z": "c1a9925591b564a7",
+        "name": "Pre processing",
+        "style": {
+            "fill": "#bfdbef",
+            "label": true,
+            "color": "#7f7f7f"
+        },
+        "nodes": [
+            "086689c5c8bba4b6",
+            "991409971787deec",
+            "1fadb46f18a01ebe"
+        ],
+        "x": 288,
+        "y": 233,
+        "w": 1104,
+        "h": 294
+    },
+    {
+        "id": "2884d4b5e34912da",
+        "type": "group",
+        "z": "c1a9925591b564a7",
+        "name": "Control",
+        "style": {
+            "fill": "#7fb7df",
+            "label": true,
+            "color": "#ffffff"
+        },
+        "nodes": [
+            "21c8ea25ac313948",
+            "7242528b056e3c47"
+        ],
+        "x": 288,
+        "y": 553,
+        "w": 924,
+        "h": 654
+    },
+    {
+        "id": "d3eeef5879f195b1",
+        "type": "group",
+        "z": "c1a9925591b564a7",
+        "g": "81135409fdd98a36",
+        "name": "PID control inputs",
+        "style": {
+            "label": true,
+            "fill": "#ffffff"
+        },
+        "nodes": [
+            "8baa774c2b027a30",
+            "597ae0e8b54ce90b",
+            "5aa64580ae12f4b2",
+            "409b51e049035eb9",
+            "526cad5fede1f966"
+        ],
+        "x": 314,
+        "y": 39,
+        "w": 552,
+        "h": 142
+    },
+    {
+        "id": "54cf41d4c27eeebe",
+        "type": "group",
+        "z": "c1a9925591b564a7",
+        "g": "81135409fdd98a36",
+        "name": "Advanced features",
+        "style": {
+            "label": true,
+            "fill": "#ffffff"
+        },
+        "nodes": [
+            "7e1e11d0eb34edae",
+            "dde5b40cb7fe1ff8"
+        ],
+        "x": 894,
+        "y": 39,
+        "w": 252,
+        "h": 142
+    },
+    {
+        "id": "086689c5c8bba4b6",
+        "type": "group",
+        "z": "c1a9925591b564a7",
+        "g": "83d2c9113c9411c2",
+        "name": "",
+        "style": {
+            "fill": "#ffffff",
+            "label": true
+        },
+        "nodes": [
+            "8b9359ba6370a958",
+            "affa3d29d06490e4",
+            "d87e5fb7584a366b",
+            "d8cf3fee789fa491"
+        ],
+        "x": 314,
+        "y": 259,
+        "w": 292,
+        "h": 202
+    },
+    {
+        "id": "991409971787deec",
+        "type": "group",
+        "z": "c1a9925591b564a7",
+        "g": "83d2c9113c9411c2",
+        "name": "Derivative - incl. bumpless operation",
+        "style": {
+            "label": true,
+            "stroke": "#a4a4a4",
+            "fill": "#ffffff"
+        },
+        "nodes": [
+            "de3671b9c7503ce3",
+            "d2868e3da06e78d5",
+            "6f0b3716cc693cd6",
+            "e8409a2a051286bf",
+            "5b44917d48154dea"
+        ],
+        "x": 614,
+        "y": 359,
+        "w": 752,
+        "h": 142
+    },
+    {
+        "id": "1fadb46f18a01ebe",
+        "type": "group",
+        "z": "c1a9925591b564a7",
+        "g": "83d2c9113c9411c2",
+        "name": "Processing required? ",
+        "style": {
+            "label": true,
+            "fill": "#ffffff"
+        },
+        "nodes": [
+            "9b70f054ec8bbbb1",
+            "735046e00914a975",
+            "7636353795317949"
+        ],
+        "x": 614,
+        "y": 259,
+        "w": 562,
+        "h": 82
+    },
+    {
+        "id": "21c8ea25ac313948",
+        "type": "group",
+        "z": "c1a9925591b564a7",
+        "g": "2884d4b5e34912da",
+        "name": "PID controller",
+        "style": {
+            "label": true,
+            "fill": "#ffffff",
+            "color": "#3f3f3f"
+        },
+        "nodes": [
+            "028f43a44d1bec69",
+            "53039b668ab0a97e",
+            "235494cc1d2a6b97",
+            "5c62450063520ee9",
+            "d6e0a13720d2ceb3",
+            "9f823db632bbd13f",
+            "ea8b44a09b499968",
+            "d739d29aebbdb0e0",
+            "bc8a24344b2ae2ca",
+            "a79b2b6c56ce7751",
+            "4854534dc7c83892",
+            "7cdef29145623758",
+            "4cafd473afb89158",
+            "cbc863ac4c6ce1b8",
+            "cfa0372c07314b8d",
+            "e52abd366fd81c67",
+            "0c60f5ca1f25e34b"
+        ],
+        "x": 314,
+        "y": 579,
+        "w": 872,
+        "h": 482
+    },
+    {
+        "id": "7242528b056e3c47",
+        "type": "group",
+        "z": "c1a9925591b564a7",
+        "g": "2884d4b5e34912da",
+        "name": "Distribution",
+        "style": {
+            "label": true,
+            "fill": "#ffffff",
+            "color": "#3f3f3f"
+        },
+        "nodes": [
+            "2ef3fc5bd6a33686",
+            "3640364ae79b69ec"
+        ],
+        "x": 314,
+        "y": 1079,
+        "w": 452,
+        "h": 102
+    },
+    {
+        "id": "7a0cd93e9df76c48",
+        "type": "link in",
+        "z": "c1a9925591b564a7",
+        "g": "e2c385d3b03e57bc",
+        "name": "Self-consumption",
+        "links": [],
+        "x": 225,
+        "y": 160,
+        "wires": [
+            [
+                "8baa774c2b027a30"
+            ]
+        ]
+    },
+    {
+        "id": "a56daa760b9feeb1",
+        "type": "comment",
+        "z": "c1a9925591b564a7",
+        "g": "e2c385d3b03e57bc",
+        "name": "Start (readme)",
+        "info": "# Setting up your battery strategy flow\n\n## Setup\nName the Link In in this start group exactly after the option configured in your\nselect_input.house_battery_strategy\n\nfound in the file:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nWill point to the flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
+        "x": 170,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "5188a2bc82313c2e",
+        "type": "comment",
+        "z": "c1a9925591b564a7",
+        "name": "Home Battery Strategy",
+        "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
+        "x": 120,
+        "y": 40,
+        "wires": []
     },
     {
         "id": "2b06415ad41aae3a",
@@ -241,44 +468,6 @@
         "x": 1700,
         "y": 360,
         "wires": []
-    },
-    {
-        "id": "176d29a.6f648d6",
-        "type": "server",
-        "name": "Home Assistant",
-        "addon": true,
-        "rejectUnauthorizedCerts": true,
-        "ha_boolean": "",
-        "connectionDelay": false,
-        "cacheJson": false,
-        "heartbeat": false,
-        "heartbeatInterval": "",
-        "statusSeparator": "",
-        "enableGlobalContextStore": false
-    },
-    {
-        "id": "94b7ae0409093e17",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "name": "Bumpless operation - switching control modes",
-        "style": {
-            "stroke": "#bfdbef",
-            "label": true
-        },
-        "nodes": [
-            "787d4a4302cc3783",
-            "58b3c35be6a1ea9c",
-            "5a05ae43285d5398",
-            "eca69e12794c1c0b",
-            "f5e5091687ccc093",
-            "cfc64f84a4532120",
-            "8a50bc3d63d7a248",
-            "a414c1013e9b72aa"
-        ],
-        "x": 1614,
-        "y": 419,
-        "w": 592,
-        "h": 282
     },
     {
         "id": "787d4a4302cc3783",
@@ -565,24 +754,6 @@
         ]
     },
     {
-        "id": "7ab490ceca7cff35",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "name": "Load distribution debug option",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "7ca8801a84b11ae8",
-            "95f5050249137fbc",
-            "6a1707cb3cef46f2"
-        ],
-        "x": 1614,
-        "y": 19,
-        "w": 452,
-        "h": 122
-    },
-    {
         "id": "7ca8801a84b11ae8",
         "type": "inject",
         "z": "c1a9925591b564a7",
@@ -654,109 +825,6 @@
         ]
     },
     {
-        "id": "81135409fdd98a36",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "name": "Inputs",
-        "style": {
-            "fill": "#7fb7df",
-            "label": true,
-            "color": "#ffffff"
-        },
-        "nodes": [
-            "5f919465d4ba96f4",
-            "d3eeef5879f195b1",
-            "54cf41d4c27eeebe"
-        ],
-        "x": 288,
-        "y": 13,
-        "w": 1124,
-        "h": 194
-    },
-    {
-        "id": "5f919465d4ba96f4",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "g": "81135409fdd98a36",
-        "name": "Battery data",
-        "style": {
-            "label": true,
-            "fill": "#ffffff"
-        },
-        "nodes": [
-            "f03b5e2d839f9828",
-            "f211567bf1aebc3d"
-        ],
-        "x": 314,
-        "y": 39,
-        "w": 212,
-        "h": 142
-    },
-    {
-        "id": "f03b5e2d839f9828",
-        "type": "debug",
-        "z": "c1a9925591b564a7",
-        "g": "5f919465d4ba96f4",
-        "name": "Batteries",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "batteries",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 400,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "f211567bf1aebc3d",
-        "type": "function",
-        "z": "c1a9925591b564a7",
-        "g": "5f919465d4ba96f4",
-        "name": "Batteries + P1",
-        "func": "// grid power | power drawn/delivered\n// msg.grid_power\n\n// batteries | calculate total and max. power delivered by batteries\nlet batteries = msg.batteries;\nlet batteries_total_power = 0;\nlet batteries_max_charging_power = 0;\nlet batteries_max_discharging_power = 0;\n\nbatteries.forEach(battery => {\n    batteries_total_power += Number(battery.power);\n    batteries_max_charging_power += Number(battery.charging_max);\n    batteries_max_discharging_power += Number(battery.discharging_max);\n});\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries\", batteries, true); // true = create clone of batteries\nRED.util.setMessageProperty(msg, \"batteries_total_power\", batteries_total_power, true);\nRED.util.setMessageProperty(msg, \"batteries_max_charge_power\", batteries_max_charging_power,true);\nRED.util.setMessageProperty(msg, \"batteries_max_discharge_power\", batteries_max_discharging_power,true);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 420,
-        "y": 80,
-        "wires": [
-            [
-                "8baa774c2b027a30"
-            ]
-        ],
-        "inputLabels": [
-            "Mapping (from Home Battery IO)"
-        ]
-    },
-    {
-        "id": "d3eeef5879f195b1",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "g": "81135409fdd98a36",
-        "name": "PID control inputs",
-        "style": {
-            "label": true,
-            "fill": "#ffffff"
-        },
-        "nodes": [
-            "8baa774c2b027a30",
-            "597ae0e8b54ce90b",
-            "5aa64580ae12f4b2",
-            "409b51e049035eb9",
-            "526cad5fede1f966"
-        ],
-        "x": 554,
-        "y": 39,
-        "w": 552,
-        "h": 142
-    },
-    {
         "id": "8baa774c2b027a30",
         "type": "api-current-state",
         "z": "c1a9925591b564a7",
@@ -799,7 +867,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 690,
+        "x": 450,
         "y": 80,
         "wires": [
             [
@@ -851,7 +919,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 890,
+        "x": 650,
         "y": 80,
         "wires": [
             [
@@ -902,7 +970,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 650,
+        "x": 410,
         "y": 140,
         "wires": [
             [
@@ -953,7 +1021,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 830,
+        "x": 590,
         "y": 140,
         "wires": [
             [
@@ -1004,32 +1072,13 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1010,
+        "x": 770,
         "y": 140,
         "wires": [
             [
                 "dde5b40cb7fe1ff8"
             ]
         ]
-    },
-    {
-        "id": "54cf41d4c27eeebe",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "g": "81135409fdd98a36",
-        "name": "Advanced features",
-        "style": {
-            "label": true,
-            "fill": "#ffffff"
-        },
-        "nodes": [
-            "7e1e11d0eb34edae",
-            "dde5b40cb7fe1ff8"
-        ],
-        "x": 1134,
-        "y": 39,
-        "w": 252,
-        "h": 142
     },
     {
         "id": "7e1e11d0eb34edae",
@@ -1044,7 +1093,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1250,
+        "x": 1010,
         "y": 140,
         "wires": [
             [
@@ -1095,54 +1144,13 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1260,
+        "x": 1020,
         "y": 80,
         "wires": [
             [
                 "7e1e11d0eb34edae"
             ]
         ]
-    },
-    {
-        "id": "83d2c9113c9411c2",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "name": "Pre processing",
-        "style": {
-            "fill": "#bfdbef",
-            "label": true,
-            "color": "#7f7f7f"
-        },
-        "nodes": [
-            "086689c5c8bba4b6",
-            "991409971787deec",
-            "1fadb46f18a01ebe"
-        ],
-        "x": 288,
-        "y": 233,
-        "w": 1104,
-        "h": 294
-    },
-    {
-        "id": "086689c5c8bba4b6",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "g": "83d2c9113c9411c2",
-        "name": "",
-        "style": {
-            "fill": "#ffffff",
-            "label": true
-        },
-        "nodes": [
-            "8b9359ba6370a958",
-            "affa3d29d06490e4",
-            "d87e5fb7584a366b",
-            "d8cf3fee789fa491"
-        ],
-        "x": 314,
-        "y": 259,
-        "w": 292,
-        "h": 202
     },
     {
         "id": "8b9359ba6370a958",
@@ -1279,29 +1287,6 @@
         ]
     },
     {
-        "id": "991409971787deec",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "g": "83d2c9113c9411c2",
-        "name": "Derivative - incl. bumpless operation",
-        "style": {
-            "label": true,
-            "stroke": "#a4a4a4",
-            "fill": "#ffffff"
-        },
-        "nodes": [
-            "de3671b9c7503ce3",
-            "d2868e3da06e78d5",
-            "6f0b3716cc693cd6",
-            "e8409a2a051286bf",
-            "5b44917d48154dea"
-        ],
-        "x": 614,
-        "y": 359,
-        "w": 752,
-        "h": 142
-    },
-    {
         "id": "de3671b9c7503ce3",
         "type": "comment",
         "z": "c1a9925591b564a7",
@@ -1410,26 +1395,6 @@
         ]
     },
     {
-        "id": "1fadb46f18a01ebe",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "g": "83d2c9113c9411c2",
-        "name": "Processing required? ",
-        "style": {
-            "label": true,
-            "fill": "#ffffff"
-        },
-        "nodes": [
-            "9b70f054ec8bbbb1",
-            "735046e00914a975",
-            "7636353795317949"
-        ],
-        "x": 614,
-        "y": 259,
-        "w": 562,
-        "h": 82
-    },
-    {
         "id": "9b70f054ec8bbbb1",
         "type": "function",
         "z": "c1a9925591b564a7",
@@ -1449,111 +1414,6 @@
                 "735046e00914a975"
             ]
         ]
-    },
-    {
-        "id": "735046e00914a975",
-        "type": "switch",
-        "z": "c1a9925591b564a7",
-        "g": "1fadb46f18a01ebe",
-        "name": "Pass or Halt",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "halted by deadband",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "halted by deadband",
-                "vt": "str"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 910,
-        "y": 300,
-        "wires": [
-            [
-                "7636353795317949"
-            ],
-            [
-                "6f0b3716cc693cd6"
-            ]
-        ]
-    },
-    {
-        "id": "7636353795317949",
-        "type": "link out",
-        "z": "c1a9925591b564a7",
-        "g": "1fadb46f18a01ebe",
-        "name": "go to End",
-        "mode": "link",
-        "links": [
-            "fb0eeeb7ddf70b28"
-        ],
-        "x": 1090,
-        "y": 300,
-        "wires": [],
-        "inputLabels": [
-            "Halt"
-        ],
-        "l": true
-    },
-    {
-        "id": "2884d4b5e34912da",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "name": "Control",
-        "style": {
-            "fill": "#7fb7df",
-            "label": true,
-            "color": "#ffffff"
-        },
-        "nodes": [
-            "21c8ea25ac313948",
-            "7242528b056e3c47"
-        ],
-        "x": 288,
-        "y": 553,
-        "w": 924,
-        "h": 654
-    },
-    {
-        "id": "21c8ea25ac313948",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "g": "2884d4b5e34912da",
-        "name": "PID controller",
-        "style": {
-            "label": true,
-            "fill": "#ffffff"
-        },
-        "nodes": [
-            "028f43a44d1bec69",
-            "53039b668ab0a97e",
-            "235494cc1d2a6b97",
-            "5c62450063520ee9",
-            "d6e0a13720d2ceb3",
-            "9f823db632bbd13f",
-            "ea8b44a09b499968",
-            "d739d29aebbdb0e0",
-            "bc8a24344b2ae2ca",
-            "a79b2b6c56ce7751",
-            "4854534dc7c83892",
-            "7cdef29145623758",
-            "4cafd473afb89158",
-            "cbc863ac4c6ce1b8",
-            "cfa0372c07314b8d",
-            "e52abd366fd81c67",
-            "0c60f5ca1f25e34b"
-        ],
-        "x": 314,
-        "y": 579,
-        "w": 872,
-        "h": 482
     },
     {
         "id": "028f43a44d1bec69",
@@ -1966,6 +1826,143 @@
         ]
     },
     {
+        "id": "2ef3fc5bd6a33686",
+        "type": "function",
+        "z": "c1a9925591b564a7",
+        "g": "7242528b056e3c47",
+        "name": "Load distribution",
+        "func": "//Debug toggle\nlet debugLog = flow.get(\"LoadDistribution_debug_enabled\") === true;\n\n// INPUT\nvar batteries = msg.batteries; // Battery configuration as provided by `Home Batteries IO` flow\nvar isCharging = msg.batteries_charging; // Are we in a battery charging scenario?\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\nvar hasReverseDischargePriority = flow.get(\"has_reverse_priority_discharge\") || false; // Prioritize (dis)charging the same battery\nvar logdata = `Charging=${isCharging} | `; // logging for node-red debug node\n\n// how much power do the batteries need to compensate?\nvar unassigned_power = Math.round(Math.abs(msg.payload)); // Power in W to compensate using batteries\nlogdata += `Unassigned power ${unassigned_power} W | `;\n\n// inits \nvar solution_array = []; // load distribution solutions\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// debug output function\nfunction debug(message) {\n    if (debugLog) {\n        node.warn(message);\n        node.status({fill:\"yellow\",shape:\"ring\",text:\"debugging\"});\n    } else {\n        node.status({fill:\"green\",shape:\"dot\",text:\"operating\"});\n    }\n}\ndebug(`=== Cycle #${Date.now()} ===`);\n\n// battery life improvement (slow charge near max SoC)\n/**\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    if(max_power < 0) max_power = 0;\n    if (!hasChargingLimiter) return max_power;\n    if (soc >= 98) return Math.min(300, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 85) return Math.min(1500, max_power);\n    return max_power;\n}\nif (isCharging) logdata += `💡Charge limiting based on SoC | `;\n\n/**\n* battery life improvement (disconnects battery only if the battery is not used for ... seconds)\n* @param {string | number} batteryID\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getStopSolution(batteryID) {\n    // idle time, before stop is given to inverter relay.\n    let time_idle_minimum = flow.get(\"idle_time_minutes\")*60*1000||0; // Milliseconds\n\n    // retrieve last registered active times for each battery based on their ids\n    let lasttime_active = context.get(\"lasttime_active\");\n    \n    // battery exists in register \n    if(lasttime_active[batteryID] !== undefined){\n        // timing\n        let time_last = lasttime_active[batteryID]; // Milliseconds \n        let time_now = Date.now();                  // Milliseconds \n        let time_idle = (time_now - time_last); // Milliseconds\n        \n        // battery is ready for STOP\n        if (time_idle >= time_idle_minimum) return {id: batteryID, mode: CMODE.STOP, power:0}; // STOP or 0 Watt disconnects relay\n        // battery is kept IDLE, while awaiting minimum inactive time\n        logdata += `Idle: ${batteryID} ${Math.round(time_idle/1000)}s | `;\n        return { id: batteryID, mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE, power: 1 }; // 1 Watt keeps battery IDLE, keeping relay engaged\n    }\n\n    // battery missing in register\n    logdata += `'Idle: ${batteryID}' unknown last active time | `;\n    debug(`[IDLE] Battery '${batteryID}' unknown last active time`);\n    return getActiveSolution(batteryID, 1); // set a last active time and engage idle state\n}\nlogdata += \"💡Idle before stop | \";\n\n/**\n* Get battery solution and register a last active time.\n* @param {any} batteryID\n* @param {number} assigned_power\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getActiveSolution(batteryID, assigned_power){\n    // register battery as active\n    let lasttime_active = context.get(\"lasttime_active\")||[]; // last registered active times for each battery based on their ids\n    lasttime_active[batteryID] = Date.now();\n    context.set(\"lasttime_active\", lasttime_active);\n\n    // solution\n    return {\n        id: batteryID,\n        mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE,\n        power: Math.round(assigned_power)\n    };\n}\n\n// -- BATTERY DISCHARGE PRIORITY\nif (!isCharging && hasReverseDischargePriority) {\n   batteries.reverse();\n}\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ id: any; soc: number; soc_min: number; soc_max: number; rs485: string; charging_max: number; discharging_max: any; }} */ battery) => {\n  \n    debug(`[CHECK] Battery ${battery.id}: SoC=${battery.soc}%, Min=${battery.soc_min}%, Max=${battery.soc_max}%, RS485=${battery.rs485}, isCharging=${isCharging}`);\n    \n    // check if battery is available for (dis)charging\n    if ((battery.soc >= battery.soc_max && isCharging) || \n        (battery.soc <= battery.soc_min && !isCharging) || \n        battery.rs485 !== \"enable\") {\n        \n        // battery is NOT available\n        debug(`[SKIP] Battery ${battery.id}: skipped due to SoC/RS485 limit`);\n        let solution = getStopSolution(battery.id); // get a soft stop solution\n        // add solution, do not update last active time.\n        solution_array.push(solution);\n        return;\n    }\n\n    // battery is AVAILABLE, assign power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power);\n    \n    // select solution\n    var solution;\n    if (assign <= 0 ) {\n        // no power solution\n        solution = getStopSolution(battery.id); // a soft stop solution\n        assign = 0;\n    } else {\n        // assigned power solution\n        solution = getActiveSolution(battery.id, Math.round(assign));\n    }\n    solution_array.push(solution);\n    \n    // log\n    debug(`[ASSIGN] Battery ${solution.id}: allowed to ${solution.mode} with ${solution.power}W`);\n\n    // remaining power to assign\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n    //node.warn(`[BATTERY] UPDATE: ID=${battery.id}, new_unassigned=${unassigned_power}W, total_assignable=${batteries_total_assignable_power}W`);\n});\n\n// battery discharge priority - put solutions back in initial order\nif (!isCharging && hasReverseDischargePriority) {\n    solution_array.reverse();\n}\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power); // this is set for the anti-windup calculation in the earlier 'calculate corrections' node, which will pick this up during next iteration.\nlogdata += `batteries_total_assignable_power ${batteries_total_assignable_power} | `;\n\n// OUTPUT\nsolution_array.forEach(solution => { \n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;\n});\nRED.util.setMessageProperty(msg, \"solutions\", solution_array,true);\n\n// TWO OUTPUT NODES\nreturn [\n    { payload: logdata },    // debug output\n    msg , // to Home Battery flow\n    ]; ",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\ncontext.set(\"lasttime_active\",[]);",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1140,
+        "wires": [
+            [
+                "3640364ae79b69ec"
+            ],
+            [
+                "67116260f2e09362"
+            ]
+        ],
+        "inputLabels": [
+            "isCharging (boolean)"
+        ]
+    },
+    {
+        "id": "3640364ae79b69ec",
+        "type": "debug",
+        "z": "c1a9925591b564a7",
+        "g": "7242528b056e3c47",
+        "name": "Load distribution",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "735046e00914a975",
+        "type": "switch",
+        "z": "c1a9925591b564a7",
+        "g": "1fadb46f18a01ebe",
+        "name": "Pass or Halt",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "halted by deadband",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "halted by deadband",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 910,
+        "y": 300,
+        "wires": [
+            [
+                "7636353795317949"
+            ],
+            [
+                "6f0b3716cc693cd6"
+            ]
+        ]
+    },
+    {
+        "id": "67116260f2e09362",
+        "type": "link out",
+        "z": "c1a9925591b564a7",
+        "g": "419f0c8ca2d0601a",
+        "name": "Return",
+        "mode": "return",
+        "links": [],
+        "x": 225,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "999fa888c5e5e56b",
+        "type": "comment",
+        "z": "c1a9925591b564a7",
+        "g": "419f0c8ca2d0601a",
+        "name": "End (readme)",
+        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
+        "x": 170,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "7636353795317949",
+        "type": "link out",
+        "z": "c1a9925591b564a7",
+        "g": "1fadb46f18a01ebe",
+        "name": "go to End",
+        "mode": "link",
+        "links": [
+            "fb0eeeb7ddf70b28"
+        ],
+        "x": 1090,
+        "y": 300,
+        "wires": [],
+        "inputLabels": [
+            "Halt"
+        ],
+        "l": true
+    },
+    {
+        "id": "fb0eeeb7ddf70b28",
+        "type": "link in",
+        "z": "c1a9925591b564a7",
+        "g": "419f0c8ca2d0601a",
+        "name": "link to End",
+        "links": [
+            "7636353795317949"
+        ],
+        "x": 105,
+        "y": 1200,
+        "wires": [
+            [
+                "67116260f2e09362"
+            ]
+        ]
+    },
+    {
         "id": "e52abd366fd81c67",
         "type": "api-call-service",
         "z": "c1a9925591b564a7",
@@ -2019,67 +2016,17 @@
         ]
     },
     {
-        "id": "7242528b056e3c47",
-        "type": "group",
-        "z": "c1a9925591b564a7",
-        "g": "2884d4b5e34912da",
-        "name": "Distribution",
-        "style": {
-            "label": true,
-            "fill": "#ffffff"
-        },
-        "nodes": [
-            "2ef3fc5bd6a33686",
-            "3640364ae79b69ec"
-        ],
-        "x": 314,
-        "y": 1079,
-        "w": 452,
-        "h": 102
-    },
-    {
-        "id": "2ef3fc5bd6a33686",
-        "type": "function",
-        "z": "c1a9925591b564a7",
-        "g": "7242528b056e3c47",
-        "name": "Load distribution",
-        "func": "//Debug toggle\nlet debugLog = flow.get(\"LoadDistribution_debug_enabled\") === true;\n\n// INPUT\nvar batteries = msg.batteries; // Battery configuration as provided by `Home Batteries IO` flow\nvar isCharging = msg.batteries_charging; // Are we in a battery charging scenario?\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\nvar hasReverseDischargePriority = flow.get(\"has_reverse_priority_discharge\") || false; // Prioritize (dis)charging the same battery\nvar logdata = `Charging=${isCharging} | `; // logging for node-red debug node\n\n// how much power do the batteries need to compensate?\nvar unassigned_power = Math.round(Math.abs(msg.payload)); // Power in W to compensate using batteries\nlogdata += `Unassigned power ${unassigned_power} W | `;\n\n// inits \nvar solution_array = []; // load distribution solutions\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// debug output function\nfunction debug(message) {\n    if (debugLog) {\n        node.warn(message);\n        node.status({fill:\"yellow\",shape:\"ring\",text:\"debugging\"});\n    } else {\n        node.status({fill:\"green\",shape:\"dot\",text:\"operating\"});\n    }\n}\ndebug(`=== Cycle #${Date.now()} ===`);\n\n// battery life improvement (slow charge near max SoC)\n/**\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    if(max_power < 0) max_power = 0;\n    if (!hasChargingLimiter) return max_power;\n    if (soc >= 98) return Math.min(300, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 85) return Math.min(1500, max_power);\n    return max_power;\n}\nif (isCharging) logdata += `💡Charge limiting based on SoC | `;\n\n/**\n* battery life improvement (disconnects battery only if the battery is not used for ... seconds)\n* @param {string | number} batteryID\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getStopSolution(batteryID) {\n    // idle time, before stop is given to inverter relay.\n    let time_idle_minimum = flow.get(\"idle_time_minutes\")*60*1000||0; // Milliseconds\n\n    // retrieve last registered active times for each battery based on their ids\n    let lasttime_active = context.get(\"lasttime_active\");\n    \n    // battery exists in register \n    if(lasttime_active[batteryID] !== undefined){\n        // timing\n        let time_last = lasttime_active[batteryID]; // Milliseconds \n        let time_now = Date.now();                  // Milliseconds \n        let time_idle = (time_now - time_last); // Milliseconds\n        \n        // battery is ready for STOP\n        if (time_idle >= time_idle_minimum) return {id: batteryID, mode: CMODE.STOP, power:0}; // STOP or 0 Watt disconnects relay\n        // battery is kept IDLE, while awaiting minimum inactive time\n        logdata += `Idle: ${batteryID} ${Math.round(time_idle/1000)}s | `;\n        return { id: batteryID, mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE, power: 1 }; // 1 Watt keeps battery IDLE, keeping relay engaged\n    }\n\n    // battery missing in register\n    logdata += `'Idle: ${batteryID}' unknown last active time | `;\n    debug(`[IDLE] Battery '${batteryID}' unknown last active time`);\n    return getActiveSolution(batteryID, 1); // set a last active time and engage idle state\n}\nlogdata += \"💡Idle before stop | \";\n\n/**\n* Get battery solution and register a last active time.\n* @param {any} batteryID\n* @param {number} assigned_power\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getActiveSolution(batteryID, assigned_power){\n    // register battery as active\n    let lasttime_active = context.get(\"lasttime_active\")||[]; // last registered active times for each battery based on their ids\n    lasttime_active[batteryID] = Date.now();\n    context.set(\"lasttime_active\", lasttime_active);\n\n    // solution\n    return {\n        id: batteryID,\n        mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE,\n        power: Math.round(assigned_power)\n    };\n}\n\n// -- BATTERY DISCHARGE PRIORITY\nif (!isCharging && hasReverseDischargePriority) {\n   batteries.reverse();\n}\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ id: any; soc: number; soc_min: number; soc_max: number; rs485: string; charging_max: number; discharging_max: any; }} */ battery) => {\n  \n    debug(`[CHECK] Battery ${battery.id}: SoC=${battery.soc}%, Min=${battery.soc_min}%, Max=${battery.soc_max}%, RS485=${battery.rs485}, isCharging=${isCharging}`);\n    \n    // check if battery is available for (dis)charging\n    if ((battery.soc >= battery.soc_max && isCharging) || \n        (battery.soc <= battery.soc_min && !isCharging) || \n        battery.rs485 !== \"enable\") {\n        \n        // battery is NOT available\n        debug(`[SKIP] Battery ${battery.id}: skipped due to SoC/RS485 limit`);\n        let solution = getStopSolution(battery.id); // get a soft stop solution\n        // add solution, do not update last active time.\n        solution_array.push(solution);\n        return;\n    }\n\n    // battery is AVAILABLE, assign power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power);\n    \n    // select solution\n    var solution;\n    if (assign <= 0 ) {\n        // no power solution\n        solution = getStopSolution(battery.id); // a soft stop solution\n        assign = 0;\n    } else {\n        // assigned power solution\n        solution = getActiveSolution(battery.id, Math.round(assign));\n    }\n    solution_array.push(solution);\n    \n    // log\n    debug(`[ASSIGN] Battery ${solution.id}: allowed to ${solution.mode} with ${solution.power}W`);\n\n    // remaining power to assign\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n    //node.warn(`[BATTERY] UPDATE: ID=${battery.id}, new_unassigned=${unassigned_power}W, total_assignable=${batteries_total_assignable_power}W`);\n});\n\n// battery discharge priority - put solutions back in initial order\nif (!isCharging && hasReverseDischargePriority) {\n    solution_array.reverse();\n}\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power); // this is set for the anti-windup calculation in the earlier 'calculate corrections' node, which will pick this up during next iteration.\nlogdata += `batteries_total_assignable_power ${batteries_total_assignable_power} | `;\n\n// OUTPUT\nsolution_array.forEach(solution => { \n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;\n});\nRED.util.setMessageProperty(msg, \"solutions\", solution_array,true);\n\n// TWO OUTPUT NODES\nreturn [\n    { payload: logdata },    // debug output\n    msg , // to Home Battery flow\n    ]; ",
-        "outputs": 2,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\ncontext.set(\"lasttime_active\",[]);",
-        "finalize": "",
-        "libs": [],
-        "x": 420,
-        "y": 1140,
-        "wires": [
-            [
-                "3640364ae79b69ec"
-            ],
-            [
-                "67116260f2e09362"
-            ]
-        ],
-        "inputLabels": [
-            "isCharging (boolean)"
-        ]
-    },
-    {
-        "id": "3640364ae79b69ec",
-        "type": "debug",
-        "z": "c1a9925591b564a7",
-        "g": "7242528b056e3c47",
-        "name": "Load distribution",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 640,
-        "y": 1120,
-        "wires": []
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "",
+        "connectionDelay": false,
+        "cacheJson": false,
+        "heartbeat": false,
+        "heartbeatInterval": "",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
     }
 ]

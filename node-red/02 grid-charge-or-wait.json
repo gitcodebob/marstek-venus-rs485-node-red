@@ -36,8 +36,8 @@
             "87d548bd5aed4381",
             "8feec1efcb2a7b66"
         ],
-        "x": 864,
-        "y": 379,
+        "x": 1134,
+        "y": 359,
         "w": 192,
         "h": 142
     },
@@ -51,12 +51,37 @@
         },
         "nodes": [
             "7266d15692f87378",
-            "7268dcab2999bcaa"
+            "7268dcab2999bcaa",
+            "7906a9814a37c604"
         ],
         "x": 34,
         "y": 319,
-        "w": 232,
+        "w": 352,
         "h": 149.5
+    },
+    {
+        "id": "519373692dbd5ba7",
+        "type": "junction",
+        "z": "ad59aaf659b31a8d",
+        "x": 420,
+        "y": 360,
+        "wires": [
+            [
+                "c2b74ee3bc97b96f"
+            ]
+        ]
+    },
+    {
+        "id": "08205056ad18de19",
+        "type": "junction",
+        "z": "ad59aaf659b31a8d",
+        "x": 420,
+        "y": 460,
+        "wires": [
+            [
+                "87d548bd5aed4381"
+            ]
+        ]
     },
     {
         "id": "791b11003865e232",
@@ -102,8 +127,8 @@
         "name": "Return",
         "mode": "return",
         "links": [],
-        "x": 905,
-        "y": 480,
+        "x": 1175,
+        "y": 460,
         "wires": []
     },
     {
@@ -113,8 +138,8 @@
         "g": "a43400bd874ba358",
         "name": "End (readme)",
         "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
-        "x": 960,
-        "y": 420,
+        "x": 1230,
+        "y": 400,
         "wires": []
     },
     {
@@ -318,34 +343,11 @@
         ]
     },
     {
-        "id": "f0d0cb9b4959bc41",
-        "type": "function",
-        "z": "ad59aaf659b31a8d",
-        "name": "Sum current  battery capacity",
-        "func": "let total_current_capacity = 0\n\nmsg.batteries.forEach(battery => {\n    total_current_capacity += battery.remaining_capacity\n});\n\nmsg.payload = total_current_capacity;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 180,
-        "y": 540,
-        "wires": [
-            [
-                "6e725d636fd14dbf"
-            ]
-        ],
-        "inputLabels": [
-            "Mapping (from Home Battery IO)"
-        ]
-    },
-    {
         "id": "6e725d636fd14dbf",
         "type": "switch",
         "z": "ad59aaf659b31a8d",
         "name": "Check target capacity ",
-        "property": "payload",
+        "property": "batteries_remaining_capacity",
         "propertyType": "msg",
         "rules": [
             {
@@ -362,8 +364,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 420,
-        "y": 540,
+        "x": 740,
+        "y": 400,
         "wires": [
             [
                 "c2b74ee3bc97b96f"
@@ -385,34 +387,16 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 670,
-        "y": 560,
+        "x": 970,
+        "y": 420,
         "wires": [
             [
-                "dd6bbe7241cefe5f",
                 "87d548bd5aed4381"
             ]
         ],
         "inputLabels": [
             "Mapping (from Home Battery IO)"
         ]
-    },
-    {
-        "id": "dd6bbe7241cefe5f",
-        "type": "debug",
-        "z": "ad59aaf659b31a8d",
-        "name": "Output solution array",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 960,
-        "y": 560,
-        "wires": []
     },
     {
         "id": "c2b74ee3bc97b96f",
@@ -439,8 +423,8 @@
         "blockInputOverrides": false,
         "domain": "input_select",
         "service": "select_option",
-        "x": 670,
-        "y": 520,
+        "x": 970,
+        "y": 360,
         "wires": [
             [
                 "87d548bd5aed4381"
@@ -501,51 +485,34 @@
         "id": "512cb5d167268473",
         "type": "switch",
         "z": "ad59aaf659b31a8d",
-        "name": "Carge enabled?",
+        "name": "Charge enabled?",
         "property": "strategy_accu_grid_charge_or_wait_charge_enabled",
         "propertyType": "flow",
         "rules": [
             {
                 "t": "eq",
-                "v": "off",
+                "v": "on",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "on",
+                "v": "off",
                 "vt": "str"
             }
         ],
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 140,
-        "y": 500,
+        "x": 510,
+        "y": 420,
         "wires": [
             [
-                "87d548bd5aed4381"
+                "6e725d636fd14dbf"
             ],
             [
-                "f0d0cb9b4959bc41"
+                "08205056ad18de19"
             ]
         ]
-    },
-    {
-        "id": "1d7bf833dbd1b1fc",
-        "type": "debug",
-        "z": "ad59aaf659b31a8d",
-        "name": "Output",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 510,
-        "y": 400,
-        "wires": []
     },
     {
         "id": "7268dcab2999bcaa",
@@ -564,8 +531,8 @@
         "z": "ad59aaf659b31a8d",
         "g": "7e7a68d5afb27d01",
         "name": "Check time window",
-        "func": "// Verwacht tijden als \"HH:MM\" of \"HH:MM:SS\" in flow context\nconst startRaw = flow.get('strategy_accu_grid_charge_or_wait_start_at');\nconst stopRaw = flow.get('strategy_accu_grid_charge_or_wait_stop_at');\n\nif (!startRaw || !stopRaw) {\n  node.status({ fill: \"yellow\", shape: \"ring\", text: \"start/stop niet gezet\" });\n  return [null, null, null];\n}\n\nfunction parseHM(raw) {\n  const [h, m, s] = raw.trim().split(':').map(Number);\n  if (Number.isInteger(h) && Number.isInteger(m)) return { h, m, s: s || 0 };\n  throw new Error(\"Onbekend tijdformaat: \" + raw);\n}\nfunction todSeconds(d) { return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds(); }\n\nconst now = new Date(); // lokale tijd\nconst { h: sh, m: sm, s: ss } = parseHM(startRaw);\nconst { h: eh, m: em, s: es } = parseHM(stopRaw);\n\nconst nowTOD = todSeconds(now);\nconst startTOD = sh * 3600 + sm * 60 + ss;\nconst stopTOD = eh * 3600 + em * 60 + es;\n\nlet start, stop, state;\n\n// CASE A: zelfde-dag venster (bv. 14:00 → 18:00)\nif (stopTOD > startTOD) {\n  start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  stop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD < startTOD) state = \"planned\"; // nog niet begonnen\n  else if (nowTOD < stopTOD) state = \"inside\";  // actief\n  else state = \"after\";   // voorbij\n\n  // CASE B: overnight venster (bv. 22:00 → 09:00)\n} else {\n  const eveningStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  const morningStop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD >= startTOD) {\n    // Avonddeel\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"inside\";\n  } else if (nowTOD < stopTOD) {\n    // Ochtenddeel\n    start = new Date(eveningStart); start.setDate(start.getDate() - 1);\n    stop = morningStop;\n    state = \"inside\";\n  } else {\n    // Overdag tussen stop en start\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"planned\";\n  }\n}\n\n// Vul message\nmsg.state = state; // \"planned\" | \"inside\" | \"after\"\nmsg.window = {\n  now: now.toISOString(),\n  start: start.toISOString(),\n  stop: stop.toISOString(),\n  start_raw: startRaw,\n  stop_raw: stopRaw\n};\nmsg.payload = { state, window: msg.window };\n\n// Node status kleuren\nif (state === \"planned\") {\n  node.status({ fill: \"blue\", shape: \"dot\", text: `PLANNED ${startRaw}→${stopRaw}` });\n  return [msg, null, null];\n}\nif (state === \"inside\") {\n  node.status({ fill: \"green\", shape: \"dot\", text: `INSIDE ${startRaw}→${stopRaw}` });\n  return [null, msg, null];\n}\n// Anders = after\nnode.status({ fill: \"grey\", shape: \"dot\", text: `AFTER ${startRaw}→${stopRaw}` });\nreturn [null, null, msg];",
-        "outputs": 3,
+        "func": "// Verwacht tijden als \"HH:MM\" of \"HH:MM:SS\" in flow context\nconst startRaw = flow.get('strategy_accu_grid_charge_or_wait_start_at');\nconst stopRaw = flow.get('strategy_accu_grid_charge_or_wait_stop_at');\n\nif (!startRaw || !stopRaw) {\n  node.status({ fill: \"yellow\", shape: \"ring\", text: \"start/stop niet gezet\" });\n  return [null, null, null];\n}\n\nfunction parseHM(raw) {\n  const [h, m, s] = raw.trim().split(':').map(Number);\n  if (Number.isInteger(h) && Number.isInteger(m)) return { h, m, s: s || 0 };\n  throw new Error(\"Onbekend tijdformaat: \" + raw);\n}\nfunction todSeconds(d) { return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds(); }\n\nconst now = new Date(); // lokale tijd\nconst { h: sh, m: sm, s: ss } = parseHM(startRaw);\nconst { h: eh, m: em, s: es } = parseHM(stopRaw);\n\nconst nowTOD = todSeconds(now);\nconst startTOD = sh * 3600 + sm * 60 + ss;\nconst stopTOD = eh * 3600 + em * 60 + es;\n\nlet start, stop, state;\n\n// CASE A: zelfde-dag venster (bv. 14:00 → 18:00)\nif (stopTOD > startTOD) {\n  start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  stop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD < startTOD) state = \"planned\"; // nog niet begonnen\n  else if (nowTOD < stopTOD) state = \"inside\";  // actief\n  else state = \"after\";   // voorbij\n\n  // CASE B: overnight venster (bv. 22:00 → 09:00)\n} else {\n  const eveningStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  const morningStop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD >= startTOD) {\n    // Avonddeel\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"inside\";\n  } else if (nowTOD < stopTOD) {\n    // Ochtenddeel\n    start = new Date(eveningStart); start.setDate(start.getDate() - 1);\n    stop = morningStop;\n    state = \"inside\";\n  } else {\n    // Overdag tussen stop en start\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"planned\";\n  }\n}\n\n// Vul message\nmsg.state = state; // \"planned\" | \"inside\" | \"after\"\nmsg.window = {\n  now: now.toISOString(),\n  start: start.toISOString(),\n  stop: stop.toISOString(),\n  start_raw: startRaw,\n  stop_raw: stopRaw\n};\nmsg.payload = { state, window: msg.window };\n\n// Node status kleuren\nswitch (msg.state) {\n  case \"planned\":\n    node.status({ fill: \"blue\", shape: \"dot\", text: `PLANNED ${startRaw}→${stopRaw}` });\n    break;\n  case \"inside\":\n    node.status({ fill: \"green\", shape: \"dot\", text: `INSIDE ${startRaw}→${stopRaw}` });\n    break;\n  case \"after\":\n    node.status({ fill: \"grey\", shape: \"dot\", text: `AFTER ${startRaw}→${stopRaw}` });\n    break;\n  default:\n    node.status({ fill: \"yellow\", shape: \"dot\", text: `${state} ${startRaw}→${stopRaw}` });\n}\n\nreturn msg;",
+        "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
@@ -575,16 +542,50 @@
         "y": 420,
         "wires": [
             [
-                "87d548bd5aed4381",
-                "1d7bf833dbd1b1fc"
+                "7906a9814a37c604"
+            ]
+        ],
+        "outputLabels": [
+            "Planned"
+        ]
+    },
+    {
+        "id": "7906a9814a37c604",
+        "type": "switch",
+        "z": "ad59aaf659b31a8d",
+        "g": "7e7a68d5afb27d01",
+        "name": "case",
+        "property": "state",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "after",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "inside",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 310,
+        "y": 420,
+        "wires": [
+            [
+                "519373692dbd5ba7"
             ],
             [
-                "512cb5d167268473",
-                "1d7bf833dbd1b1fc"
+                "512cb5d167268473"
             ],
             [
-                "c2b74ee3bc97b96f",
-                "1d7bf833dbd1b1fc"
+                "08205056ad18de19"
             ]
         ]
     },
