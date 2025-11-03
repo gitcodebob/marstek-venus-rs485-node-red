@@ -261,8 +261,6 @@ input_select:
     options:
       - Full stop # Stop (dis)charging and disengage grid relay
       - Self-consumption # Use your own solar production. Don't buy or sell. Target grid consumption = 0, e.g. "Nul op de meter (NoM)" in Dutch.
-      - Time-of-Use # Buy when prices are low and store solar, use when power is expensive. Aka Time-of-Use optimization.
-      - Trading # Ignore your own usage, optimize for making money via trading. Buy when prices are low, fully discharge when prices are high.
       - Grid-Charge-Or-Wait #charge from the grid during (very) low or negative price hours to cover upcoming expensive hours when PV is insufficient
       - Custom 1 # Your own strategy here
     icon: mdi:home-battery
@@ -291,8 +289,6 @@ input_select:
     options:
       - Full stop # Stop (dis)charging and disengage grid relay
       - Self-consumption # Use your own solar production. Don't buy or sell. Target grid consumption = 0, e.g. "Nul op de meter (NoM)" in Dutch.
-      - Time-of-Use # Buy when prices are low and store solar, use when power is expensive. Aka Time-of-Use optimization.
-      - Trading # Ignore your own usage, optimize for making money via trading. Buy when prices are low, fully discharge when prices are high.
       - Custom 1 # Your own strategy here
     icon: mdi:home-battery
 
