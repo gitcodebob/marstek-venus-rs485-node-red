@@ -73,7 +73,7 @@
         "type": "function",
         "z": "9c775009242a5a6b",
         "name": "Stop all batteries",
-        "func": "// INPUT\n// Home Battery Start payload\n\n// Process\nlet solution_array = [];\n\n// Add a solution per battery\nmsg.batteries.forEach(battery => {\n    solution_array.push({ id: battery.id, \n    mode: \"stop\", // disengages Marstek Battery\n    power: 0 }); // set power to 0W\n});\n\n// OUTPUT\nmsg.payload = solution_array;\nreturn msg;",
+        "func": "// INPUT\n// Home Battery Start payload\n\n// Process\nlet solution_array = [];\n\n// Add a solution per battery\nmsg.batteries.forEach(battery => {\n    solution_array.push({ id: battery.id, \n    mode: \"stop\", // disengages Marstek Battery\n    power: 0 }); // set power to 0W\n});\n\n// OUTPUT\nmsg.solutions = solution_array;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
