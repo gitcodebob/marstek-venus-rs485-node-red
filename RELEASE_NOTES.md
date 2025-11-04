@@ -1,14 +1,19 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 2.5.1
+- **Refactor: Replaced hardcoded 4-battery count in Master switch flow**
+  - Dynamically supports 1 to many batteries
+  - Removes Node-RED error messages when having less than the hardcoded amount of batteries
+
+- **Files Changed:**
+  - `node-red/00 master-switch-flow.json` - Refactored to use dynamic battery loop instead of hardcoded 4-battery limit
+
 ## 2.5.0
 - **Feature: 4-battery support out of the box, and several minor bugfixes on dashboard**
-  - Enhanced dashboard to properly display all 4 batteries (M1-M4) with correct visibility conditions
-  - Fixed M4 history graph entity reference (was incorrectly pointing to M3)
-  - Standardized sensor naming in PID analysis graph
+  - Enhanced dashboard to properly display up to 4 batteries (M1-M4)
   - All Node-RED flows now fully support 4-battery configurations
   - Improved template sensors to include M4 battery data
-  - Battery prioritization and load balancing now works seamlessly across 1-4 batteries
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml` - Fixed M4 entity references and standardized sensor names

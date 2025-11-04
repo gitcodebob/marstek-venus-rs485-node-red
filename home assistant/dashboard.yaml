@@ -397,5 +397,5 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Configuration and settings (v2.5.0)
+          Configuration and settings (v2.5.1)
         text_only: true
