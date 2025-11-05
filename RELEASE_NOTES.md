@@ -1,6 +1,20 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 2.5.2
+- **Add: Node-RED examples directory with advanced strategy patterns**
+  - Added `node-red/examples/` directory containing example flows for advanced users
+  - Includes super-strategy example demonstrating how to create strategies that govern other sub-strategies
+  - Updated README.md to reference the new examples directory
+- **Fix: Updated README to remove references to deprecated strategy files**
+  - Removed obsolete references to `02 strategy-time-of-use.json` and `02 strategy-trading.json` which were removed in v2.4.1
+
+- **Files Changed:**
+  - `node-red/examples/02 super-strategy.json` - New example flow showing advanced strategy pattern
+  - `node-red/examples/EXAMPLES.md` - Documentation for example flows
+  - `README.md` - Updated to mention examples directory and remove obsolete strategy references
+  - `home assistant/dashboard.yaml` - Updated version to v2.5.2
+
 ## 2.5.1
 - **Refactor: Replaced hardcoded 4-battery count in Master switch flow**
   - Dynamically supports 1 to many batteries

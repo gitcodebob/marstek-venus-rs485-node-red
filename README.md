@@ -59,8 +59,7 @@ This project is designed for hobbyists who want to control home battery systems 
        - `02 strategy-full-stop.json` (full stop strategy)
        - `02 strategy-self-consumption.json` (self-consumption strategy)
        - `02 grid-charge-or-wait.json` (manual timer based strategy, author: R. Ordelman)
-       - `02 strategy-time-of-use.json` (time-of-use strategy)
-       - `02 strategy-trading.json` (trading strategy)
+   - Optional: Explore additional examples in the `node-red/examples/` directory for advanced strategy patterns
    - Deploy all flows. No edits required.
 
 5. **Firing up**
