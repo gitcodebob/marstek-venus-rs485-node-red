@@ -134,6 +134,27 @@
         "h": 82
     },
     {
+        "id": "c1e44a160c59f1a9",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "0be9d3b9ef3576fd"
+        ],
+        "x": 34,
+        "y": 419,
+        "w": 212,
+        "h": 82
+    },
+    {
         "id": "b63f2e905b829e5b",
         "type": "group",
         "z": "a099d47fc07b3cee",
@@ -182,27 +203,6 @@
         "h": 222
     },
     {
-        "id": "c1e44a160c59f1a9",
-        "type": "group",
-        "z": "a099d47fc07b3cee",
-        "style": {
-            "stroke": "#565656",
-            "stroke-opacity": "1",
-            "fill": "#3a3a3a",
-            "fill-opacity": "0.5",
-            "label": true,
-            "label-position": "nw",
-            "color": "#cccccc"
-        },
-        "nodes": [
-            "0be9d3b9ef3576fd"
-        ],
-        "x": 34,
-        "y": 419,
-        "w": 212,
-        "h": 82
-    },
-    {
         "id": "1d0932b9cdfe2cc0",
         "type": "server-state-changed",
         "z": "a099d47fc07b3cee",
@@ -220,7 +220,7 @@
             "regex": []
         },
         "outputInitially": false,
-        "stateType": "num",
+        "stateType": "str",
         "ifState": "",
         "ifStateType": "str",
         "ifStateOperator": "is",
@@ -237,7 +237,7 @@
             {
                 "property": "grid_power",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
@@ -255,7 +255,7 @@
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -625,13 +625,13 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "entity_id": "input_number.house_battery_count",
-        "state_type": "num",
+        "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
@@ -643,7 +643,7 @@
             {
                 "property": "battery_count",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -727,13 +727,13 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "entity_id": "sensor.marstek_m{{battery_index}}_battery_state_of_charge",
-        "state_type": "num",
+        "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
@@ -745,7 +745,7 @@
             {
                 "property": "battery_state_of_charge",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -829,13 +829,13 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "entity_id": "number.marstek_m{{battery_index}}_discharging_cutoff_capacity",
-        "state_type": "num",
+        "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
@@ -847,7 +847,7 @@
             {
                 "property": "discharging_cutoff_capacity",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -880,13 +880,13 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "entity_id": "number.marstek_m{{battery_index}}_charging_cutoff_capacity",
-        "state_type": "num",
+        "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
@@ -898,7 +898,7 @@
             {
                 "property": "charging_cutoff_capacity",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -931,13 +931,13 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "entity_id": "number.marstek_m{{battery_index}}_max_discharge_power",
-        "state_type": "num",
+        "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
@@ -949,7 +949,7 @@
             {
                 "property": "max_discharge_power",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -982,13 +982,13 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "entity_id": "sensor.marstek_m{{battery_index}}_battery_remaining_capacity",
-        "state_type": "num",
+        "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
@@ -1000,7 +1000,7 @@
             {
                 "property": "battery_remaining_capacity",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -1033,13 +1033,13 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "entity_id": "number.marstek_m{{battery_index}}_max_charge_power",
-        "state_type": "num",
+        "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
@@ -1051,7 +1051,7 @@
             {
                 "property": "max_charge_power",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -1084,7 +1084,7 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "entity_id": "sensor.marstek_m{{battery_index}}_battery_power",
-        "state_type": "num",
+        "state_type": "str",
         "blockInputOverrides": false,
         "outputProperties": [
             {
@@ -1096,13 +1096,13 @@
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
                 "property": "battery_power",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -1625,13 +1625,13 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "entity_id": "input_number.house_battery_count",
-        "state_type": "num",
+        "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
@@ -1643,7 +1643,7 @@
             {
                 "property": "battery_count",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -1676,13 +1676,13 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "entity_id": "input_number.house_battery_control_prioritize_battery",
-        "state_type": "num",
+        "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
@@ -1694,7 +1694,7 @@
             {
                 "property": "prioritize_battery",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -1825,13 +1825,13 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "entity_id": "input_number.house_battery_control_prioritize_battery",
-        "state_type": "num",
+        "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
@@ -1843,7 +1843,7 @@
             {
                 "property": "prioritize_battery",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -1900,5 +1900,13 @@
         "heartbeatInterval": "",
         "statusSeparator": "",
         "enableGlobalContextStore": false
+    },
+    {
+        "id": "440341cb71ce0231",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.80.0"
+        }
     }
 ]

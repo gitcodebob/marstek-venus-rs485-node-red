@@ -1,6 +1,18 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 2.5.3
+- **Fix: Node-RED flow compatibility with newest Node-RED versions**
+  - The flows are now compatible with the newest versions of Node-RED. The deprecation warnings have been removed.
+  - **Important:** Please upgrade Node-RED to version 20.x or newer before applying this update.
+  - Updated state type configuration and added explicit value type specifications for Home Assistant nodes.
+  - Improved Node-RED group organization and added Home Assistant WebSocket module configuration.
+
+- **Files Changed:**
+  - `node-red/00 master-switch-flow.json` - Updated for Node-RED 20.x compatibility
+  - `node-red/01 start-flow.json` - Updated for Node-RED 20.x compatibility
+  - `home assistant/dashboard.yaml` - Updated version to v2.5.3
+
 ## 2.5.2
 - **Add: Node-RED examples directory with advanced strategy patterns**
   - Added `node-red/examples/` directory containing example flows for advanced users

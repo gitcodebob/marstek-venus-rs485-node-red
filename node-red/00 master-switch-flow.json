@@ -8,6 +8,26 @@
         "env": []
     },
     {
+        "id": "5b3831da1b35bb1d",
+        "type": "group",
+        "z": "acde727d4cb42aaa",
+        "name": "Marstek master control switch",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "b9f84cc9f5a92c37",
+            "db8935b06e0974bc",
+            "ce0d5547e473555e",
+            "64dc39c70599dfc4",
+            "8b5ef482f35ef9c0"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 898,
+        "h": 382
+    },
+    {
         "id": "8b5ef482f35ef9c0",
         "type": "group",
         "z": "acde727d4cb42aaa",
@@ -30,26 +50,6 @@
         "h": 222
     },
     {
-        "id": "5b3831da1b35bb1d",
-        "type": "group",
-        "z": "acde727d4cb42aaa",
-        "name": "Marstek master control switch",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "b9f84cc9f5a92c37",
-            "db8935b06e0974bc",
-            "ce0d5547e473555e",
-            "64dc39c70599dfc4",
-            "8b5ef482f35ef9c0"
-        ],
-        "x": 34,
-        "y": 19,
-        "w": 898,
-        "h": 382
-    },
-    {
         "id": "b9f84cc9f5a92c37",
         "type": "api-current-state",
         "z": "acde727d4cb42aaa",
@@ -62,13 +62,13 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "entity_id": "input_number.house_battery_count",
-        "state_type": "num",
+        "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             },
             {
@@ -80,7 +80,7 @@
             {
                 "property": "battery_count",
                 "propertyType": "msg",
-                "value": "",
+                "value": "number",
                 "valueType": "entityState"
             }
         ],
@@ -376,5 +376,13 @@
         "heartbeatInterval": "",
         "statusSeparator": "",
         "enableGlobalContextStore": false
+    },
+    {
+        "id": "f464264ff0889d6b",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.80.0"
+        }
     }
 ]
