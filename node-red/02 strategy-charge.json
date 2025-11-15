@@ -83,12 +83,12 @@
             "ded0c5838fefe02a",
             "55e38b7af412c9b6",
             "9e65fbe7fb9407f5",
-            "6b9138fbb294fee3",
-            "72ad0032f1dfc915",
             "91b6cdbd01cd0f32",
             "5e0b433df0b89085",
             "e0daa87d53914f89",
-            "8f3f500f37b1f30a"
+            "8f3f500f37b1f30a",
+            "11a3c17551b6872e",
+            "558a963fa8d37e13"
         ],
         "x": 254,
         "y": 219,
@@ -126,26 +126,12 @@
         ]
     },
     {
-        "id": "72ad0032f1dfc915",
-        "type": "junction",
-        "z": "517b5f5313a242c5",
-        "g": "38d625c4fd161b7b",
-        "x": 1160,
-        "y": 340,
-        "wires": [
-            [
-                "25349ae9d88ba324",
-                "5e0b433df0b89085"
-            ]
-        ]
-    },
-    {
         "id": "91b6cdbd01cd0f32",
         "type": "junction",
         "z": "517b5f5313a242c5",
         "g": "38d625c4fd161b7b",
-        "x": 1160,
-        "y": 280,
+        "x": 1100,
+        "y": 260,
         "wires": [
             [
                 "25349ae9d88ba324",
@@ -167,7 +153,7 @@
         "finalize": "",
         "libs": [],
         "x": 870,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "91b6cdbd01cd0f32"
@@ -411,13 +397,13 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 320,
+        "y": 300,
         "wires": [
             [
                 "9e65fbe7fb9407f5"
             ],
             [
-                "ded0c5838fefe02a"
+                "558a963fa8d37e13"
             ]
         ],
         "info": "batteries_available_energy is calculated in the Start flow"
@@ -427,17 +413,18 @@
         "type": "link call",
         "z": "517b5f5313a242c5",
         "g": "38d625c4fd161b7b",
-        "name": "",
+        "name": "Call flow",
         "links": [
             "26460a293ad3466a"
         ],
-        "linkType": "static",
+        "linkType": "dynamic",
         "timeout": "30",
-        "x": 620,
+        "x": 1040,
         "y": 340,
         "wires": [
             [
-                "72ad0032f1dfc915"
+                "5e0b433df0b89085",
+                "25349ae9d88ba324"
             ]
         ]
     },
@@ -446,14 +433,14 @@
         "type": "link call",
         "z": "517b5f5313a242c5",
         "g": "38d625c4fd161b7b",
-        "name": "",
+        "name": "Call flow",
         "links": [
             "7a0cd93e9df76c48"
         ],
-        "linkType": "static",
+        "linkType": "dynamic",
         "timeout": "30",
-        "x": 1070,
-        "y": 320,
+        "x": 1040,
+        "y": 300,
         "wires": [
             [
                 "25349ae9d88ba324",
@@ -483,41 +470,13 @@
         "repair": false,
         "outputs": 2,
         "x": 660,
-        "y": 300,
+        "y": 280,
         "wires": [
             [
                 "6f08540f9f5fe765"
             ],
             [
-                "6b9138fbb294fee3"
-            ]
-        ]
-    },
-    {
-        "id": "6b9138fbb294fee3",
-        "type": "change",
-        "z": "517b5f5313a242c5",
-        "g": "38d625c4fd161b7b",
-        "name": "Regulated power",
-        "rules": [
-            {
-                "t": "set",
-                "p": "house_target_grid_consumption_in_w",
-                "pt": "msg",
-                "to": "house_battery_strategy_timed_target_power",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 870,
-        "y": 320,
-        "wires": [
-            [
-                "55e38b7af412c9b6"
+                "11a3c17551b6872e"
             ]
         ]
     },
@@ -650,6 +609,48 @@
         ]
     },
     {
+        "id": "11a3c17551b6872e",
+        "type": "function",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "name": "Regulated power",
+        "func": "// Which sub-strategy to use\nmsg.target = \"Self-consumption\";\n\n// Set target grid consumption for the PID controller\nmsg.house_target_grid_consumption_in_w = msg.house_battery_strategy_timed_target_power;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 300,
+        "wires": [
+            [
+                "55e38b7af412c9b6"
+            ]
+        ]
+    },
+    {
+        "id": "558a963fa8d37e13",
+        "type": "function",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "name": "Full stop ",
+        "func": "msg.target = \"Full stop\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 340,
+        "wires": [
+            [
+                "ded0c5838fefe02a"
+            ]
+        ]
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -664,7 +665,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "b1d1e39bc803492f",
+        "id": "8b0fd53ac0ee5150",
         "type": "global-config",
         "env": [],
         "modules": {

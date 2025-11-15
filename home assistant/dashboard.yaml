@@ -356,7 +356,7 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Configuration and settings (v3.0.0-beta)
+          Configuration and settings (v3.0.1-beta)
         text_only: true
   - type: sections
     max_columns: 3
