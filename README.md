@@ -6,7 +6,7 @@ This project is designed for hobbyists who want to control home battery systems 
 - **Node-RED Control Flows:** Easy to import and use Node-RED control flows for battery charge/discharge control.
 - **Home Assistant Integration:** Example configuration for seamless integration with your smart home setup.
 - **Customizable:** Adapt the flows and configuration to your specific battery hardware and automation needs.
-- **Strategies:** Self-consumption or trading? Supports multiple charge/discharge strategies. And you can easily add more.
+- **Strategies:** Multiple charge/discharge strategies including self-consumption (PID-based), timed charging/discharging, and simple charge modes. Easily add your own.
 - **Updating:** Grab the latest control flow, without losing your personal configurations.
 
 ## Whats new?
@@ -55,11 +55,12 @@ This project is designed for hobbyists who want to control home battery systems 
        - `00 presets-switch-flow.json` (pid control presets)
        - `01 start-flow.json` (the main flow)
    - Import charging strategies:
-       - `02 strategy-custom.json` (custom strategy)
+       - `02 strategy-self-consumption.json` (PID-based self-consumption strategy)
+       - `02 strategy-timed.json` (time-based charging/discharging strategy)
+       - `02 strategy-charge.json` (simple charge strategy)
        - `02 strategy-full-stop.json` (full stop strategy)
-       - `02 strategy-self-consumption.json` (self-consumption strategy)
-       - `02 grid-charge-or-wait.json` (manual timer based strategy, author: R. Ordelman)
    - Optional: Explore additional examples in the `node-red/examples/` directory for advanced strategy patterns
+   - Deprecated flows are available in `node-red/deprecated/` folder for reference
    - Deploy all flows. No edits required.
 
 5. **Firing up**

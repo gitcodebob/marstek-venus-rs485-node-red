@@ -17,6 +17,14 @@ input_boolean:
   strategy_accu_grid_charge_or_wait_charge_enabled:
     name: Charge batteries during Grid charge or wait strategy
 
+  house_battery_strategy_timed_has_period_b:
+    name: Enable additional period
+    icon: mdi:clock-outline
+
+  house_battery_strategy_timed_has_max_power:
+    name: Charge at max. power
+    icon: mdi:power-plug-battery-outline
+
 ###########################################################################################################
 # DATETIME
 ###########################################################################################################
@@ -29,6 +37,30 @@ input_datetime:
 
   strategy_accu_grid_charge_or_wait_stop_at:
     name: Strategy grid charge or wait, Stop at
+    has_date: false
+    has_time: true
+    icon: mdi:clock-end
+
+  house_battery_strategy_timed_period_a1:
+    name: Period A start
+    has_date: false
+    has_time: true
+    icon: mdi:clock-start
+
+  house_battery_strategy_timed_period_a2:
+    name: Period A stop
+    has_date: false
+    has_time: true
+    icon: mdi:clock-end
+
+  house_battery_strategy_timed_period_b1:
+    name: Period B start
+    has_date: false
+    has_time: true
+    icon: mdi:clock-start
+
+  house_battery_strategy_timed_period_b2:
+    name: Period B stop
     has_date: false
     has_time: true
     icon: mdi:clock-end
@@ -57,6 +89,16 @@ input_number:
     unit_of_measurement: ""
     mode: box
     icon: mdi:battery-arrow-up
+
+  # Total usable energy in batteries
+  house_battery_total_available_energy:
+    name: "Total available energy"
+    min: -10
+    max: 1000
+    initial: 0
+    unit_of_measurement: "kWh"
+    mode: box
+    icon: mdi:power-plug-battery
 
   # Strategy | self consumption (NoM)
   house_target_grid_consumption_in_w:
@@ -244,10 +286,41 @@ input_number:
     unit_of_measurement: "kWh"
     icon: mdi:battery-charging
 
+  # Strategy | timed, desired energy reserve (effective energy available excl. cut-off energies)
+  house_battery_strategy_timed_target_energy:
+    name: Desired battery energy reserve
+    min: 0
+    max: 30
+    unit_of_measurement: "kWh"
+    mode: box
+    icon: mdi:battery-charging
+
+  # Strategy | timed, desired charging power
+  house_battery_strategy_timed_target_power:
+    name: Desired charging power
+    min: 0
+    max: 7500
+    unit_of_measurement: "W"
+    mode: box
+    icon: mdi:battery-charging
+
+###########################################################################################################
+# INPUT_TEXT
+###########################################################################################################
+input_text:
+  house_battery_strategy_active_sub_strategy:
+    name: "Active sub-strategy"
+    icon: mdi:strategy
+
+  house_battery_strategy_ev_sensor_entity_id:
+    name: "EV is charging entity_id (input_boolean)"
+    icon: mdi:power
+
 ###########################################################################################################
 # INPUT_SELECT
 ###########################################################################################################
 input_select:
+  # Master control mode (which device controls your batteries)
   marstek_master_battery_mode:
     name: Master Battery Mode
     options:
@@ -256,14 +329,23 @@ input_select:
       - Full control # Full control over the battery, no Marstek control
     icon: mdi:battery-heart
 
+  # Master strategy
   house_battery_strategy:
     name: House Battery Strategy
-    options:
+    options: &MasterStrategies
       - Full stop # Stop (dis)charging and disengage grid relay
       - Self-consumption # Use your own solar production. Don't buy or sell. Target grid consumption = 0, e.g. "Nul op de meter (NoM)" in Dutch.
+      - Timed # Configure which strategy should be active during given periods of the day.
       - Grid-Charge-Or-Wait #charge from the grid during (very) low or negative price hours to cover upcoming expensive hours when PV is insufficient
-      - Custom 1 # Your own strategy here
     icon: mdi:home-battery
+
+  # Available sub-strategies for timed / smart
+  house_battery_strategy_timed_substrat_list:
+    name: Sub-strategies
+    options: &SubStrategies
+      - Full stop # Deactivate batteries
+      - Self-consumption # Target grid consumption = 0
+      - Charge # Uses self-consumption strategy with smart settings and target grid consumption > 0
 
   # How often is battery priority cycled automatically?
   house_battery_control_priority_change_interval:
@@ -290,7 +372,32 @@ input_select:
       - Full stop # Stop (dis)charging and disengage grid relay
       - Self-consumption # Use your own solar production. Don't buy or sell. Target grid consumption = 0, e.g. "Nul op de meter (NoM)" in Dutch.
       - Custom 1 # Your own strategy here
+      - Super strategy # Example orchestrator strategy
     icon: mdi:home-battery
+
+  # Timed strategy | default strategy
+  house_battery_strategy_timed_strat_0:
+    name: Baseline strategy
+    options: *SubStrategies
+    icon: mdi:distribute-horizontal-right
+
+  # Timed strategy | during period A
+  house_battery_strategy_timed_strat_a:
+    name: During period A
+    options: *SubStrategies
+    icon: mdi:distribute-horizontal-center
+
+  # Timed strategy | during period B
+  house_battery_strategy_timed_strat_b:
+    name: During period B
+    options: *SubStrategies
+    icon: mdi:distribute-horizontal-center
+
+  # Timed strategy | during period B
+  house_battery_strategy_timed_strat_c:
+    name: During period C
+    options: *SubStrategies
+    icon: mdi:distribute-horizontal-center
 
 ###########################################################################################################
 # TEMPLATE SENSORS
@@ -331,57 +438,29 @@ template:
             unavailable
           {% endif %}
 
-      # Energy remaining
-      - name: "House Total Battery Energy remaining"
-        unique_id: "house_total_battery_energy_remaining"
-        device_class: "energy"
-        unit_of_measurement: "kWh"
-        state: >
-          {# Configuration #}
-          {% set BATTERY_CAPACITY_KWH = 5.12 %}
-          {% set MIN_DISCHARGE_SOC = 12.0 | float %}
-          {% set bat_entities = [
-            'sensor.marstek_m1_battery_state_of_charge', 
-            'sensor.marstek_m2_battery_state_of_charge',
-            'sensor.marstek_m3_battery_state_of_charge', 
-            'sensor.marstek_m4_battery_state_of_charge'
-          ] %}
-
-          {# Filter entities on valid values and retrieve SoC #}
-          {% set available_socs = expand(bat_entities) 
-            | selectattr('state', 'is_number') 
-            | map(attribute='state') 
-            | map('float', 0) 
-            | list 
-          %}
-
-          {# Calculate total battery energy #}
-          {% if available_socs | length > 0 %}
-            {% set total_soc = available_socs | sum %}
-            {% set num_batteries = available_socs | length %}
-            
-            {# Total usable SoC in % #}
-            {% set total_usable_soc = total_soc - (num_batteries * MIN_DISCHARGE_SOC) %}
-            
-            {# Total usable energy in kWh #}
-            {% set total_usable_energy = (total_usable_soc / 100) * (num_batteries * BATTERY_CAPACITY_KWH) %}
-            
-            {{ total_usable_energy | round(1) }}
-          {% else %}
-            unavailable
-          {% endif %}
-
       # Time Remaining
       - name: "Battery time remaining"
         unique_id: house_battery_time_remaining
         state: >
           {% set power = max(0, states('sensor.house_total_battery_power_in_w') | float(0)) %}
-          {% set capacity_kwh = states('sensor.house_total_battery_energy_remaining') | float(0) %}
+          {% set capacity_kwh = states('input_number.house_battery_total_available_energy') | float(0) %}
           {% if power > 0 and capacity_kwh > 0 %}
             {% set time_hrs = (capacity_kwh * 1000) / power %}
             {% set hrs = time_hrs | int %}
             {% set minutes = ((time_hrs - hrs) * 60) | round(0) | int %}
-            {{ '{:02}:{:02}'.format(hrs, minutes) }} hours
+            {{ '{:02}:{:02}'.format(hrs, minutes) }} hours, {{capacity_kwh | round(2)}} kWh
           {% else %}
-            Idle/Charging
+            {{capacity_kwh | round(2)}} kWh available
+          {% endif %}
+
+      # EV charging trigger
+      - name: "EV is charging"
+        unique_id: house_battery_strategy_ev_is_charging
+        icon: mdi:ev-station
+        state: >
+          {% set entity_id = states('input_text.house_battery_strategy_ev_sensor_entity_id') %}
+          {% if entity_id is none or bron_entity_id == '' %}
+            off
+          {% else %}
+            {{ states(entity_id) }}
           {% endif %}

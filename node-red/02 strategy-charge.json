@@ -1,0 +1,674 @@
+[
+    {
+        "id": "517b5f5313a242c5",
+        "type": "tab",
+        "label": "Strategy Charge",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1df1a3a3dcbc7925",
+        "type": "group",
+        "z": "517b5f5313a242c5",
+        "name": "Configuration",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "62fe191e903de8b2",
+            "3c519efd38a22bf5"
+        ],
+        "x": 34,
+        "y": 79,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "843e88284fbc94bf",
+        "type": "group",
+        "z": "517b5f5313a242c5",
+        "name": "Battery solutions",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "b5bd859bd4a37c5a",
+            "9e4f8a5401e67f74"
+        ],
+        "x": 34,
+        "y": 399,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "9e0b88ccf18279a0",
+        "type": "group",
+        "z": "517b5f5313a242c5",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "975b518a9af0ba5e",
+            "17407e109402eedb",
+            "8f45bbf25d832781"
+        ],
+        "x": 254,
+        "y": 119,
+        "w": 752,
+        "h": 82
+    },
+    {
+        "id": "38d625c4fd161b7b",
+        "type": "group",
+        "z": "517b5f5313a242c5",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "6f08540f9f5fe765",
+            "59946b67fc40e542",
+            "ded0c5838fefe02a",
+            "55e38b7af412c9b6",
+            "9e65fbe7fb9407f5",
+            "6b9138fbb294fee3",
+            "72ad0032f1dfc915",
+            "91b6cdbd01cd0f32",
+            "5e0b433df0b89085",
+            "e0daa87d53914f89",
+            "8f3f500f37b1f30a"
+        ],
+        "x": 254,
+        "y": 219,
+        "w": 1152,
+        "h": 162
+    },
+    {
+        "id": "69b5b1e8def42772",
+        "type": "group",
+        "z": "517b5f5313a242c5",
+        "name": "UI helper | set bounds for charge levels",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "51c020c73fa6193c",
+            "5145f9dafdea029b",
+            "a46cfe2ab1e217ad"
+        ],
+        "x": 254,
+        "y": 19,
+        "w": 672,
+        "h": 82
+    },
+    {
+        "id": "25349ae9d88ba324",
+        "type": "junction",
+        "z": "517b5f5313a242c5",
+        "x": 1240,
+        "y": 460,
+        "wires": [
+            [
+                "b5bd859bd4a37c5a"
+            ]
+        ]
+    },
+    {
+        "id": "72ad0032f1dfc915",
+        "type": "junction",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "x": 1160,
+        "y": 340,
+        "wires": [
+            [
+                "25349ae9d88ba324",
+                "5e0b433df0b89085"
+            ]
+        ]
+    },
+    {
+        "id": "91b6cdbd01cd0f32",
+        "type": "junction",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "x": 1160,
+        "y": 280,
+        "wires": [
+            [
+                "25349ae9d88ba324",
+                "8f3f500f37b1f30a"
+            ]
+        ]
+    },
+    {
+        "id": "6f08540f9f5fe765",
+        "type": "function",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "name": "Max power solution",
+        "func": "// INPUT\nlet batteries = msg.batteries;\nlet solution_array = [];\n\n// battery life improvement (slow charge near max SoC)\n/**\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    if (soc == 100) return Math.min(0, max_power);\n    if (soc >= 98) return Math.min(300, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 85) return Math.min(1500, max_power);\n    return max_power;\n}\n\n// build solution\nmsg.batteries.forEach(battery => {\n    solution_array.push({\n        id: battery.id,\n        mode: \"charge\",\n        power: chargingLimiter(battery.soc, battery.charging_max)\n    });\n});\n\n// return solution\nmsg.solutions = solution_array;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 280,
+        "wires": [
+            [
+                "91b6cdbd01cd0f32"
+            ]
+        ]
+    },
+    {
+        "id": "2b46959cdb3a5434",
+        "type": "comment",
+        "z": "517b5f5313a242c5",
+        "name": "Home Battery Strategy",
+        "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
+        "x": 140,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "62fe191e903de8b2",
+        "type": "link in",
+        "z": "517b5f5313a242c5",
+        "g": "1df1a3a3dcbc7925",
+        "name": "Charge",
+        "links": [],
+        "x": 185,
+        "y": 180,
+        "wires": [
+            [
+                "975b518a9af0ba5e"
+            ]
+        ]
+    },
+    {
+        "id": "3c519efd38a22bf5",
+        "type": "comment",
+        "z": "517b5f5313a242c5",
+        "g": "1df1a3a3dcbc7925",
+        "name": "Start (readme)",
+        "info": "# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the <select> option configured in your\nselect_input.house_battery_strategy\n\nconfigure select options in:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select 'AcmE example'\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
+        "x": 130,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "b5bd859bd4a37c5a",
+        "type": "link out",
+        "z": "517b5f5313a242c5",
+        "g": "843e88284fbc94bf",
+        "name": "Return",
+        "mode": "return",
+        "links": [],
+        "x": 75,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "9e4f8a5401e67f74",
+        "type": "comment",
+        "z": "517b5f5313a242c5",
+        "g": "843e88284fbc94bf",
+        "name": "End (readme)",
+        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
+        "x": 130,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "975b518a9af0ba5e",
+        "type": "api-current-state",
+        "z": "517b5f5313a242c5",
+        "g": "9e0b88ccf18279a0",
+        "name": "Desired energy reserve",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_timed_target_energy",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_target_energy",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 390,
+        "y": 160,
+        "wires": [
+            [
+                "8f45bbf25d832781",
+                "a46cfe2ab1e217ad"
+            ]
+        ]
+    },
+    {
+        "id": "17407e109402eedb",
+        "type": "api-current-state",
+        "z": "517b5f5313a242c5",
+        "g": "9e0b88ccf18279a0",
+        "name": "Or charge at max power?",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.house_battery_strategy_timed_has_max_power",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_has_max_power",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 870,
+        "y": 160,
+        "wires": [
+            [
+                "59946b67fc40e542"
+            ]
+        ]
+    },
+    {
+        "id": "8f45bbf25d832781",
+        "type": "api-current-state",
+        "z": "517b5f5313a242c5",
+        "g": "9e0b88ccf18279a0",
+        "name": "Desired charging power",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_timed_target_power",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_target_power",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 630,
+        "y": 160,
+        "wires": [
+            [
+                "17407e109402eedb"
+            ]
+        ]
+    },
+    {
+        "id": "59946b67fc40e542",
+        "type": "switch",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "name": "Check desired energy reserve",
+        "property": "batteries_available_energy",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "house_battery_strategy_timed_target_energy",
+                "vt": "msg"
+            },
+            {
+                "t": "gte",
+                "v": "house_battery_strategy_timed_target_energy",
+                "vt": "msg"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "9e65fbe7fb9407f5"
+            ],
+            [
+                "ded0c5838fefe02a"
+            ]
+        ],
+        "info": "batteries_available_energy is calculated in the Start flow"
+    },
+    {
+        "id": "ded0c5838fefe02a",
+        "type": "link call",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "name": "",
+        "links": [
+            "26460a293ad3466a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 620,
+        "y": 340,
+        "wires": [
+            [
+                "72ad0032f1dfc915"
+            ]
+        ]
+    },
+    {
+        "id": "55e38b7af412c9b6",
+        "type": "link call",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "name": "",
+        "links": [
+            "7a0cd93e9df76c48"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 1070,
+        "y": 320,
+        "wires": [
+            [
+                "25349ae9d88ba324",
+                "e0daa87d53914f89"
+            ]
+        ]
+    },
+    {
+        "id": "9e65fbe7fb9407f5",
+        "type": "switch",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "name": "Charge at max power",
+        "property": "house_battery_strategy_timed_has_max_power",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 660,
+        "y": 300,
+        "wires": [
+            [
+                "6f08540f9f5fe765"
+            ],
+            [
+                "6b9138fbb294fee3"
+            ]
+        ]
+    },
+    {
+        "id": "6b9138fbb294fee3",
+        "type": "change",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "name": "Regulated power",
+        "rules": [
+            {
+                "t": "set",
+                "p": "house_target_grid_consumption_in_w",
+                "pt": "msg",
+                "to": "house_battery_strategy_timed_target_power",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 320,
+        "wires": [
+            [
+                "55e38b7af412c9b6"
+            ]
+        ]
+    },
+    {
+        "id": "5e0b433df0b89085",
+        "type": "debug",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "name": "Full stop",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 1280,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e0daa87d53914f89",
+        "type": "debug",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "name": "Regulated",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1290,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "8f3f500f37b1f30a",
+        "type": "debug",
+        "z": "517b5f5313a242c5",
+        "g": "38d625c4fd161b7b",
+        "name": "Maximum",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 1280,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "51c020c73fa6193c",
+        "type": "function",
+        "z": "517b5f5313a242c5",
+        "g": "69b5b1e8def42772",
+        "name": "Min/max",
+        "func": "\n// Lower bound\nlet output = msg.payload | 0; // kWh\noutput = Math.max(msg.payload, 0);\n\n// Upper bound\nlet max_reserve = 0; // kWh\nmsg.batteries.forEach(battery => {\n    max_reserve += (Number(battery.energy_max*battery.soc_max) - Number(battery.energy_max*battery.soc_min))/100; // kWh\n});\noutput = Math.min(output, max_reserve);\n\nnode.status({fill:\"blue\",shape:\"dot\",text:`${output}`});\n\n// Output\nmsg.payload = output;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 60,
+        "wires": [
+            [
+                "5145f9dafdea029b"
+            ]
+        ]
+    },
+    {
+        "id": "5145f9dafdea029b",
+        "type": "api-call-service",
+        "z": "517b5f5313a242c5",
+        "g": "69b5b1e8def42772",
+        "name": "Set desired energy reserve",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_strategy_timed_target_energy"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.payload}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 780,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a46cfe2ab1e217ad",
+        "type": "rbe",
+        "z": "517b5f5313a242c5",
+        "g": "69b5b1e8def42772",
+        "name": "Desired energy changed",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 390,
+        "y": 60,
+        "wires": [
+            [
+                "51c020c73fa6193c"
+            ]
+        ]
+    },
+    {
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "",
+        "connectionDelay": false,
+        "cacheJson": false,
+        "heartbeat": false,
+        "heartbeatInterval": "",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
+    },
+    {
+        "id": "b1d1e39bc803492f",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.80.1"
+        }
+    }
+]
