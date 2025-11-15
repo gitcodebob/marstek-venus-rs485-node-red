@@ -1,0 +1,1054 @@
+[
+    {
+        "id": "0199f18df097aa8f",
+        "type": "tab",
+        "label": "Strategy Timed",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7d5d20208cad641e",
+        "type": "group",
+        "z": "0199f18df097aa8f",
+        "name": "Battery solutions",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "9ce9ba35eda99c46",
+            "f0ecfb0d25bf1e0f"
+        ],
+        "x": 44,
+        "y": 499,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "130c2473c32bd786",
+        "type": "group",
+        "z": "0199f18df097aa8f",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "e2fbefe0a92c8b87",
+            "df3ea4464fdd6253"
+        ],
+        "x": 24,
+        "y": 79,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "bf29fe0ee25b592b",
+        "type": "group",
+        "z": "0199f18df097aa8f",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "942bbcc0b79ffec6",
+            "84cab4abb90d1f7a",
+            "dfa151f727d68ad2"
+        ],
+        "x": 454,
+        "y": 79,
+        "w": 532,
+        "h": 82
+    },
+    {
+        "id": "f9db7587adf69bfa",
+        "type": "group",
+        "z": "0199f18df097aa8f",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "97a70bb440ca8984",
+            "d82f98b7e93d3eac",
+            "78f0fd728bec341e",
+            "cb3cb1afa5ceda3d"
+        ],
+        "x": 254,
+        "y": 179,
+        "w": 732,
+        "h": 82
+    },
+    {
+        "id": "115c88f19a6e3add",
+        "type": "group",
+        "z": "0199f18df097aa8f",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "c669dabc5fa09ae2"
+        ],
+        "x": 254,
+        "y": 79,
+        "w": 192,
+        "h": 82
+    },
+    {
+        "id": "263441dd7d34de1c",
+        "type": "group",
+        "z": "0199f18df097aa8f",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "8eaa8fd948be1fad",
+            "8de067121fbfd939",
+            "3108d0a11fcf542f",
+            "7bc56c05b65b8a56",
+            "9353d27b9ba49389",
+            "3c647acc433c766d",
+            "3919eb10fa97d04d",
+            "98697d12039611bf",
+            "c7b14890ae2578d1",
+            "83a1051adc959e8c",
+            "30c98e7546f78b88",
+            "0cde47a17becc07d",
+            "5518e5a61cfe69c6"
+        ],
+        "x": 254,
+        "y": 279,
+        "w": 672,
+        "h": 262
+    },
+    {
+        "id": "e2fbefe0a92c8b87",
+        "type": "link in",
+        "z": "0199f18df097aa8f",
+        "g": "130c2473c32bd786",
+        "name": "Timed",
+        "links": [],
+        "x": 175,
+        "y": 180,
+        "wires": [
+            [
+                "c669dabc5fa09ae2"
+            ]
+        ]
+    },
+    {
+        "id": "7dce7367da5a0686",
+        "type": "comment",
+        "z": "0199f18df097aa8f",
+        "name": "Home Battery Strategy",
+        "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
+        "x": 130,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "df3ea4464fdd6253",
+        "type": "comment",
+        "z": "0199f18df097aa8f",
+        "g": "130c2473c32bd786",
+        "name": "Start (readme)",
+        "info": "# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the <select> option configured in your\nselect_input.house_battery_strategy\n\nconfigure select options in:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select 'AcmE example'\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
+        "x": 120,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "9ce9ba35eda99c46",
+        "type": "link out",
+        "z": "0199f18df097aa8f",
+        "g": "7d5d20208cad641e",
+        "name": "Return",
+        "mode": "return",
+        "links": [],
+        "x": 85,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "f0ecfb0d25bf1e0f",
+        "type": "comment",
+        "z": "0199f18df097aa8f",
+        "g": "7d5d20208cad641e",
+        "name": "End (readme)",
+        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
+        "x": 140,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "942bbcc0b79ffec6",
+        "type": "api-current-state",
+        "z": "0199f18df097aa8f",
+        "g": "bf29fe0ee25b592b",
+        "name": "Period A start",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.house_battery_strategy_timed_period_a1",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_period_a1",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 550,
+        "y": 120,
+        "wires": [
+            [
+                "84cab4abb90d1f7a"
+            ]
+        ]
+    },
+    {
+        "id": "84cab4abb90d1f7a",
+        "type": "api-current-state",
+        "z": "0199f18df097aa8f",
+        "g": "bf29fe0ee25b592b",
+        "name": "Period A end",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.house_battery_strategy_timed_period_a2",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_period_a2",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 710,
+        "y": 120,
+        "wires": [
+            [
+                "dfa151f727d68ad2"
+            ]
+        ]
+    },
+    {
+        "id": "97a70bb440ca8984",
+        "type": "api-current-state",
+        "z": "0199f18df097aa8f",
+        "g": "f9db7587adf69bfa",
+        "name": "Period B start",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.house_battery_strategy_timed_period_b1",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_period_b1",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 540,
+        "y": 220,
+        "wires": [
+            [
+                "d82f98b7e93d3eac"
+            ]
+        ]
+    },
+    {
+        "id": "d82f98b7e93d3eac",
+        "type": "api-current-state",
+        "z": "0199f18df097aa8f",
+        "g": "f9db7587adf69bfa",
+        "name": "Period B end",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.house_battery_strategy_timed_period_b2",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_period_b2",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 710,
+        "y": 220,
+        "wires": [
+            [
+                "78f0fd728bec341e"
+            ]
+        ]
+    },
+    {
+        "id": "dfa151f727d68ad2",
+        "type": "api-current-state",
+        "z": "0199f18df097aa8f",
+        "g": "bf29fe0ee25b592b",
+        "name": "Strat during A",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_timed_strat_a",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_strat_a",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 880,
+        "y": 120,
+        "wires": [
+            [
+                "cb3cb1afa5ceda3d"
+            ]
+        ]
+    },
+    {
+        "id": "78f0fd728bec341e",
+        "type": "api-current-state",
+        "z": "0199f18df097aa8f",
+        "g": "f9db7587adf69bfa",
+        "name": "Strat during B",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_timed_strat_b",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_strat_b",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 880,
+        "y": 220,
+        "wires": [
+            [
+                "7bc56c05b65b8a56"
+            ]
+        ]
+    },
+    {
+        "id": "cb3cb1afa5ceda3d",
+        "type": "api-current-state",
+        "z": "0199f18df097aa8f",
+        "g": "f9db7587adf69bfa",
+        "name": "Has period B",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.house_battery_strategy_timed_has_period_b",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_has_period_b",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "97a70bb440ca8984"
+            ]
+        ]
+    },
+    {
+        "id": "57eb83baaca02db6",
+        "type": "inject",
+        "z": "0199f18df097aa8f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 260,
+        "wires": [
+            [
+                "c669dabc5fa09ae2"
+            ]
+        ]
+    },
+    {
+        "id": "8eaa8fd948be1fad",
+        "type": "change",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "set Strat 0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "strategy",
+                "pt": "msg",
+                "to": "house_battery_strategy_timed_strat_0",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 360,
+        "wires": [
+            [
+                "3108d0a11fcf542f"
+            ]
+        ]
+    },
+    {
+        "id": "8de067121fbfd939",
+        "type": "change",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "set Strat A",
+        "rules": [
+            {
+                "t": "set",
+                "p": "strategy",
+                "pt": "msg",
+                "to": "house_battery_strategy_timed_strat_a",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 320,
+        "wires": [
+            [
+                "7775e04676756c1e",
+                "83a1051adc959e8c"
+            ]
+        ]
+    },
+    {
+        "id": "3108d0a11fcf542f",
+        "type": "switch",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "has period B",
+        "property": "house_battery_strategy_timed_has_period_b",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 400,
+        "wires": [
+            [
+                "7775e04676756c1e",
+                "30c98e7546f78b88"
+            ],
+            [
+                "3c647acc433c766d"
+            ]
+        ]
+    },
+    {
+        "id": "7bc56c05b65b8a56",
+        "type": "function",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "config A",
+        "func": "msg.__config = {\n    startTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_a1'),\n    endTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_a2'),\n    startOffset: 0,\n    endOffset: 0\n}\n  \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 340,
+        "wires": [
+            [
+                "9353d27b9ba49389"
+            ]
+        ]
+    },
+    {
+        "id": "9353d27b9ba49389",
+        "type": "time-range-switch",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "Period A",
+        "lat": "",
+        "lon": "",
+        "startTime": "00:00",
+        "endTime": "00:00",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 480,
+        "y": 340,
+        "wires": [
+            [
+                "8de067121fbfd939"
+            ],
+            [
+                "8eaa8fd948be1fad"
+            ]
+        ]
+    },
+    {
+        "id": "3c647acc433c766d",
+        "type": "function",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "config B",
+        "func": "msg.__config = {\n    startTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_b1'),\n    endTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_b2'),\n    startOffset: 0,\n    endOffset: 0\n}\n  \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 480,
+        "wires": [
+            [
+                "3919eb10fa97d04d"
+            ]
+        ]
+    },
+    {
+        "id": "3919eb10fa97d04d",
+        "type": "time-range-switch",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "Period B",
+        "lat": "",
+        "lon": "",
+        "startTime": "00:00",
+        "endTime": "00:00",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 480,
+        "y": 480,
+        "wires": [
+            [
+                "98697d12039611bf"
+            ],
+            [
+                "c7b14890ae2578d1"
+            ]
+        ]
+    },
+    {
+        "id": "98697d12039611bf",
+        "type": "change",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "set Strat B",
+        "rules": [
+            {
+                "t": "set",
+                "p": "strategy",
+                "pt": "msg",
+                "to": "house_battery_strategy_timed_strat_b",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 460,
+        "wires": [
+            [
+                "7775e04676756c1e",
+                "0cde47a17becc07d"
+            ]
+        ]
+    },
+    {
+        "id": "c7b14890ae2578d1",
+        "type": "change",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "set Strat 0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "strategy",
+                "pt": "msg",
+                "to": "house_battery_strategy_timed_strat_0",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 500,
+        "wires": [
+            [
+                "7775e04676756c1e",
+                "5518e5a61cfe69c6"
+            ]
+        ]
+    },
+    {
+        "id": "c669dabc5fa09ae2",
+        "type": "api-current-state",
+        "z": "0199f18df097aa8f",
+        "g": "115c88f19a6e3add",
+        "name": "Default Strat",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_timed_strat_0",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_strat_0",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 350,
+        "y": 120,
+        "wires": [
+            [
+                "942bbcc0b79ffec6"
+            ]
+        ]
+    },
+    {
+        "id": "31b352bcf0b5fa22",
+        "type": "api-call-service",
+        "z": "0199f18df097aa8f",
+        "name": "Active sub strategy text field",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_text.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_text.house_battery_strategy_active_sub_strategy"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.strategy}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_text",
+        "service": "set_value",
+        "x": 1080,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1ff8dd8a7bb8c098",
+        "type": "link call",
+        "z": "0199f18df097aa8f",
+        "name": "Sub strategy",
+        "links": [],
+        "linkType": "dynamic",
+        "timeout": "30",
+        "x": 1050,
+        "y": 540,
+        "wires": [
+            [
+                "9ce9ba35eda99c46"
+            ]
+        ]
+    },
+    {
+        "id": "7775e04676756c1e",
+        "type": "change",
+        "z": "0199f18df097aa8f",
+        "name": "Select flow",
+        "rules": [
+            {
+                "t": "set",
+                "p": "target",
+                "pt": "msg",
+                "to": "strategy",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 420,
+        "wires": [
+            [
+                "31b352bcf0b5fa22",
+                "1ff8dd8a7bb8c098"
+            ]
+        ]
+    },
+    {
+        "id": "83a1051adc959e8c",
+        "type": "debug",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "A",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "strategy",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 830,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "30c98e7546f78b88",
+        "type": "debug",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "0",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "strategy",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 830,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "0cde47a17becc07d",
+        "type": "debug",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "B",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "strategy",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 830,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "5518e5a61cfe69c6",
+        "type": "debug",
+        "z": "0199f18df097aa8f",
+        "g": "263441dd7d34de1c",
+        "name": "0",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "strategy",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 830,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "",
+        "connectionDelay": false,
+        "cacheJson": false,
+        "heartbeat": false,
+        "heartbeatInterval": "",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
+    },
+    {
+        "id": "2c730ddc89320033",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.80.1",
+            "node-red-contrib-time-range-switch": "1.2.0"
+        }
+    }
+]

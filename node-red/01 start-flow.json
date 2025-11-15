@@ -21,7 +21,8 @@
             "b5940f2c8939de70",
             "981ff4f5a93db632",
             "bcecc2d9b0fe6cad",
-            "5faf7aae9da0801e"
+            "390fa8a10c0e531f",
+            "344e5a3dc0efb2f4"
         ],
         "x": 34,
         "y": 19,
@@ -64,11 +65,12 @@
             "ceb31920f185d64b",
             "b63f2e905b829e5b",
             "64a533741de02153",
-            "bbe037f4bc3425fc"
+            "bbe037f4bc3425fc",
+            "023bfc9b8ac21db1"
         ],
         "x": 28,
         "y": 159,
-        "w": 1564,
+        "w": 1664,
         "h": 242
     },
     {
@@ -172,11 +174,12 @@
             "f384e6c0da2834c8",
             "08d4efea54467ac1",
             "7831dd84510fdfaa",
-            "4e53830356f33b07"
+            "4e53830356f33b07",
+            "208060fed37273fc"
         ],
         "x": 54,
         "y": 239,
-        "w": 1512,
+        "w": 1612,
         "h": 82
     },
     {
@@ -257,6 +260,12 @@
                 "propertyType": "msg",
                 "value": "number",
                 "valueType": "entityState"
+            },
+            {
+                "property": "timestamp",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "date"
             }
         ],
         "x": 120,
@@ -546,7 +555,7 @@
         "z": "a099d47fc07b3cee",
         "g": "6fad59f7a8530963",
         "name": "Mapping",
-        "func": "// Map to batteries array\nmsg.batteries.push({\n    id: `M${msg.battery_index}`,\n    power: parseInt(msg.battery_power,10),\n    charging_max: parseInt(msg.max_charge_power,10),\n    discharging_max: parseInt(msg.max_discharge_power,10),\n    soc: parseInt(msg.battery_state_of_charge,10),\n    soc_max: parseInt(msg.charging_cutoff_capacity,10),\n    soc_min: parseInt(msg.discharging_cutoff_capacity,10),\n    inverter: String(msg.inverter_state),\n    remaining_capacity: Number(msg.battery_remaining_capacity),\n    rs485: String(msg.rs485_control_mode)\n    });\n\n// Continue\nreturn msg;",
+        "func": "// Map to batteries array\nmsg.batteries.push({\n    id: `M${msg.battery_index}`,\n    power: parseInt(msg.battery_power,10),\n    charging_max: parseInt(msg.max_charge_power,10),\n    discharging_max: parseInt(msg.max_discharge_power,10),\n    soc: parseInt(msg.battery_state_of_charge,10),\n    soc_max: parseInt(msg.charging_cutoff_capacity,10),\n    soc_min: parseInt(msg.discharging_cutoff_capacity,10),\n    inverter: String(msg.inverter_state),\n    energy: Number(msg.battery_remaining_capacity),\n    energy_max: Number(msg.battery_total_energy),\n    rs485: String(msg.rs485_control_mode)\n    });\n\n// Continue\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -589,8 +598,7 @@
                 "a91127871ba39241"
             ],
             [
-                "1933f2623fa0fffb",
-                "0be9d3b9ef3576fd"
+                "023bfc9b8ac21db1"
             ]
         ]
     },
@@ -608,7 +616,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 610,
+        "x": 770,
         "y": 360,
         "wires": []
     },
@@ -974,7 +982,7 @@
         "type": "api-current-state",
         "z": "a099d47fc07b3cee",
         "g": "b63f2e905b829e5b",
-        "name": "Capacity remaining",
+        "name": "Energy",
         "server": "176d29a.6f648d6",
         "version": 3,
         "outputs": 1,
@@ -1012,11 +1020,11 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1450,
+        "x": 1420,
         "y": 280,
         "wires": [
             [
-                "64a533741de02153"
+                "208060fed37273fc"
             ]
         ]
     },
@@ -1518,27 +1526,9 @@
         "wires": [
             [
                 "981ff4f5a93db632",
-                "5faf7aae9da0801e"
+                "390fa8a10c0e531f"
             ]
         ]
-    },
-    {
-        "id": "5faf7aae9da0801e",
-        "type": "debug",
-        "z": "a099d47fc07b3cee",
-        "g": "fc3b0636793881be",
-        "name": "Last processed",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "payload",
-        "statusType": "auto",
-        "x": 280,
-        "y": 100,
-        "wires": []
     },
     {
         "id": "db8e14c359673211",
@@ -1869,7 +1859,7 @@
         "z": "a099d47fc07b3cee",
         "g": "c1e44a160c59f1a9",
         "name": "Batteries (totals)",
-        "func": "// batteries | calculate total and max. power delivered by batteries\nlet batteries = msg.batteries;\nlet batteries_total_power = 0;\nlet batteries_max_charging_power = 0;\nlet batteries_max_discharging_power = 0;\nlet batteries_remaining_capacity = 0;\n\nbatteries.forEach(battery => {\n    batteries_total_power += Number(battery.power);\n    batteries_max_charging_power += Number(battery.charging_max);\n    batteries_max_discharging_power += Number(battery.discharging_max);\n    batteries_remaining_capacity += Number(battery.remaining_capacity);\n});\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries_total_power\", batteries_total_power, true); // W\nRED.util.setMessageProperty(msg, \"batteries_max_charge_power\", batteries_max_charging_power,true); // W\nRED.util.setMessageProperty(msg, \"batteries_max_discharge_power\", batteries_max_discharging_power,true); // W\nRED.util.setMessageProperty(msg, \"batteries_remaining_capacity\",batteries_remaining_capacity,true); // kWh\nreturn msg;",
+        "func": "// batteries | calculate total and max. power delivered by batteries\nlet batteries = msg.batteries;\nlet batteries_total_power = 0;\nlet batteries_max_charging_power = 0;\nlet batteries_max_discharging_power = 0;\nlet batteries_available_energy = 0;\n\nbatteries.forEach(battery => {\n    batteries_total_power += Number(battery.power);\n    batteries_max_charging_power += Number(battery.charging_max);\n    batteries_max_discharging_power += Number(battery.discharging_max);\n    batteries_available_energy += Number(battery.energy - battery.energy_max*battery.soc_min/100);\n});\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries_total_power\", batteries_total_power, true); // W\nRED.util.setMessageProperty(msg, \"batteries_max_charge_power\", batteries_max_charging_power,true); // W\nRED.util.setMessageProperty(msg, \"batteries_max_discharge_power\", batteries_max_discharging_power,true); // W\nRED.util.setMessageProperty(msg, \"batteries_available_energy\",batteries_available_energy,true); // kWh effective\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1880,12 +1870,161 @@
         "y": 460,
         "wires": [
             [
-                "1c419030271bee64"
+                "1c419030271bee64",
+                "f27b588385633b97"
             ]
         ],
         "inputLabels": [
             "Mapping (from Home Battery IO)"
         ]
+    },
+    {
+        "id": "208060fed37273fc",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "b63f2e905b829e5b",
+        "name": "Energy max",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.marstek_m{{battery_index}}_battery_total_energy",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "battery_total_energy",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1570,
+        "y": 280,
+        "wires": [
+            [
+                "64a533741de02153"
+            ]
+        ]
+    },
+    {
+        "id": "023bfc9b8ac21db1",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "6fad59f7a8530963",
+        "name": "Loop end",
+        "func": "// cleanup \ndelete msg.battery_index;\n\ndelete msg.battery_power;\ndelete msg.max_charge_power;\ndelete msg.max_discharge_power;\ndelete msg.battery_state_of_charge;\ndelete msg.charging_cutoff_capacity;\ndelete msg.discharging_cutoff_capacity;\ndelete msg.inverter_state;\ndelete msg.battery_remaining_capacity;\ndelete msg.battery_total_energy;\ndelete msg.rs485_control_mode;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 360,
+        "wires": [
+            [
+                "1933f2623fa0fffb",
+                "0be9d3b9ef3576fd"
+            ]
+        ]
+    },
+    {
+        "id": "f27b588385633b97",
+        "type": "api-call-service",
+        "z": "a099d47fc07b3cee",
+        "name": "Set total usable energy",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_total_available_energy"
+        ],
+        "labelId": [],
+        "data": "{\"value\":$$.batteries_available_energy}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 380,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "390fa8a10c0e531f",
+        "type": "moment",
+        "z": "a099d47fc07b3cee",
+        "g": "fc3b0636793881be",
+        "name": "Last processed",
+        "topic": "",
+        "input": "timestamp",
+        "inputType": "msg",
+        "inTz": "Europe/Amsterdam",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "HH:mm:ss",
+        "locale": "C",
+        "output": "time",
+        "outputType": "msg",
+        "outTz": "Europe/Amsterdam",
+        "x": 300,
+        "y": 100,
+        "wires": [
+            [
+                "344e5a3dc0efb2f4"
+            ]
+        ]
+    },
+    {
+        "id": "344e5a3dc0efb2f4",
+        "type": "debug",
+        "z": "a099d47fc07b3cee",
+        "g": "fc3b0636793881be",
+        "name": "Time",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "time",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 470,
+        "y": 100,
+        "wires": []
     },
     {
         "id": "176d29a.6f648d6",
@@ -1902,11 +2041,12 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "440341cb71ce0231",
+        "id": "114038de72d3c721",
         "type": "global-config",
         "env": [],
         "modules": {
-            "node-red-contrib-home-assistant-websocket": "0.80.0"
+            "node-red-contrib-home-assistant-websocket": "0.80.1",
+            "node-red-contrib-moment": "5.0.0"
         }
     }
 ]

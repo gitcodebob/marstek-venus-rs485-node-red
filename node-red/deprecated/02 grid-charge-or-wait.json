@@ -45,7 +45,7 @@
         "id": "7e7a68d5afb27d01",
         "type": "group",
         "z": "ad59aaf659b31a8d",
-        "name": "Configuration",
+        "name": "Timing",
         "style": {
             "label": true
         },
@@ -347,7 +347,7 @@
         "type": "switch",
         "z": "ad59aaf659b31a8d",
         "name": "Check target capacity ",
-        "property": "batteries_remaining_capacity",
+        "property": "batteries_available_energy",
         "propertyType": "msg",
         "rules": [
             {
@@ -531,7 +531,7 @@
         "z": "ad59aaf659b31a8d",
         "g": "7e7a68d5afb27d01",
         "name": "Check time window",
-        "func": "// Verwacht tijden als \"HH:MM\" of \"HH:MM:SS\" in flow context\nconst startRaw = flow.get('strategy_accu_grid_charge_or_wait_start_at');\nconst stopRaw = flow.get('strategy_accu_grid_charge_or_wait_stop_at');\n\nif (!startRaw || !stopRaw) {\n  node.status({ fill: \"yellow\", shape: \"ring\", text: \"start/stop niet gezet\" });\n  return [null, null, null];\n}\n\nfunction parseHM(raw) {\n  const [h, m, s] = raw.trim().split(':').map(Number);\n  if (Number.isInteger(h) && Number.isInteger(m)) return { h, m, s: s || 0 };\n  throw new Error(\"Onbekend tijdformaat: \" + raw);\n}\nfunction todSeconds(d) { return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds(); }\n\nconst now = new Date(); // lokale tijd\nconst { h: sh, m: sm, s: ss } = parseHM(startRaw);\nconst { h: eh, m: em, s: es } = parseHM(stopRaw);\n\nconst nowTOD = todSeconds(now);\nconst startTOD = sh * 3600 + sm * 60 + ss;\nconst stopTOD = eh * 3600 + em * 60 + es;\n\nlet start, stop, state;\n\n// CASE A: zelfde-dag venster (bv. 14:00 → 18:00)\nif (stopTOD > startTOD) {\n  start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  stop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD < startTOD) state = \"planned\"; // nog niet begonnen\n  else if (nowTOD < stopTOD) state = \"inside\";  // actief\n  else state = \"after\";   // voorbij\n\n  // CASE B: overnight venster (bv. 22:00 → 09:00)\n} else {\n  const eveningStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  const morningStop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD >= startTOD) {\n    // Avonddeel\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"inside\";\n  } else if (nowTOD < stopTOD) {\n    // Ochtenddeel\n    start = new Date(eveningStart); start.setDate(start.getDate() - 1);\n    stop = morningStop;\n    state = \"inside\";\n  } else {\n    // Overdag tussen stop en start\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"planned\";\n  }\n}\n\n// Vul message\nmsg.state = state; // \"planned\" | \"inside\" | \"after\"\nmsg.window = {\n  now: now.toISOString(),\n  start: start.toISOString(),\n  stop: stop.toISOString(),\n  start_raw: startRaw,\n  stop_raw: stopRaw\n};\nmsg.payload = { state, window: msg.window };\n\n// Node status kleuren\nswitch (msg.state) {\n  case \"planned\":\n    node.status({ fill: \"blue\", shape: \"dot\", text: `PLANNED ${startRaw}→${stopRaw}` });\n    break;\n  case \"inside\":\n    node.status({ fill: \"green\", shape: \"dot\", text: `INSIDE ${startRaw}→${stopRaw}` });\n    break;\n  case \"after\":\n    node.status({ fill: \"grey\", shape: \"dot\", text: `AFTER ${startRaw}→${stopRaw}` });\n    break;\n  default:\n    node.status({ fill: \"yellow\", shape: \"dot\", text: `${state} ${startRaw}→${stopRaw}` });\n}\n\nreturn msg;",
+        "func": "// Verwacht tijden als \"HH:MM\" of \"HH:MM:SS\" in flow context\nconst startRaw = flow.get('strategy_accu_grid_charge_or_wait_start_at');\nconst stopRaw = flow.get('strategy_accu_grid_charge_or_wait_stop_at');\n\nif (!startRaw || !stopRaw) {\n  node.status({ fill: \"yellow\", shape: \"ring\", text: \"start/stop niet gezet\" });\n  return null;\n}\n\nfunction parseHM(raw) {\n  const [h, m, s] = raw.trim().split(':').map(Number);\n  if (Number.isInteger(h) && Number.isInteger(m)) return { h, m, s: s || 0 };\n  throw new Error(\"Onbekend tijdformaat: \" + raw);\n}\nfunction todSeconds(d) { return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds(); }\n\nconst now = new Date(); // lokale tijd\nconst { h: sh, m: sm, s: ss } = parseHM(startRaw);\nconst { h: eh, m: em, s: es } = parseHM(stopRaw);\n\nconst nowTOD = todSeconds(now);\nconst startTOD = sh * 3600 + sm * 60 + ss;\nconst stopTOD = eh * 3600 + em * 60 + es;\n\nlet start, stop, state;\n\n// CASE A: zelfde-dag venster (bv. 14:00 → 18:00)\nif (stopTOD > startTOD) {\n  start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  stop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD < startTOD) state = \"planned\"; // nog niet begonnen\n  else if (nowTOD < stopTOD) state = \"inside\";  // actief\n  else state = \"after\";   // voorbij\n\n  // CASE B: overnight venster (bv. 22:00 → 09:00)\n} else {\n  const eveningStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, ss, 0);\n  const morningStop = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, es, 0);\n\n  if (nowTOD >= startTOD) {\n    // Avonddeel\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"inside\";\n  } else if (nowTOD < stopTOD) {\n    // Ochtenddeel\n    start = new Date(eveningStart); start.setDate(start.getDate() - 1);\n    stop = morningStop;\n    state = \"inside\";\n  } else {\n    // Overdag tussen stop en start\n    start = eveningStart;\n    stop = new Date(morningStop); stop.setDate(stop.getDate() + 1);\n    state = \"planned\";\n  }\n}\n\n// Vul message\nmsg.state = state; // \"planned\" | \"inside\" | \"after\"\nmsg.window = {\n  now: now.toISOString(),\n  start: start.toISOString(),\n  stop: stop.toISOString(),\n  start_raw: startRaw,\n  stop_raw: stopRaw\n};\nmsg.payload = { state, window: msg.window };\n\n// Node status kleuren\nswitch (msg.state) {\n  case \"planned\":\n    node.status({ fill: \"blue\", shape: \"dot\", text: `PLANNED ${startRaw}→${stopRaw}` });\n    break;\n  case \"inside\":\n    node.status({ fill: \"green\", shape: \"dot\", text: `INSIDE ${startRaw}→${stopRaw}` });\n    break;\n  case \"after\":\n    node.status({ fill: \"grey\", shape: \"dot\", text: `AFTER ${startRaw}→${stopRaw}` });\n    break;\n  default:\n    node.status({ fill: \"yellow\", shape: \"dot\", text: `${state} ${startRaw}→${stopRaw}` });\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -602,5 +602,13 @@
         "heartbeatInterval": "",
         "statusSeparator": "",
         "enableGlobalContextStore": false
+    },
+    {
+        "id": "36bec7b11f4967f9",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.80.1"
+        }
     }
 ]

@@ -1,12 +1,42 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.0.0 beta
+- **Feature: New timed strategy for scheduled charging/discharging**
+  - Added `02 strategy-timed.json` - time-based strategy 
+    - Allows timed charging/self-consumption/full stop
+    - Charging at a configurable grid power for Belgian energy contract owners
+    - Charging at peak power for ASAP situations
+    - Set a default strategy 
+    - Pick one or two time periods to engage a strategy of your liking.
+    - This strategy is superseding grid-charge-or-wait which is now deprecated.
+  - Added `02 strategy-charge.json` - simple charge strategy
+  - Dashboarding has been improved for ease of use and now supports 3 tabs.
+  - Both `timed` and `grid-charge-or-wait` now support 'effective usable energy', no mental arithmetic required.
+  - The `battery time remaining` is now more accurate and shows 'effective usable energy'
+  - This release is a prelude to dynamic energy contract support
+  
+- **Refactor: Reorganized Node-RED flows for better maintainability**
+  - Moved deprecated flows to `node-red/deprecated/` folder
+  - Moved example strategies to `node-red/examples/` folder
+  - Improved folder structure for easier navigation and updates
+
+- **Files Changed:**
+  - `node-red/02 strategy-timed.json` - New timed strategy flow
+  - `node-red/02 strategy-charge.json` - New simple charge strategy flow
+  - `node-red/02 strategy-self-consumption.json` - Updated
+  - `node-red/01 start-flow.json` - Updated
+  - `node-red/function-node.js` - Refactored time window logic
+  - `node-red/deprecated/02 grid-charge-or-wait.json` - Moved from root (previously `02 grid-charge-or-wait.json`)
+  - `node-red/examples/02 strategy-custom.json` - Moved from root (previously `02 strategy-custom.json`)
+  - `home assistant/dashboard.yaml` - Updated
+  - `home assistant/packages/house_battery_control.yaml` - Updated for timed strategy support
+  - `README.md` - Updated documentation for new folder structure and strategies
+
 ## 2.5.3
 - **Fix: Node-RED flow compatibility with newest Node-RED versions**
   - The flows are now compatible with the newest versions of Node-RED. The deprecation warnings have been removed.
   - **Important:** Please upgrade Node-RED to version 20.x or newer before applying this update.
-  - Updated state type configuration and added explicit value type specifications for Home Assistant nodes.
-  - Improved Node-RED group organization and added Home Assistant WebSocket module configuration.
 
 - **Files Changed:**
   - `node-red/00 master-switch-flow.json` - Updated for Node-RED 20.x compatibility
