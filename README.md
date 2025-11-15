@@ -80,6 +80,15 @@ This project is designed for hobbyists who want to control home battery systems 
 
 ## Advanced Features
 
+### EV Stop Trigger
+- **Electric Vehicle Charging Override:** Automatically stops all battery operations when your EV or other heavy appliance starts charging
+  - Overrules ALL active strategies to prevent power spikes and grid overload
+  - Configure by entering the `entity_id` of an `input_boolean` or `on/off` template sensor
+  - The trigger sensor should indicate when your EV or heavy appliance is actively charging
+  - When triggered, the system applies a Full Stop strategy until the sensor state returns to off
+  - Useful for preventing home battery discharge during high-power EV charging sessions
+  - Configurable through the Advanced Settings dashboard
+
 ### Battery Life
 - **Minimum Idle Time:** Configurable minimum time before allowing battery grid relay disengagement
   - Reduces relay wear and extends battery life
