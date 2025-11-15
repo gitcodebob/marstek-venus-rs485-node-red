@@ -1,6 +1,34 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.1.0
+- **Feature: EV Stop Trigger to prevent power spikes during heavy appliance usage**
+  - Added EV Stop Trigger functionality that overrules ALL active strategies when triggered
+  - Prevents home batteries from discharging during EV charging or other heavy appliance usage
+  - Configurable via `input_text.house_battery_strategy_ev_sensor_entity_id` in Advanced Settings
+  - Automatically applies Full Stop strategy when the configured sensor indicates charging is active
+  - Useful for preventing grid overload and power spikes when EV or heavy appliances start
+
+- **Improve: Optimized strategy transitions and reduced unnecessary updates**
+  - Timed Strategy now only updates active sub-strategy field when it changes, reducing system overhead
+  - Self-consumption strategy now unwinds gracefully when transitioning from Full Stop, preventing power spikes
+
+- **Files Changed:**
+  - `node-red/01 start-flow.json` - Added EV trigger detection logic
+  - `node-red/02 strategy-charge.json` - Improved unwinding behavior
+  - `node-red/02 strategy-self-consumption.json` - Improved unwinding when transitioning from Full Stop
+  - `node-red/02 strategy-timed.json` - Optimized to only update active sub-strategy on change
+  - `home assistant/dashboard.yaml` - Added EV Stop Trigger configuration UI in Advanced Settings
+  - `README.md` - Added documentation for EV Stop Trigger feature
+
+## 3.0.1
+- **Fix: Call nodes not working when charge flow is imported before other flows**
+  - Resolved import order dependency issues in Node-RED flows
+  - Charge strategy flow now works correctly regardless of import order
+
+- **Files Changed:**
+  - `node-red/02 strategy-charge.json` - Fixed call node references
+
 ## 3.0.0 beta
 - **Feature: New timed strategy for scheduled charging/discharging**
   - Added `02 strategy-timed.json` - time-based strategy 

@@ -105,6 +105,22 @@ views:
             heading: Master Battery Control
             heading_style: title
             icon: mdi:gamepad-variant-outline
+          - type: tile
+            grid_options:
+              columns: full
+            visibility:
+              - condition: state
+                entity: sensor.ev_is_charging
+                state: 'on'
+              - condition: state
+                entity: input_select.marstek_master_battery_mode
+                state: Full control
+            entity: sensor.ev_is_charging
+            name: EV is charging - Full Stop strategy is active
+            color: red
+            hide_state: true
+            vertical: false
+            features_position: bottom
           - features:
               - type: select-options
             type: tile
@@ -124,6 +140,20 @@ views:
             hide_state: true
             show_entity_picture: false
             name: Full Control Strategy
+          - type: tile
+            entity: input_text.house_battery_strategy_active_sub_strategy
+            name: Active timed strategy
+            vertical: false
+            features_position: bottom
+            grid_options:
+              columns: full
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy
+                state: Timed
+              - condition: state
+                entity: input_select.marstek_master_battery_mode
+                state: Full control
           - type: history-graph
             entities:
               - entity: input_number.house_battery_control_pid_output
@@ -225,14 +255,15 @@ views:
             heading_style: title
             icon: mdi:home-battery-outline
           - type: tile
+            grid_options:
+              columns: full
             entity: sensor.battery_time_remaining
+            name: Battery remaining
             icon: mdi:battery-clock
             show_entity_picture: false
             hide_state: false
             vertical: false
             features_position: bottom
-            grid_options:
-              columns: full
           - type: heading
             heading: Marstek M1
             heading_style: subtitle
@@ -356,7 +387,7 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Configuration and settings (v3.0.1-beta)
+          Configuration and settings (v3.1.0)
         text_only: true
   - type: sections
     max_columns: 3
@@ -617,21 +648,35 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Full stop when EV is charging
+            heading: EV Stop Trigger
             heading_style: title
             icon: mdi:power-plug-off
-          - type: tile
-            entity: sensor.ev_is_charging
-            vertical: false
-            features_position: bottom
-            grid_options:
-              columns: full
+          - type: markdown
+            content: >-
+              <font color=grey>The Stop Trigger will OVERRULE ALL active
+              strategies.
+
+              _E.g. use to disengage your home batteries when EV is
+              charging_</font>
+            text_only: true
           - type: entities
             entities:
               - entity: input_text.house_battery_strategy_ev_sensor_entity_id
+                secondary_info: none
           - type: markdown
             content: >-
-              <font color=grey>_Disengage your home batteries when EV is
-              charging_</font>
+              <font color=grey>Enter the `entity_id` of an `input_boolean` or
+              `on/off template_sensor` in the field above</font>
             text_only: true
+          - type: tile
+            grid_options:
+              columns: full
+            entity: sensor.ev_is_charging
+            name: EV stop trigger
+            vertical: false
+            features_position: bottom
+          - type: markdown
+            content: >-
+              <font color=grey>The `EV stop trigger` should now indicate wether
+              an all stop has been triggered.</font>
     cards: []

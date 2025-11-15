@@ -81,12 +81,16 @@
             "f5e5091687ccc093",
             "cfc64f84a4532120",
             "8a50bc3d63d7a248",
-            "a414c1013e9b72aa"
+            "a414c1013e9b72aa",
+            "9f357837ab8c534f",
+            "fae5e93e1a95d5ed",
+            "0d36f7d78102ff6d",
+            "8439426a432c3f9c"
         ],
         "x": 1614,
         "y": 419,
         "w": 592,
-        "h": 282
+        "h": 289.5
     },
     {
         "id": "7ab490ceca7cff35",
@@ -529,7 +533,7 @@
         "repair": false,
         "outputs": 3,
         "x": 1855,
-        "y": 520,
+        "y": 660,
         "wires": [
             [
                 "cfc64f84a4532120",
@@ -615,7 +619,7 @@
             }
         ],
         "x": 1730,
-        "y": 520,
+        "y": 660,
         "wires": [
             [
                 "787d4a4302cc3783"
@@ -2095,6 +2099,179 @@
         "wires": []
     },
     {
+        "id": "9f357837ab8c534f",
+        "type": "server-state-changed",
+        "z": "c1a9925591b564a7",
+        "g": "94b7ae0409093e17",
+        "name": "Strategy changes",
+        "server": "176d29a.6f648d6",
+        "version": 6,
+        "outputs": 1,
+        "exposeAsEntityConfig": "",
+        "entities": {
+            "entity": [
+                "input_text.house_battery_strategy_active_sub_strategy",
+                "input_select.house_battery_strategy"
+            ],
+            "substring": [],
+            "regex": []
+        },
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 1720,
+        "y": 480,
+        "wires": [
+            [
+                "fae5e93e1a95d5ed"
+            ]
+        ]
+    },
+    {
+        "id": "fae5e93e1a95d5ed",
+        "type": "switch",
+        "z": "c1a9925591b564a7",
+        "g": "94b7ae0409093e17",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Full stop",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1855,
+        "y": 480,
+        "wires": [
+            [
+                "cfc64f84a4532120"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "0d36f7d78102ff6d",
+        "type": "server-state-changed",
+        "z": "c1a9925591b564a7",
+        "g": "94b7ae0409093e17",
+        "name": "Full stop trigger",
+        "server": "176d29a.6f648d6",
+        "version": 6,
+        "outputs": 1,
+        "exposeAsEntityConfig": "",
+        "entities": {
+            "entity": [
+                "sensor.ev_is_charging"
+            ],
+            "substring": [],
+            "regex": []
+        },
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 1720,
+        "y": 560,
+        "wires": [
+            [
+                "8439426a432c3f9c"
+            ]
+        ]
+    },
+    {
+        "id": "8439426a432c3f9c",
+        "type": "switch",
+        "z": "c1a9925591b564a7",
+        "g": "94b7ae0409093e17",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1855,
+        "y": 560,
+        "wires": [
+            [
+                "cfc64f84a4532120"
+            ]
+        ],
+        "l": false
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -2109,7 +2286,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "8e7d6aefb6107db7",
+        "id": "6768496940f60e5b",
         "type": "global-config",
         "env": [],
         "modules": {
