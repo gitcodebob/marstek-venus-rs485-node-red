@@ -1,1 +1,637 @@
-input_number.house_battery_strategy_timed_target_energy
+views:
+  - type: sections
+    path: home-battery-control
+    max_columns: 3
+    title: Home battery control
+    icon: mdi:home-battery-outline
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Configuration
+            heading_style: title
+            icon: mdi:cog-outline
+          - type: markdown
+            content: '### Step 1'
+            text_only: true
+          - type: entities
+            entities:
+              - entity: input_number.house_battery_count
+          - type: markdown
+            content: '### Step 2'
+            text_only: true
+          - type: markdown
+            content: >-
+              <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> **Grid
+              power n/a**</font>
+
+
+              Configure your P1 power sensor. 
+
+
+              1. Edit the file
+
+              `packages/house_battery_control_config.yaml` 
+
+              1. Find the `<< YOUR GRID POWER SENSOR HERE` tag 
+
+              1. Enter your sensor indicating your grid power usage in Watts.
+            visibility:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity: sensor.p1_meter_power
+                    state: unavailable
+                  - condition: state
+                    entity: sensor.p1_meter_power
+                    state: unknown
+          - type: markdown
+            content: >+
+              <font color=green><ha-icon icon="mdi:check"></ha-icon></font> Grid
+              power sensor
+
+
+            visibility:
+              - condition: not
+                conditions:
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unavailable
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unknown
+          - type: heading
+            icon: mdi:pen
+            heading: Open file editor
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: /core_configurator/ingress
+          - type: markdown
+            content: '### Step 3'
+            text_only: true
+          - type: markdown
+            content: >-
+              <ha-icon icon="mdi:alert"></ha-icon> Import and deploy <font
+              color=red>Node-RED</font> scripts.
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_control_has_node_red
+                state_not: 'on'
+          - type: markdown
+            content: >-
+              <font color=green><ha-icon icon="mdi:check"></ha-icon></font>
+              Node-RED ready
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_control_has_node_red
+                state: 'on'
+          - type: markdown
+            content: '### Step 4'
+            text_only: true
+          - type: markdown
+            content: >-
+              Set the Master Battery Control to `Full Control` only after
+              reviewing and checking all installation instructions. 
+
+
+              Pick a battery charging strategy e.g. `self-consumption` and you
+              are done!
+      - type: grid
+        cards:
+          - type: heading
+            heading: Master Battery Control
+            heading_style: title
+            icon: mdi:gamepad-variant-outline
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.marstek_master_battery_mode
+            features_position: bottom
+            vertical: false
+            show_entity_picture: false
+            hide_state: true
+            name: Control Mode
+            icon: mdi:camera-control
+          - features:
+              - type: select-options
+            type: tile
+            entity: input_select.house_battery_strategy
+            features_position: bottom
+            vertical: false
+            hide_state: true
+            show_entity_picture: false
+            name: Full Control Strategy
+          - type: history-graph
+            entities:
+              - entity: input_number.house_battery_control_pid_output
+                name: PID control
+              - entity: sensor.p1_meter_power
+                name: Grid power
+              - entity: select.marstek_m1_forcible_charge_discharge
+                name: M1
+              - entity: select.marstek_m2_forcible_charge_discharge
+                name: M2
+              - entity: select.marstek_m3_forcible_charge_discharge
+                name: M3
+              - entity: select.marstek_m4_forcible_charge_discharge
+                name: M4
+            hours_to_show: 0.05
+          - type: markdown
+            content: '### Settings'
+            text_only: true
+          - type: heading
+            icon: mdi:information
+            heading: Charge this battery first
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://github.com/gitcodebob/marstek-venus-rs485-node-red/blob/main/README.md#advanced-features
+          - show_name: true
+            show_icon: true
+            show_state: true
+            type: glance
+            entities:
+              - entity: input_number.house_battery_control_prioritize_battery
+                name: 'Battery #'
+              - entity: input_select.house_battery_control_priority_change_interval
+            state_color: false
+            columns: 3
+          - type: heading
+            icon: mdi:information
+            heading: Battery life improvement
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://github.com/gitcodebob/marstek-venus-rs485-node-red?tab=readme-ov-file#battery-life
+          - type: entities
+            entities:
+              - entity: input_number.house_battery_control_idle_time
+                name: Stop after Idle for
+              - entity: input_number.house_battery_control_hysteresis_in_w
+                name: 'Hysteresis '
+                secondary_info: none
+          - type: heading
+            icon: mdi:information
+            heading: Self-consumption
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: /home-battery/advanced-settings
+          - type: markdown
+            content: >-
+              <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> High
+              controller sensitivity, monitor your system</font> use at your own
+              risk.
+            visibility:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_kp
+                    above: 0.5
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_ki
+                    above: 0.5
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_kd
+                    above: 0.5
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_error_signal_dampening
+                    above: 70
+                    below: 0
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_pid_output_dampening
+                    above: 50
+            text_only: true
+          - type: entities
+            entities:
+              - entity: input_select.house_battery_control_pid_presets
+                name: Controller sensitivity
+          - type: heading
+            icon: ''
+            heading: Configure custom values
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: /home-battery/advanced-settings
+      - type: grid
+        cards:
+          - type: heading
+            heading: Basic battery information
+            heading_style: title
+            icon: mdi:home-battery-outline
+          - type: tile
+            entity: sensor.battery_time_remaining
+            icon: mdi:battery-clock
+            show_entity_picture: false
+            hide_state: false
+            vertical: false
+            features_position: bottom
+            grid_options:
+              columns: full
+          - type: heading
+            heading: Marstek M1
+            heading_style: subtitle
+            icon: ''
+            visibility:
+              - condition: state
+                entity: sensor.marstek_m1_device_name
+                state_not: unknown
+          - type: glance
+            entities:
+              - entity: sensor.marstek_m1_battery_state_of_charge
+                name: M1 SoC
+              - entity: sensor.marstek_m1_battery_power
+                name: M1 Power
+              - entity: number.marstek_m1_max_charge_power
+                name: Max Charge
+              - entity: number.marstek_m1_max_discharge_power
+                name: Max Discharge
+            visibility:
+              - condition: state
+                entity: sensor.marstek_m1_device_name
+                state_not: unknown
+          - type: heading
+            heading: Marstek M2
+            heading_style: subtitle
+            icon: ''
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m2_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 1
+          - type: glance
+            entities:
+              - entity: sensor.marstek_m2_battery_state_of_charge
+                name: M2 SoC
+              - entity: sensor.marstek_m2_battery_power
+                name: M2 Power
+              - entity: number.marstek_m2_max_charge_power
+                name: Max Charge
+              - entity: number.marstek_m2_max_discharge_power
+                name: Max Discharge
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m2_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 1
+          - type: heading
+            heading: Marstek M3
+            heading_style: subtitle
+            icon: ''
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m3_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 2
+          - type: glance
+            entities:
+              - entity: sensor.marstek_m3_battery_state_of_charge
+                name: M3 SoC
+              - entity: sensor.marstek_m3_battery_power
+                name: M3 Power
+              - entity: number.marstek_m3_max_charge_power
+                name: Max Charge
+              - entity: number.marstek_m3_max_discharge_power
+                name: Max Discharge
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m3_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 2
+          - type: heading
+            heading: Marstek M4
+            heading_style: subtitle
+            icon: ''
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m4_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 3
+          - type: glance
+            entities:
+              - entity: sensor.marstek_m4_battery_state_of_charge
+                name: M4 SoC
+              - entity: sensor.marstek_m4_battery_power
+                name: M4 Power
+              - entity: number.marstek_m4_max_charge_power
+                name: Max Charge
+              - entity: number.marstek_m4_max_discharge_power
+                name: Max Discharge
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m4_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 3
+    header:
+      card:
+        type: markdown
+        content: |-
+          # Home batteries
+          Configuration and settings (v3.0.0-beta)
+        text_only: true
+  - type: sections
+    max_columns: 3
+    title: Timed strategy
+    icon: mdi:timer-cog-outline
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Timed strategy
+            heading_style: title
+          - type: entities
+            entities:
+              - entity: input_text.house_battery_strategy_active_sub_strategy
+                type: simple-entity
+                name: 'Active strategy :'
+            grid_options:
+              columns: 9
+              rows: auto
+            show_header_toggle: false
+            state_color: false
+            no_background: true
+          - clock_style: digital
+            clock_size: small
+            show_seconds: false
+            no_background: true
+            type: clock
+            grid_options:
+              columns: 3
+              rows: 1
+            title: Time
+            face_style: markers
+          - type: entities
+            entities:
+              - entity: input_select.house_battery_strategy_timed_strat_0
+                name: Default strategy
+          - type: entities
+            entities:
+              - entity: input_datetime.house_battery_strategy_timed_period_a1
+              - entity: input_select.house_battery_strategy_timed_strat_a
+              - entity: input_datetime.house_battery_strategy_timed_period_a2
+          - type: tile
+            grid_options:
+              columns: full
+            entity: input_boolean.house_battery_strategy_timed_has_period_b
+            name: Add period
+            icon: mdi:plus
+            color: blue-grey
+            show_entity_picture: false
+            hide_state: true
+            vertical: false
+            tap_action:
+              action: toggle
+            features_position: bottom
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_strategy_timed_has_period_b
+                state: 'off'
+          - type: entities
+            entities:
+              - entity: input_datetime.house_battery_strategy_timed_period_b1
+              - entity: input_select.house_battery_strategy_timed_strat_b
+              - entity: input_datetime.house_battery_strategy_timed_period_b2
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_strategy_timed_has_period_b
+                state: 'on'
+          - type: tile
+            grid_options:
+              columns: full
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_strategy_timed_has_period_b
+                state: 'on'
+            entity: input_boolean.house_battery_strategy_timed_has_period_b
+            name: Remove period
+            icon: mdi:minus
+            color: red
+            show_entity_picture: false
+            hide_state: true
+            vertical: false
+            tap_action:
+              action: toggle
+            features_position: bottom
+      - type: grid
+        cards:
+          - type: heading
+            heading: Sub strategy settings
+            heading_style: title
+          - type: markdown
+            content: '#### Charge'
+            text_only: true
+          - type: entities
+            entities:
+              - entity: input_number.house_battery_strategy_timed_target_energy
+                name: Target energy reserve
+              - entity: input_boolean.house_battery_strategy_timed_has_max_power
+              - type: conditional
+                conditions:
+                  - entity: input_boolean.house_battery_strategy_timed_has_max_power
+                    state: 'off'
+                row:
+                  type: input-number-entity
+                  entity: input_number.house_battery_strategy_timed_target_power
+                  name: Target grid consumption
+                  icon: mdi:home-import-outline
+          - type: markdown
+            content: >-
+              <font color=grey>*) _Usable energy reserve, excl. 12% cut-off
+              SoC_</font>
+            text_only: true
+          - type: markdown
+            content: '#### Self-consumption'
+            text_only: true
+          - type: markdown
+            content: >-
+              <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> High
+              sensitivity - monitor your system</font>, use at your own risk.
+            visibility:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_kp
+                    above: 0.5
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_ki
+                    above: 0.5
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_kd
+                    above: 0.5
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_error_signal_dampening
+                    above: 70
+                    below: 0
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_pid_output_dampening
+                    above: 50
+            text_only: true
+          - type: entities
+            entities:
+              - entity: input_select.house_battery_control_pid_presets
+                name: Controller sensitivity
+          - type: heading
+            icon: ''
+            heading: Configure custom settings
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: /home-battery/advanced-settings
+    cards: []
+  - type: sections
+    max_columns: 3
+    title: Advanced settings
+    path: advanced-settings
+    icon: mdi:cog-outline
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: PID controller (advanced settings)
+            heading_style: title
+            icon: mdi:cog-box
+          - type: markdown
+            content: >-
+              <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> High
+              values - monitor your system</font>, use at your own risk.
+            visibility:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_kp
+                    above: 0.5
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_ki
+                    above: 0.5
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_kd
+                    above: 0.5
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_error_signal_dampening
+                    above: 70
+                    below: 0
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_pid_output_dampening
+                    above: 50
+            text_only: true
+          - type: entities
+            entities:
+              - entity: input_select.house_battery_control_pid_presets
+                name: PID presets
+              - entity: input_number.house_battery_control_kp
+                name: Proportional gain (Kp)
+              - entity: input_number.house_battery_control_ki
+                name: Integral gain (Ki)
+              - entity: input_number.house_battery_control_kd
+                name: Differential gain (Kd)
+              - entity: input_number.house_battery_control_error_signal_dampening
+                name: Input smoothing
+                secondary_info: none
+              - entity: input_number.house_battery_control_pid_output_dampening
+                name: Output smoothing
+              - entity: input_number.house_target_grid_consumption_in_w
+                name: Target grid consumption
+          - type: heading
+            icon: mdi:information
+            heading: Help | setup and tuning PID control
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://github.com/gitcodebob/marstek-venus-rs485-node-red?tab=readme-ov-file#operation-and-tuning-minimal
+      - type: grid
+        cards:
+          - type: heading
+            heading: PID history
+            heading_style: title
+            icon: mdi:cog-box
+          - title: PID analysis
+            type: history-graph
+            entities:
+              - entity: input_number.house_battery_control_pid_output
+                name: PID sum
+              - entity: sensor.p1_meter_power
+                name: Grid power
+              - entity: input_number.house_battery_control_error_signal
+                name: Error
+              - entity: input_number.house_battery_control_p_term
+                name: P-term
+              - entity: input_number.house_battery_control_i_term
+                name: I-term
+              - entity: input_number.house_battery_control_d_term
+                name: D-term
+            grid_options:
+              columns: full
+            hours_to_show: 0.1
+        column_span: 2
+      - type: grid
+        cards:
+          - type: heading
+            heading: Grid-charge-or-wait (deprecated)
+            heading_style: title
+            icon: mdi:transmission-tower
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: input_datetime.strategy_accu_grid_charge_or_wait_start_at
+                name: Start grid charging / wait at
+              - entity: input_datetime.strategy_accu_grid_charge_or_wait_stop_at
+                name: Stop grid charging / wait at
+              - entity: input_boolean.strategy_accu_grid_charge_or_wait_charge_enabled
+                name: Charge during strategy
+              - entity: >-
+                  input_number.strategy_accu_grid_charge_or_wait_total_target_capacity
+                name: Grid charging target capacity
+              - entity: >-
+                  input_select.strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished
+                name: Switch to strategy when finished
+      - type: grid
+        cards:
+          - type: heading
+            heading: Full stop when EV is charging
+            heading_style: title
+            icon: mdi:power-plug-off
+          - type: tile
+            entity: sensor.ev_is_charging
+            vertical: false
+            features_position: bottom
+            grid_options:
+              columns: full
+          - type: entities
+            entities:
+              - entity: input_text.house_battery_strategy_ev_sensor_entity_id
+          - type: markdown
+            content: >-
+              <font color=grey>_Disengage your home batteries when EV is
+              charging_</font>
+            text_only: true
+    cards: []

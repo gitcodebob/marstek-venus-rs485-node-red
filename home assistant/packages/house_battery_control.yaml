@@ -447,8 +447,8 @@ template:
           {% if power > 0 and capacity_kwh > 0 %}
             {% set time_hrs = (capacity_kwh * 1000) / power %}
             {% set hrs = time_hrs | int %}
-            {% set minutes = ((time_hrs - hrs) * 60) | round(0) | int %}
-            {{ '{:02}:{:02}'.format(hrs, minutes) }} hours, {{capacity_kwh | round(2)}} kWh
+            {% set minutes = ((time_hrs - hrs) * 60) | int %}
+            {{ '{:02}:{:02}'.format(hrs, minutes) }} hours ({{capacity_kwh | round(2)}} kWh)
           {% else %}
             {{capacity_kwh | round(2)}} kWh available
           {% endif %}
