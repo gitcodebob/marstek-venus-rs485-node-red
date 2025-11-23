@@ -4,7 +4,7 @@
         "type": "tab",
         "label": "Strategy Charge",
         "disabled": false,
-        "info": "",
+        "info": "Charges batteries to desired energy level\r\nregardless of available PV/Grid power mix.",
         "env": []
     },
     {
@@ -635,7 +635,7 @@
         "z": "517b5f5313a242c5",
         "g": "38d625c4fd161b7b",
         "name": "Full stop ",
-        "func": "msg.target = \"Full stop\";\nreturn msg;",
+        "func": "msg.target = \"Full stop\";\nnode.status({fill:\"grey\",shape:\"dot\",text:`${Math.round(msg.batteries_available_energy*100)/100} of ${msg.house_battery_strategy_timed_target_energy} kWh in reserve`});\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -665,11 +665,11 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "aee1c8f9a8035aa2",
+        "id": "d05918b2853ee020",
         "type": "global-config",
         "env": [],
         "modules": {
-            "node-red-contrib-home-assistant-websocket": "0.80.1"
+            "node-red-contrib-home-assistant-websocket": "0.80.3"
         }
     }
 ]

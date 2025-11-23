@@ -314,7 +314,7 @@ input_text:
 
   house_battery_strategy_ev_sensor_entity_id:
     name: "EV is charging entity_id (input_boolean)"
-    icon: mdi:power
+    icon: mdi:identifier
 
 ###########################################################################################################
 # INPUT_SELECT
@@ -337,6 +337,7 @@ input_select:
       - Self-consumption # Use your own solar production. Don't buy or sell. Target grid consumption = 0, e.g. "Nul op de meter (NoM)" in Dutch.
       - Timed # Configure which strategy should be active during given periods of the day.
       - Grid-Charge-Or-Wait #charge from the grid during (very) low or negative price hours to cover upcoming expensive hours when PV is insufficient
+      - Charge PV # Charge when surplus PV is available, batteries will not discharge
     icon: mdi:home-battery
 
   # Available sub-strategies for timed / smart
@@ -346,6 +347,7 @@ input_select:
       - Full stop # Deactivate batteries
       - Self-consumption # Target grid consumption = 0
       - Charge # Uses self-consumption strategy with smart settings and target grid consumption > 0
+      - Charge PV # Charge when surplus PV is available, batteries will not discharge
 
   # How often is battery priority cycled automatically?
   house_battery_control_priority_change_interval:
@@ -453,9 +455,8 @@ template:
             {{capacity_kwh | round(2)}} kWh available
           {% endif %}
 
-      # EV charging trigger
+      # EV stop trigger
       - name: "EV is charging"
-        unique_id: house_battery_strategy_ev_is_charging
         icon: mdi:ev-station
         state: >
           {% set entity_id = states('input_text.house_battery_strategy_ev_sensor_entity_id') %}

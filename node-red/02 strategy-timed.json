@@ -567,7 +567,7 @@
         "id": "57eb83baaca02db6",
         "type": "inject",
         "z": "0199f18df097aa8f",
-        "name": "",
+        "name": "Test",
         "props": [
             {
                 "p": "payload"
@@ -584,7 +584,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 140,
+        "x": 130,
         "y": 260,
         "wires": [
             [
@@ -906,7 +906,7 @@
         "blockInputOverrides": true,
         "domain": "input_text",
         "service": "set_value",
-        "x": 1240,
+        "x": 1260,
         "y": 420,
         "wires": [
             []
@@ -952,7 +952,8 @@
         "wires": [
             [
                 "1ff8dd8a7bb8c098",
-                "f89183be5ef546c8"
+                "f89183be5ef546c8",
+                "4a78e8501fe52d32"
             ]
         ]
     },
@@ -1040,13 +1041,30 @@
         "septopics": false,
         "property": "timed_strategy",
         "topi": "topic",
-        "x": 1030,
+        "x": 1050,
         "y": 420,
         "wires": [
             [
                 "31b352bcf0b5fa22"
             ]
         ]
+    },
+    {
+        "id": "4a78e8501fe52d32",
+        "type": "debug",
+        "z": "0199f18df097aa8f",
+        "name": "Target",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "target",
+        "targetType": "msg",
+        "statusVal": "target",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 480,
+        "wires": []
     },
     {
         "id": "176d29a.6f648d6",
@@ -1063,11 +1081,11 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "dee3b64ca6fda666",
+        "id": "4c2d8192e6ac4517",
         "type": "global-config",
         "env": [],
         "modules": {
-            "node-red-contrib-home-assistant-websocket": "0.80.1",
+            "node-red-contrib-home-assistant-websocket": "0.80.3",
             "node-red-contrib-time-range-switch": "1.2.0"
         }
     }

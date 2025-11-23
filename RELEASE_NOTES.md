@@ -1,6 +1,30 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.2.0
+- **Feature: Charge PV Strategy**
+  - New "Charge PV" strategy option available in both main battery strategy and timed sub-strategies
+  - Batteries charge only when surplus solar (PV) power is available
+  - Batteries will not discharge - ideal for maximizing self-consumption of solar energy
+  - Perfect for sunny days when you want to store excess solar without drawing from the grid
+
+- **Improve: Enhanced battery control and stability**
+  - Updated Home Assistant WebSocket integration to latest version (0.80.3)
+  - Reduced unnecessary system updates with improved change detection
+  - Better visual feedback in dashboard with adjusted battery status tile layout
+  - Improved clarity for EV stop trigger with updated icons and descriptions
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml` - UI improvements for battery status and EV trigger
+  - `home assistant/packages/house_battery_control.yaml` - Added Charge PV strategy options
+  - `node-red/02 strategy-charge-pv.json` - NEW FILE: Charge PV strategy implementation
+  - `node-red/02 strategy-self-consumption.json` - Enhanced discharge control, updated WebSocket module
+  
+  Optional:
+  - `node-red/01 start-flow.json` - Updated WebSocket module
+  - `node-red/02 strategy-charge.json` - Updated WebSocket module, added flow description
+  - `node-red/02 strategy-timed.json` - Updated WebSocket module, improved debugging
+
 ## 3.1.0
 - **Feature: EV Stop Trigger to prevent power spikes during heavy appliance usage**
   - Added EV Stop Trigger functionality that overrules ALL active strategies when triggered

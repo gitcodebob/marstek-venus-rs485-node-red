@@ -6,7 +6,7 @@ This project is designed for hobbyists who want to control home battery systems 
 - **Node-RED Control Flows:** Easy to import and use Node-RED control flows for battery charge/discharge control.
 - **Home Assistant Integration:** Example configuration for seamless integration with your smart home setup.
 - **Customizable:** Adapt the flows and configuration to your specific battery hardware and automation needs.
-- **Strategies:** Multiple charge/discharge strategies including self-consumption (PID-based), timed charging/discharging, and simple charge modes. Easily add your own.
+- **Strategies:** Multiple charge/discharge strategies including self-consumption (PID-based), timed charging/discharging, simple charge modes, and solar-only charging (Charge PV). Easily add your own.
 - **Updating:** Grab the latest control flow, without losing your personal configurations.
 
 ## Whats new?

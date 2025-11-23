@@ -255,8 +255,6 @@ views:
             heading_style: title
             icon: mdi:home-battery-outline
           - type: tile
-            grid_options:
-              columns: full
             entity: sensor.battery_time_remaining
             name: Battery remaining
             icon: mdi:battery-clock
@@ -264,6 +262,9 @@ views:
             hide_state: false
             vertical: false
             features_position: bottom
+            grid_options:
+              columns: full
+              rows: 1
           - type: heading
             heading: Marstek M1
             heading_style: subtitle
@@ -387,7 +388,7 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Configuration and settings (v3.1.0)
+          Configuration and settings (v3.2.0)
         text_only: true
   - type: sections
     max_columns: 3
@@ -678,5 +679,7 @@ views:
           - type: markdown
             content: >-
               <font color=grey>The `EV stop trigger` should now indicate wether
-              an all stop has been triggered.</font>
+              an all stop has been triggered. Stop trigger 'on' = batteries
+              'Full stop'.</font>
+            text_only: true
     cards: []

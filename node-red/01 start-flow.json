@@ -2113,11 +2113,11 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "becf08f808dca809",
+        "id": "86bb98d7a90ef974",
         "type": "global-config",
         "env": [],
         "modules": {
-            "node-red-contrib-home-assistant-websocket": "0.80.1",
+            "node-red-contrib-home-assistant-websocket": "0.80.3",
             "node-red-contrib-moment": "5.0.0"
         }
     }
