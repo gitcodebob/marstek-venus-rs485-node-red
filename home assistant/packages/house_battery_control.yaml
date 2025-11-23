@@ -332,7 +332,7 @@ input_select:
   # Master strategy
   house_battery_strategy:
     name: House Battery Strategy
-    options: &MasterStrategies
+    options:
       - Full stop # Stop (dis)charging and disengage grid relay
       - Self-consumption # Use your own solar production. Don't buy or sell. Target grid consumption = 0, e.g. "Nul op de meter (NoM)" in Dutch.
       - Timed # Configure which strategy should be active during given periods of the day.
