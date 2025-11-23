@@ -6,6 +6,7 @@
 
 ## Commit Workflow:
 - When asked to commit, always:
+    1. Check all /node-red/ json files if they contain atleast 5 nodes or more. Otherwise halt and inform the user some files might be missing nodes.
     1. Stage all relevant modified and new files in git.
     1. Perform `git status` to check the current state of the repository.
     1. Generate a concise, descriptive commit message in the imperative mood (e.g., "Fix: Resolve login issue," "Feat: Add user profiles").
