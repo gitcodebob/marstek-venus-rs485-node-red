@@ -18,7 +18,11 @@ input_boolean:
     name: Charge batteries during Grid charge or wait strategy
 
   house_battery_strategy_timed_has_period_b:
-    name: Enable additional period
+    name: Enable additional period B
+    icon: mdi:clock-outline
+
+  house_battery_strategy_timed_has_period_c:
+    name: Enable additional period C
     icon: mdi:clock-outline
 
   house_battery_strategy_timed_has_max_power:
@@ -61,6 +65,18 @@ input_datetime:
 
   house_battery_strategy_timed_period_b2:
     name: Period B stop
+    has_date: false
+    has_time: true
+    icon: mdi:clock-end
+
+  house_battery_strategy_timed_period_c1:
+    name: Period C start
+    has_date: false
+    has_time: true
+    icon: mdi:clock-start
+
+  house_battery_strategy_timed_period_c2:
+    name: Period C stop
     has_date: false
     has_time: true
     icon: mdi:clock-end
@@ -395,7 +411,7 @@ input_select:
     options: *SubStrategies
     icon: mdi:distribute-horizontal-center
 
-  # Timed strategy | during period B
+  # Timed strategy | during period C
   house_battery_strategy_timed_strat_c:
     name: During period C
     options: *SubStrategies
@@ -452,7 +468,7 @@ template:
             {% set minutes = ((time_hrs - hrs) * 60) | int %}
             {{ '{:02}:{:02}'.format(hrs, minutes) }} hours ({{capacity_kwh | round(2)}} kWh)
           {% else %}
-            {{capacity_kwh | round(2)}} kWh available
+            Charging ({{capacity_kwh | round(2)}} kWh)
           {% endif %}
 
       # EV stop trigger

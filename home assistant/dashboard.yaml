@@ -388,7 +388,7 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Configuration and settings (v3.2.0)
+          Configuration and settings (v3.3.0)
         text_only: true
   - type: sections
     max_columns: 3
@@ -457,13 +457,62 @@ views:
                 entity: input_boolean.house_battery_strategy_timed_has_period_b
                 state: 'on'
           - type: tile
+            entity: input_boolean.house_battery_strategy_timed_has_period_c
+            name: Add period
+            icon: mdi:plus
+            color: blue-grey
+            show_entity_picture: false
+            hide_state: true
+            vertical: false
+            tap_action:
+              action: toggle
+            features_position: bottom
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: input_boolean.house_battery_strategy_timed_has_period_b
+                    state: 'on'
+                  - condition: state
+                    entity: input_boolean.house_battery_strategy_timed_has_period_c
+                    state: 'off'
+          - type: tile
+            entity: input_boolean.house_battery_strategy_timed_has_period_b
+            name: Remove period
+            icon: mdi:minus
+            color: red
+            show_entity_picture: false
+            hide_state: true
+            vertical: false
+            tap_action:
+              action: toggle
+            features_position: bottom
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: input_boolean.house_battery_strategy_timed_has_period_b
+                    state: 'on'
+                  - condition: state
+                    entity: input_boolean.house_battery_strategy_timed_has_period_c
+                    state: 'off'
+          - type: entities
+            entities:
+              - entity: input_datetime.house_battery_strategy_timed_period_c1
+              - entity: input_select.house_battery_strategy_timed_strat_c
+              - entity: input_datetime.house_battery_strategy_timed_period_c2
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_strategy_timed_has_period_c
+                state: 'on'
+          - type: tile
             grid_options:
               columns: full
             visibility:
               - condition: state
-                entity: input_boolean.house_battery_strategy_timed_has_period_b
+                entity: input_boolean.house_battery_strategy_timed_has_period_c
                 state: 'on'
-            entity: input_boolean.house_battery_strategy_timed_has_period_b
+            entity: input_boolean.house_battery_strategy_timed_has_period_c
             name: Remove period
             icon: mdi:minus
             color: red
