@@ -3,10 +3,9 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
 
 ## 3.3.0
 - **Feature: Third time period for Timed Strategy**
-  - Added Period C to timed strategy, allowing up to three distinct time periods per day
-  - Users can now configure complex daily schedules with baseline strategy plus periods A, B, and C
+  - Added 3rd period to timed strategy, allowing up to three distinct time periods per day
+  - This covers the use case of tackling 2 price peaks (morning and afternoon) and 1 charging period a day.
   - Each period can run different sub-strategies (Self-consumption, Charge, Charge PV, Full stop)
-  - Improved dashboard UI with sequential period management and conditional visibility controls
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml` - Added Period C UI controls and configuration
