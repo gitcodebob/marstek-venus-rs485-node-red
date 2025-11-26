@@ -1,6 +1,18 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.3.0
+- **Feature: Third time period for Timed Strategy**
+  - Added Period C to timed strategy, allowing up to three distinct time periods per day
+  - Users can now configure complex daily schedules with baseline strategy plus periods A, B, and C
+  - Each period can run different sub-strategies (Self-consumption, Charge, Charge PV, Full stop)
+  - Improved dashboard UI with sequential period management and conditional visibility controls
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml` - Added Period C UI controls and configuration
+  - `home assistant/packages/house_battery_control.yaml` - Added Period C entities (datetime inputs, boolean toggle, strategy selector)
+  - `node-red/02 strategy-timed.json` - Implemented Period C logic with cascading time-period evaluation
+
 ## 3.2.0
 - **Feature: Charge PV Strategy**
   - New "Charge PV" strategy option available in both main battery strategy and timed sub-strategies
@@ -26,7 +38,7 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
   - `node-red/02 strategy-timed.json` - Updated WebSocket module, improved debugging
 
 ## 3.1.0
-- **Feature: EV Stop Trigger to prevent power spikes during heavy appliance usage**
+- **Feature: EV Stop Trigger to disable battery operation**
   - Added EV Stop Trigger functionality that overrules ALL active strategies when triggered
   - Prevents home batteries from discharging during EV charging or other heavy appliance usage
   - Configurable via `input_text.house_battery_strategy_ev_sensor_entity_id` in Advanced Settings
