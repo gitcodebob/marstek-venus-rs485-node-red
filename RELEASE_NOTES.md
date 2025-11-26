@@ -1,6 +1,14 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.3.1
+- **Fix: Dashboard tab navigation**
+  - Dashboard layout now uses `navigate` to switch tabs instead of `url`, improving robustness when switching views in Home Assistant.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml` - Bumped header to `v3.3.1` and updated navigation behavior
+  - `RELEASE_NOTES.md` - Added 3.3.1 release note
+
 ## 3.3.0
 - **Feature: Third time period for Timed Strategy**
   - Added 3rd period to timed strategy, allowing up to three distinct time periods per day
