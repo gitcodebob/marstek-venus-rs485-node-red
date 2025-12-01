@@ -141,19 +141,25 @@ views:
             show_entity_picture: false
             name: Full Control Strategy
           - type: tile
-            entity: input_text.house_battery_strategy_active_sub_strategy
-            name: Active timed strategy
-            vertical: false
-            features_position: bottom
             grid_options:
               columns: full
             visibility:
-              - condition: state
-                entity: input_select.house_battery_strategy
-                state: Timed
-              - condition: state
-                entity: input_select.marstek_master_battery_mode
-                state: Full control
+              - condition: and
+                conditions:
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity: input_select.house_battery_strategy
+                        state: Timed
+                      - condition: state
+                        entity: input_select.house_battery_strategy
+                        state: Dynamic
+                  - condition: state
+                    entity: input_select.marstek_master_battery_mode
+                    state: Full control
+            entity: input_text.house_battery_strategy_active_sub_strategy
+            vertical: false
+            features_position: bottom
           - type: history-graph
             entities:
               - entity: input_number.house_battery_control_pid_output
@@ -388,7 +394,7 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Configuration and settings (v3.3.1)
+          Configuration and settings (v3.4.0)
         text_only: true
   - type: sections
     max_columns: 3
@@ -587,6 +593,21 @@ views:
             tap_action:
               action: navigate
               navigation_path: /home-battery/advanced-settings
+      - type: grid
+        cards:
+          - type: heading
+            heading: Dynamic strategy
+            heading_style: title
+          - type: entities
+            entities:
+              - entity: input_datetime.house_battery_strategy_dynamic_cheapest_start
+                type: simple-entity
+              - entity: input_datetime.house_battery_strategy_dynamic_cheapest_end
+                type: simple-entity
+              - entity: input_datetime.house_battery_strategy_dynamic_expensive_start
+                type: simple-entity
+              - entity: input_datetime.house_battery_strategy_dynamic_expensive_end
+                type: simple-entity
     cards: []
   - type: sections
     max_columns: 3

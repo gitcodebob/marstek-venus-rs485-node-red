@@ -1,0 +1,629 @@
+[
+    {
+        "id": "95489b12daee74f5",
+        "type": "tab",
+        "label": "Strategy Dynamic",
+        "disabled": false,
+        "info": "Dynamic contract automated management",
+        "env": []
+    },
+    {
+        "id": "ff30c86c22bf31c8",
+        "type": "group",
+        "z": "95489b12daee74f5",
+        "name": "Battery solutions",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "45ca4e9b170ae0e4",
+            "c855da432b5a589a"
+        ],
+        "x": 14,
+        "y": 239,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "ee5f9b06bf7efa46",
+        "type": "group",
+        "z": "95489b12daee74f5",
+        "name": "Home battery start",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "2c4ec860ab1a8f79",
+            "471fda4979e7fc76"
+        ],
+        "x": 14,
+        "y": 79,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "9c68fafd28d3b4fc",
+        "type": "group",
+        "z": "95489b12daee74f5",
+        "name": "Strategy selection",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "adbbd358b213f08e",
+            "2e5b6b44c86f80e3",
+            "0799b280bf62758e",
+            "5cb60087e09c8852",
+            "34a30e529baf678b",
+            "1908addf7c5bfb93",
+            "89368e429aa3d7d0",
+            "e83d728f6cf5d437",
+            "dc266592c79676c7",
+            "ea704e53eb20315f",
+            "c0fe420fa716d4ca"
+        ],
+        "x": 234,
+        "y": 319,
+        "w": 952,
+        "h": 362
+    },
+    {
+        "id": "70d1049fc896f1cd",
+        "type": "group",
+        "z": "95489b12daee74f5",
+        "name": "Execute",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "ec06caa7c9e6a95d",
+            "31e4a5e372bcb73f",
+            "8cddc8961385f28e",
+            "81b460c063969182",
+            "e5f74756a260df5b",
+            "c38ec0f354fd0ff8",
+            "16efd2b03d6dece5"
+        ],
+        "x": 234,
+        "y": 59,
+        "w": 852,
+        "h": 182
+    },
+    {
+        "id": "2c4ec860ab1a8f79",
+        "type": "link in",
+        "z": "95489b12daee74f5",
+        "g": "ee5f9b06bf7efa46",
+        "name": "Dynamic",
+        "links": [],
+        "x": 165,
+        "y": 180,
+        "wires": [
+            [
+                "81b460c063969182"
+            ]
+        ]
+    },
+    {
+        "id": "57a9ce1a5a7bb9ef",
+        "type": "comment",
+        "z": "95489b12daee74f5",
+        "name": "Home Battery Strategy",
+        "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
+        "x": 120,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "471fda4979e7fc76",
+        "type": "comment",
+        "z": "95489b12daee74f5",
+        "g": "ee5f9b06bf7efa46",
+        "name": "Start (readme)",
+        "info": "# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the <select> option configured in your\nselect_input.house_battery_strategy\n\nconfigure select options in:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select 'AcmE example'\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
+        "x": 110,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "45ca4e9b170ae0e4",
+        "type": "link out",
+        "z": "95489b12daee74f5",
+        "g": "ff30c86c22bf31c8",
+        "name": "Return",
+        "mode": "return",
+        "links": [],
+        "x": 55,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "c855da432b5a589a",
+        "type": "comment",
+        "z": "95489b12daee74f5",
+        "g": "ff30c86c22bf31c8",
+        "name": "End (readme)",
+        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
+        "x": 110,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "2e5b6b44c86f80e3",
+        "type": "api-render-template",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Cheapest Zonneplan",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    hours=3,\n    include_tomorrow=true,\n    mode=\"all\"\n) | to_json }}",
+        "resultsLocation": "cheapest",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 580,
+        "y": 360,
+        "wires": [
+            [
+                "34a30e529baf678b"
+            ]
+        ]
+    },
+    {
+        "id": "0799b280bf62758e",
+        "type": "api-render-template",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Expensive Zonneplan",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    lowest=false,\n    hours=4,\n    mode=\"all\"\n) | to_json }}",
+        "resultsLocation": "expensive",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 860,
+        "y": 360,
+        "wires": [
+            [
+                "1908addf7c5bfb93"
+            ]
+        ]
+    },
+    {
+        "id": "5cb60087e09c8852",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Complete message",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "34a30e529baf678b",
+        "type": "json",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "",
+        "property": "cheapest",
+        "action": "obj",
+        "pretty": false,
+        "x": 715,
+        "y": 360,
+        "wires": [
+            [
+                "0799b280bf62758e"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "1908addf7c5bfb93",
+        "type": "json",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "",
+        "property": "expensive",
+        "action": "obj",
+        "pretty": false,
+        "x": 995,
+        "y": 360,
+        "wires": [
+            [
+                "adbbd358b213f08e"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "adbbd358b213f08e",
+        "type": "function",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Determine dynamic strategy",
+        "func": "// extract start date objects\nlet start_cheapest = new Date(RED.util.getMessageProperty(msg,\"cheapest.start\"));\nlet start_expensive = new Date(RED.util.getMessageProperty(msg,\"expensive.start\"));\nlet isCheapestNext = true;\nlet lastCheapestPrice = context.last_cheapest_price | 0;\n\n// enums\nconst STRATEGY = {\n    CHEAPEST: \"Charge\", \n    NEUTRAL: \"Charge PV\",\n    EXPENSIVE: \"Self-consumption\"\n}\n\n// Check if the Date objects are valid. If 'Invalid Date', stop and warn the user.\nif (isNaN(start_cheapest.getTime()) || isNaN(start_expensive.getTime())) {\n    node.warn(`One or both dates are invalid. Cheap = ${start_cheapest}, Expensive = ${start_expensive}`);\n}\n\n// Check if cheapest of expensive is next\nif (start_cheapest < start_expensive) {\n    context.last_cheapest_price = RED.util.getMessageProperty(msg, \"cheapest.average\"); // €/kWh rate\n    lastCheapestPrice = context.last_cheapest_price;\n}\n\n// // Format the Date object to HH:MM based on locale options.\n// // We use 'nl-NL' locale, but any will work if it uses : as separator\n// const startCheapHHMM = start_cheapest.toLocaleTimeString('nl-NL', {\n//     hour: '2-digit',        // Ensure the hour is two digits (e.g., 03)\n//     minute: '2-digit',      // Ensure the minute is two digits (e.g., 00)\n//     hour12: false           // Force 24-hour format (00-23)\n// });                         // Result: \"03:00\"\n// msg.cheapest.startHHMM = startCheapHHMM;\n\n\n// const endHHMM = end.toLocaleTimeString('nl-NL', {\n//     hour: '2-digit',        // Ensure the hour is two digits (e.g., 03)\n//     minute: '2-digit',      // Ensure the minute is two digits (e.g., 00)\n//     hour12: false           // Force 24-hour format (00-23)\n// });   \n\n// is_now\n/** @type {boolean} */\nconst cheapestIsNow = RED.util.getMessageProperty(msg,\"cheapest.is_now\");\n/** @type {boolean} */\nconst expensiveIsNow = RED.util.getMessageProperty(msg, \"expensive.is_now\");\n\n// Determine if it is economical to start charging\nmsg.dynamic_strategy = STRATEGY.NEUTRAL;\n// average price cheapest \n// average price expensive\nconst lastExpensivePrice = RED.util.getMessageProperty(msg, \"expensive.average\"); // €/kWh rate\n// delta > € 0,06 = charging is economical\nconst delta = (lastExpensivePrice - lastCheapestPrice) / 10000000; // \n\n// Set strategy\nif (cheapestIsNow) msg.dynamic_strategy = STRATEGY.CHEAPEST;\nif (expensiveIsNow && delta > 0.06) msg.dynamic_strategy = STRATEGY.EXPENSIVE;\nflow.set(\"dynamic_strategy\",msg.dynamic_strategy);\n\n// Node status\nnode.status({ fill: \"blue\", shape: \"dot\", text: `${msg.dynamic_strategy}; ${cheapestIsNow} + ${expensiveIsNow}` });\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 400,
+        "wires": [
+            [
+                "5cb60087e09c8852",
+                "89368e429aa3d7d0",
+                "e83d728f6cf5d437",
+                "dc266592c79676c7",
+                "ea704e53eb20315f"
+            ]
+        ]
+    },
+    {
+        "id": "ec06caa7c9e6a95d",
+        "type": "change",
+        "z": "95489b12daee74f5",
+        "g": "70d1049fc896f1cd",
+        "name": "Set strategy",
+        "rules": [
+            {
+                "t": "set",
+                "p": "target",
+                "pt": "msg",
+                "to": "dynamic_strategy",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 200,
+        "wires": [
+            [
+                "31e4a5e372bcb73f",
+                "c38ec0f354fd0ff8"
+            ]
+        ]
+    },
+    {
+        "id": "31e4a5e372bcb73f",
+        "type": "link call",
+        "z": "95489b12daee74f5",
+        "g": "70d1049fc896f1cd",
+        "name": "Sub-strategy",
+        "links": [],
+        "linkType": "dynamic",
+        "timeout": "3",
+        "x": 710,
+        "y": 200,
+        "wires": [
+            [
+                "45ca4e9b170ae0e4"
+            ]
+        ]
+    },
+    {
+        "id": "89368e429aa3d7d0",
+        "type": "api-call-service",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Cheapest Start",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_datetime.set_datetime",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_datetime.house_battery_strategy_dynamic_cheapest_start"
+        ],
+        "labelId": [],
+        "data": "{\t    \"datetime\": $moment($$.cheapest.start).format('YYYY-MM-DD HH:mm:ss')\t}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_datetime",
+        "service": "set_datetime",
+        "x": 1040,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e83d728f6cf5d437",
+        "type": "api-call-service",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Cheapest End",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_datetime.set_datetime",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_datetime.house_battery_strategy_dynamic_cheapest_end"
+        ],
+        "labelId": [],
+        "data": "{\t    \"datetime\": $moment($$.cheapest.end).format('YYYY-MM-DD HH:mm:ss')\t}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_datetime",
+        "service": "set_datetime",
+        "x": 1040,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dc266592c79676c7",
+        "type": "api-call-service",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Expensive Start",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_datetime.set_datetime",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_datetime.house_battery_strategy_dynamic_expensive_start"
+        ],
+        "labelId": [],
+        "data": "{\t    \"datetime\": $moment($$.expensive.start).format('YYYY-MM-DD HH:mm:ss')\t}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_datetime",
+        "service": "set_datetime",
+        "x": 1040,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ea704e53eb20315f",
+        "type": "api-call-service",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Expensive End",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_datetime.set_datetime",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_datetime.house_battery_strategy_dynamic_expensive_end"
+        ],
+        "labelId": [],
+        "data": "{\t    \"datetime\": $moment($$.expensive.end).format('YYYY-MM-DD HH:mm:ss')\t}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_datetime",
+        "service": "set_datetime",
+        "x": 1040,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8cddc8961385f28e",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "70d1049fc896f1cd",
+        "name": "Sub-strategy",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "target",
+        "targetType": "msg",
+        "statusVal": "target",
+        "statusType": "auto",
+        "x": 890,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c0fe420fa716d4ca",
+        "type": "inject",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Every hour (cron)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "0 0-23 * * *",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "2e5b6b44c86f80e3"
+            ]
+        ]
+    },
+    {
+        "id": "81b460c063969182",
+        "type": "switch",
+        "z": "95489b12daee74f5",
+        "g": "70d1049fc896f1cd",
+        "name": "Has strategy",
+        "property": "dynamic_strategy",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "e5f74756a260df5b"
+            ],
+            [
+                "ec06caa7c9e6a95d"
+            ]
+        ]
+    },
+    {
+        "id": "e5f74756a260df5b",
+        "type": "change",
+        "z": "95489b12daee74f5",
+        "g": "70d1049fc896f1cd",
+        "name": "Set Full stop",
+        "rules": [
+            {
+                "t": "set",
+                "p": "target",
+                "pt": "msg",
+                "to": "Full stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 160,
+        "wires": [
+            [
+                "31e4a5e372bcb73f",
+                "c38ec0f354fd0ff8"
+            ]
+        ]
+    },
+    {
+        "id": "c38ec0f354fd0ff8",
+        "type": "rbe",
+        "z": "95489b12daee74f5",
+        "g": "70d1049fc896f1cd",
+        "name": "On change",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "target",
+        "topi": "topic",
+        "x": 710,
+        "y": 160,
+        "wires": [
+            [
+                "16efd2b03d6dece5",
+                "8cddc8961385f28e"
+            ]
+        ]
+    },
+    {
+        "id": "16efd2b03d6dece5",
+        "type": "api-call-service",
+        "z": "95489b12daee74f5",
+        "g": "70d1049fc896f1cd",
+        "name": "Active sub strategy text field",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_text.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_text.house_battery_strategy_active_sub_strategy"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.target}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_text",
+        "service": "set_value",
+        "x": 940,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "",
+        "connectionDelay": false,
+        "cacheJson": false,
+        "heartbeat": false,
+        "heartbeatInterval": "",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
+    },
+    {
+        "id": "87d99e71aa5d4c40",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.80.3"
+        }
+    }
+]

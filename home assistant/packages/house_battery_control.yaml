@@ -81,6 +81,30 @@ input_datetime:
     has_time: true
     icon: mdi:clock-end
 
+  house_battery_strategy_dynamic_cheapest_start:
+    name: Charge start
+    has_date: true
+    has_time: true
+    icon: mdi:clock-start
+
+  house_battery_strategy_dynamic_cheapest_end:
+    name: Charge end
+    has_date: true
+    has_time: true
+    icon: mdi:clock-end
+
+  house_battery_strategy_dynamic_expensive_start:
+    name: Expensive start
+    has_date: true
+    has_time: true
+    icon: mdi:clock-start
+
+  house_battery_strategy_dynamic_expensive_end:
+    name: Expensive end
+    has_date: true
+    has_time: true
+    icon: mdi:clock-end
+
 ###########################################################################################################
 # INPUT_NUMBER
 ###########################################################################################################
@@ -352,6 +376,7 @@ input_select:
       - Full stop # Stop (dis)charging and disengage grid relay
       - Self-consumption # Use your own solar production. Don't buy or sell. Target grid consumption = 0, e.g. "Nul op de meter (NoM)" in Dutch.
       - Timed # Configure which strategy should be active during given periods of the day.
+      - Dynamic # Requires a dynamic tariff contract and the Cheapest Hours HACS add-on
       - Grid-Charge-Or-Wait #charge from the grid during (very) low or negative price hours to cover upcoming expensive hours when PV is insufficient
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
     icon: mdi:home-battery
