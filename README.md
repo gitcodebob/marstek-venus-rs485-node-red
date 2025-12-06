@@ -31,6 +31,7 @@ This project is designed for hobbyists who want to control home battery systems 
    - Confirm `Node-RED` is running
    - (Optional) install [`B2500 Meter`](https://github.com/tomquist/b2500-meter) to enable the `Marstek control` option.
       - This sends grid power usage via the ESPHome boards to Martek's own control algorithms.
+   - (Optional) install [Cheapest Hours](https://github.com/TheFes/cheapest-energy-hours?tab=readme-ov-file#how-to-install) to enable support for `Dynamic` contracts with hourly changing rates.
 
 1. **Configure Home Assistant**
    - Use the provided YAML files in the `home assistant` folder as follows.
@@ -127,7 +128,7 @@ This project is designed for hobbyists who want to control home battery systems 
    - Remove the `Loop step` and `Loop until`, tie the `Mapping` to the `Battery strategy` directly.
    - Deploy as per normal instructions.
 
-## Operation and tuning (minimal)
+## Self-consumption (setup)
 For the `self-consumption strategy` a PID controler is used. This keeps grid input/output close to 0 W (the target grid consumption). This PID controler needs to be tuned to your home.
 
 ### What is a PID Controller
@@ -186,6 +187,31 @@ Use the [Ziegler-Nichols method]((https://en.wikipedia.org/wiki/Proportional%E2%
     - This baseline can be a bit aggressive.
 
 Note: every system is different and your home is unique. Tune in small increments from here. 
+
+## Dynamic strategy (setup)
+The `dynamic` flow is provided for automated charging/discharging based on changing hourly rates. This is only relevant if you have a dynamic/hourly contract.
+
+### How it works
+The strategy will periodically check for new tarif data from your supplier.
+It will use `charge` during the cheapest 2 hrs of this day. And charge using your charge settings.
+It will use `self-consumption` during the most expensive 4 hrs of the day, if the price delta is big enough. 
+Outside of these periods it will use `charge PV` to capture any surplus (cheap) solar power.
+
+### Getting dynamic up and running
+1. Install [Cheapest Hours](https://github.com/TheFes/cheapest-energy-hours?tab=readme-ov-file#how-to-install) if you have not done so already
+1. Provide data from your Energy supplier to Home Assistant. [See this easy list](https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings) with addons from TheFes.
+   - Follow any instructions provided by the Data Provider addon.
+1. Import the `02 strategy-dynamic.json` flow into Node-RED and *deploy*
+1. Go to your Home Battery Control dashboard in HA
+   - Select `Full control` and `Dynamic` to activate the strategy
+1. Go to 2nd tab, this shows `timed` and `dynamic` planning
+   - Select your energy supplier from the dropdown
+   - The dashboard should (with a small delay) display when it will be charging/idle/discharing in the next 24 hrs.
+1. Price delta
+   - Leave the price delta at €0,06/kWh or set it to your desired value
+   - For a Marstek bought at ~ €1250, 6000 cycles at 88% DoD and an 80 RTE = delta at €0,06/kWh
+
+Done.
 
 ## Troubleshooting
 1. The controller barely responds and (dis)charges only with a few Watts

@@ -326,7 +326,7 @@ input_number:
     unit_of_measurement: "kWh"
     icon: mdi:battery-charging
 
-  # Strategy | timed, desired energy reserve (effective energy available excl. cut-off energies)
+  # Strategy timed | desired energy reserve (effective energy available excl. cut-off energies)
   house_battery_strategy_timed_target_energy:
     name: Desired battery energy reserve
     min: 0
@@ -335,7 +335,7 @@ input_number:
     mode: box
     icon: mdi:battery-charging
 
-  # Strategy | timed, desired charging power
+  # Strategy timed | desired charging power
   house_battery_strategy_timed_target_power:
     name: Desired charging power
     min: 0
@@ -343,6 +343,66 @@ input_number:
     unit_of_measurement: "W"
     mode: box
     icon: mdi:battery-charging
+
+  # Strategy dynamic | select the N most cheapest hours of the day
+  house_battery_strategy_dynamic_cheapest_hrs:
+    name: Cheapest hours
+    icon: mdi:clock-outline
+    min: 1 # Select at least 1 hour
+    max: 8 # Using more than 4 hrs is usualy not advised
+    step: 1 # Whole hour steps
+    unit_of_measurement: "h"
+    mode: box
+
+  # Strategy dynamic | select the N most expensive hours of the day
+  house_battery_strategy_dynamic_expensive_hrs:
+    name: Expensive hours
+    icon: mdi:clock-outline
+    min: 1 # Select at least 1 hour
+    max: 8 # Using more than 4 hrs is usualy not advised
+    step: 1 # Whole hour steps
+    unit_of_measurement: "h"
+    mode: box
+
+  # Strategy dynamic | minimum difference between cheapest and expensive tariff, before switching to battery power.
+  house_battery_strategy_dynamic_threshold_delta:
+    name: Minimum difference
+    icon: mdi:cash
+    min: 0
+    max: 20
+    step: 1 # Cents
+    unit_of_measurement: "Cents"
+    mode: box
+
+  # Strategy dynamic | average tariff of cheapest period
+  house_battery_strategy_dynamic_cheapest_avg_tariff:
+    name: Avg cheapest tariff
+    icon: mdi:cash
+    min: 0
+    max: 1000
+    step: 0.01 # Cents
+    # unit_of_measurement: "EUR/USD"
+    mode: box
+
+  # Strategy dynamic | average tariff of expensive period
+  house_battery_strategy_dynamic_expensive_avg_tariff:
+    name: Avg expensive tariff
+    icon: mdi:cash
+    min: 0
+    max: 1000
+    step: 0.01 # Cents
+    # unit_of_measurement: "Cents"
+    mode: box
+
+  # Strategy dynamic | average difference between cheapes and expensive tariff
+  house_battery_strategy_dynamic_expensive_avg_delta:
+    name: Avg delta
+    icon: mdi:cash
+    min: 0
+    max: 1000
+    step: 0.01 # Cents
+    # unit_of_measurement: "Cents"
+    mode: box
 
 ###########################################################################################################
 # INPUT_TEXT
@@ -442,6 +502,25 @@ input_select:
     options: *SubStrategies
     icon: mdi:distribute-horizontal-center
 
+  # Dynamic strategy | energy suppliers
+  house_battery_strategy_dynamic_data_source:
+    name: Tariff data source
+    options:
+      - None
+      - Zonneplan
+      - Amber Electric
+      - EasyEnergy, EnergyZero (core)
+      - ENTSO-E
+      - Frank Energie
+      - GE-Spot
+      - Tibber, Nordpool (core)
+      - Tibber (custom)
+      - Nordpool (custom)
+      - PVPC (Spain)
+      - Octopus Energy
+      - Omie
+    icon: mdi:factory
+
 ###########################################################################################################
 # TEMPLATE SENSORS
 ###########################################################################################################
@@ -485,8 +564,11 @@ template:
       - name: "Battery time remaining"
         unique_id: house_battery_time_remaining
         state: >
+          {# this value is calculated in the template sensor above #}
           {% set power = max(0, states('sensor.house_total_battery_power_in_w') | float(0)) %}
+          {# this input_number is calculated in the Node-RED flows #}
           {% set capacity_kwh = states('input_number.house_battery_total_available_energy') | float(0) %}
+          {# display #}
           {% if power > 0 and capacity_kwh > 0 %}
             {% set time_hrs = (capacity_kwh * 1000) / power %}
             {% set hrs = time_hrs | int %}
@@ -506,3 +588,18 @@ template:
           {% else %}
             {{ states(entity_id) }}
           {% endif %}
+
+  - binary_sensor:
+      # Strategy charge | has the target energy level been reached?
+      - name: "Target energy reserve reached"
+        unique_id: house_battery_strategy_target_energy_status
+        icon: mdi:battery-check
+
+        # The sensor is 'on' (true) if the available
+        state: >
+          {{ states('input_number.house_battery_total_available_energy') | float(0) >= 
+              states('input_number.house_battery_strategy_timed_target_energy') | float(0) }}
+
+        # Optional: Prevents rapid flickering if values change quickly near the threshold
+        delay_off:
+          seconds: 5

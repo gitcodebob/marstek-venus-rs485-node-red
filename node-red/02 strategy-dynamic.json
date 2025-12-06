@@ -45,7 +45,7 @@
         "id": "9c68fafd28d3b4fc",
         "type": "group",
         "z": "95489b12daee74f5",
-        "name": "Strategy selection",
+        "name": "Set dynamic strategy on",
         "style": {
             "label": true
         },
@@ -60,12 +60,35 @@
             "e83d728f6cf5d437",
             "dc266592c79676c7",
             "ea704e53eb20315f",
-            "c0fe420fa716d4ca"
+            "c0fe420fa716d4ca",
+            "1990213302cf1876",
+            "98d7f59f0b7eab92",
+            "de24e0e941d08b62",
+            "5534a44cf66a84bd",
+            "1d49e10959ab22bc",
+            "3d76aa4d40d9ede2",
+            "127bc4a04263b3c0",
+            "7f75e4fa1c2d86a0",
+            "f5f223200fbada06",
+            "fedfd15cd6cddaed",
+            "f65eeae181ccbc8a",
+            "af541182589224a7",
+            "da4428dd14db9967",
+            "cba4fb540a66e4e6",
+            "03f47a2f3212cb6b",
+            "b97bd9a51080da68",
+            "1247084c53315208",
+            "4b8c5bc2b8cf6c4d",
+            "6e287097dc4e0236",
+            "403a9dfa33392328",
+            "67e38494d0337403",
+            "f1168e015522bbfc",
+            "141ebe1a0441a814"
         ],
         "x": 234,
-        "y": 319,
-        "w": 952,
-        "h": 362
+        "y": 279,
+        "w": 1492,
+        "h": 702
     },
     {
         "id": "70d1049fc896f1cd",
@@ -86,8 +109,66 @@
         ],
         "x": 234,
         "y": 59,
-        "w": 852,
+        "w": 832,
         "h": 182
+    },
+    {
+        "id": "c6507e8b14c27c81",
+        "type": "group",
+        "z": "95489b12daee74f5",
+        "name": "Today - test",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "92e35d100ca61070",
+            "6e2f9d4be7e18c3a",
+            "30af788462a325c7",
+            "d05798a95b8cf195",
+            "04d57a78a2fc3095",
+            "320df01bc7436680",
+            "d8004c43e9b3d8d0"
+        ],
+        "x": 234,
+        "y": 1039,
+        "w": 972,
+        "h": 142
+    },
+    {
+        "id": "1237795be79af24c",
+        "type": "group",
+        "z": "95489b12daee74f5",
+        "name": "Look_ahead + include tomorrow",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "1f3454b85f32ab4c",
+            "338407c8c442244c",
+            "3f94e4f380add2e8",
+            "6a255f140e0a0484",
+            "5f46de3f1bbfc7e3",
+            "308c8abd7e2afc1f",
+            "3fdf8f163b13a299",
+            "331e45a37cfdee1d"
+        ],
+        "x": 234,
+        "y": 1199,
+        "w": 972,
+        "h": 202
+    },
+    {
+        "id": "b97bd9a51080da68",
+        "type": "junction",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "x": 600,
+        "y": 320,
+        "wires": [
+            [
+                "127bc4a04263b3c0"
+            ]
+        ]
     },
     {
         "id": "2c4ec860ab1a8f79",
@@ -153,16 +234,16 @@
         "type": "api-render-template",
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
-        "name": "Cheapest Zonneplan",
+        "name": "Cheapest",
         "server": "176d29a.6f648d6",
         "version": 0,
-        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    hours=3,\n    include_tomorrow=true,\n    mode=\"all\"\n) | to_json }}",
-        "resultsLocation": "cheapest",
+        "template": "{}",
+        "resultsLocation": "dynamic.data_cheapest",
         "resultsLocationType": "msg",
         "templateLocation": "",
         "templateLocationType": "none",
-        "x": 580,
-        "y": 360,
+        "x": 460,
+        "y": 560,
         "wires": [
             [
                 "34a30e529baf678b"
@@ -174,16 +255,16 @@
         "type": "api-render-template",
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
-        "name": "Expensive Zonneplan",
+        "name": "Expensive",
         "server": "176d29a.6f648d6",
         "version": 0,
-        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    lowest=false,\n    hours=4,\n    mode=\"all\"\n) | to_json }}",
-        "resultsLocation": "expensive",
+        "template": "",
+        "resultsLocation": "dynamic.data_expensive",
         "resultsLocationType": "msg",
         "templateLocation": "",
         "templateLocationType": "none",
-        "x": 860,
-        "y": 360,
+        "x": 470,
+        "y": 620,
         "wires": [
             [
                 "1908addf7c5bfb93"
@@ -204,8 +285,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1050,
-        "y": 640,
+        "x": 830,
+        "y": 900,
         "wires": []
     },
     {
@@ -214,14 +295,14 @@
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
         "name": "",
-        "property": "cheapest",
+        "property": "dynamic.data_cheapest",
         "action": "obj",
         "pretty": false,
-        "x": 715,
-        "y": 360,
+        "x": 555,
+        "y": 560,
         "wires": [
             [
-                "0799b280bf62758e"
+                "af541182589224a7"
             ]
         ],
         "l": false
@@ -232,14 +313,14 @@
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
         "name": "",
-        "property": "expensive",
+        "property": "dynamic.data_expensive",
         "action": "obj",
         "pretty": false,
-        "x": 995,
-        "y": 360,
+        "x": 575,
+        "y": 620,
         "wires": [
             [
-                "adbbd358b213f08e"
+                "da4428dd14db9967"
             ]
         ],
         "l": false
@@ -250,22 +331,26 @@
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
         "name": "Determine dynamic strategy",
-        "func": "// extract start date objects\nlet start_cheapest = new Date(RED.util.getMessageProperty(msg,\"cheapest.start\"));\nlet start_expensive = new Date(RED.util.getMessageProperty(msg,\"expensive.start\"));\nlet isCheapestNext = true;\nlet lastCheapestPrice = context.last_cheapest_price | 0;\n\n// enums\nconst STRATEGY = {\n    CHEAPEST: \"Charge\", \n    NEUTRAL: \"Charge PV\",\n    EXPENSIVE: \"Self-consumption\"\n}\n\n// Check if the Date objects are valid. If 'Invalid Date', stop and warn the user.\nif (isNaN(start_cheapest.getTime()) || isNaN(start_expensive.getTime())) {\n    node.warn(`One or both dates are invalid. Cheap = ${start_cheapest}, Expensive = ${start_expensive}`);\n}\n\n// Check if cheapest of expensive is next\nif (start_cheapest < start_expensive) {\n    context.last_cheapest_price = RED.util.getMessageProperty(msg, \"cheapest.average\"); // €/kWh rate\n    lastCheapestPrice = context.last_cheapest_price;\n}\n\n// // Format the Date object to HH:MM based on locale options.\n// // We use 'nl-NL' locale, but any will work if it uses : as separator\n// const startCheapHHMM = start_cheapest.toLocaleTimeString('nl-NL', {\n//     hour: '2-digit',        // Ensure the hour is two digits (e.g., 03)\n//     minute: '2-digit',      // Ensure the minute is two digits (e.g., 00)\n//     hour12: false           // Force 24-hour format (00-23)\n// });                         // Result: \"03:00\"\n// msg.cheapest.startHHMM = startCheapHHMM;\n\n\n// const endHHMM = end.toLocaleTimeString('nl-NL', {\n//     hour: '2-digit',        // Ensure the hour is two digits (e.g., 03)\n//     minute: '2-digit',      // Ensure the minute is two digits (e.g., 00)\n//     hour12: false           // Force 24-hour format (00-23)\n// });   \n\n// is_now\n/** @type {boolean} */\nconst cheapestIsNow = RED.util.getMessageProperty(msg,\"cheapest.is_now\");\n/** @type {boolean} */\nconst expensiveIsNow = RED.util.getMessageProperty(msg, \"expensive.is_now\");\n\n// Determine if it is economical to start charging\nmsg.dynamic_strategy = STRATEGY.NEUTRAL;\n// average price cheapest \n// average price expensive\nconst lastExpensivePrice = RED.util.getMessageProperty(msg, \"expensive.average\"); // €/kWh rate\n// delta > € 0,06 = charging is economical\nconst delta = (lastExpensivePrice - lastCheapestPrice) / 10000000; // \n\n// Set strategy\nif (cheapestIsNow) msg.dynamic_strategy = STRATEGY.CHEAPEST;\nif (expensiveIsNow && delta > 0.06) msg.dynamic_strategy = STRATEGY.EXPENSIVE;\nflow.set(\"dynamic_strategy\",msg.dynamic_strategy);\n\n// Node status\nnode.status({ fill: \"blue\", shape: \"dot\", text: `${msg.dynamic_strategy}; ${cheapestIsNow} + ${expensiveIsNow}` });\nreturn msg;",
+        "func": "// Extract start date objects\nlet start_cheapest = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.start\"));\nlet start_expensive = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_expensive.start\"));\nlet isCheapestNext = true;\nlet lastCheapestPrice = context.last_cheapest_price || 0;\nlet deltaThreshold = parseFloat(RED.util.getMessageProperty(msg,\"dynamic.min_delta_cents\")/100) || 0; // 100 cents = 1 Cr\n\n// Enums\nconst STRATEGY = {\n    CHEAPEST: \"Charge\", \n    NEUTRAL: \"Charge PV\",\n    EXPENSIVE: \"Self-consumption\"\n}\n\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg,\"dynamic.value_conversion\")) || 1;\n\n// Check if the Date objects are valid. If 'Invalid Date', stop and warn the user.\nif (isNaN(start_cheapest.getTime()) || isNaN(start_expensive.getTime())) {\n    node.warn(`One or both dates are invalid. Cheap = ${start_cheapest}, Expensive = ${start_expensive}`);\n    msg.log ? msg.log.push(`One or both dates are invalid. Cheap = ${start_cheapest}, Expensive = ${start_expensive}`):null;\n}\n\n// Check if cheapest lies before expensive\nif (start_cheapest < start_expensive) {\n    msg.log ? msg.log.push(`Cheapest moment lies before expensive moment. Cheapest moment: ${start_cheapest}, Expensive = ${start_expensive}`): null;\n    // store the cheapest price to compare it with future expensive rates, to determine if it's economical to discharge.\n    context.last_cheapest_price = RED.util.getMessageProperty(msg, \"dynamic.data_cheapest.average\"); // €/kWh rate\n    lastCheapestPrice = context.last_cheapest_price;\n    msg.log ? msg.log.push(`Cheapest price set to ${lastCheapestPrice}`):null;\n}\n\nif (lastCheapestPrice == 0) {\n    msg.log ? msg.log.push(`I can't recall the tariff used for charging. Cheapest price set to ${lastCheapestPrice}`):null;\n}\n\n// // Format the Date object to HH:MM based on locale options.\n// // We use 'nl-NL' locale, but any will work if it uses : as separator\n// const startCheapHHMM = start_cheapest.toLocaleTimeString('nl-NL', {\n//     hour: '2-digit',        // Ensure the hour is two digits (e.g., 03)\n//     minute: '2-digit',      // Ensure the minute is two digits (e.g., 00)\n//     hour12: false           // Force 24-hour format (00-23)\n// });                         // Result: \"03:00\"\n// msg.cheapest.startHHMM = startCheapHHMM;\n\n\n// const endHHMM = end.toLocaleTimeString('nl-NL', {\n//     hour: '2-digit',        // Ensure the hour is two digits (e.g., 03)\n//     minute: '2-digit',      // Ensure the minute is two digits (e.g., 00)\n//     hour12: false           // Force 24-hour format (00-23)\n// });   \n\n// is_now\n/** @type {boolean} */\nconst cheapestIsNow = RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.is_now\");\n/** @type {boolean} */\nconst expensiveIsNow = RED.util.getMessageProperty(msg, \"dynamic.data_expensive.is_now\");\n\n// Determine if it is economical to start charging\nmsg.dynamic.strategy = STRATEGY.NEUTRAL;\n// average price expensive\nconst lastExpensivePrice = RED.util.getMessageProperty(msg, \"dynamic.data_expensive.average\"); // €/kWh rate\n// delta > € 0,06 = charging is economical\nconst delta = (lastExpensivePrice - lastCheapestPrice) / CONVERSION_RATE; // \n\n// UI values\nmsg.dynamic.avg_cheapest_tariff = parseFloat((lastCheapestPrice / CONVERSION_RATE).toFixed(2));\nmsg.dynamic.avg_expensive_tariff = parseFloat((lastExpensivePrice / CONVERSION_RATE).toFixed(2));\nmsg.dynamic.avg_delta = parseFloat(delta.toFixed(2));\n\n// Set strategy\nif (cheapestIsNow) msg.dynamic.strategy = STRATEGY.CHEAPEST;\nif (expensiveIsNow && delta >= deltaThreshold) {\n    msg.dynamic.strategy = STRATEGY.EXPENSIVE;\n} else if(expensiveIsNow) {\n    // log\n    msg.log ? msg.log.push(`Expensive period, but not using batteries. The tariff difference between cheap and expensive periods is too small: ${(lastExpensivePrice / CONVERSION_RATE).toFixed(4)}-${(lastCheapestPrice / CONVERSION_RATE).toFixed(4) }=${delta.toFixed(4)} < ${deltaThreshold}.`) : null;    \n}\n\n// Store the strategy in flow-context. The 'Execution' area will read from the flow-context.\nflow.set(\"dynamic_strategy\",msg.dynamic.strategy);\n\n// Node status\nnode.status({ fill: \"blue\", shape: \"dot\", text: `${msg.dynamic.strategy}; ${cheapestIsNow} + ${expensiveIsNow} @ €${delta.toFixed(4)}` });\n\n// Log\nmsg.log ? msg.log.push(`Dynamic strat set to ${msg.dynamic.strategy}. \nCheapest period now? ${cheapestIsNow}. \nExpensive period now? ${expensiveIsNow}.`):null;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 600,
-        "y": 400,
+        "x": 400,
+        "y": 740,
         "wires": [
             [
                 "5cb60087e09c8852",
                 "89368e429aa3d7d0",
                 "e83d728f6cf5d437",
                 "dc266592c79676c7",
-                "ea704e53eb20315f"
+                "ea704e53eb20315f",
+                "cba4fb540a66e4e6",
+                "6e287097dc4e0236",
+                "403a9dfa33392328",
+                "67e38494d0337403"
             ]
         ]
     },
@@ -289,7 +374,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 490,
+        "x": 510,
         "y": 200,
         "wires": [
             [
@@ -307,7 +392,7 @@
         "links": [],
         "linkType": "dynamic",
         "timeout": "3",
-        "x": 710,
+        "x": 690,
         "y": 200,
         "wires": [
             [
@@ -332,7 +417,7 @@
             "input_datetime.house_battery_strategy_dynamic_cheapest_start"
         ],
         "labelId": [],
-        "data": "{\t    \"datetime\": $moment($$.cheapest.start).format('YYYY-MM-DD HH:mm:ss')\t}",
+        "data": "{\t    \"datetime\": $moment($$.dynamic.data_cheapest.start).format('YYYY-MM-DD HH:mm:ss')\t}",
         "dataType": "jsonata",
         "mergeContext": "",
         "mustacheAltTags": false,
@@ -341,8 +426,8 @@
         "blockInputOverrides": true,
         "domain": "input_datetime",
         "service": "set_datetime",
-        "x": 1040,
-        "y": 400,
+        "x": 820,
+        "y": 620,
         "wires": [
             []
         ]
@@ -364,7 +449,7 @@
             "input_datetime.house_battery_strategy_dynamic_cheapest_end"
         ],
         "labelId": [],
-        "data": "{\t    \"datetime\": $moment($$.cheapest.end).format('YYYY-MM-DD HH:mm:ss')\t}",
+        "data": "{\t    \"datetime\": $moment($$.dynamic.data_cheapest.end).format('YYYY-MM-DD HH:mm:ss')\t}",
         "dataType": "jsonata",
         "mergeContext": "",
         "mustacheAltTags": false,
@@ -373,8 +458,8 @@
         "blockInputOverrides": true,
         "domain": "input_datetime",
         "service": "set_datetime",
-        "x": 1040,
-        "y": 460,
+        "x": 820,
+        "y": 660,
         "wires": [
             []
         ]
@@ -396,7 +481,7 @@
             "input_datetime.house_battery_strategy_dynamic_expensive_start"
         ],
         "labelId": [],
-        "data": "{\t    \"datetime\": $moment($$.expensive.start).format('YYYY-MM-DD HH:mm:ss')\t}",
+        "data": "{\t    \"datetime\": $moment($$.dynamic.data_expensive.start).format('YYYY-MM-DD HH:mm:ss')\t}",
         "dataType": "jsonata",
         "mergeContext": "",
         "mustacheAltTags": false,
@@ -405,8 +490,8 @@
         "blockInputOverrides": true,
         "domain": "input_datetime",
         "service": "set_datetime",
-        "x": 1040,
-        "y": 520,
+        "x": 820,
+        "y": 700,
         "wires": [
             []
         ]
@@ -428,7 +513,7 @@
             "input_datetime.house_battery_strategy_dynamic_expensive_end"
         ],
         "labelId": [],
-        "data": "{\t    \"datetime\": $moment($$.expensive.end).format('YYYY-MM-DD HH:mm:ss')\t}",
+        "data": "{\t    \"datetime\": $moment($$.dynamic.data_expensive.end).format('YYYY-MM-DD HH:mm:ss')\t}",
         "dataType": "jsonata",
         "mergeContext": "",
         "mustacheAltTags": false,
@@ -437,8 +522,8 @@
         "blockInputOverrides": true,
         "domain": "input_datetime",
         "service": "set_datetime",
-        "x": 1040,
-        "y": 580,
+        "x": 820,
+        "y": 740,
         "wires": [
             []
         ]
@@ -457,7 +542,7 @@
         "targetType": "msg",
         "statusVal": "target",
         "statusType": "auto",
-        "x": 890,
+        "x": 870,
         "y": 100,
         "wires": []
     },
@@ -478,16 +563,16 @@
         ],
         "repeat": "",
         "crontab": "0 0-23 * * *",
-        "once": true,
+        "once": false,
         "onceDelay": "3",
         "topic": "",
         "payload": "",
         "payloadType": "date",
         "x": 370,
-        "y": 360,
+        "y": 400,
         "wires": [
             [
-                "2e5b6b44c86f80e3"
+                "1990213302cf1876"
             ]
         ]
     },
@@ -541,7 +626,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 490,
+        "x": 510,
         "y": 160,
         "wires": [
             [
@@ -563,7 +648,7 @@
         "septopics": false,
         "property": "target",
         "topi": "topic",
-        "x": 710,
+        "x": 690,
         "y": 160,
         "wires": [
             [
@@ -598,10 +683,1017 @@
         "blockInputOverrides": true,
         "domain": "input_text",
         "service": "set_value",
-        "x": 940,
+        "x": 920,
         "y": 160,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "6e2f9d4be7e18c3a",
+        "type": "inject",
+        "z": "95489b12daee74f5",
+        "g": "c6507e8b14c27c81",
+        "name": "today",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 330,
+        "y": 1100,
+        "wires": [
+            [
+                "92e35d100ca61070"
+            ]
+        ]
+    },
+    {
+        "id": "92e35d100ca61070",
+        "type": "api-render-template",
+        "z": "95489b12daee74f5",
+        "g": "c6507e8b14c27c81",
+        "name": "Cheapest Zonneplan",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    hours=1,\n    mode=\"all\"\n) | to_json }}",
+        "resultsLocation": "cheapest",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 540,
+        "y": 1100,
+        "wires": [
+            [
+                "30af788462a325c7"
+            ]
+        ]
+    },
+    {
+        "id": "30af788462a325c7",
+        "type": "json",
+        "z": "95489b12daee74f5",
+        "g": "c6507e8b14c27c81",
+        "name": "",
+        "property": "cheapest",
+        "action": "obj",
+        "pretty": false,
+        "x": 675,
+        "y": 1100,
+        "wires": [
+            [
+                "d05798a95b8cf195"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "d05798a95b8cf195",
+        "type": "api-render-template",
+        "z": "95489b12daee74f5",
+        "g": "c6507e8b14c27c81",
+        "name": "Expensive Zonneplan",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    lowest=false,\n    hours=1,\n    mode=\"all\"\n) | to_json }}",
+        "resultsLocation": "expensive",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 820,
+        "y": 1100,
+        "wires": [
+            [
+                "04d57a78a2fc3095"
+            ]
+        ]
+    },
+    {
+        "id": "04d57a78a2fc3095",
+        "type": "json",
+        "z": "95489b12daee74f5",
+        "g": "c6507e8b14c27c81",
+        "name": "",
+        "property": "expensive",
+        "action": "obj",
+        "pretty": false,
+        "x": 955,
+        "y": 1100,
+        "wires": [
+            [
+                "320df01bc7436680",
+                "d8004c43e9b3d8d0"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "320df01bc7436680",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "c6507e8b14c27c81",
+        "name": "Cheap",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "cheapest.start",
+        "targetType": "msg",
+        "statusVal": "cheapest.start",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "d8004c43e9b3d8d0",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "c6507e8b14c27c81",
+        "name": "Expensive",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "expensive.start",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "1f3454b85f32ab4c",
+        "type": "api-render-template",
+        "z": "95489b12daee74f5",
+        "g": "1237795be79af24c",
+        "name": "Cheapest Zonneplan",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    include_tomorrow=true,\n    look_ahead=true,\n    hours=1,\n    mode=\"all\"\n) | to_json }}",
+        "resultsLocation": "cheapest",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 540,
+        "y": 1260,
+        "wires": [
+            [
+                "3f94e4f380add2e8"
+            ]
+        ]
+    },
+    {
+        "id": "338407c8c442244c",
+        "type": "inject",
+        "z": "95489b12daee74f5",
+        "g": "1237795be79af24c",
+        "name": "look_ahead",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 350,
+        "y": 1260,
+        "wires": [
+            [
+                "1f3454b85f32ab4c"
+            ]
+        ]
+    },
+    {
+        "id": "3f94e4f380add2e8",
+        "type": "json",
+        "z": "95489b12daee74f5",
+        "g": "1237795be79af24c",
+        "name": "",
+        "property": "cheapest",
+        "action": "obj",
+        "pretty": false,
+        "x": 675,
+        "y": 1260,
+        "wires": [
+            [
+                "6a255f140e0a0484"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "6a255f140e0a0484",
+        "type": "api-render-template",
+        "z": "95489b12daee74f5",
+        "g": "1237795be79af24c",
+        "name": "Expensive Zonneplan",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    include_tomorrow=true,\n    look_ahead=true,\n    lowest=false,\n    hours=1,\n    mode=\"all\"\n) | to_json }}",
+        "resultsLocation": "expensive",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 820,
+        "y": 1260,
+        "wires": [
+            [
+                "5f46de3f1bbfc7e3"
+            ]
+        ]
+    },
+    {
+        "id": "5f46de3f1bbfc7e3",
+        "type": "json",
+        "z": "95489b12daee74f5",
+        "g": "1237795be79af24c",
+        "name": "",
+        "property": "expensive",
+        "action": "obj",
+        "pretty": false,
+        "x": 955,
+        "y": 1260,
+        "wires": [
+            [
+                "308c8abd7e2afc1f",
+                "3fdf8f163b13a299",
+                "331e45a37cfdee1d"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "308c8abd7e2afc1f",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "1237795be79af24c",
+        "name": "Cheap",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "cheapest.start",
+        "targetType": "msg",
+        "statusVal": "cheapest.start",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "3fdf8f163b13a299",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "1237795be79af24c",
+        "name": "Expensive",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "expensive.start",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "331e45a37cfdee1d",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "1237795be79af24c",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "1990213302cf1876",
+        "type": "delay",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 540,
+        "y": 400,
+        "wires": [
+            [
+                "127bc4a04263b3c0"
+            ]
+        ]
+    },
+    {
+        "id": "98d7f59f0b7eab92",
+        "type": "api-current-state",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Source",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_dynamic_data_source",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.data_source",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 800,
+        "y": 360,
+        "wires": [
+            [
+                "5534a44cf66a84bd"
+            ]
+        ]
+    },
+    {
+        "id": "de24e0e941d08b62",
+        "type": "function",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Data source settings",
+        "func": "/*    From cheapes-energy-hours macro\n      See: https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings\n\n      - None (default selection)\n      - Zonneplan\n      - Amber Electric\n      - EasyEnergy, EnergyZero (core)\n      - ENTSO-E\n      - Frank Energie\n      - GE-Spot\n      - Tibber, Nordpool (core)\n      - Tibber (custom)\n      - Nordpool (custom)\n      - PVPC (Spain)\n      - Octopus Energy\n      - Omie\n*/\n\nswitch (msg.dynamic.data_source) {\n      case \"None\":\n            // Handle the 'None' case (e.g., no supplier selected or data is unavailable)\n            msg.log.push(\"No data source selected.\");\n            // Add config here...\n            break;\n\n      case \"Zonneplan\":\n            // Code for Zonneplan (a Dutch energy supplier)\n            msg.log.push(\"Processing Zonneplan data.\");\n            // Add config here...\n            msg.dynamic.sensor='sensor.zonneplan_current_electricity_tariff'; // when using: https://github.com/fsaris/home-assistant-zonneplan-one\n            msg.dynamic.attr_all='forecast';\n            msg.dynamic.value_key='electricity_price';\n            msg.dynamic.value_conversion = 10000000;\n            break;\n\n      case \"Amber Electric\":\n            // Code for Amber Electric (Australian energy retailer)\n            msg.log.push(\"Processing Amber Electric data.\");\n            // Add config here...\n            msg.dynamic.attr_all='forecasts'; \n            msg.dynamic.time_key='start_time'; \n            msg.dynamic.value_key='per_kwh';\n            break;\n\n      case \"EasyEnergy, EnergyZero (core)\":\n            // Code for EasyEnergy and EnergyZero (core/default implementation)\n            msg.log.push(\"Processing EasyEnergy/EnergyZero core data.\");\n            // Add config here...\n            break;\n\n      case \"ENTSO-E\":\n            // Code for ENTSO-E (European Network of Transmission System Operators for Electricity)\n            msg.log.push(\"Processing ENTSO-E data.\");\n            // Add config here...\n            msg.dynamic.attr_today='prices_today'; \n            msg.dynamic.attr_tomorrow='prices_tomorrow'; \n            msg.dynamic.time_key='time';\n            msg.dynamic.value_key='price';\n            break;\n\n      case \"Frank Energie\":\n            // Code for Frank Energie (Dutch energy supplier)\n            msg.log.push(\"Processing Frank Energie data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'prices'; \n            msg.dynamic.time_key = 'from'; \n            msg.dynamic.value_key = 'price';\n            break;\n\n      case \"GE-Spot\":\n            // Code for GE-Spot (Global Electric Spot price)\n            msg.log.push(\"Processing GE-Spot data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today_hourly_prices'; // using the hourly version. today_interval_prices is per 15 mins\n            msg.dynamic.attr_tomorrow = 'tomorrow_hourly_prices'; // using the hourly version\n            msg.dynamic.time_key = 'time'; \n            msg.dynamic.value_key = 'value';\n            break;\n\n      case \"Tibber, Nordpool (core)\":\n            // Code for Tibber and Nordpool (core/default implementation)\n            msg.log.push(\"Processing Tibber/Nordpool core data.\");\n            // Add config here...\n            break;\n\n      case \"Tibber (custom)\":\n            // Code for a custom Tibber setup/configuration\n            msg.log.push(\"Processing Tibber custom data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.datetime_in_data = false;\n            break;\n\n      case \"Nordpool (custom)\":\n            // Code for a custom Nordpool setup/configuration\n            msg.log.push(\"Processing Nordpool custom data.\");\n            // Add config here...\n            break;\n\n      case \"PVPC (Spain)\":\n            // Code for PVPC (Voluntary Price for Small Consumers in Spain)\n            msg.log.push(\"Processing Spanish PVPC data.\");\n            // Add config here...\n            break;\n\n      case \"Octopus Energy\":\n            // Code for Octopus Energy (UK/international energy supplier)\n            msg.log.push(\"Processing Octopus Energy data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'rates'; \n            msg.dynamic.value_key = 'value_incl_vat';\n            break;\n\n      case \"Omie\":\n            // Code for Omie (Iberian Energy Market Operator)\n            msg.log.push(\"Processing Omie data.\");\n            // Add config here...\n            break;\n\n      default:\n            // Code to execute if the supplier does not match any of the above cases\n            node.warn(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            msg.log.push(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            // Add default error handling...\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 480,
+        "wires": [
+            [
+                "7f75e4fa1c2d86a0"
+            ]
+        ]
+    },
+    {
+        "id": "5534a44cf66a84bd",
+        "type": "api-current-state",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Cheapest N hrs",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_dynamic_cheapest_hrs",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.cheapest_hrs",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 960,
+        "y": 360,
+        "wires": [
+            [
+                "1d49e10959ab22bc"
+            ]
+        ]
+    },
+    {
+        "id": "1d49e10959ab22bc",
+        "type": "api-current-state",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Expensive N hrs",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_dynamic_expensive_hrs",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.expensive_hrs",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1140,
+        "y": 360,
+        "wires": [
+            [
+                "f1168e015522bbfc"
+            ]
+        ]
+    },
+    {
+        "id": "3d76aa4d40d9ede2",
+        "type": "inject",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "On start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 340,
+        "y": 360,
+        "wires": [
+            [
+                "127bc4a04263b3c0"
+            ]
+        ]
+    },
+    {
+        "id": "127bc4a04263b3c0",
+        "type": "function",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Init",
+        "func": "msg.dynamic = {};\nmsg.log = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 360,
+        "wires": [
+            [
+                "98d7f59f0b7eab92"
+            ]
+        ]
+    },
+    {
+        "id": "7f75e4fa1c2d86a0",
+        "type": "function",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Generate templates",
+        "func": "// final template initialization\nmsg.dynamic.template_cheapest = \"\";\nmsg.dynamic.template_expensive = \"\";\n\n// temporary template parts\nlet template_start = \"\";\nlet template_common = [];\nlet template_cheapest = [];\nlet template_expensive = [];\nlet template_end = \"\";\n\n// 1. IMPROVEMENT: Use radix 10 and Logical OR (||) for cleaner default handling\nconst cheapest_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.cheapest_hrs\"), 10) || 1;\nconst expensive_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.expensive_hrs\"), 10) || 1;\n\n// load the macro\ntemplate_start = `{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n`;\ntemplate_end = `) | to_json }}`;\n\n// collect arguments | strings\nconst stringKeys = [\n    'sensor',\n    'attr_all',\n    'value_key',\n    'attr_today',\n    'attr_tomorrow',\n    'time_key'\n];\n\nstringKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}='${msg.dynamic[key]}'`);\n    }\n});\n\n// collect arguments | boolean, integer\nconst otherKeys = [\n    'datetime_in_data',\n    'data_minutes',\n];\n\notherKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}=${msg.dynamic[key]}`);\n    }\n});\n\n// copy common items\ntemplate_cheapest = [...template_common];\ntemplate_expensive = [...template_common];\n\n// collect arguments | cheapest specific\ntemplate_cheapest.push(`hours=${cheapest_hrs}`);\ntemplate_cheapest.push(`include_tomorrow=true`);\ntemplate_cheapest.push(`mode=\"all\"`);\n\n// collect arguments | expensive specific\ntemplate_expensive.push(`hours=${expensive_hrs}`);\ntemplate_expensive.push(`include_tomorrow=true`);\ntemplate_expensive.push(`lowest=false`);\ntemplate_expensive.push(`mode=\"all\"`);\n\n/**\n * Formats an array of strings into a single string:\n * - Each item starts with 4 spaces.\n * - Each item ends with a comma, except the last one.\n * - Items are separated by a newline.\n */\nfunction formatTemplateArray(array) {\n    if (!array || array.length === 0) {\n        return \"\";\n    }\n\n    const indent = \"    \"; \n\n    const formatted_lines = array.map((element, index) => {\n        const suffix = (index < array.length - 1) ? \",\" : \"\";\n        return `${indent}${element}${suffix}`;\n    });\n\n    return formatted_lines.join('\\n');\n}\n\n// generate string templates\nconst template_cheapest_string = formatTemplateArray(template_cheapest);\nconst template_expensive_string = formatTemplateArray(template_expensive);\n\n// done\nmsg.dynamic.template_cheapest = `${template_start}${template_cheapest_string}${template_end}`;\nmsg.dynamic.template_expensive = `${template_start}${template_expensive_string}${template_end}`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 480,
+        "wires": [
+            [
+                "f5f223200fbada06",
+                "fedfd15cd6cddaed",
+                "f65eeae181ccbc8a"
+            ]
+        ]
+    },
+    {
+        "id": "f5f223200fbada06",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Template cheapest",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "dynamic.template_cheapest",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "fedfd15cd6cddaed",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Template expensive",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "dynamic.template_expensive",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "f65eeae181ccbc8a",
+        "type": "change",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Set",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "dynamic.template_cheapest",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 560,
+        "wires": [
+            [
+                "2e5b6b44c86f80e3"
+            ]
+        ]
+    },
+    {
+        "id": "af541182589224a7",
+        "type": "change",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Set",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "dynamic.template_expensive",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 620,
+        "wires": [
+            [
+                "0799b280bf62758e"
+            ]
+        ]
+    },
+    {
+        "id": "da4428dd14db9967",
+        "type": "change",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Cleanup",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "template",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 680,
+        "wires": [
+            [
+                "adbbd358b213f08e"
+            ]
+        ]
+    },
+    {
+        "id": "cba4fb540a66e4e6",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Log only",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "log",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "03f47a2f3212cb6b",
+        "type": "server-state-changed",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "User input",
+        "server": "176d29a.6f648d6",
+        "version": 6,
+        "outputs": 1,
+        "exposeAsEntityConfig": "",
+        "entities": {
+            "entity": [
+                "input_number.house_battery_strategy_dynamic_cheapest_hrs",
+                "input_number.house_battery_strategy_dynamic_expensive_hrs",
+                "input_select.house_battery_strategy_dynamic_data_source",
+                "input_number.house_battery_strategy_dynamic_threshold_delta"
+            ],
+            "substring": [],
+            "regex": []
+        },
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 340,
+        "y": 320,
+        "wires": [
+            [
+                "b97bd9a51080da68"
+            ]
+        ]
+    },
+    {
+        "id": "1247084c53315208",
+        "type": "switch",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Source selected?",
+        "property": "dynamic.data_source",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "None",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1395,
+        "y": 360,
+        "wires": [
+            [
+                "141ebe1a0441a814"
+            ],
+            [
+                "de24e0e941d08b62"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "4b8c5bc2b8cf6c4d",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Not set",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 1620,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "6e287097dc4e0236",
+        "type": "api-call-service",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Avg cheap tariff",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_strategy_dynamic_cheapest_avg_tariff"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.dynamic.avg_cheapest_tariff }",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 820,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "403a9dfa33392328",
+        "type": "api-call-service",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Avg expensive tariff",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_strategy_dynamic_expensive_avg_tariff"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.dynamic.avg_expensive_tariff}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 830,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "67e38494d0337403",
+        "type": "api-call-service",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Avg delta",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_strategy_dynamic_expensive_avg_delta"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.dynamic.avg_delta}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 800,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f1168e015522bbfc",
+        "type": "api-current-state",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "Threshold",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_dynamic_threshold_delta",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.min_delta_cents",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1300,
+        "y": 360,
+        "wires": [
+            [
+                "1247084c53315208"
+            ]
+        ]
+    },
+    {
+        "id": "141ebe1a0441a814",
+        "type": "change",
+        "z": "95489b12daee74f5",
+        "g": "9c68fafd28d3b4fc",
+        "name": "null",
+        "rules": [
+            {
+                "t": "set",
+                "p": "dynamic_strategy",
+                "pt": "flow",
+                "to": "null",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1490,
+        "y": 340,
+        "wires": [
+            [
+                "4b8c5bc2b8cf6c4d"
+            ]
         ]
     },
     {
@@ -619,7 +1711,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "87d99e71aa5d4c40",
+        "id": "1c47e9f257f4edc0",
         "type": "global-config",
         "env": [],
         "modules": {

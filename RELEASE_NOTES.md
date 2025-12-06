@@ -6,6 +6,21 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
   - Added a new "Dynamic" strategy that leverages the "Cheapest Hours" integration (via HACS) to optimize battery usage based on dynamic energy tariffs.
   - Automatically charges during the cheapest hours and discharges or holds during expensive periods.
   - Requires the "Cheapest Hours" HACS add-on and a dynamic energy contract.
+    - See: https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings
+  - Confirmed data source support: 
+    - Zonneplan
+  - Unconfirmed support:
+    - Amber Electric
+    - EasyEnergy, EnergyZero (core)
+    - ENTSO-E
+    - Frank Energie
+    - GE-Spot
+    - Tibber, Nordpool (core)
+    - Tibber (custom)
+    - Nordpool (custom)
+    - PVPC (Spain)
+    - Octopus Energy
+    - Omie
 
 - **Files Changed:**
   - `node-red/02 strategy-dynamic.json` - NEW FILE: Dynamic strategy implementation
