@@ -140,20 +140,40 @@ views:
             hide_state: true
             show_entity_picture: false
             name: Full Control Strategy
+          - type: heading
+            icon: mdi:alert
+            heading: 'Dynamic strategy: Full Stop. Please configure dynamic strategy'
+            heading_style: subtitle
+            tap_action:
+              action: navigate
+              navigation_path: /home-battery/1
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_dynamic_data_source
+                state: None
+              - condition: state
+                entity: input_select.house_battery_strategy
+                state: Dynamic
           - type: tile
-            entity: input_text.house_battery_strategy_active_sub_strategy
-            name: Active timed strategy
-            vertical: false
-            features_position: bottom
             grid_options:
               columns: full
             visibility:
-              - condition: state
-                entity: input_select.house_battery_strategy
-                state: Timed
-              - condition: state
-                entity: input_select.marstek_master_battery_mode
-                state: Full control
+              - condition: and
+                conditions:
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity: input_select.house_battery_strategy
+                        state: Timed
+                      - condition: state
+                        entity: input_select.house_battery_strategy
+                        state: Dynamic
+                  - condition: state
+                    entity: input_select.marstek_master_battery_mode
+                    state: Full control
+            entity: input_text.house_battery_strategy_active_sub_strategy
+            vertical: false
+            features_position: bottom
           - type: history-graph
             entities:
               - entity: input_number.house_battery_control_pid_output
@@ -388,7 +408,7 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Configuration and settings (v3.3.1)
+          Configuration and settings (v3.4.0)
         text_only: true
   - type: sections
     max_columns: 3
@@ -400,27 +420,6 @@ views:
           - type: heading
             heading: Timed strategy
             heading_style: title
-          - type: entities
-            entities:
-              - entity: input_text.house_battery_strategy_active_sub_strategy
-                type: simple-entity
-                name: 'Active strategy :'
-            grid_options:
-              columns: 9
-              rows: auto
-            show_header_toggle: false
-            state_color: false
-            no_background: true
-          - clock_style: digital
-            clock_size: small
-            show_seconds: false
-            no_background: true
-            type: clock
-            grid_options:
-              columns: 3
-              rows: 1
-            title: Time
-            face_style: markers
           - type: entities
             entities:
               - entity: input_select.house_battery_strategy_timed_strat_0
@@ -525,8 +524,29 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Sub strategy settings
+            heading: Settings
             heading_style: title
+          - type: entities
+            entities:
+              - entity: input_text.house_battery_strategy_active_sub_strategy
+                type: simple-entity
+                name: Active strategy
+            grid_options:
+              columns: 9
+              rows: auto
+            show_header_toggle: false
+            state_color: false
+            no_background: true
+          - clock_style: digital
+            clock_size: small
+            show_seconds: false
+            no_background: true
+            type: clock
+            grid_options:
+              columns: 3
+              rows: 1
+            title: Time
+            face_style: markers
           - type: markdown
             content: '#### Charge'
             text_only: true
@@ -587,6 +607,89 @@ views:
             tap_action:
               action: navigate
               navigation_path: /home-battery/advanced-settings
+      - type: grid
+        cards:
+          - type: heading
+            heading: Dynamic strategy
+            heading_style: title
+          - type: markdown
+            content: >-
+              <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> Cheapest
+              Hours integration not installed</font>
+
+
+              This strategy uses [the Cheapest Hours integration from
+              TheFes](https://github.com/TheFes/cheapest-energy-hours/tree/main?tab=readme-ov-file#how-to-install).
+
+              Please install via HACS or follow his instructions.
+            text_only: true
+            visibility:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity: update.cheapest_energy_hours_update
+                    state: unavailable
+                  - condition: state
+                    entity: update.cheapest_energy_hours_update
+                    state: unknown
+          - type: entities
+            entities:
+              - entity: input_select.house_battery_strategy_dynamic_data_source
+          - type: entities
+            entities:
+              - entity: input_number.house_battery_strategy_dynamic_threshold_delta
+                name: Minimum price delta
+          - type: tile
+            entity: input_number.house_battery_strategy_dynamic_cheapest_hrs
+            hide_state: true
+            vertical: false
+            features:
+              - type: numeric-input
+                style: buttons
+            features_position: bottom
+          - type: tile
+            entity: input_number.house_battery_strategy_dynamic_expensive_hrs
+            hide_state: true
+            vertical: false
+            features:
+              - type: numeric-input
+                style: buttons
+            features_position: bottom
+          - type: entities
+            entities:
+              - entity: input_datetime.house_battery_strategy_dynamic_cheapest_start
+                type: simple-entity
+              - entity: input_datetime.house_battery_strategy_dynamic_cheapest_end
+                type: simple-entity
+              - entity: input_datetime.house_battery_strategy_dynamic_expensive_start
+                type: simple-entity
+              - entity: input_datetime.house_battery_strategy_dynamic_expensive_end
+                type: simple-entity
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_dynamic_data_source
+                state_not: None
+          - show_name: true
+            show_icon: true
+            show_state: true
+            type: glance
+            entities:
+              - entity: >-
+                  input_number.house_battery_strategy_dynamic_expensive_avg_tariff
+                type: simple-entity
+                name: Expensive period
+              - entity: >-
+                  input_number.house_battery_strategy_dynamic_cheapest_avg_tariff
+                type: simple-entity
+                name: Charged at
+              - entity: >-
+                  input_number.house_battery_strategy_dynamic_expensive_avg_delta
+                type: simple-entity
+                name: Price delta
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_dynamic_data_source
+                state_not: None
     cards: []
   - type: sections
     max_columns: 3
