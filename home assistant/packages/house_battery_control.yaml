@@ -14,9 +14,6 @@ input_boolean:
     name: Charging
 
   # Supported strategies
-  strategy_accu_grid_charge_or_wait_charge_enabled:
-    name: Charge batteries during Grid charge or wait strategy
-
   house_battery_strategy_timed_has_period_b:
     name: Enable additional period B
     icon: mdi:clock-outline
@@ -33,18 +30,6 @@ input_boolean:
 # DATETIME
 ###########################################################################################################
 input_datetime:
-  strategy_accu_grid_charge_or_wait_start_at:
-    name: Strategy grid charge or wait, Start at
-    has_date: false
-    has_time: true
-    icon: mdi:clock-end
-
-  strategy_accu_grid_charge_or_wait_stop_at:
-    name: Strategy grid charge or wait, Stop at
-    has_date: false
-    has_time: true
-    icon: mdi:clock-end
-
   house_battery_strategy_timed_period_a1:
     name: Period A start
     has_date: false
@@ -317,15 +302,6 @@ input_number:
     initial: 0
     icon: mdi:chart-timeline-variant-shimmer # shimmering line chart
 
-  # Strategy | charge or wait
-  strategy_accu_grid_charge_or_wait_total_target_capacity:
-    name: House Battery Target (kWh) in grid charge from the grid
-    min: 1.8 # +/- 11%
-    max: 15.36 # pas dit aan naar totale capaciteit van je 3 accu's
-    step: 0.1
-    unit_of_measurement: "kWh"
-    icon: mdi:battery-charging
-
   # Strategy timed | desired energy reserve (effective energy available excl. cut-off energies)
   house_battery_strategy_timed_target_energy:
     name: Desired battery energy reserve
@@ -437,7 +413,6 @@ input_select:
       - Self-consumption # Use your own solar production. Don't buy or sell. Target grid consumption = 0, e.g. "Nul op de meter (NoM)" in Dutch.
       - Timed # Configure which strategy should be active during given periods of the day.
       - Dynamic # Requires a dynamic tariff contract and the Cheapest Hours HACS add-on
-      - Grid-Charge-Or-Wait #charge from the grid during (very) low or negative price hours to cover upcoming expensive hours when PV is insufficient
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
     icon: mdi:home-battery
 
@@ -468,15 +443,6 @@ input_select:
       - Safe
       - Regular
     icon: mdi:list-box
-
-  strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished:
-    name: Strategy when finished grid charge or wait
-    options:
-      - Full stop # Stop (dis)charging and disengage grid relay
-      - Self-consumption # Use your own solar production. Don't buy or sell. Target grid consumption = 0, e.g. "Nul op de meter (NoM)" in Dutch.
-      - Custom 1 # Your own strategy here
-      - Super strategy # Example orchestrator strategy
-    icon: mdi:home-battery
 
   # Timed strategy | default strategy
   house_battery_strategy_timed_strat_0:

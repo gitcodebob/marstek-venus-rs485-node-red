@@ -408,7 +408,7 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Configuration and settings (v3.4.0)
+          Configuration and settings (v3.5.0)
         text_only: true
   - type: sections
     max_columns: 3
@@ -777,27 +777,6 @@ views:
               columns: full
             hours_to_show: 0.1
         column_span: 2
-      - type: grid
-        cards:
-          - type: heading
-            heading: Grid-charge-or-wait (deprecated)
-            heading_style: title
-            icon: mdi:transmission-tower
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - entity: input_datetime.strategy_accu_grid_charge_or_wait_start_at
-                name: Start grid charging / wait at
-              - entity: input_datetime.strategy_accu_grid_charge_or_wait_stop_at
-                name: Stop grid charging / wait at
-              - entity: input_boolean.strategy_accu_grid_charge_or_wait_charge_enabled
-                name: Charge during strategy
-              - entity: >-
-                  input_number.strategy_accu_grid_charge_or_wait_total_target_capacity
-                name: Grid charging target capacity
-              - entity: >-
-                  input_select.strategy_accu_grid_charge_or_wait_switch_to_strategy_when_finished
-                name: Switch to strategy when finished
       - type: grid
         cards:
           - type: heading

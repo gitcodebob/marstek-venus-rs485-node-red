@@ -1,6 +1,20 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.5.0
+- **Feature: Sunset of Grid-Charge-Or-Wait Strategy**
+  - The deprecated "Grid-Charge-Or-Wait" strategy has been completely removed from the system.
+  - All associated entities, configuration options, and Node-RED flows have been deleted.
+  - This strategy was deprecated in version 3.0.0 and has now been fully removed.
+  - **Migration Path:** Users previously using Grid-Charge-Or-Wait should migrate to:
+    - **Dynamic Strategy** - For users with dynamic tariff contracts and the Cheapest Hours HACS add-on
+    - **Timed Strategy** - For scheduled charging/discharging with time-based control
+
+- **Files Changed:**
+  - `home assistant/packages/house_battery_control.yaml` - Removed all Grid-Charge-Or-Wait entities (input_boolean, input_datetime, input_number, input_select) and strategy option
+  - `home assistant/dashboard.yaml` - Removed Grid-Charge-Or-Wait configuration section and bumped version to v3.5.0
+  - `node-red/deprecated/02 grid-charge-or-wait.json` - DELETED: Completely removed deprecated flow
+
 ## 3.4.0
 - **Feature: Dynamic Strategy with Cheapest Hours Integration**
   - Added a new "Dynamic" strategy that leverages the "Cheapest Hours" integration (via HACS) to optimize battery usage based on dynamic energy tariffs.
