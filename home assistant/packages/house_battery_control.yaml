@@ -569,3 +569,23 @@ template:
         # Optional: Prevents rapid flickering if values change quickly near the threshold
         delay_off:
           seconds: 5
+
+###########################################################################################################
+# RECORDER - LOGBOOK FILTERING
+###########################################################################################################
+# Exclude high-frequency technical entities from the logbook to reduce noise.
+# History graphs and statistics remain unaffected.
+recorder:
+  exclude:
+    entity_globs:
+      # PID control signals (updated every 2-40 seconds during operation)
+      - input_number.house_battery_control_*_term
+      - input_number.house_battery_control_*_deviation
+      - input_number.house_battery_control_error_signal
+      - input_number.house_battery_control_pid_output
+      - input_number.house_battery_control_debug
+      # Dynamic strategy calculated values (updated hourly)
+      - input_number.house_battery_strategy_dynamic_*_avg_*
+      # Status fields (updated frequently)
+      - input_number.house_battery_total_available_energy
+      - sensor.battery_time_remaining
