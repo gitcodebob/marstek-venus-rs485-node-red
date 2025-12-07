@@ -1,6 +1,23 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.5.1
+- **Fix: Excessive Home Assistant Logbook Entries**
+  - Added `recorder:` configuration to `house_battery_control.yaml` package to filter high-frequency technical entities from the logbook
+  - Reduces logbook noise by ~90-95% while preserving user-relevant events (Master Switch, Strategy changes, configuration updates)
+  - Excluded entities (14 total):
+    - 9 PID control/analytics signals (updated every 2-40 seconds during operation)
+    - 3 Dynamic strategy calculated averages (updated hourly)
+    - 1 Total available energy status field
+    - 1 Battery time remaining template sensor
+  - History graphs and statistics remain fully functional
+  - User configuration changes and important state transitions still appear in logbook
+
+- **Files Changed:**
+  - `home assistant/packages/house_battery_control.yaml` - Added recorder exclusion configuration
+  - `home assistant/dashboard.yaml` - Bumped version to v3.5.1
+  - `README.md` - Added logbook filtering documentation
+
 ## 3.5.0
 - **Feature: Sunset of Grid-Charge-Or-Wait Strategy**
   - The deprecated "Grid-Charge-Or-Wait" strategy has been completely removed from the system.
