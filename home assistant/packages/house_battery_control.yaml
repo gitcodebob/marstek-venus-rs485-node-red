@@ -335,7 +335,7 @@ input_number:
     name: Expensive hours
     icon: mdi:clock-outline
     min: 1 # Select at least 1 hour
-    max: 8 # Using more than 4 hrs is usualy not advised
+    max: 23 # Using more than 4 hrs is usualy not advised
     step: 1 # Whole hour steps
     unit_of_measurement: "h"
     mode: box
@@ -546,6 +546,7 @@ template:
 
       # EV stop trigger
       - name: "EV is charging"
+        unique_id: ev_is_charging
         icon: mdi:ev-station
         state: >
           {% set entity_id = states('input_text.house_battery_strategy_ev_sensor_entity_id') %}

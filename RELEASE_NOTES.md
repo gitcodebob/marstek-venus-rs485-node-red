@@ -1,6 +1,18 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.5.2
+- **Fix: Improve dynamic strategy configuration and template sensor**
+  - Updated `house_battery_strategy_dynamic_expensive_hrs` maximum value from 8 to 23 hours for greater flexibility
+  - Added missing `unique_id` to "EV is charging" template sensor for proper entity management
+  - Added configuration comment for Zonneplan `value_conversion` parameter in dynamic strategy
+  - Added complete configuration support for "Tibber, Nordpool (core)" data source with proper attribute mappings
+
+- **Files Changed:**
+  - `home assistant/packages/house_battery_control.yaml` - Updated expensive hours max value and added template sensor unique_id
+  - `node-red/02 strategy-dynamic.json` - Enhanced data source configuration for Tibber/Nordpool and improved comments
+  - `home assistant/dashboard.yaml` - Bumped version to v3.5.2
+
 ## 3.5.1
 - **Fix: Excessive Home Assistant Logbook Entries**
   - Added `recorder:` configuration to `house_battery_control.yaml` package to filter high-frequency technical entities from the logbook
