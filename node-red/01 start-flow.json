@@ -170,13 +170,13 @@
             "a91127871ba39241",
             "325f396f7e8ad2a8",
             "d01fc0ee854e249a",
-            "a49e9a91bbfcb11d",
-            "22123f145efcd95c",
             "f384e6c0da2834c8",
             "08d4efea54467ac1",
             "7831dd84510fdfaa",
             "4e53830356f33b07",
-            "208060fed37273fc"
+            "208060fed37273fc",
+            "f3e427d4451be530",
+            "a882514e64e6f538"
         ],
         "x": 54,
         "y": 239,
@@ -770,7 +770,7 @@
         "y": 280,
         "wires": [
             [
-                "a49e9a91bbfcb11d"
+                "f3e427d4451be530"
             ]
         ]
     },
@@ -822,108 +822,6 @@
         "wires": [
             [
                 "08d4efea54467ac1"
-            ]
-        ]
-    },
-    {
-        "id": "a49e9a91bbfcb11d",
-        "type": "api-current-state",
-        "z": "a099d47fc07b3cee",
-        "g": "b63f2e905b829e5b",
-        "name": "SoC min",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "number.marstek_m{{battery_index}}_discharging_cutoff_capacity",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "number",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "discharging_cutoff_capacity",
-                "propertyType": "msg",
-                "value": "number",
-                "valueType": "entityState"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 980,
-        "y": 280,
-        "wires": [
-            [
-                "22123f145efcd95c"
-            ]
-        ]
-    },
-    {
-        "id": "22123f145efcd95c",
-        "type": "api-current-state",
-        "z": "a099d47fc07b3cee",
-        "g": "b63f2e905b829e5b",
-        "name": "SoC max",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "number.marstek_m{{battery_index}}_charging_cutoff_capacity",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "number",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "charging_cutoff_capacity",
-                "propertyType": "msg",
-                "value": "number",
-                "valueType": "entityState"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 1120,
-        "y": 280,
-        "wires": [
-            [
-                "d01fc0ee854e249a"
             ]
         ]
     },
@@ -2099,6 +1997,62 @@
         ]
     },
     {
+        "id": "f3e427d4451be530",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "b63f2e905b829e5b",
+        "name": "SoC min",
+        "rules": [
+            {
+                "t": "set",
+                "p": "discharging_cutoff_capacity",
+                "pt": "msg",
+                "to": "12",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 280,
+        "wires": [
+            [
+                "a882514e64e6f538"
+            ]
+        ]
+    },
+    {
+        "id": "a882514e64e6f538",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "b63f2e905b829e5b",
+        "name": "SoC max",
+        "rules": [
+            {
+                "t": "set",
+                "p": "charging_cutoff_capacity",
+                "pt": "msg",
+                "to": "100",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1120,
+        "y": 280,
+        "wires": [
+            [
+                "d01fc0ee854e249a"
+            ]
+        ]
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -2113,7 +2067,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "86bb98d7a90ef974",
+        "id": "bbf548d5482cba49",
         "type": "global-config",
         "env": [],
         "modules": {

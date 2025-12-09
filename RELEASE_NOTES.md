@@ -1,17 +1,24 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.5.3
+- **Fix: Replace dynamic SoC cutoff capacity with hardcoded values for Marstek V3 compatibility**
+  - Replaced API calls to fetch `discharging_cutoff_capacity` and `charging_cutoff_capacity` entities with hardcoded values (12% min, 100% max)
+  - Marstek V3 does not expose these SoC min/max parameters, so fixed values are used to maintain functionality
+  - This change ensures compatibility with both Marstek V2 and V3 hardware versions
+
+- **Files Changed:**
+  - `node-red/01 start-flow.json` - Replaced two API current-state nodes with change nodes setting fixed SoC cutoff values
+
 ## 3.5.2
 - **Fix: Improve dynamic strategy configuration and template sensor**
   - Updated `house_battery_strategy_dynamic_expensive_hrs` maximum value from 8 to 23 hours for greater flexibility
   - Added missing `unique_id` to "EV is charging" template sensor for proper entity management
-  - Added configuration comment for Zonneplan `value_conversion` parameter in dynamic strategy
   - Added complete configuration support for "Tibber, Nordpool (core)" data source with proper attribute mappings
 
 - **Files Changed:**
   - `home assistant/packages/house_battery_control.yaml` - Updated expensive hours max value and added template sensor unique_id
   - `node-red/02 strategy-dynamic.json` - Enhanced data source configuration for Tibber/Nordpool and improved comments
-  - `home assistant/dashboard.yaml` - Bumped version to v3.5.2
 
 ## 3.5.1
 - **Fix: Excessive Home Assistant Logbook Entries**
