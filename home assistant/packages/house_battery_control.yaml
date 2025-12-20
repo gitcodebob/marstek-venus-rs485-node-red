@@ -131,6 +131,7 @@ input_number:
     name: "House Target Grid Consumption"
     min: -15000
     max: 15000
+    initial: 0 # after each reboot/restart the target will be 0
     step: 1
     unit_of_measurement: "W"
     mode: box
@@ -583,7 +584,7 @@ recorder:
       - input_number.house_battery_control_*_term
       - input_number.house_battery_control_*_deviation
       - input_number.house_battery_control_error_signal
-      - input_number.house_battery_control_pid_output
+      # - input_number.house_battery_control_pid_output  # optional: this is useful for debugging
       - input_number.house_battery_control_debug
       # Dynamic strategy calculated values (updated hourly)
       - input_number.house_battery_strategy_dynamic_*_avg_*

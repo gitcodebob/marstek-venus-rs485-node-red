@@ -116,7 +116,7 @@
         "id": "c6507e8b14c27c81",
         "type": "group",
         "z": "95489b12daee74f5",
-        "name": "Today - test",
+        "name": "Test area",
         "style": {
             "label": true
         },
@@ -127,18 +127,19 @@
             "d05798a95b8cf195",
             "04d57a78a2fc3095",
             "320df01bc7436680",
-            "d8004c43e9b3d8d0"
+            "d8004c43e9b3d8d0",
+            "99545071b9bdfd66"
         ],
         "x": 234,
-        "y": 1039,
-        "w": 972,
-        "h": 142
+        "y": 1019,
+        "w": 912,
+        "h": 162
     },
     {
         "id": "1237795be79af24c",
         "type": "group",
         "z": "95489b12daee74f5",
-        "name": "Look_ahead + include tomorrow",
+        "name": "All data",
         "style": {
             "label": true
         },
@@ -146,16 +147,12 @@
             "1f3454b85f32ab4c",
             "338407c8c442244c",
             "3f94e4f380add2e8",
-            "6a255f140e0a0484",
-            "5f46de3f1bbfc7e3",
-            "308c8abd7e2afc1f",
-            "3fdf8f163b13a299",
-            "331e45a37cfdee1d"
+            "079e2531ed154c01"
         ],
         "x": 234,
-        "y": 1199,
-        "w": 972,
-        "h": 202
+        "y": 1659,
+        "w": 572,
+        "h": 82
     },
     {
         "id": "b97bd9a51080da68",
@@ -694,7 +691,7 @@
         "type": "inject",
         "z": "95489b12daee74f5",
         "g": "c6507e8b14c27c81",
-        "name": "today",
+        "name": "Test",
         "props": [
             {
                 "p": "payload"
@@ -712,7 +709,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 330,
-        "y": 1100,
+        "y": 1060,
         "wires": [
             [
                 "92e35d100ca61070"
@@ -724,7 +721,7 @@
         "type": "api-render-template",
         "z": "95489b12daee74f5",
         "g": "c6507e8b14c27c81",
-        "name": "Cheapest Zonneplan",
+        "name": "Cheapest",
         "server": "176d29a.6f648d6",
         "version": 0,
         "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    hours=1,\n    mode=\"all\"\n) | to_json }}",
@@ -732,8 +729,8 @@
         "resultsLocationType": "msg",
         "templateLocation": "",
         "templateLocationType": "none",
-        "x": 540,
-        "y": 1100,
+        "x": 500,
+        "y": 1060,
         "wires": [
             [
                 "30af788462a325c7"
@@ -749,8 +746,8 @@
         "property": "cheapest",
         "action": "obj",
         "pretty": false,
-        "x": 675,
-        "y": 1100,
+        "x": 595,
+        "y": 1060,
         "wires": [
             [
                 "d05798a95b8cf195"
@@ -763,7 +760,7 @@
         "type": "api-render-template",
         "z": "95489b12daee74f5",
         "g": "c6507e8b14c27c81",
-        "name": "Expensive Zonneplan",
+        "name": "Expensive",
         "server": "176d29a.6f648d6",
         "version": 0,
         "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    lowest=false,\n    hours=1,\n    mode=\"all\"\n) | to_json }}",
@@ -771,8 +768,8 @@
         "resultsLocationType": "msg",
         "templateLocation": "",
         "templateLocationType": "none",
-        "x": 820,
-        "y": 1100,
+        "x": 750,
+        "y": 1060,
         "wires": [
             [
                 "04d57a78a2fc3095"
@@ -788,12 +785,13 @@
         "property": "expensive",
         "action": "obj",
         "pretty": false,
-        "x": 955,
-        "y": 1100,
+        "x": 855,
+        "y": 1060,
         "wires": [
             [
                 "320df01bc7436680",
-                "d8004c43e9b3d8d0"
+                "d8004c43e9b3d8d0",
+                "99545071b9bdfd66"
             ]
         ],
         "l": false
@@ -812,8 +810,8 @@
         "targetType": "msg",
         "statusVal": "cheapest.start",
         "statusType": "auto",
-        "x": 1070,
-        "y": 1080,
+        "x": 990,
+        "y": 1100,
         "wires": []
     },
     {
@@ -830,7 +828,7 @@
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 1090,
+        "x": 1010,
         "y": 1140,
         "wires": []
     },
@@ -839,16 +837,16 @@
         "type": "api-render-template",
         "z": "95489b12daee74f5",
         "g": "1237795be79af24c",
-        "name": "Cheapest Zonneplan",
+        "name": "All Zonneplan",
         "server": "176d29a.6f648d6",
         "version": 0,
-        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    include_tomorrow=true,\n    look_ahead=true,\n    hours=1,\n    mode=\"all\"\n) | to_json }}",
-        "resultsLocation": "cheapest",
+        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    include_tomorrow=true,\n    hours=\"all\",\n    mode=\"all\"\n) | to_json }}",
+        "resultsLocation": "all_data",
         "resultsLocationType": "msg",
         "templateLocation": "",
         "templateLocationType": "none",
-        "x": 540,
-        "y": 1260,
+        "x": 480,
+        "y": 1700,
         "wires": [
             [
                 "3f94e4f380add2e8"
@@ -860,7 +858,7 @@
         "type": "inject",
         "z": "95489b12daee74f5",
         "g": "1237795be79af24c",
-        "name": "look_ahead",
+        "name": "Fetch",
         "props": [
             {
                 "p": "payload"
@@ -877,8 +875,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 350,
-        "y": 1260,
+        "x": 330,
+        "y": 1700,
         "wires": [
             [
                 "1f3454b85f32ab4c"
@@ -891,112 +889,17 @@
         "z": "95489b12daee74f5",
         "g": "1237795be79af24c",
         "name": "",
-        "property": "cheapest",
+        "property": "all_data",
         "action": "obj",
         "pretty": false,
-        "x": 675,
-        "y": 1260,
+        "x": 595,
+        "y": 1700,
         "wires": [
             [
-                "6a255f140e0a0484"
+                "079e2531ed154c01"
             ]
         ],
         "l": false
-    },
-    {
-        "id": "6a255f140e0a0484",
-        "type": "api-render-template",
-        "z": "95489b12daee74f5",
-        "g": "1237795be79af24c",
-        "name": "Expensive Zonneplan",
-        "server": "176d29a.6f648d6",
-        "version": 0,
-        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    include_tomorrow=true,\n    look_ahead=true,\n    lowest=false,\n    hours=1,\n    mode=\"all\"\n) | to_json }}",
-        "resultsLocation": "expensive",
-        "resultsLocationType": "msg",
-        "templateLocation": "",
-        "templateLocationType": "none",
-        "x": 820,
-        "y": 1260,
-        "wires": [
-            [
-                "5f46de3f1bbfc7e3"
-            ]
-        ]
-    },
-    {
-        "id": "5f46de3f1bbfc7e3",
-        "type": "json",
-        "z": "95489b12daee74f5",
-        "g": "1237795be79af24c",
-        "name": "",
-        "property": "expensive",
-        "action": "obj",
-        "pretty": false,
-        "x": 955,
-        "y": 1260,
-        "wires": [
-            [
-                "308c8abd7e2afc1f",
-                "3fdf8f163b13a299",
-                "331e45a37cfdee1d"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "308c8abd7e2afc1f",
-        "type": "debug",
-        "z": "95489b12daee74f5",
-        "g": "1237795be79af24c",
-        "name": "Cheap",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "cheapest.start",
-        "targetType": "msg",
-        "statusVal": "cheapest.start",
-        "statusType": "auto",
-        "x": 1070,
-        "y": 1240,
-        "wires": []
-    },
-    {
-        "id": "3fdf8f163b13a299",
-        "type": "debug",
-        "z": "95489b12daee74f5",
-        "g": "1237795be79af24c",
-        "name": "Expensive",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "expensive.start",
-        "targetType": "msg",
-        "statusVal": "payload",
-        "statusType": "auto",
-        "x": 1090,
-        "y": 1300,
-        "wires": []
-    },
-    {
-        "id": "331e45a37cfdee1d",
-        "type": "debug",
-        "z": "95489b12daee74f5",
-        "g": "1237795be79af24c",
-        "name": "debug 1",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1080,
-        "y": 1360,
-        "wires": []
     },
     {
         "id": "1990213302cf1876",
@@ -1081,7 +984,7 @@
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
         "name": "Data source settings",
-        "func": "/*    From cheapes-energy-hours macro\n      See: https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings\n\n      - None (default selection)\n      - Zonneplan\n      - Amber Electric\n      - EasyEnergy, EnergyZero (core)\n      - ENTSO-E\n      - Frank Energie\n      - GE-Spot\n      - Tibber, Nordpool (core)\n      - Tibber (custom)\n      - Nordpool (custom)\n      - PVPC (Spain)\n      - Octopus Energy\n      - Omie\n*/\n\nswitch (msg.dynamic.data_source) {\n      case \"None\":\n            // Handle the 'None' case (e.g., no supplier selected or data is unavailable)\n            msg.log.push(\"No data source selected.\");\n            // Add config here...\n            break;\n\n      case \"Zonneplan\":\n            // Code for Zonneplan (a Dutch energy supplier)\n            msg.log.push(\"Processing Zonneplan data.\");\n            // Add config here...\n            msg.dynamic.sensor='sensor.zonneplan_current_electricity_tariff'; // when using: https://github.com/fsaris/home-assistant-zonneplan-one\n            msg.dynamic.attr_all='forecast';\n            msg.dynamic.value_key='electricity_price';\n            msg.dynamic.value_conversion = 10000000; // whole currency / kWh\n            break;\n\n      case \"Amber Electric\":\n            // Code for Amber Electric (Australian energy retailer)\n            msg.log.push(\"Processing Amber Electric data.\");\n            // Add config here...\n            msg.dynamic.attr_all='forecasts'; \n            msg.dynamic.time_key='start_time'; \n            msg.dynamic.value_key='per_kwh';\n            break;\n\n      case \"EasyEnergy, EnergyZero (core)\":\n            // Code for EasyEnergy and EnergyZero (core/default implementation)\n            msg.log.push(\"Processing EasyEnergy/EnergyZero core data.\");\n            // Add config here...\n            break;\n\n      case \"ENTSO-E\":\n            // Code for ENTSO-E (European Network of Transmission System Operators for Electricity)\n            msg.log.push(\"Processing ENTSO-E data.\");\n            // Add config here...\n            msg.dynamic.attr_today='prices_today'; \n            msg.dynamic.attr_tomorrow='prices_tomorrow'; \n            msg.dynamic.time_key='time';\n            msg.dynamic.value_key='price';\n            break;\n\n      case \"Frank Energie\":\n            // Code for Frank Energie (Dutch energy supplier)\n            msg.log.push(\"Processing Frank Energie data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'prices'; \n            msg.dynamic.time_key = 'from'; \n            msg.dynamic.value_key = 'price';\n            break;\n\n      case \"GE-Spot\":\n            // Code for GE-Spot (Global Electric Spot price)\n            msg.log.push(\"Processing GE-Spot data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today_hourly_prices'; // using the hourly version. today_interval_prices is per 15 mins\n            msg.dynamic.attr_tomorrow = 'tomorrow_hourly_prices'; // using the hourly version\n            msg.dynamic.time_key = 'time'; \n            msg.dynamic.value_key = 'value';\n            break;\n\n      case \"Tibber, Nordpool (core)\":\n            // Code for Tibber and Nordpool (core/default implementation)\n            msg.log.push(\"Processing Tibber/Nordpool core data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.time_key = 'start';\n            msg.dynamic.value_key = 'value';\n            msg.dynamic.datetime_in_data = true; // datetime is in the data\n            msg.dynamic.value_conversion = 1000; // price in ct → €/kWh\n            break;\n\n      case \"Tibber (custom)\":\n            // Code for a custom Tibber setup/configuration\n            msg.log.push(\"Processing Tibber custom data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.datetime_in_data = false;\n            break;\n\n      case \"Nordpool (custom)\":\n            // Code for a custom Nordpool setup/configuration\n            msg.log.push(\"Processing Nordpool custom data.\");\n            // Add config here...\n            break;\n\n      case \"PVPC (Spain)\":\n            // Code for PVPC (Voluntary Price for Small Consumers in Spain)\n            msg.log.push(\"Processing Spanish PVPC data.\");\n            // Add config here...\n            break;\n\n      case \"Octopus Energy\":\n            // Code for Octopus Energy (UK/international energy supplier)\n            msg.log.push(\"Processing Octopus Energy data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'rates'; \n            msg.dynamic.value_key = 'value_incl_vat';\n            break;\n\n      case \"Omie\":\n            // Code for Omie (Iberian Energy Market Operator)\n            msg.log.push(\"Processing Omie data.\");\n            // Add config here...\n            break;\n\n      default:\n            // Code to execute if the supplier does not match any of the above cases\n            node.warn(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            msg.log.push(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            // Add default error handling...\n}\n\nreturn msg;",
+        "func": "/*    From cheapes-energy-hours macro\n      See: https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings\n\n      - None (default selection)\n      - Zonneplan\n      - Amber Electric\n      - EasyEnergy, EnergyZero (core)\n      - ENTSO-E\n      - Frank Energie\n      - GE-Spot\n      - Tibber, Nordpool (core)\n      - Tibber (custom)\n      - Nordpool (custom)\n      - PVPC (Spain)\n      - Octopus Energy\n      - Omie\n*/\n\nswitch (msg.dynamic.data_source) {\n      case \"None\":\n            // Handle the 'None' case (e.g., no supplier selected or data is unavailable)\n            msg.log.push(\"No data source selected.\");\n            // Add config here...\n            break;\n\n      case \"Zonneplan\":\n            // Code for Zonneplan (a Dutch energy supplier)\n            msg.log.push(\"Processing Zonneplan data.\");\n            // Add config here...\n            msg.dynamic.sensor='sensor.zonneplan_current_electricity_tariff'; // when using: https://github.com/fsaris/home-assistant-zonneplan-one\n            msg.dynamic.attr_all='forecast';\n            msg.dynamic.value_key='electricity_price';\n            msg.dynamic.value_conversion = 10000000; // whole currency / kWh\n            break;\n\n      case \"Amber Electric\":\n            // Code for Amber Electric (Australian energy retailer)\n            msg.log.push(\"Processing Amber Electric data.\");\n            // Add config here...\n            msg.dynamic.attr_all='forecasts'; \n            msg.dynamic.time_key='start_time'; \n            msg.dynamic.value_key='per_kwh';\n            break;\n\n      case \"EasyEnergy, EnergyZero (core)\":\n            // Code for EasyEnergy and EnergyZero (core/default implementation)\n            msg.log.push(\"Processing EasyEnergy/EnergyZero core data.\");\n            // Add config here...\n            break;\n\n      case \"ENTSO-E\":\n            // Code for ENTSO-E (European Network of Transmission System Operators for Electricity)\n            msg.log.push(\"Processing ENTSO-E data.\");\n            // Add config here...\n            msg.dynamic.attr_today='prices_today'; \n            msg.dynamic.attr_tomorrow='prices_tomorrow'; \n            msg.dynamic.time_key='time';\n            msg.dynamic.value_key='price';\n            break;\n\n      case \"Frank Energie\":\n            // Code for Frank Energie (Dutch energy supplier)\n            msg.log.push(\"Processing Frank Energie data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'prices'; \n            msg.dynamic.time_key = 'from'; \n            msg.dynamic.value_key = 'price';\n            break;\n\n      case \"GE-Spot\":\n            // Code for GE-Spot (Global Electric Spot price)\n            msg.log.push(\"Processing GE-Spot data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today_hourly_prices'; // using the hourly version. today_interval_prices is per 15 mins\n            msg.dynamic.attr_tomorrow = 'tomorrow_hourly_prices'; // using the hourly version\n            msg.dynamic.time_key = 'time'; \n            msg.dynamic.value_key = 'value';\n            break;\n\n      case \"Tibber, Nordpool (core)\":\n            // Code for Tibber and Nordpool (core/default implementation)\n            msg.log.push(\"Processing Tibber/Nordpool core data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.tibber_ceh_prices';\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.time_key = 'start';\n            msg.dynamic.value_key = 'value';\n            msg.dynamic.datetime_in_data = true; // datetime is in the data\n            break;\n\n      case \"Tibber (custom)\":\n            // Code for a custom Tibber setup/configuration\n            msg.log.push(\"Processing Tibber custom data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.datetime_in_data = false;\n            break;\n\n      case \"Nordpool (custom)\":\n            // Code for a custom Nordpool setup/configuration\n            msg.log.push(\"Processing Nordpool custom data.\");\n            // Add config here...\n            break;\n\n      case \"PVPC (Spain)\":\n            // Code for PVPC (Voluntary Price for Small Consumers in Spain)\n            msg.log.push(\"Processing Spanish PVPC data.\");\n            // Add config here...\n            break;\n\n      case \"Octopus Energy\":\n            // Code for Octopus Energy (UK/international energy supplier)\n            msg.log.push(\"Processing Octopus Energy data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'rates'; \n            msg.dynamic.value_key = 'value_incl_vat';\n            break;\n\n      case \"Omie\":\n            // Code for Omie (Iberian Energy Market Operator)\n            msg.log.push(\"Processing Omie data.\");\n            // Add config here...\n            break;\n\n      default:\n            // Code to execute if the supplier does not match any of the above cases\n            node.warn(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            msg.log.push(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            // Add default error handling...\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1697,6 +1600,42 @@
         ]
     },
     {
+        "id": "079e2531ed154c01",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "1237795be79af24c",
+        "name": "All data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "all_data",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "99545071b9bdfd66",
+        "type": "debug",
+        "z": "95489b12daee74f5",
+        "g": "c6507e8b14c27c81",
+        "name": "Complete msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 1060,
+        "wires": []
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -1711,7 +1650,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "bc171a625792f36b",
+        "id": "f6c08c375ce602eb",
         "type": "global-config",
         "env": [],
         "modules": {

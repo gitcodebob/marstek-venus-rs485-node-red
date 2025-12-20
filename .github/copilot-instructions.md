@@ -14,7 +14,7 @@
     1. If documentation related to the changes exists (e.g., in `README.md`), suggest updates or ask if updates are needed.
     1. Use the approved commit message to update the `RELEASE_NOTES.md` if applicable.
         1. Ask the user if they want a major, minor, or patch version bump according to Semantic Versioning (SemVer).
-        1. Ask the user if the release notes should contain the specific files changed, or if a general summary is sufficient.
+        1. Update the release notes with the specific files changed, omitting documentation files (e.g.`README.md`, `RELEASE_NOTES.md`).
         1. Also update the `Configuration and settings (v <version>)` in `home assistant\dashboard.yaml` to match the changes and current SemVer.
     1. If the user approves, commit the changes with the generated message.
     1. After a successful commit, offer to push the changes to the remote repository.

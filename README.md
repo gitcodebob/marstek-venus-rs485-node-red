@@ -146,7 +146,6 @@ In Home Assistant:
       - Kp = 0.5
       - Ki = 0
       - Kd = 0
-   - Double check min/max SoC of your batteries
    - Double check min/max (dis)charge power of your batteries.
 
 Click `Full control` and select `self-consumption` as a strategy.

@@ -1,6 +1,20 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.5.4
+- **Chore: Update copilot instructions and minor improvements**
+  - Updated copilot-instructions to automatically include specific files in release notes
+  - Remove min/max SoC reference from README (no longer applicable with V3 compatibility)
+  - Add initial value to `house_target_grid_consumption_in_w` for clarity after reboot/restart
+  - PID output is no longer excluded from the data recorder
+  - Clean up dynamic strategy flow test area and improve labeling
+  - Add Tibber sensor default configuration for core integration
+
+- **Files Changed:**
+  - `.github/copilot-instructions.md` - Updated commit workflow to automatically include specific files in release notes
+  - `home assistant/packages/house_battery_control.yaml` - Added initial value and adjusted recorder exclusions
+  - `node-red/02 strategy-dynamic.json` - Improved test area organization and added Tibber configuration
+
 ## 3.5.3
 - **Fix: Replace dynamic SoC cutoff capacity with hardcoded values for Marstek V3 compatibility**
   - Replaced API calls to fetch `discharging_cutoff_capacity` and `charging_cutoff_capacity` entities with hardcoded values (12% min, 100% max)
