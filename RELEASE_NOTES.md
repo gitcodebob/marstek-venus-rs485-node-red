@@ -3,12 +3,10 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
 
 ## 3.5.4
 - **Chore: Update copilot instructions and minor improvements**
-  - Updated copilot-instructions to automatically include specific files in release notes
-  - Remove min/max SoC reference from README (no longer applicable with V3 compatibility)
-  - Add initial value to `house_target_grid_consumption_in_w` for clarity after reboot/restart
+  - Add initial value of 0 to `house_target_grid_consumption_in_w` as new users were reporting a -15000 and getting confused
   - PID output is no longer excluded from the data recorder
-  - Clean up dynamic strategy flow test area and improve labeling
   - Add Tibber sensor default configuration for core integration
+  - Remove min/max SoC reference from README (no longer applicable with V3 compatibility)
 
 - **Files Changed:**
   - `.github/copilot-instructions.md` - Updated commit workflow to automatically include specific files in release notes
