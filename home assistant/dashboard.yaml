@@ -199,7 +199,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://github.com/gitcodebob/marstek-venus-rs485-node-red/blob/main/README.md#advanced-features
+                https://gitcodebob.github.io/marstek-venus-rs485-node-red/advanced/battery-prioritization
           - show_name: true
             show_icon: true
             show_state: true
@@ -217,7 +217,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://github.com/gitcodebob/marstek-venus-rs485-node-red?tab=readme-ov-file#battery-life
+                https://gitcodebob.github.io/marstek-venus-rs485-node-red/advanced/battery-life-optimization
           - type: entities
             entities:
               - entity: input_number.house_battery_control_idle_time
@@ -622,6 +622,10 @@ views:
               TheFes](https://github.com/TheFes/cheapest-energy-hours/tree/main?tab=readme-ov-file#how-to-install).
 
               Please install via HACS or follow his instructions.
+
+
+              See also: [Dynamic Strategy Setup
+              Guide](https://gitcodebob.github.io/marstek-venus-rs485-node-red/strategies/dynamic#setup-guide)
             text_only: true
             visibility:
               - condition: or
@@ -751,7 +755,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://github.com/gitcodebob/marstek-venus-rs485-node-red?tab=readme-ov-file#operation-and-tuning-minimal
+                https://gitcodebob.github.io/marstek-venus-rs485-node-red/advanced/pid-tuning
       - type: grid
         cards:
           - type: heading

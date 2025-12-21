@@ -1,4 +1,15 @@
 # Release Notes
+
+> **📚 Documentation Restructured!**
+>
+> The documentation has been completely reorganized for better navigation and discoverability.
+> - **README.md** is now a landing page with project overview
+> - **All guides moved to `/docs/`** folder with topic-based structure
+> - **GitHub Pages enabled** at https://gitcodebob.github.io/marstek-venus-rs485-node-red/
+> - **Dashboard links updated** to point to new documentation locations
+>
+> **Start here:** [📖 Documentation Hub](/docs/index.md)
+
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
 ## 3.5.4

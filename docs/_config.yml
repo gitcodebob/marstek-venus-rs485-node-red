@@ -1,0 +1,27 @@
+title: Home Battery Control
+description: Open Source Home Assistant Battery Management with Node-RED
+theme: jekyll-theme-cayman
+
+# Enable GitHub Pages serving from /docs folder
+# Configuration: Settings → Pages → Source: Deploy from branch → main /docs
+
+# Navigation
+nav_links:
+  - title: Documentation
+    url: /index
+  - title: Installation
+    url: /getting-started/installation
+  - title: Strategies
+    url: /strategies/overview
+  - title: GitHub
+    url: https://github.com/gitcodebob/marstek-venus-rs485-node-red
+
+# SEO
+keywords: home battery control, thuisaccu besturing, Home Assistant, Node-RED, solar panels, zonnepanelen, energy management, energiebeheer, PID controller, dynamic pricing, EV charging, batterij beheer
+
+# Social
+github_username: gitcodebob
+discord_invite: marstek-rs485
+
+# Analytics (optional - user can add their own)
+# google_analytics: UA-XXXXXXXXX-X
