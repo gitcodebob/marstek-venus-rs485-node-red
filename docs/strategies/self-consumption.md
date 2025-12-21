@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # Self-Consumption Strategy
 
 The self-consumption strategy (zelfconsumptie strategie) uses a PID controller to automatically maintain near-zero grid power import/export, maximizing the use of your solar energy (zonne-energie) and minimizing grid interaction.
@@ -336,3 +340,4 @@ Self-consumption may not be optimal if:
 - **Discord:** `Marstek RS485/Node-Red besturing`
 - **GitHub Discussions:** Share your PID settings and results
 - **Report issues:** [GitHub Issues](https://github.com/gitcodebob/marstek-venus-rs485-node-red/issues)
+

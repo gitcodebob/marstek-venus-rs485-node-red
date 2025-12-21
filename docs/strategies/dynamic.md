@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # Dynamic Pricing Strategy
 
 The dynamic pricing strategy (dynamische prijzen strategie) automatically optimizes battery charging and discharging based on hourly energy prices from your dynamic energy contract.
@@ -485,3 +489,4 @@ template:
 - **Discord:** `Marstek RS485/Node-Red besturing` - Share your dynamic strategy results
 - **GitHub Discussions:** Compare price delta settings
 - **Report issues:** [GitHub Issues](https://github.com/gitcodebob/marstek-venus-rs485-node-red/issues)
+

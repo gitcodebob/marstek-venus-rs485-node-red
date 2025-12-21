@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # Hardware Setup - Modbus Connection
 
 Learn how to connect your home battery (thuisaccu) system to Home Assistant via Modbus RS485.
@@ -190,3 +194,4 @@ Once hardware is connected and entities are available in Home Assistant:
 - [ESPHome Modbus Documentation](https://esphome.io/components/modbus.html)
 - [RS485 Basics Tutorial](https://www.ti.com/lit/an/slyt324/slyt324.pdf)
 - Community Discord: `Marstek RS485/Node-Red besturing`
+

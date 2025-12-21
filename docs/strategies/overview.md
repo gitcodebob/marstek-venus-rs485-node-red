@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # Strategy Overview
 
 Home Battery Control supports multiple charging and discharging strategies (thuisaccu strategieën) to optimize your energy usage based on your specific needs and energy contract.
@@ -225,3 +229,4 @@ Not sure which strategy fits your situation?
 - [Dynamic Strategy →](dynamic.md)
 - [Timed Strategy →](timed.md)
 - [All Charge Modes →](charge.md)
+

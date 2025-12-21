@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # Safety Guidelines
 
 **Essential safety information for home battery control (thuisaccu besturing)**
@@ -255,3 +259,4 @@ Before activating Full Control:
 ---
 
 **Next:** [Choose Your Strategy](../strategies/overview.md) | [Return to Installation](installation.md)
+

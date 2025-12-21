@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # Installation Guide
 
 Complete step-by-step installation instructions for Home Battery Control with Home Assistant and Node-RED.
@@ -171,3 +175,4 @@ If you encounter issues during installation:
 
 - Open an issue on [GitHub](https://github.com/gitcodebob/marstek-venus-rs485-node-red/issues)
 - Join our Discord: `Marstek RS485/Node-Red besturing`
+

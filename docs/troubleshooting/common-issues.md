@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # Common Issues and Troubleshooting
 
 Solutions to frequently encountered problems with Home Battery Control.
@@ -407,3 +411,4 @@ If all else fails:
 ---
 
 **Need more help?** Join our community on Discord: `Marstek RS485/Node-Red besturing`
+

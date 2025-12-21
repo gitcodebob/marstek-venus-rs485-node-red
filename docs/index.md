@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # Home Battery Control Documentation
 
 Complete documentation for open-source `Home Battery Control` with Home Assistant and Node-RED.
@@ -227,3 +231,4 @@ This project is licensed under the MIT License - see [LICENSE](../LICENSE) file 
 **Ready to get started?** → [Installation Guide](getting-started/installation.md)
 
 **Have questions?** → [Common Issues](troubleshooting/common-issues.md) | Discord: `Marstek RS485/Node-Red besturing`
+

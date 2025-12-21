@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # Battery Prioritization
 
 Configure charge order and automatic cycling for multi-battery systems (meerdere batterijen).
@@ -374,3 +378,4 @@ Priority Order: Battery 2 → Battery 3 → Battery 1 (last)
 ---
 
 **Questions?** Discord: `Marstek RS485/Node-Red besturing`
+

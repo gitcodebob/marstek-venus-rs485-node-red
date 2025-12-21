@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # Battery Life Optimization
 
 Techniques to extend battery lifespan (levensduur thuisaccu) and reduce wear through smart configuration.
@@ -363,3 +367,4 @@ Monitor for:
 ---
 
 **Questions?** Join Discord: `Marstek RS485/Node-Red besturing`
+

@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # EV Stop Trigger
 
 Automatically stop battery operations when electric vehicle (elektrische auto) or other heavy appliances start charging.
@@ -376,3 +380,4 @@ template:
 ---
 
 **Questions?** Discord: `Marstek RS485/Node-Red besturing`
+

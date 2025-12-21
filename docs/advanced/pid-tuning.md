@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # Advanced PID Tuning
 
 Comprehensive guide to tuning the PID controller for optimal self-consumption performance.
@@ -555,3 +559,4 @@ Results:
 - **GitHub:** [CSV Analysis Tool](https://github.com/gitcodebob/HA-history-graph-csv-export-analysis)
 - **Documentation:** [PID Controller Theory](../reference/pid-controller.md)
 - **Wikipedia:** [PID Controller](https://en.wikipedia.org/wiki/PID_controller)
+
