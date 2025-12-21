@@ -127,6 +127,7 @@ Solutions to frequently encountered problems with Home Battery Control.
 
 **Solutions:**
 1. **P1 sensor in kW instead of W:**
+   {% raw %}
    ```yaml
    # Multiply by 1000
    template:
@@ -135,6 +136,7 @@ Solutions to frequently encountered problems with Home Battery Control.
            state: "{{ states('sensor.p1_power_kw') | float * 1000 }}"
            unit_of_measurement: "W"
    ```
+   {% endraw %}
 2. Verify P1 meter is reporting net power (import - export)
 3. Check sensor direction (positive = import, negative = export)
 4. Verify entity_id is correct in configuration

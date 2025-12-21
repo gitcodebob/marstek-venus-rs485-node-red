@@ -206,6 +206,7 @@ template:
           {{ total | round(1) }}
         unit_of_measurement: "kWh"
 ```
+{% endraw %}
 
 **Review monthly:**
 - Compare cycles across all batteries
@@ -215,6 +216,7 @@ template:
 ### Priority Change Notifications
 
 **Optional automation to track changes:**
+{% raw %}
 ```yaml
 automation:
   - alias: "Battery Priority Changed"
@@ -227,6 +229,7 @@ automation:
           title: "Battery Priority Rotated"
           message: "New order: {{ states('input_text.house_battery_priority_order') }}"
 ```
+{% endraw %}
 
 ## 3-Phase Systems
 

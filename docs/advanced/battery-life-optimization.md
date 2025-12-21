@@ -177,6 +177,7 @@ With hysteresis (30W):
 - Battery capacity degradation over time
 
 **Create tracking sensors:**
+{% raw %}
 ```yaml
 template:
   - sensor:
@@ -194,6 +195,7 @@ template:
           {{ (days_in_use * avg_cycles_per_day) | round(0) }}
         unit_of_measurement: "cycles"
 ```
+{% endraw %}
 
 ## Longevity vs Performance Trade-offs
 

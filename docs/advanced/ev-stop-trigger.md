@@ -47,6 +47,7 @@ input_boolean:
 ```
 
 **Option B: Automatic detection based on power**
+{% raw %}
 ```yaml
 # configuration.yaml
 template:
@@ -56,8 +57,10 @@ template:
           {{ states('sensor.ev_charger_power') | float > 1000 }}
         device_class: power
 ```
+{% endraw %}
 
 **Option C: From EV charger integration**
+{% raw %}
 ```yaml
 # Many EV charger integrations provide charging status
 # Examples:
@@ -72,6 +75,7 @@ template:
         state: >
           {{ is_state('sensor.easee_charger_status', 'charging') }}
 ```
+{% endraw %}
 
 ### Step 2: Configure in Home Assistant
 
@@ -141,6 +145,7 @@ Use `sensor.battery_stop_trigger` as EV Stop Trigger entity.
 
 Add delay to prevent false triggers:
 
+{% raw %}
 ```yaml
 template:
   - binary_sensor:
@@ -150,6 +155,7 @@ template:
         delay_on: "00:00:30"  # 30 second delay before triggering
         delay_off: "00:01:00"  # 1 minute delay before releasing
 ```
+{% endraw %}
 
 **Why delay?**
 - Prevents trigger from brief power spikes
@@ -160,6 +166,7 @@ template:
 
 Trigger based on total home consumption:
 
+{% raw %}
 ```yaml
 template:
   - binary_sensor:
@@ -168,6 +175,7 @@ template:
           {{ states('sensor.house_power_consumption') | float > 5000 }}
         delay_on: "00:00:15"
 ```
+{% endraw %}
 
 **Use case:** Stop batteries when total home consumption exceeds safe limit
 
@@ -318,6 +326,7 @@ automation:
 # No additional template needed
 EV Stop Trigger Entity: sensor.wallbox_pulsar_plus_status_description
 
+{% raw %}
 # Alternative with binary sensor:
 template:
   - binary_sensor:
@@ -326,8 +335,10 @@ template:
           {{ is_state('sensor.wallbox_pulsar_plus_status_description', 'Charging') }}
         delay_on: "00:00:30"
 ```
+{% endraw %}
 
 ### Configuration 2: Power-based Detection
+{% raw %}
 ```yaml
 template:
   - binary_sensor:
@@ -337,6 +348,7 @@ template:
         delay_on: "00:00:30"
         delay_off: "00:02:00"
 ```
+{% endraw %}
 
 ### Configuration 3: Multiple Appliances
 ```yaml

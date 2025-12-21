@@ -1,14 +1,9 @@
----
-render_with_liquid: false
----
-
 # Hardware Setup - Modbus Connection
 
-Learn how to connect your home battery (thuisaccu) system to Home Assistant via Modbus RS485.
+This guide covers hardware options and ready-to-use configurations for connecting your battery to Home Assistant.
 
 ## Overview
-
-Most home battery systems support Modbus RTU communication via an RS485 port. This guide covers hardware options and ready-to-use configurations for connecting your battery to Home Assistant.
+Most home battery systems support Modbus communication via an RS485 port. You can buy consumer grade RS485 to WiFi/Lan or use a M5stack/LilyGo microcontroller. The goal is to 
 
 ## Connection Methods
 
@@ -17,15 +12,16 @@ Most home battery systems support Modbus RTU communication via an RS485 port. Th
 ESPHome provides reliable, WiFi-based Modbus connectivity with automatic Home Assistant integration.
 
 Popular hardware options:
+- **M5Stack Atom S3 Lite with RS485 module** - Modular approach
 - **LilyGo T-CAN485** - Affordable, compact RS485 to WiFi bridge
 - **LilyGo T-POE Pro** - Power over Ethernet option
-- **M5Stack Atom S3 Lite with RS485 module** - Modular approach
+
 
 ## Ready-to-Use Configurations
 
 ### For Marstek Venus Battery Systems
 
-The community has created ready-to-deploy ESPHome configurations:
+The community has created ready-to-deploy ESPHome configurations. By 
 
 #### LilyGo V1/V2
 ```yaml
@@ -106,6 +102,7 @@ If you use different ESPHome configurations or battery brands with different ent
 1. Go to Settings → Devices & Services → Helpers
 2. Create template sensors that map your entities to expected names
 3. Example:
+{% raw %}
 ```yaml
 template:
   - sensor:
@@ -114,6 +111,7 @@ template:
         state: "{{ states('sensor.your_battery_power') }}"
         unit_of_measurement: "W"
 ```
+{% endraw %}
 
 **Option 2: Modify Project Configuration**
 - Edit `house_battery_control_config.yaml` to reference your entity names
@@ -192,6 +190,3 @@ Once hardware is connected and entities are available in Home Assistant:
 ## Additional Resources
 
 - [ESPHome Modbus Documentation](https://esphome.io/components/modbus.html)
-- [RS485 Basics Tutorial](https://www.ti.com/lit/an/slyt324/slyt324.pdf)
-- Community Discord: `Marstek RS485/Node-Red besturing`
-

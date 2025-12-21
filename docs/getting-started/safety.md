@@ -1,7 +1,3 @@
----
-render_with_liquid: false
----
-
 # Safety Guidelines
 
 **Essential safety information for home battery control (thuisaccu besturing)**
@@ -14,7 +10,7 @@ You are responsible for configuring and operating your system safely. Monitor ca
 
 ### 1. Verify P1 Sensor Units
 
-**Critical:** The P1 power sensor must report in Watts (W), not kilowatts (kW).
+The P1 power sensor is expected to report in Watts (W), not kilowatts (kW).
 
 ```yaml
 # ✅ Correct - sensor reports in Watts
@@ -25,6 +21,7 @@ sensor.house_power: 1.234 kW
 ```
 
 If your meter provides kW, multiply by 1000:
+{% raw %}
 ```yaml
 template:
   - sensor:
@@ -32,13 +29,13 @@ template:
         state: "{{ states('sensor.house_power_kw') | float * 1000 }}"
         unit_of_measurement: "W"
 ```
+{% endraw %}
 
 ### 2. Start with Conservative Settings
 
 **First-time setup:**
 - ✅ Test in **800W mode** (max charge/discharge)
 - ✅ Use "Very Safe" PID preset
-- ✅ Monitor for at least 24 hours
 - ❌ Do NOT start with maximum battery power limits
 
 **Why 800W?**
@@ -48,24 +45,15 @@ template:
 
 ### 3. Set Battery Limits Correctly
 
-Configure maximum charge and discharge power for each battery:
-
-1. Check your battery specifications
-2. Set limits via Home Assistant dashboard (click battery glance cards)
-3. **Never exceed manufacturer specifications**
-4. Consider electrical installation limits (circuits, fuses, breakers)
-
-Example limits:
-- Small system (2-3 kWh): 800-1500W
-- Medium system (5-10 kWh): 2000-3000W
-- Large system (10+ kWh): 3000-5000W
+1. Set limits via Home Assistant dashboard (click battery glance cards)
+1. **Never exceed manufacturer specifications**
+1. Consider electrical installation limits (circuits, fuses, breakers)
 
 ### 4. Consult Professional Electrician
 
 **Always consult a licensed electrician when:**
 - Going above 800W continuous power
-- Installing 3-phase systems
-- Connecting multiple batteries
+- Connecting multiple batteries to a single phase or group
 - Modifying electrical installations
 - Uncertain about safety margins
 
@@ -74,7 +62,7 @@ Example limits:
 ### Monitor Your System
 
 **First week:**
-- Check system behavior daily
+- Check system behavior regularly
 - Monitor PID response to appliances (coffee machine, washing machine, dryer)
 - Watch for oscillations or instability
 - Verify battery relay engagement/disengagement
@@ -97,29 +85,8 @@ Example limits:
 2. Battery display panel → Set to Standby/Off
 3. If unresponsive: Circuit breaker → OFF
 
-## Common Hazards
-
-### 1. High-Power Appliances
-
-Devices that can cause rapid power changes:
-- ☕ Coffee machines (1500-2400W)
-- 🔥 Induction cooktops (2000-3500W)
-- 🧺 Washing machines, dryers (2000-3000W)
-- 💇 Hair dryers, straighteners (1500-2200W)
-- 🔌 Electric heaters (1000-3000W)
-- 🚗 EV chargers (3600W+)
-
-**Recommendation:**
-- Start with low PID gains when testing with these appliances
-- Use [EV Stop Trigger](../advanced/ev-stop-trigger.md) for EV charging
-- Monitor first cycles of high-power appliances
 
 ### 2. System Instability (Oscillations)
-
-PID controller oscillations can cause:
-- Excessive relay wear
-- Battery stress
-- Grid connection instability
 
 **If system oscillates:**
 1. Immediately reduce Kp gain
@@ -128,7 +95,7 @@ PID controller oscillations can cause:
 
 ### 3. Relay Wear
 
-Frequent charge/discharge switching wears battery relays:
+Frequent start/stop switching wears battery relays:
 
 **Protection measures:**
 - Enable Minimum Idle Time (default 120 seconds)
@@ -259,4 +226,3 @@ Before activating Full Control:
 ---
 
 **Next:** [Choose Your Strategy](../strategies/overview.md) | [Return to Installation](installation.md)
-

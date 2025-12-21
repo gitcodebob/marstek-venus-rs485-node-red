@@ -425,6 +425,7 @@ Track your optimization results:
 - Strategy distribution (% time in each mode)
 
 **Useful sensors:**
+{% raw %}
 ```yaml
 template:
   - sensor:
@@ -437,6 +438,7 @@ template:
           {% set avg_discharge_price = states('sensor.average_discharge_hour_price') | float %}
           {{ ((discharged * avg_discharge_price) - (charged * avg_charge_price)) | round(2) }}
 ```
+{% endraw %}
 
 ## Comparison with Other Strategies
 

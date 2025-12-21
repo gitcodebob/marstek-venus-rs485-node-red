@@ -1,18 +1,20 @@
-# Home Battery Control - Open Source Home Assistant Battery Management
+# Home Battery Control for Home Assistant
 
 ![License](https://img.shields.io/github/license/gitcodebob/marstek-venus-rs485-node-red)
 ![Release](https://img.shields.io/github/v/release/gitcodebob/marstek-venus-rs485-node-red)
 ![Stars](https://img.shields.io/github/stars/gitcodebob/marstek-venus-rs485-node-red)
 
-**Open-source home battery control (thuisaccu besturing) for Home Assistant and Node-RED**. Take full control of your energy storage system with advanced PID-based self-consumption, dynamic pricing optimization, and customizable charging strategies. No proprietary software, no vendor lock-in—just complete control over your home battery system (energieopslag).
+**Open-source Home Battery Control for Home Assistant and Node-RED**. 
 
-Perfect for solar panel (zonnepanelen) owners who want to maximize self-sufficiency, minimize grid dependence, and optimize energy costs with dynamic energy contracts.
+Take full control of your energy storage system with advanced PID-based self-consumption, dynamic pricing optimization, and customizable charging strategies. No proprietary software, no vendor lock-in—just complete control over your home battery system (energieopslag).
+
+Perfect for solar panel owners who want to maximize self-sufficiency, minimize grid dependence, and optimize energy costs with dynamic energy contracts.
 
 ## ⚡ Why Home Battery Control?
 
-### Open Source Freedom
+### Open Source
 - ✅ **No vendor lock-in** - Full control over your battery system
-- ✅ **Community-driven** - Continuously improved by users worldwide
+- ✅ **Community-driven** - Continuously improved from the community for the community
 - ✅ **Transparent** - See exactly how your system works
 - ✅ **Customizable** - Adapt to your specific needs
 
@@ -21,7 +23,7 @@ Perfect for solar panel (zonnepanelen) owners who want to maximize self-sufficie
 - **Dynamic Pricing** - Optimize for hourly energy rates, charge cheap & discharge expensive
 - **Timed Charging** - Simple time-based scheduling for fixed off-peak rates
 - **Solar-Only** - Store only solar energy (zonne-energie), never from grid
-- **EV Integration** - Automatically pause during electric vehicle (elektrische auto) charging
+- **Electric Vehicle Integration** - Automatically pause during electric vehicle (elektrische auto) charging
 
 ### Proven Performance
 - 🎯 Grid power tracking: ±20-50W average
@@ -54,6 +56,7 @@ Get your system running in under an hour:
 ### Video Overview
 
 [![Home Battery via Home Assistant](https://img.youtube.com/vi/PQo_1QyyrGo/0.jpg)](https://www.youtube.com/watch?v=PQo_1QyyrGo)
+English text and subtitles, Dutch voice-over.
 
 ## ✨ Key Features
 
