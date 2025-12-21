@@ -140,6 +140,10 @@ views:
             hide_state: true
             show_entity_picture: false
             name: Full Control Strategy
+            visibility:
+              - condition: state
+                entity: input_select.marstek_master_battery_mode
+                state: Full control
           - type: heading
             icon: mdi:alert
             heading: 'Dynamic strategy: Full Stop. Please configure dynamic strategy'
@@ -234,7 +238,7 @@ views:
               navigation_path: /home-battery/advanced-settings
           - type: markdown
             content: >-
-              <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> High
+              <font color=orange><ha-icon icon="mdi:alert"></ha-icon> High
               controller sensitivity, monitor your system</font> use at your own
               risk.
             visibility:
@@ -408,7 +412,7 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Configuration and settings (v3.5.4)
+          Configuration and settings (v3.5.5)
         text_only: true
   - type: sections
     max_columns: 3
@@ -574,7 +578,7 @@ views:
             text_only: true
           - type: markdown
             content: >-
-              <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> High
+              <font color=orange><ha-icon icon="mdi:alert"></ha-icon> High
               sensitivity - monitor your system</font>, use at your own risk.
             visibility:
               - condition: or
@@ -614,7 +618,7 @@ views:
             heading_style: title
           - type: markdown
             content: >-
-              <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> Cheapest
+              <font color=orange><ha-icon icon="mdi:alert"></ha-icon> Cheapest
               Hours integration not installed</font>
 
 
@@ -690,6 +694,27 @@ views:
               - condition: state
                 entity: input_select.house_battery_strategy_dynamic_data_source
                 state_not: None
+          - type: markdown
+            content: >-
+              #### Information
+
+              | Period      | Strategy |
+
+              | ----------- | ----------- |
+
+              | Default     | Charge PV   |
+
+              | Cheapest    | Charge      |
+
+              | Expensive   | Self-consumption |
+
+
+              1. _Use the settings on this dashboard to tune the strategies_
+
+              1. _Timed and Dynamic share the same settings_
+
+              1. _Note: currently it is not possible to change the strategy per
+              period via this dashboard_
     cards: []
   - type: sections
     max_columns: 3
