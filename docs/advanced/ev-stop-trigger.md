@@ -351,6 +351,7 @@ template:
 {% endraw %}
 
 ### Configuration 3: Multiple Appliances
+{% raw %}
 ```yaml
 template:
   - binary_sensor:
@@ -361,6 +362,7 @@ template:
              or (states('sensor.house_power') | float > 6000) }}
         delay_on: "00:00:15"
 ```
+{% endraw %}
 
 ## Performance Impact
 

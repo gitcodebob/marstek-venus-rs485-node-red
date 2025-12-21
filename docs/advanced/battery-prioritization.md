@@ -191,6 +191,7 @@ Use cases:
 - Engagement frequency per battery
 
 **Example sensors:**
+{% raw %}
 ```yaml
 template:
   - sensor:

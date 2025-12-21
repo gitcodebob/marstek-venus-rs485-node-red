@@ -6,9 +6,14 @@
 
 **Open-source Home Battery Control for Home Assistant and Node-RED**. 
 
-Take full control of your energy storage system with advanced PID-based self-consumption, dynamic pricing optimization, and customizable charging strategies. No proprietary software, no vendor lock-in—just complete control over your home battery system (energieopslag).
+Want full control of your Home Batteries and employ them exactly the way you want? E.g. self-consumption, dynamic pricing optimization, timed charging, peak shaving and customizable strategies. No proprietary software, no vendor lock-in — just complete control over your home battery system using **Home Assistant and Node-RED**.
 
-Perfect for solar panel owners who want to maximize self-sufficiency, minimize grid dependence, and optimize energy costs with dynamic energy contracts.
+Perfect for owners who want to maximize self-sufficiency, minimize grid dependence, and optimize energy costs.
+
+*Dutch*
+
+Voor iedereen die meer controle wil over zijn/haar thuis 
+
 
 ## ⚡ Why Home Battery Control?
 
@@ -22,14 +27,14 @@ Perfect for solar panel owners who want to maximize self-sufficiency, minimize g
 - **Self-Consumption (PID)** - Automatically maintain near-zero grid power with smart PID controller
 - **Dynamic Pricing** - Optimize for hourly energy rates, charge cheap & discharge expensive
 - **Timed Charging** - Simple time-based scheduling for fixed off-peak rates
-- **Solar-Only** - Store only solar energy (zonne-energie), never from grid
-- **Electric Vehicle Integration** - Automatically pause during electric vehicle (elektrische auto) charging
+- **Solar-Only** - Store excess solar energy, but don't charge from grid
+- **Electric Vehicle Integration** - Automatically pause during electric vehicle charging
 
 ### Proven Performance
-- 🎯 Grid power tracking: ±20-50W average
+- 🎯 Grid power tracking: ±20-50W average (better than vendor)
 - 💰 Daily savings: €0.50-4.00 (dynamic pricing)
 - 🔋 Battery longevity: Smart wear distribution & relay protection
-- 🌍 Active community: 500+ installations, Discord support
+- 🌍 Active community: 500+ installations nd growing, Discord support
 
 ## 📊 Comparison: Open Source vs Proprietary
 
@@ -38,8 +43,8 @@ Perfect for solar panel owners who want to maximize self-sufficiency, minimize g
 | **Cost** | Free & open-source | Free (limited features) | Varies |
 | **Customization** | Unlimited | Limited | None |
 | **Strategies** | 6+ (expandable) | 2-3 basic modes | Varies |
-| **PID Tuning** | Full control | Fixed | Hidden |
-| **Multi-battery** | Unlimited | Up to 4 | Varies |
+| **Tuning** | Full control | Fixed | Hidden |
+| **Multi-battery** | Unlimited | Up to 9 | Varies |
 | **Dynamic pricing** | Full support | Not available | Rarely |
 | **Updates** | Community-driven | Vendor schedule | Vendor schedule |
 | **Privacy** | Full control | Unknown | Unknown |
@@ -117,13 +122,14 @@ See **[Release Notes](RELEASE_NOTES.md)** for the latest features and improvemen
 
 ## 🎯 Perfect For
 
-✅ **You have solar panels** and want to maximize self-consumption
-✅ **You want to minimize grid import/export** and reduce energy bills
-✅ **You have a dynamic energy contract** with hourly variable rates
-✅ **You want full control** without proprietary software limitations
-✅ **You're technically inclined** and enjoy home automation
-✅ **You have an EV** and need smart charging integration
-✅ **You want to extend battery life** with smart wear management
+- ✅ **You have solar panels** and want to maximize self-consumption
+- ✅ **You want to minimize grid import/export** and reduce energy bills
+- ✅ **You have a dynamic energy contract** with hourly variable rates
+- ✅ **You want full control** without proprietary software limitations
+- ✅ **You're technically inclined** and enjoy home automation
+- ✅ **You have an EV** and need smart charging integration
+- ✅ **You want to extend battery life** with smart wear management
+- ✅ **You require peak shaving** because of captar
 
 ❌ **Not suitable if:**
 - You prefer plug-and-play solutions without configuration
@@ -155,24 +161,15 @@ See **[Release Notes](RELEASE_NOTES.md)** for the latest features and improvemen
 ## 🌟 Community
 
 ### Get Support
-- **💬 Discord:** `Marstek RS485/Node-Red besturing` - Active community with 500+ members
-- **🐛 GitHub Issues:** [Report bugs](https://github.com/gitcodebob/marstek-venus-rs485-node-red/issues) - Technical problems and feature requests
-- **💡 GitHub Discussions:** Share configurations and ask questions
+- **💬 Discord:** [`Marstek RS485/Node-Red Home Battery Control`](https://discord.gg/yeAGaE4kgy)
 
 ### Contributing
-We welcome contributions! Whether it's:
-- 📝 Documentation improvements
-- 🐛 Bug reports and fixes
-- ✨ New features and strategies
-- 📊 Sharing your PID tuning results
-- 🔧 Hardware compatibility reports
-
 **See [CONTRIBUTING](.github/copilot-instructions.md)** for guidelines
 
 ## 📖 Credits & Acknowledgments
 
 Special thanks to:
-- **Ruald Ordelman** - Original Node-RED + HA control schema
+- **Ruald Ordelman** - Initiative Node-RED + HA control schema
 - **Fonske** - Marstek ESPHome configurations
 - **Community contributors** - Testing, feedback, and improvements
 - **TheFes** - Cheapest Hours integration
