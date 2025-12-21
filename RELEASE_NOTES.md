@@ -1,6 +1,17 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.5.5
+- **Docs: Add Modbus connection guide and improve dashboard UX**
+  - Add new "Modbus to Home Assistant" section with Fonske project examples
+  - Improve dashboard visibility and warning colors
+  - Add Dynamic strategy information table
+
+- **Files Changed:**
+  - `LICENSE`
+  - `README.md`
+  - `home assistant/dashboard.yaml`
+
 ## 3.5.4
 - **Chore: Update copilot instructions and minor improvements**
   - Add initial value of 0 to `house_target_grid_consumption_in_w` as new users were reporting a -15000 and getting confused

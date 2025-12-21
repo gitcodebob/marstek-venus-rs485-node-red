@@ -13,11 +13,15 @@ This project is designed for hobbyists who want to control home battery systems 
 [Release notes](RELEASE_NOTES.md)
 
 ## Getting Started
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/PQo_1QyyrGo/0.jpg)](https://www.youtube.com/watch?v=PQo_1QyyrGo)
+[![Home Battery via Home Assistant](https://img.youtube.com/vi/PQo_1QyyrGo/0.jpg)](https://www.youtube.com/watch?v=PQo_1QyyrGo)
 
 [Video instructions (NL with ENG subs)](https://youtu.be/PQo_1QyyrGo?si=wEI7CChgbtWXV8Ue)
 
 ### Step by step
+1. **Connect batteries to Home Assistant**
+   - The project assumes you have connected your batteries to Home Assistant
+   - Have a look at these [modbus examples and ready to use configurations](#modbus-to-home-assistant)
+   
 1. **Install Node-RED in Home Assistant**
    - Follow the official guide: [How to install Node-RED in Home Assistant](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/guide/installation.html)
 
@@ -79,6 +83,22 @@ This project is designed for hobbyists who want to control home battery systems 
 - Test your first time setup in 800W mode
 - Set the appropiate Max. Charge and Max. Discharge values for each battery via the dashboard, by clicking on the glance charts.
 - Always consult a professional electrician when going above 800W.
+
+### Modbus to Home Assistant
+Most home batteries allow control via a ModBus port. To connect your battery via Modbus with Home Assistant there are several ready-to-buy/Microcontroler diy/ESPHome based solutions available.
+
+Examples and ready to use configurations for Marstek are found here:
+* lilygo v1/2: https://github.com/fonske/MarstekVenus-LilygoRS485/blob/main/lilygo_mt1.yaml
+* lilygo V3: https://github.com/fonske/MarstekVenus-LilygoRS485/blob/main/lilygo_mt1_v3.yaml
+* lilygo poe: v3: https://github.com/Adam600david/Marstek-venus-V3-Lilygo-T-POE-pro/blob/main/MarstekVenus-Lilygo-T-POE-Pro%20MTforum.yaml  (not my work)
+* M5stack rs485 Atom s3: v1/2:  https://github.com/fonske/MarstekVenus-M5stackRS485/blob/main/esphome/atom_s3_lite_rs485.yaml
+* M5stack rs485 Atom s3: v3: https://github.com/fonske/MarstekVenus-M5stackRS485/blob/main/esphome/atom_s3_lite_rs485_v3.yaml
+
+Adapt the above to your any project you have. 
+
+> Home Battery Control assumes the sensor and entity names used in the `Fonske` projects above. 
+>
+> Using alternate naming or different code projects requires you to create HA helper entities to map values from your custom setup to the expected entities in the project. Changing the project itself is also possible, but less advised as this makes updating more cumbersome for you.
 
 ## Advanced Features
 
