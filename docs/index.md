@@ -1,13 +1,13 @@
 # Home Battery Control Documentation
 
-Complete documentation for open-source home battery (thuisaccu) control with Home Assistant and Node-RED.
+Complete documentation for open-source `Home Battery Control` with Home Assistant and Node-RED.
 
 ## 🚀 Quick Start
 
 New to Home Battery Control? Start here:
 
 1. **[Installation Guide](getting-started/installation.md)** - Step-by-step setup
-2. **[Safety Guidelines](getting-started/safety.md)** - Essential safety information
+2. **[Safety Guidelines](getting-started/safety.md)** - Safety tips
 3. **[Hardware Setup](getting-started/hardware-setup.md)** - Connect your battery via Modbus
 4. **[Choose Your Strategy](strategies/overview.md)** - Find the best control strategy for your needs
 
