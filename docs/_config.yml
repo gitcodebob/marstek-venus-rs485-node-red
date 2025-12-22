@@ -1,0 +1,9 @@
+title: Home Battery Control
+description: Open-source battery control for Home Assistant & Node-RED
+theme: jekyll-theme-cayman
+show_downloads: true
+
+github:
+  repository_url: https://github.com/gitcodebob/marstek-venus-rs485-node-red
+  zip_url: https://github.com/gitcodebob/marstek-venus-rs485-node-red/zipball/main
+  tar_url: https://github.com/gitcodebob/marstek-venus-rs485-node-red/tarball/main

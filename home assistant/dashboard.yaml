@@ -203,7 +203,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://github.com/gitcodebob/marstek-venus-rs485-node-red/blob/main/README.md#advanced-features
+                https://github.com/gitcodebob/marstek-venus-rs485-node-red/blob/main/docs/06-advanced-features.md#battery-life
           - show_name: true
             show_icon: true
             show_state: true
@@ -221,7 +221,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://github.com/gitcodebob/marstek-venus-rs485-node-red?tab=readme-ov-file#battery-life
+                https://github.com/gitcodebob/marstek-venus-rs485-node-red/blob/main/docs/06-advanced-features.md#battery-life
           - type: entities
             entities:
               - entity: input_number.house_battery_control_idle_time
@@ -412,7 +412,7 @@ views:
         type: markdown
         content: |-
           # Home batteries
-          Configuration and settings (v3.5.5)
+          Configuration and settings (v3.5.6)
         text_only: true
   - type: sections
     max_columns: 3
@@ -776,7 +776,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://github.com/gitcodebob/marstek-venus-rs485-node-red?tab=readme-ov-file#operation-and-tuning-minimal
+                https://github.com/gitcodebob/marstek-venus-rs485-node-red/blob/main/docs/04-setup-self-consumption.md#pid-operation
       - type: grid
         cards:
           - type: heading

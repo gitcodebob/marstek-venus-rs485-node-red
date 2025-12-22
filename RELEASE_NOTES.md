@@ -1,6 +1,16 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.5.6
+- **Docs: Restructure documentation with numbered files and GitHub Pages support**
+  - Separate README into compact landing page and detailed docs in /docs folder
+  - Add strategy explainers and videos
+  - Add GitHub Pages support
+  - Update all documentation links in README and dashboard.yaml
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+
 ## 3.5.5
 - **Docs: Add Modbus connection guide and improve dashboard UX**
   - Add new "Modbus to Home Assistant" section with Fonske project examples
@@ -8,8 +18,6 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
   - Add Dynamic strategy information table
 
 - **Files Changed:**
-  - `LICENSE`
-  - `README.md`
   - `home assistant/dashboard.yaml`
 
 ## 3.5.4

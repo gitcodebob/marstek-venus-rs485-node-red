@@ -1,257 +1,80 @@
-# Home Battery Control with Home Assistant & Node-RED
 
-This project is designed for hobbyists who want to control home battery systems using Home Assistant and Node-RED. It provides ready-to-use flows and configuration examples, including a PID controller for advanced battery management. Use at your own discretion.
+# Home Battery Control via Home Assistant & Node-RED
+
+Home Battery Control is an open-source solution for the community to control home batteries and electric vehicles using Home Assistant and Node-RED. Control your batteries exactly how you want, all in one place without vendor lock-ins.
+
+This project is designed for hobbyists who want full control over their home battery systems. It provides ready-to-use flows and configuration examples, including a PID controller for advanced battery management. Use at your own discretion.
+
+[![Home Assistant](https://img.shields.io/badge/Home%20Assistant-Integration-3DDC84?logo=home-assistant&logoColor=#03A9F4)](https://www.home-assistant.io/) 
+[![Node-RED](https://img.shields.io/badge/Node--RED-Flow-FF4A00?logo=node-red&logoColor=)](https://nodered.org/) 
+[![Discord](https://img.shields.io/badge/Discord-Join%20server-5865F2?logo=discord&logoColor=white)](https://discord.gg/yeAGaE4kgy) 
+![Stars](https://img.shields.io/github/stars/gitcodebob/marstek-venus-rs485-node-red)
 
 ## Features
-- **Node-RED Control Flows:** Easy to import and use Node-RED control flows for battery charge/discharge control.
-- **Home Assistant Integration:** Example configuration for seamless integration with your smart home setup.
-- **Customizable:** Adapt the flows and configuration to your specific battery hardware and automation needs.
-- **Strategies:** Multiple charge/discharge strategies including self-consumption (PID-based), timed charging/discharging, simple charge modes, and solar-only charging (Charge PV). Easily add your own.
-- **Updating:** Grab the latest control flow, without losing your personal configurations.
+- **Node-RED Control Flows:** Easy to import and use control flows for battery charge/discharge ([node-red/](node-red/))
+- **Home Assistant Integration:** Example configuration for seamless smart home integration ([home assistant/](home%20assistant/))
+- **Customizable:** Adapt the flows and configuration to your specific battery hardware and automation needs
+- **Multiple Strategies:** [Self-consumption](docs/04-setup-self-consumption.md) (use your own energy), [Timed](node-red/02%20strategy-timed.json), [Dynamic](docs/05-setup-dynamic.md) (price-based), [Charge](node-red/02%20strategy-charge.json), [Charge PV](node-red/02%20strategy-charge-pv.json) (solar-only), [Full Stop](node-red/02%20strategy-full-stop.json). Easily add your own. See [all strategies](docs/03-strategies.md).
+- **Easy Updates:** Grab the latest control flow without losing your personal configurations
 
-## Whats new?
-[Release notes](RELEASE_NOTES.md)
+## What's New? ![Release](https://img.shields.io/github/v/release/gitcodebob/marstek-venus-rs485-node-red)
+[Release Notes](RELEASE_NOTES.md) 
 
-## Getting Started
+## Quick Start
 [![Home Battery via Home Assistant](https://img.youtube.com/vi/PQo_1QyyrGo/0.jpg)](https://www.youtube.com/watch?v=PQo_1QyyrGo)
 
-[Video instructions (NL with ENG subs)](https://youtu.be/PQo_1QyyrGo?si=wEI7CChgbtWXV8Ue)
+[Video instructions (English text and subs, Dutch spoken)](https://youtu.be/PQo_1QyyrGo?si=wEI7CChgbtWXV8Ue)
 
-### Step by step
-1. **Connect batteries to Home Assistant**
-   - The project assumes you have connected your batteries to Home Assistant
-   - Have a look at these [modbus examples and ready to use configurations](#modbus-to-home-assistant)
-   
-1. **Install Node-RED in Home Assistant**
-   - Follow the official guide: [How to install Node-RED in Home Assistant](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/guide/installation.html)
+### Installation Summary
+1. **Connect your batteries to HA** - e.g. use ESPhome or LilyGo to connect batteries to Home Assistant (see [Modbus setup guide](docs/02-modbus-setup.md))
+1. **Install Node-RED** - [Install in Home Assistant](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/guide/installation.html)
+1. **Clone this repository** - `git clone https://github.com/gitcodebob/marstek-venus-rs485-node-red.git`
+1. **Configure Home Assistant** - Import YAML files from `home assistant/` folder
+1. **Import Node-RED flows** - Import control flows from `node-red/` folder
+1. **Set up strategies** - Choose and configure your preferred control strategy
 
-1. **Clone this repository**
-   ```sh
-   git clone https://github.com/gitcodebob/marstek-venus-rs485-node-red.git
-   ```
-   
-1. **Home Assistant Add-ons**
-   - Go to settings > Add-ons and confirm [`File editor`](https://github.com/home-assistant/addons/tree/master/configurator) or `Visual Studio Server` are installed
-   - Confirm `Node-RED` is running
-   - (Optional) install [`B2500 Meter`](https://github.com/tomquist/b2500-meter) to enable the `Marstek control` option.
-      - This sends grid power usage via the ESPHome boards to Martek's own control algorithms.
-   - (Optional) install [Cheapest Hours](https://github.com/TheFes/cheapest-energy-hours?tab=readme-ov-file#how-to-install) to enable support for `Dynamic` contracts with hourly changing rates.
+📖 **[Complete Getting Started Guide](docs/01-getting-started.md)**
 
-1. **Configure Home Assistant**
-   - Use the provided YAML files in the `home assistant` folder as follows.
-     - Configuration files are organized using the package-based structure:
-       - `packages/house_battery_control.yaml` contains all input entities (booleans, datetimes, numbers, selects) and template sensors for battery control. This file is what you usually update.
-       - `packages/house_battery_control_config.yaml` contains configuration-related entities specific for your install. Customize it. Don't overwrite at each update.
-     - The main `configuration.yaml` automatically loads all package files from the `packages/` directory
-       - Tip: you can add your own package files to the `packages/` folder as well. They will be loaded automatically.
-       - Tip: the `house_battery_control.yaml` includes `recorder:` configuration to reduce logbook clutter by excluding high-frequency technical entities (PID control signals, calculated averages) while preserving user-relevant changes (Master Switch, Strategy selection, configuration changes). History graphs and statistics remain fully functional.
-     - This package-based structure provides better organization, easier maintenance, and improved configuration sharing.
-     - See instruction [good to know](#good-to-know--safety) for safety tips.
+### Safety First
+> **Disclaimer:** You are responsible for configuring and operating your system safely. Monitor carefully. Be prepared to switch off battery control or disengage physically.
 
-1. **Home Assistant DASHBOARD - continue installation with guidance**
-   - In Home Assistant import `dashboard.yaml` to create a dashboard.
-   - Follow the **additional guidance** on this interactive dashboard.
-      1. Set your desired number of batteries (the system can handle any number of batteries, but the dash is designed for max. 4)
-      1. Set your P1 sensor (`template_sensors\template_sensor_house_battery_control.yaml`)
-      1. Import NR flows, see instructions below.
+- The P1 value is expected in Watt (W). If your meter supplies kW, multiply the P1 input × 1000
+- **Test your first setup in 800W mode**
+- Set appropriate Max. Charge and Max. Discharge values for each battery via the dashboard
+- Always consult a professional electrician when going above 800W
 
-1. **Import Node-RED Flows**
-    - In Node-RED, go to the menu > Import > and select the relevant JSON files from the `node-red` folder:
-       - `00 master-switch-flow.json` (enable/disable control)
-       - `00 presets-switch-flow.json` (pid control presets)
-       - `01 start-flow.json` (the main flow)
-   - Import charging strategies:
-       - `02 strategy-self-consumption.json` (PID-based self-consumption strategy)
-       - `02 strategy-timed.json` (time-based charging/discharging strategy)
-       - `02 strategy-charge.json` (simple charge strategy)
-       - `02 strategy-full-stop.json` (full stop strategy)
-   - Optional: Explore additional examples in the `node-red/examples/` directory for advanced strategy patterns
-   - Deprecated flows are available in `node-red/deprecated/` folder for reference
-   - Deploy all flows. No edits required.
+## Documentation
 
-5. **Firing up**
-   - Check the dashboard if all checks are green, if you have not done so already.
-   - Continue reading **before** switching the master battery mode to `Full Control` to activate.
+📚 **[View Full Documentation](https://gitcodebob.github.io/marstek-venus-rs485-node-red/)** (GitHub Pages)
 
+### Getting Started
+- **[Installation Guide](docs/01-getting-started.md)** - Complete step-by-step installation
+- **[Modbus Setup](docs/02-modbus-setup.md)** - Connect batteries to Home Assistant via Modbus
 
-> Disclaimer 
->
-> You are responsible for configuring and operating your system safely. Monitor carefully. Be prepared to switch off battery control or disengage physically. 
+### Strategies
+- **[All Strategies Overview](docs/03-strategies.md)** - When to use each strategy and how they work
+- **[Self-Consumption Setup](docs/04-setup-self-consumption.md)** - PID controller configuration and tuning
+- **[Dynamic Strategy Setup](docs/05-setup-dynamic.md)** - Automated price-based control
 
-### Good to know / Safety
-- The P1 value is expected in Watt (w). If your meter supplies kW, multiply the P1 input * 1000
-- Test your first time setup in 800W mode
-- Set the appropiate Max. Charge and Max. Discharge values for each battery via the dashboard, by clicking on the glance charts.
-- Always consult a professional electrician when going above 800W.
+### Advanced
+- **[Advanced Features](docs/06-advanced-features.md)** - EV trigger, multi-battery, 3-phase, performance optimizations
+- **[Troubleshooting](docs/07-troubleshooting.md)** - Common issues and solutions
 
-### Modbus to Home Assistant
-Most home batteries allow control via a ModBus port. To connect your battery via Modbus with Home Assistant there are several ready-to-buy/Microcontroler diy/ESPHome based solutions available.
-
-Examples and ready to use configurations for Marstek are found here:
-* lilygo v1/2: https://github.com/fonske/MarstekVenus-LilygoRS485/blob/main/lilygo_mt1.yaml
-* lilygo V3: https://github.com/fonske/MarstekVenus-LilygoRS485/blob/main/lilygo_mt1_v3.yaml
-* lilygo poe: v3: https://github.com/Adam600david/Marstek-venus-V3-Lilygo-T-POE-pro/blob/main/MarstekVenus-Lilygo-T-POE-Pro%20MTforum.yaml  (not my work)
-* M5stack rs485 Atom s3: v1/2:  https://github.com/fonske/MarstekVenus-M5stackRS485/blob/main/esphome/atom_s3_lite_rs485.yaml
-* M5stack rs485 Atom s3: v3: https://github.com/fonske/MarstekVenus-M5stackRS485/blob/main/esphome/atom_s3_lite_rs485_v3.yaml
-
-Adapt the above to your any project you have. 
-
-> Home Battery Control assumes the sensor and entity names used in the `Fonske` projects above. 
->
-> Using alternate naming or different code projects requires you to create HA helper entities to map values from your custom setup to the expected entities in the project. Changing the project itself is also possible, but less advised as this makes updating more cumbersome for you.
-
-## Advanced Features
-
-### EV Stop Trigger
-- **Electric Vehicle Charging Override:** Automatically stops all battery operations when your EV or other heavy appliance starts charging
-  - Overrules ALL active strategies to prevent power spikes and grid overload
-  - Configure by entering the `entity_id` of an `input_boolean` or `on/off` template sensor
-  - The trigger sensor should indicate when your EV or heavy appliance is actively charging
-  - When triggered, the system applies a Full Stop strategy until the sensor state returns to off
-  - Useful for preventing home battery discharge during high-power EV charging sessions
-  - Configurable through the Advanced Settings dashboard
-
-### Battery Life
-- **Minimum Idle Time:** Configurable minimum time before allowing battery grid relay disengagement
-  - Reduces relay wear and extends battery life
-  - Eliminates clicking/clacking noises during frequent charge/discharge transitions around 0W
-  - Configurable through Home Assistant dashboard
-- **Hysteresis:** Prevents excessive switching between charge and discharge mode around the 0 Watt line. 
-   - If the PID output level lies within hysteresis, it will not switch from charge to discharge or vise versa. 
-   - 0 = apply no hysteresis
-- **Battery charge order:** determines which battery gets charged first (Multi-battery only)
-   - Batteries gets charged in order. By changing which battery is first in order, you can optimize battery wear.
-   - Espescially during cloudy periods when the first battery takes the grunt of the charging and discharing.
-   - The **Auto Cycle** feature changes the order of the batteries automatically each night or each week
-      - Auto Cycling occurs at 02:00 hrs daily, or 02:00 hrs Sunday morning.
-      - Don't want auto cycling? Select Cycle priority "Never". 
-- **Controller Output Protection:** Software protection based on battery maximum charge/discharge values
-  - Adjusts control output to stay within configured battery capabilities
-
-   
-### Performance Optimizations
-- **Deadbands:** Control loop only activates when _P1 error_ is outside the deadband and _P1 changes_ of more than 2%.
-  - Significantly reduces CPU load during stable operation
-  - Changing the P1 change for triggering the loop is done in `Home Battery Start` -> `RBE:node 'On change (2%)'` 
-  - Changing the deadband can be done in `Strategy Self-consumption` -> `F:node Deadband(15W)` 
-- **Reporting by Exception:** Action nodes only trigger when values actually change
-  - Reduces unnecessary Home Assistant calls and system load
-  - Note: the SET MODE action nodes have proven unreliable, for _safety reasons_ the `On Change` RBE has been left out.
-
-### Multi-Battery Management
-- **Easy Battery Addition/Removal:** only the `Home Battery Start` flow requires editing to add/remove batteries. Strategy execution should remain unaltered.
-- **3-Phase self-consumption:** if you require 0 W grid consumption on a per phase basis, the setup changes slightly. 
-      
-      Note: most homes get billed for the net total of all phases. If that is the case for you as well, ignore these instructions.
-
-   - Duplicate `Home Battery Start` to `Home Battery Start L1`, `Home Battery Start L2`, `Home Battery Start L3` (one for each phase).
-   - Set the correct battery index in the `Start Loop` node. Keeping an eye on which battery is on which phase and thus which flow.
-   - Remove the `Loop step` and `Loop until`, tie the `Mapping` to the `Battery strategy` directly.
-   - Deploy as per normal instructions.
-
-## Self-consumption (setup)
-For the `self-consumption strategy` a PID controler is used. This keeps grid input/output close to 0 W (the target grid consumption). This PID controler needs to be tuned to your home.
-
-### What is a PID Controller
-A proportional–integral–derivative controller (PID controller or three-term controller) is a feedback-based control loop mechanism commonly used to manage machines and processes that require continuous control and automatic adjustment. See [Wikipedia - Fundamental operation](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller#Fundamental_operation)
-
-### PID Operation
-Complete the [getting started](#getting-started) first.
-
-Open Node-RED (in an extra browser tab): 
-- Open the debug bar to monitor messages.
-
-In Home Assistant:
-   - Find the PID controls on the dashboard and select the `very safe` preset. Or set the Kp, Ki, Kd values manually to something like: 
-      - Kp = 0.5
-      - Ki = 0
-      - Kd = 0
-   - Double check min/max (dis)charge power of your batteries.
-
-Click `Full control` and select `self-consumption` as a strategy.
-- Now the controller will start managing the batteries.
-
-Tip, observe the HA history graph containing:
-   - P1 sensor (positive = drawing power from grid, negative = delivering power back to grid)
-   - PID output (positive = batteries are charging, negative = discharging)
-   - P-term, I-term, D-term (P+I+D = PID Output)
-   - Error signal (what error is observed in Watts)
-
-### PID Tuning
-#### PID Presets (Simplified Tuning)
-For easier setup, use the **PID Presets** dropdown in the Home Assistant dashboard. Choose from predefined configurations:
-- **Very safe**: Conservative settings, slower response
-- **Safe**: Moderate settings, balanced performance  
-- **Regular**: Faster settings, monitoring required
-- **Custom**: Manual tuning using individual parameters
-
-The system automatically applies the selected preset values on selection. After that, you can tune values to your liking.
-
-> **IMPORTANT SAFETY** Carefully monitor for **system instabilaty** and standby to tune down Kp, Ki, Kd values or disengage batteries when large oscillations persist.
-
-Every system is different and your home requires unique settings. What's marked as 'Regular' for one, can be unstable for others. Keep this in mind. This is also why this system can easily outperform Marstek software, as Marstek needs to put in a healthy safety margin to accomodate these differences between homes. 
-
-> **ADVISE** Keep the max. charge/discharge settings low (< 800 W) until you have experience with how your system reacts to coffee machines, hair straighteners, old washing machines and other 'horrifically noisy devices'.   
-
-#### PID Tuning (Advanced)
-Use the [Ziegler-Nichols method]((https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller#Ziegler%E2%80%93Nichols_method)) for a starting point. 
-
-1. Set Kp to say 1.0, and be prepared to decrease it fast if needed.
-1. If the system oscillates in a steady state -> export the HA History graph to CSV.
-    - increase Kp when not resonating
-    - decrease Kp if the system runs off. (stay alert, not to damage your system)
-1. Determine the resonant frequency. E.g. by using [HA-history-graph-csv-export-analysis
-](https://github.com/gitcodebob/HA-history-graph-csv-export-analysis)
-1. T<sub>u</sub> = 1 / `<resonant frequency>` and K<sub>u</sub> = your current K<sub>p</sub> during resonance
-1. Use the table of the [Ziegler-Nichols method]((https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller#Ziegler%E2%80%93Nichols_method)) to get a baseline. 
-    - This baseline can be a bit aggressive.
-
-Note: every system is different and your home is unique. Tune in small increments from here. 
-
-## Dynamic strategy (setup)
-The `dynamic` flow is provided for automated charging/discharging based on changing hourly rates. This is only relevant if you have a dynamic/hourly contract.
-
-### How it works
-The strategy will periodically check for new tarif data from your supplier.
-It will use `charge` during the cheapest 2 hrs of this day. And charge using your charge settings.
-It will use `self-consumption` during the most expensive 4 hrs of the day, if the price delta is big enough. 
-Outside of these periods it will use `charge PV` to capture any surplus (cheap) solar power.
-
-### Getting dynamic up and running
-1. Install [Cheapest Hours](https://github.com/TheFes/cheapest-energy-hours?tab=readme-ov-file#how-to-install) if you have not done so already
-1. Provide data from your Energy supplier to Home Assistant. [See this easy list](https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings) with addons from TheFes.
-   - Follow any instructions provided by the Data Provider addon.
-1. Import the `02 strategy-dynamic.json` flow into Node-RED and *deploy*
-1. Go to your Home Battery Control dashboard in HA
-   - Select `Full control` and `Dynamic` to activate the strategy
-1. Go to 2nd tab, this shows `timed` and `dynamic` planning
-   - Select your energy supplier from the dropdown
-   - The dashboard should (with a small delay) display when it will be charging/idle/discharing in the next 24 hrs.
-1. Price delta
-   - Leave the price delta at €0,06/kWh or set it to your desired value
-   - For a Marstek bought at ~ €1250, 6000 cycles at 88% DoD and an 80 RTE = delta at €0,06/kWh
-
-Done.
-
-## Troubleshooting
-1. The controller barely responds and (dis)charges only with a few Watts
-   - A: check if the P1 input is in Watt and not in kW.
-1. I get an error `"HomeAssistantError: Invalid value for input_number.house_battery_control_pid_output: 16743 (range -15000.0 - 15000.0)"`
-   - A: check battery max (dis)charge values. Are these correct?
-   - A: If your converter/batteries allows over 15kW of charging, adjust the limits in `home assistant\input_numbers\input_number_house_battery_control.yaml`
-
-## Updating
-Check the release notes which files have changed. In most cases your `Battery Start` flow stays unchanged which contain your handmade changes. Copy the other files and import Node-RED flows as per instruction.
+### Updating
+Check the [release notes](RELEASE_NOTES.md) to see which files have changed. In most cases your `Battery Start` flow stays unchanged (contains your custom settings). Copy the other files and import Node-RED flows as per [installation guide](docs/01-getting-started.md).
 
 ## Credits
-The Node-RED + HA control schema is based on the approach by Ruald Ordelman. Many thanks for sharing your work and ideas with the community!
+The Node-RED + HA control schema is based on the approach by Ruald Ordelman. And the easy to use Modbus to HA boards by Fonske. Many thanks for sharing your work and ideas with the community!
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
-MIT
+![License](https://img.shields.io/github/license/gitcodebob/marstek-venus-rs485-node-red) MIT
 
----
-For questions or suggestions, open an issue on GitHub or Join our `Marstek RS485/Node-Red besturing` Discord.
- 
+## Getting help
+For questions or suggestions, open an issue on GitHub or join our [`Marstek RS485/Node-Red besturing` Discord](https://discord.gg/yeAGaE4kgy).
+
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white)](https://github.com/gitcodebob/marstek-venus-rs485-node-red) [![Discord](https://img.shields.io/badge/Discord-Join%20server-5865F2?logo=discord&logoColor=white)](https://discord.gg/yeAGaE4kgy)
+
+**Keywords:** Open Home Battery Control, Marstek Venus Home Assistant, Thuisaccu besturen met Home Assistant, thuis batterij aansturen met Home Assistant, Marstek en Home Assistant, battery management, zonnepanelen energiebeheer, solar energy storage, dynamic pricing optimization, dynamisch energie tarief en Home Assistant, open source energy management, Marstek control, ESPHome battery, electric vehicle charging integration, modbus rs485
