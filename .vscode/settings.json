@@ -1,0 +1,9 @@
+{
+    "scss.validate": false,
+    "css.validate": false,
+    "[scss]": {
+        "files.associations": {
+            "docs/assets/css/*.scss": "jekyll"
+        }
+    }
+}
