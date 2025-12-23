@@ -10,8 +10,9 @@
    - Have a look at these [modbus examples and ready to use configurations](02-modbus-setup.md)
    
 1. **Install Node-RED in Home Assistant**
-   - Follow the official guide: [How to install Node-RED in Home Assistant](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/guide/installation.html)
-   - **Running Node-RED in a separate Docker container?**
+   - *Node-RED as a Home Assistant Add-on (popular)*
+      - Follow the official guide: [How to install Node-RED in Home Assistant](https://github.com/hassio-addons/addon-node-red/blob/main/node-red/DOCS.md)
+   - *Node-RED in a Docker container*
      - The default Node-RED Docker installation is missing several nodes required by this project. Install them via Node-RED's Manage palette:
        - `node-red-contrib-moment`
        - `node-red-contrib-time-range-switch`
