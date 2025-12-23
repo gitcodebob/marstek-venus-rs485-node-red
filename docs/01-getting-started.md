@@ -11,6 +11,15 @@
    
 1. **Install Node-RED in Home Assistant**
    - Follow the official guide: [How to install Node-RED in Home Assistant](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/guide/installation.html)
+   - **Running Node-RED in a separate Docker container?**
+     - The default Node-RED Docker installation is missing several nodes required by this project. Install them via Node-RED's Manage palette:
+       - `node-red-contrib-moment`
+       - `node-red-contrib-time-range-switch`
+       - `node-red-node-smooth`
+     - For the Home Assistant WebSocket connection, you'll need to manually configure:
+       - Home Assistant URL (e.g., `http://homeassistant.local:8123` or your specific IP address)
+       - Access token (generate one in Home Assistant: Profile > Long-Lived Access Tokens)
+       - Update the connection settings in each Home Assistant server configuration node
 
 1. **Clone this repository**
    ```sh
@@ -71,4 +80,4 @@
 - Test your first time setup in 800W mode
 - Manufacturers advise to consult a professional electrician when going above 800W.
 - Set the appropiate Max. Charge and Max. Discharge values for each battery via the dashboard, by clicking on the glance charts on the dashboard.
-- Don't soley rely on Home Assistant / Node-RED to control the batteries when running into trouble during first flights. Staying near the physical battery controls or your circuit breakers is a good extra safety measure. 
+- Don't soley rely on Home Assistant / Node-RED to disengage the batteries when running into trouble during first flights. Staying near the physical battery controls or your circuit breakers is a good extra safety measure. 
