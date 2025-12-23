@@ -2,11 +2,12 @@
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
 ## 3.5.6
-- **Docs: Restructure documentation with numbered files and GitHub Pages support**
+- **Docs upgrade: Restructured documentation and added GitHub Pages support**
   - Separate README into compact landing page and detailed docs in /docs folder
+  - Add setup tips when running Node-RED in docker (reported by https://github.com/jeroen85)
   - Add strategy explainers and videos
   - Add GitHub Pages support
-  - Update all documentation links in README and dashboard.yaml
+  - Update all existing documentation links in README and dashboard.yaml
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
