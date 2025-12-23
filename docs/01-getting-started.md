@@ -2,7 +2,7 @@
 
 [![Home Battery via Home Assistant](https://img.youtube.com/vi/PQo_1QyyrGo/0.jpg)](https://www.youtube.com/watch?v=PQo_1QyyrGo)
 
-[Video instructions (NL with ENG subs)](https://youtu.be/PQo_1QyyrGo?si=wEI7CChgbtWXV8Ue)
+[Video instructions (Dutch spoken with English text and subs)](https://youtu.be/PQo_1QyyrGo?si=wEI7CChgbtWXV8Ue)
 
 ## Step by step
 1. **Connect batteries to Home Assistant**
