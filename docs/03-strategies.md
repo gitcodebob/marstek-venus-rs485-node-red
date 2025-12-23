@@ -1,126 +1,82 @@
 # Battery Control Strategies
 
-Home Battery Control supports multiple charging and discharging strategies to match different needs and energy scenarios. Each strategy has its own Node-RED flow that can be imported and activated through the Home Assistant dashboard.
+## Quick Reference
 
-## Available Strategies
+| Strategy | Use Case | Setup Required |
+|----------|----------|----------------|
+| **Self-Consumption** | Maximize solar usage, minimize grid power | [Setup guide](04-setup-self-consumption.md) ⚙️ |
+| **Dynamic** | Optimize for hourly energy prices | [Setup guide](05-setup-dynamic.md) ⚙️ |
+| **Timed** | Fixed schedule charging/discharging | Dashboard config only |
+| **Charge** | Force charge from grid | Dashboard config only |
+| **Charge PV** | Charge only from solar surplus | No setup needed |
+| **Full Stop** | Disable all battery operations | No setup needed |
 
-### Self-Consumption (PID-based)
-**When to use:** Maximize self-consumption of solar energy while keeping grid usage near zero
+Switch strategies anytime via the Home Assistant dashboard.
 
-**How it works:** Uses an advanced PID controller to continuously adjust battery charge/discharge to maintain close to 0W grid power. When you produce more solar than you consume, excess energy charges the battery. When you consume more than you produce, the battery discharges to cover the difference.
 
-**Best for:**
-- Homes with solar panels
-- Minimizing grid dependency
-- Optimizing self-sufficiency
-- Dynamic household consumption patterns
 
-**Setup:** Requires PID tuning for optimal performance. See [Self-consumption Setup](04-setup-self-consumption.md) for detailed configuration.
+## Strategy Details
 
-**Node-RED Flow:** `02 strategy-self-consumption.json`
+### Self-Consumption (required)
+Uses a PID controller to maintain ~0W grid power by continuously adjusting battery charge/discharge. When solar production exceeds consumption, the battery charges. When consumption exceeds production, the battery discharges to cover the difference.
+
+**Note:** this is a core strategy employed by many other strategies and thus mandatory to configure.
+
+**⚙️ Setup required:** PID tuning for optimal performance. See [Self-consumption Setup Guide](04-setup-self-consumption.md).
+
+**Flow:** `02 strategy-self-consumption.json`
 
 ---
 
 ### Dynamic (Price-based)
-**When to use:** You have a dynamic energy contract with hourly changing prices
+Automatically charges during the cheapest hours, uses self-consumption during the most expensive hours (if price delta justifies battery wear), and uses Charge PV during other periods.
 
-**How it works:** Automatically charges batteries during the cheapest 2 hours of the day, uses self-consumption during the most expensive 4 hours (if price delta justifies battery wear), and uses Charge PV during other periods to capture surplus solar.
+**Ideal for:** Dynamic/hourly energy contracts to maximize financial savings.
 
-**Best for:**
-- Dynamic/hourly energy contracts
-- Maximizing financial savings
-- Automated price-responsive control
-- Users with variable energy rates
+**⚙️ Setup required:** Cheapest Hours integration and energy supplier configuration. See [Dynamic Strategy Setup Guide](05-setup-dynamic.md).
 
-**Setup:** Requires Cheapest Hours integration and energy supplier data. See [Dynamic Strategy Setup](05-setup-dynamic.md) for details.
+*Active strategy by period:*
 
-**Node-RED Flow:** `02 strategy-dynamic.json`
+| Period | Active Strategy | Notes |
+|--------|-----------------|-------|
+| Cheapest hours | Charge | Charge from grid during low-price windows to store energy |
+| Most expensive hours | Self-Consumption | Discharge to minimize grid import and save costs |
+| Other periods | Charge PV | Only charge from solar surplus, avoid grid charging |
+
+**Flow:** `02 strategy-dynamic.json`
 
 ---
 
 ### Timed Charging/Discharging
-**When to use:** Fixed schedule based on predictable patterns or time-of-use tariffs
+Charge or discharge based on a fixed schedule. Configure time windows through the dashboard (e.g., charge during cheap night rates, discharge during expensive evening rates).
 
-**How it works:** Charge or discharge batteries according to a predefined schedule. Set specific times for charging (e.g., cheap night rates) and discharging (e.g., expensive evening rates).
+**Ideal for:** Time-of-use tariffs and predictable daily routines.
 
-**Best for:**
-- Time-of-use energy tariffs
-- Predictable daily routines
-- Simple scheduled control
-- Users who want set-and-forget operation
-
-**Setup:** Configure charge and discharge time windows through the Home Assistant dashboard.
-
-**Node-RED Flow:** `02 strategy-timed.json`
+**Flow:** `02 strategy-timed.json`
 
 ---
 
-### Charge (Simple Charge Mode)
-**When to use:** You want to actively charge batteries regardless of solar production
+### Charge (from grid)
+Forces charging from grid until batteries reach the capacity indicated by the user.
 
-**How it works:** Forces batteries to charge from the grid at maximum configured charge power until they reach full capacity.
+**Ideal for:** Preparing for power outages or charging before expensive rate periods.
 
-**Best for:**
-- Preparing for expected power outages
-- Charging before expensive rate periods
-- Manual control scenarios
-- Emergency preparation
-
-**Setup:** Set max charge power via dashboard and activate the strategy.
-
-**Node-RED Flow:** `02 strategy-charge.json`
+**Flow:** `02 strategy-charge.json`
 
 ---
 
-### Charge PV (Solar-Only Charging)
-**When to use:** You only want to charge batteries from solar surplus, never from grid
+### Charge PV (Solar-Only)
+Charges batteries only from solar surplus. Never draws from grid for charging. PV stands for Photo Voltaic aka 'solar panels'
 
-**How it works:** Batteries charge only when solar production exceeds household consumption. No grid power is used for charging.
+**Ideal for:** Maximizing free solar energy without grid charging costs.
 
-**Best for:**
-- Maximizing free solar energy use
-- Avoiding grid charging costs
-- Environmentally conscious operation
-- Homes with sufficient solar capacity
-
-**Setup:** No specific configuration needed. The controller automatically detects solar surplus.
-
-**Node-RED Flow:** `02 strategy-charge-pv.json`
+**Flow:** `02 strategy-charge-pv.json`
 
 ---
 
 ### Full Stop
-**When to use:** Temporarily disable all battery operations
+Completely stops all battery operations.
 
-**How it works:** Completely stops all charging and discharging. Batteries remain idle and disconnected from control.
+**Ideal for:** Maintenance, testing, or emergency situations.
 
-**Best for:**
-- System maintenance
-- Testing other equipment
-- Emergency situations
-- Debugging issues
-
-**Setup:** Simply select this strategy to deactivate battery control.
-
-**Node-RED Flow:** `02 strategy-full-stop.json`
-
----
-
-## Custom Strategies
-
-You can create your own strategies by:
-1. Duplicating an existing strategy flow
-2. Modifying the logic to suit your needs
-3. Saving with a new name (e.g., `02 strategy-custom.json`)
-
-See the `node-red/examples/` directory for advanced strategy patterns and examples.
-
-## Switching Strategies
-
-Strategies can be changed at any time through the Home Assistant dashboard:
-1. Go to the Home Battery Control dashboard
-2. Ensure Master Switch is in "Full Control" mode
-3. Select your desired strategy from the dropdown
-4. The system will immediately switch to the new strategy
-
-> **Note:** Some strategies like Self-Consumption and Dynamic have additional setup requirements. Make sure to complete the setup documentation before activating these strategies.
+**Flow:** `02 strategy-full-stop.json`
