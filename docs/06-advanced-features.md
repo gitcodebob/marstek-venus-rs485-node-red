@@ -1,0 +1,47 @@
+# Advanced Features
+
+## EV Stop Trigger
+- **Electric Vehicle Charging Override:** Automatically stops all battery operations when your EV or other heavy appliance starts charging
+  - Overrules ALL active strategies to prevent power spikes and grid overload
+  - Configure by entering the `entity_id` of an `input_boolean` or `on/off` template sensor
+  - The trigger sensor should indicate when your EV or heavy appliance is actively charging
+  - When triggered, the system applies a Full Stop strategy until the sensor state returns to off
+  - Useful for preventing home battery discharge during high-power EV charging sessions
+  - Configurable through the Advanced Settings dashboard
+
+## Battery Life
+- **Minimum Idle Time:** Configurable minimum time before allowing battery grid relay disengagement
+  - Reduces relay wear and extends battery life
+  - Eliminates clicking/clacking noises during frequent charge/discharge transitions around 0W
+  - Configurable through Home Assistant dashboard
+- **Hysteresis:** Prevents excessive switching between charge and discharge mode around the 0 Watt line. 
+   - If the PID output level lies within hysteresis, it will not switch from charge to discharge or vise versa. 
+   - 0 = apply no hysteresis
+- **Battery charge order:** determines which battery gets charged first (Multi-battery only)
+   - Batteries gets charged in order. By changing which battery is first in order, you can optimize battery wear.
+   - Espescially during cloudy periods when the first battery takes the grunt of the charging and discharing.
+   - The **Auto Cycle** feature changes the order of the batteries automatically each night or each week
+      - Auto Cycling occurs at 02:00 hrs daily, or 02:00 hrs Sunday morning.
+      - Don't want auto cycling? Select Cycle priority "Never". 
+- **Controller Output Protection:** Software protection based on battery maximum charge/discharge values
+  - Adjusts control output to stay within configured battery capabilities
+
+## Performance Optimizations
+- **Deadbands:** Control loop only activates when _P1 error_ is outside the deadband and _P1 changes_ of more than 2%.
+  - Significantly reduces CPU load during stable operation
+  - Changing the P1 change for triggering the loop is done in `Home Battery Start` -> `RBE:node 'On change (2%)'` 
+  - Changing the deadband can be done in `Strategy Self-consumption` -> `F:node Deadband(15W)` 
+- **Reporting by Exception:** Action nodes only trigger when values actually change
+  - Reduces unnecessary Home Assistant calls and system load
+  - Note: the SET MODE action nodes have proven unreliable, for _safety reasons_ the `On Change` RBE has been left out.
+
+## Multi-Battery Management
+- **Easy Battery Addition/Removal:** only the `Home Battery Start` flow requires editing to add/remove batteries. Strategy execution should remain unaltered.
+- **3-Phase self-consumption:** if you require 0 W grid consumption on a per phase basis, the setup changes slightly. 
+      
+      Note: most homes get billed for the net total of all phases. If that is the case for you as well, ignore these instructions.
+
+   - Duplicate `Home Battery Start` to `Home Battery Start L1`, `Home Battery Start L2`, `Home Battery Start L3` (one for each phase).
+   - Set the correct battery index in the `Start Loop` node. Keeping an eye on which battery is on which phase and thus which flow.
+   - Remove the `Loop step` and `Loop until`, tie the `Mapping` to the `Battery strategy` directly.
+   - Deploy as per normal instructions.
