@@ -1,7 +1,7 @@
 title: Home Battery Control
-description: Open-source battery control for Home Assistant & Node-RED
+description: Open-source Home Battery Control for Home Assistant & Node-RED
 remote_theme: pages-themes/cayman@v0.2.0
-show_downloads: true
+show_downloads: false
 plugins:
   - jekyll-remote-theme
 
