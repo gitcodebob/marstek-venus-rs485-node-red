@@ -1,6 +1,15 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.5.7
+- **Fix: P1 rate limitter making application unresponsive at constant grid_power values**
+  - Resolved issue where rate limiter prevented control loop from executing when grid power remained constant
+  - Improved system responsiveness during stable grid conditions
+
+- **Files Changed:**
+  - `node-red/01 start-flow.json`
+  - `home assistant/dashboard.yaml`
+
 ## 3.5.6
 - **Docs upgrade: Restructured documentation and added GitHub Pages support**
   - Separate README into compact landing page and detailed docs in /docs folder

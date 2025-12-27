@@ -18,16 +18,12 @@
         "nodes": [
             "1d0932b9cdfe2cc0",
             "057b9222c17d4046",
-            "b5940f2c8939de70",
-            "981ff4f5a93db632",
-            "bcecc2d9b0fe6cad",
-            "390fa8a10c0e531f",
-            "344e5a3dc0efb2f4"
+            "b5940f2c8939de70"
         ],
         "x": 34,
         "y": 19,
-        "w": 992,
-        "h": 122
+        "w": 652,
+        "h": 82
     },
     {
         "id": "a5b8a03b1e2f2371",
@@ -47,7 +43,7 @@
             "b0cd2895e3545c27"
         ],
         "x": 34,
-        "y": 619,
+        "y": 719,
         "w": 812,
         "h": 162
     },
@@ -70,7 +66,7 @@
             "023bfc9b8ac21db1"
         ],
         "x": 28,
-        "y": 159,
+        "y": 259,
         "w": 1664,
         "h": 242
     },
@@ -78,7 +74,7 @@
         "id": "ea78c084bba20424",
         "type": "group",
         "z": "a099d47fc07b3cee",
-        "name": "On start",
+        "name": "On deploy",
         "style": {
             "label": true
         },
@@ -86,9 +82,9 @@
             "ad80dc99baec6552",
             "42d70237afb8b3a7"
         ],
-        "x": 1074,
+        "x": 734,
         "y": 19,
-        "w": 412,
+        "w": 432,
         "h": 82
     },
     {
@@ -108,7 +104,7 @@
             "77163ca9f43e8fb7"
         ],
         "x": 34,
-        "y": 799,
+        "y": 899,
         "w": 838,
         "h": 342
     },
@@ -132,7 +128,7 @@
             "641cc1cf21ace75a"
         ],
         "x": 34,
-        "y": 519,
+        "y": 619,
         "w": 1852,
         "h": 82
     },
@@ -153,7 +149,7 @@
             "0be9d3b9ef3576fd"
         ],
         "x": 34,
-        "y": 419,
+        "y": 519,
         "w": 212,
         "h": 82
     },
@@ -179,7 +175,7 @@
             "a882514e64e6f538"
         ],
         "x": 54,
-        "y": 239,
+        "y": 339,
         "w": 1612,
         "h": 82
     },
@@ -202,9 +198,30 @@
             "1e4f762143a12bba"
         ],
         "x": 294,
-        "y": 839,
+        "y": 939,
         "w": 552,
         "h": 222
+    },
+    {
+        "id": "149d3bed7854fec1",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Rate limiter",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e2a3a19c3da30059",
+            "8ddd86470cf105f4",
+            "660d380dfd258f53",
+            "563c57a7746c3a96",
+            "898cc8a1b89a0f72",
+            "ca528d9c66c9f8d6"
+        ],
+        "x": 34,
+        "y": 119,
+        "w": 1032,
+        "h": 122
     },
     {
         "id": "1d0932b9cdfe2cc0",
@@ -273,7 +290,7 @@
         "y": 60,
         "wires": [
             [
-                "bcecc2d9b0fe6cad"
+                "057b9222c17d4046"
             ]
         ]
     },
@@ -320,7 +337,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 640,
+        "x": 300,
         "y": 60,
         "wires": [
             [
@@ -346,11 +363,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 880,
+        "x": 540,
         "y": 60,
         "wires": [
             [
-                "ceb31920f185d64b"
+                "898cc8a1b89a0f72"
             ]
         ]
     },
@@ -398,7 +415,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 140,
-        "y": 660,
+        "y": 760,
         "wires": [
             [
                 "b0cd2895e3545c27"
@@ -419,7 +436,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 660,
+        "y": 760,
         "wires": [
             [
                 "b658a34d31bcd8f3",
@@ -437,7 +454,7 @@
         "linkType": "dynamic",
         "timeout": "1.2",
         "x": 410,
-        "y": 700,
+        "y": 800,
         "wires": [
             [
                 "712cd7b2343eead6",
@@ -460,7 +477,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 710,
-        "y": 660,
+        "y": 760,
         "wires": []
     },
     {
@@ -478,7 +495,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 710,
-        "y": 700,
+        "y": 800,
         "wires": []
     },
     {
@@ -495,39 +512,12 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 740,
+        "y": 840,
         "wires": [
             [
                 "15830b9747f8132e"
             ]
         ]
-    },
-    {
-        "id": "981ff4f5a93db632",
-        "type": "delay",
-        "z": "a099d47fc07b3cee",
-        "g": "fc3b0636793881be",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "1",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "0.8",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": true,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 450,
-        "y": 60,
-        "wires": [
-            [
-                "057b9222c17d4046"
-            ]
-        ],
-        "info": "Due to reports of 3 phase connections sending at \r\nintermittend message intervals.\r\n\r\nThis does not improve quality much and mostly\r\nincreases load. \r\n\r\nWe therefor employ a rate limiter."
     },
     {
         "id": "dbe474c91266b428",
@@ -543,7 +533,7 @@
         "finalize": "",
         "libs": [],
         "x": 320,
-        "y": 200,
+        "y": 300,
         "wires": [
             [
                 "a91127871ba39241"
@@ -564,7 +554,7 @@
         "finalize": "",
         "libs": [],
         "x": 140,
-        "y": 360,
+        "y": 460,
         "wires": [
             [
                 "bbe037f4bc3425fc"
@@ -593,7 +583,7 @@
         "repair": false,
         "outputs": 2,
         "x": 420,
-        "y": 360,
+        "y": 460,
         "wires": [
             [
                 "a91127871ba39241"
@@ -618,7 +608,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 770,
-        "y": 360,
+        "y": 460,
         "wires": []
     },
     {
@@ -665,7 +655,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 150,
-        "y": 200,
+        "y": 300,
         "wires": [
             [
                 "dbe474c91266b428"
@@ -716,7 +706,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 160,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "4e53830356f33b07"
@@ -767,7 +757,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 850,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "f3e427d4451be530"
@@ -818,7 +808,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1270,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "08d4efea54467ac1"
@@ -869,7 +859,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 680,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "325f396f7e8ad2a8"
@@ -920,7 +910,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1420,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "208060fed37273fc"
@@ -971,7 +961,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 470,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "f384e6c0da2834c8"
@@ -1022,7 +1012,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 310,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "7831dd84510fdfaa"
@@ -1055,7 +1045,7 @@
         "blockInputOverrides": false,
         "domain": "input_boolean",
         "service": "turn_on",
-        "x": 1360,
+        "x": 1040,
         "y": 60,
         "wires": [
             []
@@ -1066,7 +1056,7 @@
         "type": "inject",
         "z": "a099d47fc07b3cee",
         "g": "ea78c084bba20424",
-        "name": "On start",
+        "name": "On deploy",
         "props": [
             {
                 "p": "payload"
@@ -1083,7 +1073,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 1180,
+        "x": 850,
         "y": 60,
         "wires": [
             [
@@ -1116,7 +1106,7 @@
         "domain": "input_text",
         "service": "set_value",
         "x": 640,
-        "y": 880,
+        "y": 980,
         "wires": [
             []
         ]
@@ -1135,7 +1125,7 @@
         "finalize": "",
         "libs": [],
         "x": 390,
-        "y": 920,
+        "y": 1020,
         "wires": [
             [
                 "e1927196c4198cbf"
@@ -1170,7 +1160,7 @@
         "finalize": "",
         "libs": [],
         "x": 120,
-        "y": 920,
+        "y": 1020,
         "wires": [
             [
                 "047542bb597a3048"
@@ -1199,7 +1189,7 @@
         "repair": false,
         "outputs": 2,
         "x": 720,
-        "y": 980,
+        "y": 1080,
         "wires": [
             [
                 "047542bb597a3048"
@@ -1223,7 +1213,7 @@
         "finalize": "",
         "libs": [],
         "x": 560,
-        "y": 980,
+        "y": 1080,
         "wires": [
             [
                 "df4b99688f85df0a",
@@ -1256,7 +1246,7 @@
         "domain": "input_text",
         "service": "set_value",
         "x": 740,
-        "y": 920,
+        "y": 1020,
         "wires": [
             []
         ]
@@ -1275,7 +1265,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 880,
+        "y": 980,
         "wires": [
             [
                 "95295516124d818d"
@@ -1301,7 +1291,7 @@
         "repair": false,
         "outputs": 1,
         "x": 150,
-        "y": 840,
+        "y": 940,
         "wires": [
             [
                 "4d6fd96944872ba1"
@@ -1322,7 +1312,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 1040,
+        "y": 1140,
         "wires": [
             [
                 "77163ca9f43e8fb7"
@@ -1344,7 +1334,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 730,
-        "y": 1020,
+        "y": 1120,
         "wires": []
     },
     {
@@ -1361,7 +1351,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 570,
-        "y": 920,
+        "y": 1020,
         "wires": [
             [
                 "4decf8d91d6ccacb"
@@ -1383,7 +1373,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 110,
-        "y": 1100,
+        "y": 1200,
         "wires": []
     },
     {
@@ -1400,32 +1390,10 @@
         "finalize": "",
         "libs": [],
         "x": 280,
-        "y": 360,
+        "y": 460,
         "wires": [
             [
                 "7d6705c1829e0683"
-            ]
-        ]
-    },
-    {
-        "id": "bcecc2d9b0fe6cad",
-        "type": "rbe",
-        "z": "a099d47fc07b3cee",
-        "g": "fc3b0636793881be",
-        "name": "On change (2%)",
-        "func": "deadband",
-        "gap": "2%",
-        "start": "",
-        "inout": "out",
-        "septopics": false,
-        "property": "payload",
-        "topi": "topic",
-        "x": 280,
-        "y": 60,
-        "wires": [
-            [
-                "981ff4f5a93db632",
-                "390fa8a10c0e531f"
             ]
         ]
     },
@@ -1443,7 +1411,7 @@
         "finalize": "",
         "libs": [],
         "x": 360,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "e63433bdfbdd57e9"
@@ -1473,7 +1441,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 610,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "64c9954af597093d"
@@ -1494,7 +1462,7 @@
         "finalize": "",
         "libs": [],
         "x": 1540,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "c9b6b8b729161188"
@@ -1545,7 +1513,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1350,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "9f9dd1b6c8a68339"
@@ -1596,7 +1564,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 150,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "db8e14c359673211"
@@ -1630,7 +1598,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 1750,
-        "y": 560,
+        "y": 660,
         "wires": [
             []
         ]
@@ -1673,7 +1641,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 800,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "1dac3194a67aeec2"
@@ -1694,7 +1662,7 @@
         "finalize": "",
         "libs": [],
         "x": 980,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "641cc1cf21ace75a"
@@ -1745,7 +1713,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1160,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "1cc51c4bd0523e93"
@@ -1766,7 +1734,7 @@
         "finalize": "",
         "libs": [],
         "x": 140,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "1c419030271bee64",
@@ -1821,7 +1789,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1570,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "64a533741de02153"
@@ -1842,7 +1810,7 @@
         "finalize": "",
         "libs": [],
         "x": 580,
-        "y": 360,
+        "y": 460,
         "wires": [
             [
                 "1933f2623fa0fffb",
@@ -1876,54 +1844,10 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 540,
-        "y": 460,
+        "y": 560,
         "wires": [
             []
         ]
-    },
-    {
-        "id": "390fa8a10c0e531f",
-        "type": "moment",
-        "z": "a099d47fc07b3cee",
-        "g": "fc3b0636793881be",
-        "name": "Last processed",
-        "topic": "",
-        "input": "timestamp",
-        "inputType": "msg",
-        "inTz": "Europe/Amsterdam",
-        "adjAmount": 0,
-        "adjType": "days",
-        "adjDir": "add",
-        "format": "HH:mm:ss",
-        "locale": "C",
-        "output": "time",
-        "outputType": "msg",
-        "outTz": "Europe/Amsterdam",
-        "x": 300,
-        "y": 100,
-        "wires": [
-            [
-                "344e5a3dc0efb2f4"
-            ]
-        ]
-    },
-    {
-        "id": "344e5a3dc0efb2f4",
-        "type": "debug",
-        "z": "a099d47fc07b3cee",
-        "g": "fc3b0636793881be",
-        "name": "Time",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "time",
-        "targetType": "msg",
-        "statusVal": "payload",
-        "statusType": "auto",
-        "x": 470,
-        "y": 100,
-        "wires": []
     },
     {
         "id": "b0cd2895e3545c27",
@@ -1969,7 +1893,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 140,
-        "y": 720,
+        "y": 820,
         "wires": [
             [
                 "06dd855a34065b5d"
@@ -1989,7 +1913,7 @@
         "property": "batteries_available_energy",
         "topi": "topic",
         "x": 350,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "f27b588385633b97"
@@ -2017,7 +1941,7 @@
         "to": "",
         "reg": false,
         "x": 980,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "a882514e64e6f538"
@@ -2045,11 +1969,164 @@
         "to": "",
         "reg": false,
         "x": 1120,
-        "y": 280,
+        "y": 380,
         "wires": [
             [
                 "d01fc0ee854e249a"
             ]
+        ]
+    },
+    {
+        "id": "e2a3a19c3da30059",
+        "type": "switch",
+        "z": "a099d47fc07b3cee",
+        "g": "149d3bed7854fec1",
+        "name": "Select rate limit",
+        "property": "rate_limit",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 380,
+        "y": 180,
+        "wires": [
+            [
+                "563c57a7746c3a96"
+            ],
+            [
+                "660d380dfd258f53"
+            ]
+        ]
+    },
+    {
+        "id": "8ddd86470cf105f4",
+        "type": "delay",
+        "z": "a099d47fc07b3cee",
+        "g": "149d3bed7854fec1",
+        "name": "Rate limit (drop)",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "3",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": true,
+        "outputs": 1,
+        "x": 720,
+        "y": 200,
+        "wires": [
+            [
+                "ceb31920f185d64b",
+                "ca528d9c66c9f8d6"
+            ]
+        ]
+    },
+    {
+        "id": "660d380dfd258f53",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "149d3bed7854fec1",
+        "name": "1 msg/s",
+        "rules": [
+            {
+                "t": "set",
+                "p": "rate",
+                "pt": "msg",
+                "to": "1000",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 200,
+        "wires": [
+            [
+                "8ddd86470cf105f4"
+            ]
+        ]
+    },
+    {
+        "id": "563c57a7746c3a96",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "149d3bed7854fec1",
+        "name": "0.333 msg/s",
+        "rules": [
+            {
+                "t": "set",
+                "p": "rate",
+                "pt": "msg",
+                "to": "3000",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 160,
+        "wires": [
+            [
+                "8ddd86470cf105f4"
+            ]
+        ]
+    },
+    {
+        "id": "898cc8a1b89a0f72",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "149d3bed7854fec1",
+        "name": "P1 change (20W or 2%)",
+        "func": "// Switch between low and high rate limiting to decrease load and power consumption\n// --\n// The flow should always be rate limited by atleast the total execution time of strategies\n// The flow should not lock up indefinitly when grid_power is constant.\n// In the latter case, a more relaxed rate limit can help reduce system load.\n// Devs: don't set msg.rate directly. Use nodes, so novice users can easily read the flow.\n\n// Count the number of evaluations\nlet evaluationCount = Number(context.get(\"p1_rate_limit_evaluations\")) + 1 || 1;\ncontext.set(\"p1_rate_limit_evaluations\", evaluationCount);\nmsg.rate_limit_evaluations = evaluationCount;\n\n// Get the previous value from this node's context\n// If it doesn't exist yet, initialize it as null\nlet previousValue = context.get('previousValue') || null;\nlet currentValue = Number(msg.grid_power);\n\n// Save the current value for the next time the node is triggered\ncontext.set('previousValue', currentValue);\n\n// Default no limiting\nmsg.rate_limit = false;\n\n// Check if we have a valid history to compare with\nif (previousValue !== null) {\n    let absoluteDiff = Math.abs(currentValue - previousValue);\n    let percentageChange = previousValue !== 0 ? Math.abs((absoluteDiff / previousValue) * 100):0;\n\n    // Condition: Absolute difference > N Watt AND percentage change > M %\n    if (absoluteDiff > 20 && percentageChange > 2) {\n\n        // Enable rate limit\n        msg.rate_limit = true;\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "e2a3a19c3da30059"
+            ]
+        ]
+    },
+    {
+        "id": "ca528d9c66c9f8d6",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "149d3bed7854fec1",
+        "name": "CPU power saved",
+        "func": "// 1. Get evaluations (Total attempts)\nlet evaluations = Number(RED.util.getMessageProperty(msg,\"rate_limit_evaluations\")) || 0;\n\n// 2. Increment and get passes (Filtered/successful events)\nlet passes = (context.get(\"p1_rate_limit_passes\") || 0) + 1;\ncontext.set(\"p1_rate_limit_passes\", passes);\n\n// 3a. Calculate percentage (Rate of passing vs total evaluations)\nlet percentage = evaluations > 0 ? (passes / evaluations) * 100 : 0;\n// 3b. Display the percentage rate of not-passing as a measure of efficiency gained\npercentage = 100 - percentage;\n\n// 4. Update Node Status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Saved: ${percentage.toFixed(2)}% (${evaluations-passes}/${evaluations})`\n});\n\n// No output\nreturn null;\n\n/*\n// Counters\nlet passesCount = context.get(\"p1_rate_limit_passes\") || 0;\ncontext.set(\"p1_rate_limit_passes\", passesCount++);\n\nlet evaluationCount = Number(flow.get(\"p1_rate_limit_evaluations\")) || 0;\n\n// Percentage\nlet percentage = 0;\nif(passesCount !== 0) {\n    percentage = evaluationCount/passesCount * 100;\n    percentage = Number(percentage.toFixed(2));  // 2 decimals\n}\n\n// Node info\nnode.status({fill:\"blue\",shape:\"dot\",text:`${percentage} %`});\n\nreturn null; */",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 200,
+        "wires": [
+            []
         ]
     },
     {
@@ -2067,12 +2144,11 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "bbf548d5482cba49",
+        "id": "eaa414a9123cc363",
         "type": "global-config",
         "env": [],
         "modules": {
-            "node-red-contrib-home-assistant-websocket": "0.80.3",
-            "node-red-contrib-moment": "5.0.0"
+            "node-red-contrib-home-assistant-websocket": "0.80.3"
         }
     }
 ]
