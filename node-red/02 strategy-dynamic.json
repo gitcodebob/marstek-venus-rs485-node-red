@@ -548,7 +548,7 @@
         "type": "inject",
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
-        "name": "Every hour (cron)",
+        "name": "Every 30 min (cron)",
         "props": [
             {
                 "p": "payload"
@@ -559,13 +559,13 @@
             }
         ],
         "repeat": "",
-        "crontab": "0 0-23 * * *",
+        "crontab": "*/30 0-23 * * *",
         "once": false,
         "onceDelay": "3",
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 370,
+        "x": 380,
         "y": 400,
         "wires": [
             [
@@ -919,7 +919,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 540,
+        "x": 560,
         "y": 400,
         "wires": [
             [
@@ -1650,7 +1650,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "f6c08c375ce602eb",
+        "id": "4564c1ec27576964",
         "type": "global-config",
         "env": [],
         "modules": {
