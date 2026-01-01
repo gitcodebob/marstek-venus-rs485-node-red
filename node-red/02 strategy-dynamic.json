@@ -86,7 +86,7 @@
             "141ebe1a0441a814"
         ],
         "x": 234,
-        "y": 279,
+        "y": 299,
         "w": 1492,
         "h": 702
     },
@@ -104,13 +104,12 @@
             "8cddc8961385f28e",
             "81b460c063969182",
             "e5f74756a260df5b",
-            "c38ec0f354fd0ff8",
-            "16efd2b03d6dece5"
+            "2b50d9094cb8a9a8"
         ],
         "x": 234,
-        "y": 59,
-        "w": 832,
-        "h": 182
+        "y": 119,
+        "w": 572,
+        "h": 122
     },
     {
         "id": "c6507e8b14c27c81",
@@ -155,15 +154,48 @@
         "h": 82
     },
     {
+        "id": "28a2ae1ba720d063",
+        "type": "group",
+        "z": "95489b12daee74f5",
+        "name": "Update UI: active sub strategy",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "16efd2b03d6dece5",
+            "87e5752435e0ca42",
+            "600f70a08a900d1c"
+        ],
+        "x": 834,
+        "y": 139,
+        "w": 692,
+        "h": 82
+    },
+    {
         "id": "b97bd9a51080da68",
         "type": "junction",
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
         "x": 600,
-        "y": 320,
+        "y": 340,
         "wires": [
             [
                 "127bc4a04263b3c0"
+            ]
+        ]
+    },
+    {
+        "id": "2b50d9094cb8a9a8",
+        "type": "junction",
+        "z": "95489b12daee74f5",
+        "g": "70d1049fc896f1cd",
+        "x": 600,
+        "y": 180,
+        "wires": [
+            [
+                "31e4a5e372bcb73f",
+                "8cddc8961385f28e",
+                "87e5752435e0ca42"
             ]
         ]
     },
@@ -240,7 +272,7 @@
         "templateLocation": "",
         "templateLocationType": "none",
         "x": 460,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "34a30e529baf678b"
@@ -261,7 +293,7 @@
         "templateLocation": "",
         "templateLocationType": "none",
         "x": 470,
-        "y": 620,
+        "y": 640,
         "wires": [
             [
                 "1908addf7c5bfb93"
@@ -283,7 +315,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 830,
-        "y": 900,
+        "y": 920,
         "wires": []
     },
     {
@@ -296,7 +328,7 @@
         "action": "obj",
         "pretty": false,
         "x": 555,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "af541182589224a7"
@@ -314,7 +346,7 @@
         "action": "obj",
         "pretty": false,
         "x": 575,
-        "y": 620,
+        "y": 640,
         "wires": [
             [
                 "da4428dd14db9967"
@@ -336,7 +368,7 @@
         "finalize": "",
         "libs": [],
         "x": 400,
-        "y": 740,
+        "y": 760,
         "wires": [
             [
                 "5cb60087e09c8852",
@@ -375,8 +407,7 @@
         "y": 200,
         "wires": [
             [
-                "31e4a5e372bcb73f",
-                "c38ec0f354fd0ff8"
+                "2b50d9094cb8a9a8"
             ]
         ]
     },
@@ -424,7 +455,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 820,
-        "y": 620,
+        "y": 640,
         "wires": [
             []
         ]
@@ -456,7 +487,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 820,
-        "y": 660,
+        "y": 680,
         "wires": [
             []
         ]
@@ -488,7 +519,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 820,
-        "y": 700,
+        "y": 720,
         "wires": [
             []
         ]
@@ -520,7 +551,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 820,
-        "y": 740,
+        "y": 760,
         "wires": [
             []
         ]
@@ -539,8 +570,8 @@
         "targetType": "msg",
         "statusVal": "target",
         "statusType": "auto",
-        "x": 870,
-        "y": 100,
+        "x": 690,
+        "y": 160,
         "wires": []
     },
     {
@@ -566,7 +597,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 380,
-        "y": 400,
+        "y": 420,
         "wires": [
             [
                 "1990213302cf1876"
@@ -627,30 +658,7 @@
         "y": 160,
         "wires": [
             [
-                "31e4a5e372bcb73f",
-                "c38ec0f354fd0ff8"
-            ]
-        ]
-    },
-    {
-        "id": "c38ec0f354fd0ff8",
-        "type": "rbe",
-        "z": "95489b12daee74f5",
-        "g": "70d1049fc896f1cd",
-        "name": "On change",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": false,
-        "property": "target",
-        "topi": "topic",
-        "x": 690,
-        "y": 160,
-        "wires": [
-            [
-                "16efd2b03d6dece5",
-                "8cddc8961385f28e"
+                "2b50d9094cb8a9a8"
             ]
         ]
     },
@@ -658,7 +666,7 @@
         "id": "16efd2b03d6dece5",
         "type": "api-call-service",
         "z": "95489b12daee74f5",
-        "g": "70d1049fc896f1cd",
+        "g": "28a2ae1ba720d063",
         "name": "Active sub strategy text field",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -680,8 +688,8 @@
         "blockInputOverrides": true,
         "domain": "input_text",
         "service": "set_value",
-        "x": 920,
-        "y": 160,
+        "x": 1380,
+        "y": 180,
         "wires": [
             []
         ]
@@ -920,7 +928,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 560,
-        "y": 400,
+        "y": 420,
         "wires": [
             [
                 "127bc4a04263b3c0"
@@ -971,7 +979,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 800,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "5534a44cf66a84bd"
@@ -992,7 +1000,7 @@
         "finalize": "",
         "libs": [],
         "x": 380,
-        "y": 480,
+        "y": 500,
         "wires": [
             [
                 "7f75e4fa1c2d86a0"
@@ -1043,7 +1051,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 960,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "1d49e10959ab22bc"
@@ -1094,7 +1102,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1140,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "f1168e015522bbfc"
@@ -1124,7 +1132,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 340,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "127bc4a04263b3c0"
@@ -1145,7 +1153,7 @@
         "finalize": "",
         "libs": [],
         "x": 670,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "98d7f59f0b7eab92"
@@ -1166,7 +1174,7 @@
         "finalize": "",
         "libs": [],
         "x": 590,
-        "y": 480,
+        "y": 500,
         "wires": [
             [
                 "f5f223200fbada06",
@@ -1190,7 +1198,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 830,
-        "y": 480,
+        "y": 500,
         "wires": []
     },
     {
@@ -1208,7 +1216,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 520,
+        "y": 540,
         "wires": []
     },
     {
@@ -1232,7 +1240,7 @@
         "to": "",
         "reg": false,
         "x": 330,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "2e5b6b44c86f80e3"
@@ -1260,7 +1268,7 @@
         "to": "",
         "reg": false,
         "x": 330,
-        "y": 620,
+        "y": 640,
         "wires": [
             [
                 "0799b280bf62758e"
@@ -1286,7 +1294,7 @@
         "to": "",
         "reg": false,
         "x": 340,
-        "y": 680,
+        "y": 700,
         "wires": [
             [
                 "adbbd358b213f08e"
@@ -1308,7 +1316,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 800,
-        "y": 940,
+        "y": 960,
         "wires": []
     },
     {
@@ -1366,7 +1374,7 @@
             }
         ],
         "x": 340,
-        "y": 320,
+        "y": 340,
         "wires": [
             [
                 "b97bd9a51080da68"
@@ -1395,7 +1403,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1395,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "141ebe1a0441a814"
@@ -1421,7 +1429,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1620,
-        "y": 340,
+        "y": 360,
         "wires": []
     },
     {
@@ -1451,7 +1459,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 820,
-        "y": 780,
+        "y": 800,
         "wires": [
             []
         ]
@@ -1483,7 +1491,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 830,
-        "y": 820,
+        "y": 840,
         "wires": [
             []
         ]
@@ -1515,7 +1523,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 800,
-        "y": 860,
+        "y": 880,
         "wires": [
             []
         ]
@@ -1564,7 +1572,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1300,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "1247084c53315208"
@@ -1592,7 +1600,7 @@
         "to": "",
         "reg": false,
         "x": 1490,
-        "y": 340,
+        "y": 360,
         "wires": [
             [
                 "4b8c5bc2b8cf6c4d"
@@ -1636,6 +1644,78 @@
         "wires": []
     },
     {
+        "id": "87e5752435e0ca42",
+        "type": "api-current-state",
+        "z": "95489b12daee74f5",
+        "g": "28a2ae1ba720d063",
+        "name": "sub strategy UI value",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_text.house_battery_strategy_active_sub_strategy",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "ui_value",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 960,
+        "y": 180,
+        "wires": [
+            [
+                "600f70a08a900d1c"
+            ]
+        ]
+    },
+    {
+        "id": "600f70a08a900d1c",
+        "type": "function",
+        "z": "95489b12daee74f5",
+        "g": "28a2ae1ba720d063",
+        "name": "On difference",
+        "func": "// Block when equal\nif(msg.ui_value === msg.target) return null;\n\n// Pass otherwise\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 180,
+        "wires": [
+            [
+                "16efd2b03d6dece5"
+            ]
+        ]
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -1650,7 +1730,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "4564c1ec27576964",
+        "id": "9791920358bf2e68",
         "type": "global-config",
         "env": [],
         "modules": {

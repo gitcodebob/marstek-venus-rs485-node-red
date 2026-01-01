@@ -161,12 +161,13 @@
         "nodes": [
             "31b352bcf0b5fa22",
             "1ff8dd8a7bb8c098",
-            "f89183be5ef546c8",
-            "4a78e8501fe52d32"
+            "4a78e8501fe52d32",
+            "08145a57bee1f1d9",
+            "e3ff5478297e2295"
         ],
         "x": 994,
-        "y": 599,
-        "w": 452,
+        "y": 579,
+        "w": 692,
         "h": 202
     },
     {
@@ -943,7 +944,7 @@
             "input_text.house_battery_strategy_active_sub_strategy"
         ],
         "labelId": [],
-        "data": "{\"value\": $$.timed_strategy}",
+        "data": "{\"value\": $$.target}",
         "dataType": "jsonata",
         "mergeContext": "",
         "mustacheAltTags": false,
@@ -952,8 +953,8 @@
         "blockInputOverrides": true,
         "domain": "input_text",
         "service": "set_value",
-        "x": 1300,
-        "y": 640,
+        "x": 1540,
+        "y": 620,
         "wires": [
             []
         ]
@@ -968,7 +969,7 @@
         "linkType": "dynamic",
         "timeout": "30",
         "x": 1090,
-        "y": 760,
+        "y": 740,
         "wires": [
             [
                 "9ce9ba35eda99c46"
@@ -1000,8 +1001,8 @@
         "wires": [
             [
                 "1ff8dd8a7bb8c098",
-                "f89183be5ef546c8",
-                "4a78e8501fe52d32"
+                "4a78e8501fe52d32",
+                "08145a57bee1f1d9"
             ]
         ]
     },
@@ -1078,27 +1079,6 @@
         "wires": []
     },
     {
-        "id": "f89183be5ef546c8",
-        "type": "rbe",
-        "z": "0199f18df097aa8f",
-        "g": "635af4e3e7a252ce",
-        "name": "On change",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": false,
-        "property": "timed_strategy",
-        "topi": "topic",
-        "x": 1090,
-        "y": 640,
-        "wires": [
-            [
-                "31b352bcf0b5fa22"
-            ]
-        ]
-    },
-    {
         "id": "4a78e8501fe52d32",
         "type": "debug",
         "z": "0199f18df097aa8f",
@@ -1113,7 +1093,7 @@
         "statusVal": "target",
         "statusType": "auto",
         "x": 1070,
-        "y": 700,
+        "y": 680,
         "wires": []
     },
     {
@@ -1494,6 +1474,78 @@
         "wires": []
     },
     {
+        "id": "08145a57bee1f1d9",
+        "type": "api-current-state",
+        "z": "0199f18df097aa8f",
+        "g": "635af4e3e7a252ce",
+        "name": "sub strategy UI value",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_text.house_battery_strategy_active_sub_strategy",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "ui_value",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1120,
+        "y": 620,
+        "wires": [
+            [
+                "e3ff5478297e2295"
+            ]
+        ]
+    },
+    {
+        "id": "e3ff5478297e2295",
+        "type": "function",
+        "z": "0199f18df097aa8f",
+        "g": "635af4e3e7a252ce",
+        "name": "On difference",
+        "func": "// Block when equal\nif(msg.ui_value === msg.target) return null;\n\n// Pass otherwise\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 620,
+        "wires": [
+            [
+                "31b352bcf0b5fa22"
+            ]
+        ]
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -1508,7 +1560,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "9ee309feb38fc00b",
+        "id": "8257ed7a999307c9",
         "type": "global-config",
         "env": [],
         "modules": {

@@ -42,6 +42,27 @@
         "h": 142
     },
     {
+        "id": "a982ce2192b36fd5",
+        "type": "group",
+        "z": "676ceac4c521834d",
+        "name": "Update UI: active sub-strategy",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "ce6bb883d5b1f007",
+            "33fd9ce7833604ba",
+            "bba58df78152ef59",
+            "32caf8e345be7b6e",
+            "0d8f2f25053a7fdf",
+            "28c212820d1b1899"
+        ],
+        "x": 614,
+        "y": 319,
+        "w": 552,
+        "h": 142
+    },
+    {
         "id": "a5e9e484430e1720",
         "type": "link in",
         "z": "676ceac4c521834d",
@@ -133,7 +154,8 @@
         "wires": [
             [
                 "d612533a5317bb76",
-                "87be4b85f89829b6"
+                "87be4b85f89829b6",
+                "33fd9ce7833604ba"
             ]
         ]
     },
@@ -153,5 +175,224 @@
         "x": 730,
         "y": 260,
         "wires": []
+    },
+    {
+        "id": "ce6bb883d5b1f007",
+        "type": "api-call-service",
+        "z": "676ceac4c521834d",
+        "g": "a982ce2192b36fd5",
+        "name": "Active sub strategy text field",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_text.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_text.house_battery_strategy_active_sub_strategy"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.target}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_text",
+        "service": "set_value",
+        "x": 1020,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "33fd9ce7833604ba",
+        "type": "api-current-state",
+        "z": "676ceac4c521834d",
+        "g": "a982ce2192b36fd5",
+        "name": "User strategy",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "master_strategy",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 710,
+        "y": 360,
+        "wires": [
+            [
+                "bba58df78152ef59"
+            ]
+        ]
+    },
+    {
+        "id": "bba58df78152ef59",
+        "type": "switch",
+        "z": "676ceac4c521834d",
+        "g": "a982ce2192b36fd5",
+        "name": "is Charge PV",
+        "property": "master_strategy",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Charge PV",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 870,
+        "y": 360,
+        "wires": [
+            [
+                "32caf8e345be7b6e"
+            ]
+        ]
+    },
+    {
+        "id": "32caf8e345be7b6e",
+        "type": "function",
+        "z": "676ceac4c521834d",
+        "g": "a982ce2192b36fd5",
+        "name": "Name sub-strategy",
+        "func": "msg.target = \"Charge PV\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 360,
+        "wires": [
+            [
+                "0d8f2f25053a7fdf"
+            ]
+        ]
+    },
+    {
+        "id": "0d8f2f25053a7fdf",
+        "type": "api-current-state",
+        "z": "676ceac4c521834d",
+        "g": "a982ce2192b36fd5",
+        "name": "UI value",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_text.house_battery_strategy_active_sub_strategy",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "ui_value",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 655,
+        "y": 420,
+        "wires": [
+            [
+                "28c212820d1b1899"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "28c212820d1b1899",
+        "type": "function",
+        "z": "676ceac4c521834d",
+        "g": "a982ce2192b36fd5",
+        "name": "On difference",
+        "func": "// Block when equal\nif(msg.ui_value === msg.target) return null;\n\n// Pass otherwise\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 420,
+        "wires": [
+            [
+                "ce6bb883d5b1f007"
+            ]
+        ]
+    },
+    {
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "",
+        "connectionDelay": false,
+        "cacheJson": false,
+        "heartbeat": false,
+        "heartbeatInterval": "",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
+    },
+    {
+        "id": "4b287d235ce982a2",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.80.3"
+        }
     }
 ]
