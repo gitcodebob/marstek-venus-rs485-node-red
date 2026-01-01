@@ -18,7 +18,7 @@ This project is designed for hobbyists who want full control over their home bat
 - **Easy Updates:** Grab the latest control flow without losing your personal configurations
 
 ## What's New? ![Release](https://img.shields.io/github/v/release/gitcodebob/marstek-venus-rs485-node-red)
-[Release Notes](RELEASE_NOTES.md) 
+📃 **[Release Notes](RELEASE_NOTES.md)** and  📚 **[Documentation](https://gitcodebob.github.io/marstek-venus-rs485-node-red/)** (GitHub Pages)
 
 ## Quick Start
 [![Home Battery via Home Assistant](https://img.youtube.com/vi/PQo_1QyyrGo/0.jpg)](https://www.youtube.com/watch?v=PQo_1QyyrGo)
@@ -77,4 +77,4 @@ For questions or suggestions, open an issue on GitHub or join our [`Marstek RS48
 
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white)](https://github.com/gitcodebob/marstek-venus-rs485-node-red) [![Discord](https://img.shields.io/badge/Discord-Join%20server-5865F2?logo=discord&logoColor=white)](https://discord.gg/yeAGaE4kgy)
 
-**Keywords:** Open Home Battery Control, Marstek Venus Home Assistant, Thuisaccu besturen met Home Assistant, thuis batterij aansturen met Home Assistant, Marstek en Home Assistant, battery management, zonnepanelen energiebeheer, solar energy storage, dynamic pricing optimization, dynamisch energie tarief en Home Assistant, open source energy management, Marstek control, ESPHome battery, electric vehicle charging integration, modbus rs485
+**Keywords:** Open Home Battery Control, Marstek Venus Home Assistant, Marstek Venus aansturen met Homeassistant, Thuisaccu besturen met Home Assistant, thuis batterij aansturen met Home Assistant, Marstek en Home Assistant, battery management, zonnepanelen energiebeheer, solar energy storage, dynamic pricing optimization, dynamisch energie tarief en Home Assistant, open source energy management, Marstek control, ESPHome battery, electric vehicle charging integration, modbus rs485

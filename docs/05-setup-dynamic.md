@@ -8,19 +8,13 @@ It will use `charge` during the cheapest hours of this day. And charge using you
 It will use `self-consumption` during the most expensive hours of the day, if the price delta is big enough. 
 Outside of these periods it will use `charge PV` to capture any surplus (cheap) solar power.
 
+View the explanation videos of the general idea behind this strategy:
+* How to SETUP dynamic: _English text and subtitles, NL spoken: [https://youtu.be/PR1XA5GUlAE](https://youtu.be/AdnXlbPMrTA)_
+* How to USE dynamic: _English text and subtitles, NL spoken: [https://youtu.be/PR1XA5GUlAE](https://youtu.be/PR1XA5GUlAE)_
 
 
-View the explanation video of the general idea behind this strategy:
-
-
+## SETUP - getting dynamic up and running
 [![How to setup Dynamic](https://img.youtube.com/vi/AdnXlbPMrTA/hqdefault.jpg)](https://youtu.be/AdnXlbPMrTA)
-[![How to use Dynamic](https://img.youtube.com/vi/PR1XA5GUlAE/hqdefault.jpg)](https://youtu.be/PR1XA5GUlAE)
-
-How to SETUP dynamic: _English text and subtitles, NL spoken: [https://youtu.be/PR1XA5GUlAE](https://youtu.be/AdnXlbPMrTA)_
-How to USE dynamic: _English text and subtitles, NL spoken: [https://youtu.be/PR1XA5GUlAE](https://youtu.be/PR1XA5GUlAE)_
-
-
-## SETUP: getting dynamic up and running
 1. Install [Cheapest Energy Hours](https://github.com/TheFes/cheapest-energy-hours?tab=readme-ov-file#how-to-install) if you have not done so already
 1. Provide data from your Energy supplier to Home Assistant. [See this easy list](https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings) with addons from TheFes.
    - Follow any instructions provided by the Data Provider addon.
@@ -37,12 +31,15 @@ How to USE dynamic: _English text and subtitles, NL spoken: [https://youtu.be/PR
 
 Done.
 
-## USE: the dynamic strategy
+## USE - the dynamic strategy
+[![How to use Dynamic](https://img.youtube.com/vi/PR1XA5GUlAE/hqdefault.jpg)](https://youtu.be/PR1XA5GUlAE)
 
 ### Strategy behavior per period
 - **Default**: Uses `Charge PV` to capture surplus solar power
 - **Cheapest hours**: Uses `Charge` to charge from grid at lowest rates
-- **Expensive hours**: Uses `Self-consumption` to discharge and reduce grid usage (only if delta threshold is met)
+- **Expensive hours**: Uses `Self-consumption` to discharge and reduce grid usage (only if `minimum price delta` threshold is met)
+
+**Note** the dynamic and timed strategy share settings for charge / charge pv / self-consumption.
 
 ### Dashboard controls
 
@@ -63,19 +60,19 @@ Done.
 - How many of the most `expensive hours` per day to use for self-consumption (discharging)
 - The system automatically finds the most expensive block of consecutive hours in your data source (often: the current and next day)
 
-- **Only activates** if the `minimum price delta` threshold is met. Otherwise grid power is cheaper than the energie stored in your battery.
-   - it will **remain in charge PV** mode during `expensive hours` if the threshold is not met. 
+- **Only activates** if the [`minimum price delta`](#minimum-price-delta-kWh) threshold is met. Otherwise grid power is cheaper than the energie stored in your battery.
+   - it will **remain in charge PV** mode during [`expensive hours`](#expensive-hours-number) if the threshold is not met. 
 
 _FAQ_
 
-- (Optional) guarantee self-consumption during `expensive hours`?
-   - Set the `minimum price delta` to €0,00 if you always want to switch to self-consumption during expensive hours.
+- (Optional) guarantee self-consumption during [`expensive hours`](#expensive-hours-number)?
+   - Set the [`minimum price delta`](#minimum-price-delta-kWh) to €0,00 if you always want to switch to self-consumption during expensive hours.
 - (Optional) want self-consumption throughout the day? 
-   - Set `expensive hours` to `24 - cheapest hours`. E.g. you charge during 2 cheapest hours? Set expensive to `24-2 = 22 hrs`
-   - Set `minimum price delta` to €0,00 to make sure the strat activates.
+   - Set [`expensive hours`](#expensive-hours-number) to [24 - `cheapest hours`](#cheapest-hours-number). E.g. you charge during 2 cheapest hours? Set expensive to `24 hrs - 2 hrs = 22 hrs`
+   - Set [`minimum price delta`](#minimum-price-delta-kWh) to €0,00 to make sure the strat activates.
 
 #### Period start/end times (read-only)
-- Shows when the `cheapest` and `expensive` periods start and end
+- Shows when the [`cheapest`](#cheapest-hours-number) and [`expensive`](#expensive-hours-number) periods start and end
 - Automatically calculated by the system based on your energy price data
 
 #### Average tariffs display

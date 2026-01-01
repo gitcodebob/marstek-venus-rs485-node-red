@@ -1,6 +1,14 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 3.5.8
+- **Docs: Improve documentation formatting and navigation**
+  - Add GitHub Pages link to README
+  - Restructure dynamic strategy setup guide with clearer video sections and internal links
+
+- **Files Changed:**
+  - `docs/05-setup-dynamic.md`
+
 ## 3.5.7
 - **Fix: P1 rate limitter making application unresponsive at constant grid_power values**
   - Resolved issue where rate limiter prevented control loop from executing when grid power remained constant
