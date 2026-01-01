@@ -7,7 +7,7 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
   - Restructure dynamic strategy setup guide with clearer video sections and internal links
 
 - **Files Changed:**
-  - `docs/05-setup-dynamic.md`
+  - None, docs only.
 
 ## 3.5.7
 - **Fix: P1 rate limitter making application unresponsive at constant grid_power values**
