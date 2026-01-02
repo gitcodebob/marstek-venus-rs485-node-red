@@ -18,11 +18,12 @@
         "nodes": [
             "1d0932b9cdfe2cc0",
             "057b9222c17d4046",
-            "b5940f2c8939de70"
+            "b5940f2c8939de70",
+            "625f53bc2e61f2fa"
         ],
         "x": 34,
         "y": 19,
-        "w": 652,
+        "w": 812,
         "h": 82
     },
     {
@@ -40,7 +41,8 @@
             "b658a34d31bcd8f3",
             "712cd7b2343eead6",
             "7f303dfb944dfc04",
-            "b0cd2895e3545c27"
+            "b0cd2895e3545c27",
+            "096752fe134c7b17"
         ],
         "x": 34,
         "y": 719,
@@ -82,7 +84,7 @@
             "ad80dc99baec6552",
             "42d70237afb8b3a7"
         ],
-        "x": 734,
+        "x": 874,
         "y": 19,
         "w": 432,
         "h": 82
@@ -136,14 +138,9 @@
         "id": "c1e44a160c59f1a9",
         "type": "group",
         "z": "a099d47fc07b3cee",
+        "name": "Calculate totals",
         "style": {
-            "stroke": "#565656",
-            "stroke-opacity": "1",
-            "fill": "#3a3a3a",
-            "fill-opacity": "0.5",
-            "label": true,
-            "label-position": "nw",
-            "color": "#cccccc"
+            "label": true
         },
         "nodes": [
             "0be9d3b9ef3576fd"
@@ -152,6 +149,27 @@
         "y": 519,
         "w": 212,
         "h": 82
+    },
+    {
+        "id": "149d3bed7854fec1",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Rate limiter",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e2a3a19c3da30059",
+            "8ddd86470cf105f4",
+            "660d380dfd258f53",
+            "563c57a7746c3a96",
+            "898cc8a1b89a0f72",
+            "ca528d9c66c9f8d6"
+        ],
+        "x": 34,
+        "y": 119,
+        "w": 1032,
+        "h": 122
     },
     {
         "id": "b63f2e905b829e5b",
@@ -203,25 +221,59 @@
         "h": 222
     },
     {
-        "id": "149d3bed7854fec1",
+        "id": "28a2ae1ba720d063",
         "type": "group",
         "z": "a099d47fc07b3cee",
-        "name": "Rate limiter",
+        "name": "Update UI: active sub strategy",
         "style": {
             "label": true
         },
         "nodes": [
-            "e2a3a19c3da30059",
-            "8ddd86470cf105f4",
-            "660d380dfd258f53",
-            "563c57a7746c3a96",
-            "898cc8a1b89a0f72",
-            "ca528d9c66c9f8d6"
+            "16efd2b03d6dece5",
+            "87e5752435e0ca42",
+            "600f70a08a900d1c",
+            "f9cb97e039c82bdc",
+            "9afb8cfc6b4732b2"
         ],
-        "x": 34,
-        "y": 119,
-        "w": 1032,
-        "h": 122
+        "x": 914,
+        "y": 799,
+        "w": 632,
+        "h": 142
+    },
+    {
+        "id": "fbff025fd39d88a8",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Update UI: usable energy",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "f27b588385633b97",
+            "ce28e80550ab9b42"
+        ],
+        "x": 274,
+        "y": 519,
+        "w": 412,
+        "h": 82
+    },
+    {
+        "id": "8edf76f55293c620",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Debug mode",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "ee2ae25070582e27",
+            "93ab1d6dafabb3c1",
+            "40b79d34db8d2b48"
+        ],
+        "x": 1334,
+        "y": 19,
+        "w": 632,
+        "h": 82
     },
     {
         "id": "1d0932b9cdfe2cc0",
@@ -367,7 +419,7 @@
         "y": 60,
         "wires": [
             [
-                "898cc8a1b89a0f72"
+                "625f53bc2e61f2fa"
             ]
         ]
     },
@@ -428,7 +480,7 @@
         "z": "a099d47fc07b3cee",
         "g": "a5b8a03b1e2f2371",
         "name": "Strategy selection",
-        "func": "// INFLOW\nlet strategy = flow.get(\"house_battery_strategy\");\n\n// stop on error\nif(msg.batteries === undefined) {\n    node.error(\"Battery configuration undefined\", msg);\n    return null;\n}\nif(strategy === undefined) {\n    node.error(\"Battery strategy undefined\", msg);\n    return null;\n}\n\n// select target flow based on the input_select `house_battery_strategy`\nmsg.target = `${strategy}`;\n\n// full stop trigger overrules ALL selected strategies\nconst stopTrigger = RED.util.getMessageProperty(msg,\"full_stop_trigger\");\nif(stopTrigger == \"on\" || stopTrigger === true) {\n    msg.target = 'Full stop';\n}\n\n// add execution marker\nRED.util.setMessageProperty(msg,\"strategy.execution_start\",Date.now()); // when do we start executing the selected strategy\n\n// OUTPUT\nnode.status({fill:\"grey\",shape:\"dot\",text:msg.target});\nreturn msg;",
+        "func": "// INFLOW\nlet strategy = flow.get(\"house_battery_strategy\");\n\n// Configure msg.strategy object\nRED.util.setMessageProperty(msg,\"strategy.selected\",strategy,true);\nRED.util.setMessageProperty(msg,\"strategy.trace\",[],true);\n\n// stop on error\nif(msg.batteries === undefined) {\n    node.error(\"Battery configuration undefined\", msg);\n    return null;\n}\nif(strategy === undefined) {\n    node.error(\"Battery strategy undefined\", msg);\n    return null;\n}\n\n// select target flow based on the input_select `house_battery_strategy`\nmsg.target = `${strategy}`;\n\n// full stop trigger overrules ALL selected strategies\nconst stopTrigger = RED.util.getMessageProperty(msg,\"full_stop_trigger\");\nif(stopTrigger == \"on\" || stopTrigger === true) {\n    msg.target = 'Full stop';\n}\n\n// add execution marker\nRED.util.setMessageProperty(msg,\"strategy.execution_start\",Date.now()); // when do we start executing the selected strategy\n\n// OUTPUT\nnode.status({fill:\"grey\",shape:\"dot\",text:msg.target});\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -467,7 +519,7 @@
         "type": "debug",
         "z": "a099d47fc07b3cee",
         "g": "a5b8a03b1e2f2371",
-        "name": "Input parameters",
+        "name": "Input msg",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -476,7 +528,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 710,
+        "x": 680,
         "y": 760,
         "wires": []
     },
@@ -485,7 +537,7 @@
         "type": "debug",
         "z": "a099d47fc07b3cee",
         "g": "a5b8a03b1e2f2371",
-        "name": "Returned solutions",
+        "name": "Returned msg",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -494,7 +546,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 710,
+        "x": 700,
         "y": 800,
         "wires": []
     },
@@ -515,7 +567,9 @@
         "y": 840,
         "wires": [
             [
-                "15830b9747f8132e"
+                "15830b9747f8132e",
+                "096752fe134c7b17",
+                "87e5752435e0ca42"
             ]
         ]
     },
@@ -1045,7 +1099,7 @@
         "blockInputOverrides": false,
         "domain": "input_boolean",
         "service": "turn_on",
-        "x": 1040,
+        "x": 1180,
         "y": 60,
         "wires": [
             []
@@ -1073,7 +1127,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 850,
+        "x": 990,
         "y": 60,
         "wires": [
             [
@@ -1822,6 +1876,7 @@
         "id": "f27b588385633b97",
         "type": "api-call-service",
         "z": "a099d47fc07b3cee",
+        "g": "fbff025fd39d88a8",
         "name": "Set total usable energy",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1843,7 +1898,7 @@
         "blockInputOverrides": true,
         "domain": "input_number",
         "service": "set_value",
-        "x": 540,
+        "x": 560,
         "y": 560,
         "wires": [
             []
@@ -1904,6 +1959,7 @@
         "id": "ce28e80550ab9b42",
         "type": "rbe",
         "z": "a099d47fc07b3cee",
+        "g": "fbff025fd39d88a8",
         "name": "On change",
         "func": "rbe",
         "gap": "",
@@ -1912,7 +1968,7 @@
         "septopics": false,
         "property": "batteries_available_energy",
         "topi": "topic",
-        "x": 350,
+        "x": 370,
         "y": 560,
         "wires": [
             [
@@ -2130,6 +2186,339 @@
         ]
     },
     {
+        "id": "096752fe134c7b17",
+        "type": "debug",
+        "z": "a099d47fc07b3cee",
+        "g": "a5b8a03b1e2f2371",
+        "name": "Strategy evaluation",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "strategy",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "16efd2b03d6dece5",
+        "type": "api-call-service",
+        "z": "a099d47fc07b3cee",
+        "g": "28a2ae1ba720d063",
+        "name": "Show on dashboard",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_text.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_text.house_battery_strategy_active_sub_strategy"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.ui_value_new}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_text",
+        "service": "set_value",
+        "x": 1420,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "87e5752435e0ca42",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "28a2ae1ba720d063",
+        "name": "current UI value",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_text.house_battery_strategy_active_sub_strategy",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "ui_value_current",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1020,
+        "y": 840,
+        "wires": [
+            [
+                "600f70a08a900d1c",
+                "9afb8cfc6b4732b2"
+            ]
+        ]
+    },
+    {
+        "id": "600f70a08a900d1c",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "28a2ae1ba720d063",
+        "name": "on new UI value",
+        "func": "// Block when undefined (don't update UI)\nif(msg.ui_value_current === undefined) return null;\n\n// We show the 2nd strategy in the trace (if available) on the dashboard as the 'active sub-strategy'\nconst secondTraceEntry = msg.strategy?.trace?.[1];\nif (secondTraceEntry) {\n    // Handle case where 2nd flow is present\n    msg.ui_value_new =  secondTraceEntry.flow;\n} else {\n    // Handle case where the 2nd flow is missing\n    // Get a sensible alternative\n    msg.ui_value_new = msg.strategy?.selected || \"\"; // don't use unknown or unavailable as these are reserved HA keywords\n}\n\n// Improve human readability\nif(msg.ui_value_new == \"Self-consumption\" && secondTraceEntry?.flow_settings?.discharge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (charge only)\";\n}\n\n// Node status for devs\nnode.status({fill:\"grey\",shape:\"dot\",text:`new: ${msg.ui_value_new}`});\n\n// Block when equal (don't update UI)\nif(msg.ui_value_current === msg.ui_value_new) return null;\n\n// Pass otherwise\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 840,
+        "wires": [
+            [
+                "16efd2b03d6dece5"
+            ]
+        ]
+    },
+    {
+        "id": "f9cb97e039c82bdc",
+        "type": "ha-fire-event",
+        "z": "a099d47fc07b3cee",
+        "g": "28a2ae1ba720d063",
+        "name": "Show on debug board",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "event": "update_trace_sensor",
+        "data": "{\t   \"trace\": strategy.trace ? strategy.trace : []\t}",
+        "dataType": "jsonata",
+        "x": 1420,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "625f53bc2e61f2fa",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "fc3b0636793881be",
+        "name": "Debug mode",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.house_battery_control_is_debug_mode",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "debug_mode",
+                "propertyType": "msg",
+                "value": "ha_boolean",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 750,
+        "y": 60,
+        "wires": [
+            [
+                "898cc8a1b89a0f72"
+            ]
+        ]
+    },
+    {
+        "id": "9afb8cfc6b4732b2",
+        "type": "switch",
+        "z": "a099d47fc07b3cee",
+        "g": "28a2ae1ba720d063",
+        "name": "Debug mode?",
+        "property": "debug_mode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1220,
+        "y": 900,
+        "wires": [
+            [
+                "f9cb97e039c82bdc"
+            ]
+        ]
+    },
+    {
+        "id": "ee2ae25070582e27",
+        "type": "server-state-changed",
+        "z": "a099d47fc07b3cee",
+        "g": "8edf76f55293c620",
+        "name": "On debug",
+        "server": "176d29a.6f648d6",
+        "version": 6,
+        "outputs": 2,
+        "exposeAsEntityConfig": "",
+        "entities": {
+            "entity": [
+                "input_boolean.house_battery_control_is_debug_mode"
+            ],
+            "substring": [],
+            "regex": []
+        },
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "on",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 1420,
+        "y": 60,
+        "wires": [
+            [
+                "93ab1d6dafabb3c1"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "93ab1d6dafabb3c1",
+        "type": "trigger",
+        "z": "a099d47fc07b3cee",
+        "g": "8edf76f55293c620",
+        "name": "disable debug after 5 minutes",
+        "op1": "",
+        "op2": "off",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "5",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1630,
+        "y": 60,
+        "wires": [
+            [
+                "40b79d34db8d2b48"
+            ]
+        ]
+    },
+    {
+        "id": "40b79d34db8d2b48",
+        "type": "api-call-service",
+        "z": "a099d47fc07b3cee",
+        "g": "8edf76f55293c620",
+        "name": "Turn debug OFF",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_boolean.turn_off",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_boolean.house_battery_control_is_debug_mode"
+        ],
+        "labelId": [],
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_boolean",
+        "service": "turn_off",
+        "x": 1860,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -2144,7 +2533,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "eaa414a9123cc363",
+        "id": "d415cf54402305e6",
         "type": "global-config",
         "env": [],
         "modules": {

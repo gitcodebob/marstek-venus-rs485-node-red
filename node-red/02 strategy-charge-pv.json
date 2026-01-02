@@ -34,12 +34,13 @@
         },
         "nodes": [
             "a5e9e484430e1720",
-            "bf548077ba6ca350"
+            "bf548077ba6ca350",
+            "be2a48e071dee195"
         ],
         "x": 14,
         "y": 79,
         "w": 192,
-        "h": 142
+        "h": 162
     },
     {
         "id": "a5e9e484430e1720",
@@ -48,13 +49,14 @@
         "g": "72059e541379a869",
         "name": "Charge PV",
         "links": [],
-        "x": 165,
-        "y": 180,
+        "x": 100,
+        "y": 160,
         "wires": [
             [
-                "682972c51f2870ed"
+                "be2a48e071dee195"
             ]
-        ]
+        ],
+        "l": true
     },
     {
         "id": "13aeb5c39ba83e0a",
@@ -153,5 +155,34 @@
         "x": 730,
         "y": 260,
         "wires": []
+    },
+    {
+        "id": "be2a48e071dee195",
+        "type": "change",
+        "z": "676ceac4c521834d",
+        "g": "72059e541379a869",
+        "name": "Trace",
+        "rules": [
+            {
+                "t": "set",
+                "p": "strategy.trace",
+                "pt": "msg",
+                "to": "[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 90,
+        "y": 200,
+        "wires": [
+            [
+                "682972c51f2870ed"
+            ]
+        ],
+        "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     }
 ]

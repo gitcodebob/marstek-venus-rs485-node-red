@@ -1,6 +1,27 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.0.0
+- **Feat: Improved system insight and documentation**
+  - Enhance insight into what the battery control system is doing at any moment
+  - Improved dashboard layout with better configuration guidance
+  - Show active sub-strategy on home tab and all strategy tabs
+  - Add debug mode for troubleshooting
+  - Debug mode includes execution trace display showing current system activity
+  - Update strategy documentation with clearer examples
+  - Add Buy Me a Coffee support badge
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/01 start-flow.json`
+  - `node-red/02 strategy-charge-pv.json`
+  - `node-red/02 strategy-charge.json`
+  - `node-red/02 strategy-dynamic.json`
+  - `node-red/02 strategy-full-stop.json`
+  - `node-red/02 strategy-self-consumption.json`
+  - `node-red/02 strategy-timed.json`
+
 ## 3.5.8
 - **Docs: Improve documentation formatting and navigation**
   - Add GitHub Pages link to README

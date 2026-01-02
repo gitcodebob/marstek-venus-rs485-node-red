@@ -11,18 +11,19 @@
         "id": "0bd042d837a592d2",
         "type": "group",
         "z": "9c775009242a5a6b",
-        "name": "Configuration",
+        "name": "Strategy start",
         "style": {
             "label": true
         },
         "nodes": [
             "26460a293ad3466a",
-            "fd021c46fa86cb98"
+            "fd021c46fa86cb98",
+            "bf64301cde62c8c3"
         ],
         "x": 14,
         "y": 79,
         "w": 192,
-        "h": 142
+        "h": 162
     },
     {
         "id": "cd31f39c38ae6c21",
@@ -48,13 +49,14 @@
         "g": "0bd042d837a592d2",
         "name": "Full stop",
         "links": [],
-        "x": 165,
-        "y": 180,
+        "x": 100,
+        "y": 160,
         "wires": [
             [
-                "e8765c8c2f9d4414"
+                "bf64301cde62c8c3"
             ]
-        ]
+        ],
+        "l": true
     },
     {
         "id": "c1e3cac395f0b1cb",
@@ -119,5 +121,34 @@
         "x": 110,
         "y": 120,
         "wires": []
+    },
+    {
+        "id": "bf64301cde62c8c3",
+        "type": "change",
+        "z": "9c775009242a5a6b",
+        "g": "0bd042d837a592d2",
+        "name": "Trace",
+        "rules": [
+            {
+                "t": "set",
+                "p": "strategy.trace",
+                "pt": "msg",
+                "to": "[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "e8765c8c2f9d4414"
+            ]
+        ],
+        "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     }
 ]

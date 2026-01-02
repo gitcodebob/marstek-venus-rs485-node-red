@@ -18,12 +18,13 @@
         },
         "nodes": [
             "7a0cd93e9df76c48",
-            "a56daa760b9feeb1"
+            "a56daa760b9feeb1",
+            "2cf23ce6ec1b78e4"
         ],
-        "x": 74,
+        "x": 54,
         "y": 79,
-        "w": 192,
-        "h": 122
+        "w": 212,
+        "h": 162
     },
     {
         "id": "419f0c8ca2d0601a",
@@ -137,7 +138,7 @@
         "style": {
             "fill": "#bfdbef",
             "label": true,
-            "color": "#7f7f7f"
+            "color": "#ffffff"
         },
         "nodes": [
             "086689c5c8bba4b6",
@@ -383,13 +384,14 @@
         "g": "e2c385d3b03e57bc",
         "name": "Self-consumption",
         "links": [],
-        "x": 225,
+        "x": 160,
         "y": 160,
         "wires": [
             [
-                "de5eedecc97994b4"
+                "2cf23ce6ec1b78e4"
             ]
-        ]
+        ],
+        "l": true
     },
     {
         "id": "a56daa760b9feeb1",
@@ -398,7 +400,7 @@
         "g": "e2c385d3b03e57bc",
         "name": "Start (readme)",
         "info": "# Setting up your battery strategy flow\n\n## Setup\nName the Link In in this start group exactly after the option configured in your\nselect_input.house_battery_strategy\n\nfound in the file:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nWill point to the flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
-        "x": 170,
+        "x": 150,
         "y": 120,
         "wires": []
     },
@@ -1138,7 +1140,7 @@
         "z": "c1a9925591b564a7",
         "g": "54cf41d4c27eeebe",
         "name": "Advanced settings",
-        "func": "// 1. Hard coded advanced settings (flow level)\nflow.set(\"has_soc_charging_limiter\", true);         // slows charging from 90% to 100% to improve battery life\nflow.set(\"has_reverse_priority_discharge\", true);   // Prioritize discharging and charging the same battery when possible\nflow.set(\"master_gain\", 1);                         // Gain scheduling. Not Implemented!\n\n// 2. Configurable advanced settings (msg level)\nRED.util.setMessageProperty(msg,\"advanced_settings.self_consumption_at\",Date.now(),true); // creates 'advanced_settings' if it does net yet exist\nlet mas = msg.advanced_settings;\n\n// disable dicharge solutions and changes them to stop solutions\nRED.util.setMessageProperty(msg,\"advanced_settings.discharge_disabled\", mas.discharge_disabled ?? false);\n\n// 3. continue\nreturn msg;\n\n// Notes for home battery tinkerer friends:\n// Using RED.util.getMessageProperty / RED.util.setMessageProperty is more performant and safe.\n// If any part of the path (\"foo.bar\") is missing, it will return 'undefined' without throwing an error.\n//\n// The nullish coalescing (??) operator is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined,\n",
+        "func": "// 1. Hard coded advanced settings (flow level)\nflow.set(\"has_soc_charging_limiter\", true);         // slows charging from 90% to 100% to improve battery life\nflow.set(\"has_reverse_priority_discharge\", true);   // Prioritize discharging and charging the same battery when possible\nflow.set(\"master_gain\", 1);                         // Gain scheduling. Not Implemented!\n\n// 2. Configurable advanced settings (msg level)\nmsg.advanced_settings ||= {}; // creates 'advanced_settings' if it does net yet exist\nlet mas = msg.advanced_settings;\n\n// disable dicharge solutions and changes them to stop solutions\nRED.util.setMessageProperty(msg,\"advanced_settings.discharge_disabled\", mas.discharge_disabled ?? false);\n\n// 3. continue\nreturn msg;\n\n// Notes for home battery tinkerer friends:\n// Using RED.util.getMessageProperty / RED.util.setMessageProperty is more performant and safe.\n// If any part of the path (\"foo.bar\") is missing, it will return 'undefined' without throwing an error.\n//\n// The nullish coalescing (??) operator is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined,\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2351,6 +2353,35 @@
         ]
     },
     {
+        "id": "2cf23ce6ec1b78e4",
+        "type": "change",
+        "z": "c1a9925591b564a7",
+        "g": "e2c385d3b03e57bc",
+        "name": "Trace",
+        "rules": [
+            {
+                "t": "set",
+                "p": "strategy.trace",
+                "pt": "msg",
+                "to": "[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "de5eedecc97994b4"
+            ]
+        ],
+        "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -2365,7 +2396,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "373f851fdaf8ee48",
+        "id": "924965fb90915f1f",
         "type": "global-config",
         "env": [],
         "modules": {

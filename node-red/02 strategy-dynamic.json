@@ -19,8 +19,8 @@
             "45ca4e9b170ae0e4",
             "c855da432b5a589a"
         ],
-        "x": 14,
-        "y": 239,
+        "x": 844,
+        "y": 99,
         "w": 192,
         "h": 142
     },
@@ -34,12 +34,13 @@
         },
         "nodes": [
             "2c4ec860ab1a8f79",
-            "471fda4979e7fc76"
+            "471fda4979e7fc76",
+            "f22f7a3f371bae96"
         ],
         "x": 14,
         "y": 79,
         "w": 192,
-        "h": 142
+        "h": 162
     },
     {
         "id": "9c68fafd28d3b4fc",
@@ -86,7 +87,7 @@
             "141ebe1a0441a814"
         ],
         "x": 234,
-        "y": 279,
+        "y": 299,
         "w": 1492,
         "h": 702
     },
@@ -104,13 +105,12 @@
             "8cddc8961385f28e",
             "81b460c063969182",
             "e5f74756a260df5b",
-            "c38ec0f354fd0ff8",
-            "16efd2b03d6dece5"
+            "2b50d9094cb8a9a8"
         ],
         "x": 234,
-        "y": 59,
-        "w": 832,
-        "h": 182
+        "y": 119,
+        "w": 572,
+        "h": 122
     },
     {
         "id": "c6507e8b14c27c81",
@@ -160,10 +160,24 @@
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
         "x": 600,
-        "y": 320,
+        "y": 340,
         "wires": [
             [
                 "127bc4a04263b3c0"
+            ]
+        ]
+    },
+    {
+        "id": "2b50d9094cb8a9a8",
+        "type": "junction",
+        "z": "95489b12daee74f5",
+        "g": "70d1049fc896f1cd",
+        "x": 600,
+        "y": 180,
+        "wires": [
+            [
+                "31e4a5e372bcb73f",
+                "8cddc8961385f28e"
             ]
         ]
     },
@@ -174,13 +188,14 @@
         "g": "ee5f9b06bf7efa46",
         "name": "Dynamic",
         "links": [],
-        "x": 165,
-        "y": 180,
+        "x": 100,
+        "y": 160,
         "wires": [
             [
-                "81b460c063969182"
+                "f22f7a3f371bae96"
             ]
-        ]
+        ],
+        "l": true
     },
     {
         "id": "57a9ce1a5a7bb9ef",
@@ -211,8 +226,8 @@
         "name": "Return",
         "mode": "return",
         "links": [],
-        "x": 55,
-        "y": 340,
+        "x": 885,
+        "y": 200,
         "wires": []
     },
     {
@@ -222,8 +237,8 @@
         "g": "ff30c86c22bf31c8",
         "name": "End (readme)",
         "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
-        "x": 110,
-        "y": 280,
+        "x": 940,
+        "y": 140,
         "wires": []
     },
     {
@@ -240,7 +255,7 @@
         "templateLocation": "",
         "templateLocationType": "none",
         "x": 460,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "34a30e529baf678b"
@@ -261,7 +276,7 @@
         "templateLocation": "",
         "templateLocationType": "none",
         "x": 470,
-        "y": 620,
+        "y": 640,
         "wires": [
             [
                 "1908addf7c5bfb93"
@@ -283,7 +298,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 830,
-        "y": 900,
+        "y": 920,
         "wires": []
     },
     {
@@ -296,7 +311,7 @@
         "action": "obj",
         "pretty": false,
         "x": 555,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "af541182589224a7"
@@ -314,7 +329,7 @@
         "action": "obj",
         "pretty": false,
         "x": 575,
-        "y": 620,
+        "y": 640,
         "wires": [
             [
                 "da4428dd14db9967"
@@ -336,7 +351,7 @@
         "finalize": "",
         "libs": [],
         "x": 400,
-        "y": 740,
+        "y": 760,
         "wires": [
             [
                 "5cb60087e09c8852",
@@ -375,8 +390,7 @@
         "y": 200,
         "wires": [
             [
-                "31e4a5e372bcb73f",
-                "c38ec0f354fd0ff8"
+                "2b50d9094cb8a9a8"
             ]
         ]
     },
@@ -424,7 +438,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 820,
-        "y": 620,
+        "y": 640,
         "wires": [
             []
         ]
@@ -456,7 +470,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 820,
-        "y": 660,
+        "y": 680,
         "wires": [
             []
         ]
@@ -488,7 +502,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 820,
-        "y": 700,
+        "y": 720,
         "wires": [
             []
         ]
@@ -520,7 +534,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 820,
-        "y": 740,
+        "y": 760,
         "wires": [
             []
         ]
@@ -539,8 +553,8 @@
         "targetType": "msg",
         "statusVal": "target",
         "statusType": "auto",
-        "x": 870,
-        "y": 100,
+        "x": 690,
+        "y": 160,
         "wires": []
     },
     {
@@ -566,7 +580,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 380,
-        "y": 400,
+        "y": 420,
         "wires": [
             [
                 "1990213302cf1876"
@@ -627,63 +641,8 @@
         "y": 160,
         "wires": [
             [
-                "31e4a5e372bcb73f",
-                "c38ec0f354fd0ff8"
+                "2b50d9094cb8a9a8"
             ]
-        ]
-    },
-    {
-        "id": "c38ec0f354fd0ff8",
-        "type": "rbe",
-        "z": "95489b12daee74f5",
-        "g": "70d1049fc896f1cd",
-        "name": "On change",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": false,
-        "property": "target",
-        "topi": "topic",
-        "x": 690,
-        "y": 160,
-        "wires": [
-            [
-                "16efd2b03d6dece5",
-                "8cddc8961385f28e"
-            ]
-        ]
-    },
-    {
-        "id": "16efd2b03d6dece5",
-        "type": "api-call-service",
-        "z": "95489b12daee74f5",
-        "g": "70d1049fc896f1cd",
-        "name": "Active sub strategy text field",
-        "server": "176d29a.6f648d6",
-        "version": 7,
-        "debugenabled": false,
-        "action": "input_text.set_value",
-        "floorId": [],
-        "areaId": [],
-        "deviceId": [],
-        "entityId": [
-            "input_text.house_battery_strategy_active_sub_strategy"
-        ],
-        "labelId": [],
-        "data": "{\"value\": $$.target}",
-        "dataType": "jsonata",
-        "mergeContext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "blockInputOverrides": true,
-        "domain": "input_text",
-        "service": "set_value",
-        "x": 920,
-        "y": 160,
-        "wires": [
-            []
         ]
     },
     {
@@ -920,7 +879,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 560,
-        "y": 400,
+        "y": 420,
         "wires": [
             [
                 "127bc4a04263b3c0"
@@ -971,7 +930,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 800,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "5534a44cf66a84bd"
@@ -992,7 +951,7 @@
         "finalize": "",
         "libs": [],
         "x": 380,
-        "y": 480,
+        "y": 500,
         "wires": [
             [
                 "7f75e4fa1c2d86a0"
@@ -1043,7 +1002,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 960,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "1d49e10959ab22bc"
@@ -1094,7 +1053,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1140,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "f1168e015522bbfc"
@@ -1124,7 +1083,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 340,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "127bc4a04263b3c0"
@@ -1145,7 +1104,7 @@
         "finalize": "",
         "libs": [],
         "x": 670,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "98d7f59f0b7eab92"
@@ -1166,7 +1125,7 @@
         "finalize": "",
         "libs": [],
         "x": 590,
-        "y": 480,
+        "y": 500,
         "wires": [
             [
                 "f5f223200fbada06",
@@ -1190,7 +1149,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 830,
-        "y": 480,
+        "y": 500,
         "wires": []
     },
     {
@@ -1208,7 +1167,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 520,
+        "y": 540,
         "wires": []
     },
     {
@@ -1232,7 +1191,7 @@
         "to": "",
         "reg": false,
         "x": 330,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "2e5b6b44c86f80e3"
@@ -1260,7 +1219,7 @@
         "to": "",
         "reg": false,
         "x": 330,
-        "y": 620,
+        "y": 640,
         "wires": [
             [
                 "0799b280bf62758e"
@@ -1286,7 +1245,7 @@
         "to": "",
         "reg": false,
         "x": 340,
-        "y": 680,
+        "y": 700,
         "wires": [
             [
                 "adbbd358b213f08e"
@@ -1308,7 +1267,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 800,
-        "y": 940,
+        "y": 960,
         "wires": []
     },
     {
@@ -1366,7 +1325,7 @@
             }
         ],
         "x": 340,
-        "y": 320,
+        "y": 340,
         "wires": [
             [
                 "b97bd9a51080da68"
@@ -1395,7 +1354,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1395,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "141ebe1a0441a814"
@@ -1421,7 +1380,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1620,
-        "y": 340,
+        "y": 360,
         "wires": []
     },
     {
@@ -1451,7 +1410,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 820,
-        "y": 780,
+        "y": 800,
         "wires": [
             []
         ]
@@ -1483,7 +1442,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 830,
-        "y": 820,
+        "y": 840,
         "wires": [
             []
         ]
@@ -1515,7 +1474,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 800,
-        "y": 860,
+        "y": 880,
         "wires": [
             []
         ]
@@ -1564,7 +1523,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1300,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "1247084c53315208"
@@ -1592,7 +1551,7 @@
         "to": "",
         "reg": false,
         "x": 1490,
-        "y": 340,
+        "y": 360,
         "wires": [
             [
                 "4b8c5bc2b8cf6c4d"
@@ -1636,6 +1595,35 @@
         "wires": []
     },
     {
+        "id": "f22f7a3f371bae96",
+        "type": "change",
+        "z": "95489b12daee74f5",
+        "g": "ee5f9b06bf7efa46",
+        "name": "Trace",
+        "rules": [
+            {
+                "t": "set",
+                "p": "strategy.trace",
+                "pt": "msg",
+                "to": "[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 90,
+        "y": 200,
+        "wires": [
+            [
+                "81b460c063969182"
+            ]
+        ],
+        "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -1650,7 +1638,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "4564c1ec27576964",
+        "id": "0d09c28dab9fd1b9",
         "type": "global-config",
         "env": [],
         "modules": {
