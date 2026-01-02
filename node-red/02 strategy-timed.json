@@ -19,8 +19,8 @@
             "9ce9ba35eda99c46",
             "f0ecfb0d25bf1e0f"
         ],
-        "x": 24,
-        "y": 739,
+        "x": 1214,
+        "y": 419,
         "w": 192,
         "h": 142
     },
@@ -39,12 +39,13 @@
         },
         "nodes": [
             "e2fbefe0a92c8b87",
-            "df3ea4464fdd6253"
+            "df3ea4464fdd6253",
+            "c7a97b8051dfb0c4"
         ],
         "x": 24,
         "y": 79,
         "w": 192,
-        "h": 142
+        "h": 162
     },
     {
         "id": "bf29fe0ee25b592b",
@@ -159,16 +160,13 @@
             "label": true
         },
         "nodes": [
-            "31b352bcf0b5fa22",
             "1ff8dd8a7bb8c098",
-            "4a78e8501fe52d32",
-            "08145a57bee1f1d9",
-            "e3ff5478297e2295"
+            "4a78e8501fe52d32"
         ],
-        "x": 994,
-        "y": 579,
-        "w": 692,
-        "h": 202
+        "x": 984,
+        "y": 419,
+        "w": 192,
+        "h": 142
     },
     {
         "id": "e0ed6822bd47bca9",
@@ -201,13 +199,14 @@
         "g": "130c2473c32bd786",
         "name": "Timed",
         "links": [],
-        "x": 175,
-        "y": 180,
+        "x": 110,
+        "y": 160,
         "wires": [
             [
-                "c669dabc5fa09ae2"
+                "c7a97b8051dfb0c4"
             ]
-        ]
+        ],
+        "l": true
     },
     {
         "id": "7dce7367da5a0686",
@@ -238,8 +237,8 @@
         "name": "Return",
         "mode": "return",
         "links": [],
-        "x": 65,
-        "y": 840,
+        "x": 1255,
+        "y": 520,
         "wires": []
     },
     {
@@ -249,8 +248,8 @@
         "g": "7d5d20208cad641e",
         "name": "End (readme)",
         "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
-        "x": 120,
-        "y": 780,
+        "x": 1310,
+        "y": 460,
         "wires": []
     },
     {
@@ -631,8 +630,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 130,
-        "y": 260,
+        "x": 330,
+        "y": 40,
         "wires": [
             [
                 "c669dabc5fa09ae2"
@@ -928,38 +927,6 @@
         ]
     },
     {
-        "id": "31b352bcf0b5fa22",
-        "type": "api-call-service",
-        "z": "0199f18df097aa8f",
-        "g": "635af4e3e7a252ce",
-        "name": "Active sub strategy text field",
-        "server": "176d29a.6f648d6",
-        "version": 7,
-        "debugenabled": false,
-        "action": "input_text.set_value",
-        "floorId": [],
-        "areaId": [],
-        "deviceId": [],
-        "entityId": [
-            "input_text.house_battery_strategy_active_sub_strategy"
-        ],
-        "labelId": [],
-        "data": "{\"value\": $$.target}",
-        "dataType": "jsonata",
-        "mergeContext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "blockInputOverrides": true,
-        "domain": "input_text",
-        "service": "set_value",
-        "x": 1540,
-        "y": 620,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "1ff8dd8a7bb8c098",
         "type": "link call",
         "z": "0199f18df097aa8f",
@@ -968,8 +935,8 @@
         "links": [],
         "linkType": "dynamic",
         "timeout": "30",
-        "x": 1090,
-        "y": 740,
+        "x": 1080,
+        "y": 520,
         "wires": [
             [
                 "9ce9ba35eda99c46"
@@ -1001,8 +968,7 @@
         "wires": [
             [
                 "1ff8dd8a7bb8c098",
-                "4a78e8501fe52d32",
-                "08145a57bee1f1d9"
+                "4a78e8501fe52d32"
             ]
         ]
     },
@@ -1092,8 +1058,8 @@
         "targetType": "msg",
         "statusVal": "target",
         "statusType": "auto",
-        "x": 1070,
-        "y": 680,
+        "x": 1060,
+        "y": 460,
         "wires": []
     },
     {
@@ -1474,76 +1440,33 @@
         "wires": []
     },
     {
-        "id": "08145a57bee1f1d9",
-        "type": "api-current-state",
+        "id": "c7a97b8051dfb0c4",
+        "type": "change",
         "z": "0199f18df097aa8f",
-        "g": "635af4e3e7a252ce",
-        "name": "sub strategy UI value",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_text.house_battery_strategy_active_sub_strategy",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
+        "g": "130c2473c32bd786",
+        "name": "Trace",
+        "rules": [
             {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "ui_value",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
+                "t": "set",
+                "p": "strategy.trace",
+                "pt": "msg",
+                "to": "[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]",
+                "tot": "jsonata"
             }
         ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 1120,
-        "y": 620,
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 110,
+        "y": 200,
         "wires": [
             [
-                "e3ff5478297e2295"
+                "c669dabc5fa09ae2"
             ]
-        ]
-    },
-    {
-        "id": "e3ff5478297e2295",
-        "type": "function",
-        "z": "0199f18df097aa8f",
-        "g": "635af4e3e7a252ce",
-        "name": "On difference",
-        "func": "// Block when equal\nif(msg.ui_value === msg.target) return null;\n\n// Pass otherwise\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1320,
-        "y": 620,
-        "wires": [
-            [
-                "31b352bcf0b5fa22"
-            ]
-        ]
+        ],
+        "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     },
     {
         "id": "176d29a.6f648d6",
@@ -1560,7 +1483,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "8257ed7a999307c9",
+        "id": "199d9e3c41f403f7",
         "type": "global-config",
         "env": [],
         "modules": {

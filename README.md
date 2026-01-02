@@ -9,6 +9,7 @@ This project is designed for hobbyists who want full control over their home bat
 [![Node-RED](https://img.shields.io/badge/Node--RED-Flow-FF4A00?logo=node-red&logoColor=)](https://nodered.org/) 
 [![Discord](https://img.shields.io/badge/Discord-Join%20server-5865F2?logo=discord&logoColor=white)](https://discord.gg/yeAGaE4kgy) 
 ![Stars](https://img.shields.io/github/stars/gitcodebob/marstek-venus-rs485-node-red)
+[![Buy Us A Battery](https://img.shields.io/badge/Buy%20Us%20A%20Battery-Support-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/home.battery.control)
 
 ## Features
 - **Node-RED Control Flows:** Easy to import and use control flows for battery charge/discharge ([node-red/](node-red/))

@@ -19,8 +19,8 @@
             "45ca4e9b170ae0e4",
             "c855da432b5a589a"
         ],
-        "x": 14,
-        "y": 239,
+        "x": 844,
+        "y": 99,
         "w": 192,
         "h": 142
     },
@@ -34,12 +34,13 @@
         },
         "nodes": [
             "2c4ec860ab1a8f79",
-            "471fda4979e7fc76"
+            "471fda4979e7fc76",
+            "f22f7a3f371bae96"
         ],
         "x": 14,
         "y": 79,
         "w": 192,
-        "h": 142
+        "h": 162
     },
     {
         "id": "9c68fafd28d3b4fc",
@@ -154,24 +155,6 @@
         "h": 82
     },
     {
-        "id": "28a2ae1ba720d063",
-        "type": "group",
-        "z": "95489b12daee74f5",
-        "name": "Update UI: active sub strategy",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "16efd2b03d6dece5",
-            "87e5752435e0ca42",
-            "600f70a08a900d1c"
-        ],
-        "x": 834,
-        "y": 139,
-        "w": 692,
-        "h": 82
-    },
-    {
         "id": "b97bd9a51080da68",
         "type": "junction",
         "z": "95489b12daee74f5",
@@ -194,8 +177,7 @@
         "wires": [
             [
                 "31e4a5e372bcb73f",
-                "8cddc8961385f28e",
-                "87e5752435e0ca42"
+                "8cddc8961385f28e"
             ]
         ]
     },
@@ -206,13 +188,14 @@
         "g": "ee5f9b06bf7efa46",
         "name": "Dynamic",
         "links": [],
-        "x": 165,
-        "y": 180,
+        "x": 100,
+        "y": 160,
         "wires": [
             [
-                "81b460c063969182"
+                "f22f7a3f371bae96"
             ]
-        ]
+        ],
+        "l": true
     },
     {
         "id": "57a9ce1a5a7bb9ef",
@@ -243,8 +226,8 @@
         "name": "Return",
         "mode": "return",
         "links": [],
-        "x": 55,
-        "y": 340,
+        "x": 885,
+        "y": 200,
         "wires": []
     },
     {
@@ -254,8 +237,8 @@
         "g": "ff30c86c22bf31c8",
         "name": "End (readme)",
         "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
-        "x": 110,
-        "y": 280,
+        "x": 940,
+        "y": 140,
         "wires": []
     },
     {
@@ -660,38 +643,6 @@
             [
                 "2b50d9094cb8a9a8"
             ]
-        ]
-    },
-    {
-        "id": "16efd2b03d6dece5",
-        "type": "api-call-service",
-        "z": "95489b12daee74f5",
-        "g": "28a2ae1ba720d063",
-        "name": "Active sub strategy text field",
-        "server": "176d29a.6f648d6",
-        "version": 7,
-        "debugenabled": false,
-        "action": "input_text.set_value",
-        "floorId": [],
-        "areaId": [],
-        "deviceId": [],
-        "entityId": [
-            "input_text.house_battery_strategy_active_sub_strategy"
-        ],
-        "labelId": [],
-        "data": "{\"value\": $$.target}",
-        "dataType": "jsonata",
-        "mergeContext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "blockInputOverrides": true,
-        "domain": "input_text",
-        "service": "set_value",
-        "x": 1380,
-        "y": 180,
-        "wires": [
-            []
         ]
     },
     {
@@ -1644,76 +1595,33 @@
         "wires": []
     },
     {
-        "id": "87e5752435e0ca42",
-        "type": "api-current-state",
+        "id": "f22f7a3f371bae96",
+        "type": "change",
         "z": "95489b12daee74f5",
-        "g": "28a2ae1ba720d063",
-        "name": "sub strategy UI value",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_text.house_battery_strategy_active_sub_strategy",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
+        "g": "ee5f9b06bf7efa46",
+        "name": "Trace",
+        "rules": [
             {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "ui_value",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
+                "t": "set",
+                "p": "strategy.trace",
+                "pt": "msg",
+                "to": "[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]",
+                "tot": "jsonata"
             }
         ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 960,
-        "y": 180,
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 90,
+        "y": 200,
         "wires": [
             [
-                "600f70a08a900d1c"
+                "81b460c063969182"
             ]
-        ]
-    },
-    {
-        "id": "600f70a08a900d1c",
-        "type": "function",
-        "z": "95489b12daee74f5",
-        "g": "28a2ae1ba720d063",
-        "name": "On difference",
-        "func": "// Block when equal\nif(msg.ui_value === msg.target) return null;\n\n// Pass otherwise\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1160,
-        "y": 180,
-        "wires": [
-            [
-                "16efd2b03d6dece5"
-            ]
-        ]
+        ],
+        "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     },
     {
         "id": "176d29a.6f648d6",
@@ -1730,7 +1638,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "9791920358bf2e68",
+        "id": "0d09c28dab9fd1b9",
         "type": "global-config",
         "env": [],
         "modules": {

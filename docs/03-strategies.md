@@ -61,6 +61,8 @@ Forces charging from grid until batteries reach the capacity indicated by the us
 
 **Ideal for:** Preparing for power outages or charging before expensive rate periods.
 
+**🔧 Settings:** [video explainer charge settings](https://www.youtube.com/watch?v=UbeJaRjFK_o&t=193s) (on YouTube)
+
 **Flow:** `02 strategy-charge.json`
 
 ---

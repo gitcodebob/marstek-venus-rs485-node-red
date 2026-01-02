@@ -11,18 +11,19 @@
         "id": "0bd042d837a592d2",
         "type": "group",
         "z": "9c775009242a5a6b",
-        "name": "Configuration",
+        "name": "Strategy start",
         "style": {
             "label": true
         },
         "nodes": [
             "26460a293ad3466a",
-            "fd021c46fa86cb98"
+            "fd021c46fa86cb98",
+            "bf64301cde62c8c3"
         ],
         "x": 14,
         "y": 79,
         "w": 192,
-        "h": 142
+        "h": 162
     },
     {
         "id": "cd31f39c38ae6c21",
@@ -42,37 +43,17 @@
         "h": 142
     },
     {
-        "id": "36d3d713969b2832",
-        "type": "group",
-        "z": "9c775009242a5a6b",
-        "name": "Update UI - active sub-strategy",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "c23de8e8ab568b52",
-            "f322b34904d4944b",
-            "72ce79bf6a03a3d6",
-            "b890d6c270915ce5",
-            "3363b72314098044"
-        ],
-        "x": 474,
-        "y": 259,
-        "w": 1012,
-        "h": 82
-    },
-    {
         "id": "26460a293ad3466a",
         "type": "link in",
         "z": "9c775009242a5a6b",
         "g": "0bd042d837a592d2",
         "name": "Full stop",
         "links": [],
-        "x": 120,
-        "y": 180,
+        "x": 100,
+        "y": 160,
         "wires": [
             [
-                "e8765c8c2f9d4414"
+                "bf64301cde62c8c3"
             ]
         ],
         "l": true
@@ -105,8 +86,7 @@
         "y": 180,
         "wires": [
             [
-                "c1e3cac395f0b1cb",
-                "f322b34904d4944b"
+                "c1e3cac395f0b1cb"
             ]
         ]
     },
@@ -143,200 +123,32 @@
         "wires": []
     },
     {
-        "id": "c23de8e8ab568b52",
-        "type": "api-call-service",
+        "id": "bf64301cde62c8c3",
+        "type": "change",
         "z": "9c775009242a5a6b",
-        "g": "36d3d713969b2832",
-        "name": "Active sub strategy text field",
-        "server": "176d29a.6f648d6",
-        "version": 7,
-        "debugenabled": false,
-        "action": "input_text.set_value",
-        "floorId": [],
-        "areaId": [],
-        "deviceId": [],
-        "entityId": [
-            "input_text.house_battery_strategy_active_sub_strategy"
-        ],
-        "labelId": [],
-        "data": "{\"value\": $$.target}",
-        "dataType": "jsonata",
-        "mergeContext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "blockInputOverrides": true,
-        "domain": "input_text",
-        "service": "set_value",
-        "x": 1340,
-        "y": 300,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "f322b34904d4944b",
-        "type": "api-current-state",
-        "z": "9c775009242a5a6b",
-        "g": "36d3d713969b2832",
-        "name": "User strategy",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_select.house_battery_strategy",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "master_strategy",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 570,
-        "y": 300,
-        "wires": [
-            [
-                "72ce79bf6a03a3d6"
-            ]
-        ]
-    },
-    {
-        "id": "72ce79bf6a03a3d6",
-        "type": "switch",
-        "z": "9c775009242a5a6b",
-        "g": "36d3d713969b2832",
-        "name": "is Full stop",
-        "property": "master_strategy",
-        "propertyType": "msg",
+        "g": "0bd042d837a592d2",
+        "name": "Trace",
         "rules": [
             {
-                "t": "eq",
-                "v": "Full stop",
-                "vt": "str"
+                "t": "set",
+                "p": "strategy.trace",
+                "pt": "msg",
+                "to": "[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]",
+                "tot": "jsonata"
             }
         ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 730,
-        "y": 300,
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 110,
+        "y": 200,
         "wires": [
             [
-                "b890d6c270915ce5"
+                "e8765c8c2f9d4414"
             ]
-        ]
-    },
-    {
-        "id": "b890d6c270915ce5",
-        "type": "api-current-state",
-        "z": "9c775009242a5a6b",
-        "g": "36d3d713969b2832",
-        "name": "sub strategy UI value",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_text.house_battery_strategy_active_sub_strategy",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "ui_value",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            }
         ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 920,
-        "y": 300,
-        "wires": [
-            [
-                "3363b72314098044"
-            ]
-        ]
-    },
-    {
-        "id": "3363b72314098044",
-        "type": "function",
-        "z": "9c775009242a5a6b",
-        "g": "36d3d713969b2832",
-        "name": "On difference",
-        "func": "// This flow is the target flow\nmsg.target = \"Full stop\";\n\n// Block when equal\nif(msg.ui_value === msg.target) return null;\n\n// Pass otherwise\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1120,
-        "y": 300,
-        "wires": [
-            [
-                "c23de8e8ab568b52"
-            ]
-        ]
-    },
-    {
-        "id": "176d29a.6f648d6",
-        "type": "server",
-        "name": "Home Assistant",
-        "addon": true,
-        "rejectUnauthorizedCerts": true,
-        "ha_boolean": "",
-        "connectionDelay": false,
-        "cacheJson": false,
-        "heartbeat": false,
-        "heartbeatInterval": "",
-        "statusSeparator": "",
-        "enableGlobalContextStore": false
-    },
-    {
-        "id": "aa5bceda72af6823",
-        "type": "global-config",
-        "env": [],
-        "modules": {
-            "node-red-contrib-home-assistant-websocket": "0.80.3"
-        }
+        "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     }
 ]

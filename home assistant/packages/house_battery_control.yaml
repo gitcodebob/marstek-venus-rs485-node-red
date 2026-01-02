@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=http://schemas.home-assistant.io/configuration
 # This file contains the core entities of the House Battery Control.
 # It should be included in the main configuration.yaml file as a `package` via `!include_dir_named` https://www.home-assistant.io/docs/configuration/packages/.
 # Replace this file when updating `House Battery Control`.
@@ -25,6 +26,10 @@ input_boolean:
   house_battery_strategy_timed_has_max_power:
     name: Charge at max. power
     icon: mdi:power-plug-battery-outline
+
+  # Debug
+  house_battery_control_is_debug_mode:
+    name: Debug mode
 
 ###########################################################################################################
 # DATETIME
@@ -572,6 +577,19 @@ template:
         delay_off:
           seconds: 5
 
+  - trigger:
+      - platform: event
+        event_type: "update_trace_sensor"
+    sensor:
+      - name: "Node-RED Trace"
+        unique_id: nodered_trace_sensor
+        state: >
+          {{ trigger.event.data.last_step | default('Idle') }}
+        attributes:
+          history: >
+            {{ trigger.event.data.trace | default([]) }}
+          last_updated: "{{ now() }}"
+
 ###########################################################################################################
 # RECORDER - LOGBOOK FILTERING
 ###########################################################################################################
@@ -579,6 +597,8 @@ template:
 # History graphs and statistics remain unaffected.
 recorder:
   exclude:
+    entities:
+      - sensor.node_red_trace
     entity_globs:
       # PID control signals (updated every 2-40 seconds during operation)
       - input_number.house_battery_control_*_term

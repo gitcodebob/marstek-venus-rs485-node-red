@@ -3,7 +3,7 @@ views:
     path: home-battery-control
     max_columns: 3
     title: Home battery control
-    icon: mdi:home-battery-outline
+    icon: mdi:home
     sections:
       - type: grid
         cards:
@@ -191,7 +191,13 @@ views:
               - condition: state
                 entity: input_select.marstek_master_battery_mode
                 state: Full control
-            hours_to_show: 8
+            hours_to_show: 12
+          - type: markdown
+            content: |-
+              <font color="grey">
+
+              #### Your energy and battery usage</font>
+            text_only: true
           - type: history-graph
             entities:
               - entity: input_number.house_battery_control_pid_output
@@ -207,42 +213,6 @@ views:
               - entity: select.marstek_m4_forcible_charge_discharge
                 name: M4
             hours_to_show: 0.05
-          - type: markdown
-            content: '### Settings'
-            text_only: true
-          - type: heading
-            icon: mdi:information
-            heading: Charge this battery first
-            heading_style: subtitle
-            tap_action:
-              action: url
-              url_path: >-
-                https://github.com/gitcodebob/marstek-venus-rs485-node-red/blob/main/README.md#advanced-features
-          - show_name: true
-            show_icon: true
-            show_state: true
-            type: glance
-            entities:
-              - entity: input_number.house_battery_control_prioritize_battery
-                name: 'Battery #'
-              - entity: input_select.house_battery_control_priority_change_interval
-            state_color: false
-            columns: 3
-          - type: heading
-            icon: mdi:information
-            heading: Battery life improvement
-            heading_style: subtitle
-            tap_action:
-              action: url
-              url_path: >-
-                https://github.com/gitcodebob/marstek-venus-rs485-node-red?tab=readme-ov-file#battery-life
-          - type: entities
-            entities:
-              - entity: input_number.house_battery_control_idle_time
-                name: Stop after Idle for
-              - entity: input_number.house_battery_control_hysteresis_in_w
-                name: 'Hysteresis '
-                secondary_info: none
           - type: heading
             icon: mdi:information
             heading: Self-consumption
@@ -424,10 +394,215 @@ views:
     header:
       card:
         type: markdown
-        content: |-
-          # Home batteries
-          Configuration and settings (v3.5.8)
+        content: '### Home Battery Control *(v4.0.0)*'
         text_only: true
+    cards: []
+  - type: sections
+    max_columns: 3
+    icon: mdi:transmission-tower-off
+    path: ''
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: PID controller (advanced settings)
+            heading_style: title
+            icon: mdi:cog-box
+          - type: markdown
+            content: >-
+              <font color="grey"><i>These settings tune how aggressive the
+              system tries to keep the grid power at the desired power level.
+              Too aggressive is unstable! Too safe  will toss efficiency. This
+              PID control can outperform Vendor made software by a great margin,
+              according to community feedback.
+
+              </i></font>
+            text_only: true
+          - type: heading
+            icon: mdi:information
+            heading: Help | setup and tuning PID control
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://gitcodebob.github.io/marstek-venus-rs485-node-red/04-setup-self-consumption.html
+          - type: markdown
+            content: >-
+              <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> High
+              values - monitor your system</font>, use at your own risk.
+            visibility:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_kp
+                    above: 0.5
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_ki
+                    above: 0.5
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_kd
+                    above: 0.5
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_error_signal_dampening
+                    above: 70
+                    below: 0
+                  - condition: numeric_state
+                    entity: input_number.house_battery_control_pid_output_dampening
+                    above: 50
+            text_only: true
+          - type: entities
+            entities:
+              - entity: input_select.house_battery_control_pid_presets
+                name: PID presets
+              - entity: input_number.house_battery_control_kp
+                name: Proportional gain (Kp)
+              - entity: input_number.house_battery_control_ki
+                name: Integral gain (Ki)
+              - entity: input_number.house_battery_control_kd
+                name: Differential gain (Kd)
+              - entity: input_number.house_battery_control_error_signal_dampening
+                name: Input smoothing
+                secondary_info: none
+              - entity: input_number.house_battery_control_pid_output_dampening
+                name: Output smoothing
+              - entity: input_number.house_target_grid_consumption_in_w
+                name: Target grid consumption
+      - type: grid
+        cards:
+          - type: heading
+            heading: PID history
+            heading_style: title
+            icon: mdi:cog-box
+          - type: markdown
+            content: >-
+              <font color="grey"><i>Use **PID History** for tuning. It shows the
+              internal controller values:
+
+
+              * **Input (W):** Grid power error (Current vs. Desired)
+
+              * **Output (W):** Target battery power
+
+              * **Output (W):** P-term + I-term + D-term
+
+
+              </i></font>
+            text_only: true
+            grid_options:
+              columns: full
+          - title: PID analysis
+            type: history-graph
+            entities:
+              - entity: input_number.house_battery_control_pid_output
+                name: PID output
+              - entity: sensor.p1_meter_power
+                name: Grid power
+              - entity: input_number.house_battery_control_error_signal
+                name: PID input
+              - entity: input_number.house_battery_control_p_term
+                name: P-term
+              - entity: input_number.house_battery_control_i_term
+                name: I-term
+              - entity: input_number.house_battery_control_d_term
+                name: D-term
+            grid_options:
+              columns: full
+            hours_to_show: 0.1
+        column_span: 2
+    title: Self-consumption
+    cards: []
+    badges:
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_select.house_battery_strategy
+        name: Choose strategy
+        tap_action:
+          action: more-info
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_text.house_battery_strategy_active_sub_strategy
+        show_entity_picture: false
+        name: Executing
+    header:
+      layout: center
+      badges_position: top
+      badges_wrap: scroll
+      card:
+        type: markdown
+        content: >-
+          ### Self-consumption strategy (NoM)
+
+          The **PID controller** steers your batteries to keep grid usage near
+          target, _e.g. 0 Watt_, and is used by: 
+
+          _Self-consumption, Charge PV, Charge (regulated), Peak shaving and
+          more..._
+        text_only: true
+  - type: sections
+    max_columns: 4
+    title: Charge/Sell
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Charge strategy
+            heading_style: title
+            icon: mdi:battery-charging-80
+          - type: heading
+            icon: mdi:information-slab-circle
+            heading: Settings documentation
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://gitcodebob.github.io/marstek-venus-rs485-node-red/03-strategies.html#charge-from-grid
+          - type: entities
+            entities:
+              - entity: input_number.house_battery_strategy_timed_target_energy
+                name: Target energy reserve
+              - entity: input_boolean.house_battery_strategy_timed_has_max_power
+              - type: conditional
+                conditions:
+                  - entity: input_boolean.house_battery_strategy_timed_has_max_power
+                    state: 'off'
+                row:
+                  type: input-number-entity
+                  entity: input_number.house_battery_strategy_timed_target_power
+                  name: Target grid consumption
+                  icon: mdi:home-import-outline
+          - type: markdown
+            content: >-
+              <font color=grey>_Target energy reserve = desired  usable energy
+              in your batteries (e.g. above 12% SoC)_
+
+              </font>
+            text_only: true
+    icon: mdi:transmission-tower-export
+    cards: []
+    badges:
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_select.house_battery_strategy
+        name: Choose strategy
+        tap_action:
+          action: more-info
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_text.house_battery_strategy_active_sub_strategy
+        show_entity_picture: false
+        name: Executing
+    header:
+      layout: center
+      badges_position: top
+      badges_wrap: scroll
   - type: sections
     max_columns: 3
     title: Timed/Dynamic
@@ -438,10 +613,30 @@ views:
           - type: heading
             heading: Timed strategy
             heading_style: title
+          - type: heading
+            icon: mdi:youtube
+            heading: Using the timed strategy
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: https://youtu.be/UbeJaRjFK_o?t=53s
           - type: entities
             entities:
               - entity: input_select.house_battery_strategy_timed_strat_0
                 name: Default strategy
+            grid_options:
+              columns: 9
+              rows: auto
+          - clock_style: digital
+            clock_size: small
+            show_seconds: false
+            no_background: true
+            type: clock
+            grid_options:
+              columns: 3
+              rows: 1
+            title: Time
+            face_style: markers
           - type: entities
             entities:
               - entity: input_datetime.house_battery_strategy_timed_period_a1
@@ -539,92 +734,6 @@ views:
             tap_action:
               action: toggle
             features_position: bottom
-      - type: grid
-        cards:
-          - type: heading
-            heading: Settings
-            heading_style: title
-          - type: entities
-            entities:
-              - entity: input_text.house_battery_strategy_active_sub_strategy
-                type: simple-entity
-                name: Active strategy
-            grid_options:
-              columns: 9
-              rows: auto
-            show_header_toggle: false
-            state_color: false
-            no_background: true
-          - clock_style: digital
-            clock_size: small
-            show_seconds: false
-            no_background: true
-            type: clock
-            grid_options:
-              columns: 3
-              rows: 1
-            title: Time
-            face_style: markers
-          - type: markdown
-            content: '#### Charge'
-            text_only: true
-          - type: entities
-            entities:
-              - entity: input_number.house_battery_strategy_timed_target_energy
-                name: Target energy reserve
-              - entity: input_boolean.house_battery_strategy_timed_has_max_power
-              - type: conditional
-                conditions:
-                  - entity: input_boolean.house_battery_strategy_timed_has_max_power
-                    state: 'off'
-                row:
-                  type: input-number-entity
-                  entity: input_number.house_battery_strategy_timed_target_power
-                  name: Target grid consumption
-                  icon: mdi:home-import-outline
-          - type: markdown
-            content: >-
-              <font color=grey>*) _Usable energy reserve, excl. 12% cut-off
-              SoC_</font>
-            text_only: true
-          - type: markdown
-            content: '#### Self-consumption'
-            text_only: true
-          - type: markdown
-            content: >-
-              <font color=orange><ha-icon icon="mdi:alert"></ha-icon> High
-              sensitivity - monitor your system</font>, use at your own risk.
-            visibility:
-              - condition: or
-                conditions:
-                  - condition: numeric_state
-                    entity: input_number.house_battery_control_kp
-                    above: 0.5
-                  - condition: numeric_state
-                    entity: input_number.house_battery_control_ki
-                    above: 0.5
-                  - condition: numeric_state
-                    entity: input_number.house_battery_control_kd
-                    above: 0.5
-                  - condition: numeric_state
-                    entity: input_number.house_battery_control_error_signal_dampening
-                    above: 70
-                    below: 0
-                  - condition: numeric_state
-                    entity: input_number.house_battery_control_pid_output_dampening
-                    above: 50
-            text_only: true
-          - type: entities
-            entities:
-              - entity: input_select.house_battery_control_pid_presets
-                name: Controller sensitivity
-          - type: heading
-            icon: ''
-            heading: Configure custom settings
-            heading_style: subtitle
-            tap_action:
-              action: navigate
-              navigation_path: /home-battery/advanced-settings
       - type: grid
         cards:
           - type: heading
@@ -772,6 +881,26 @@ views:
               1. _Note: currently it is not possible to change the strategy per
               period via this dashboard_
     cards: []
+    badges:
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_select.house_battery_strategy
+        name: Choose strategy
+        tap_action:
+          action: more-info
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_text.house_battery_strategy_active_sub_strategy
+        show_entity_picture: false
+        name: Executing
+    header:
+      layout: center
+      badges_position: top
+      badges_wrap: scroll
   - type: sections
     max_columns: 3
     title: Advanced settings
@@ -781,83 +910,51 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: PID controller (advanced settings)
+            heading: General
             heading_style: title
-            icon: mdi:cog-box
-          - type: markdown
-            content: >-
-              <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> High
-              values - monitor your system</font>, use at your own risk.
-            visibility:
-              - condition: or
-                conditions:
-                  - condition: numeric_state
-                    entity: input_number.house_battery_control_kp
-                    above: 0.5
-                  - condition: numeric_state
-                    entity: input_number.house_battery_control_ki
-                    above: 0.5
-                  - condition: numeric_state
-                    entity: input_number.house_battery_control_kd
-                    above: 0.5
-                  - condition: numeric_state
-                    entity: input_number.house_battery_control_error_signal_dampening
-                    above: 70
-                    below: 0
-                  - condition: numeric_state
-                    entity: input_number.house_battery_control_pid_output_dampening
-                    above: 50
-            text_only: true
+            icon: mdi:home
           - type: entities
             entities:
-              - entity: input_select.house_battery_control_pid_presets
-                name: PID presets
-              - entity: input_number.house_battery_control_kp
-                name: Proportional gain (Kp)
-              - entity: input_number.house_battery_control_ki
-                name: Integral gain (Ki)
-              - entity: input_number.house_battery_control_kd
-                name: Differential gain (Kd)
-              - entity: input_number.house_battery_control_error_signal_dampening
-                name: Input smoothing
-                secondary_info: none
-              - entity: input_number.house_battery_control_pid_output_dampening
-                name: Output smoothing
-              - entity: input_number.house_target_grid_consumption_in_w
-                name: Target grid consumption
+              - entity: input_number.house_battery_count
+      - type: grid
+        cards:
+          - type: heading
+            heading: Battery life
+            heading_style: title
+            icon: mdi:medication
           - type: heading
             icon: mdi:information
-            heading: Help | setup and tuning PID control
+            heading: Cycle which battery to charge first
             heading_style: subtitle
             tap_action:
               action: url
               url_path: >-
-                https://github.com/gitcodebob/marstek-venus-rs485-node-red?tab=readme-ov-file#operation-and-tuning-minimal
-      - type: grid
-        cards:
-          - type: heading
-            heading: PID history
-            heading_style: title
-            icon: mdi:cog-box
-          - title: PID analysis
-            type: history-graph
+                https://github.com/gitcodebob/marstek-venus-rs485-node-red/blob/main/README.md#advanced-features
+          - show_name: true
+            show_icon: true
+            show_state: true
+            type: glance
             entities:
-              - entity: input_number.house_battery_control_pid_output
-                name: PID sum
-              - entity: sensor.p1_meter_power
-                name: Grid power
-              - entity: input_number.house_battery_control_error_signal
-                name: Error
-              - entity: input_number.house_battery_control_p_term
-                name: P-term
-              - entity: input_number.house_battery_control_i_term
-                name: I-term
-              - entity: input_number.house_battery_control_d_term
-                name: D-term
-            grid_options:
-              columns: full
-            hours_to_show: 0.1
-        column_span: 2
+              - entity: input_number.house_battery_control_prioritize_battery
+                name: 'Battery #'
+              - entity: input_select.house_battery_control_priority_change_interval
+            state_color: false
+            columns: 3
+          - type: heading
+            icon: mdi:information
+            heading: Optimize stop and go behavior
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://github.com/gitcodebob/marstek-venus-rs485-node-red?tab=readme-ov-file#battery-life
+          - type: entities
+            entities:
+              - entity: input_number.house_battery_control_idle_time
+                name: Stop after Idle for
+              - entity: input_number.house_battery_control_hysteresis_in_w
+                name: 'Hysteresis '
+                secondary_info: none
       - type: grid
         cards:
           - type: heading
@@ -894,4 +991,91 @@ views:
               an all stop has been triggered. Stop trigger 'on' = batteries
               'Full stop'.</font>
             text_only: true
+    cards: []
+    badges:
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_select.house_battery_strategy
+        name: Choose strategy
+        tap_action:
+          action: more-info
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_text.house_battery_strategy_active_sub_strategy
+        show_entity_picture: false
+        name: Executing
+    header:
+      layout: center
+      badges_position: top
+      badges_wrap: scroll
+  - type: sections
+    max_columns: 4
+    icon: mdi:spider-outline
+    path: ''
+    background:
+      opacity: 10
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: fixed
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Node-RED
+            heading_style: title
+          - type: markdown
+            title: 🕵️ Flow trace
+            content: |-
+              **Strategy:** {{ states('input_select.house_battery_strategy')}}
+              ***
+              Flows used
+              | Step | Flow | Time |
+              | :--- | :--- | :--- |
+              | 0 | Home battery start |  |
+                {% for entry in state_attr('sensor.node_red_trace', 'history') -%}
+                {%- set ts = entry.timestamp -%}
+                {%- set time_ms = ts.split('T')[1].split('Z')[0] if 'T' in ts else ts -%}
+                | {{ loop.index }} | {{ entry.flow }} | {{ time_ms[:12] }} |
+                {% endfor %}| ✔️ | Home battery start |  |
+    header:
+      card:
+        type: markdown
+        text_only: true
+        content: |-
+          # Debug
+          Need help figuring out what is going on? 
+          Hit **Debug mode**. _Auto-off after 5min._
+      layout: center
+      badges_position: top
+      badges_wrap: scroll
+    badges:
+      - type: entity
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: input_boolean.house_battery_control_is_debug_mode
+        tap_action:
+          action: toggle
+        name:
+          type: entity
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_select.house_battery_strategy
+        name: Choose strategy
+        tap_action:
+          action: more-info
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_text.house_battery_strategy_active_sub_strategy
+        show_entity_picture: false
+        name: Executing
     cards: []

@@ -17,12 +17,13 @@
         },
         "nodes": [
             "62fe191e903de8b2",
-            "3c519efd38a22bf5"
+            "3c519efd38a22bf5",
+            "c4771a0356fa5983"
         ],
         "x": 34,
         "y": 79,
         "w": 192,
-        "h": 142
+        "h": 162
     },
     {
         "id": "843e88284fbc94bf",
@@ -114,26 +115,6 @@
         "h": 82
     },
     {
-        "id": "50913cc784b36803",
-        "type": "group",
-        "z": "517b5f5313a242c5",
-        "name": "Update UI - active sub-strategy",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "9421868a18b49122",
-            "4be8af1b84064f71",
-            "639f30448513315c",
-            "db167c26a387f791",
-            "be7ea7d80408d0b2"
-        ],
-        "x": 254,
-        "y": 439,
-        "w": 992,
-        "h": 82
-    },
-    {
         "id": "25349ae9d88ba324",
         "type": "junction",
         "z": "517b5f5313a242c5",
@@ -141,8 +122,7 @@
         "y": 400,
         "wires": [
             [
-                "b5bd859bd4a37c5a",
-                "4be8af1b84064f71"
+                "b5bd859bd4a37c5a"
             ]
         ]
     },
@@ -184,13 +164,14 @@
         "g": "1df1a3a3dcbc7925",
         "name": "Charge",
         "links": [],
-        "x": 185,
-        "y": 180,
+        "x": 110,
+        "y": 200,
         "wires": [
             [
-                "975b518a9af0ba5e"
+                "c4771a0356fa5983"
             ]
-        ]
+        ],
+        "l": true
     },
     {
         "id": "3c519efd38a22bf5",
@@ -658,38 +639,6 @@
         ]
     },
     {
-        "id": "9421868a18b49122",
-        "type": "api-call-service",
-        "z": "517b5f5313a242c5",
-        "g": "50913cc784b36803",
-        "name": "Active sub strategy text field",
-        "server": "176d29a.6f648d6",
-        "version": 7,
-        "debugenabled": false,
-        "action": "input_text.set_value",
-        "floorId": [],
-        "areaId": [],
-        "deviceId": [],
-        "entityId": [
-            "input_text.house_battery_strategy_active_sub_strategy"
-        ],
-        "labelId": [],
-        "data": "{\"value\": $$.target}",
-        "dataType": "jsonata",
-        "mergeContext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "blockInputOverrides": true,
-        "domain": "input_text",
-        "service": "set_value",
-        "x": 1100,
-        "y": 480,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "c62978a7d936dfba",
         "type": "change",
         "z": "517b5f5313a242c5",
@@ -719,147 +668,33 @@
         ]
     },
     {
-        "id": "639f30448513315c",
-        "type": "switch",
+        "id": "c4771a0356fa5983",
+        "type": "change",
         "z": "517b5f5313a242c5",
-        "g": "50913cc784b36803",
-        "name": "is Charge",
-        "property": "master_strategy",
-        "propertyType": "msg",
+        "g": "1df1a3a3dcbc7925",
+        "name": "Trace",
         "rules": [
             {
-                "t": "eq",
-                "v": "Charge",
-                "vt": "str"
+                "t": "set",
+                "p": "strategy.trace",
+                "pt": "msg",
+                "to": "[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]",
+                "tot": "jsonata"
             }
         ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 500,
-        "y": 480,
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 110,
+        "y": 160,
         "wires": [
             [
-                "db167c26a387f791"
+                "975b518a9af0ba5e"
             ]
-        ]
-    },
-    {
-        "id": "4be8af1b84064f71",
-        "type": "api-current-state",
-        "z": "517b5f5313a242c5",
-        "g": "50913cc784b36803",
-        "name": "User strategy",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_select.house_battery_strategy",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "master_strategy",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            }
         ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 350,
-        "y": 480,
-        "wires": [
-            [
-                "639f30448513315c"
-            ]
-        ]
-    },
-    {
-        "id": "db167c26a387f791",
-        "type": "api-current-state",
-        "z": "517b5f5313a242c5",
-        "g": "50913cc784b36803",
-        "name": "sub strategy UI value",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_text.house_battery_strategy_active_sub_strategy",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "ui_value",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 680,
-        "y": 480,
-        "wires": [
-            [
-                "be7ea7d80408d0b2"
-            ]
-        ]
-    },
-    {
-        "id": "be7ea7d80408d0b2",
-        "type": "function",
-        "z": "517b5f5313a242c5",
-        "g": "50913cc784b36803",
-        "name": "On difference",
-        "func": "// Block when equal\nif(msg.ui_value === msg.target) return null;\n\n// Pass otherwise\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 880,
-        "y": 480,
-        "wires": [
-            [
-                "9421868a18b49122"
-            ]
-        ]
+        "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     },
     {
         "id": "176d29a.6f648d6",
@@ -876,7 +711,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "5f717a9a82287f28",
+        "id": "4ffaa0c08f8739b4",
         "type": "global-config",
         "env": [],
         "modules": {
