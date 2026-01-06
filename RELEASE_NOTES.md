@@ -14,6 +14,10 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
   * **Clearer errors/warnings** - When *expected errors* occur, the log explains exactly what's wrong and which flow/node encountered the problem
   * **Cleaner logbook** - Debug sensors are excluded from Home Assistant's main logbook to prevent clutter while still being accessible in the Debug dashboard
 
+- **Tweaks and fixes**
+  * Dynamic Strategy only looks at today by default. (Switches over at midnight.)
+  * Examples `node-red/examples` have been updated for v4 layout
+
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
   - `home assistant/packages/house_battery_control.yaml`
