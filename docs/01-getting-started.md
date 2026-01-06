@@ -49,7 +49,7 @@
    - In Home Assistant import `dashboard.yaml` to create a dashboard.
    - Follow the **additional guidance** on this interactive dashboard.
       1. Set your desired number of batteries (the system can handle any number of batteries, but the dash is designed for max. 4)
-      1. Set your P1 sensor (`template_sensors\template_sensor_house_battery_control.yaml`)
+      1. Set your P1 sensor (`/packages/house_battery_control_config.yaml`)
       1. Import NR flows, see instructions below.
 
 1. **Import Node-RED Flows**

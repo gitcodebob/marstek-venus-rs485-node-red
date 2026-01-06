@@ -902,7 +902,7 @@ views:
       badges_position: top
       badges_wrap: scroll
   - type: sections
-    max_columns: 4
+    max_columns: 3
     icon: mdi:spider-outline
     path: ''
     background:
@@ -1001,10 +1001,15 @@ views:
       card:
         type: markdown
         text_only: true
-        content: |-
-          # Debug
+        content: >-
+          ### Debug
+
           Need help figuring out what is going on? 
+
           Hit **Debug mode**. _Auto-off after 5min._
+
+          📘 [Troubleshooting
+          documentation](https://gitcodebob.github.io/marstek-venus-rs485-node-red/07-troubleshooting.html)
       layout: center
       badges_position: top
       badges_wrap: scroll

@@ -36,7 +36,8 @@
   - Note: the SET MODE action nodes have proven unreliable, for _safety reasons_ the `On Change` RBE has been left out.
 
 ## Multi-Battery Management
-- **Easy Battery Addition/Removal:** only the `Home Battery Start` flow requires editing to add/remove batteries. Strategy execution should remain unaltered.
+- **More than 4 batteries:** Override or change `input_number.house_battery_count` and you are good to go.
+  - The dashboard supports 4 batteries out of the box, duplicate and edit these or create your own dashboard.
 - **3-Phase self-consumption:** if you require 0 W grid consumption on a per phase basis, the setup changes slightly. 
       
       Note: most homes get billed for the net total of all phases. If that is the case for you as well, ignore these instructions.

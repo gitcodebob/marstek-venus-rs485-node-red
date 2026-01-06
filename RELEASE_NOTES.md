@@ -3,18 +3,16 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
 
 ## 4.0.0
 - **Feat: Add visual flow execution tracking and detailed logging to dashboard**
-  - Visual flow execution tracking
-  - Execution time transparency
-  - Detailed explanations in plain language
-  - Troubleshooting made easy
-  - Battery operation clarity
-  - Strategy switching transparency
-  - Auto-disable safety feature
-  - Timestamp precision
-  - Performance insights
-  - Reduced confusion during issues
-  - Strategy validation feedback
-  - Cleaner logbook
+  * **Visual flow execution tracking** - You can now see which strategy flows your system executed and in what order, helping you understand the decision-making process in real-time
+  * **Execution time transparency** - Each flow step displays its duration in seconds, allowing you to identify if any part of your system is running slower than expected
+  * **Performance insights** - The "Total" execution time at the bottom of the trace shows you how long your entire battery control cycle takes, helping to identify fitting rate limits
+  * **Detailed explanations in plain language** - The system now logs human-readable explanations of what it's doing, color-coded by severity (info=teal, log=green, warn=orange, error=red), with emoji indicators for quick scanning
+  * **Troubleshooting made easy** - When something isn't working as expected, you can toggle Debug Mode on to see up to 100 detailed log entries showing what decisions the system made and why
+  * **Battery operation clarity** - Specific logs explain why each battery was charged, discharged, skipped, or stopped, including SoC percentages and power levels
+  * **Strategy switching transparency** - You can now see why the system switched between strategies (e.g., from default to expensive period) with tariff comparisons and price deltas
+  * **Auto-disable safety feature** - Debug mode automatically turns off after 5 minutes to prevent performance degradation from excessive logging
+  * **Clearer errors/warnings** - When *expected errors* occur, the log explains exactly what's wrong and which flow/node encountered the problem
+  * **Cleaner logbook** - Debug sensors are excluded from Home Assistant's main logbook to prevent clutter while still being accessible in the Debug dashboard
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
@@ -27,7 +25,7 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
   - `node-red/02 strategy-self-consumption.json`
   - `node-red/02 strategy-timed.json`
 
-## 4.0.0 RC1
+## 4.0.0 - Release candidate 1
 - **Feat: Improved system insight and documentation**
   - Improved dashboard layout with better configuration guidance
   - Show active sub-strategy on home tab and all strategy tabs
