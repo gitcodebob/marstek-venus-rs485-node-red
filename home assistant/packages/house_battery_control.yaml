@@ -419,6 +419,7 @@ input_select:
       - Self-consumption # Use your own solar production. Don't buy or sell. Target grid consumption = 0, e.g. "Nul op de meter (NoM)" in Dutch.
       - Timed # Configure which strategy should be active during given periods of the day.
       - Dynamic # Requires a dynamic tariff contract and the Cheapest Hours HACS add-on
+      - Charge # Uses self-consumption strategy with smart settings and target grid consumption > 0
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
     icon: mdi:home-battery
 
@@ -581,14 +582,25 @@ template:
       - platform: event
         event_type: "update_trace_sensor"
     sensor:
-      - name: "Node-RED Trace"
-        unique_id: nodered_trace_sensor
+      - name: "Home battery control Trace"
+        unique_id: home_battery_control_trace_sensor
         state: >
-          {{ trigger.event.data.last_step | default('Idle') }}
+          {{ now() | default('Idle') }}
         attributes:
+          start: "{{ trigger.event.data.start | default('Unknown') }}"
+          end: "{{ trigger.event.data.end | default('Unknown') }}"
           history: >
             {{ trigger.event.data.trace | default([]) }}
           last_updated: "{{ now() }}"
+
+      - name: "Home battery control Log"
+        unique_id: home_battery_control_log_sensor
+        # State is the last message in the log
+        state: >
+          {% set logs = trigger.event.data.log | default([]) %}
+          {{ logs[-1] if logs | length > 0 else 'No logs' }}
+        attributes:
+          log: "{{ trigger.event.data.log | default([]) }}"
 
 ###########################################################################################################
 # RECORDER - LOGBOOK FILTERING
@@ -598,7 +610,9 @@ template:
 recorder:
   exclude:
     entities:
-      - sensor.node_red_trace
+      # Debug sensors (updated frequently when debug mode is active)
+      - sensor.home_battery_control_trace
+      - sensor.home_battery_control_log
     entity_globs:
       # PID control signals (updated every 2-40 seconds during operation)
       - input_number.house_battery_control_*_term

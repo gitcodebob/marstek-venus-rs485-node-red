@@ -8,7 +8,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Configuration
+            heading: Onboarding
             heading_style: title
             icon: mdi:cog-outline
           - type: markdown
@@ -902,6 +902,139 @@ views:
       badges_position: top
       badges_wrap: scroll
   - type: sections
+    max_columns: 4
+    icon: mdi:spider-outline
+    path: ''
+    background:
+      opacity: 10
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: fixed
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Node-RED
+            heading_style: title
+          - type: heading
+            icon: mdi:list-status
+            heading: 🕵️ Flow trace
+            heading_style: subtitle
+          - type: markdown
+            content: >-
+              **Strategy:** {{ states('input_select.house_battery_strategy')}}
+
+              ***
+
+              {% set history = state_attr('sensor.home_battery_control_trace',
+              'history') or [] %} {% set start_ts =
+              state_attr('sensor.home_battery_control_trace', 'start') %} {% set
+              end_ts = state_attr('sensor.home_battery_control_trace', 'end') %}
+              {% set start_dt = (start_ts / 1000) | as_datetime if start_ts is
+              number else as_datetime(start_ts) %} {% set end_dt = (end_ts /
+              1000) | as_datetime if end_ts is number else as_datetime(end_ts)
+              %} {% set total_dt = (end_dt - start_dt).total_seconds() if end_dt
+              and start_dt else 0 %}
+
+              Flows used
+
+              | Step | Flow | Duration |
+
+              | :--- | :--- | :--- |
+
+              {% set first_ts = history[0].timestamp if history|length > 0 else
+              end_ts %} {% set first_dt = (first_ts / 1000) | as_datetime if
+              first_ts is number else as_datetime(first_ts) %} {% set d0 =
+              (first_dt - start_dt).total_seconds() if first_dt and start_dt
+              else 0 %} | 0 | Home battery start | `{{ "{:.3f}".format(d0) }}s`
+              |
+
+              {% for entry in history -%}
+                {%- set ts = entry.timestamp -%}
+                {%- set current_dt = (ts / 1000) | as_datetime if ts is number else as_datetime(ts) -%}
+                {%- if not loop.last -%}
+                  {%- set next_ts = history[loop.index].timestamp -%}
+                {%- else -%}
+                  {%- set next_ts = end_ts -%}
+                {%- endif -%}    
+                {%- set next_dt = (next_ts / 1000) | as_datetime if next_ts is number else as_datetime(next_ts) -%}
+                {%- set delta = (next_dt - current_dt).total_seconds() if next_dt and current_dt else 0 -%}
+                | {{ loop.index }} | {{ entry.flow }} | `{{ "{:.3f}".format(delta) }}s` |
+              {% endfor %} | ✔️ | Home Battery Start | `Done` |
+
+
+              **Total `{{ "{:.3f}".format(total_dt) }}s`** spent in strategy
+              flows
+      - type: grid
+        cards:
+          - type: heading
+            heading: Insight
+            heading_style: title
+          - type: heading
+            icon: mdi:list-box-outline
+            heading: 📋 Explenations (last 100 items)
+            heading_style: subtitle
+          - type: markdown
+            content: >
+              {% set logs = state_attr('sensor.home_battery_control_log', 'log')
+              %}  {% if logs %}
+
+              | Time |  | Flow | Node | Explenation |
+
+              | :--- | :--- | :--- | :--- | :--- |
+                {%- for entry in logs %}
+                {%- set color = '#009ac7' -%}
+                {%- if entry.level == 'log' %}{% set color = '#38cd9e' -%}
+                {%- elif entry.level == 'warn' %}{% set color = 'orange' -%}
+                {%- elif entry.level == 'error' %}{% set color = 'red' -%}
+                {%- endif %}
+                | {{ entry.timestamp }} | {{ entry.icon }} |<font color="{{color}}">{{ entry.flow }}</font> | {{ entry.node }} |{{ entry.payload }} |
+                {%- endfor %}
+              {% else %}
+                No logs available
+              {% endif %}
+            grid_options:
+              columns: full
+        column_span: 2
+    header:
+      card:
+        type: markdown
+        text_only: true
+        content: |-
+          # Debug
+          Need help figuring out what is going on? 
+          Hit **Debug mode**. _Auto-off after 5min._
+      layout: center
+      badges_position: top
+      badges_wrap: scroll
+    badges:
+      - type: entity
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: input_boolean.house_battery_control_is_debug_mode
+        tap_action:
+          action: toggle
+        name:
+          type: entity
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_select.house_battery_strategy
+        name: Choose strategy
+        tap_action:
+          action: more-info
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_text.house_battery_strategy_active_sub_strategy
+        show_entity_picture: false
+        name: Executing
+    cards: []
+  - type: sections
     max_columns: 3
     title: Advanced settings
     path: advanced-settings
@@ -1012,70 +1145,3 @@ views:
       layout: center
       badges_position: top
       badges_wrap: scroll
-  - type: sections
-    max_columns: 4
-    icon: mdi:spider-outline
-    path: ''
-    background:
-      opacity: 10
-      alignment: center
-      size: cover
-      repeat: repeat
-      attachment: fixed
-    sections:
-      - type: grid
-        cards:
-          - type: heading
-            heading: Node-RED
-            heading_style: title
-          - type: markdown
-            title: 🕵️ Flow trace
-            content: |-
-              **Strategy:** {{ states('input_select.house_battery_strategy')}}
-              ***
-              Flows used
-              | Step | Flow | Time |
-              | :--- | :--- | :--- |
-              | 0 | Home battery start |  |
-                {% for entry in state_attr('sensor.node_red_trace', 'history') -%}
-                {%- set ts = entry.timestamp -%}
-                {%- set time_ms = ts.split('T')[1].split('Z')[0] if 'T' in ts else ts -%}
-                | {{ loop.index }} | {{ entry.flow }} | {{ time_ms[:12] }} |
-                {% endfor %}| ✔️ | Home battery start |  |
-    header:
-      card:
-        type: markdown
-        text_only: true
-        content: |-
-          # Debug
-          Need help figuring out what is going on? 
-          Hit **Debug mode**. _Auto-off after 5min._
-      layout: center
-      badges_position: top
-      badges_wrap: scroll
-    badges:
-      - type: entity
-        show_name: true
-        show_state: false
-        show_icon: true
-        entity: input_boolean.house_battery_control_is_debug_mode
-        tap_action:
-          action: toggle
-        name:
-          type: entity
-      - type: entity
-        show_name: true
-        show_state: true
-        show_icon: true
-        entity: input_select.house_battery_strategy
-        name: Choose strategy
-        tap_action:
-          action: more-info
-      - type: entity
-        show_name: true
-        show_state: true
-        show_icon: true
-        entity: input_text.house_battery_strategy_active_sub_strategy
-        show_entity_picture: false
-        name: Executing
-    cards: []

@@ -107,7 +107,7 @@
         "type": "function",
         "z": "676ceac4c521834d",
         "name": "Setup",
-        "func": "// use the self consumption strategy to charge when there is PV surplus\nmsg.target = \"Self-consumption\";\n\n// tell that strategy to disalow discharging\nconst DISABLE_DISCHARGE = true;\nRED.util.setMessageProperty(msg,\"advanced_settings.discharge_disabled\",DISABLE_DISCHARGE,true);\n\nreturn msg;",
+        "func": "// explain\nconst log = global.get(\"logger\");\nlog(this,\"Using self-consumption to charge with surplus PV\")\n\n// use the self consumption strategy to charge when there is PV surplus\nmsg.target = \"Self-consumption\";\n\n// tell that strategy to disalow discharging\nconst DISABLE_DISCHARGE = true;\nRED.util.setMessageProperty(msg,\"advanced_settings.discharge_disabled\",DISABLE_DISCHARGE,true);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
