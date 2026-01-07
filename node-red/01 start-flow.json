@@ -45,7 +45,7 @@
             "096752fe134c7b17"
         ],
         "x": 34,
-        "y": 839,
+        "y": 1419,
         "w": 812,
         "h": 162
     },
@@ -65,12 +65,13 @@
             "b63f2e905b829e5b",
             "64a533741de02153",
             "bbe037f4bc3425fc",
-            "023bfc9b8ac21db1"
+            "023bfc9b8ac21db1",
+            "e21880c4dcb447aa"
         ],
         "x": 28,
         "y": 379,
-        "w": 1664,
-        "h": 242
+        "w": 1090,
+        "h": 802
     },
     {
         "id": "ea78c084bba20424",
@@ -110,7 +111,7 @@
             "bd24a7a9802612b4"
         ],
         "x": 34,
-        "y": 1019,
+        "y": 1599,
         "w": 912,
         "h": 342
     },
@@ -134,7 +135,7 @@
             "641cc1cf21ace75a"
         ],
         "x": 34,
-        "y": 739,
+        "y": 1319,
         "w": 1852,
         "h": 82
     },
@@ -150,7 +151,7 @@
             "0be9d3b9ef3576fd"
         ],
         "x": 34,
-        "y": 639,
+        "y": 1219,
         "w": 212,
         "h": 82
     },
@@ -197,7 +198,7 @@
             "5e20e0b02d9b6db5"
         ],
         "x": 1234,
-        "y": 1219,
+        "y": 1799,
         "w": 632,
         "h": 202
     },
@@ -215,7 +216,7 @@
             "ce28e80550ab9b42"
         ],
         "x": 1474,
-        "y": 639,
+        "y": 1219,
         "w": 412,
         "h": 82
     },
@@ -237,13 +238,13 @@
             "7831dd84510fdfaa",
             "4e53830356f33b07",
             "208060fed37273fc",
-            "f3e427d4451be530",
-            "a882514e64e6f538"
+            "913480540695c3f5",
+            "357a1c7f46159af3"
         ],
         "x": 54,
         "y": 459,
-        "w": 1612,
-        "h": 82
+        "w": 1038,
+        "h": 622
     },
     {
         "id": "d77f3b233b9d9a45",
@@ -264,7 +265,7 @@
             "1e4f762143a12bba"
         ],
         "x": 314,
-        "y": 1059,
+        "y": 1639,
         "w": 552,
         "h": 222
     },
@@ -283,7 +284,7 @@
             "600f70a08a900d1c"
         ],
         "x": 1254,
-        "y": 919,
+        "y": 1499,
         "w": 632,
         "h": 82
     },
@@ -306,6 +307,58 @@
         "y": 119,
         "w": 892,
         "h": 82
+    },
+    {
+        "id": "913480540695c3f5",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "g": "b63f2e905b829e5b",
+        "name": "SoC discharging limit",
+        "style": {
+            "label": true,
+            "label-position": "n"
+        },
+        "nodes": [
+            "bac6f3d3fb3b1f9c",
+            "bc9481fcd42bdd38",
+            "2f232d71efe214fd",
+            "2f4e33bffc53a43f",
+            "65db8f8c19526e1a",
+            "cb463f18c683fc3d",
+            "5cd1c3c67e3feaf7",
+            "778581f6b0d0f9e8",
+            "1ae8a5ec75454b1b"
+        ],
+        "x": 274,
+        "y": 539,
+        "w": 792,
+        "h": 202
+    },
+    {
+        "id": "357a1c7f46159af3",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "g": "b63f2e905b829e5b",
+        "name": "SoC charging limit",
+        "style": {
+            "label": true,
+            "label-position": "n"
+        },
+        "nodes": [
+            "bc6d62839fca9712",
+            "ff9154e66a48fafe",
+            "0385aa579c212066",
+            "77d808683a0f1613",
+            "da3eb9a813286977",
+            "c12caa7c510aaeef",
+            "fb1a49e5b05591fd",
+            "fb8d1b80944d2a63",
+            "ca9eacbf789d312b"
+        ],
+        "x": 274,
+        "y": 759,
+        "w": 792,
+        "h": 202
     },
     {
         "id": "ca3fa4bc666e5dd2",
@@ -511,7 +564,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 140,
-        "y": 880,
+        "y": 1460,
         "wires": [
             [
                 "b0cd2895e3545c27"
@@ -532,7 +585,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 880,
+        "y": 1460,
         "wires": [
             [
                 "b658a34d31bcd8f3",
@@ -550,7 +603,7 @@
         "linkType": "dynamic",
         "timeout": "1.2",
         "x": 410,
-        "y": 920,
+        "y": 1500,
         "wires": [
             [
                 "712cd7b2343eead6",
@@ -573,7 +626,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 680,
-        "y": 880,
+        "y": 1460,
         "wires": []
     },
     {
@@ -591,7 +644,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 700,
-        "y": 920,
+        "y": 1500,
         "wires": []
     },
     {
@@ -608,7 +661,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 960,
+        "y": 1540,
         "wires": [
             [
                 "15830b9747f8132e",
@@ -634,7 +687,7 @@
         "y": 420,
         "wires": [
             [
-                "a91127871ba39241"
+                "e21880c4dcb447aa"
             ]
         ]
     },
@@ -651,8 +704,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 140,
-        "y": 580,
+        "x": 160,
+        "y": 1140,
         "wires": [
             [
                 "bbe037f4bc3425fc"
@@ -680,8 +733,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 420,
-        "y": 580,
+        "x": 440,
+        "y": 1140,
         "wires": [
             [
                 "a91127871ba39241"
@@ -705,8 +758,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 770,
-        "y": 580,
+        "x": 790,
+        "y": 1140,
         "wires": []
     },
     {
@@ -858,7 +911,7 @@
         "y": 500,
         "wires": [
             [
-                "f3e427d4451be530"
+                "1ae8a5ec75454b1b"
             ]
         ]
     },
@@ -905,8 +958,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1270,
-        "y": 500,
+        "x": 210,
+        "y": 1040,
         "wires": [
             [
                 "08d4efea54467ac1"
@@ -1007,8 +1060,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1420,
-        "y": 500,
+        "x": 360,
+        "y": 1040,
         "wires": [
             [
                 "208060fed37273fc"
@@ -1205,7 +1258,7 @@
         "domain": "input_text",
         "service": "set_value",
         "x": 660,
-        "y": 1100,
+        "y": 1680,
         "wires": [
             []
         ]
@@ -1224,7 +1277,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 1140,
+        "y": 1720,
         "wires": [
             [
                 "e1927196c4198cbf"
@@ -1259,7 +1312,7 @@
         "finalize": "",
         "libs": [],
         "x": 120,
-        "y": 1140,
+        "y": 1720,
         "wires": [
             [
                 "047542bb597a3048"
@@ -1288,7 +1341,7 @@
         "repair": false,
         "outputs": 2,
         "x": 740,
-        "y": 1200,
+        "y": 1780,
         "wires": [
             [
                 "047542bb597a3048"
@@ -1312,7 +1365,7 @@
         "finalize": "",
         "libs": [],
         "x": 580,
-        "y": 1200,
+        "y": 1780,
         "wires": [
             [
                 "df4b99688f85df0a",
@@ -1345,7 +1398,7 @@
         "domain": "input_text",
         "service": "set_value",
         "x": 760,
-        "y": 1140,
+        "y": 1720,
         "wires": [
             []
         ]
@@ -1364,7 +1417,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 1100,
+        "y": 1680,
         "wires": [
             [
                 "95295516124d818d"
@@ -1395,7 +1448,7 @@
         "repair": false,
         "outputs": 2,
         "x": 150,
-        "y": 1060,
+        "y": 1640,
         "wires": [
             [
                 "bd24a7a9802612b4"
@@ -1419,7 +1472,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 1320,
+        "y": 1900,
         "wires": [
             [
                 "77163ca9f43e8fb7",
@@ -1442,7 +1495,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 750,
-        "y": 1240,
+        "y": 1820,
         "wires": []
     },
     {
@@ -1459,7 +1512,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 590,
-        "y": 1140,
+        "y": 1720,
         "wires": [
             [
                 "4decf8d91d6ccacb"
@@ -1481,7 +1534,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 270,
-        "y": 1320,
+        "y": 1900,
         "wires": []
     },
     {
@@ -1490,15 +1543,15 @@
         "z": "a099d47fc07b3cee",
         "g": "6fad59f7a8530963",
         "name": "Loop step",
-        "func": "// Step index down\nmsg.battery_index += 1;\n\n// Continue\nreturn msg;",
+        "func": "// Step index down\nmsg.battery_index += 1;\nflow.battery_index += 1;\n\n// Continue\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 580,
+        "x": 300,
+        "y": 1140,
         "wires": [
             [
                 "7d6705c1829e0683"
@@ -1519,7 +1572,7 @@
         "finalize": "",
         "libs": [],
         "x": 360,
-        "y": 780,
+        "y": 1360,
         "wires": [
             [
                 "e63433bdfbdd57e9"
@@ -1549,7 +1602,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 610,
-        "y": 780,
+        "y": 1360,
         "wires": [
             [
                 "64c9954af597093d"
@@ -1570,7 +1623,7 @@
         "finalize": "",
         "libs": [],
         "x": 1540,
-        "y": 780,
+        "y": 1360,
         "wires": [
             [
                 "c9b6b8b729161188"
@@ -1621,7 +1674,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1350,
-        "y": 780,
+        "y": 1360,
         "wires": [
             [
                 "9f9dd1b6c8a68339"
@@ -1672,7 +1725,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 150,
-        "y": 780,
+        "y": 1360,
         "wires": [
             [
                 "db8e14c359673211"
@@ -1706,7 +1759,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 1750,
-        "y": 780,
+        "y": 1360,
         "wires": [
             []
         ]
@@ -1749,7 +1802,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 800,
-        "y": 780,
+        "y": 1360,
         "wires": [
             [
                 "1dac3194a67aeec2"
@@ -1770,7 +1823,7 @@
         "finalize": "",
         "libs": [],
         "x": 980,
-        "y": 780,
+        "y": 1360,
         "wires": [
             [
                 "641cc1cf21ace75a"
@@ -1821,7 +1874,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1160,
-        "y": 780,
+        "y": 1360,
         "wires": [
             [
                 "1cc51c4bd0523e93"
@@ -1842,7 +1895,7 @@
         "finalize": "",
         "libs": [],
         "x": 140,
-        "y": 680,
+        "y": 1260,
         "wires": [
             [
                 "1c419030271bee64",
@@ -1896,8 +1949,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1570,
-        "y": 500,
+        "x": 510,
+        "y": 1040,
         "wires": [
             [
                 "64a533741de02153"
@@ -1917,8 +1970,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 580,
-        "y": 580,
+        "x": 600,
+        "y": 1140,
         "wires": [
             [
                 "1933f2623fa0fffb",
@@ -1953,7 +2006,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 1760,
-        "y": 680,
+        "y": 1260,
         "wires": [
             []
         ]
@@ -2002,7 +2055,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 140,
-        "y": 940,
+        "y": 1520,
         "wires": [
             [
                 "06dd855a34065b5d"
@@ -2023,66 +2076,10 @@
         "property": "batteries_available_energy",
         "topi": "topic",
         "x": 1570,
-        "y": 680,
+        "y": 1260,
         "wires": [
             [
                 "f27b588385633b97"
-            ]
-        ]
-    },
-    {
-        "id": "f3e427d4451be530",
-        "type": "change",
-        "z": "a099d47fc07b3cee",
-        "g": "b63f2e905b829e5b",
-        "name": "SoC min",
-        "rules": [
-            {
-                "t": "set",
-                "p": "discharging_cutoff_capacity",
-                "pt": "msg",
-                "to": "12",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 980,
-        "y": 500,
-        "wires": [
-            [
-                "a882514e64e6f538"
-            ]
-        ]
-    },
-    {
-        "id": "a882514e64e6f538",
-        "type": "change",
-        "z": "a099d47fc07b3cee",
-        "g": "b63f2e905b829e5b",
-        "name": "SoC max",
-        "rules": [
-            {
-                "t": "set",
-                "p": "charging_cutoff_capacity",
-                "pt": "msg",
-                "to": "100",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1120,
-        "y": 500,
-        "wires": [
-            [
-                "d01fc0ee854e249a"
             ]
         ]
     },
@@ -2262,7 +2259,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 710,
-        "y": 960,
+        "y": 1540,
         "wires": []
     },
     {
@@ -2292,7 +2289,7 @@
         "domain": "input_text",
         "service": "set_value",
         "x": 1760,
-        "y": 960,
+        "y": 1540,
         "wires": [
             []
         ]
@@ -2341,7 +2338,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1360,
-        "y": 960,
+        "y": 1540,
         "wires": [
             [
                 "600f70a08a900d1c"
@@ -2362,7 +2359,7 @@
         "finalize": "",
         "libs": [],
         "x": 1560,
-        "y": 960,
+        "y": 1540,
         "wires": [
             [
                 "16efd2b03d6dece5"
@@ -2381,7 +2378,7 @@
         "data": "{\t   \"trace\": strategy.trace ? strategy.trace : [],\t   \"start\": strategy.execution_start ? strategy.execution_start : 0,\t   \"end\": strategy.execution_end ? strategy.execution_end : 0,\t   \"log\": log ? log : []\t}",
         "dataType": "jsonata",
         "x": 1740,
-        "y": 1320,
+        "y": 1900,
         "wires": [
             []
         ]
@@ -2460,7 +2457,7 @@
         "repair": false,
         "outputs": 1,
         "x": 1540,
-        "y": 1320,
+        "y": 1900,
         "wires": [
             [
                 "f9cb97e039c82bdc"
@@ -2694,12 +2691,11 @@
         "g": "28a2ae1ba720d063",
         "name": "Update debug dashboard",
         "links": [
-            "16a456b52daa011d",
             "f213e8027e665e7a",
             "bd24a7a9802612b4"
         ],
         "x": 1395,
-        "y": 1260,
+        "y": 1840,
         "wires": [
             [
                 "9afb8cfc6b4732b2",
@@ -2732,7 +2728,7 @@
         ],
         "uncaught": false,
         "x": 1340,
-        "y": 1380,
+        "y": 1960,
         "wires": [
             [
                 "9afb8cfc6b4732b2",
@@ -2755,7 +2751,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1520,
-        "y": 1380,
+        "y": 1960,
         "wires": []
     },
     {
@@ -2773,7 +2769,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1520,
-        "y": 1260,
+        "y": 1840,
         "wires": []
     },
     {
@@ -2787,7 +2783,7 @@
             "fe48ceaa8805fad1"
         ],
         "x": 905,
-        "y": 1060,
+        "y": 1640,
         "wires": []
     },
     {
@@ -2841,6 +2837,642 @@
             ]
         ],
         "l": false
+    },
+    {
+        "id": "bac6f3d3fb3b1f9c",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "913480540695c3f5",
+        "name": "SoC min",
+        "rules": [
+            {
+                "t": "set",
+                "p": "discharging_cutoff_capacity",
+                "pt": "msg",
+                "to": "12",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 700,
+        "wires": [
+            [
+                "77d808683a0f1613"
+            ]
+        ]
+    },
+    {
+        "id": "bc9481fcd42bdd38",
+        "type": "switch",
+        "z": "a099d47fc07b3cee",
+        "g": "913480540695c3f5",
+        "name": "",
+        "property": "soc_min_limit",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 810,
+        "y": 580,
+        "wires": [
+            [
+                "2f4e33bffc53a43f"
+            ],
+            [
+                "5cd1c3c67e3feaf7"
+            ]
+        ]
+    },
+    {
+        "id": "2f232d71efe214fd",
+        "type": "ha-get-entities",
+        "z": "a099d47fc07b3cee",
+        "g": "913480540695c3f5",
+        "name": "Find SoC min limit",
+        "server": "176d29a.6f648d6",
+        "version": 1,
+        "rules": [],
+        "outputType": "array",
+        "outputEmptyResults": true,
+        "outputLocationType": "msg",
+        "outputLocation": "soc_min_limit",
+        "outputResultsCount": 1,
+        "x": 630,
+        "y": 580,
+        "wires": [
+            [
+                "bc9481fcd42bdd38"
+            ]
+        ]
+    },
+    {
+        "id": "2f4e33bffc53a43f",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "913480540695c3f5",
+        "name": "SoC min",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.marstek_m{{battery_index}}_discharging_cutoff_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "discharging_cutoff_capacity",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 980,
+        "y": 580,
+        "wires": [
+            [
+                "77d808683a0f1613"
+            ]
+        ]
+    },
+    {
+        "id": "65db8f8c19526e1a",
+        "type": "switch",
+        "z": "a099d47fc07b3cee",
+        "g": "913480540695c3f5",
+        "name": "",
+        "property": "soc_min_limit",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 810,
+        "y": 640,
+        "wires": [
+            [
+                "778581f6b0d0f9e8"
+            ],
+            [
+                "bac6f3d3fb3b1f9c"
+            ]
+        ]
+    },
+    {
+        "id": "cb463f18c683fc3d",
+        "type": "ha-get-entities",
+        "z": "a099d47fc07b3cee",
+        "g": "913480540695c3f5",
+        "name": "Find SoC min limit",
+        "server": "176d29a.6f648d6",
+        "version": 1,
+        "rules": [],
+        "outputType": "array",
+        "outputEmptyResults": true,
+        "outputLocationType": "msg",
+        "outputLocation": "soc_min_limit",
+        "outputResultsCount": 1,
+        "x": 630,
+        "y": 640,
+        "wires": [
+            [
+                "65db8f8c19526e1a"
+            ]
+        ]
+    },
+    {
+        "id": "5cd1c3c67e3feaf7",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "913480540695c3f5",
+        "name": "SoC min from device rule",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"rules\":[{\"condition\":\"state_object\",\"property\":\"entity_id\",\"logic\":\"is\",\"value\":\"input_number.marstek_m$flowContext('battery_index')_discharging_cutoff_capacity\",\"valueType\":\"str\"}]}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "payload.rules[0].value",
+                "pt": "msg",
+                "to": "\"number.marstek_m\" & $flowContext('battery_index') & \"_discharging_cutoff_capacity\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 640,
+        "wires": [
+            [
+                "cb463f18c683fc3d"
+            ]
+        ]
+    },
+    {
+        "id": "778581f6b0d0f9e8",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "913480540695c3f5",
+        "name": "SoC min",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m{{battery_index}}_discharging_cutoff_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "discharging_cutoff_capacity",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 980,
+        "y": 640,
+        "wires": [
+            [
+                "77d808683a0f1613"
+            ]
+        ]
+    },
+    {
+        "id": "bc6d62839fca9712",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "357a1c7f46159af3",
+        "name": "SoC max",
+        "rules": [
+            {
+                "t": "set",
+                "p": "charging_cutoff_capacity",
+                "pt": "msg",
+                "to": "100",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 920,
+        "wires": [
+            [
+                "d01fc0ee854e249a"
+            ]
+        ]
+    },
+    {
+        "id": "ff9154e66a48fafe",
+        "type": "switch",
+        "z": "a099d47fc07b3cee",
+        "g": "357a1c7f46159af3",
+        "name": "",
+        "property": "soc_max_limit",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 810,
+        "y": 800,
+        "wires": [
+            [
+                "da3eb9a813286977"
+            ],
+            [
+                "fb8d1b80944d2a63"
+            ]
+        ]
+    },
+    {
+        "id": "0385aa579c212066",
+        "type": "ha-get-entities",
+        "z": "a099d47fc07b3cee",
+        "g": "357a1c7f46159af3",
+        "name": "Find SoC max limit",
+        "server": "176d29a.6f648d6",
+        "version": 1,
+        "rules": [],
+        "outputType": "array",
+        "outputEmptyResults": true,
+        "outputLocationType": "msg",
+        "outputLocation": "soc_max_limit",
+        "outputResultsCount": 1,
+        "x": 630,
+        "y": 800,
+        "wires": [
+            [
+                "ff9154e66a48fafe"
+            ]
+        ]
+    },
+    {
+        "id": "77d808683a0f1613",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "357a1c7f46159af3",
+        "name": "SoC max from input rule",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"rules\":[{\"condition\":\"state_object\",\"property\":\"entity_id\",\"logic\":\"is\",\"value\":\"input_number.marstek_m{{battery_index}}_charging_cutoff_capacity\",\"valueType\":\"str\"}]}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "payload.rules[0].value",
+                "pt": "msg",
+                "to": "\"input_number.marstek_m\" & $flowContext('battery_index') & \"_charging_cutoff_capacity\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 800,
+        "wires": [
+            [
+                "0385aa579c212066"
+            ]
+        ]
+    },
+    {
+        "id": "da3eb9a813286977",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "357a1c7f46159af3",
+        "name": "SoC max",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.marstek_m{{battery_index}}_charging_cutoff_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "charging_cutoff_capacity",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 980,
+        "y": 800,
+        "wires": [
+            [
+                "d01fc0ee854e249a"
+            ]
+        ]
+    },
+    {
+        "id": "c12caa7c510aaeef",
+        "type": "switch",
+        "z": "a099d47fc07b3cee",
+        "g": "357a1c7f46159af3",
+        "name": "",
+        "property": "soc_max_limit",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 810,
+        "y": 860,
+        "wires": [
+            [
+                "ca9eacbf789d312b"
+            ],
+            [
+                "bc6d62839fca9712"
+            ]
+        ]
+    },
+    {
+        "id": "fb1a49e5b05591fd",
+        "type": "ha-get-entities",
+        "z": "a099d47fc07b3cee",
+        "g": "357a1c7f46159af3",
+        "name": "Find SoC max limit",
+        "server": "176d29a.6f648d6",
+        "version": 1,
+        "rules": [],
+        "outputType": "array",
+        "outputEmptyResults": true,
+        "outputLocationType": "msg",
+        "outputLocation": "soc_max_limit",
+        "outputResultsCount": 1,
+        "x": 630,
+        "y": 860,
+        "wires": [
+            [
+                "c12caa7c510aaeef"
+            ]
+        ]
+    },
+    {
+        "id": "fb8d1b80944d2a63",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "357a1c7f46159af3",
+        "name": "SoC max from device rule",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"rules\":[{\"condition\":\"state_object\",\"property\":\"entity_id\",\"logic\":\"is\",\"value\":\"input_number.marstek_m{{battery_index}}_charging_cutoff_capacity\",\"valueType\":\"str\"}]}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "payload.rules[0].value",
+                "pt": "msg",
+                "to": "\"number.marstek_m\" & $flowContext('battery_index') & \"_charging_cutoff_capacity\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 860,
+        "wires": [
+            [
+                "fb1a49e5b05591fd"
+            ]
+        ]
+    },
+    {
+        "id": "ca9eacbf789d312b",
+        "type": "api-current-state",
+        "z": "a099d47fc07b3cee",
+        "g": "357a1c7f46159af3",
+        "name": "SoC max",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "number.marstek_m{{battery_index}}_discharging_cutoff_capacity",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "charging_cutoff_capacity",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 980,
+        "y": 860,
+        "wires": [
+            [
+                "d01fc0ee854e249a"
+            ]
+        ]
+    },
+    {
+        "id": "1ae8a5ec75454b1b",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "913480540695c3f5",
+        "name": "SoC min from input rule",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"rules\":[{\"condition\":\"state_object\",\"property\":\"entity_id\",\"logic\":\"is\",\"value\":\"input_number.marstek_m$flowContext('battery_index')_discharging_cutoff_capacity\",\"valueType\":\"str\"}]}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "payload.rules[0].value",
+                "pt": "msg",
+                "to": "\"input_number.marstek_m\" & $flowContext('battery_index') & \"_discharging_cutoff_capacity\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 580,
+        "wires": [
+            [
+                "2f232d71efe214fd"
+            ]
+        ]
+    },
+    {
+        "id": "e21880c4dcb447aa",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "6fad59f7a8530963",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "battery_index",
+                "pt": "flow",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 420,
+        "wires": [
+            [
+                "a91127871ba39241"
+            ]
+        ]
     },
     {
         "id": "176d29a.6f648d6",

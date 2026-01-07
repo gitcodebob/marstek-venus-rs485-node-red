@@ -1150,3 +1150,268 @@ views:
       layout: center
       badges_position: top
       badges_wrap: scroll
+  - type: sections
+    max_columns: 2
+    title: Power limits
+    path: power-limits
+    icon: mdi:tune
+    sections:
+      - type: grid
+        cards:
+          - type: markdown
+            content: '## Marstek M1'
+            text_only: true
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: '### Discharging '
+                text_only: true
+              - type: tile
+                entity: input_number.marstek_m1_discharging_cutoff_capacity
+                name: Cutoff capacity
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+              - type: tile
+                entity: number.marstek_m1_max_discharge_power
+                name: Max Power
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+            grid_options:
+              columns: 12
+              rows: auto
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: '### Charging '
+                text_only: true
+              - type: tile
+                grid_options:
+                  columns: 12
+                  rows: 2
+                entity: input_number.marstek_m1_charging_cutoff_capacity
+                name: Cutoff capacity
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+              - type: tile
+                grid_options:
+                  columns: 12
+                  rows: 2
+                entity: number.marstek_m1_max_charge_power
+                name: 'Max. Power '
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+      - type: grid
+        cards:
+          - type: markdown
+            content: '## Marstek M2'
+            text_only: true
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: '### Discharging '
+                text_only: true
+              - type: tile
+                entity: input_number.marstek_m2_discharging_cutoff_capacity
+                name: Cutoff capacity
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+              - type: tile
+                entity: number.marstek_m2_max_discharge_power
+                name: Max Power
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+            grid_options:
+              columns: 12
+              rows: auto
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: '### Charging '
+                text_only: true
+              - type: tile
+                grid_options:
+                  columns: 12
+                  rows: 2
+                entity: input_number.marstek_m2_charging_cutoff_capacity
+                name: Cutoff capacity
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+              - type: tile
+                grid_options:
+                  columns: 12
+                  rows: 2
+                entity: number.marstek_m2_max_charge_power
+                name: 'Max. Power '
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+        visibility:
+          - condition: numeric_state
+            entity: input_number.house_battery_count
+            above: 1
+      - type: grid
+        cards:
+          - type: markdown
+            content: '## Marstek M3'
+            text_only: true
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: '### Discharging '
+                text_only: true
+              - type: tile
+                entity: input_number.marstek_m3_discharging_cutoff_capacity
+                name: Cutoff capacity
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+              - type: tile
+                entity: number.marstek_m3_max_discharge_power
+                name: Max Power
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+            grid_options:
+              columns: 12
+              rows: auto
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: '### Charging '
+                text_only: true
+              - type: tile
+                grid_options:
+                  columns: 12
+                  rows: 2
+                entity: input_number.marstek_m3_charging_cutoff_capacity
+                name: Cutoff capacity
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+              - type: tile
+                grid_options:
+                  columns: 12
+                  rows: 2
+                entity: number.marstek_m3_max_charge_power
+                name: 'Max. Power '
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+        visibility:
+          - condition: numeric_state
+            entity: input_number.house_battery_count
+            above: 2
+      - type: grid
+        cards:
+          - type: markdown
+            content: '## Marstek M4'
+            text_only: true
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: '### Discharging '
+                text_only: true
+              - type: tile
+                entity: input_number.marstek_m4_discharging_cutoff_capacity
+                name: Cutoff capacity
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+              - type: tile
+                entity: number.marstek_m4_max_discharge_power
+                name: Max Power
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+            grid_options:
+              columns: 12
+              rows: auto
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: '### Charging '
+                text_only: true
+              - type: tile
+                grid_options:
+                  columns: 12
+                  rows: 2
+                entity: input_number.marstek_m4_charging_cutoff_capacity
+                name: Cutoff capacity
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+              - type: tile
+                grid_options:
+                  columns: 12
+                  rows: 2
+                entity: number.marstek_m4_max_charge_power
+                name: 'Max. Power '
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+        visibility:
+          - condition: numeric_state
+            entity: input_number.house_battery_count
+            above: 3
+    header:
+      card:
+        type: markdown
+        text_only: true
+        content: '# Battery configuration '
+    cards: []
+
