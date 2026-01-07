@@ -3372,7 +3372,7 @@
         "halt_if": "",
         "halt_if_type": "str",
         "halt_if_compare": "is",
-        "entity_id": "number.marstek_m{{battery_index}}_discharging_cutoff_capacity",
+        "entity_id": "number.marstek_m{{battery_index}}_charging_cutoff_capacity",
         "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [
