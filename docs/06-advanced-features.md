@@ -46,3 +46,26 @@
    - Set the correct battery index in the `Start Loop` node. Keeping an eye on which battery is on which phase and thus which flow.
    - Remove the `Loop step` and `Loop until`, tie the `Mapping` to the `Battery strategy` directly.
    - Deploy as per normal instructions.
+
+## Charging/Discharging limits
+- Marstek Venus E batteries prior to hardware version 3 allowed to set the discharging 
+  limit (minimum state of charge) and charging limit (maximum state of charge). 
+  These limits are no longer exposed in the v3 batteries. 
+  To overcome this you can define `input_number` helpers using the 
+  `house_battery_control_charging_limits.yaml` from the `home assistant\packages` 
+  directory.
+  Simply add the file to the packages directory and restart Home Assistant to create 
+  the necessary helpers.
+  They can be configured from the Power Limits tab in the dashboard.
+- Using the `input_number`s also allows a higher discharging cutoff limit than the
+  Marstek limits. This can therefore be used for example to implement something like
+  the [Victron BatteryLife](https://www.victronenergy.com/media/pg/Energy_Storage_System/en/controlling-depth-of-discharge.html#UUID-af4a7478-4b75-68ac-cf3c-16c381335d1e)
+  strategy to ensure the battery reaches 100% State of Charge regularly for 
+  calibration purposes.
+- The Node-RED flows check for the existance of the `input_number` helpers for each
+  battery individually, 
+  and if it exists uses that as preferred value.
+  If the `input_number` could not be found it looks for the corresponding `number` 
+  entity.
+  If that also does not exist it falls back to the default value of 12% for the
+  discharging cutoff and 100% for the charging cutoff.
