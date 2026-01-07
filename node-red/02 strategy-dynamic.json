@@ -19,8 +19,8 @@
             "45ca4e9b170ae0e4",
             "c855da432b5a589a"
         ],
-        "x": 844,
-        "y": 99,
+        "x": 934,
+        "y": 79,
         "w": 192,
         "h": 142
     },
@@ -87,7 +87,7 @@
             "141ebe1a0441a814"
         ],
         "x": 234,
-        "y": 299,
+        "y": 279,
         "w": 1492,
         "h": 702
     },
@@ -102,14 +102,13 @@
         "nodes": [
             "ec06caa7c9e6a95d",
             "31e4a5e372bcb73f",
-            "8cddc8961385f28e",
             "81b460c063969182",
             "e5f74756a260df5b",
-            "2b50d9094cb8a9a8"
+            "9d9a70e738fd1b76"
         ],
         "x": 234,
         "y": 119,
-        "w": 572,
+        "w": 672,
         "h": 122
     },
     {
@@ -160,24 +159,10 @@
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
         "x": 600,
-        "y": 340,
+        "y": 320,
         "wires": [
             [
                 "127bc4a04263b3c0"
-            ]
-        ]
-    },
-    {
-        "id": "2b50d9094cb8a9a8",
-        "type": "junction",
-        "z": "95489b12daee74f5",
-        "g": "70d1049fc896f1cd",
-        "x": 600,
-        "y": 180,
-        "wires": [
-            [
-                "31e4a5e372bcb73f",
-                "8cddc8961385f28e"
             ]
         ]
     },
@@ -226,8 +211,8 @@
         "name": "Return",
         "mode": "return",
         "links": [],
-        "x": 885,
-        "y": 200,
+        "x": 975,
+        "y": 180,
         "wires": []
     },
     {
@@ -237,8 +222,8 @@
         "g": "ff30c86c22bf31c8",
         "name": "End (readme)",
         "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
-        "x": 940,
-        "y": 140,
+        "x": 1030,
+        "y": 120,
         "wires": []
     },
     {
@@ -255,7 +240,7 @@
         "templateLocation": "",
         "templateLocationType": "none",
         "x": 460,
-        "y": 580,
+        "y": 560,
         "wires": [
             [
                 "34a30e529baf678b"
@@ -276,7 +261,7 @@
         "templateLocation": "",
         "templateLocationType": "none",
         "x": 470,
-        "y": 640,
+        "y": 620,
         "wires": [
             [
                 "1908addf7c5bfb93"
@@ -298,7 +283,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 830,
-        "y": 920,
+        "y": 900,
         "wires": []
     },
     {
@@ -311,7 +296,7 @@
         "action": "obj",
         "pretty": false,
         "x": 555,
-        "y": 580,
+        "y": 560,
         "wires": [
             [
                 "af541182589224a7"
@@ -329,7 +314,7 @@
         "action": "obj",
         "pretty": false,
         "x": 575,
-        "y": 640,
+        "y": 620,
         "wires": [
             [
                 "da4428dd14db9967"
@@ -343,7 +328,7 @@
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
         "name": "Determine dynamic strategy",
-        "func": "// Extract start date objects\nlet start_cheapest = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.start\"));\nlet start_expensive = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_expensive.start\"));\nlet isCheapestNext = true;\nlet lastCheapestPrice = context.last_cheapest_price || 0;\nlet deltaThreshold = parseFloat(RED.util.getMessageProperty(msg,\"dynamic.min_delta_cents\")/100) || 0; // 100 cents = 1 Cr\n\n// Enums\nconst STRATEGY = {\n    CHEAPEST: \"Charge\", \n    NEUTRAL: \"Charge PV\",\n    EXPENSIVE: \"Self-consumption\"\n}\n\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg,\"dynamic.value_conversion\")) || 1;\n\n// Check if the Date objects are valid. If 'Invalid Date', stop and warn the user.\nif (isNaN(start_cheapest.getTime()) || isNaN(start_expensive.getTime())) {\n    node.warn(`One or both dates are invalid. Cheap = ${start_cheapest}, Expensive = ${start_expensive}`);\n    msg.log ? msg.log.push(`One or both dates are invalid. Cheap = ${start_cheapest}, Expensive = ${start_expensive}`):null;\n}\n\n// Check if cheapest lies before expensive\nif (start_cheapest < start_expensive) {\n    msg.log ? msg.log.push(`Cheapest moment lies before expensive moment. Cheapest moment: ${start_cheapest}, Expensive = ${start_expensive}`): null;\n    // store the cheapest price to compare it with future expensive rates, to determine if it's economical to discharge.\n    context.last_cheapest_price = RED.util.getMessageProperty(msg, \"dynamic.data_cheapest.average\"); // €/kWh rate\n    lastCheapestPrice = context.last_cheapest_price;\n    msg.log ? msg.log.push(`Cheapest price set to ${lastCheapestPrice}`):null;\n}\n\nif (lastCheapestPrice == 0) {\n    msg.log ? msg.log.push(`I can't recall the tariff used for charging. Cheapest price set to ${lastCheapestPrice}`):null;\n}\n\n// // Format the Date object to HH:MM based on locale options.\n// // We use 'nl-NL' locale, but any will work if it uses : as separator\n// const startCheapHHMM = start_cheapest.toLocaleTimeString('nl-NL', {\n//     hour: '2-digit',        // Ensure the hour is two digits (e.g., 03)\n//     minute: '2-digit',      // Ensure the minute is two digits (e.g., 00)\n//     hour12: false           // Force 24-hour format (00-23)\n// });                         // Result: \"03:00\"\n// msg.cheapest.startHHMM = startCheapHHMM;\n\n\n// const endHHMM = end.toLocaleTimeString('nl-NL', {\n//     hour: '2-digit',        // Ensure the hour is two digits (e.g., 03)\n//     minute: '2-digit',      // Ensure the minute is two digits (e.g., 00)\n//     hour12: false           // Force 24-hour format (00-23)\n// });   \n\n// is_now\n/** @type {boolean} */\nconst cheapestIsNow = RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.is_now\");\n/** @type {boolean} */\nconst expensiveIsNow = RED.util.getMessageProperty(msg, \"dynamic.data_expensive.is_now\");\n\n// Determine if it is economical to start charging\nmsg.dynamic.strategy = STRATEGY.NEUTRAL;\n// average price expensive\nconst lastExpensivePrice = RED.util.getMessageProperty(msg, \"dynamic.data_expensive.average\"); // €/kWh rate\n// delta > € 0,06 = charging is economical\nconst delta = (lastExpensivePrice - lastCheapestPrice) / CONVERSION_RATE; // \n\n// UI values\nmsg.dynamic.avg_cheapest_tariff = parseFloat((lastCheapestPrice / CONVERSION_RATE).toFixed(2));\nmsg.dynamic.avg_expensive_tariff = parseFloat((lastExpensivePrice / CONVERSION_RATE).toFixed(2));\nmsg.dynamic.avg_delta = parseFloat(delta.toFixed(2));\n\n// Set strategy\nif (cheapestIsNow) msg.dynamic.strategy = STRATEGY.CHEAPEST;\nif (expensiveIsNow && delta >= deltaThreshold) {\n    msg.dynamic.strategy = STRATEGY.EXPENSIVE;\n} else if(expensiveIsNow) {\n    // log\n    msg.log ? msg.log.push(`Expensive period, but not using batteries. The tariff difference between cheap and expensive periods is too small: ${(lastExpensivePrice / CONVERSION_RATE).toFixed(4)}-${(lastCheapestPrice / CONVERSION_RATE).toFixed(4) }=${delta.toFixed(4)} < ${deltaThreshold}.`) : null;    \n}\n\n// Store the strategy in flow-context. The 'Execution' area will read from the flow-context.\nflow.set(\"dynamic_strategy\",msg.dynamic.strategy);\n\n// Node status\nnode.status({ fill: \"blue\", shape: \"dot\", text: `${msg.dynamic.strategy}; ${cheapestIsNow} + ${expensiveIsNow} @ €${delta.toFixed(4)}` });\n\n// Log\nmsg.log ? msg.log.push(`Dynamic strat set to ${msg.dynamic.strategy}. \nCheapest period now? ${cheapestIsNow}. \nExpensive period now? ${expensiveIsNow}.`):null;\nreturn msg;",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// Extract start date objects\nlet start_cheapest = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.start\"));\nlet start_expensive = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_expensive.start\"));\nlet isCheapestNext = true;\nlet lastCheapestPrice = context.last_cheapest_price || 0;\nlet deltaThreshold = parseFloat(RED.util.getMessageProperty(msg,\"dynamic.min_delta_cents\")/100) || 0; // 100 cents = 1 Cr\n\n// Enums\nconst STRATEGY = {\n    CHEAPEST: \"Charge\", \n    NEUTRAL: \"Charge PV\",\n    EXPENSIVE: \"Self-consumption\"\n}\n\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg,\"dynamic.value_conversion\")) || 1;\n\n// Check if the Date objects are valid. If 'Invalid Date', stop and warn the user.\nif (isNaN(start_cheapest.getTime()) || isNaN(start_expensive.getTime())) {\n    node.warn(`One or both dates are invalid. Cheap = ${start_cheapest}, Expensive = ${start_expensive}`);\n    log(this, `One or both dates are invalid. Cheap = ${start_cheapest}, Expensive = ${start_expensive}`,\"warn\");\n}\n\n// Check if cheapest lies before expensive\nif (start_cheapest < start_expensive) {\n    log(this, `Cheapest moment lies before expensive moment. Cheapest moment: ${start_cheapest}, Expensive = ${start_expensive}`);\n    // store the cheapest price to compare it with future expensive rates, to determine if it's economical to discharge.\n    context.last_cheapest_price = RED.util.getMessageProperty(msg, \"dynamic.data_cheapest.average\"); // €/kWh rate\n    lastCheapestPrice = context.last_cheapest_price;\n    log(this, `Cheapest price set to ${lastCheapestPrice}`);\n}\n\nif (lastCheapestPrice == 0) {\n    log(this, `I can't recall the tariff used for charging. Cheapest price set to ${lastCheapestPrice}`);\n}\n\n// // Format the Date object to HH:MM based on locale options.\n// // We use 'nl-NL' locale, but any will work if it uses : as separator\n// const startCheapHHMM = start_cheapest.toLocaleTimeString('nl-NL', {\n//     hour: '2-digit',        // Ensure the hour is two digits (e.g., 03)\n//     minute: '2-digit',      // Ensure the minute is two digits (e.g., 00)\n//     hour12: false           // Force 24-hour format (00-23)\n// });                         // Result: \"03:00\"\n// msg.cheapest.startHHMM = startCheapHHMM;\n\n\n// const endHHMM = end.toLocaleTimeString('nl-NL', {\n//     hour: '2-digit',        // Ensure the hour is two digits (e.g., 03)\n//     minute: '2-digit',      // Ensure the minute is two digits (e.g., 00)\n//     hour12: false           // Force 24-hour format (00-23)\n// });   \n\n// is_now\n/** @type {boolean} */\nconst cheapestIsNow = RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.is_now\");\n/** @type {boolean} */\nconst expensiveIsNow = RED.util.getMessageProperty(msg, \"dynamic.data_expensive.is_now\");\n\n// Determine if it is economical to start charging\nmsg.dynamic.strategy = STRATEGY.NEUTRAL;\n// average price expensive\nconst lastExpensivePrice = RED.util.getMessageProperty(msg, \"dynamic.data_expensive.average\"); // €/kWh rate\n// delta > € 0,06 = charging is economical\nconst delta = (lastExpensivePrice - lastCheapestPrice) / CONVERSION_RATE; // \n\n// UI values\nmsg.dynamic.avg_cheapest_tariff = parseFloat((lastCheapestPrice / CONVERSION_RATE).toFixed(2));\nmsg.dynamic.avg_expensive_tariff = parseFloat((lastExpensivePrice / CONVERSION_RATE).toFixed(2));\nmsg.dynamic.avg_delta = parseFloat(delta.toFixed(2));\n\n// Set strategy\nif (cheapestIsNow) msg.dynamic.strategy = STRATEGY.CHEAPEST;\nif (expensiveIsNow && delta >= deltaThreshold) {\n    msg.dynamic.strategy = STRATEGY.EXPENSIVE;\n} else if(expensiveIsNow) {\n    // log\n    log(this, `Expensive period is now. However not using batteries. The tariff difference between cheap and expensive periods is too small: ${(lastExpensivePrice / CONVERSION_RATE).toFixed(4)}-${(lastCheapestPrice / CONVERSION_RATE).toFixed(4) }=${delta.toFixed(4)} < ${deltaThreshold}.`);    \n}\n\n// Store the strategy in flow-context. The 'Execution' area will read from the flow-context.\nflow.set(\"dynamic_strategy\",msg.dynamic.strategy);\n\n// Node status\nnode.status({ fill: \"blue\", shape: \"dot\", text: `${msg.dynamic.strategy}; ${cheapestIsNow} + ${expensiveIsNow} @ €${delta.toFixed(4)}` });\n\n// Log\nlog(this, `Dynamic strat set to ${msg.dynamic.strategy}. \nCheapest period now? ${cheapestIsNow}. \nExpensive period now? ${expensiveIsNow}.`);\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -351,7 +336,7 @@
         "finalize": "",
         "libs": [],
         "x": 400,
-        "y": 760,
+        "y": 740,
         "wires": [
             [
                 "5cb60087e09c8852",
@@ -390,7 +375,7 @@
         "y": 200,
         "wires": [
             [
-                "2b50d9094cb8a9a8"
+                "9d9a70e738fd1b76"
             ]
         ]
     },
@@ -403,8 +388,8 @@
         "links": [],
         "linkType": "dynamic",
         "timeout": "3",
-        "x": 690,
-        "y": 200,
+        "x": 810,
+        "y": 180,
         "wires": [
             [
                 "45ca4e9b170ae0e4"
@@ -438,7 +423,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 820,
-        "y": 640,
+        "y": 620,
         "wires": [
             []
         ]
@@ -470,7 +455,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 820,
-        "y": 680,
+        "y": 660,
         "wires": [
             []
         ]
@@ -502,7 +487,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 820,
-        "y": 720,
+        "y": 700,
         "wires": [
             []
         ]
@@ -534,28 +519,10 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 820,
-        "y": 760,
+        "y": 740,
         "wires": [
             []
         ]
-    },
-    {
-        "id": "8cddc8961385f28e",
-        "type": "debug",
-        "z": "95489b12daee74f5",
-        "g": "70d1049fc896f1cd",
-        "name": "Sub-strategy",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "target",
-        "targetType": "msg",
-        "statusVal": "target",
-        "statusType": "auto",
-        "x": 690,
-        "y": 160,
-        "wires": []
     },
     {
         "id": "c0fe420fa716d4ca",
@@ -580,7 +547,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 380,
-        "y": 420,
+        "y": 400,
         "wires": [
             [
                 "1990213302cf1876"
@@ -641,7 +608,7 @@
         "y": 160,
         "wires": [
             [
-                "2b50d9094cb8a9a8"
+                "9d9a70e738fd1b76"
             ]
         ]
     },
@@ -879,7 +846,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 560,
-        "y": 420,
+        "y": 400,
         "wires": [
             [
                 "127bc4a04263b3c0"
@@ -930,7 +897,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 800,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "5534a44cf66a84bd"
@@ -943,7 +910,7 @@
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
         "name": "Data source settings",
-        "func": "/*    From cheapes-energy-hours macro\n      See: https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings\n\n      - None (default selection)\n      - Zonneplan\n      - Amber Electric\n      - EasyEnergy, EnergyZero (core)\n      - ENTSO-E\n      - Frank Energie\n      - GE-Spot\n      - Tibber, Nordpool (core)\n      - Tibber (custom)\n      - Nordpool (custom)\n      - PVPC (Spain)\n      - Octopus Energy\n      - Omie\n*/\n\nswitch (msg.dynamic.data_source) {\n      case \"None\":\n            // Handle the 'None' case (e.g., no supplier selected or data is unavailable)\n            msg.log.push(\"No data source selected.\");\n            // Add config here...\n            break;\n\n      case \"Zonneplan\":\n            // Code for Zonneplan (a Dutch energy supplier)\n            msg.log.push(\"Processing Zonneplan data.\");\n            // Add config here...\n            msg.dynamic.sensor='sensor.zonneplan_current_electricity_tariff'; // when using: https://github.com/fsaris/home-assistant-zonneplan-one\n            msg.dynamic.attr_all='forecast';\n            msg.dynamic.value_key='electricity_price';\n            msg.dynamic.value_conversion = 10000000; // whole currency / kWh\n            break;\n\n      case \"Amber Electric\":\n            // Code for Amber Electric (Australian energy retailer)\n            msg.log.push(\"Processing Amber Electric data.\");\n            // Add config here...\n            msg.dynamic.attr_all='forecasts'; \n            msg.dynamic.time_key='start_time'; \n            msg.dynamic.value_key='per_kwh';\n            break;\n\n      case \"EasyEnergy, EnergyZero (core)\":\n            // Code for EasyEnergy and EnergyZero (core/default implementation)\n            msg.log.push(\"Processing EasyEnergy/EnergyZero core data.\");\n            // Add config here...\n            break;\n\n      case \"ENTSO-E\":\n            // Code for ENTSO-E (European Network of Transmission System Operators for Electricity)\n            msg.log.push(\"Processing ENTSO-E data.\");\n            // Add config here...\n            msg.dynamic.attr_today='prices_today'; \n            msg.dynamic.attr_tomorrow='prices_tomorrow'; \n            msg.dynamic.time_key='time';\n            msg.dynamic.value_key='price';\n            break;\n\n      case \"Frank Energie\":\n            // Code for Frank Energie (Dutch energy supplier)\n            msg.log.push(\"Processing Frank Energie data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'prices'; \n            msg.dynamic.time_key = 'from'; \n            msg.dynamic.value_key = 'price';\n            break;\n\n      case \"GE-Spot\":\n            // Code for GE-Spot (Global Electric Spot price)\n            msg.log.push(\"Processing GE-Spot data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today_hourly_prices'; // using the hourly version. today_interval_prices is per 15 mins\n            msg.dynamic.attr_tomorrow = 'tomorrow_hourly_prices'; // using the hourly version\n            msg.dynamic.time_key = 'time'; \n            msg.dynamic.value_key = 'value';\n            break;\n\n      case \"Tibber, Nordpool (core)\":\n            // Code for Tibber and Nordpool (core/default implementation)\n            msg.log.push(\"Processing Tibber/Nordpool core data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.tibber_ceh_prices';\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.time_key = 'start';\n            msg.dynamic.value_key = 'value';\n            msg.dynamic.datetime_in_data = true; // datetime is in the data\n            break;\n\n      case \"Tibber (custom)\":\n            // Code for a custom Tibber setup/configuration\n            msg.log.push(\"Processing Tibber custom data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.datetime_in_data = false;\n            break;\n\n      case \"Nordpool (custom)\":\n            // Code for a custom Nordpool setup/configuration\n            msg.log.push(\"Processing Nordpool custom data.\");\n            // Add config here...\n            break;\n\n      case \"PVPC (Spain)\":\n            // Code for PVPC (Voluntary Price for Small Consumers in Spain)\n            msg.log.push(\"Processing Spanish PVPC data.\");\n            // Add config here...\n            break;\n\n      case \"Octopus Energy\":\n            // Code for Octopus Energy (UK/international energy supplier)\n            msg.log.push(\"Processing Octopus Energy data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'rates'; \n            msg.dynamic.value_key = 'value_incl_vat';\n            break;\n\n      case \"Omie\":\n            // Code for Omie (Iberian Energy Market Operator)\n            msg.log.push(\"Processing Omie data.\");\n            // Add config here...\n            break;\n\n      default:\n            // Code to execute if the supplier does not match any of the above cases\n            node.warn(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            msg.log.push(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            // Add default error handling...\n}\n\nreturn msg;",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n/*    From cheapes-energy-hours macro\n      See: https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings\n\n      - None (default selection)\n      - Zonneplan\n      - Amber Electric\n      - EasyEnergy, EnergyZero (core)\n      - ENTSO-E\n      - Frank Energie\n      - GE-Spot\n      - Tibber, Nordpool (core)\n      - Tibber (custom)\n      - Nordpool (custom)\n      - PVPC (Spain)\n      - Octopus Energy\n      - Omie\n*/\n\nswitch (msg.dynamic.data_source) {\n      case \"None\":\n            // Handle the 'None' case (e.g., no supplier selected or data is unavailable)\n            log(this,\"No data source selected.\");\n            // Add config here...\n            break;\n\n      case \"Zonneplan\":\n            // Code for Zonneplan (a Dutch energy supplier)\n            log(this,\"Processing Zonneplan data.\");\n            // Add config here...\n            msg.dynamic.sensor='sensor.zonneplan_current_electricity_tariff'; // when using: https://github.com/fsaris/home-assistant-zonneplan-one\n            msg.dynamic.attr_all='forecast';\n            msg.dynamic.value_key='electricity_price';\n            msg.dynamic.value_conversion = 10000000; // whole currency / kWh\n            break;\n\n      case \"Amber Electric\":\n            // Code for Amber Electric (Australian energy retailer)\n            log(this,\"Processing Amber Electric data.\");\n            // Add config here...\n            msg.dynamic.attr_all='forecasts'; \n            msg.dynamic.time_key='start_time'; \n            msg.dynamic.value_key='per_kwh';\n            break;\n\n      case \"EasyEnergy, EnergyZero (core)\":\n            // Code for EasyEnergy and EnergyZero (core/default implementation)\n            log(this,\"Processing EasyEnergy/EnergyZero core data.\");\n            // Add config here...\n            break;\n\n      case \"ENTSO-E\":\n            // Code for ENTSO-E (European Network of Transmission System Operators for Electricity)\n            log(this,\"Processing ENTSO-E data.\");\n            // Add config here...\n            msg.dynamic.attr_today='prices_today'; \n            msg.dynamic.attr_tomorrow='prices_tomorrow'; \n            msg.dynamic.time_key='time';\n            msg.dynamic.value_key='price';\n            break;\n\n      case \"Frank Energie\":\n            // Code for Frank Energie (Dutch energy supplier)\n            log(this,\"Processing Frank Energie data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'prices'; \n            msg.dynamic.time_key = 'from'; \n            msg.dynamic.value_key = 'price';\n            break;\n\n      case \"GE-Spot\":\n            // Code for GE-Spot (Global Electric Spot price)\n            log(this,\"Processing GE-Spot data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today_hourly_prices'; // using the hourly version. today_interval_prices is per 15 mins\n            msg.dynamic.attr_tomorrow = 'tomorrow_hourly_prices'; // using the hourly version\n            msg.dynamic.time_key = 'time'; \n            msg.dynamic.value_key = 'value';\n            break;\n\n      case \"Tibber, Nordpool (core)\":\n            // Code for Tibber and Nordpool (core/default implementation)\n            log(this,\"Processing Tibber/Nordpool core data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.tibber_ceh_prices';\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.time_key = 'start';\n            msg.dynamic.value_key = 'value';\n            msg.dynamic.datetime_in_data = true; // datetime is in the data\n            break;\n\n      case \"Tibber (custom)\":\n            // Code for a custom Tibber setup/configuration\n            log(this,\"Processing Tibber custom data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.datetime_in_data = false;\n            break;\n\n      case \"Nordpool (custom)\":\n            // Code for a custom Nordpool setup/configuration\n            log(this,\"Processing Nordpool custom data.\");\n            // Add config here...\n            break;\n\n      case \"PVPC (Spain)\":\n            // Code for PVPC (Voluntary Price for Small Consumers in Spain)\n            log(this,\"Processing Spanish PVPC data.\");\n            // Add config here...\n            break;\n\n      case \"Octopus Energy\":\n            // Code for Octopus Energy (UK/international energy supplier)\n            log(this,\"Processing Octopus Energy data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'rates'; \n            msg.dynamic.value_key = 'value_incl_vat';\n            break;\n\n      case \"Omie\":\n            // Code for Omie (Iberian Energy Market Operator)\n            log(this,\"Processing Omie data.\");\n            // Add config here...\n            break;\n\n      default:\n            // Code to execute if the supplier does not match any of the above cases\n            node.warn(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            log(this,`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            // Add default error handling...\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -951,7 +918,7 @@
         "finalize": "",
         "libs": [],
         "x": 380,
-        "y": 500,
+        "y": 480,
         "wires": [
             [
                 "7f75e4fa1c2d86a0"
@@ -1002,7 +969,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 960,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "1d49e10959ab22bc"
@@ -1053,7 +1020,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1140,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "f1168e015522bbfc"
@@ -1083,7 +1050,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 340,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "127bc4a04263b3c0"
@@ -1104,7 +1071,7 @@
         "finalize": "",
         "libs": [],
         "x": 670,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "98d7f59f0b7eab92"
@@ -1117,7 +1084,7 @@
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
         "name": "Generate templates",
-        "func": "// final template initialization\nmsg.dynamic.template_cheapest = \"\";\nmsg.dynamic.template_expensive = \"\";\n\n// temporary template parts\nlet template_start = \"\";\nlet template_common = [];\nlet template_cheapest = [];\nlet template_expensive = [];\nlet template_end = \"\";\n\n// 1. IMPROVEMENT: Use radix 10 and Logical OR (||) for cleaner default handling\nconst cheapest_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.cheapest_hrs\"), 10) || 1;\nconst expensive_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.expensive_hrs\"), 10) || 1;\n\n// load the macro\ntemplate_start = `{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n`;\ntemplate_end = `) | to_json }}`;\n\n// collect arguments | strings\nconst stringKeys = [\n    'sensor',\n    'attr_all',\n    'value_key',\n    'attr_today',\n    'attr_tomorrow',\n    'time_key'\n];\n\nstringKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}='${msg.dynamic[key]}'`);\n    }\n});\n\n// collect arguments | boolean, integer\nconst otherKeys = [\n    'datetime_in_data',\n    'data_minutes',\n];\n\notherKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}=${msg.dynamic[key]}`);\n    }\n});\n\n// copy common items\ntemplate_cheapest = [...template_common];\ntemplate_expensive = [...template_common];\n\n// collect arguments | cheapest specific\ntemplate_cheapest.push(`hours=${cheapest_hrs}`);\ntemplate_cheapest.push(`include_tomorrow=true`);\ntemplate_cheapest.push(`mode=\"all\"`);\n\n// collect arguments | expensive specific\ntemplate_expensive.push(`hours=${expensive_hrs}`);\ntemplate_expensive.push(`include_tomorrow=true`);\ntemplate_expensive.push(`lowest=false`);\ntemplate_expensive.push(`mode=\"all\"`);\n\n/**\n * Formats an array of strings into a single string:\n * - Each item starts with 4 spaces.\n * - Each item ends with a comma, except the last one.\n * - Items are separated by a newline.\n */\nfunction formatTemplateArray(array) {\n    if (!array || array.length === 0) {\n        return \"\";\n    }\n\n    const indent = \"    \"; \n\n    const formatted_lines = array.map((element, index) => {\n        const suffix = (index < array.length - 1) ? \",\" : \"\";\n        return `${indent}${element}${suffix}`;\n    });\n\n    return formatted_lines.join('\\n');\n}\n\n// generate string templates\nconst template_cheapest_string = formatTemplateArray(template_cheapest);\nconst template_expensive_string = formatTemplateArray(template_expensive);\n\n// done\nmsg.dynamic.template_cheapest = `${template_start}${template_cheapest_string}${template_end}`;\nmsg.dynamic.template_expensive = `${template_start}${template_expensive_string}${template_end}`;\n\nreturn msg;",
+        "func": "// final template initialization\nmsg.dynamic.template_cheapest = \"\";\nmsg.dynamic.template_expensive = \"\";\n\n// temporary template parts\nlet template_start = \"\";\nlet template_common = [];\nlet template_cheapest = [];\nlet template_expensive = [];\nlet template_end = \"\";\n\n// 1. IMPROVEMENT: Use radix 10 and Logical OR (||) for cleaner default handling\nconst cheapest_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.cheapest_hrs\"), 10) || 1;\nconst expensive_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.expensive_hrs\"), 10) || 1;\n\n// load the macro\ntemplate_start = `{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n`;\ntemplate_end = `) | to_json }}`;\n\n// collect arguments | strings\nconst stringKeys = [\n    'sensor',\n    'attr_all',\n    'value_key',\n    'attr_today',\n    'attr_tomorrow',\n    'time_key'\n];\n\nstringKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}='${msg.dynamic[key]}'`);\n    }\n});\n\n// collect arguments | boolean, integer\nconst otherKeys = [\n    'datetime_in_data',\n    'data_minutes',\n];\n\notherKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}=${msg.dynamic[key]}`);\n    }\n});\n\n// copy common items\ntemplate_cheapest = [...template_common];\ntemplate_expensive = [...template_common];\n\n// collect arguments | cheapest specific\ntemplate_cheapest.push(`hours=${cheapest_hrs}`);\n// template_cheapest.push(`include_tomorrow=true`);\ntemplate_cheapest.push(`mode=\"all\"`);\n\n// collect arguments | expensive specific\ntemplate_expensive.push(`hours=${expensive_hrs}`);\n// template_expensive.push(`include_tomorrow=true`);\ntemplate_expensive.push(`lowest=false`);\ntemplate_expensive.push(`mode=\"all\"`);\n\n/**\n * Formats an array of strings into a single string:\n * - Each item starts with 4 spaces.\n * - Each item ends with a comma, except the last one.\n * - Items are separated by a newline.\n */\nfunction formatTemplateArray(array) {\n    if (!array || array.length === 0) {\n        return \"\";\n    }\n\n    const indent = \"    \"; \n\n    const formatted_lines = array.map((element, index) => {\n        const suffix = (index < array.length - 1) ? \",\" : \"\";\n        return `${indent}${element}${suffix}`;\n    });\n\n    return formatted_lines.join('\\n');\n}\n\n// generate string templates\nconst template_cheapest_string = formatTemplateArray(template_cheapest);\nconst template_expensive_string = formatTemplateArray(template_expensive);\n\n// done\nmsg.dynamic.template_cheapest = `${template_start}${template_cheapest_string}${template_end}`;\nmsg.dynamic.template_expensive = `${template_start}${template_expensive_string}${template_end}`;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1125,7 +1092,7 @@
         "finalize": "",
         "libs": [],
         "x": 590,
-        "y": 500,
+        "y": 480,
         "wires": [
             [
                 "f5f223200fbada06",
@@ -1149,7 +1116,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 830,
-        "y": 500,
+        "y": 480,
         "wires": []
     },
     {
@@ -1167,7 +1134,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 540,
+        "y": 520,
         "wires": []
     },
     {
@@ -1191,7 +1158,7 @@
         "to": "",
         "reg": false,
         "x": 330,
-        "y": 580,
+        "y": 560,
         "wires": [
             [
                 "2e5b6b44c86f80e3"
@@ -1219,7 +1186,7 @@
         "to": "",
         "reg": false,
         "x": 330,
-        "y": 640,
+        "y": 620,
         "wires": [
             [
                 "0799b280bf62758e"
@@ -1245,7 +1212,7 @@
         "to": "",
         "reg": false,
         "x": 340,
-        "y": 700,
+        "y": 680,
         "wires": [
             [
                 "adbbd358b213f08e"
@@ -1257,8 +1224,8 @@
         "type": "debug",
         "z": "95489b12daee74f5",
         "g": "9c68fafd28d3b4fc",
-        "name": "Log only",
-        "active": false,
+        "name": "Log: activate 'debug mode' first",
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1266,8 +1233,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
-        "y": 960,
+        "x": 870,
+        "y": 940,
         "wires": []
     },
     {
@@ -1325,7 +1292,7 @@
             }
         ],
         "x": 340,
-        "y": 340,
+        "y": 320,
         "wires": [
             [
                 "b97bd9a51080da68"
@@ -1354,7 +1321,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1395,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "141ebe1a0441a814"
@@ -1380,7 +1347,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1620,
-        "y": 360,
+        "y": 340,
         "wires": []
     },
     {
@@ -1410,7 +1377,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 820,
-        "y": 800,
+        "y": 780,
         "wires": [
             []
         ]
@@ -1442,7 +1409,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 830,
-        "y": 840,
+        "y": 820,
         "wires": [
             []
         ]
@@ -1474,7 +1441,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 800,
-        "y": 880,
+        "y": 860,
         "wires": [
             []
         ]
@@ -1523,7 +1490,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1300,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "1247084c53315208"
@@ -1551,7 +1518,7 @@
         "to": "",
         "reg": false,
         "x": 1490,
-        "y": 360,
+        "y": 340,
         "wires": [
             [
                 "4b8c5bc2b8cf6c4d"
@@ -1624,6 +1591,27 @@
         "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     },
     {
+        "id": "9d9a70e738fd1b76",
+        "type": "function",
+        "z": "95489b12daee74f5",
+        "g": "70d1049fc896f1cd",
+        "name": "Selected",
+        "func": "// Logger\nconst log = global.get(\"logger\");\nlog(this,`${msg.target} strategy`);\n\n// Status\nnode.status({fill:\"green\",shape:\"dot\",text:`${msg.target}`});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 180,
+        "wires": [
+            [
+                "31e4a5e372bcb73f"
+            ]
+        ]
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -1638,7 +1626,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "0d09c28dab9fd1b9",
+        "id": "4b7701c08bd92b70",
         "type": "global-config",
         "env": [],
         "modules": {

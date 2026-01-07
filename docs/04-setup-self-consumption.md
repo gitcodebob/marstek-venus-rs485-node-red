@@ -44,7 +44,7 @@ Every system is different and your home requires unique settings. What's marked 
 > **ADVISE** Keep the max. charge/discharge settings low (< 800 W) until you have experience with how your system reacts to coffee machines, hair straighteners, old washing machines and other 'horrifically noisy devices'.   
 
 ### PID Tuning (Advanced)
-Use the [Ziegler-Nichols method]((https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller#Ziegler%E2%80%93Nichols_method)) for a starting point. 
+Use the [Ziegler-Nichols method](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller#Ziegler%E2%80%93Nichols_method) for a starting point. 
 
 1. Set Kp to say 1.0, and be prepared to decrease it fast if needed.
 1. If the system oscillates in a steady state -> export the HA History graph to CSV.
@@ -53,7 +53,7 @@ Use the [Ziegler-Nichols method]((https://en.wikipedia.org/wiki/Proportional%E2%
 1. Determine the resonant frequency. E.g. by using [HA-history-graph-csv-export-analysis
 ](https://github.com/gitcodebob/HA-history-graph-csv-export-analysis)
 1. T<sub>u</sub> = 1 / `<resonant frequency>` and K<sub>u</sub> = your current K<sub>p</sub> during resonance
-1. Use the table of the [Ziegler-Nichols method]((https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller#Ziegler%E2%80%93Nichols_method)) to get a baseline. 
+1. Use the table of the [Ziegler-Nichols method](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller#Ziegler%E2%80%93Nichols_method) to get a baseline. 
     - This baseline can be a bit aggressive.
 
 Note: every system is different and your home is unique. Tune in small increments from here.

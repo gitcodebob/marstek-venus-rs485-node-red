@@ -132,7 +132,7 @@
         "z": "517b5f5313a242c5",
         "g": "38d625c4fd161b7b",
         "name": "Max power solution",
-        "func": "// INPUT\nlet batteries = msg.batteries;\nlet solution_array = [];\n\n// battery life improvement (slow charge near max SoC)\n/**\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    if (soc == 100) return Math.min(0, max_power);\n    if (soc >= 98) return Math.min(300, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 85) return Math.min(1500, max_power);\n    return max_power;\n}\n\n// build solution\nmsg.batteries.forEach(battery => {\n    solution_array.push({\n        id: battery.id,\n        mode: \"charge\",\n        power: chargingLimiter(battery.soc, battery.charging_max)\n    });\n});\n\n// return solution\nmsg.solutions = solution_array;\nreturn msg;",
+        "func": "// Logger, usage: log(this, \"\");\nconst log = global.get('logger');\nlog(this, \"Charge at **max. power**\");\n\n// INPUT\nlet batteries = msg.batteries;\nlet solution_array = [];\n\n// battery life improvement (slow charge near max SoC)\n/**\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    if (soc == 100) return Math.min(0, max_power);\n    if (soc >= 98) return Math.min(300, max_power);\n    if (soc >= 95) return Math.min(500, max_power);\n    if (soc >= 85) return Math.min(1500, max_power);\n    return max_power;\n}\n\n// build solution\nmsg.batteries.forEach(battery => {\n    const calculatedPower = chargingLimiter(battery.soc, battery.charging_max);\n\n    solution_array.push({\n        id: battery.id,\n        mode: \"charge\",\n        power: calculatedPower\n    });\n\n    // if charge limited\n    if(calculatedPower < battery.charging_max) {\n        log(this, `${battery.id} reduced charging from ${battery.charging_max}W to ${calculatedPower}W as it has a high ${Number(battery.soc).toFixed(1)}% SoC. To preserve battery life.`);\n    }\n});\n\n// return solution\nmsg.solutions = solution_array;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -602,7 +602,7 @@
         "z": "517b5f5313a242c5",
         "g": "38d625c4fd161b7b",
         "name": "Regulated power",
-        "func": "// Which sub-strategy to use\nmsg.target = \"Self-consumption\";\n\n// Set target grid consumption for the PID controller\nmsg.house_target_grid_consumption_in_w = msg.house_battery_strategy_timed_target_power;\n\nreturn msg;",
+        "func": "// Logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// Which sub-strategy to use\nmsg.target = \"Self-consumption\";\n\n// Set target grid consumption for the PID controller\nmsg.house_target_grid_consumption_in_w = msg.house_battery_strategy_timed_target_power;\n\n// Finally\nlog(this, `**Regulated** charging. Target energy ${Number(msg.batteries_available_energy).toFixed(1)}/${Number(msg.house_battery_strategy_timed_target_energy).toFixed(1)} kWh @ target grid consumption ${Math.floor(msg.house_target_grid_consumption_in_w)} W`);\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -623,7 +623,7 @@
         "z": "517b5f5313a242c5",
         "g": "38d625c4fd161b7b",
         "name": "Full stop ",
-        "func": "msg.target = \"Full stop\";\nnode.status({fill:\"grey\",shape:\"dot\",text:`${Math.round(msg.batteries_available_energy*100)/100} of ${msg.house_battery_strategy_timed_target_energy} kWh in reserve`});\nreturn msg;",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\nlog(this, `**Stopped** charging. Target energy of ${Number(msg.house_battery_strategy_timed_target_energy).toFixed(1)} kWh reached. Available: ${Number(msg.batteries_available_energy).toFixed(1)} kWh`);\n\n// set target flow\nmsg.target = \"Full stop\";\nnode.status({fill:\"grey\",shape:\"dot\",text:`${Math.round(msg.batteries_available_energy*100)/100} of ${Math.round(msg.house_battery_strategy_timed_target_energy*100)/100} kWh in reserve`});\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -711,7 +711,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "4ffaa0c08f8739b4",
+        "id": "57077c3559b31b8d",
         "type": "global-config",
         "env": [],
         "modules": {

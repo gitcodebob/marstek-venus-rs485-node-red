@@ -13,17 +13,17 @@
         "z": "a099d47fc07b3cee",
         "name": "Start",
         "style": {
-            "label": true
+            "label": true,
+            "stroke": "#009ac7"
         },
         "nodes": [
             "1d0932b9cdfe2cc0",
             "057b9222c17d4046",
-            "b5940f2c8939de70",
-            "625f53bc2e61f2fa"
+            "b5940f2c8939de70"
         ],
         "x": 34,
         "y": 19,
-        "w": 812,
+        "w": 652,
         "h": 82
     },
     {
@@ -45,7 +45,7 @@
             "096752fe134c7b17"
         ],
         "x": 34,
-        "y": 719,
+        "y": 839,
         "w": 812,
         "h": 162
     },
@@ -68,7 +68,7 @@
             "023bfc9b8ac21db1"
         ],
         "x": 28,
-        "y": 259,
+        "y": 379,
         "w": 1664,
         "h": 242
     },
@@ -78,16 +78,19 @@
         "z": "a099d47fc07b3cee",
         "name": "On deploy",
         "style": {
-            "label": true
+            "label": true,
+            "fill": "#3f3f3f"
         },
         "nodes": [
             "ad80dc99baec6552",
-            "42d70237afb8b3a7"
+            "42d70237afb8b3a7",
+            "ca8748b5164d7b1c",
+            "d780cd3e820d19fd"
         ],
-        "x": 874,
+        "x": 1294,
         "y": 19,
-        "w": 432,
-        "h": 82
+        "w": 592,
+        "h": 142
     },
     {
         "id": "5778369e644d84d7",
@@ -103,11 +106,12 @@
             "15830b9747f8132e",
             "d77f3b233b9d9a45",
             "8b0aa863bb6493fd",
-            "77163ca9f43e8fb7"
+            "77163ca9f43e8fb7",
+            "bd24a7a9802612b4"
         ],
         "x": 34,
-        "y": 899,
-        "w": 838,
+        "y": 1019,
+        "w": 912,
         "h": 342
     },
     {
@@ -130,7 +134,7 @@
             "641cc1cf21ace75a"
         ],
         "x": 34,
-        "y": 619,
+        "y": 739,
         "w": 1852,
         "h": 82
     },
@@ -146,7 +150,7 @@
             "0be9d3b9ef3576fd"
         ],
         "x": 34,
-        "y": 519,
+        "y": 639,
         "w": 212,
         "h": 82
     },
@@ -164,12 +168,56 @@
             "660d380dfd258f53",
             "563c57a7746c3a96",
             "898cc8a1b89a0f72",
-            "ca528d9c66c9f8d6"
+            "ca528d9c66c9f8d6",
+            "0b5f8dbb2283df26",
+            "9b0aae5445f0d48b",
+            "f213e8027e665e7a",
+            "029e59a3b851ea60"
         ],
         "x": 34,
-        "y": 119,
-        "w": 1032,
+        "y": 219,
+        "w": 1402,
         "h": 122
+    },
+    {
+        "id": "28a2ae1ba720d063",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Update UI: debug dashboard",
+        "style": {
+            "label": true,
+            "stroke": "#3f5787"
+        },
+        "nodes": [
+            "f9cb97e039c82bdc",
+            "9afb8cfc6b4732b2",
+            "fe48ceaa8805fad1",
+            "bd2a65959fe4e8d8",
+            "8c6c156e143d3f10",
+            "5e20e0b02d9b6db5"
+        ],
+        "x": 1234,
+        "y": 1219,
+        "w": 632,
+        "h": 202
+    },
+    {
+        "id": "fbff025fd39d88a8",
+        "type": "group",
+        "z": "a099d47fc07b3cee",
+        "name": "Update UI: usable energy",
+        "style": {
+            "label": true,
+            "stroke": "#3f5787"
+        },
+        "nodes": [
+            "f27b588385633b97",
+            "ce28e80550ab9b42"
+        ],
+        "x": 1474,
+        "y": 639,
+        "w": 412,
+        "h": 82
     },
     {
         "id": "b63f2e905b829e5b",
@@ -193,7 +241,7 @@
             "a882514e64e6f538"
         ],
         "x": 54,
-        "y": 339,
+        "y": 459,
         "w": 1612,
         "h": 82
     },
@@ -215,65 +263,61 @@
             "084ac27446297f16",
             "1e4f762143a12bba"
         ],
-        "x": 294,
-        "y": 939,
+        "x": 314,
+        "y": 1059,
         "w": 552,
         "h": 222
     },
     {
-        "id": "28a2ae1ba720d063",
+        "id": "a9726cdfb26e4cbd",
         "type": "group",
         "z": "a099d47fc07b3cee",
-        "name": "Update UI: active sub strategy",
+        "name": "Update UI: active sub-strategy",
         "style": {
-            "label": true
+            "label": true,
+            "stroke": "#3f5787"
         },
         "nodes": [
-            "16efd2b03d6dece5",
             "87e5752435e0ca42",
-            "600f70a08a900d1c",
-            "f9cb97e039c82bdc",
-            "9afb8cfc6b4732b2"
+            "16efd2b03d6dece5",
+            "600f70a08a900d1c"
         ],
-        "x": 914,
-        "y": 799,
+        "x": 1254,
+        "y": 919,
         "w": 632,
-        "h": 142
-    },
-    {
-        "id": "fbff025fd39d88a8",
-        "type": "group",
-        "z": "a099d47fc07b3cee",
-        "name": "Update UI: usable energy",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "f27b588385633b97",
-            "ce28e80550ab9b42"
-        ],
-        "x": 274,
-        "y": 519,
-        "w": 412,
         "h": 82
     },
     {
-        "id": "8edf76f55293c620",
+        "id": "bfb65874f68e9557",
         "type": "group",
         "z": "a099d47fc07b3cee",
-        "name": "Debug mode",
+        "name": "Insight",
         "style": {
             "label": true
         },
         "nodes": [
+            "625f53bc2e61f2fa",
+            "f6692c64e302f8b7",
             "ee2ae25070582e27",
             "93ab1d6dafabb3c1",
             "40b79d34db8d2b48"
         ],
-        "x": 1334,
-        "y": 19,
-        "w": 632,
+        "x": 34,
+        "y": 119,
+        "w": 892,
         "h": 82
+    },
+    {
+        "id": "ca3fa4bc666e5dd2",
+        "type": "junction",
+        "z": "a099d47fc07b3cee",
+        "x": 40,
+        "y": 360,
+        "wires": [
+            [
+                "ceb31920f185d64b"
+            ]
+        ]
     },
     {
         "id": "1d0932b9cdfe2cc0",
@@ -467,7 +511,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 140,
-        "y": 760,
+        "y": 880,
         "wires": [
             [
                 "b0cd2895e3545c27"
@@ -480,7 +524,7 @@
         "z": "a099d47fc07b3cee",
         "g": "a5b8a03b1e2f2371",
         "name": "Strategy selection",
-        "func": "// INFLOW\nlet strategy = flow.get(\"house_battery_strategy\");\n\n// Configure msg.strategy object\nRED.util.setMessageProperty(msg,\"strategy.selected\",strategy,true);\nRED.util.setMessageProperty(msg,\"strategy.trace\",[],true);\n\n// stop on error\nif(msg.batteries === undefined) {\n    node.error(\"Battery configuration undefined\", msg);\n    return null;\n}\nif(strategy === undefined) {\n    node.error(\"Battery strategy undefined\", msg);\n    return null;\n}\n\n// select target flow based on the input_select `house_battery_strategy`\nmsg.target = `${strategy}`;\n\n// full stop trigger overrules ALL selected strategies\nconst stopTrigger = RED.util.getMessageProperty(msg,\"full_stop_trigger\");\nif(stopTrigger == \"on\" || stopTrigger === true) {\n    msg.target = 'Full stop';\n}\n\n// add execution marker\nRED.util.setMessageProperty(msg,\"strategy.execution_start\",Date.now()); // when do we start executing the selected strategy\n\n// OUTPUT\nnode.status({fill:\"grey\",shape:\"dot\",text:msg.target});\nreturn msg;",
+        "func": "// Logger\nconst logger = global.get(\"logger\");\n\n// INFLOW\nlet strategy = flow.get(\"house_battery_strategy\");\n\n// Configure msg.strategy object\nRED.util.setMessageProperty(msg,\"strategy.selected\",strategy,true);\nRED.util.setMessageProperty(msg,\"strategy.trace\",[],true);\n\n// stop on error\nif(msg.batteries === undefined) {\n    logger(this, \"Battery configuration undefined\", \"error\");\n    return null;\n}\nif(strategy === undefined) {\n    logger(this, \"Battery strategy undefined\", \"error\");\n    return null;\n}\n\n// select target flow based on the input_select `house_battery_strategy`\nmsg.target = `${strategy}`;\n\n// full stop trigger overrules ALL selected strategies\nconst stopTrigger = RED.util.getMessageProperty(msg,\"full_stop_trigger\");\nif(stopTrigger == \"on\" || stopTrigger === true || stopTrigger === 1) {\n    msg.target = 'Full stop';\n    // Explain\n    logger(this, `**Full Stop** strategy selected, due to (EV) stop trigger: '${stopTrigger}'`);\n}\n\n// add execution marker\nRED.util.setMessageProperty(msg,\"strategy.execution_start\",Date.now()); // when do we start executing the selected strategy\n\n// OUTPUT\nnode.status({fill:\"grey\",shape:\"dot\",text:msg.target});\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -488,7 +532,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 760,
+        "y": 880,
         "wires": [
             [
                 "b658a34d31bcd8f3",
@@ -506,7 +550,7 @@
         "linkType": "dynamic",
         "timeout": "1.2",
         "x": 410,
-        "y": 800,
+        "y": 920,
         "wires": [
             [
                 "712cd7b2343eead6",
@@ -529,7 +573,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 680,
-        "y": 760,
+        "y": 880,
         "wires": []
     },
     {
@@ -547,7 +591,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 700,
-        "y": 800,
+        "y": 920,
         "wires": []
     },
     {
@@ -564,7 +608,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 840,
+        "y": 960,
         "wires": [
             [
                 "15830b9747f8132e",
@@ -587,7 +631,7 @@
         "finalize": "",
         "libs": [],
         "x": 320,
-        "y": 300,
+        "y": 420,
         "wires": [
             [
                 "a91127871ba39241"
@@ -608,7 +652,7 @@
         "finalize": "",
         "libs": [],
         "x": 140,
-        "y": 460,
+        "y": 580,
         "wires": [
             [
                 "bbe037f4bc3425fc"
@@ -637,7 +681,7 @@
         "repair": false,
         "outputs": 2,
         "x": 420,
-        "y": 460,
+        "y": 580,
         "wires": [
             [
                 "a91127871ba39241"
@@ -662,7 +706,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 770,
-        "y": 460,
+        "y": 580,
         "wires": []
     },
     {
@@ -709,7 +753,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 150,
-        "y": 300,
+        "y": 420,
         "wires": [
             [
                 "dbe474c91266b428"
@@ -760,7 +804,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 160,
-        "y": 380,
+        "y": 500,
         "wires": [
             [
                 "4e53830356f33b07"
@@ -811,7 +855,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 850,
-        "y": 380,
+        "y": 500,
         "wires": [
             [
                 "f3e427d4451be530"
@@ -862,7 +906,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1270,
-        "y": 380,
+        "y": 500,
         "wires": [
             [
                 "08d4efea54467ac1"
@@ -913,7 +957,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 680,
-        "y": 380,
+        "y": 500,
         "wires": [
             [
                 "325f396f7e8ad2a8"
@@ -964,7 +1008,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1420,
-        "y": 380,
+        "y": 500,
         "wires": [
             [
                 "208060fed37273fc"
@@ -1015,7 +1059,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 470,
-        "y": 380,
+        "y": 500,
         "wires": [
             [
                 "f384e6c0da2834c8"
@@ -1066,7 +1110,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 310,
-        "y": 380,
+        "y": 500,
         "wires": [
             [
                 "7831dd84510fdfaa"
@@ -1078,7 +1122,7 @@
         "type": "api-call-service",
         "z": "a099d47fc07b3cee",
         "g": "ea78c084bba20424",
-        "name": "Node-RED status: ON",
+        "name": "Node-RED status: OK",
         "server": "176d29a.6f648d6",
         "version": 7,
         "debugenabled": false,
@@ -1099,7 +1143,7 @@
         "blockInputOverrides": false,
         "domain": "input_boolean",
         "service": "turn_on",
-        "x": 1180,
+        "x": 1760,
         "y": 60,
         "wires": [
             []
@@ -1123,15 +1167,16 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "onceDelay": "2",
+        "onceDelay": "0.1",
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 990,
+        "x": 1410,
         "y": 60,
         "wires": [
             [
-                "ad80dc99baec6552"
+                "ca8748b5164d7b1c",
+                "d780cd3e820d19fd"
             ]
         ]
     },
@@ -1159,8 +1204,8 @@
         "blockInputOverrides": false,
         "domain": "input_text",
         "service": "set_value",
-        "x": 640,
-        "y": 980,
+        "x": 660,
+        "y": 1100,
         "wires": [
             []
         ]
@@ -1171,15 +1216,15 @@
         "z": "a099d47fc07b3cee",
         "g": "d77f3b233b9d9a45",
         "name": "Set Batteries",
-        "func": "// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// Output format and target\nlet outputArray = [];\nlet solution = msg.solutions[msg.battery_index-1]; // Base-0, thus -1\nif(solution === undefined) {\n    node.error(`Can't find solution for index ${msg.battery_index - 1} in ${msg.solutions}, aborting...`);\n    return null;\n}\nlet target = `marstek_${solution.id.toLowerCase()}`;\n\n// Safety | Id exists\nlet battery = msg.batteries.find(battery => battery.id === solution.id);\nif (battery === undefined) {\n    node.error(`Can't set battery ${solution.id}, aborting...`);\n    return null;\n}\n// Safety | Power limit\nsolution.power = Math.min(solution.power, solution.mode == CMODE.CHARGE ? battery.charging_max: battery.discharging_max);\n\n// Set | Mode\nconst serviceCallMode = {\n    \"action\": \"select.select_option\",\n    \"target\": {\n        \"entity_id\": [`select.${target}_forcible_charge_discharge`]\n    },\n    \"data\": {\n         \"option\": String(solution.mode) // forced charge mode (stop, charge, discharge)\n    }\n};\n// Add topic to allow correct 'on change' filtering\noutputArray.push({payload: serviceCallMode, topic:solution.id});\n\n// Set | Power\nconst serviceCallPower = {\n    \"action\": \"number.set_value\",\n    \"target\": {\n        \"entity_id\": [\n            `number.${target}_forcible_charge_power`,\n            `number.${target}_forcible_discharge_power`\n            ]\n    },\n    \"data\": {\n        \"value\": Number(solution.power)\n    } \n};\n// Add topic to allow correct 'on change' filtering\noutputArray.push({payload: serviceCallPower, topic:solution.id});\n\n// Store service calls in msg to allow checking of loop results\nmsg.loop_result = { target, serviceCallMode, serviceCallPower };\n\n// Return msg as third output\noutputArray.push(msg);\n\n// Output\nreturn outputArray;",
+        "func": "// Logger\nconst log = global.get(\"logger\");\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// Output format and target\nlet outputArray = [];\nlet solution = msg.solutions[msg.battery_index-1]; // Base-0, thus -1\nif (solution === undefined) {\n    log(this,`Can't find solution for index ${msg.battery_index - 1} in ${msg.solutions}, aborting...`,\"error\");\n    return null;\n}\nlet target = `marstek_${solution.id.toLowerCase()}`;\n\n// Safety | Id exists\nlet battery = msg.batteries.find(battery => battery.id === solution.id);\nif (battery === undefined) {\n    log(`Can't set battery ${solution.id}, aborting...`,\"error\");\n    return null;\n}\n// Safety | Power limit\nsolution.power = Math.min(solution.power, solution.mode == CMODE.CHARGE ? battery.charging_max: battery.discharging_max);\n\n// Set | Mode\nconst serviceCallMode = {\n    \"action\": \"select.select_option\",\n    \"target\": {\n        \"entity_id\": [`select.${target}_forcible_charge_discharge`]\n    },\n    \"data\": {\n         \"option\": String(solution.mode) // forced charge mode (stop, charge, discharge)\n    }\n};\n// Add topic to allow correct 'on change' filtering\noutputArray.push({payload: serviceCallMode, topic:solution.id});\n\n// Set | Power\nconst serviceCallPower = {\n    \"action\": \"number.set_value\",\n    \"target\": {\n        \"entity_id\": [\n            `number.${target}_forcible_charge_power`,\n            `number.${target}_forcible_discharge_power`\n            ]\n    },\n    \"data\": {\n        \"value\": Number(solution.power)\n    } \n};\n// Add topic to allow correct 'on change' filtering\noutputArray.push({payload: serviceCallPower, topic:solution.id});\n\n// Store service calls in msg to allow checking of loop results\nmsg.loop_result = { target, serviceCallMode, serviceCallPower };\n\n// Return msg as third output\noutputArray.push(msg);\n\n// Explain\nlog(this,`${target} ${String(solution.mode)} @ ${Number(solution.power)} Watt`);\n\n// Output\nreturn outputArray;",
         "outputs": 3,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 390,
-        "y": 1020,
+        "x": 410,
+        "y": 1140,
         "wires": [
             [
                 "e1927196c4198cbf"
@@ -1214,7 +1259,7 @@
         "finalize": "",
         "libs": [],
         "x": 120,
-        "y": 1020,
+        "y": 1140,
         "wires": [
             [
                 "047542bb597a3048"
@@ -1242,8 +1287,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 720,
-        "y": 1080,
+        "x": 740,
+        "y": 1200,
         "wires": [
             [
                 "047542bb597a3048"
@@ -1266,8 +1311,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 560,
-        "y": 1080,
+        "x": 580,
+        "y": 1200,
         "wires": [
             [
                 "df4b99688f85df0a",
@@ -1299,8 +1344,8 @@
         "blockInputOverrides": false,
         "domain": "input_text",
         "service": "set_value",
-        "x": 740,
-        "y": 1020,
+        "x": 760,
+        "y": 1140,
         "wires": [
             []
         ]
@@ -1310,7 +1355,7 @@
         "type": "function",
         "z": "a099d47fc07b3cee",
         "g": "5778369e644d84d7",
-        "name": "timing start",
+        "name": "Timing start",
         "func": "RED.util.setMessageProperty(msg,\"setbatteries.execution_start\",Date.now());\nRED.util.setMessageProperty(msg,\"setbatteries.marker\", `M1_${Date.now()}`);\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -1319,7 +1364,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 980,
+        "y": 1100,
         "wires": [
             [
                 "95295516124d818d"
@@ -1336,6 +1381,11 @@
         "propertyType": "msg",
         "rules": [
             {
+                "t": "eq",
+                "v": "undefined",
+                "vt": "jsonata"
+            },
+            {
                 "t": "neq",
                 "v": "undefined",
                 "vt": "jsonata"
@@ -1343,10 +1393,13 @@
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 1,
+        "outputs": 2,
         "x": 150,
-        "y": 940,
+        "y": 1060,
         "wires": [
+            [
+                "bd24a7a9802612b4"
+            ],
             [
                 "4d6fd96944872ba1"
             ]
@@ -1357,7 +1410,7 @@
         "type": "function",
         "z": "a099d47fc07b3cee",
         "g": "5778369e644d84d7",
-        "name": "timing end",
+        "name": "Timing end",
         "func": "let start = RED.util.getMessageProperty(msg,\"setbatteries.execution_start\");\nlet end = Date.now();\nlet delta = end - start;\nlet timingString = `${delta/1000} sec`;\n\nnode.status({fill:\"green\",shape:\"dot\",text: timingString});\nmsg.delta = delta;\nmsg.timing = timingString;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -1366,10 +1419,11 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 1140,
+        "y": 1320,
         "wires": [
             [
-                "77163ca9f43e8fb7"
+                "77163ca9f43e8fb7",
+                "9afb8cfc6b4732b2"
             ]
         ]
     },
@@ -1387,8 +1441,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 730,
-        "y": 1120,
+        "x": 750,
+        "y": 1240,
         "wires": []
     },
     {
@@ -1404,8 +1458,8 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 570,
-        "y": 1020,
+        "x": 590,
+        "y": 1140,
         "wires": [
             [
                 "4decf8d91d6ccacb"
@@ -1426,8 +1480,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 110,
-        "y": 1200,
+        "x": 270,
+        "y": 1320,
         "wires": []
     },
     {
@@ -1444,7 +1498,7 @@
         "finalize": "",
         "libs": [],
         "x": 280,
-        "y": 460,
+        "y": 580,
         "wires": [
             [
                 "7d6705c1829e0683"
@@ -1465,7 +1519,7 @@
         "finalize": "",
         "libs": [],
         "x": 360,
-        "y": 660,
+        "y": 780,
         "wires": [
             [
                 "e63433bdfbdd57e9"
@@ -1495,7 +1549,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 610,
-        "y": 660,
+        "y": 780,
         "wires": [
             [
                 "64c9954af597093d"
@@ -1516,7 +1570,7 @@
         "finalize": "",
         "libs": [],
         "x": 1540,
-        "y": 660,
+        "y": 780,
         "wires": [
             [
                 "c9b6b8b729161188"
@@ -1567,7 +1621,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1350,
-        "y": 660,
+        "y": 780,
         "wires": [
             [
                 "9f9dd1b6c8a68339"
@@ -1618,7 +1672,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 150,
-        "y": 660,
+        "y": 780,
         "wires": [
             [
                 "db8e14c359673211"
@@ -1652,7 +1706,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 1750,
-        "y": 660,
+        "y": 780,
         "wires": [
             []
         ]
@@ -1695,7 +1749,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 800,
-        "y": 660,
+        "y": 780,
         "wires": [
             [
                 "1dac3194a67aeec2"
@@ -1716,7 +1770,7 @@
         "finalize": "",
         "libs": [],
         "x": 980,
-        "y": 660,
+        "y": 780,
         "wires": [
             [
                 "641cc1cf21ace75a"
@@ -1767,7 +1821,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1160,
-        "y": 660,
+        "y": 780,
         "wires": [
             [
                 "1cc51c4bd0523e93"
@@ -1788,7 +1842,7 @@
         "finalize": "",
         "libs": [],
         "x": 140,
-        "y": 560,
+        "y": 680,
         "wires": [
             [
                 "1c419030271bee64",
@@ -1843,7 +1897,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1570,
-        "y": 380,
+        "y": 500,
         "wires": [
             [
                 "64a533741de02153"
@@ -1864,7 +1918,7 @@
         "finalize": "",
         "libs": [],
         "x": 580,
-        "y": 460,
+        "y": 580,
         "wires": [
             [
                 "1933f2623fa0fffb",
@@ -1898,8 +1952,8 @@
         "blockInputOverrides": true,
         "domain": "input_number",
         "service": "set_value",
-        "x": 560,
-        "y": 560,
+        "x": 1760,
+        "y": 680,
         "wires": [
             []
         ]
@@ -1948,7 +2002,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 140,
-        "y": 820,
+        "y": 940,
         "wires": [
             [
                 "06dd855a34065b5d"
@@ -1968,8 +2022,8 @@
         "septopics": false,
         "property": "batteries_available_energy",
         "topi": "topic",
-        "x": 370,
-        "y": 560,
+        "x": 1570,
+        "y": 680,
         "wires": [
             [
                 "f27b588385633b97"
@@ -1997,7 +2051,7 @@
         "to": "",
         "reg": false,
         "x": 980,
-        "y": 380,
+        "y": 500,
         "wires": [
             [
                 "a882514e64e6f538"
@@ -2025,7 +2079,7 @@
         "to": "",
         "reg": false,
         "x": 1120,
-        "y": 380,
+        "y": 500,
         "wires": [
             [
                 "d01fc0ee854e249a"
@@ -2038,7 +2092,7 @@
         "z": "a099d47fc07b3cee",
         "g": "149d3bed7854fec1",
         "name": "Select rate limit",
-        "property": "rate_limit",
+        "property": "p1_rate_limit.save_power",
         "propertyType": "msg",
         "rules": [
             {
@@ -2051,8 +2105,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 380,
-        "y": 180,
+        "x": 660,
+        "y": 280,
         "wires": [
             [
                 "563c57a7746c3a96"
@@ -2067,7 +2121,7 @@
         "type": "delay",
         "z": "a099d47fc07b3cee",
         "g": "149d3bed7854fec1",
-        "name": "Rate limit (drop)",
+        "name": "Rate limit",
         "pauseType": "rate",
         "timeout": "5",
         "timeoutUnits": "seconds",
@@ -2079,14 +2133,20 @@
         "randomUnits": "seconds",
         "drop": true,
         "allowrate": true,
-        "outputs": 1,
-        "x": 720,
-        "y": 200,
+        "outputs": 2,
+        "x": 980,
+        "y": 280,
         "wires": [
             [
-                "ceb31920f185d64b",
-                "ca528d9c66c9f8d6"
+                "0b5f8dbb2283df26"
+            ],
+            [
+                "9b0aae5445f0d48b"
             ]
+        ],
+        "outputLabels": [
+            "Pass",
+            ""
         ]
     },
     {
@@ -2109,8 +2169,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 540,
-        "y": 200,
+        "x": 820,
+        "y": 300,
         "wires": [
             [
                 "8ddd86470cf105f4"
@@ -2137,8 +2197,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 550,
-        "y": 160,
+        "x": 830,
+        "y": 260,
         "wires": [
             [
                 "8ddd86470cf105f4"
@@ -2151,15 +2211,15 @@
         "z": "a099d47fc07b3cee",
         "g": "149d3bed7854fec1",
         "name": "P1 change (20W or 2%)",
-        "func": "// Switch between low and high rate limiting to decrease load and power consumption\n// --\n// The flow should always be rate limited by atleast the total execution time of strategies\n// The flow should not lock up indefinitly when grid_power is constant.\n// In the latter case, a more relaxed rate limit can help reduce system load.\n// Devs: don't set msg.rate directly. Use nodes, so novice users can easily read the flow.\n\n// Count the number of evaluations\nlet evaluationCount = Number(context.get(\"p1_rate_limit_evaluations\")) + 1 || 1;\ncontext.set(\"p1_rate_limit_evaluations\", evaluationCount);\nmsg.rate_limit_evaluations = evaluationCount;\n\n// Get the previous value from this node's context\n// If it doesn't exist yet, initialize it as null\nlet previousValue = context.get('previousValue') || null;\nlet currentValue = Number(msg.grid_power);\n\n// Save the current value for the next time the node is triggered\ncontext.set('previousValue', currentValue);\n\n// Default no limiting\nmsg.rate_limit = false;\n\n// Check if we have a valid history to compare with\nif (previousValue !== null) {\n    let absoluteDiff = Math.abs(currentValue - previousValue);\n    let percentageChange = previousValue !== 0 ? Math.abs((absoluteDiff / previousValue) * 100):0;\n\n    // Condition: Absolute difference > N Watt AND percentage change > M %\n    if (absoluteDiff > 20 && percentageChange > 2) {\n\n        // Enable rate limit\n        msg.rate_limit = true;\n    }\n}\n\nreturn msg;",
+        "func": "// Switch between low and high rate limiting to decrease load and power consumption\n// --\n// The flow should always be rate limited by atleast the total execution time of strategies\n// The flow should not lock up indefinitly when grid_power is constant.\n// In the latter case, a more relaxed rate limit can help reduce system load.\n// Devs: don't set msg.rate directly. Use nodes, so novice users can easily read the flow.\n\n// Thresholds for change in power, before switching to high rate limit\nconst THRESHOLD_POWER = 20; // Watt change\nconst THRESHOLD_PERCENT = 2; // Percentage\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_power\", THRESHOLD_POWER,true);\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_percent\", THRESHOLD_PERCENT, true);\n\n// Get the previous value from this node's context\n// If it doesn't exist yet, initialize it as null\nlet previousValue = context.get('previousValue') || null;\nlet currentValue = Number(msg.grid_power);\n\n// Save the current value for the next time the node is triggered\ncontext.set('previousValue', currentValue);\n\n// Default rate limiting\nRED.util.setMessageProperty(msg,\"p1_rate_limit.save_power\",true);\n\n// Check if we have a valid history to compare with\nif (previousValue !== null) {\n    let powerChange = Math.abs(currentValue - previousValue);\n    let percentageChange = previousValue !== 0 ? Math.abs((powerChange / previousValue) * 100):0;\n\n    // Condition: Absolute difference > N Watt AND percentage change > M %\n    if (powerChange > THRESHOLD_POWER && percentageChange > THRESHOLD_PERCENT) {\n        // Enable faster refresh rate\n        RED.util.setMessageProperty(msg,\"p1_rate_limit.save_power\",false);\n    }\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 170,
-        "y": 180,
+        "x": 450,
+        "y": 280,
         "wires": [
             [
                 "e2a3a19c3da30059"
@@ -2172,17 +2232,19 @@
         "z": "a099d47fc07b3cee",
         "g": "149d3bed7854fec1",
         "name": "CPU power saved",
-        "func": "// 1. Get evaluations (Total attempts)\nlet evaluations = Number(RED.util.getMessageProperty(msg,\"rate_limit_evaluations\")) || 0;\n\n// 2. Increment and get passes (Filtered/successful events)\nlet passes = (context.get(\"p1_rate_limit_passes\") || 0) + 1;\ncontext.set(\"p1_rate_limit_passes\", passes);\n\n// 3a. Calculate percentage (Rate of passing vs total evaluations)\nlet percentage = evaluations > 0 ? (passes / evaluations) * 100 : 0;\n// 3b. Display the percentage rate of not-passing as a measure of efficiency gained\npercentage = 100 - percentage;\n\n// 4. Update Node Status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Saved: ${percentage.toFixed(2)}% (${evaluations-passes}/${evaluations})`\n});\n\n// No output\nreturn null;\n\n/*\n// Counters\nlet passesCount = context.get(\"p1_rate_limit_passes\") || 0;\ncontext.set(\"p1_rate_limit_passes\", passesCount++);\n\nlet evaluationCount = Number(flow.get(\"p1_rate_limit_evaluations\")) || 0;\n\n// Percentage\nlet percentage = 0;\nif(passesCount !== 0) {\n    percentage = evaluationCount/passesCount * 100;\n    percentage = Number(percentage.toFixed(2));  // 2 decimals\n}\n\n// Node info\nnode.status({fill:\"blue\",shape:\"dot\",text:`${percentage} %`});\n\nreturn null; */",
+        "func": "// Logger\nconst logger = global.get(\"logger\");\n\n// Passed or blocked\nconst hasPassed = msg.payload; // 0 = blocked, 1 = passed\n\n// 1. Get evaluations (Total attempts)\nlet evaluations = (context.get(\"p1_rate_limit_evaluations\") || 0) + 1;\ncontext.set(\"p1_rate_limit_evaluations\", evaluations);\n\n// 2. Increment and get passes (Filtered/successful events)\nlet passes = (context.get(\"p1_rate_limit_passes\") || 0) + hasPassed;\ncontext.set(\"p1_rate_limit_passes\", passes);\n\n// 3a. Calculate percentage (Rate of passing vs total evaluations)\nlet percentage = evaluations > 0 ? (passes / evaluations) * 100 : 0;\n// 3b. Display the percentage rate of not-passing as a measure of efficiency gained\npercentage = 100 - percentage;\n\n// 4. Update Node Status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Saved: ${percentage.toFixed(2)}% (${evaluations-passes}/${evaluations})`\n});\n\n// 5. Explain\n// On block\nif(hasPassed === 0) {\n    if(msg.p1_rate_limit.save_power === true) {\n        // This is good\n        logger(this, `<font color=\"#009ac7\">Power saved</font> by P1 Rate Limiter, execution stopped.`); \n    } else {\n        // This is not so good. P1 updates are coming in fast.\n        logger(this, `<font color=\"orange\">Blocked</font> by P1 Rate Limiter. ${Number(1000/msg.rate).toFixed(2)} messages per second exceeded.`); \n    }\n    \n    // Send message onward to debug dashboard\n    return msg;\n}\n// No output on pass\nreturn null;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 950,
-        "y": 200,
+        "x": 1270,
+        "y": 280,
         "wires": [
-            []
+            [
+                "f213e8027e665e7a"
+            ]
         ]
     },
     {
@@ -2200,14 +2262,14 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 710,
-        "y": 840,
+        "y": 960,
         "wires": []
     },
     {
         "id": "16efd2b03d6dece5",
         "type": "api-call-service",
         "z": "a099d47fc07b3cee",
-        "g": "28a2ae1ba720d063",
+        "g": "a9726cdfb26e4cbd",
         "name": "Show on dashboard",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -2229,8 +2291,8 @@
         "blockInputOverrides": true,
         "domain": "input_text",
         "service": "set_value",
-        "x": 1420,
-        "y": 840,
+        "x": 1760,
+        "y": 960,
         "wires": [
             []
         ]
@@ -2239,7 +2301,7 @@
         "id": "87e5752435e0ca42",
         "type": "api-current-state",
         "z": "a099d47fc07b3cee",
-        "g": "28a2ae1ba720d063",
+        "g": "a9726cdfb26e4cbd",
         "name": "current UI value",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -2278,12 +2340,11 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1020,
-        "y": 840,
+        "x": 1360,
+        "y": 960,
         "wires": [
             [
-                "600f70a08a900d1c",
-                "9afb8cfc6b4732b2"
+                "600f70a08a900d1c"
             ]
         ]
     },
@@ -2291,7 +2352,7 @@
         "id": "600f70a08a900d1c",
         "type": "function",
         "z": "a099d47fc07b3cee",
-        "g": "28a2ae1ba720d063",
+        "g": "a9726cdfb26e4cbd",
         "name": "on new UI value",
         "func": "// Block when undefined (don't update UI)\nif(msg.ui_value_current === undefined) return null;\n\n// We show the 2nd strategy in the trace (if available) on the dashboard as the 'active sub-strategy'\nconst secondTraceEntry = msg.strategy?.trace?.[1];\nif (secondTraceEntry) {\n    // Handle case where 2nd flow is present\n    msg.ui_value_new =  secondTraceEntry.flow;\n} else {\n    // Handle case where the 2nd flow is missing\n    // Get a sensible alternative\n    msg.ui_value_new = msg.strategy?.selected || \"\"; // don't use unknown or unavailable as these are reserved HA keywords\n}\n\n// Improve human readability\nif(msg.ui_value_new == \"Self-consumption\" && secondTraceEntry?.flow_settings?.discharge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (charge only)\";\n}\n\n// Node status for devs\nnode.status({fill:\"grey\",shape:\"dot\",text:`new: ${msg.ui_value_new}`});\n\n// Block when equal (don't update UI)\nif(msg.ui_value_current === msg.ui_value_new) return null;\n\n// Pass otherwise\nreturn msg;",
         "outputs": 1,
@@ -2300,8 +2361,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1220,
-        "y": 840,
+        "x": 1560,
+        "y": 960,
         "wires": [
             [
                 "16efd2b03d6dece5"
@@ -2317,10 +2378,10 @@
         "server": "176d29a.6f648d6",
         "version": 0,
         "event": "update_trace_sensor",
-        "data": "{\t   \"trace\": strategy.trace ? strategy.trace : []\t}",
+        "data": "{\t   \"trace\": strategy.trace ? strategy.trace : [],\t   \"start\": strategy.execution_start ? strategy.execution_start : 0,\t   \"end\": strategy.execution_end ? strategy.execution_end : 0,\t   \"log\": log ? log : []\t}",
         "dataType": "jsonata",
-        "x": 1420,
-        "y": 900,
+        "x": 1740,
+        "y": 1320,
         "wires": [
             []
         ]
@@ -2329,7 +2390,7 @@
         "id": "625f53bc2e61f2fa",
         "type": "api-current-state",
         "z": "a099d47fc07b3cee",
-        "g": "fc3b0636793881be",
+        "g": "bfb65874f68e9557",
         "name": "Debug mode",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -2358,6 +2419,12 @@
                 "propertyType": "msg",
                 "value": "ha_boolean",
                 "valueType": "entityState"
+            },
+            {
+                "property": "debug_mode",
+                "propertyType": "global",
+                "value": "ha_boolean",
+                "valueType": "entityState"
             }
         ],
         "for": "0",
@@ -2368,11 +2435,11 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 750,
-        "y": 60,
+        "x": 130,
+        "y": 160,
         "wires": [
             [
-                "898cc8a1b89a0f72"
+                "f6692c64e302f8b7"
             ]
         ]
     },
@@ -2383,7 +2450,7 @@
         "g": "28a2ae1ba720d063",
         "name": "Debug mode?",
         "property": "debug_mode",
-        "propertyType": "msg",
+        "propertyType": "global",
         "rules": [
             {
                 "t": "true"
@@ -2392,8 +2459,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1220,
-        "y": 900,
+        "x": 1540,
+        "y": 1320,
         "wires": [
             [
                 "f9cb97e039c82bdc"
@@ -2404,7 +2471,7 @@
         "id": "ee2ae25070582e27",
         "type": "server-state-changed",
         "z": "a099d47fc07b3cee",
-        "g": "8edf76f55293c620",
+        "g": "bfb65874f68e9557",
         "name": "On debug",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -2451,8 +2518,8 @@
                 "valueType": "triggerId"
             }
         ],
-        "x": 1420,
-        "y": 60,
+        "x": 380,
+        "y": 160,
         "wires": [
             [
                 "93ab1d6dafabb3c1"
@@ -2464,7 +2531,7 @@
         "id": "93ab1d6dafabb3c1",
         "type": "trigger",
         "z": "a099d47fc07b3cee",
-        "g": "8edf76f55293c620",
+        "g": "bfb65874f68e9557",
         "name": "disable debug after 5 minutes",
         "op1": "",
         "op2": "off",
@@ -2478,8 +2545,8 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 1630,
-        "y": 60,
+        "x": 590,
+        "y": 160,
         "wires": [
             [
                 "40b79d34db8d2b48"
@@ -2490,7 +2557,7 @@
         "id": "40b79d34db8d2b48",
         "type": "api-call-service",
         "z": "a099d47fc07b3cee",
-        "g": "8edf76f55293c620",
+        "g": "bfb65874f68e9557",
         "name": "Turn debug OFF",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -2512,11 +2579,268 @@
         "blockInputOverrides": true,
         "domain": "input_boolean",
         "service": "turn_off",
-        "x": 1860,
-        "y": 60,
+        "x": 820,
+        "y": 160,
         "wires": [
             []
         ]
+    },
+    {
+        "id": "ca8748b5164d7b1c",
+        "type": "delay",
+        "z": "a099d47fc07b3cee",
+        "g": "ea78c084bba20424",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1580,
+        "y": 60,
+        "wires": [
+            [
+                "ad80dc99baec6552"
+            ]
+        ]
+    },
+    {
+        "id": "d780cd3e820d19fd",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "ea78c084bba20424",
+        "name": "Custom logger",
+        "func": "/**\n * Custom Logger Function\n * * Provides centralized logging, node-status updates, and message tracing.\n * Specifically designed for Home Battery Control logic within Node-RED.\n * \n * Debug dashboard updating:\n * A msg needs to reach 'Strategy Evaluation' or be passed to the \"Show on debug board\" trigger node.\n * Errors are automatically passed to the \"Show on debug board\" trigger node.\n * \n * * @param {object} callingNode - The context of the calling node (pass 'this').\n * @param {string} text - The log message/explanation.\n * @param {string} level - Log level: 'log', 'warn', 'error', or 'info' (default: 'info').\n * \n * Note: anything above 'info' will also write to the Node-RED log files \n * \n * * @usage: \n * const log = global.get(\"logger\");\n * log(this, \"Charging cycle started\");\n */\nconst customLogger = (callingNode, text, level = 'info') => {\n    \n    // Log only when debug_mode is ON\n    const debug_mode = global.get(\"debug_mode\") || false;\n    if(debug_mode == false) return null;\n\n    // Max log elements to keep\n    const MAX_ELEMENTS = 100;\n\n    // Create the YYYY-MM-DD HH:MM:SS.mmm format\n    const now = new Date();\n    const timestamp = now.getHours().toString().padStart(2, '0') + \":\" +\n                now.getMinutes().toString().padStart(2, '0') + \":\" +\n                now.getSeconds().toString().padStart(2, '0') + \".\" +\n                now.getMilliseconds().toString().padStart(3, '0');\n\n    const formattedTimeLevel = `${timestamp} [${level.toLowerCase()}]`;\n    \n    // Get the name of the node or fallback to the ID\n    const nodeName = callingNode.__node__ ? callingNode.__node__.name || callingNode.__node__.id : undefined;\n    // Get the name of the Flow/Tab\n    const flowName = callingNode.env.get(\"NR_FLOW_NAME\") || \"Unknown flow\";\n    // Explain to the Home Battery Control user what is going on\n    const formattedExplenation = `[${flowName} >> ${nodeName}]: ${text}`;\n\n    // Level icons\n    let icon = \"⚪\";\n    switch (level) {\n        case \"info\":\n            icon = \"ℹ️\";\n            break;\n        case \"log\":\n            icon = \"🔧\";\n            break;\n        case \"warn\":\n            icon = \"⚠️\";      \n            break;\n        case \"error\":\n            icon = \"❌\";\n            break;\n    }\n\n    // Enrich msg with log info\n    const msg = callingNode.msg;\n    (msg.log = msg.log || []).push({ timestamp: timestamp, level:level, flow:flowName, node:nodeName, payload: text, icon: icon});\n\n    if (msg.log.length > MAX_ELEMENTS) {\n        // Slice keeps the last X elements\n        msg.log = msg.log.slice(-MAX_ELEMENTS);\n    }\n\n    // Log to the Node-RED system log\n    switch (level) {\n        case \"log\":\n            node.log(`${formattedExplenation}`);\n            break;\n        case \"warn\":\n            node.warn(`${formattedExplenation}`);       \n            break;\n        case \"error\":\n            node.error(`${formattedExplenation}`, callingNode.msg);\n            break;\n        default:\n            // don't log to logfiles by default\n    }\n\n};\n\nglobal.set('logger', customLogger);\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1600,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0b5f8dbb2283df26",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "149d3bed7854fec1",
+        "name": "Pass",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1110,
+        "y": 300,
+        "wires": [
+            [
+                "ca528d9c66c9f8d6",
+                "ca3fa4bc666e5dd2"
+            ]
+        ]
+    },
+    {
+        "id": "9b0aae5445f0d48b",
+        "type": "change",
+        "z": "a099d47fc07b3cee",
+        "g": "149d3bed7854fec1",
+        "name": "Block",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1110,
+        "y": 260,
+        "wires": [
+            [
+                "ca528d9c66c9f8d6"
+            ]
+        ]
+    },
+    {
+        "id": "fe48ceaa8805fad1",
+        "type": "link in",
+        "z": "a099d47fc07b3cee",
+        "g": "28a2ae1ba720d063",
+        "name": "Update debug dashboard",
+        "links": [
+            "16a456b52daa011d",
+            "f213e8027e665e7a",
+            "bd24a7a9802612b4"
+        ],
+        "x": 1395,
+        "y": 1260,
+        "wires": [
+            [
+                "9afb8cfc6b4732b2",
+                "5e20e0b02d9b6db5"
+            ]
+        ]
+    },
+    {
+        "id": "f213e8027e665e7a",
+        "type": "link out",
+        "z": "a099d47fc07b3cee",
+        "g": "149d3bed7854fec1",
+        "name": "goto Debug Dashboard update",
+        "mode": "link",
+        "links": [
+            "fe48ceaa8805fad1"
+        ],
+        "x": 1395,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "bd2a65959fe4e8d8",
+        "type": "catch",
+        "z": "a099d47fc07b3cee",
+        "g": "28a2ae1ba720d063",
+        "name": "Custom logger",
+        "scope": [
+            "d780cd3e820d19fd"
+        ],
+        "uncaught": false,
+        "x": 1340,
+        "y": 1380,
+        "wires": [
+            [
+                "9afb8cfc6b4732b2",
+                "8c6c156e143d3f10"
+            ]
+        ]
+    },
+    {
+        "id": "8c6c156e143d3f10",
+        "type": "debug",
+        "z": "a099d47fc07b3cee",
+        "g": "28a2ae1ba720d063",
+        "name": "Via Catch",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 1520,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "5e20e0b02d9b6db5",
+        "type": "debug",
+        "z": "a099d47fc07b3cee",
+        "g": "28a2ae1ba720d063",
+        "name": "Via link",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 1520,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "bd24a7a9802612b4",
+        "type": "link out",
+        "z": "a099d47fc07b3cee",
+        "g": "5778369e644d84d7",
+        "name": "link out 1",
+        "mode": "link",
+        "links": [
+            "fe48ceaa8805fad1"
+        ],
+        "x": 905,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "029e59a3b851ea60",
+        "type": "switch",
+        "z": "a099d47fc07b3cee",
+        "g": "149d3bed7854fec1",
+        "name": "Skip rate limiter during debug",
+        "property": "debug_mode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 180,
+        "y": 280,
+        "wires": [
+            [
+                "898cc8a1b89a0f72"
+            ],
+            [
+                "ca3fa4bc666e5dd2"
+            ]
+        ]
+    },
+    {
+        "id": "f6692c64e302f8b7",
+        "type": "function",
+        "z": "a099d47fc07b3cee",
+        "g": "bfb65874f68e9557",
+        "name": "Notice",
+        "func": "// Explain when debugging\nif(msg.debug_mode == true){\n    const log = global.get(\"logger\");\n    log(this, \"P1 Rate limiter is *disabled* during *debug mode*\");\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 235,
+        "y": 160,
+        "wires": [
+            [
+                "029e59a3b851ea60"
+            ]
+        ],
+        "l": false
     },
     {
         "id": "176d29a.6f648d6",
@@ -2533,7 +2857,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "d415cf54402305e6",
+        "id": "a8ba5f67d3097c26",
         "type": "global-config",
         "env": [],
         "modules": {
