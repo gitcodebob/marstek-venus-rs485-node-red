@@ -39,7 +39,7 @@
      - Configuration files are organized using the package-based structure:
        - `packages/house_battery_control.yaml` contains all input entities (booleans, datetimes, numbers, selects) and template sensors for battery control. This file is what you usually update.
        - `packages/house_battery_control_config.yaml` contains configuration-related entities specific for your install. Customize it. Don't overwrite at each update.
-       - `packages/house_battery_control_charge_limits.yaml` contains optional inputs to configure charging and discharging limits, for example for for Marstek Venus E v3 batteries which no longer expose them on the modbus.
+       - `packages/house_battery_control_charge_limits.yaml` contains optional inputs to configure charging and discharging limits, for example for Marstek Venus E v3 batteries which no longer expose them on the modbus.
      - The main `configuration.yaml` automatically loads all package files from the `packages/` directory
        - Tip: you can add your own package files to the `packages/` folder as well. They will be loaded automatically.
        - Tip: the `house_battery_control.yaml` includes `recorder:` configuration to reduce logbook clutter by excluding high-frequency technical entities (PID control signals, calculated averages) while preserving user-relevant changes (Master Switch, Strategy selection, configuration changes). History graphs and statistics remain fully functional.
@@ -81,5 +81,5 @@
 - The P1 value is expected in Watt (w). If your meter supplies kW, multiply the P1 input * 1000
 - Test your first time setup in 800W mode
 - Manufacturers advise to consult a professional electrician when going above 800W.
-- Set the appropiate Max. Charge and Max. Discharge values for each battery via the dashboard, by clicking on the glance charts on the dashboard.
-- Don't soley rely on Home Assistant / Node-RED to disengage the batteries when running into trouble during first flights. Staying near the physical battery controls or your circuit breakers is a good extra safety measure. 
+- Set the appropriate Max. Charge and Max. Discharge values for each battery via the dashboard, by clicking on the glance charts on the dashboard.
+- Don't solely rely on Home Assistant / Node-RED to disengage the batteries when running into trouble during first flights. Staying near the physical battery controls or your circuit breakers is a good extra safety measure. 

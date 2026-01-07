@@ -62,7 +62,7 @@
   the [Victron BatteryLife](https://www.victronenergy.com/media/pg/Energy_Storage_System/en/controlling-depth-of-discharge.html#UUID-af4a7478-4b75-68ac-cf3c-16c381335d1e)
   strategy to ensure the battery reaches 100% State of Charge regularly for 
   calibration purposes.
-- The Node-RED flows check for the existance of the `input_number` helpers for each
+- The Node-RED flows check for the existence of the `input_number` helpers for each
   battery individually, 
   and if it exists uses that as preferred value.
   If the `input_number` could not be found it looks for the corresponding `number` 
