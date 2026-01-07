@@ -3032,7 +3032,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"rules\":[{\"condition\":\"state_object\",\"property\":\"entity_id\",\"logic\":\"is\",\"value\":\"input_number.marstek_m$flowContext('battery_index')_discharging_cutoff_capacity\",\"valueType\":\"str\"}]}",
+                "to": "{\"rules\":[{\"condition\":\"state_object\",\"property\":\"entity_id\",\"logic\":\"is\",\"value\":\"number.marstek_m$flowContext('battery_index')_discharging_cutoff_capacity\",\"valueType\":\"str\"}]}",
                 "tot": "json"
             },
             {
@@ -3336,7 +3336,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"rules\":[{\"condition\":\"state_object\",\"property\":\"entity_id\",\"logic\":\"is\",\"value\":\"input_number.marstek_m{{battery_index}}_charging_cutoff_capacity\",\"valueType\":\"str\"}]}",
+                "to": "{\"rules\":[{\"condition\":\"state_object\",\"property\":\"entity_id\",\"logic\":\"is\",\"value\":\"number.marstek_m{{battery_index}}_charging_cutoff_capacity\",\"valueType\":\"str\"}]}",
                 "tot": "json"
             },
             {
