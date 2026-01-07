@@ -64,7 +64,7 @@
   calibration purposes.
 - The Node-RED flows check for the existence of the `input_number` helpers for each
   battery individually, 
-  and if it exists uses that as preferred value.
+  and if it exists, uses that as the preferred value.
   If the `input_number` could not be found it looks for the corresponding `number` 
   entity.
   If that also does not exist it falls back to the default value of 12% for the
