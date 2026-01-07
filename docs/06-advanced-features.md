@@ -52,7 +52,7 @@
   limit (minimum state of charge) and charging limit (maximum state of charge). 
   These limits are no longer exposed in the v3 batteries. 
   To overcome this you can define `input_number` helpers using the 
-  `house_battery_control_charging_limits.yaml` from the `home assistant\packages` 
+  `house_battery_control_charge_limits.yaml` from the `home assistant\packages` 
   directory.
   Simply add the file to the packages directory and restart Home Assistant to create 
   the necessary helpers.
