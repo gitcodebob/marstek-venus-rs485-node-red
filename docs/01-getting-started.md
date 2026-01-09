@@ -39,7 +39,6 @@
      - Configuration files are organized using the package-based structure:
        - `packages/house_battery_control.yaml` contains all input entities (booleans, datetimes, numbers, selects) and template sensors for battery control. This file is what you usually update.
        - `packages/house_battery_control_config.yaml` contains configuration-related entities specific for your install. Customize it. Don't overwrite at each update.
-       - `packages/house_battery_control_charge_limits.yaml` contains optional inputs to configure charging and discharging limits, for example for Marstek Venus E v3 batteries which no longer expose them on the modbus.
      - The main `configuration.yaml` automatically loads all package files from the `packages/` directory
        - Tip: you can add your own package files to the `packages/` folder as well. They will be loaded automatically.
        - Tip: the `house_battery_control.yaml` includes `recorder:` configuration to reduce logbook clutter by excluding high-frequency technical entities (PID control signals, calculated averages) while preserving user-relevant changes (Master Switch, Strategy selection, configuration changes). History graphs and statistics remain fully functional.
