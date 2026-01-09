@@ -18,7 +18,7 @@ template:
       # House battery control | Grid power
       # Your P1 meter indicates the power drawn or returned to grid.
       # This "P1 meter power" sensor acts as an alias for you power sensing configuration and is used throughout the node-RED scripts.
-      - name: "Grid Power"
+      - name: "P1 Meter Power"
         unique_id: "p1_meter_power"
         state: "{{ states('sensor.l1_meter_power') }}" # << SET YOUR GRID POWER SENSOR HERE
         unit_of_measurement: "W"
