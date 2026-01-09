@@ -262,9 +262,6 @@ views:
             heading: Basic battery information
             heading_style: title
             icon: mdi:home-battery-outline
-            tap_action:
-              action: navigate
-              navigation_path: /home-battery/battery-settings
           - type: tile
             entity: sensor.battery_time_remaining
             name: Battery remaining
