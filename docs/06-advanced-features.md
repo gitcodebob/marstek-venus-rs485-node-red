@@ -48,8 +48,8 @@
    - Deploy as per normal instructions.
 
 ## Charging/Discharging limits
-- Marstek Venus E batteries prior to hardware version 3 allowed to set the discharging 
-  limit (minimum state of charge) and charging limit (maximum state of charge). 
+- Marstek Venus E batteries with hardware versions prior to 3 allowed setting the discharging
+  limit (minimum state of charge) and the charging limit (maximum state of charge).
   These limits are no longer exposed in the v3 batteries. 
   To overcome this, a number of `input_number` helpers are defined which are used for 
   all batteries instead of the device limits.
