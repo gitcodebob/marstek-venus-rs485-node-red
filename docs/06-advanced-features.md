@@ -46,3 +46,16 @@
    - Set the correct battery index in the `Start Loop` node. Keeping an eye on which battery is on which phase and thus which flow.
    - Remove the `Loop step` and `Loop until`, tie the `Mapping` to the `Battery strategy` directly.
    - Deploy as per normal instructions.
+
+## Charging/Discharging limits
+- Marstek Venus E batteries with hardware versions prior to 3 allowed setting the discharging
+  limit (minimum state of charge) and the charging limit (maximum state of charge).
+  These limits are no longer exposed in the v3 batteries. 
+  To overcome this, a number of `input_number` helpers are defined which are used for 
+  all batteries instead of the device limits.
+  They can be configured from the Power Limits tab in the dashboard.
+- Using the `input_number`s also allows a higher discharging cutoff limit than the
+  Marstek limits. This can therefore be used for example to implement something like
+  the [Victron BatteryLife](https://www.victronenergy.com/media/pg/Energy_Storage_System/en/controlling-depth-of-discharge.html#UUID-af4a7478-4b75-68ac-cf3c-16c381335d1e)
+  strategy to ensure the battery reaches 100% State of Charge regularly for 
+  calibration purposes.

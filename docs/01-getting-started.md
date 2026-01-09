@@ -80,5 +80,5 @@
 - The P1 value is expected in Watt (w). If your meter supplies kW, multiply the P1 input * 1000
 - Test your first time setup in 800W mode
 - Manufacturers advise to consult a professional electrician when going above 800W.
-- Set the appropiate Max. Charge and Max. Discharge values for each battery via the dashboard, by clicking on the glance charts on the dashboard.
-- Don't soley rely on Home Assistant / Node-RED to disengage the batteries when running into trouble during first flights. Staying near the physical battery controls or your circuit breakers is a good extra safety measure. 
+- Set the appropriate Max. Charge and Max. Discharge values for each battery via the dashboard, by clicking on the glance charts on the dashboard.
+- Don't solely rely on Home Assistant / Node-RED to disengage the batteries when running into trouble during first flights. Staying near the physical battery controls or your circuit breakers is a good extra safety measure. 
