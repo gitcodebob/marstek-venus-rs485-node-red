@@ -262,6 +262,9 @@ views:
             heading: Basic battery information
             heading_style: title
             icon: mdi:home-battery-outline
+            tap_action:
+              action: navigate
+              navigation_path: /home-battery/battery-settings
           - type: tile
             entity: sensor.battery_time_remaining
             name: Battery remaining
@@ -1129,33 +1132,6 @@ views:
               an all stop has been triggered. Stop trigger 'on' = batteries
               'Full stop'.</font>
             text_only: true
-    cards: []
-    badges:
-      - type: entity
-        show_name: true
-        show_state: true
-        show_icon: true
-        entity: input_select.house_battery_strategy
-        name: Choose strategy
-        tap_action:
-          action: more-info
-      - type: entity
-        show_name: true
-        show_state: true
-        show_icon: true
-        entity: input_text.house_battery_strategy_active_sub_strategy
-        show_entity_picture: false
-        name: Executing
-    header:
-      layout: center
-      badges_position: top
-      badges_wrap: scroll
-  - type: sections
-    max_columns: 2
-    title: Power limits
-    path: power-limits
-    icon: mdi:tune
-    sections:
       - type: grid
         cards:
           - type: markdown
@@ -1408,10 +1384,24 @@ views:
           - condition: numeric_state
             entity: input_number.house_battery_count
             above: 3
-    header:
-      card:
-        type: markdown
-        text_only: true
-        content: '# Battery configuration '
     cards: []
-
+    badges:
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_select.house_battery_strategy
+        name: Choose strategy
+        tap_action:
+          action: more-info
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: input_text.house_battery_strategy_active_sub_strategy
+        show_entity_picture: false
+        name: Executing
+    header:
+      layout: center
+      badges_position: top
+      badges_wrap: scroll
