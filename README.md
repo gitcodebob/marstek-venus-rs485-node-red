@@ -12,9 +12,10 @@ This project is designed for hobbyists who want full control over their home bat
 [![Buy Us A Battery](https://img.shields.io/badge/Buy%20Us%20A%20Battery-Support-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/home.battery.control)
 
 ## Features
+- **You don't need to be a programmer**
 - **Node-RED Control Flows:** Easy to import and use control flows for battery charge/discharge ([node-red/](node-red/))
-- **Home Assistant Integration:** Example configuration for seamless smart home integration ([home assistant/](home%20assistant/))
-- **Customizable:** Adapt the flows and configuration to your specific battery hardware and automation needs
+- **Home Assistant Integration:** Premade dashboard for onboarding and control. Example configuration files included. ([home assistant/](home%20assistant/))
+- **Customizable:** Tweakers? Adapt the flows and configuration to your specific battery hardware and automation needs
 - **Multiple Strategies:** [Self-consumption](docs/04-setup-self-consumption.md) (use your own energy), [Timed](node-red/02%20strategy-timed.json), [Dynamic](docs/05-setup-dynamic.md) (price-based), [Charge](node-red/02%20strategy-charge.json), [Charge PV](node-red/02%20strategy-charge-pv.json) (solar-only), [Full Stop](node-red/02%20strategy-full-stop.json). Easily add your own. See [all strategies](docs/03-strategies.md).
 - **Easy Updates:** Grab the latest control flow without losing your personal configurations
 
