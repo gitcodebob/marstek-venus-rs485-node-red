@@ -1,6 +1,31 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.1.0
+- **Feature: Configurable battery charge limits**
+  * **User-controlled SoC limits** - New input helpers allow you to set custom minimum and maximum State of Charge (SoC) limits per battery
+  * **Override hardware defaults** - The system now always uses these input helpers instead of reading limits from the battery device, providing more flexibility
+  * **Better battery longevity** - Set conservative limits (e.g., 20% min, 90% max) to extend battery lifespan by reducing deep cycles
+  * **Merged settings interface** - All battery configuration settings are now consolidated on a single dashboard page for easier management
+  * **Documentation included** - New section in Advanced Features explains how to use charge limits effectively
+
+- **Fix: Grid power sensor configuration**
+  * Corrected grid power sensor name property to prevent Home Assistant from generating incorrect `sensor.grid_power` entity
+  * System now correctly references the expected sensor entity
+
+- **Tweak: Improved default charge cutoff**
+  * Changed default charge cutoff value from 80% to 100% for better out-of-box experience
+  * Users can still customize this value using the new charge limit input helpers
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `home assistant/packages/house_battery_control_config.yaml`
+  - `node-red/01 start-flow.json`
+  - `docs/01-getting-started.md`
+  - `docs/06-advanced-features.md`
+  - `README.md`
+
 ## 4.0.0
 - **Feat: Add visual flow execution tracking and detailed logging to dashboard**
   * **Visual flow execution tracking** - You can now see which strategy flows your system executed and in what order, helping you understand the decision-making process in real-time
