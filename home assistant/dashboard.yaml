@@ -99,6 +99,98 @@ views:
 
               Pick a battery charging strategy e.g. `self-consumption` and you
               are done!
+          - type: markdown
+            content: '### Done'
+            text_only: true
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_control_has_node_red
+                state: 'on'
+              - condition: not
+                conditions:
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unavailable
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unknown
+          - show_name: false
+            show_icon: true
+            type: button
+            entity: input_boolean.house_battery_control_onboarding_finished
+            grid_options:
+              columns: 2
+              rows: 1
+            icon: mdi:eye-off-outline
+            hold_action:
+              action: toggle
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_control_has_node_red
+                state: 'on'
+              - condition: not
+                conditions:
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unavailable
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unknown
+            icon_height: 25px
+          - type: markdown
+            text_only: true
+            grid_options:
+              columns: 9
+              rows: 1
+            content: |-
+              ---
+              Hide onboarding
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_control_has_node_red
+                state: 'on'
+              - condition: not
+                conditions:
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unavailable
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unknown
+          - type: markdown
+            content: >-
+              _You can find battery settings and unhide onboarding on the
+              settings tab._
+            grid_options:
+              columns: full
+              rows: auto
+            text_only: true
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_control_has_node_red
+                state: 'on'
+              - condition: not
+                conditions:
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unavailable
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unknown
+        visibility:
+          - condition: not
+            conditions:
+              - condition: state
+                entity: input_boolean.house_battery_control_onboarding_finished
+                state: 'on'
       - type: grid
         cards:
           - type: heading
@@ -391,10 +483,29 @@ views:
                   - condition: numeric_state
                     entity: input_number.house_battery_count
                     above: 3
+          - type: heading
+            heading: Info and guides
+            heading_style: title
+            icon: mdi:book-open-page-variant
+          - type: heading
+            icon: mdi:information-slab-circle
+            heading: Online documentation
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: https://gitcodebob.github.io/marstek-venus-rs485-node-red/
+          - type: heading
+            icon: mdi:youtube-subscription
+            heading: Youtube (playlist)
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://www.youtube.com/playlist?list=PL9wonDMnFmzvm-ln2iHdRE5niDD3ikrKn
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.1.0)*'
+        content: '### Home Battery Control *(v4.2.0)*'
         text_only: true
     cards: []
   - type: sections
@@ -1054,6 +1165,33 @@ views:
           - type: entities
             entities:
               - entity: input_number.house_battery_count
+          - type: tile
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_control_has_node_red
+                state: 'on'
+              - condition: not
+                conditions:
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unavailable
+                      - condition: state
+                        entity: sensor.p1_meter_power
+                        state: unknown
+            entity: input_boolean.house_battery_control_onboarding_finished
+            name: Show/Hide onboarding
+            icon: mdi:eye-off-outline
+            color: disabled
+            show_entity_picture: false
+            hide_state: true
+            vertical: false
+            tap_action:
+              action: toggle
+            features_position: bottom
+            grid_options:
+              columns: full
       - type: grid
         cards:
           - type: heading
@@ -1132,12 +1270,21 @@ views:
       - type: grid
         cards:
           - type: markdown
-            content: '## Marstek M1'
+            content: '---'
+            grid_options:
+              columns: full
             text_only: true
+        column_span: 3
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:power-plug-battery
+            heading: Marstek M1
+            heading_style: title
           - type: vertical-stack
             cards:
               - type: markdown
-                content: '### Discharging '
+                content: '**<font color="#9b9b9b">Discharging</font>**'
                 text_only: true
               - type: tile
                 entity: input_number.marstek_m1_discharging_cutoff_capacity
@@ -1163,7 +1310,7 @@ views:
           - type: vertical-stack
             cards:
               - type: markdown
-                content: '### Charging '
+                content: '**<font color="#9b9b9b">Charging</font>**'
                 text_only: true
               - type: tile
                 grid_options:
@@ -1189,15 +1336,24 @@ views:
                   - type: numeric-input
                     style: buttons
                 features_position: inline
+          - type: heading
+            icon: mdi:information-slab-circle
+            heading: Cutoff capacities
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://gitcodebob.github.io/marstek-venus-rs485-node-red/06-advanced-features.html#chargingdischarging-limits
       - type: grid
         cards:
-          - type: markdown
-            content: '## Marstek M2'
-            text_only: true
+          - type: heading
+            icon: mdi:power-plug-battery
+            heading: Marstek M2
+            heading_style: title
           - type: vertical-stack
             cards:
               - type: markdown
-                content: '### Discharging '
+                content: '**<font color="#9b9b9b">Discharging</font>**'
                 text_only: true
               - type: tile
                 entity: input_number.marstek_m2_discharging_cutoff_capacity
@@ -1223,7 +1379,7 @@ views:
           - type: vertical-stack
             cards:
               - type: markdown
-                content: '### Charging '
+                content: '**<font color="#9b9b9b">Charging</font>**'
                 text_only: true
               - type: tile
                 grid_options:
@@ -1255,13 +1411,14 @@ views:
             above: 1
       - type: grid
         cards:
-          - type: markdown
-            content: '## Marstek M3'
-            text_only: true
+          - type: heading
+            icon: mdi:power-plug-battery
+            heading: Marstek M3
+            heading_style: title
           - type: vertical-stack
             cards:
               - type: markdown
-                content: '### Discharging '
+                content: '**<font color="#9b9b9b">Discharging</font>**'
                 text_only: true
               - type: tile
                 entity: input_number.marstek_m3_discharging_cutoff_capacity
@@ -1287,7 +1444,7 @@ views:
           - type: vertical-stack
             cards:
               - type: markdown
-                content: '### Charging '
+                content: '**<font color="#9b9b9b">Charging</font>**'
                 text_only: true
               - type: tile
                 grid_options:
@@ -1319,13 +1476,14 @@ views:
             above: 2
       - type: grid
         cards:
-          - type: markdown
-            content: '## Marstek M4'
-            text_only: true
+          - type: heading
+            icon: mdi:power-plug-battery
+            heading: Marstek M4
+            heading_style: title
           - type: vertical-stack
             cards:
               - type: markdown
-                content: '### Discharging '
+                content: '**<font color="#9b9b9b">Discharging</font>**'
                 text_only: true
               - type: tile
                 entity: input_number.marstek_m4_discharging_cutoff_capacity
@@ -1351,7 +1509,7 @@ views:
           - type: vertical-stack
             cards:
               - type: markdown
-                content: '### Charging '
+                content: '**<font color="#9b9b9b">Charging</font>**'
                 text_only: true
               - type: tile
                 grid_options:

@@ -31,6 +31,10 @@ input_boolean:
   house_battery_control_is_debug_mode:
     name: Debug mode
 
+  # Onboarding
+  house_battery_control_onboarding_finished:
+    name: "Finish onboarding"
+
 ###########################################################################################################
 # DATETIME
 ###########################################################################################################
