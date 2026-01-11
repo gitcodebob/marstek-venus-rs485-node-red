@@ -14,7 +14,7 @@ input_boolean:
   house_battery_control_is_charging:
     name: Charging
 
-  # Supported strategies
+  # Strategy Timed
   house_battery_strategy_timed_has_period_b:
     name: Enable additional period B
     icon: mdi:clock-outline
@@ -23,8 +23,14 @@ input_boolean:
     name: Enable additional period C
     icon: mdi:clock-outline
 
-  house_battery_strategy_timed_has_max_power:
+  # Strategy Charge / Sell
+  # old name: house_battery_strategy_timed_has_max_power
+  house_battery_strategy_charge_has_max_power:
     name: Charge at max. power
+    icon: mdi:power-plug-battery-outline
+
+  house_battery_strategy_sell_has_max_power:
+    name: Sell at max. power
     icon: mdi:power-plug-battery-outline
 
   # Debug
@@ -312,23 +318,62 @@ input_number:
     initial: 0
     icon: mdi:chart-timeline-variant-shimmer # shimmering line chart
 
-  # Strategy timed | desired energy reserve (effective energy available excl. cut-off energies)
-  house_battery_strategy_timed_target_energy:
-    name: Desired battery energy reserve
+  # Strategy charge | desired energy reserve (effective energy available excl. cut-off energies)
+  # old name: house_battery_strategy_timed_target_energy
+  house_battery_strategy_charge_target_energy:
+    name: Charge until reserve is
     min: 0
     max: 30
     unit_of_measurement: "kWh"
     mode: box
     icon: mdi:battery-charging
 
-  # Strategy timed | desired charging power
-  house_battery_strategy_timed_target_power:
-    name: Desired charging power
-    min: 0
+  # Strategy charge | charge till battery SoC
+  house_battery_strategy_charge_target_soc:
+    name: Charge until SoC
+    min: 80
+    max: 100
+    initial: 100
+    unit_of_measurement: "%"
+    mode: box
+    icon: mdi:battery-90
+
+  # Strategy charge | desired charging power
+  # old name: house_battery_strategy_timed_target_power
+  house_battery_strategy_charge_target_power:
+    name: Limit power from grid
+    min: 500
     max: 7500
     unit_of_measurement: "W"
     mode: box
+    icon: mdi:home-import-outline
+
+  # Strategy sell | desired energy reserve (effective energy available excl. cut-off energies)
+  house_battery_strategy_sell_target_energy:
+    name: Keep energy in reserve
+    min: 0
+    max: 30
+    unit_of_measurement: "kWh"
+    mode: box
     icon: mdi:battery-charging
+
+  # Strategy sell | desired grid discharging power
+  house_battery_strategy_sell_target_power:
+    name: Limit power to grid
+    min: 500
+    max: 7500
+    unit_of_measurement: "W"
+    mode: box
+    icon: mdi:home-export-outline
+
+  # Strategy sell | sell till battery SoC
+  house_battery_strategy_sell_target_soc:
+    name: Sell until SoC
+    min: 12 # minimum advised by manufacturer
+    max: 80
+    unit_of_measurement: "%"
+    mode: box
+    icon: mdi:battery-10
 
   # Strategy dynamic | select the N most cheapest hours of the day
   house_battery_strategy_dynamic_cheapest_hrs:
@@ -390,6 +435,7 @@ input_number:
     # unit_of_measurement: "Cents"
     mode: box
 
+  # SoC limits
   marstek_m1_charging_cutoff_capacity:
     name: "Marstek M1 Charging Cutoff Capacity"
     min: 80
@@ -501,6 +547,7 @@ input_select:
       - Dynamic # Requires a dynamic tariff contract and the Cheapest Hours HACS add-on
       - Charge # Uses self-consumption strategy with smart settings and target grid consumption > 0
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
+      - Sell # Discharge batteries
     icon: mdi:home-battery
 
   # Available sub-strategies for timed / smart
@@ -511,6 +558,7 @@ input_select:
       - Self-consumption # Target grid consumption = 0
       - Charge # Uses self-consumption strategy with smart settings and target grid consumption > 0
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
+      - Sell
 
   # How often is battery priority cycled automatically?
   house_battery_control_priority_change_interval:
@@ -573,6 +621,24 @@ input_select:
       - Octopus Energy
       - Omie
     icon: mdi:factory
+
+  # Charge strategy | goal setting
+  house_battery_strategy_charge_goal:
+    name: Charge until
+    options:
+      - batteries are full
+      - state of charge
+      - energy reserve
+    icon: mdi:battery-charging-80
+
+  # Sell strategy | goal setting
+  house_battery_strategy_sell_goal:
+    name: Sell until
+    options:
+      - batteries are empty
+      - state of charge
+      - energy reserve
+    icon: mdi:cash-multiple
 
 ###########################################################################################################
 # TEMPLATE SENSORS
@@ -652,7 +718,7 @@ template:
         # The sensor is 'on' (true) if the available
         state: >
           {{ states('input_number.house_battery_total_available_energy') | float(0) >= 
-              states('input_number.house_battery_strategy_timed_target_energy') | float(0) }}
+              states('input_number.house_battery_strategy_charge_target_energy') | float(0) }}
 
         # Optional: Prevents rapid flickering if values change quickly near the threshold
         delay_off:
