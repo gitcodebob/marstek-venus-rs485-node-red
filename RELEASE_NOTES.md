@@ -1,6 +1,31 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.3.0
+- **Feature: Enhanced Charge strategy**
+  * **Rebuilt charge control** - Charge strategy rebuilt to match Sell strategy capabilities with maximum power and regulated charging options
+  * **Configurable charge limits** - Control charging behavior with battery SoC thresholds for when to start and stop charging
+  * **Dashboard controls** - New UI controls for charge settings with automatic validation and bounds checking
+
+- **Improvement: Exception handling**
+  * **Error resilience** - All strategy flows now handle unhandled exceptions gracefully
+  * **Better diagnostics** - Exceptions are caught and logged for troubleshooting
+
+- **Improvement: Version labeling**
+  * **Clear versioning** - All strategy flow tabs now display version numbers
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/01 start-flow.json`
+  - `node-red/02 strategy-charge-pv.json`
+  - `node-red/02 strategy-charge.json`
+  - `node-red/02 strategy-dynamic.json`
+  - `node-red/02 strategy-full-stop.json`
+  - `node-red/02 strategy-self-consumption.json`
+  - `node-red/02 strategy-sell.json`
+  - `node-red/02 strategy-timed.json`
+
 ## 4.2.0
 - **Feature: Hideable onboarding section**
   * **Hide onboarding UI** - New button allows users to hide the onboarding section after completing setup

@@ -505,7 +505,7 @@ views:
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.2.0)*'
+        content: '### Home Battery Control *(v4.3.0)*'
         text_only: true
     cards: []
   - type: sections
@@ -539,7 +539,7 @@ views:
                 https://gitcodebob.github.io/marstek-venus-rs485-node-red/04-setup-self-consumption.html
           - type: markdown
             content: >-
-              <font color=yellow><ha-icon icon="mdi:alert"></ha-icon> High
+              <font color=orange><ha-icon icon="mdi:alert"></ha-icon> High
               values - monitor your system</font>, use at your own risk.
             visibility:
               - condition: or
@@ -618,7 +618,16 @@ views:
                 name: D-term
             grid_options:
               columns: full
-            hours_to_show: 0.1
+            hours_to_show: 0.025
+          - type: markdown
+            content: >-
+              <font color="grey"><i>Click on the labels in the legenda to turn
+              individual graphs on/off
+
+              </i></font>
+            text_only: true
+            grid_options:
+              columns: full
         column_span: 2
     title: Self-consumption
     cards: []
@@ -665,7 +674,7 @@ views:
             icon: mdi:battery-charging-80
           - type: heading
             icon: mdi:information-slab-circle
-            heading: Settings documentation
+            heading: Charge until
             heading_style: subtitle
             tap_action:
               action: url
@@ -673,24 +682,118 @@ views:
                 https://gitcodebob.github.io/marstek-venus-rs485-node-red/03-strategies.html#charge-from-grid
           - type: entities
             entities:
-              - entity: input_number.house_battery_strategy_timed_target_energy
-                name: Target energy reserve
-              - entity: input_boolean.house_battery_strategy_timed_has_max_power
+              - entity: input_select.house_battery_strategy_charge_goal
               - type: conditional
                 conditions:
-                  - entity: input_boolean.house_battery_strategy_timed_has_max_power
+                  - entity: input_select.house_battery_strategy_charge_goal
+                    state: energy reserve
+                row:
+                  entity: input_number.house_battery_strategy_charge_target_energy
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy_charge_goal
+                    state: state of charge
+                row:
+                  entity: input_number.house_battery_strategy_charge_target_soc
+            show_header_toggle: false
+            state_color: false
+          - type: markdown
+            content: >-
+              <font color=grey>_'Reserve' is usable energy in your batteries
+              (e.g. above 12% SoC)_
+
+              </font>
+            text_only: true
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_charge_goal
+                state: energy reserve
+          - type: heading
+            icon: mdi:transmission-tower-import
+            heading: Power limit during import from grid
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: input_boolean.house_battery_strategy_charge_has_max_power
+              - type: conditional
+                conditions:
+                  - entity: input_boolean.house_battery_strategy_charge_has_max_power
                     state: 'off'
                 row:
                   type: input-number-entity
-                  entity: input_number.house_battery_strategy_timed_target_power
-                  name: Target grid consumption
+                  entity: input_number.house_battery_strategy_charge_target_power
                   icon: mdi:home-import-outline
           - type: markdown
             content: >-
-              <font color=grey>_Target energy reserve = desired  usable energy
-              in your batteries (e.g. above 12% SoC)_
+              <font color=grey><i>Visit the '<ha-icon
+              icon="mdi:cog-outline"></ha-icon>settings tab' for fine grained
+              control **per battery**
+
+              </i></font>
+            text_only: true
+      - type: grid
+        cards:
+          - type: heading
+            heading: Sell strategy
+            heading_style: title
+            icon: mdi:cash-multiple
+          - type: heading
+            icon: mdi:information-slab-circle
+            heading: Sell until
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://gitcodebob.github.io/marstek-venus-rs485-node-red/03-strategies.html#charge-from-grid
+          - type: entities
+            entities:
+              - entity: input_select.house_battery_strategy_sell_goal
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy_sell_goal
+                    state: energy reserve
+                row:
+                  entity: input_number.house_battery_strategy_sell_target_energy
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy_sell_goal
+                    state: state of charge
+                row:
+                  entity: input_number.house_battery_strategy_sell_target_soc
+            show_header_toggle: false
+            state_color: false
+          - type: markdown
+            content: >-
+              <font color=grey>_'Reserve' is usable energy in your batteries
+              (e.g. above 12% SoC)_
 
               </font>
+            text_only: true
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_sell_goal
+                state: energy reserve
+          - type: heading
+            icon: mdi:transmission-tower-export
+            heading: Power limit during export to grid
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: input_boolean.house_battery_strategy_sell_has_max_power
+              - type: conditional
+                conditions:
+                  - entity: input_boolean.house_battery_strategy_sell_has_max_power
+                    state: 'off'
+                row:
+                  type: input-number-entity
+                  entity: input_number.house_battery_strategy_sell_target_power
+          - type: markdown
+            content: >-
+              <font color=grey><i>Visit the '<ha-icon
+              icon="mdi:cog-outline"></ha-icon>settings tab' for fine grained
+              control **per battery**
+
+              </i></font>
             text_only: true
     icon: mdi:transmission-tower-export
     cards: []
