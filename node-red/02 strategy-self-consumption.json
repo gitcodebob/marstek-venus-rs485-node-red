@@ -2,7 +2,7 @@
     {
         "id": "2dc255585c9021ad",
         "type": "tab",
-        "label": "Strategy Self-consumption",
+        "label": "Strategy Self-consumption v4.2.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -336,6 +336,26 @@
         "y": 1119,
         "w": 452,
         "h": 102
+    },
+    {
+        "id": "ff7db384260f1b22",
+        "type": "group",
+        "z": "2dc255585c9021ad",
+        "name": "Unhandled exceptions",
+        "style": {
+            "label": true,
+            "stroke": "#d88a8a",
+            "color": "#d88a8a"
+        },
+        "nodes": [
+            "916c17ae8b44a945",
+            "768fa0dcf7e8e3b5",
+            "30ea27bc433988a5"
+        ],
+        "x": 54,
+        "y": 279,
+        "w": 182,
+        "h": 82
     },
     {
         "id": "edbd6dfed6ba7652",
@@ -2382,6 +2402,57 @@
         "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     },
     {
+        "id": "916c17ae8b44a945",
+        "type": "catch",
+        "z": "2dc255585c9021ad",
+        "g": "ff7db384260f1b22",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 95,
+        "y": 320,
+        "wires": [
+            [
+                "768fa0dcf7e8e3b5"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "768fa0dcf7e8e3b5",
+        "type": "function",
+        "z": "2dc255585c9021ad",
+        "g": "ff7db384260f1b22",
+        "name": "Unhandled Exception",
+        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 145,
+        "y": 320,
+        "wires": [
+            [
+                "30ea27bc433988a5"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "30ea27bc433988a5",
+        "type": "link out",
+        "z": "2dc255585c9021ad",
+        "g": "ff7db384260f1b22",
+        "name": "link out 7",
+        "mode": "return",
+        "links": [],
+        "x": 195,
+        "y": 320,
+        "wires": []
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -2396,7 +2467,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "122069743cb51aed",
+        "id": "72b65d60c4a6d738",
         "type": "global-config",
         "env": [],
         "modules": {

@@ -2,7 +2,7 @@
     {
         "id": "6819518feb29bc2f",
         "type": "tab",
-        "label": "Strategy Sell",
+        "label": "Strategy Sell v4.2.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -97,13 +97,32 @@
             "0caffb6f3dcf54aa",
             "64ce1b00832934c8",
             "50111f095ccb54db",
-            "35e1677dd1e4b3ac",
-            "15554c279a4d75e3"
+            "35e1677dd1e4b3ac"
         ],
         "x": 254,
         "y": 79,
-        "w": 1858,
+        "w": 1838,
         "h": 207
+    },
+    {
+        "id": "303aed49c7d7423b",
+        "type": "group",
+        "z": "6819518feb29bc2f",
+        "name": "Unhandled exceptions",
+        "style": {
+            "label": true,
+            "stroke": "#d88a8a",
+            "color": "#d88a8a"
+        },
+        "nodes": [
+            "db058dac42db1b30",
+            "182b31853a6284f3",
+            "90901c3a5ef64aad"
+        ],
+        "x": 34,
+        "y": 379,
+        "w": 182,
+        "h": 82
     },
     {
         "id": "35e1677dd1e4b3ac",
@@ -122,25 +141,7 @@
         ],
         "x": 1394,
         "y": 159,
-        "w": 692,
-        "h": 82
-    },
-    {
-        "id": "303aed49c7d7423b",
-        "type": "group",
-        "z": "6819518feb29bc2f",
-        "name": "Unhandled exceptions",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "db058dac42db1b30",
-            "38647378b21e3599",
-            "a2b7ef4a917493af"
-        ],
-        "x": 34,
-        "y": 639,
-        "w": 182,
+        "w": 672,
         "h": 82
     },
     {
@@ -415,7 +416,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1740,
+        "x": 1720,
         "y": 200,
         "wires": [
             [
@@ -449,7 +450,7 @@
         "blockInputOverrides": true,
         "domain": "input_number",
         "service": "set_value",
-        "x": 1940,
+        "x": 1920,
         "y": 200,
         "wires": [
             []
@@ -613,8 +614,7 @@
         "y": 180,
         "wires": [
             [
-                "0caffb6f3dcf54aa",
-                "15554c279a4d75e3"
+                "0caffb6f3dcf54aa"
             ]
         ]
     },
@@ -983,24 +983,6 @@
         "l": true
     },
     {
-        "id": "15554c279a4d75e3",
-        "type": "debug",
-        "z": "6819518feb29bc2f",
-        "g": "dd8b19e7bf513b66",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": false,
-        "console": false,
-        "tostatus": true,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "counter",
-        "x": 410,
-        "y": 120,
-        "wires": []
-    },
-    {
         "id": "db058dac42db1b30",
         "type": "catch",
         "z": "6819518feb29bc2f",
@@ -1009,10 +991,10 @@
         "scope": null,
         "uncaught": false,
         "x": 75,
-        "y": 680,
+        "y": 420,
         "wires": [
             [
-                "a2b7ef4a917493af"
+                "182b31853a6284f3"
             ]
         ],
         "l": false
@@ -1120,51 +1102,38 @@
         ]
     },
     {
-        "id": "38647378b21e3599",
+        "id": "182b31853a6284f3",
+        "type": "function",
+        "z": "6819518feb29bc2f",
+        "g": "303aed49c7d7423b",
+        "name": "Unhandled Exception",
+        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 125,
+        "y": 420,
+        "wires": [
+            [
+                "90901c3a5ef64aad"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "90901c3a5ef64aad",
         "type": "link out",
         "z": "6819518feb29bc2f",
         "g": "303aed49c7d7423b",
         "name": "link out 2",
-        "mode": "link",
+        "mode": "return",
         "links": [],
         "x": 175,
-        "y": 680,
+        "y": 420,
         "wires": []
-    },
-    {
-        "id": "a2b7ef4a917493af",
-        "type": "change",
-        "z": "6819518feb29bc2f",
-        "g": "303aed49c7d7423b",
-        "name": "target",
-        "rules": [
-            {
-                "t": "set",
-                "p": "target",
-                "pt": "msg",
-                "to": "Catch Unhandled Exception",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 125,
-        "y": 680,
-        "wires": [
-            [
-                "38647378b21e3599"
-            ]
-        ],
-        "inputLabels": [
-            "catch node"
-        ],
-        "outputLabels": [
-            "link out node"
-        ],
-        "l": false
     },
     {
         "id": "176d29a.6f648d6",
@@ -1181,7 +1150,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "0502f422c5d17360",
+        "id": "a0691f57dd534c02",
         "type": "global-config",
         "env": [],
         "modules": {

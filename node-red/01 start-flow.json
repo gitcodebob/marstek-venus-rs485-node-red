@@ -2,7 +2,7 @@
     {
         "id": "af34cb220b20910d",
         "type": "tab",
-        "label": "Home Battery Start",
+        "label": "Home Battery Start v4.2.0",
         "disabled": false,
         "info": "# Home battery control\r\nConsists of three flows:\r\n 1.  Start flow\r\n 1.  Control flow\r\n 1.  Master switch flow\r\n\r\n## Start flow\r\nThis is the starting point of your home battery control.\r\n\r\nIt starts with P1 measurement as a trigger.\r\nIt allows you to connect your battery sensors to the flow.\r\nIt ends with a function node, mapping your batteries to a battery_array\r\n\r\nThe battery_array is passed on to the control flow.\r\n\r\nWhen the control flow has calculated the desired corrections,\r\nit is passed back to this flow and applied to your batteries.",
         "env": []
@@ -258,6 +258,24 @@
         "h": 82
     },
     {
+        "id": "71b024dc5b7b3bab",
+        "type": "group",
+        "z": "af34cb220b20910d",
+        "name": "Log and Error handling",
+        "style": {
+            "stroke": "#ff3f3f",
+            "label": true
+        },
+        "nodes": [
+            "05a06bc76e6a6e9a",
+            "2f622a73471cb708"
+        ],
+        "x": 1634,
+        "y": 119,
+        "w": 252,
+        "h": 142
+    },
+    {
         "id": "84a3c68e27fb4830",
         "type": "group",
         "z": "af34cb220b20910d",
@@ -307,23 +325,24 @@
         "h": 222
     },
     {
-        "id": "71b024dc5b7b3bab",
+        "id": "23c04a40553186b4",
         "type": "group",
         "z": "af34cb220b20910d",
-        "name": "Log and Error handling",
+        "name": "Unhandled exceptions",
         "style": {
-            "stroke": "#ff3f3f",
-            "label": true
+            "label": true,
+            "stroke": "#d88a8a",
+            "color": "#d88a8a"
         },
         "nodes": [
-            "05a06bc76e6a6e9a",
-            "2f622a73471cb708",
-            "51779f909858e9af"
+            "60ee1e36b8687a9a",
+            "a32e687727337d74",
+            "87783a2c72de698b"
         ],
-        "x": 1544,
-        "y": 119,
-        "w": 342,
-        "h": 142
+        "x": 1704,
+        "y": 279,
+        "w": 182,
+        "h": 82
     },
     {
         "id": "e9e3ed3b9a0e4640",
@@ -1852,7 +1871,7 @@
         "z": "af34cb220b20910d",
         "g": "d4c3b3cf29f60247",
         "name": "Batteries (totals)",
-        "func": "// batteries | calculate total and max. power delivered by batteries\nlet batteries = msg.batteries;\nlet batteries_total_power = 0;\nlet batteries_max_charging_power = 0;\nlet batteries_max_discharging_power = 0;\nlet batteries_available_energy = 0;\n\nbatteries.forEach(battery => {\n    batteries_total_power += Number(battery.power);\n    batteries_max_charging_power += Number(battery.charging_max);\n    batteries_max_discharging_power += Number(battery.discharging_max);\n    batteries_available_energy += Number(battery.energy - battery.energy_max*battery.soc_min/100);\n});\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries_total_power\", batteries_total_power, true); // W\nRED.util.setMessageProperty(msg, \"batteries_max_charge_power\", batteries_max_charging_power,true); // W\nRED.util.setMessageProperty(msg, \"batteries_max_discharge_power\", batteries_max_discharging_power,true); // W\nRED.util.setMessageProperty(msg, \"batteries_available_energy\",batteries_available_energy,true); // kWh effective\nreturn msg;",
+        "func": "// batteries | calculate total and max. power delivered by batteries\nlet batteries = msg.batteries;\nlet batteries_total_power = 0;\nlet batteries_max_charging_power = 0;\nlet batteries_max_discharging_power = 0;\nlet batteries_available_energy = 0;\nlet batteries_max_energy = 0;\n\nbatteries.forEach(battery => {\n    batteries_total_power += Number(battery.power);\n    batteries_max_charging_power += Number(battery.charging_max);\n    batteries_max_discharging_power += Number(battery.discharging_max);\n    batteries_available_energy += Number(battery.energy - battery.energy_max*battery.soc_min/100);\n    batteries_max_energy += (Number(battery.energy_max*battery.soc_max) - Number(battery.energy_max*battery.soc_min))/100; // kWh\n});\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries_total_power\", batteries_total_power, true); // W\nRED.util.setMessageProperty(msg, \"batteries_max_charge_power\", batteries_max_charging_power,true); // W\nRED.util.setMessageProperty(msg, \"batteries_max_discharge_power\", batteries_max_discharging_power,true); // W\nRED.util.setMessageProperty(msg, \"batteries_available_energy\",batteries_available_energy,true); // kWh usable\nRED.util.setMessageProperty(msg, \"batteries_max_energy\", batteries_max_energy, true); // kWh usable\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2316,7 +2335,7 @@
         "z": "af34cb220b20910d",
         "g": "712479aed242f1f1",
         "name": "on new UI value",
-        "func": "// Block when undefined (don't update UI)\nif(msg.ui_value_current === undefined) return null;\n\n// We show the 2nd strategy in the trace (if available) on the dashboard as the 'active sub-strategy'\nconst secondTraceEntry = msg.strategy?.trace?.[1];\nif (secondTraceEntry) {\n    // Handle case where 2nd flow is present\n    msg.ui_value_new =  secondTraceEntry.flow;\n} else {\n    // Handle case where the 2nd flow is missing\n    // Get a sensible alternative\n    msg.ui_value_new = msg.strategy?.selected || \"\"; // don't use unknown or unavailable as these are reserved HA keywords\n}\n\n// Improve human readability\nif(msg.ui_value_new == \"Self-consumption\" && secondTraceEntry?.flow_settings?.discharge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (charge only)\";\n}\n\n// Node status for devs\nnode.status({fill:\"grey\",shape:\"dot\",text:`new: ${msg.ui_value_new}`});\n\n// Block when equal (don't update UI)\nif(msg.ui_value_current === msg.ui_value_new) return null;\n\n// Pass otherwise\nreturn msg;",
+        "func": "// Block when undefined (don't update UI)\nif(msg.ui_value_current === undefined) return null;\n\n// We show the 2nd strategy in the trace (if available) on the dashboard as the 'active sub-strategy'\nconst secondTraceEntry = msg.strategy?.trace?.[1];\nif (secondTraceEntry) {\n    // Handle case where 2nd flow is present\n    msg.ui_value_new =  secondTraceEntry.flow;\n} else {\n    // Handle case where the 2nd flow is missing\n    // Get a sensible alternative\n    msg.ui_value_new = msg.strategy?.selected || \"\"; // don't use unknown or unavailable as these are reserved HA keywords\n}\n\n// Improve human readability\nif(msg.ui_value_new == \"Self-consumption\" && secondTraceEntry?.flow_settings?.discharge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (charge only)\";\n}\nif(msg.ui_value_new == \"Self-consumption\" && secondTraceEntry?.flow_settings?.charge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (no charging)\";\n}\n\n// Node status for devs\nnode.status({fill:\"grey\",shape:\"dot\",text:`new: ${msg.ui_value_new}`});\n\n// Block when equal (don't update UI)\nif(msg.ui_value_current === msg.ui_value_new) return null;\n\n// Pass otherwise\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2579,7 +2598,7 @@
         "z": "af34cb220b20910d",
         "g": "71b024dc5b7b3bab",
         "name": "Custom logger",
-        "func": "/**\n * Custom Logger Function\n * * Provides centralized logging, node-status updates, and message tracing.\n * Specifically designed for Home Battery Control logic within Node-RED.\n * \n * Debug dashboard updating:\n * A msg needs to reach 'Strategy Evaluation' or be passed to the \"Show on debug board\" trigger node.\n * Errors are automatically passed to the \"Show on debug board\" trigger node.\n * \n * * @param {object} callingNode - The context of the calling node (pass 'this').\n * @param {string} text - The log message/explanation.\n * @param {string} level - Log level: 'log', 'warn', 'error', or 'info' (default: 'info').\n * \n * Note: anything above 'info' will also write to the Node-RED log files \n * \n * * @usage: \n * const log = global.get(\"logger\");\n * log(this, \"Charging cycle started\");\n */\nconst customLogger = (callingNode, text, level = 'info') => {\n    \n    // Log only when debug_mode is ON\n    const debug_mode = global.get(\"debug_mode\") || false;\n    if(debug_mode == false) return null;\n\n    // Max log elements to keep\n    const MAX_ELEMENTS = 100;\n\n    // Create the YYYY-MM-DD HH:MM:SS.mmm format\n    const now = new Date();\n    const timestamp = now.getHours().toString().padStart(2, '0') + \":\" +\n                now.getMinutes().toString().padStart(2, '0') + \":\" +\n                now.getSeconds().toString().padStart(2, '0') + \".\" +\n                now.getMilliseconds().toString().padStart(3, '0');\n\n    const formattedTimeLevel = `${timestamp} [${level.toLowerCase()}]`;\n    \n    // Get the name of the node or fallback to the ID\n    const nodeName = callingNode.__node__ ? callingNode.__node__.name || callingNode.__node__.id : undefined;\n    // Get the name of the Flow/Tab\n    const flowName = callingNode.env.get(\"NR_FLOW_NAME\") || \"Unknown flow\";\n    // Explain to the Home Battery Control user what is going on\n    const formattedExplenation = `[${flowName} >> ${nodeName}]: ${text}`;\n\n    // Level icons\n    let icon = \"⚪\";\n    switch (level) {\n        case \"info\":\n            icon = \"ℹ️\";\n            break;\n        case \"log\":\n            icon = \"🔧\";\n            break;\n        case \"warn\":\n            icon = \"⚠️\";      \n            break;\n        case \"error\":\n            icon = \"❌\";\n            break;\n    }\n\n    // Enrich msg with log info\n    const msg = callingNode.msg;\n    (msg.log = msg.log || []).push({ timestamp: timestamp, level:level, flow:flowName, node:nodeName, payload: text, icon: icon});\n\n    if (msg.log.length > MAX_ELEMENTS) {\n        // Slice keeps the last X elements\n        msg.log = msg.log.slice(-MAX_ELEMENTS);\n    }\n\n    // Log to the Node-RED system log\n    switch (level) {\n        case \"log\":\n            node.log(`${formattedExplenation}`);\n            break;\n        case \"warn\":\n            node.warn(`${formattedExplenation}`);       \n            break;\n        case \"error\":\n            node.error(`${formattedExplenation}`, callingNode.msg);\n            break;\n        default:\n            // don't log to logfiles by default\n    }\n\n};\n\nglobal.set('logger', customLogger);\nreturn null;",
+        "func": "/**\n * Custom Logger Function\n * * Provides centralized logging, node-status updates, and message tracing.\n * Specifically designed for Home Battery Control logic within Node-RED.\n * \n * Debug dashboard updating:\n * A msg needs to reach 'Strategy Evaluation' or be passed to the \"Show on debug board\" trigger node.\n * Errors are automatically passed to the \"Show on debug board\" trigger node.\n * \n * * @param {object} callingNode - The context of the calling node (pass 'this').\n * @param {string} text - The log message/explanation.\n * @param {string} level - Log level: 'log', 'warn', 'error', or 'info' (default: 'info').\n * \n * Note: anything above 'info' will also write to the Node-RED log files \n * \n * * @usage: \n * const log = global.get(\"logger\");\n * log(this, \"Charging cycle started\");\n */\nconst customLogger = (callingNode, text, level = 'info') => {\n    \n    // Log only when debug_mode is ON\n    const debug_mode = global.get(\"debug_mode\") || false;\n    if(debug_mode == false) return null;\n\n    // Max log elements to keep\n    const MAX_ELEMENTS = 100;\n\n    // Create the YYYY-MM-DD HH:MM:SS.mmm format\n    const now = new Date();\n    const timestamp = now.getHours().toString().padStart(2, '0') + \":\" +\n                now.getMinutes().toString().padStart(2, '0') + \":\" +\n                now.getSeconds().toString().padStart(2, '0') + \".\" +\n                now.getMilliseconds().toString().padStart(3, '0');\n\n    const formattedTimeLevel = `${timestamp} [${level.toLowerCase()}]`;\n    \n    // Get the name of the node or fallback to the ID\n    const nodeName = callingNode.__node__ ? callingNode.__node__.name || callingNode.__node__.id : undefined;\n    // Get the name of the Flow/Tab\n    const flowName = callingNode.env.get(\"NR_FLOW_NAME\") || \"Unknown flow\";\n    // Explain to the Home Battery Control user what is going on\n    const formattedExplenation = `[${flowName} >> ${nodeName}]: ${text}`;\n\n    // Level icons\n    let icon = \"⚪\";\n    switch (level) {\n        case \"info\":\n            icon = \"ℹ️\";\n            break;\n        case \"log\":\n            icon = \"🔧\";\n            break;\n        case \"warn\":\n            icon = \"⚠️\";      \n            break;\n        case \"error\":\n            icon = \"❌\";\n            break;\n    }\n\n    // Enrich msg with log info\n    const msg = callingNode.msg;\n    (msg.log = msg.log || []).push({ timestamp: timestamp, level:level, flow:flowName, node:nodeName, payload: text, icon: icon});\n\n    if (msg.log.length > MAX_ELEMENTS) {\n        // Slice keeps the last X elements\n        msg.log = msg.log.slice(-MAX_ELEMENTS);\n    }\n\n    // Log to the Node-RED system log\n    switch (level) {\n        case \"log\":\n            node.log(`${formattedExplenation}`);\n            break;\n        case \"warn\":\n            node.warn(`${formattedExplenation}`);       \n            break;\n        case \"error\":\n            node.error(`${formattedExplenation}`, callingNode.msg);\n            break;\n        default:\n            // don't log to logfiles by default\n    }\n\n};\n\nglobal.set('logger', customLogger);\nglobal.set('unhandledException', \"\");\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2589,7 +2608,9 @@
         "x": 1740,
         "y": 160,
         "wires": [
-            []
+            [
+                "2f622a73471cb708"
+            ]
         ]
     },
     {
@@ -2910,8 +2931,8 @@
         "type": "function",
         "z": "af34cb220b20910d",
         "g": "71b024dc5b7b3bab",
-        "name": "Unhandled exception",
-        "func": "/**\n * Catch Node Handler\n * Processes errors caught by the Catch node and sends them to the custom logger.\n */\n\n// 1. Get the custom logger from global context\nconst log = global.get(\"logger\");\n\n// 2. Extract error details from the msg object\nconst errorData = msg.error || {};\nconst errorMessage = errorData.message || \"Unknown error occurred\";\nconst sourceName = errorData.source ? (errorData.source.name || errorData.source.id) : \"Unknown Node\";\nconst sourceType = errorData.source ? errorData.source.type : \"unknown-type\";\n\n// 3. Construct a user-friendly message for the logger\nconst friendlyMessage = `Node '${sourceName}' (${sourceType}) reported: ${errorMessage}`;\n\n// 4. Call the logger with level 'error'\n// Note: the logger uses 'callingNode', we pass 'this' context here.\nlog(this, friendlyMessage, 'error');\n\n// 5. Update the node status (CORRECTED)\nnode.status({ \n    fill: \"red\", \n    shape: \"ring\", \n    text: `Error from: ${sourceName}` \n});\n\nreturn null;",
+        "name": "Unhandled Exception",
+        "func": "/**\n * Handles exceptions by extracting node details and routing them to a global logger.\n * This is designed to be called from within a Node-RED Function node or sub-flow.\n *\n * @param {Object} callingNode - The Node-RED 'this' context or msg object containing node metadata.\n * @param {Object} [callingNode.msg] - The message object associated with the error.\n * @param {Object} [callingNode.msg.error] - Error details provided by a Node-RED error catch.\n * @param {string} [callingNode.msg.error.message] - The specific error message.\n * @param {Object} [callingNode.msg.error.source] - The node that triggered the error.\n * * @example\n * // Usage in a Function Node:\n * const unhandledException = global.get('unhandledException');\n * unhandledException(this);\n */\nconst unhandledException = (callingNode) => {\n    // 1. Get the custom logger from global context\n    const log = global.get(\"logger\");\n\n    // 2. Extract error details from the msg object\n    const errorData = callingNode.msg?.error || {};\n    const errorMessage = errorData.message || \"Unknown error occurred\";\n    const sourceName = errorData.source ? (errorData.source.name || errorData.source.id) : \"Unknown Node\";\n    const sourceType = errorData.source ? errorData.source.type : \"unknown-type\";\n\n    // 3. Construct a user-friendly message for the logger\n    const friendlyMessage = `**Unhandled exception** (${sourceType} node) ${errorMessage}`;\n    callingNode.__node__ ??= {};\n    callingNode.__node__.name = sourceName;\n\n    // 4. Call the logger with level 'error'\n    // Note: the logger uses 'callingNode', we pass on whatever we have.\n    log(callingNode, friendlyMessage, 'error');\n\n};\n\nglobal.set('unhandledException', unhandledException);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2925,19 +2946,55 @@
         ]
     },
     {
-        "id": "51779f909858e9af",
-        "type": "link in",
+        "id": "60ee1e36b8687a9a",
+        "type": "catch",
         "z": "af34cb220b20910d",
-        "g": "71b024dc5b7b3bab",
-        "name": "catch Unhandled Exception",
-        "links": [],
-        "x": 1585,
-        "y": 220,
+        "g": "23c04a40553186b4",
+        "name": "",
+        "scope": null,
+        "uncaught": true,
+        "x": 1745,
+        "y": 320,
         "wires": [
             [
-                "2f622a73471cb708"
+                "a32e687727337d74"
             ]
-        ]
+        ],
+        "l": false
+    },
+    {
+        "id": "a32e687727337d74",
+        "type": "function",
+        "z": "af34cb220b20910d",
+        "g": "23c04a40553186b4",
+        "name": "Unhandled Exception",
+        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1795,
+        "y": 320,
+        "wires": [
+            [
+                "87783a2c72de698b"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "87783a2c72de698b",
+        "type": "link out",
+        "z": "af34cb220b20910d",
+        "g": "23c04a40553186b4",
+        "name": "link out 9",
+        "mode": "return",
+        "links": [],
+        "x": 1845,
+        "y": 320,
+        "wires": []
     },
     {
         "id": "176d29a.6f648d6",
@@ -2954,7 +3011,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "794fc2b985bd05d7",
+        "id": "d45a4d94725e78b4",
         "type": "global-config",
         "env": [],
         "modules": {

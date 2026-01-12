@@ -2,7 +2,7 @@
     {
         "id": "676ceac4c521834d",
         "type": "tab",
-        "label": "Strategy Charge PV",
+        "label": "Strategy Charge PV v4.2.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -41,6 +41,26 @@
         "y": 79,
         "w": 192,
         "h": 162
+    },
+    {
+        "id": "6e6682265db1e9ee",
+        "type": "group",
+        "z": "676ceac4c521834d",
+        "name": "Unhandled exceptions",
+        "style": {
+            "label": true,
+            "stroke": "#d88a8a",
+            "color": "#d88a8a"
+        },
+        "nodes": [
+            "524b61f06ac20ae7",
+            "b068ce351aa5b926",
+            "0d26b7f936be7947"
+        ],
+        "x": 14,
+        "y": 259,
+        "w": 182,
+        "h": 82
     },
     {
         "id": "a5e9e484430e1720",
@@ -184,5 +204,56 @@
             ]
         ],
         "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
+    },
+    {
+        "id": "524b61f06ac20ae7",
+        "type": "catch",
+        "z": "676ceac4c521834d",
+        "g": "6e6682265db1e9ee",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 55,
+        "y": 300,
+        "wires": [
+            [
+                "b068ce351aa5b926"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "b068ce351aa5b926",
+        "type": "function",
+        "z": "676ceac4c521834d",
+        "g": "6e6682265db1e9ee",
+        "name": "Unhandled Exception",
+        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 105,
+        "y": 300,
+        "wires": [
+            [
+                "0d26b7f936be7947"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "0d26b7f936be7947",
+        "type": "link out",
+        "z": "676ceac4c521834d",
+        "g": "6e6682265db1e9ee",
+        "name": "link out 4",
+        "mode": "return",
+        "links": [],
+        "x": 155,
+        "y": 300,
+        "wires": []
     }
 ]

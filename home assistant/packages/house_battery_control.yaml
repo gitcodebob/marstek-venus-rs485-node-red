@@ -331,7 +331,7 @@ input_number:
   # Strategy charge | charge till battery SoC
   house_battery_strategy_charge_target_soc:
     name: Charge until SoC
-    min: 80
+    min: 15
     max: 100
     initial: 100
     unit_of_measurement: "%"
