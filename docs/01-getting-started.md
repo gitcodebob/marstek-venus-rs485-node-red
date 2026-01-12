@@ -60,7 +60,8 @@
    - Import charging strategies:
        - `02 strategy-self-consumption.json` (PID-based self-consumption strategy)
        - `02 strategy-timed.json` (time-based charging/discharging strategy)
-       - `02 strategy-charge.json` (simple charge strategy)
+       - `02 strategy-charge.json` (charge from grid strategy)
+       - `02 strategy-sell.json` (discharge to grid strategy)
        - `02 strategy-full-stop.json` (full stop strategy)
    - Optional: Explore additional examples in the `node-red/examples/` directory for advanced strategy patterns
    - Deprecated flows are available in `node-red/deprecated/` folder for reference

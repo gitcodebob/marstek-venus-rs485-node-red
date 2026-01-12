@@ -8,6 +8,7 @@
 | **Dynamic** | Optimize for hourly energy prices | [Setup guide](05-setup-dynamic.md) ⚙️ |
 | **Timed** | Fixed schedule charging/discharging | Dashboard config only |
 | **Charge** | Force charge from grid | Dashboard config only |
+| **Sell** | Discharge to grid for profit | Dashboard config only |
 | **Charge PV** | Charge only from solar surplus | No setup needed |
 | **Full Stop** | Disable all battery operations | No setup needed |
 
@@ -57,13 +58,38 @@ Charge or discharge based on a fixed schedule. Configure time windows through th
 ---
 
 ### Charge (from grid)
-Forces charging from grid until batteries reach the capacity indicated by the user.
+Charges batteries from the grid. You can configure when to start and stop charging based on battery State of Charge (SoC).
+
+**Power options:**
+- **Maximum power:** Charges at full battery capacity for fastest charging
+- **Regulated power:** Uses self-consumption strategy to charge at a controlled rate, useful to prevent overloading your grid connection
 
 **Ideal for:** Preparing for power outages or charging before expensive rate periods.
 
-**🔧 Settings:** [video explainer charge settings](https://www.youtube.com/watch?v=UbeJaRjFK_o&t=193s) (on YouTube)
+**Dashboard settings:**
+- Start charging at: SoC percentage when charging begins
+- Stop charging at: SoC percentage when charging stops
+- Choose maximum or regulated power mode
 
 **Flow:** `02 strategy-charge.json`
+
+---
+
+### Sell (Discharge to grid)
+Discharges batteries to the grid for profit during high electricity prices. You can configure when to start and stop based on battery State of Charge (SoC).
+
+**Power options:**
+- **Maximum power:** Discharges at full battery capacity for maximum export
+- **Regulated power:** Uses self-consumption strategy to discharge at a controlled rate
+
+**Ideal for:** Selling stored energy during peak price periods or when compensated for grid export.
+
+**Dashboard settings:**
+- Start discharge at: SoC percentage when discharge begins
+- Stop discharge at: SoC percentage when discharge stops (avoid depleting battery completely)
+- Choose maximum or regulated power mode
+
+**Flow:** `02 strategy-sell.json`
 
 ---
 
