@@ -505,7 +505,7 @@ views:
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.2.0)*'
+        content: '### Home Battery Control *(v4.3.0)*'
         text_only: true
     cards: []
   - type: sections
@@ -723,6 +723,14 @@ views:
                   type: input-number-entity
                   entity: input_number.house_battery_strategy_charge_target_power
                   icon: mdi:home-import-outline
+          - type: markdown
+            content: >-
+              <font color=grey><i>Visit the '<ha-icon
+              icon="mdi:cog-outline"></ha-icon>settings tab' for fine grained
+              control **per battery**
+
+              </i></font>
+            text_only: true
       - type: grid
         cards:
           - type: heading
@@ -779,6 +787,14 @@ views:
                 row:
                   type: input-number-entity
                   entity: input_number.house_battery_strategy_sell_target_power
+          - type: markdown
+            content: >-
+              <font color=grey><i>Visit the '<ha-icon
+              icon="mdi:cog-outline"></ha-icon>settings tab' for fine grained
+              control **per battery**
+
+              </i></font>
+            text_only: true
     icon: mdi:transmission-tower-export
     cards: []
     badges:
