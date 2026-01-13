@@ -725,7 +725,7 @@ template:
           seconds: 5
 
   - trigger:
-      - platform: event
+      - trigger: event
         event_type: "update_trace_sensor"
     sensor:
       - name: "Home battery control Trace"

@@ -1,15 +1,24 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.3.1
+- **Fix: Deprecated YAML syntax**
+  * **Trigger platform** - Updated event trigger syntax in trace sensor from deprecated `platform: event` to `trigger: event` format
+
+- **Files Changed:**
+  - `home assistant/packages/house_battery_control.yaml`
+
 ## 4.3.0
-- **Feature: Enhanced Charge strategy**
+- **Feature: new Sell strategy and updated charge strategy**
+  * **Configurable goals** - Control behavior with SoC target, Energy target or unlimitted goals.
+  * **Configurable power** - Set for maximum or power limited (dis)charging. Choosing between speed or lower peak power.
   * **Rebuilt charge control** - Charge strategy rebuilt to match Sell strategy capabilities with maximum power and regulated charging options
-  * **Configurable charge limits** - Control charging behavior with battery SoC thresholds for when to start and stop charging
-  * **Dashboard controls** - New UI controls for charge settings with automatic validation and bounds checking
+  * **Dashboard controls** - New UI controls for charge and sell settings
+  * **Note** - Please review your Charge Strategy settings. Old charge settings have reset or been discarded. 
 
 - **Improvement: Exception handling**
   * **Error resilience** - All strategy flows now handle unhandled exceptions gracefully
-  * **Better diagnostics** - Exceptions are caught and logged for troubleshooting
+  * **Better diagnostics** - Exceptions are caught, logged and displayed on the debug dashboard for troubleshooting
 
 - **Improvement: Version labeling**
   * **Clear versioning** - All strategy flow tabs now display version numbers
@@ -29,10 +38,6 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
 ## 4.2.0
 - **Feature: Hideable onboarding section**
   * **Hide onboarding UI** - New button allows users to hide the onboarding section after completing setup
-  * **Settings page toggle** - Added "Show/Hide onboarding" control on the Advanced Settings tab for easy access
-  * **Conditional visibility** - Onboarding section automatically hides when marked complete, keeping the main dashboard clean
-  * **Improved styling consistency** - Enhanced visual styling on the Advanced Settings page with consistent heading styles and better layout organization
-  * **User experience improvement** - Experienced users can now have a cleaner dashboard while new users still get guided setup
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
