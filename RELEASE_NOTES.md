@@ -5,11 +5,16 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
 - **Fix: Improve PID controller safety, logging, and integral term handling**
   * **Controller disabled warning** - Added clear warning message when all PID gains are zero to prevent silent failures
   * **Simplified load distribution** - Removed redundant debug flag system and streamlined logging for better maintainability
-  * **Integral term safety** - Fixed divide-by-zero issue when Ki=0, improving controller robustness
+  * **Integral term safety** - Fixed divide-by-zero issue when Integral gain was set to 0, improving controller robustness
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
   - `node-red/02 strategy-self-consumption.json`
+
+- **License Changed:**
+  - This open source project started in the community of tinkerers, hobbyists and off-time engineers and should stay available for said community. Providing an open way to control and manage your energy systems. And I aim for any development on the project to also benefit said community.
+  - The GPL 3.0 license seems to better reflect this goal. This and upcoming versions will be released using this license.
+  - Kind regards and happy tinkering, @gitcodebob
 
 ## 4.3.1
 - **Fix: Deprecated YAML syntax**
