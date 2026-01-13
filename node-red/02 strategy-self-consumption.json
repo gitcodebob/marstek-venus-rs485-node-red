@@ -2,7 +2,7 @@
     {
         "id": "2dc255585c9021ad",
         "type": "tab",
-        "label": "Strategy Self-consumption v4.3.1",
+        "label": "Strategy Self-consumption v4.3.2",
         "disabled": false,
         "info": "",
         "env": []
@@ -61,7 +61,7 @@
             "1526a33d800732ac"
         ],
         "x": 1614,
-        "y": 159,
+        "y": 19,
         "w": 252,
         "h": 242
     },
@@ -89,27 +89,9 @@
             "332d68169bd129ff"
         ],
         "x": 1614,
-        "y": 419,
+        "y": 279,
         "w": 592,
         "h": 289.5
-    },
-    {
-        "id": "41a4cb9ce424770f",
-        "type": "group",
-        "z": "2dc255585c9021ad",
-        "name": "Load distribution debug option",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "916fb3fe8335317f",
-            "0b22c050fcc7398b",
-            "043514c40396fe59"
-        ],
-        "x": 1614,
-        "y": 19,
-        "w": 452,
-        "h": 122
     },
     {
         "id": "b9b7c6e5106b3a7c",
@@ -167,7 +149,27 @@
         "x": 288,
         "y": 593,
         "w": 924,
-        "h": 654
+        "h": 634
+    },
+    {
+        "id": "ff7db384260f1b22",
+        "type": "group",
+        "z": "2dc255585c9021ad",
+        "name": "Unhandled exceptions",
+        "style": {
+            "label": true,
+            "stroke": "#d88a8a",
+            "color": "#d88a8a"
+        },
+        "nodes": [
+            "916c17ae8b44a945",
+            "768fa0dcf7e8e3b5",
+            "30ea27bc433988a5"
+        ],
+        "x": 54,
+        "y": 279,
+        "w": 182,
+        "h": 82
     },
     {
         "id": "d4bd6010b2a82002",
@@ -335,26 +337,6 @@
         "x": 314,
         "y": 1119,
         "w": 452,
-        "h": 102
-    },
-    {
-        "id": "ff7db384260f1b22",
-        "type": "group",
-        "z": "2dc255585c9021ad",
-        "name": "Unhandled exceptions",
-        "style": {
-            "label": true,
-            "stroke": "#d88a8a",
-            "color": "#d88a8a"
-        },
-        "nodes": [
-            "916c17ae8b44a945",
-            "768fa0dcf7e8e3b5",
-            "30ea27bc433988a5"
-        ],
-        "x": 54,
-        "y": 279,
-        "w": 182,
         "h": 82
     },
     {
@@ -486,7 +468,7 @@
             }
         ],
         "x": 1720,
-        "y": 240,
+        "y": 100,
         "wires": [
             [
                 "c07fd441a19ddcd6"
@@ -507,7 +489,7 @@
         "finalize": "",
         "libs": [],
         "x": 1730,
-        "y": 300,
+        "y": 160,
         "wires": [
             [
                 "1526a33d800732ac"
@@ -522,7 +504,7 @@
         "name": "Bumpless Ki changes",
         "info": "Recalc I-term whenever Ki changes\n\nNote: always be mindful of making changes to control parameters of systems in operation.",
         "x": 1740,
-        "y": 200,
+        "y": 60,
         "wires": []
     },
     {
@@ -540,7 +522,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1700,
-        "y": 360,
+        "y": 220,
         "wires": []
     },
     {
@@ -572,7 +554,7 @@
         "repair": false,
         "outputs": 3,
         "x": 1855,
-        "y": 660,
+        "y": 520,
         "wires": [
             [
                 "2a5a379c33bdc594",
@@ -603,7 +585,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 2060,
-        "y": 660,
+        "y": 520,
         "wires": []
     },
     {
@@ -658,7 +640,7 @@
             }
         ],
         "x": 1730,
-        "y": 660,
+        "y": 520,
         "wires": [
             [
                 "af9242d4df5098ea"
@@ -692,7 +674,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 2050,
-        "y": 500,
+        "y": 360,
         "wires": [
             [
                 "bdcb744226755ff7"
@@ -726,7 +708,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 2060,
-        "y": 540,
+        "y": 400,
         "wires": [
             [
                 "ce822e5f44a30bc2"
@@ -760,7 +742,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 2060,
-        "y": 460,
+        "y": 320,
         "wires": [
             [
                 "b67191747e0bfe44"
@@ -794,7 +776,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 2050,
-        "y": 580,
+        "y": 440,
         "wires": [
             [
                 "a98d3ba5387274d6"
@@ -822,80 +804,9 @@
         "to": "",
         "reg": false,
         "x": 2060,
-        "y": 620,
+        "y": 480,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "916fb3fe8335317f",
-        "type": "inject",
-        "z": "2dc255585c9021ad",
-        "g": "41a4cb9ce424770f",
-        "name": "Debug FALSE",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "false",
-        "payloadType": "bool",
-        "x": 1730,
-        "y": 100,
-        "wires": [
-            [
-                "0b22c050fcc7398b"
-            ]
-        ]
-    },
-    {
-        "id": "0b22c050fcc7398b",
-        "type": "function",
-        "z": "2dc255585c9021ad",
-        "g": "41a4cb9ce424770f",
-        "name": "Set debug true/false",
-        "func": "flow.set(\"LoadDistribution_debug_enabled\", msg.payload);\nnode.warn(\"Debug flag set to: \" + msg.payload);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1940,
-        "y": 80,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "043514c40396fe59",
-        "type": "inject",
-        "z": "2dc255585c9021ad",
-        "g": "41a4cb9ce424770f",
-        "name": "Debug TRUE",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 1730,
-        "y": 60,
-        "wires": [
-            [
-                "0b22c050fcc7398b"
-            ]
         ]
     },
     {
@@ -1495,7 +1406,7 @@
         "z": "2dc255585c9021ad",
         "g": "0538d5e767988695",
         "name": "Calculate corrections",
-        "func": "// Logger\nvar logdata = \"\"; // deprecated\nconst log = global.get(\"logger\");\n\n// Timing\nlet time_last = context.get('time_last') || Date.now(); // Milliseconds\nlet time_current = Date.now(); // Milliseconds\nlet time_delta = (time_current - time_last) / 1000; // Convert to seconds\n// note: due to inherent 1 sec intervals of P1 meter we omit dt terms. This is mostly for bug checking and optimizations.\n\n// Batteries\nvar B_power = msg.batteries_total_power; // charging is positive, discharging negative\nvar anti_windup_threshold = Number(flow.get(\"batteries_total_assignable_power\")) || 0; // max available charge/discharge power.\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = msg.grid_power; // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\nvar P1_error = msg.grid_error;  // W (watt), error signal = SP - PV\nvar P1_derivative = msg.grid_derivative; // Derivative of PV, not the error\n\n// PID values\nvar Kp = flow.get(\"house_battery_control_kp\") || 0.75;  // Proportional gain\nvar Ki = flow.get(\"house_battery_control_ki\") || 0;     // Integral gain        Ki = Kp/Ti\nvar Kd = flow.get(\"house_battery_control_kd\") || 0;     // Derivative gain      Kd = Kp*Td\n\n// helpers\nvar I_integral_sum = context.get('I_integral_sum') || 0;\nvar Gm = flow.get(\"master_gain\")||1; // gain scheduling\n\n// optimizations\nvar hysteresis = flow.get(\"house_battery_control_hysteresis_in_w\"); // W (watt)\n\n// advanced settings\nconst isDischargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.discharge_disabled\");\nconst isChargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.charge_disabled\");\n\n// -- PID regulator --\n// Proportional term\nlet p_term = Gm * Kp * P1_error;\n\n// Integral term | integrate\nI_integral_sum += P1_error; \n\n// Integral term | apply anti-windup \nlet integral_max = anti_windup_threshold / Ki; // the anti-windup value is set to the current controlable range of the batteries, given by the previous load balancer calculations\nI_integral_sum = Math.min(Math.max(I_integral_sum, -integral_max), integral_max);\n\n// Integral term | the term\nlet i_term = Ki * I_integral_sum;\n\n// Integral term | explain\nlogdata += `anti_windup_threshold=${anti_windup_threshold}, integral_max=${integral_max}| `; // deprecated\n\n// Differential term\nlet d_term = Gm * Kd * (-P1_derivative); // omitted '/time_delta'. inherent P1 refresh fequency.\n\n// Total PID output\nvar PID_output = p_term + i_term + d_term; // W (watt), the control input for the battery packs\n\n// Charging or Discharging states\nvar B_was_charging = context.get(\"batteries_charging_last\") || false;\nvar B_is_charging = PID_output > 0 ? true : false;\n\n// Explain\nlogdata += `U(${time_delta}s)[${PID_output}] = P(${Kp})[${p_term}] + I(${Ki})[${i_term}] + D(${Kd})[${d_term}] | `; // deprecated\nlog(this,`**PID Controller**`);\nlog(this,`Step size: ${time_delta} s`);\nlog(this,`P-term: ${Math.floor(p_term)} W @ P-gain ${Kp}`);\nlog(this,`I-term: ${Math.floor(i_term)} W @ I-gain ${Ki}`);\nlog(this,`D-term: ${Math.floor(d_term)} W @ D-gain ${Kd}`);\nlog(this, `**PID ${B_is_charging ? 'Charge' : 'Discharge'}: ${Math.floor(p_term)} + ${Math.floor(i_term)} + ${Math.floor(d_term) } = ${Math.round(PID_output)} Watt**`);\nlog(this, `I-term was capped at ${integral_max}, corresponding to ${anti_windup_threshold} W`);\nif (isDischargeDisabled) log(this,'PID discharging is disabled via `msg.advanced_settings`');\n\n// Only one of the advanced settings below can be active at once.\n// Advanced setting | discharge disabled\nif(isDischargeDisabled && !B_is_charging) {\n    // log explain\n    logdata += `Discharging disabled, PID unwound U(${time_delta})[0]=0+0+0 | `;\n    log(this,'**PID set to 0**. Discharge was disabled.');\n    // Set all PID terms to 0 and unwind integral sum\n    PID_output = 0;\n    p_term = 0;\n    i_term = 0;\n    d_term = 0;\n    I_integral_sum = 0; // unwind\n    // maintain charge scenario\n    B_is_charging = true;\n    \n// Advanced setting | charge disabled\n} else if (isChargeDisabled && B_is_charging) {\n    // log explain\n    logdata += `Charging disabled, PID unwound U(${time_delta})[0]=0+0+0 | `;\n    log(this,'**PID set to 0**. Charge was disabled.');\n    // Set all PID terms to 0 and unwind integral sum\n    PID_output = 0;\n    p_term = 0;\n    i_term = 0;\n    d_term = 0;\n    I_integral_sum = 0; // unwind\n    // maintain discharge scenario\n    B_is_charging = false;\n\n// Advanced setting | hysteresis\n} else if \n// prevents excessive switching between (dis)charge mode around the zero point.\n// if new PID_output lies within hysteresis, it will not switch charge mode. \n// set hysteresis to 0, to apply no hysteresis\n(B_is_charging !== B_was_charging && Math.abs(PID_output) < hysteresis){\n    // log explain\n    logdata += `Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst) | `;\n    log(this,`Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst)`);\n    // prevent negative charging or positive discharging values (not allowed)\n    PID_output = (PID_output < 0 && B_is_charging) || ((PID_output > 0 && !B_is_charging)) ? 0 : PID_output;\n    // maintain previous scenario\n    B_is_charging = B_was_charging;\n} \n\n// save for next iteration\ncontext.set(\"batteries_charging_last\", B_is_charging); //boolean\n\n// OUTFLOW\ncontext.set(\"time_last\", Date.now());\ncontext.set(\"I_integral_sum\", I_integral_sum);\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries_charging\", B_is_charging, true);\nRED.util.setMessageProperty(msg, \"I_integral_sum\", I_integral_sum,true);\nmsg.payload = Number(PID_output);\n\n\nreturn [msg, // payload = PID_output\n        { payload: Number(P1_error)},\n        { payload: parseFloat(p_term)},\n        { payload: parseFloat(i_term)},\n        { payload: parseFloat(d_term)},\n        { payload: B_is_charging},\n        { payload: logdata }];",
+        "func": "// Logger\nvar logdata = \"\"; // deprecated\nconst log = global.get(\"logger\");\n\n// Timing\nlet time_last = context.get('time_last') || Date.now(); // Milliseconds\nlet time_current = Date.now(); // Milliseconds\nlet time_delta = (time_current - time_last) / 1000; // Convert to seconds\n// note: due to inherent 1 sec intervals of P1 meter we omit dt terms. This is mostly for bug checking and optimizations.\n\n// Batteries\nvar B_power = msg.batteries_total_power; // charging is positive, discharging negative\nvar anti_windup_threshold = Number(flow.get(\"batteries_total_assignable_power\")) || 0; // max available charge/discharge power.\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = msg.grid_power; // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\nvar P1_error = msg.grid_error;  // W (watt), error signal = SP - PV\nvar P1_derivative = msg.grid_derivative; // Derivative of PV, not the error\n\n// PID values\nvar Kp = flow.get(\"house_battery_control_kp\") || 0.75;  // Proportional gain\nvar Ki = flow.get(\"house_battery_control_ki\") || 0;     // Integral gain        Ki = Kp/Ti\nvar Kd = flow.get(\"house_battery_control_kd\") || 0;     // Derivative gain      Kd = Kp*Td\n\n// helpers\nvar I_integral_sum = context.get('I_integral_sum') || 0;\nvar Gm = flow.get(\"master_gain\")||1; // gain scheduling\n\n// optimizations\nvar hysteresis = flow.get(\"house_battery_control_hysteresis_in_w\"); // W (watt)\n\n// advanced settings\nconst isDischargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.discharge_disabled\");\nconst isChargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.charge_disabled\");\n\n// -- PID regulator --\n// Proportional term\nlet p_term = Gm * Kp * P1_error;\n\n// Integral term\nlet integral_max = 0;\nif (Ki > 0) {\n    // Integral term | integrate\n    I_integral_sum += P1_error; \n    // Integral term | apply anti-windup\n    integral_max = anti_windup_threshold / Ki; // the anti-windup value is set to the current controlable range of the batteries, given by the previous load balancer calculations\n    I_integral_sum = Math.min(Math.max(I_integral_sum, -integral_max), integral_max);\n} else {\n    // If Ki is 0, keep everything 0\n    I_integral_sum = 0;\n    integral_max = 0;\n}\n\n// Integral term | the term\nlet i_term = Ki * I_integral_sum;\n\n// Integral term | explain\nlogdata += `anti_windup_threshold=${anti_windup_threshold}, integral_max=${integral_max}| `; // deprecated\n\n// Differential term\nlet d_term = Gm * Kd * (-P1_derivative); // omitted '/time_delta'. inherent P1 refresh fequency.\n\n// Total PID output\nvar PID_output = p_term + i_term + d_term; // W (watt), the control input for the battery packs\n\n// Charging or Discharging states\nvar B_was_charging = context.get(\"batteries_charging_last\") || false;\nvar B_is_charging = PID_output > 0 ? true : false;\n\n// Explain\nlogdata += `U(${time_delta}s)[${PID_output}] = P(${Kp})[${p_term}] + I(${Ki})[${i_term}] + D(${Kd})[${d_term}] | `; // deprecated\nlog(this,`**PID Controller**`);\nlog(this,`Step size: ${time_delta} s`);\nif(Kp == 0 && Ki == 0 && Kd == 0) {\n    log(this, `<font color=\"orange\">**Controller disabled**</font> All PID gains are 0. Choose a PID preset or set gains > 0.`,\"warn\");\n} else {\n    log(this, `P-term: ${Math.floor(p_term)} W @ P-gain ${Kp}`);\n    log(this, `I-term: ${Math.floor(i_term)} W @ I-gain ${Ki} (max. ${anti_windup_threshold} W)`);\n    log(this, `D-term: ${Math.floor(d_term)} W @ D-gain ${Kd}`);\n    log(this, `**PID ${B_is_charging ? 'Charge' : 'Discharge'}:** ${Math.floor(p_term)} + ${Math.floor(i_term)} + ${Math.floor(d_term)} = **${Math.round(PID_output)} Watt**`);\n}\n\n// Only one of the advanced settings below can be active at once.\n// Advanced setting | discharge disabled\nif(isDischargeDisabled && !B_is_charging) {\n    // log explain\n    logdata += `Discharging disabled, PID unwound U(${time_delta})[0]=0+0+0 | `;\n    log(this,'**PID set to 0**. Discharge was disabled via `msg.advanced_settings`.');\n    // Set all PID terms to 0 and unwind integral sum\n    PID_output = 0;\n    p_term = 0;\n    i_term = 0;\n    d_term = 0;\n    I_integral_sum = 0; // unwind\n    // maintain charge scenario\n    B_is_charging = true;\n    \n// Advanced setting | charge disabled\n} else if (isChargeDisabled && B_is_charging) {\n    // log explain\n    logdata += `Charging disabled, PID unwound U(${time_delta})[0]=0+0+0 | `;\n    log(this,'**PID set to 0**. Charge was disabled via `msg.advanced_settings`.');\n    // Set all PID terms to 0 and unwind integral sum\n    PID_output = 0;\n    p_term = 0;\n    i_term = 0;\n    d_term = 0;\n    I_integral_sum = 0; // unwind\n    // maintain discharge scenario\n    B_is_charging = false;\n\n// Advanced setting | hysteresis\n} else if \n// prevents excessive switching between (dis)charge mode around the zero point.\n// if new PID_output lies within hysteresis, it will not switch charge mode. \n// set hysteresis to 0, to apply no hysteresis\n(B_is_charging !== B_was_charging && Math.abs(PID_output) < hysteresis){\n    // log explain\n    logdata += `Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst) | `;\n    log(this,`Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst)`);\n    // prevent negative charging or positive discharging values (not allowed)\n    PID_output = (PID_output < 0 && B_is_charging) || ((PID_output > 0 && !B_is_charging)) ? 0 : PID_output;\n    // maintain previous scenario\n    B_is_charging = B_was_charging;\n} \n\n// save for next iteration\ncontext.set(\"batteries_charging_last\", B_is_charging); //boolean\n\n// OUTFLOW\ncontext.set(\"time_last\", Date.now());\ncontext.set(\"I_integral_sum\", I_integral_sum);\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries_charging\", B_is_charging, true);\nRED.util.setMessageProperty(msg, \"I_integral_sum\", I_integral_sum,true);\nmsg.payload = Number(PID_output);\n\n\nreturn [msg, // payload = PID_output\n        { payload: Number(P1_error)},\n        { payload: parseFloat(p_term)},\n        { payload: parseFloat(i_term)},\n        { payload: parseFloat(d_term)},\n        { payload: B_is_charging},\n        { payload: logdata }];",
         "outputs": 7,
         "timeout": 0,
         "noerr": 0,
@@ -1905,20 +1816,18 @@
         "z": "2dc255585c9021ad",
         "g": "81378689693e940b",
         "name": "Load distribution",
-        "func": "// Logger\nlet debugLog = flow.get(\"LoadDistribution_debug_enabled\") === true; // deprecated\nconst log = global.get(\"logger\");\nlog(this,\"**PID load distribution**\");\n\n// INPUT\nvar batteries = msg.batteries; // Battery configuration as provided by `Home Batteries IO` flow\nvar isCharging = msg.batteries_charging; // Are we in a battery charging scenario?\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\nvar hasReverseDischargePriority = flow.get(\"has_reverse_priority_discharge\") || false; // Prioritize (dis)charging the same battery\nvar logdata = `Charging=${isCharging} | `; // logging for node-red debug node\nconst isDischargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.discharge_disabled\"); // Disallow discharging?\n\n// how much power do the batteries need to compensate?\nvar unassigned_power = Math.round(Math.abs(msg.payload)); // Power in W to compensate using batteries\nlogdata += `Unassigned power ${unassigned_power} W | `;\nlog(this,`How much power do the batteries need to compensate: ${unassigned_power} W`);\n\n// inits \nvar solution_array = []; // load distribution solutions\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// debug output function\nfunction debug(message) {\n    if (debugLog) {\n        node.warn(message);\n        node.status({fill:\"yellow\",shape:\"ring\",text:\"debugging\"});\n    } else {\n        node.status({fill:\"green\",shape:\"dot\",text:\"operating\"});\n    }\n}\ndebug(`=== Cycle #${Date.now()} ===`);\n\n/**\n** Battery life improvement (slow charge near max SoC)\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    // Must be greater than zero\n    let limitedPower = Math.max(0, max_power); \n\n    // Limit charge at high SoC\n    if (hasChargingLimiter) {\n        if (soc >= 98)      limitedPower = Math.min(300, limitedPower);\n        else if (soc >= 95) limitedPower = Math.min(500, limitedPower);\n        else if (soc >= 85) limitedPower = Math.min(1500, limitedPower);\n    }\n    return limitedPower;\n}\nif (isCharging) logdata += `💡Charge limiting based on SoC | `; // deprecated\n\n/**\n* battery life improvement (disconnects battery only if the battery is not used for ... seconds)\n* @param {string | number} batteryID\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getStopSolution(batteryID) {\n    // idle time, before stop is given to inverter relay.\n    let time_idle_minimum = flow.get(\"idle_time_minutes\")*60*1000||0; // Milliseconds\n\n    // retrieve last registered active times for each battery based on their ids\n    let lasttime_active = context.get(\"lasttime_active\");\n    \n    // battery exists in register \n    if(lasttime_active[batteryID] !== undefined){\n        // timing\n        let time_last = lasttime_active[batteryID]; // Milliseconds \n        let time_now = Date.now();                  // Milliseconds \n        let time_idle = (time_now - time_last); // Milliseconds\n        \n        // battery is ready for STOP\n        if (time_idle >= time_idle_minimum) {\n            log(this,`Battery ${batteryID} [STOP]: 0 Watt and disconnect relay.`);\n            return {id: batteryID, mode: CMODE.STOP, power:0}; // STOP or 0 Watt disconnects relay\n        }\n        \n        // battery is kept IDLE, while awaiting minimum inactive time\n        logdata += `Idle: ${batteryID} ${Math.round(time_idle/1000)}s | `; // deprecated\n        log(this,`Battery ${batteryID} [IDLE]: 1 Watt for ${Math.round((time_idle_minimum-time_idle)/1000)}s. Keep relay engaged.`);\n        return { id: batteryID, mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE, power: 1 }; // 1 Watt keeps battery IDLE, keeping relay engaged\n    }\n\n    // battery missing in register\n    logdata += `'Idle: ${batteryID}' unknown last active time | `; // deprecated\n    debug(`[IDLE] Battery '${batteryID}' unknown last active time`); // deprecated\n    log(this,`Battery ${batteryID} [IDLE]: unknown last active time`);\n    return getActiveSolution(batteryID, 1); // set a last active time and engage idle state\n}\nlogdata += \"💡Idle before stop | \";\n\n/**\n* Get battery solution and register a last active time.\n* @param {any} batteryID\n* @param {number} assigned_power\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getActiveSolution(batteryID, assigned_power){\n    // register battery as active\n    let lasttime_active = context.get(\"lasttime_active\")||[]; // last registered active times for each battery based on their ids\n    lasttime_active[batteryID] = Date.now();\n    context.set(\"lasttime_active\", lasttime_active);\n\n    // solution\n    return {\n        id: batteryID,\n        mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE,\n        power: Math.round(assigned_power)\n    };\n}\n\n// -- BATTERY DISCHARGE PRIORITY\nif (!isCharging && hasReverseDischargePriority) {\n   batteries.reverse();\n}\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ id: any; soc: number; soc_min: number; soc_max: number; rs485: string; charging_max: number; discharging_max: any; }} */ battery) => {\n  \n    debug(`[CHECK] Battery ${battery.id}: SoC=${battery.soc}%, Min=${battery.soc_min}%, Max=${battery.soc_max}%, RS485=${battery.rs485}`);\n    log(this, `<font color=\"#009ac7\">Battery ${battery.id}</font>: ${battery.soc}% (min: ${battery.soc_min}%, max: ${battery.soc_max}%) ; RS485: ${battery.rs485=='enable'?'OK':'Nok'}`);\n\n    // track if the battery should be skipped and why\n    let skipReason = null;\n    if (battery.rs485 !== \"enable\") {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped because RS485 is not 'enable'`;\n    } else if (isCharging && battery.soc >= battery.soc_max) {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped because SoC (${battery.soc}%) >= Max (${battery.soc_max}%) while charging`;\n    } else if (!isCharging && battery.soc <= battery.soc_min) {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped because SoC (${battery.soc}%) <= Min (${battery.soc_min}%) while discharging`;\n    } else if (!isCharging && isDischargeDisabled) {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped, discharging was disabled via msg property`;\n    }\n\n    // battery NOT AVAIABLE, skip via soft stop\n    if (skipReason !== null) {\n        log(this, skipReason);                      // communicate reason\n        debug(skipReason);                          // communicate reason\n        let solution = getStopSolution(battery.id); // get a soft stop solution for this battery\n        solution_array.push(solution);              // add solution, do not update last active time.\n        // next battery\n        return; \n    }\n\n    // battery is AVAILABLE, assign power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power);\n    \n    // select solution\n    var solution;\n    if (assign <= 0 ) {\n        // no power solution\n        solution = getStopSolution(battery.id); // a soft stop solution\n        assign = 0;\n    } else {\n        // assigned power solution\n        solution = getActiveSolution(battery.id, Math.round(assign));\n    }\n    solution_array.push(solution);\n    \n    // Explain: charge limiting\n    if(unassigned_power > battery_assignable_power && battery_assignable_power < battery.charging_max) {\n        log(this,`Charging limited to protect battery (${battery.soc}%): ${battery.charging_max}W -> ${battery_assignable_power}W`);\n    }\n    // Explain: solution result\n    debug(`[ASSIGN] Battery ${solution.id}: allowed to ${solution.mode} with ${solution.power}W`);\n    log(this, `<font color=\"#38cd9e\">Battery ${solution.id}</font>: allowed to ${solution.mode} with ${solution.power}W / ${isCharging ? battery.charging_max : battery.discharging_max }W max.`)\n\n    // remaining power to assign\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n    //node.warn(`[BATTERY] UPDATE: ID=${battery.id}, new_unassigned=${unassigned_power}W, total_assignable=${batteries_total_assignable_power}W`);\n});\n\n// battery discharge priority - put solutions back in initial order\nif (!isCharging && hasReverseDischargePriority) {\n    solution_array.reverse();\n}\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power); // this is set for the anti-windup calculation in the earlier 'calculate corrections' node, which will pick this up during next iteration.\nlogdata += `batteries_total_assignable_power ${batteries_total_assignable_power} | `;\n\n// OUTPUT\nsolution_array.forEach(solution => { \n    logdata += `Solution: ${solution.id}, ${solution.mode} ${solution.power} W | `;\n});\nRED.util.setMessageProperty(msg, \"solutions\", solution_array,true);\n\n// TWO OUTPUT NODES\nreturn [\n    { payload: logdata },    // debug output\n    msg , // to Home Battery flow\n    ]; ",
-        "outputs": 2,
+        "func": "// Logger\nconst log = global.get(\"logger\");\nlog(this,\"**PID load distribution**\");\n\n// INPUT\nvar batteries = msg.batteries; // Battery configuration as provided by `Home Batteries IO` flow\nvar isCharging = msg.batteries_charging; // Are we in a battery charging scenario?\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\nvar hasReverseDischargePriority = flow.get(\"has_reverse_priority_discharge\") || false; // Prioritize (dis)charging the same battery\nconst isDischargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.discharge_disabled\"); // Disallow discharging?\n\n// how much power do the batteries need to compensate?\nvar unassigned_power = Math.round(Math.abs(msg.payload)); // Power in W to compensate using batteries\nlog(this,`How much power do the batteries need to compensate: ${unassigned_power} W`);\n\n// inits \nvar solution_array = []; // load distribution solutions\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n/**\n** Battery life improvement (slow charge near max SoC)\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    // Must be greater than zero\n    let limitedPower = Math.max(0, max_power); \n\n    // Limit charge at high SoC\n    if (hasChargingLimiter) {\n        if (soc >= 98)      limitedPower = Math.min(300, limitedPower);\n        else if (soc >= 95) limitedPower = Math.min(500, limitedPower);\n        else if (soc >= 85) limitedPower = Math.min(1500, limitedPower);\n    }\n    return limitedPower;\n}\n\n/**\n* battery life improvement (disconnects battery only if the battery is not used for ... seconds)\n* @param {string | number} batteryID\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getStopSolution(batteryID) {\n    // idle time, before stop is given to inverter relay.\n    let time_idle_minimum = flow.get(\"idle_time_minutes\")*60*1000||0; // Milliseconds\n\n    // retrieve last registered active times for each battery based on their ids\n    let lasttime_active = context.get(\"lasttime_active\");\n    \n    // battery exists in register \n    if(lasttime_active[batteryID] !== undefined){\n        // timing\n        let time_last = lasttime_active[batteryID]; // Milliseconds \n        let time_now = Date.now();                  // Milliseconds \n        let time_idle = (time_now - time_last); // Milliseconds\n        \n        // battery is ready for STOP\n        if (time_idle >= time_idle_minimum) {\n            log(this,`Battery ${batteryID} [STOP]: 0 Watt and disconnect relay.`);\n            return {id: batteryID, mode: CMODE.STOP, power:0}; // STOP or 0 Watt disconnects relay\n        }\n        \n        // battery is kept IDLE, while awaiting minimum inactive time\n        log(this,`Battery ${batteryID} [IDLE]: 1 Watt for ${Math.round((time_idle_minimum-time_idle)/1000)}s. Keep relay engaged.`);\n        return { id: batteryID, mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE, power: 1 }; // 1 Watt keeps battery IDLE, keeping relay engaged\n    }\n\n    // battery missing in register\n    log(this,`Battery ${batteryID} [IDLE]: unknown last active time`);\n    return getActiveSolution(batteryID, 1); // set a last active time and engage idle state\n}\n\n/**\n* Get battery solution and register a last active time.\n* @param {any} batteryID\n* @param {number} assigned_power\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getActiveSolution(batteryID, assigned_power){\n    // register battery as active\n    let lasttime_active = context.get(\"lasttime_active\")||[]; // last registered active times for each battery based on their ids\n    lasttime_active[batteryID] = Date.now();\n    context.set(\"lasttime_active\", lasttime_active);\n\n    // solution\n    return {\n        id: batteryID,\n        mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE,\n        power: Math.round(assigned_power)\n    };\n}\n\n// -- BATTERY DISCHARGE PRIORITY\nif (!isCharging && hasReverseDischargePriority) {\n   batteries.reverse();\n}\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ id: any; soc: number; soc_min: number; soc_max: number; rs485: string; charging_max: number; discharging_max: any; }} */ battery) => {\n    \n    // Explain\n    log(this, `Battery ${battery.id}: ${battery.soc}% (min: ${battery.soc_min}%, max: ${battery.soc_max}%) ; RS485: ${battery.rs485=='enable'?'OK':'Nok'}`);\n\n    // track if the battery should be skipped and why\n    let skipReason = null;\n    if (battery.rs485 !== \"enable\") {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped because RS485 is not 'enable'`;\n    } else if (isCharging && battery.soc >= battery.soc_max) {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped because SoC (${battery.soc}%) >= Max (${battery.soc_max}%) while charging`;\n    } else if (!isCharging && battery.soc <= battery.soc_min) {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped because SoC (${battery.soc}%) <= Min (${battery.soc_min}%) while discharging`;\n    } else if (!isCharging && isDischargeDisabled) {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped, discharging was disabled via msg property`;\n    }\n\n    // battery NOT AVAIABLE, skip via soft stop\n    if (skipReason !== null) {\n        log(this, skipReason);                      // communicate reason\n        let solution = getStopSolution(battery.id); // get a soft stop solution for this battery\n        solution_array.push(solution);              // add solution, do not update last active time.\n        // next battery\n        return; \n    }\n\n    // battery is AVAILABLE, assign power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power);\n    \n    // select solution\n    var solution;\n    if (assign <= 0 ) {\n        // no power solution\n        solution = getStopSolution(battery.id); // a soft stop solution\n        assign = 0;\n    } else {\n        // assigned power solution\n        solution = getActiveSolution(battery.id, Math.round(assign));\n    }\n    solution_array.push(solution);\n    \n    // Explain: charge limiting\n    if(unassigned_power > battery_assignable_power && battery_assignable_power < battery.charging_max) {\n        log(this,`Charging limited to protect battery (${battery.soc}%): ${battery.charging_max}W -> ${battery_assignable_power}W`);\n    }\n    // Explain: solution result\n    log(this, `<font color=\"#009ac7\">Battery ${solution.id}</font>: assigned to ${solution.mode} with ${solution.power}W / ${isCharging ? battery.charging_max : battery.discharging_max }W max.`)\n\n    // remaining power to assign\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n});\n\n// battery discharge priority - put solutions back in initial order\nif (!isCharging && hasReverseDischargePriority) {\n    solution_array.reverse();\n}\n\n// store solutions in msg\nRED.util.setMessageProperty(msg, \"solutions\", solution_array,true);\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power); // this is set for the anti-windup calculation in the earlier 'calculate corrections' node, which will pick this up during next iteration.\n\n// OUTPUT\nreturn msg; // to Home Battery flow",
+        "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is started.\n\ncontext.set(\"lasttime_active\",[]);",
         "finalize": "",
         "libs": [],
         "x": 420,
-        "y": 1180,
+        "y": 1160,
         "wires": [
             [
-                "9197f431cd22f55c"
-            ],
-            [
+                "9197f431cd22f55c",
                 "188b6d74052d7b75"
             ]
         ],
@@ -1936,7 +1845,7 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
+        "complete": "solutions",
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
@@ -2188,7 +2097,7 @@
             }
         ],
         "x": 1720,
-        "y": 480,
+        "y": 340,
         "wires": [
             [
                 "85a1019efd05b4bd"
@@ -2214,7 +2123,7 @@
         "repair": false,
         "outputs": 1,
         "x": 1855,
-        "y": 480,
+        "y": 340,
         "wires": [
             [
                 "2a5a379c33bdc594"
@@ -2274,7 +2183,7 @@
             }
         ],
         "x": 1720,
-        "y": 560,
+        "y": 420,
         "wires": [
             [
                 "332d68169bd129ff"
@@ -2300,7 +2209,7 @@
         "repair": false,
         "outputs": 1,
         "x": 1855,
-        "y": 560,
+        "y": 420,
         "wires": [
             [
                 "2a5a379c33bdc594"
@@ -2467,7 +2376,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "72b65d60c4a6d738",
+        "id": "4daf6e7bcce195d0",
         "type": "global-config",
         "env": [],
         "modules": {
