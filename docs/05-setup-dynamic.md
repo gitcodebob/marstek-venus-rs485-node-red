@@ -1,3 +1,8 @@
+---
+layout: default
+title: Dynamic Strategy Setup
+---
+
 # Dynamic Strategy Setup
 
 The `dynamic` flow is provided for automated charging/discharging based on changing hourly rates. This is only relevant if you have a dynamic/hourly contract.

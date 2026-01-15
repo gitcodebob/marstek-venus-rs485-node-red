@@ -1,3 +1,8 @@
+---
+layout: default
+title: Advanced Features
+---
+
 # Advanced Features
 
 ## EV Stop Trigger

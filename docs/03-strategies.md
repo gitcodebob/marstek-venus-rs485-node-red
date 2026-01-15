@@ -1,3 +1,8 @@
+---
+layout: default
+title: Control Strategies
+---
+
 # Battery Control Strategies
 
 ## Quick Reference

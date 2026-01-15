@@ -165,6 +165,86 @@
         .main-content img {
             background-color: transparent;
         }
+
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: fixed;
+            left: 20px;
+            top: 180px;
+            width: 250px;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+            background-color: #001220;
+            border: 1px solid #003D5C;
+            border-radius: 5px;
+            padding: 15px;
+            display: none;
+        }
+
+        .toc-sidebar h3 {
+            margin-top: 0;
+            font-size: 1.1rem;
+            color: #FF9F38;
+            margin-bottom: 10px;
+        }
+
+        .toc-sidebar ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .toc-sidebar li {
+            margin-bottom: 5px;
+        }
+
+        .toc-sidebar a {
+            color: #00A3B1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            display: block;
+        }
+
+        .toc-sidebar a:hover {
+            color: #00D4E6;
+        }
+
+        .toc-sidebar .active {
+            color: #FF9F38;
+            font-weight: bold;
+        }
+
+        /* Indent nested headings */
+        .toc-sidebar .toc-h2 {
+            padding-left: 0;
+        }
+
+        .toc-sidebar .toc-h3 {
+            padding-left: 15px;
+        }
+
+        .toc-sidebar .toc-h4 {
+            padding-left: 30px;
+        }
+
+        /* Show TOC on larger screens */
+        @media screen and (min-width: 1200px) {
+            .toc-sidebar {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 290px;
+            }
+        }
+
+        /* Hide TOC on smaller screens */
+        @media screen and (max-width: 1199px) {
+            .toc-sidebar {
+                display: none;
+            }
+        }
     </style>
 
     {% include head-custom.html %}
@@ -188,6 +268,12 @@
         <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
         {% endif %}
     </header>
+
+    <!-- Table of Contents Sidebar -->
+    <div class="toc-sidebar" id="toc">
+        <h3>On This Page</h3>
+        <ul id="toc-list"></ul>
+    </div>
 
     <main id="content" class="main-content" role="main">
 
@@ -216,6 +302,68 @@
             icon: '#'
         };
         anchors.add('.main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6');
+
+        // Generate Table of Contents
+        function generateTOC() {
+            const content = document.querySelector('.main-content');
+            const headings = content.querySelectorAll('h2, h3, h4');
+            const tocList = document.getElementById('toc-list');
+            const toc = document.getElementById('toc');
+
+            if (headings.length === 0) {
+                toc.style.display = 'none';
+                return;
+            }
+
+            headings.forEach((heading, index) => {
+                // Create an ID if it doesn't have one
+                if (!heading.id) {
+                    heading.id = 'heading-' + index;
+                }
+
+                const li = document.createElement('li');
+                li.className = 'toc-' + heading.tagName.toLowerCase();
+
+                const a = document.createElement('a');
+                a.href = '#' + heading.id;
+                a.textContent = heading.textContent.replace('#', '').trim();
+
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    heading.scrollIntoView({ behavior: 'smooth' });
+                    history.pushState(null, null, '#' + heading.id);
+                });
+
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+
+            // Highlight active section on scroll
+            let lastActiveLink = null;
+            window.addEventListener('scroll', () => {
+                let current = '';
+                headings.forEach(heading => {
+                    const rect = heading.getBoundingClientRect();
+                    if (rect.top <= 100) {
+                        current = heading.id;
+                    }
+                });
+
+                if (current) {
+                    if (lastActiveLink) {
+                        lastActiveLink.classList.remove('active');
+                    }
+                    const activeLink = tocList.querySelector(`a[href="#${current}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                        lastActiveLink = activeLink;
+                    }
+                }
+            });
+        }
+
+        // Run after page loads
+        document.addEventListener('DOMContentLoaded', generateTOC);
     </script>
 </body>
 
