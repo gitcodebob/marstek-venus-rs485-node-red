@@ -349,63 +349,39 @@
         {% if page.url != "/" and page.url != "/index.html" %}
 
         <!-- Previous/Next Navigation -->
+        {% assign nav_pages = site.pages | where_exp: "item", "item.nav_order" | sort: "nav_order" %}
+        {% assign prev_page = nil %}
+        {% assign next_page = nil %}
+        {% assign found = false %}
+
+        {% for nav_page in nav_pages %}
+        {% if found == true and next_page == nil %}
+        {% assign next_page = nav_page %}
+        {% endif %}
+
+        {% if nav_page.url == page.url %}
+        {% assign found = true %}
+        {% elsif found == false %}
+        {% assign prev_page = nav_page %}
+        {% endif %}
+        {% endfor %}
+
         <nav class="page-navigation">
-            {% if page.url contains "01-getting-started" %}
+            {% if prev_page %}
+            <a href="{{ prev_page.url }}" class="nav-prev">
+                <span class="nav-label">← Previous</span>
+                <span class="nav-title">{{ prev_page.title }}</span>
+            </a>
+            {% else %}
             <div></div>
-            <a href="/02-modbus-setup" class="nav-next">
+            {% endif %}
+
+            {% if next_page %}
+            <a href="{{ next_page.url }}" class="nav-next">
                 <span class="nav-label">Next →</span>
-                <span class="nav-title">Modbus Setup</span>
+                <span class="nav-title">{{ next_page.title }}</span>
             </a>
-            {% elsif page.url contains "02-modbus-setup" %}
-            <a href="/01-getting-started" class="nav-prev">
-                <span class="nav-label">← Previous</span>
-                <span class="nav-title">Getting Started</span>
-            </a>
-            <a href="/03-strategies" class="nav-next">
-                <span class="nav-label">Next →</span>
-                <span class="nav-title">Control Strategies</span>
-            </a>
-            {% elsif page.url contains "03-strategies" %}
-            <a href="/02-modbus-setup" class="nav-prev">
-                <span class="nav-label">← Previous</span>
-                <span class="nav-title">Modbus Setup</span>
-            </a>
-            <a href="/04-setup-self-consumption" class="nav-next">
-                <span class="nav-label">Next →</span>
-                <span class="nav-title">Self-Consumption Setup</span>
-            </a>
-            {% elsif page.url contains "04-setup-self-consumption" %}
-            <a href="/03-strategies" class="nav-prev">
-                <span class="nav-label">← Previous</span>
-                <span class="nav-title">Control Strategies</span>
-            </a>
-            <a href="/05-setup-dynamic" class="nav-next">
-                <span class="nav-label">Next →</span>
-                <span class="nav-title">Dynamic Strategy Setup</span>
-            </a>
-            {% elsif page.url contains "05-setup-dynamic" %}
-            <a href="/04-setup-self-consumption" class="nav-prev">
-                <span class="nav-label">← Previous</span>
-                <span class="nav-title">Self-Consumption Setup</span>
-            </a>
-            <a href="/06-advanced-features" class="nav-next">
-                <span class="nav-label">Next →</span>
-                <span class="nav-title">Advanced Features</span>
-            </a>
-            {% elsif page.url contains "06-advanced-features" %}
-            <a href="/05-setup-dynamic" class="nav-prev">
-                <span class="nav-label">← Previous</span>
-                <span class="nav-title">Dynamic Strategy Setup</span>
-            </a>
-            <a href="/07-troubleshooting" class="nav-next">
-                <span class="nav-label">Next →</span>
-                <span class="nav-title">Troubleshooting</span>
-            </a>
-            {% elsif page.url contains "07-troubleshooting" %}
-            <a href="/06-advanced-features" class="nav-prev">
-                <span class="nav-label">← Previous</span>
-                <span class="nav-title">Advanced Features</span>
-            </a>
+            {% else %}
             <div></div>
             {% endif %}
         </nav>

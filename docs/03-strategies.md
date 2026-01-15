@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Control Strategies
+nav_order: 3
 ---
 
 # Battery Control Strategies

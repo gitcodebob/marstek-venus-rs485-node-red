@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Dynamic Strategy Setup
+nav_order: 5
 ---
 
 # Dynamic Strategy Setup

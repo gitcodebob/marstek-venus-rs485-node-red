@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Modbus Setup
+nav_order: 2
 ---
 
 # Modbus to Home Assistant

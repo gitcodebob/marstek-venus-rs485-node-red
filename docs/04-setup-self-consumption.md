@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Self-Consumption Setup
+nav_order: 4
 ---
 # Self-consumption Strategy Setup
 
