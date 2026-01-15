@@ -58,35 +58,34 @@ Charge or discharge based on a fixed schedule. Configure time windows through th
 ---
 
 ### Charge (from grid)
-Charges batteries from the grid. You can configure when to start and stop charging based on battery State of Charge (SoC).
+Charges batteries from the grid. You can configure when to start and stop charging based on battery State of Charge (SoC) or Energy level (kWh).
 
 **Power options:**
 - **Maximum power:** Charges at full battery capacity for fastest charging
-- **Regulated power:** Uses self-consumption strategy to charge at a controlled rate, useful to prevent overloading your grid connection
+- **Regulated power:** Uses PID-controller to charge at a controlled rate, useful to prevent overloading your grid connection. Require battery specific charging limits? Review the settings tab.
 
 **Ideal for:** Preparing for power outages or charging before expensive rate periods.
 
-**Dashboard settings:**
-- Start charging at: SoC percentage when charging begins
-- Stop charging at: SoC percentage when charging stops
-- Choose maximum or regulated power mode
+**🔧 Settings:** [video explainer charge settings](https://www.youtube.com/watch?v=UbeJaRjFK_o&t=193s) (on YouTube)
+- This video is a bit dated, but gives an idea.
 
 **Flow:** `02 strategy-charge.json`
 
 ---
 
 ### Sell (Discharge to grid)
-Discharges batteries to the grid for profit during high electricity prices. You can configure when to start and stop based on battery State of Charge (SoC).
+Discharges batteries to the grid for profit during high electricity prices. You can configure when to start and stop based on battery State of Charge (SoC) or Energy levels (kWh).
 
 **Power options:**
 - **Maximum power:** Discharges at full battery capacity for maximum export
-- **Regulated power:** Uses self-consumption strategy to discharge at a controlled rate
+- **Regulated power:** Uses PID-controller to discharge at a controlled rate
 
 **Ideal for:** Selling stored energy during peak price periods or when compensated for grid export.
 
 **Dashboard settings:**
-- Start discharge at: SoC percentage when discharge begins
-- Stop discharge at: SoC percentage when discharge stops (avoid depleting battery completely)
+- Stop discharge when: all have reached their minimum state of charge (SoC)
+- Stop discharge at: average SoC percentage over all batteries (per battery SoC limits are stil obeyed)
+- Stop discharge at: Energy kWh (avoid depleting battery completely)
 - Choose maximum or regulated power mode
 
 **Flow:** `02 strategy-sell.json`
