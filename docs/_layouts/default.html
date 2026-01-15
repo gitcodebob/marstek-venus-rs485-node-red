@@ -245,6 +245,73 @@
                 display: none;
             }
         }
+
+        /* Previous/Next Navigation */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 3rem 0 2rem 0;
+            padding: 1.5rem 0;
+            border-top: 2px solid #003D5C;
+            border-bottom: 2px solid #003D5C;
+        }
+
+        .page-navigation a {
+            color: #00A3B1;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid #003D5C;
+            border-radius: 5px;
+            background-color: #001220;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            max-width: 45%;
+        }
+
+        .page-navigation a:hover {
+            background-color: #003D5C;
+            border-color: #00A3B1;
+            color: #00D4E6;
+        }
+
+        .page-navigation .nav-label {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+        }
+
+        .page-navigation .nav-title {
+            font-size: 1rem;
+            color: #00A3B1;
+            font-weight: bold;
+        }
+
+        .page-navigation a:hover .nav-title {
+            color: #00D4E6;
+        }
+
+        .page-navigation .nav-prev {
+            text-align: left;
+        }
+
+        .page-navigation .nav-next {
+            text-align: right;
+        }
+
+        @media screen and (max-width: 768px) {
+            .page-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .page-navigation a {
+                max-width: 100%;
+                width: 100%;
+            }
+        }
     </style>
 
     {% include head-custom.html %}
@@ -280,6 +347,69 @@
         {{ content }}
 
         {% if page.url != "/" and page.url != "/index.html" %}
+
+        <!-- Previous/Next Navigation -->
+        <nav class="page-navigation">
+            {% if page.url contains "01-getting-started" %}
+            <div></div>
+            <a href="/02-modbus-setup" class="nav-next">
+                <span class="nav-label">Next →</span>
+                <span class="nav-title">Modbus Setup</span>
+            </a>
+            {% elsif page.url contains "02-modbus-setup" %}
+            <a href="/01-getting-started" class="nav-prev">
+                <span class="nav-label">← Previous</span>
+                <span class="nav-title">Getting Started</span>
+            </a>
+            <a href="/03-strategies" class="nav-next">
+                <span class="nav-label">Next →</span>
+                <span class="nav-title">Control Strategies</span>
+            </a>
+            {% elsif page.url contains "03-strategies" %}
+            <a href="/02-modbus-setup" class="nav-prev">
+                <span class="nav-label">← Previous</span>
+                <span class="nav-title">Modbus Setup</span>
+            </a>
+            <a href="/04-setup-self-consumption" class="nav-next">
+                <span class="nav-label">Next →</span>
+                <span class="nav-title">Self-Consumption Setup</span>
+            </a>
+            {% elsif page.url contains "04-setup-self-consumption" %}
+            <a href="/03-strategies" class="nav-prev">
+                <span class="nav-label">← Previous</span>
+                <span class="nav-title">Control Strategies</span>
+            </a>
+            <a href="/05-setup-dynamic" class="nav-next">
+                <span class="nav-label">Next →</span>
+                <span class="nav-title">Dynamic Strategy Setup</span>
+            </a>
+            {% elsif page.url contains "05-setup-dynamic" %}
+            <a href="/04-setup-self-consumption" class="nav-prev">
+                <span class="nav-label">← Previous</span>
+                <span class="nav-title">Self-Consumption Setup</span>
+            </a>
+            <a href="/06-advanced-features" class="nav-next">
+                <span class="nav-label">Next →</span>
+                <span class="nav-title">Advanced Features</span>
+            </a>
+            {% elsif page.url contains "06-advanced-features" %}
+            <a href="/05-setup-dynamic" class="nav-prev">
+                <span class="nav-label">← Previous</span>
+                <span class="nav-title">Dynamic Strategy Setup</span>
+            </a>
+            <a href="/07-troubleshooting" class="nav-next">
+                <span class="nav-label">Next →</span>
+                <span class="nav-title">Troubleshooting</span>
+            </a>
+            {% elsif page.url contains "07-troubleshooting" %}
+            <a href="/06-advanced-features" class="nav-prev">
+                <span class="nav-label">← Previous</span>
+                <span class="nav-title">Advanced Features</span>
+            </a>
+            <div></div>
+            {% endif %}
+        </nav>
+
         <p style="margin-top: 2rem; margin-bottom: 1rem;"><a href="{{ site.baseurl }}/">← Back to Home</a></p>
         {% endif %}
 
