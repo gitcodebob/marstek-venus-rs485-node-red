@@ -2,12 +2,17 @@
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
 ## 4.3.3
-- **Improve: Enhanced dashboard user experience and documentation**
-  * **Clearer alerts** - Replaced inconsistent warning formatting with modern ha-alert components for better visibility
+- **[Docs.homebatterycontrol.com live](https://docs.homebatterycontrol.com)** celebrating the supporters of this project
   * **Updated documentation links** - All documentation now points to docs.homebatterycontrol.com
-  * **Better navigation** - Added quick access to debug mode from main dashboard
-  * **Improved onboarding** - Clearer instructions and better warning visibility logic
-  * **Performance documentation** - Added detailed Rate Limiter behavior and configuration information
+  * **Documentation navigation and table of contents** - The docs now have next/previous navi and a Table of Contents
+  * **Extravagant unnecessary styling** - Yes, required.
+
+- **Dashboard tweaks**
+  * **More pretty info & warnings** - Replaced old formatting with modern ha-alert components
+  * **Tweaked texts and visibility** - mostly on the home
+
+- **Experimental** an 'all-flows-in-file.json' has been added
+  * To possibly ease initial project import or updates. Feedback? Join our Discord.
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
