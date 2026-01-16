@@ -72,6 +72,14 @@
             color: #E1E1E1;
         }
 
+        /* Override Cayman theme's max-width on larger screens */
+        @media screen and (min-width: 64em) {
+            .main-content {
+                max-width: 80rem;
+                padding: 2rem 3rem;
+            }
+        }
+
         .main-content h1,
         .main-content h2,
         .main-content h3,
@@ -114,6 +122,7 @@
 
         /* Lists - only top-level list items */
         .main-content>ul>li,
+        .main-content li>ul,
         .main-content>ol>li {
             margin-bottom: 10px;
         }
@@ -166,19 +175,25 @@
             background-color: transparent;
         }
 
+        /* Content wrapper for TOC and main content */
+        .content-wrapper {
+            display: flex;
+            gap: 2rem;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
         /* Table of Contents Sidebar */
         .toc-sidebar {
-            position: fixed;
-            left: 20px;
-            top: 180px;
-            width: 250px;
-            max-height: calc(100vh - 140px);
-            overflow-y: auto;
+            flex: 0 0 220px;
             background-color: #001220;
             border: 1px solid #003D5C;
             border-radius: 5px;
             padding: 15px;
-            display: none;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
         }
 
         .toc-sidebar h3 {
@@ -228,21 +243,30 @@
             padding-left: 30px;
         }
 
+        /* Main content area */
+        .main-content-area {
+            flex: 1;
+            min-width: 0;
+            max-width: 900px;
+        }
+
         /* Show TOC on larger screens */
         @media screen and (min-width: 1200px) {
-            .toc-sidebar {
-                display: block;
-            }
-
-            .main-content {
-                margin-left: 290px;
+            .content-wrapper {
+                flex-direction: row;
             }
         }
 
-        /* Hide TOC on smaller screens */
+        /* Stack on smaller screens */
         @media screen and (max-width: 1199px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+
             .toc-sidebar {
-                display: none;
+                position: static;
+                flex: 0 0 auto;
+                width: 100%;
             }
         }
 
@@ -336,58 +360,62 @@
         {% endif %}
     </header>
 
-    <!-- Table of Contents Sidebar -->
-    <div class="toc-sidebar" id="toc">
-        <h3>On This Page</h3>
-        <ul id="toc-list"></ul>
-    </div>
-
     <main id="content" class="main-content" role="main">
+        <div class="content-wrapper">
+            <!-- Table of Contents Sidebar -->
+            <div class="toc-sidebar" id="toc">
+                <h3>On This Page</h3>
+                <ul id="toc-list"></ul>
+            </div>
 
-        {{ content }}
+            <div class="main-content-area">
+                {{ content }}
 
-        {% if page.url != "/" and page.url != "/index.html" %}
+                {% if page.url != "/" and page.url != "/index.html" %}
 
-        <!-- Previous/Next Navigation -->
-        {% assign nav_pages = site.pages | where_exp: "item", "item.nav_order" | sort: "nav_order" %}
-        {% assign prev_page = nil %}
-        {% assign next_page = nil %}
-        {% assign found = false %}
+                <!-- Previous/Next Navigation -->
+                {% assign nav_pages = site.pages | where_exp: "item", "item.nav_order" | sort: "nav_order" %}
+                {% assign prev_page = nil %}
+                {% assign next_page = nil %}
+                {% assign found = false %}
 
-        {% for nav_page in nav_pages %}
-        {% if found == true and next_page == nil %}
-        {% assign next_page = nav_page %}
-        {% endif %}
+                {% for nav_page in nav_pages %}
+                {% if found == true and next_page == nil %}
+                {% assign next_page = nav_page %}
+                {% endif %}
 
-        {% if nav_page.url == page.url %}
-        {% assign found = true %}
-        {% elsif found == false %}
-        {% assign prev_page = nav_page %}
-        {% endif %}
-        {% endfor %}
+                {% if nav_page.url == page.url %}
+                {% assign found = true %}
+                {% elsif found == false %}
+                {% assign prev_page = nav_page %}
+                {% endif %}
+                {% endfor %}
 
-        <nav class="page-navigation">
-            {% if prev_page %}
-            <a href="{{ prev_page.url }}" class="nav-prev">
-                <span class="nav-label">← Previous</span>
-                <span class="nav-title">{{ prev_page.title }}</span>
-            </a>
-            {% else %}
-            <div></div>
-            {% endif %}
+                <nav class="page-navigation">
+                    {% if prev_page %}
+                    <a href="{{ prev_page.url }}" class="nav-prev">
+                        <span class="nav-label">← Previous</span>
+                        <span class="nav-title">{{ prev_page.title }}</span>
+                    </a>
+                    {% else %}
+                    <div></div>
+                    {% endif %}
 
-            {% if next_page %}
-            <a href="{{ next_page.url }}" class="nav-next">
-                <span class="nav-label">Next →</span>
-                <span class="nav-title">{{ next_page.title }}</span>
-            </a>
-            {% else %}
-            <div></div>
-            {% endif %}
-        </nav>
+                    {% if next_page %}
+                    <a href="{{ next_page.url }}" class="nav-next">
+                        <span class="nav-label">Next →</span>
+                        <span class="nav-title">{{ next_page.title }}</span>
+                    </a>
+                    {% else %}
+                    <div></div>
+                    {% endif %}
+                </nav>
 
-        <p style="margin-top: 2rem; margin-bottom: 1rem;"><a href="{{ site.baseurl }}/">← Back to Home</a></p>
-        {% endif %}
+                <p style="margin-top: 2rem; margin-bottom: 1rem;"><a href="{{ site.baseurl }}/">← Back to Home</a></p>
+                {% endif %}
+
+            </div><!-- end main-content-area -->
+        </div><!-- end content-wrapper -->
 
         <footer class="site-footer">
             {% if site.github.is_project_page %}
@@ -411,7 +439,7 @@
 
         // Generate Table of Contents
         function generateTOC() {
-            const content = document.querySelector('.main-content');
+            const content = document.querySelector('.main-content-area');
             const headings = content.querySelectorAll('h2, h3, h4');
             const tocList = document.getElementById('toc-list');
             const toc = document.getElementById('toc');
