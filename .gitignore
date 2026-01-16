@@ -1,4 +1,9 @@
+# Ignore temporary release notes file
 RELEASE_NOTES_TEMP.txt
-HASERVER.md
+
+# Ignore notes and development files
 notes/
 template_sensor_bob_battery_dashboard.yaml
+
+# Ignore SASS cache files
+docs/.sass-cache

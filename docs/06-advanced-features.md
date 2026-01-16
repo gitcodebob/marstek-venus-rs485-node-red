@@ -1,3 +1,9 @@
+---
+layout: default
+title: Advanced Features
+nav_order: 6
+---
+
 # Advanced Features
 
 ## EV Stop Trigger
@@ -27,10 +33,14 @@
   - Adjusts control output to stay within configured battery capabilities
 
 ## Performance Optimizations
-- **Deadbands:** Control loop only activates when _P1 error_ is outside the deadband and _P1 changes_ of more than 2%.
-  - Significantly reduces CPU load during stable operation
-  - Changing the P1 change for triggering the loop is done in `Home Battery Start` -> `RBE:node 'On change (2%)'` 
-  - Changing the deadband can be done in `Strategy Self-consumption` -> `F:node Deadband(15W)` 
+- **Rate Limiter:** Dynamically adjusts processing rate based on grid power changes to reduce CPU load
+  - *Power saving mode:* Processes 0.333 messages/second (every 3 seconds) during stable operation
+  - *Responsive mode:* Increases to 1 message/second when significant changes detected (>20W AND >2%)
+  - Automatically switches between modes based on power fluctuations
+  - Change thresholds in `Home Battery Start` → `Rate limiter` → `F:node P1 change (20W or 2%)`
+- **Deadband:** Control loop only activates when _P1 error_ is outside the deadband threshold
+  - Further reduces unnecessary battery adjustments during stable operation
+  - Change the deadband in `Strategy Self-consumption` → `F:node Deadband(15W)` 
 - **Reporting by Exception:** Action nodes only trigger when values actually change
   - Reduces unnecessary Home Assistant calls and system load
   - Note: the SET MODE action nodes have proven unreliable, for _safety reasons_ the `On Change` RBE has been left out.

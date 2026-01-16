@@ -1,6 +1,17 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.3.3
+- **Improve: Enhanced dashboard user experience and documentation**
+  * **Clearer alerts** - Replaced inconsistent warning formatting with modern ha-alert components for better visibility
+  * **Updated documentation links** - All documentation now points to docs.homebatterycontrol.com
+  * **Better navigation** - Added quick access to debug mode from main dashboard
+  * **Improved onboarding** - Clearer instructions and better warning visibility logic
+  * **Performance documentation** - Added detailed Rate Limiter behavior and configuration information
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+
 ## 4.3.2
 - **Fix: Improve PID controller safety, logging, and integral term handling**
   * **Controller disabled warning** - Added clear warning message when all PID gains are zero to prevent silent failures

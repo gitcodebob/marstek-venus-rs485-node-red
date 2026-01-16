@@ -71,8 +71,13 @@ The Node-RED + HA control schema is based on the approach by Ruald Ordelman. And
 ## Contributing
 For major changes, please open an issue first to discuss what you would like to change.
 
+For documentation improvements, build the docs locally via docker to preview the result
+```powershell
+docker run --rm -v "${PWD}/docs:/usr/src/app" -p 4000:4000 starefossen/github-pages
+```
+
 ## License
-![License](https://img.shields.io/github/license/gitcodebob/marstek-venus-rs485-node-red) MIT
+![License](https://img.shields.io/github/license/gitcodebob/marstek-venus-rs485-node-red)
 
 ## Getting help
 For questions or suggestions, open an issue on GitHub or join our [`Marstek RS485/Node-Red besturing` Discord](https://discord.gg/yeAGaE4kgy).

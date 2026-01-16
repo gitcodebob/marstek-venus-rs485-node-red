@@ -1,3 +1,8 @@
+---
+layout: default
+title: Self-Consumption Setup
+nav_order: 4
+---
 # Self-consumption Strategy Setup
 
 For the `self-consumption strategy` a PID controler is used. This keeps grid input/output close to 0 W (the target grid consumption). This PID controler needs to be tuned to your home. When your done, it outperforms the vendor's control algorithm in almost every scenario.
