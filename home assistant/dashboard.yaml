@@ -22,12 +22,8 @@ views:
             text_only: true
           - type: markdown
             content: >-
-              <font color=orange><ha-icon icon="mdi:alert"></ha-icon> **Grid
-              power n/a**</font>
-
-
-              Configure your P1 power sensor. 
-
+              <ha-alert title="Setup Grid Power Sensor">Configure your P1 power
+              sensor</ha-alert>
 
               1. Edit the file
 
@@ -46,11 +42,9 @@ views:
                     entity: sensor.p1_meter_power
                     state: unknown
           - type: markdown
-            content: >+
-              <font color=green><ha-icon icon="mdi:check"></ha-icon></font> Grid
-              power sensor
-
-
+            content: >-
+              <ha-alert title="Grid Power Sensor"
+              alert-type="success">Configured</ha-alert>
             visibility:
               - condition: not
                 conditions:
@@ -74,16 +68,16 @@ views:
             text_only: true
           - type: markdown
             content: >-
-              <ha-icon icon="mdi:alert"></ha-icon> Import and deploy <font
-              color=red>Node-RED</font> scripts.
+              <ha-alert title="Setup Node-RED"> Import and deploy <font
+              color=red>Node-RED</font> scripts.</ha-alert>
             visibility:
               - condition: state
                 entity: input_boolean.house_battery_control_has_node_red
                 state_not: 'on'
           - type: markdown
             content: >-
-              <font color=green><ha-icon icon="mdi:check"></ha-icon></font>
-              Node-RED ready
+              <ha-alert title="Node-RED" alert-type="success">Configured and
+              script deployed</ha-alert>
             visibility:
               - condition: state
                 entity: input_boolean.house_battery_control_has_node_red
@@ -97,8 +91,8 @@ views:
               reviewing and checking all installation instructions. 
 
 
-              Pick a battery charging strategy e.g. `self-consumption` and you
-              are done!
+              Pick a battery charging strategy e.g. `self-consumption`, choose
+              controller sensitivity `very safe` and you are done!
           - type: markdown
             content: '### Done'
             text_only: true
@@ -250,14 +244,16 @@ views:
               - condition: state
                 entity: input_select.house_battery_strategy
                 state: Dynamic
+              - condition: state
+                entity: input_select.marstek_master_battery_mode
+                state: Full control
           - type: heading
             icon: mdi:information-slab-circle
             heading: 'About strategies '
             heading_style: subtitle
             tap_action:
               action: url
-              url_path: >-
-                https://gitcodebob.github.io/marstek-venus-rs485-node-red/03-strategies.html
+              url_path: https://docs.homebatterycontrol.com/03-strategies.html
           - type: entities
             entities:
               - entity: input_text.house_battery_strategy_active_sub_strategy
@@ -311,12 +307,11 @@ views:
             heading_style: subtitle
             tap_action:
               action: navigate
-              navigation_path: /home-battery/advanced-settings
+              navigation_path: /home-battery/1
           - type: markdown
             content: >-
-              <font color=orange><ha-icon icon="mdi:alert"></ha-icon> High
-              controller sensitivity, monitor your system</font> use at your own
-              risk.
+              <ha-alert alert-type="warning">High controller sensitivity,
+              monitor your system.</ha-alert>
             visibility:
               - condition: or
                 conditions:
@@ -347,7 +342,7 @@ views:
             heading_style: subtitle
             tap_action:
               action: navigate
-              navigation_path: /home-battery/advanced-settings
+              navigation_path: /home-battery/1
       - type: grid
         cards:
           - type: heading
@@ -493,7 +488,7 @@ views:
             heading_style: subtitle
             tap_action:
               action: url
-              url_path: https://gitcodebob.github.io/marstek-venus-rs485-node-red/
+              url_path: https://docs.homebatterycontrol.com/
           - type: heading
             icon: mdi:youtube-subscription
             heading: Youtube (playlist)
@@ -502,10 +497,17 @@ views:
               action: url
               url_path: >-
                 https://www.youtube.com/playlist?list=PL9wonDMnFmzvm-ln2iHdRE5niDD3ikrKn
+          - type: heading
+            icon: mdi:spider
+            heading_style: subtitle
+            heading: Debug mode
+            tap_action:
+              action: navigate
+              navigation_path: /home-battery/4
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.3.2)*'
+        content: '### Home Battery Control *(v4.3.3)*'
         text_only: true
     cards: []
   - type: sections
@@ -536,11 +538,11 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://gitcodebob.github.io/marstek-venus-rs485-node-red/04-setup-self-consumption.html
+                https://docs.homebatterycontrol.com/04-setup-self-consumption.html
           - type: markdown
             content: >-
-              <font color=orange><ha-icon icon="mdi:alert"></ha-icon> High
-              values - monitor your system</font>, use at your own risk.
+              <ha-alert alert-type="warning">High controller sensitivity,
+              monitor your system.</ha-alert>
             visibility:
               - condition: or
                 conditions:
@@ -679,7 +681,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://gitcodebob.github.io/marstek-venus-rs485-node-red/03-strategies.html#charge-from-grid
+                https://docs.homebatterycontrol.com/03-strategies.html#charge-from-grid
           - type: entities
             entities:
               - entity: input_select.house_battery_strategy_charge_goal
@@ -744,7 +746,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://gitcodebob.github.io/marstek-venus-rs485-node-red/03-strategies.html#charge-from-grid
+                https://docs.homebatterycontrol.com/03-strategies.html#charge-from-grid
           - type: entities
             entities:
               - entity: input_select.house_battery_strategy_sell_goal
@@ -955,8 +957,8 @@ views:
             heading_style: title
           - type: markdown
             content: >-
-              <font color=orange><ha-icon icon="mdi:alert"></ha-icon> Cheapest
-              Hours integration not installed</font>
+              <ha-alert alert-type="info">Cheapest Hours integration not
+              installed.</ha-alert>
 
 
               This strategy uses [the Cheapest Hours integration from
@@ -979,7 +981,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://gitcodebob.github.io/marstek-venus-rs485-node-red/05-setup-dynamic.html#setup-getting-dynamic-up-and-running
+                https://docs.homebatterycontrol.com/05-setup-dynamic.html#setup-getting-dynamic-up-and-running
             visibility:
               - condition: or
                 conditions:
@@ -997,7 +999,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://gitcodebob.github.io/marstek-venus-rs485-node-red/05-setup-dynamic.html#use-the-dynamic-strategy
+                https://docs.homebatterycontrol.com/05-setup-dynamic.html#use-the-dynamic-strategy
             visibility:
               - condition: not
                 conditions:
@@ -1037,7 +1039,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://gitcodebob.github.io/marstek-venus-rs485-node-red/05-setup-dynamic.html#period-startend-times-read-only
+                https://docs.homebatterycontrol.com/05-setup-dynamic.html#period-startend-times-read-only
           - type: entities
             entities:
               - entity: input_datetime.house_battery_strategy_dynamic_cheapest_start
@@ -1223,7 +1225,7 @@ views:
           Hit **Debug mode**. _Auto-off after 5min._
 
           📘 [Troubleshooting
-          documentation](https://gitcodebob.github.io/marstek-venus-rs485-node-red/07-troubleshooting.html)
+          documentation](https://docs.homebatterycontrol.com/07-troubleshooting.html)
       layout: center
       badges_position: top
       badges_wrap: scroll
@@ -1308,7 +1310,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://github.com/gitcodebob/marstek-venus-rs485-node-red/blob/main/README.md#advanced-features
+                https://docs.homebatterycontrol.com/06-advanced-features.html#battery-life
           - show_name: true
             show_icon: true
             show_state: true
@@ -1326,7 +1328,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://github.com/gitcodebob/marstek-venus-rs485-node-red?tab=readme-ov-file#battery-life
+                https://docs.homebatterycontrol.com/06-advanced-features.html#battery-life
           - type: entities
             entities:
               - entity: input_number.house_battery_control_idle_time
@@ -1446,7 +1448,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://gitcodebob.github.io/marstek-venus-rs485-node-red/06-advanced-features.html#chargingdischarging-limits
+                https://docs.homebatterycontrol.com/06-advanced-features.html#chargingdischarging-limits
       - type: grid
         cards:
           - type: heading
