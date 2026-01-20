@@ -955,6 +955,23 @@ views:
           - type: heading
             heading: Dynamic strategy
             heading_style: title
+          - type: heading
+            icon: mdi:information
+            heading: Using the dynamic strategy
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://docs.homebatterycontrol.com/05-setup-dynamic.html#use-the-dynamic-strategy
+            visibility:
+              - condition: not
+                conditions:
+                  - condition: state
+                    entity: update.cheapest_energy_hours_update
+                    state: unavailable
+                  - condition: state
+                    entity: update.cheapest_energy_hours_update
+                    state: unknown
           - type: markdown
             content: >-
               <ha-alert alert-type="info">Cheapest Hours integration not
@@ -992,46 +1009,9 @@ views:
                     entity: update.cheapest_energy_hours_update
                     state: unknown
             heading: Setup instructions dynamic strategy
-          - type: heading
-            icon: mdi:information
-            heading: Using the dynamic strategy
-            heading_style: subtitle
-            tap_action:
-              action: url
-              url_path: >-
-                https://docs.homebatterycontrol.com/05-setup-dynamic.html#use-the-dynamic-strategy
-            visibility:
-              - condition: not
-                conditions:
-                  - condition: state
-                    entity: update.cheapest_energy_hours_update
-                    state: unavailable
-                  - condition: state
-                    entity: update.cheapest_energy_hours_update
-                    state: unknown
           - type: entities
             entities:
               - entity: input_select.house_battery_strategy_dynamic_data_source
-          - type: entities
-            entities:
-              - entity: input_number.house_battery_strategy_dynamic_threshold_delta
-                name: Minimum price delta
-          - type: tile
-            entity: input_number.house_battery_strategy_dynamic_cheapest_hrs
-            hide_state: true
-            vertical: false
-            features:
-              - type: numeric-input
-                style: buttons
-            features_position: bottom
-          - type: tile
-            entity: input_number.house_battery_strategy_dynamic_expensive_hrs
-            hide_state: true
-            vertical: false
-            features:
-              - type: numeric-input
-                style: buttons
-            features_position: bottom
           - type: heading
             icon: mdi:information
             heading_style: subtitle
@@ -1040,20 +1020,6 @@ views:
               action: url
               url_path: >-
                 https://docs.homebatterycontrol.com/05-setup-dynamic.html#period-startend-times-read-only
-          - type: entities
-            entities:
-              - entity: input_datetime.house_battery_strategy_dynamic_cheapest_start
-                type: simple-entity
-              - entity: input_datetime.house_battery_strategy_dynamic_cheapest_end
-                type: simple-entity
-              - entity: input_datetime.house_battery_strategy_dynamic_expensive_start
-                type: simple-entity
-              - entity: input_datetime.house_battery_strategy_dynamic_expensive_end
-                type: simple-entity
-            visibility:
-              - condition: state
-                entity: input_select.house_battery_strategy_dynamic_data_source
-                state_not: None
           - show_name: true
             show_icon: true
             show_state: true
@@ -1071,31 +1037,117 @@ views:
                   input_number.house_battery_strategy_dynamic_expensive_avg_delta
                 type: simple-entity
                 name: Price delta
-            visibility:
-              - condition: state
-                entity: input_select.house_battery_strategy_dynamic_data_source
-                state_not: None
-          - type: markdown
-            content: >-
-              #### Information
-
-              | Period      | Strategy |
-
-              | ----------- | ----------- |
-
-              | Default     | Charge PV   |
-
-              | Cheapest    | Charge      |
-
-              | Expensive   | Self-consumption |
-
-
-              1. _Use the settings on this dashboard to tune the strategies_
-
-              1. _Timed and Dynamic share the same settings_
-
-              1. _Note: currently it is not possible to change the strategy per
-              period via this dashboard_
+          - type: vertical-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: binary_sensor.is_below_threshold_cheapest_period_tariff
+                    state: 'on'
+                card:
+                  type: entities
+                  entities:
+                    - entity: input_number.house_battery_strategy_dynamic_cheapest_hrs
+                      name: Cheapest period
+                    - entity: >-
+                        input_datetime.house_battery_strategy_dynamic_cheapest_start
+                      type: simple-entity
+                      name: Start
+                    - entity: >-
+                        input_datetime.house_battery_strategy_dynamic_cheapest_end
+                      type: simple-entity
+                      name: End
+              - type: conditional
+                conditions:
+                  - condition: not
+                    conditions:
+                      - condition: state
+                        entity: >-
+                          binary_sensor.is_below_threshold_cheapest_period_tariff
+                        state: 'on'
+                card:
+                  type: markdown
+                  content: >-
+                    <ha-alert title="SKIPPING cheapest period">You have set a
+                    price limit for the cheapest period</ha-alert>The cheapest
+                    period is too expensive today.
+          - type: vertical-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: binary_sensor.is_above_threshold_price_delta
+                    state: 'on'
+                card:
+                  type: entities
+                  entities:
+                    - entity: >-
+                        input_number.house_battery_strategy_dynamic_expensive_hrs
+                      name: Expensive period
+                    - entity: >-
+                        input_datetime.house_battery_strategy_dynamic_expensive_start
+                      name: Start
+                      type: simple-entity
+                    - entity: >-
+                        input_datetime.house_battery_strategy_dynamic_expensive_end
+                      name: End
+                      type: simple-entity
+              - type: conditional
+                conditions:
+                  - condition: not
+                    conditions:
+                      - condition: state
+                        entity: binary_sensor.is_above_threshold_price_delta
+                        state: 'on'
+                card:
+                  type: markdown
+                  content: >-
+                    <ha-alert title="SKIPPING expensive period">You have set a
+                    minimum Price Delta.</ha-alert>The price difference between
+                    the expensive and cheapest period is too small. Discharging
+                    is not economical.
+          - type: heading
+            icon: mdi:format-align-middle
+            heading: Base strategy
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: input_select.house_battery_strategy_dynamic_default
+                name: Default to
+          - type: heading
+            icon: mdi:timeline-clock-outline
+            heading: Cheapest period
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: input_select.house_battery_strategy_dynamic_cheapest
+                name: I want to use
+              - entity: input_number.house_battery_strategy_dynamic_cheapest_hrs
+                name: During the cheapest
+              - entity: >-
+                  input_number.house_battery_strategy_dynamic_threshold_cheapest_period
+                name: If the tariff is below
+                icon: mdi:download-circle-outline
+              - entity: >-
+                  input_number.house_battery_strategy_dynamic_cheapest_avg_tariff
+                name: Today the tariff is
+                type: simple-entity
+          - type: heading
+            icon: mdi:timeline-clock-outline
+            heading: Expensive period
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: input_select.house_battery_strategy_dynamic_expensive
+                name: I want to use
+              - entity: input_number.house_battery_strategy_dynamic_expensive_hrs
+                name: During the most expensive
+              - entity: input_number.house_battery_strategy_dynamic_threshold_delta
+                name: If the price delta >=
+              - entity: >-
+                  input_number.house_battery_strategy_dynamic_expensive_avg_delta
+                name: Today the price delta is
+                type: simple-entity
     cards: []
     badges:
       - type: entity
