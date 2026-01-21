@@ -1,6 +1,21 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.4.0-beta.1
+- **Feature: Selectable strategies per period in Dynamic strategy**
+  * **Choose your strategy per period** - Select which strategy to use during cheapest, expensive, and regular periods independently
+  * **Baseline strategy** - Choose between Charge PV, Self-consumption, or Full stop for regular hours
+  * **Cheapest period strategy** - Choose between Charge or Charge PV during low-price windows
+  * **Expensive period strategy** - Choose between Self-consumption or Sell during high-price windows
+  * **Smart activation thresholds** - Configure when cheapest period activates (tariff limit) and when expensive period activates (minimum price spread)
+  * **Price data table** - New dashboard table shows hourly prices for today and tomorrow to help you analyze strategy performance
+  * **Estimated profit calculator** - See the estimated profit per kWh based on current price spreads
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-dynamic.json`
+
 ## 4.3.3
 - **[Docs.homebatterycontrol.com live](https://docs.homebatterycontrol.com)** celebrating the supporters of this project
   * **Updated documentation links** - All documentation now points to docs.homebatterycontrol.com

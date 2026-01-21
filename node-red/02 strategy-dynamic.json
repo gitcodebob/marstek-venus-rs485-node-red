@@ -62,7 +62,7 @@
         "x": 228,
         "y": 273,
         "w": 1244,
-        "h": 974
+        "h": 1034
     },
     {
         "id": "a9848e780d8c4ef0",
@@ -119,12 +119,13 @@
             "8f42f0fb164b0203",
             "d1d1b0034a493a57",
             "a98fc515dd7eab9f",
-            "1c32650a68b2d5d4"
+            "1c32650a68b2d5d4",
+            "b010d66c1e7ad270"
         ],
         "x": 234,
         "y": 1659,
-        "w": 572,
-        "h": 82
+        "w": 672,
+        "h": 142
     },
     {
         "id": "f3012bea4c1ffe74",
@@ -169,12 +170,18 @@
             "bafd4b639ffb990d",
             "2f43baa24fb1b823",
             "7d75e3c907d0efa5",
-            "634b05801baa4ea9"
+            "634b05801baa4ea9",
+            "d93b799f1011283e",
+            "964043538db2a118",
+            "dbc490b53cadf34d",
+            "402880758fdb1d96",
+            "53c7e13897bf1606",
+            "2cff1346b63fe9f9"
         ],
         "x": 254,
         "y": 499,
-        "w": 732,
-        "h": 302
+        "w": 752,
+        "h": 362
     },
     {
         "id": "154236b91b5e54b5",
@@ -201,7 +208,8 @@
             "22e4fafaef966fd7",
             "f385d2544b66ddee",
             "ac8df319cfad78ad",
-            "af6a03d36d48a7d8"
+            "af6a03d36d48a7d8",
+            "e015763d0b952f57"
         ],
         "x": 254,
         "y": 299,
@@ -236,7 +244,7 @@
             "6cfa38c6f6cd36df"
         ],
         "x": 254,
-        "y": 819,
+        "y": 879,
         "w": 872,
         "h": 402
     },
@@ -361,7 +369,7 @@
         "z": "9e1c81935ce65263",
         "g": "a44935d902985d30",
         "name": "Complete message",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -370,7 +378,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 910,
-        "y": 1140,
+        "y": 1200,
         "wires": []
     },
     {
@@ -404,7 +412,7 @@
         "y": 700,
         "wires": [
             [
-                "ee9dd764e7851217"
+                "dbc490b53cadf34d"
             ]
         ],
         "l": false
@@ -423,7 +431,7 @@
         "finalize": "",
         "libs": [],
         "x": 620,
-        "y": 1060,
+        "y": 1120,
         "wires": [
             [
                 "2e62f1c39e0b0dc3",
@@ -510,7 +518,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 900,
-        "y": 860,
+        "y": 920,
         "wires": [
             []
         ]
@@ -542,7 +550,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 900,
-        "y": 900,
+        "y": 960,
         "wires": [
             []
         ]
@@ -574,7 +582,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 900,
-        "y": 940,
+        "y": 1000,
         "wires": [
             []
         ]
@@ -606,7 +614,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 900,
-        "y": 980,
+        "y": 1040,
         "wires": [
             []
         ]
@@ -909,7 +917,8 @@
         "y": 1700,
         "wires": [
             [
-                "1c32650a68b2d5d4"
+                "1c32650a68b2d5d4",
+                "b010d66c1e7ad270"
             ]
         ],
         "l": false
@@ -1140,7 +1149,7 @@
         "y": 380,
         "wires": [
             [
-                "eeee46277502b43e"
+                "e015763d0b952f57"
             ]
         ]
     },
@@ -1171,7 +1180,7 @@
         "z": "9e1c81935ce65263",
         "g": "4ca3e4168cb0a19f",
         "name": "Generate templates",
-        "func": "// final template initialization\nmsg.dynamic.template_cheapest = \"\";\nmsg.dynamic.template_expensive = \"\";\n\n// temporary template parts\nlet template_start = \"\";\nlet template_common = [];\nlet template_cheapest = [];\nlet template_expensive = [];\nlet template_end = \"\";\n\n// 1. IMPROVEMENT: Use radix 10 and Logical OR (||) for cleaner default handling\nconst cheapest_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.cheapest_hrs\"), 10) || 1;\nconst expensive_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.expensive_hrs\"), 10) || 1;\n\n// load the macro\ntemplate_start = `{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n`;\ntemplate_end = `) | to_json }}`;\n\n// collect arguments | strings\nconst stringKeys = [\n    'sensor',\n    'attr_all',\n    'value_key',\n    'attr_today',\n    'attr_tomorrow',\n    'time_key'\n];\n\nstringKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}='${msg.dynamic[key]}'`);\n    }\n});\n\n// collect arguments | boolean, integer\nconst otherKeys = [\n    'datetime_in_data',\n    'data_minutes',\n];\n\notherKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}=${msg.dynamic[key]}`);\n    }\n});\n\n// copy common items\ntemplate_cheapest = [...template_common];\ntemplate_expensive = [...template_common];\n\n// collect arguments | cheapest specific\ntemplate_cheapest.push(`hours=${cheapest_hrs}`);\n// template_cheapest.push(`include_tomorrow=true`);\ntemplate_cheapest.push(`mode=\"all\"`);\n\n// collect arguments | expensive specific\ntemplate_expensive.push(`hours=${expensive_hrs}`);\n// template_expensive.push(`include_tomorrow=true`);\ntemplate_expensive.push(`lowest=false`);\ntemplate_expensive.push(`mode=\"all\"`);\n\n/**\n * Formats an array of strings into a single string:\n * - Each item starts with 4 spaces.\n * - Each item ends with a comma, except the last one.\n * - Items are separated by a newline.\n */\nfunction formatTemplateArray(array) {\n    if (!array || array.length === 0) {\n        return \"\";\n    }\n\n    const indent = \"    \"; \n\n    const formatted_lines = array.map((element, index) => {\n        const suffix = (index < array.length - 1) ? \",\" : \"\";\n        return `${indent}${element}${suffix}`;\n    });\n\n    return formatted_lines.join('\\n');\n}\n\n// generate string templates\nconst template_cheapest_string = formatTemplateArray(template_cheapest);\nconst template_expensive_string = formatTemplateArray(template_expensive);\n\n// done\nmsg.dynamic.template_cheapest = `${template_start}${template_cheapest_string}${template_end}`;\nmsg.dynamic.template_expensive = `${template_start}${template_expensive_string}${template_end}`;\n\nreturn msg;",
+        "func": "// final template initialization\nmsg.dynamic.template_cheapest = \"\";\nmsg.dynamic.template_expensive = \"\";\n\n// temporary template parts\nlet template_start = \"\";\nlet template_common = [];\nlet template_cheapest = [];\nlet template_expensive = [];\nlet template_all = [];\nlet template_end = \"\";\n\n// 1. IMPROVEMENT: Use radix 10 and Logical OR (||) for cleaner default handling\nconst cheapest_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.cheapest_hrs\"), 10) || 1;\nconst expensive_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.expensive_hrs\"), 10) || 1;\n\n// load the macro\ntemplate_start = `{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n`;\ntemplate_end = `) | to_json }}`;\n\n// collect arguments | strings\nconst stringKeys = [\n    'sensor',\n    'attr_all',\n    'value_key',\n    'attr_today',\n    'attr_tomorrow',\n    'time_key'\n];\n\nstringKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}='${msg.dynamic[key]}'`);\n    }\n});\n\n// collect arguments | boolean, integer\nconst otherKeys = [\n    'datetime_in_data',\n    'data_minutes',\n];\n\notherKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}=${msg.dynamic[key]}`);\n    }\n});\n\n// copy common items\ntemplate_cheapest = [...template_common];\ntemplate_expensive = [...template_common];\ntemplate_all = [...template_common];\n\n// collect arguments | cheapest specific\ntemplate_cheapest.push(`hours=${cheapest_hrs}`);\n// template_cheapest.push(`include_tomorrow=true`);\ntemplate_cheapest.push(`mode=\"all\"`);\n\n// collect arguments | expensive specific\ntemplate_expensive.push(`hours=${expensive_hrs}`);\n// template_expensive.push(`include_tomorrow=true`);\ntemplate_expensive.push(`lowest=false`);\ntemplate_expensive.push(`mode=\"all\"`);\n\n// collect all hours | via extra call\ntemplate_all.push(`hours=\"all\"`);\ntemplate_all.push(`include_tomorrow=true`);\ntemplate_all.push(`mode=\"all\"`);\n\n/**\n * Formats an array of strings into a single string:\n * - Each item starts with 4 spaces.\n * - Each item ends with a comma, except the last one.\n * - Items are separated by a newline.\n */\nfunction formatTemplateArray(array) {\n    if (!array || array.length === 0) {\n        return \"\";\n    }\n\n    const indent = \"    \"; \n\n    const formatted_lines = array.map((element, index) => {\n        const suffix = (index < array.length - 1) ? \",\" : \"\";\n        return `${indent}${element}${suffix}`;\n    });\n\n    return formatted_lines.join('\\n');\n}\n\n// generate string templates\nconst template_cheapest_string = formatTemplateArray(template_cheapest);\nconst template_expensive_string = formatTemplateArray(template_expensive);\nconst template_all_string = formatTemplateArray(template_all);\n\n// done\nmsg.dynamic.template_cheapest = `${template_start}${template_cheapest_string}${template_end}`;\nmsg.dynamic.template_expensive = `${template_start}${template_expensive_string}${template_end}`;\nmsg.dynamic.template_all = `${template_start}${template_all_string}${template_end}`;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1184,7 +1193,8 @@
             [
                 "bafd4b639ffb990d",
                 "2f43baa24fb1b823",
-                "50e84b8184986fb3"
+                "50e84b8184986fb3",
+                "402880758fdb1d96"
             ]
         ]
     },
@@ -1202,7 +1212,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 830,
+        "x": 850,
         "y": 600,
         "wires": []
     },
@@ -1220,7 +1230,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 840,
+        "x": 860,
         "y": 560,
         "wires": []
     },
@@ -1299,7 +1309,7 @@
         "to": "",
         "reg": false,
         "x": 340,
-        "y": 760,
+        "y": 820,
         "wires": [
             [
                 "c5a3235ad687da39"
@@ -1321,7 +1331,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 950,
-        "y": 1180,
+        "y": 1240,
         "wires": []
     },
     {
@@ -1465,7 +1475,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 900,
-        "y": 1020,
+        "y": 1080,
         "wires": [
             []
         ]
@@ -1497,7 +1507,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 910,
-        "y": 1060,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -1529,7 +1539,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 880,
-        "y": 1100,
+        "y": 1160,
         "wires": [
             []
         ]
@@ -1578,7 +1588,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 360,
-        "y": 940,
+        "y": 1000,
         "wires": [
             [
                 "170ff03203e89243"
@@ -1794,7 +1804,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 370,
-        "y": 900,
+        "y": 960,
         "wires": [
             [
                 "e65065ba7454c5a2"
@@ -1845,7 +1855,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 360,
-        "y": 980,
+        "y": 1040,
         "wires": [
             [
                 "882a3b79f37cc471"
@@ -1896,7 +1906,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 370,
-        "y": 1020,
+        "y": 1080,
         "wires": [
             [
                 "8a7913f81b38a9e0"
@@ -1947,7 +1957,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 370,
-        "y": 1060,
+        "y": 1120,
         "wires": [
             [
                 "bb83810278be291c"
@@ -1960,7 +1970,7 @@
         "z": "9e1c81935ce65263",
         "g": "4ca3e4168cb0a19f",
         "name": "Cache data source",
-        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\nconst dynamicData = msg.dynamic;\n\n// Helper to check for errors in the object\nconst isInvalid = (data) => {\n    if (!data) return true;\n    // Check if the stringified object contains \"error\"\n    return JSON.stringify(data).toLowerCase().includes(\"error\");\n};\n\nif (isInvalid(dynamicData)) {\n    // Explain issue\n    log(this, \"Invalid data received, clearing cache\", \"warn\");\n    // Clear cache\n    flow.set(\"cached_dynamic_data\", undefined);\n} else {\n    // Cache on success\n    log(this, \"Caching full dynamic data object\");\n    // Save the entire object to flow context\n    flow.set(\"cached_dynamic_data\", dynamicData);\n}\n\nreturn msg;",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\nconst dynamicData = msg.dynamic;\n\n// Helper to check for errors in the object\nconst isInvalid = (data) => {\n    if (!data) return true;\n    // Check if the stringified object contains \"error\"\n    return JSON.stringify(data).toLowerCase().includes(\"error\");\n};\n\nif (isInvalid(dynamicData)) {\n    // Explain issue\n    log(this, \"Invalid data received, clearing cache\", \"warn\");\n    // Clear cache\n    flow.set(\"cached_dynamic_data\", undefined);\n} else {\n    // Cache on success\n    log(this, \"Caching `msg.dynamic`\");\n    // Save the entire object to flow context\n    flow.set(\"cached_dynamic_data\", dynamicData);\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1968,7 +1978,7 @@
         "finalize": "",
         "libs": [],
         "x": 510,
-        "y": 760,
+        "y": 820,
         "wires": [
             [
                 "634b05801baa4ea9"
@@ -2126,7 +2136,7 @@
             "f385d2544b66ddee"
         ],
         "x": 295,
-        "y": 860,
+        "y": 920,
         "wires": [
             [
                 "2ff7656d60360ce2"
@@ -2144,7 +2154,7 @@
             "6cfa38c6f6cd36df"
         ],
         "x": 635,
-        "y": 760,
+        "y": 820,
         "wires": []
     },
     {
@@ -2170,6 +2180,169 @@
         "l": false
     },
     {
+        "id": "b010d66c1e7ad270",
+        "type": "ha-fire-event",
+        "z": "9e1c81935ce65263",
+        "g": "0186ef8f4e3ce1f2",
+        "name": "",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "event": "update_energy_prices",
+        "data": "msg.all_data",
+        "dataType": "jsonata",
+        "x": 760,
+        "y": 1760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d93b799f1011283e",
+        "type": "api-render-template",
+        "z": "9e1c81935ce65263",
+        "g": "4ca3e4168cb0a19f",
+        "name": "All",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "",
+        "resultsLocation": "dynamic.data_all",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 450,
+        "y": 760,
+        "wires": [
+            [
+                "964043538db2a118"
+            ]
+        ]
+    },
+    {
+        "id": "964043538db2a118",
+        "type": "json",
+        "z": "9e1c81935ce65263",
+        "g": "4ca3e4168cb0a19f",
+        "name": "",
+        "property": "dynamic.data_all",
+        "action": "obj",
+        "pretty": false,
+        "x": 535,
+        "y": 760,
+        "wires": [
+            [
+                "ee9dd764e7851217",
+                "53c7e13897bf1606"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "dbc490b53cadf34d",
+        "type": "change",
+        "z": "9e1c81935ce65263",
+        "g": "4ca3e4168cb0a19f",
+        "name": "Set",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "dynamic.template_all",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 760,
+        "wires": [
+            [
+                "d93b799f1011283e"
+            ]
+        ]
+    },
+    {
+        "id": "2cff1346b63fe9f9",
+        "type": "ha-fire-event",
+        "z": "9e1c81935ce65263",
+        "g": "4ca3e4168cb0a19f",
+        "name": "Update energy prices",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "event": "update_energy_prices",
+        "data": "msg.dynamic.data_all",
+        "dataType": "jsonata",
+        "x": 860,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "402880758fdb1d96",
+        "type": "debug",
+        "z": "9e1c81935ce65263",
+        "g": "4ca3e4168cb0a19f",
+        "name": "Template all",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "dynamic.template_all",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "53c7e13897bf1606",
+        "type": "function",
+        "z": "9e1c81935ce65263",
+        "g": "4ca3e4168cb0a19f",
+        "name": "Convert price",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.value_conversion\")) || 1;\n\n// Check if the list exists and is an array to prevent errors\nif (msg.dynamic && msg.dynamic.data_all && Array.isArray(msg.dynamic.data_all.list)) {\n    \n    // Create a new array where each value is multiplied\n    if (Array.isArray(msg.dynamic.data_all?.list)) {\n        msg.dynamic.data_all.list = msg.dynamic.data_all.list.map(v => parseInt(v / CONVERSION_RATE * 100)); // cents\n    }\n\n    // Update other fields\n    if (msg.dynamic.data_all?.average) {\n        msg.dynamic.data_all.average = parseInt(msg.dynamic.data_all.average / CONVERSION_RATE * 100); // cents\n    }\n} else {\n    // Do not continue\n    log(this,\"*price data not updated* price data missing\");\n    return null;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 760,
+        "wires": [
+            [
+                "2cff1346b63fe9f9"
+            ]
+        ]
+    },
+    {
+        "id": "e015763d0b952f57",
+        "type": "function",
+        "z": "9e1c81935ce65263",
+        "g": "154236b91b5e54b5",
+        "name": "Clear Cache",
+        "func": "// Clear cache\nflow.set(\"cached_dynamic_data\", undefined);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 625,
+        "y": 380,
+        "wires": [
+            [
+                "eeee46277502b43e"
+            ]
+        ],
+        "l": false
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -2184,7 +2357,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "324205df3eec0f23",
+        "id": "aed5dd7ec2941394",
         "type": "global-config",
         "env": [],
         "modules": {

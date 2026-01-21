@@ -1108,8 +1108,8 @@ views:
                     is not economical.
           - type: heading
             icon: mdi:format-align-middle
-            heading: Base strategy
             heading_style: subtitle
+            heading: Regular period
           - type: entities
             entities:
               - entity: input_select.house_battery_strategy_dynamic_default
@@ -1148,6 +1148,68 @@ views:
                   input_number.house_battery_strategy_dynamic_expensive_avg_delta
                 name: Today the price delta is
                 type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy_dynamic_expensive
+                    state: Sell
+                row:
+                  entity: sensor.estimated_profit_per_kwh
+                  name: Estimated profit per kWh
+      - type: grid
+        cards:
+          - type: heading
+            heading_style: title
+            heading: Price data (beta | to help you analyse results)
+            icon: mdi:flask-outline
+          - type: markdown
+            content: >-
+              | Time | Today (cent) | Tomorrow (cent) |
+
+              |:---:|:-------:|:------:|
+
+              {% set data_sensor = 'sensor.hbc_energy_prices_data' %}
+
+              {%- set prices = state_attr(data_sensor, 'prices') -%}
+
+              {%- set points_per_hour = state_attr(data_sensor,
+              'datapoints_per_hour') | default(1, true) | int -%}
+
+              {%- set points_per_day = 24 * points_per_hour -%}
+
+              {%- set interval_minutes = (60 / points_per_hour) | int -%}
+
+              {%- if prices is not none and prices | length >= points_per_day
+              -%}
+                {%- for i in range(points_per_day) -%}
+                  {%- set today_price = prices[i] -%}
+                  {#- Calculate the index for the same time tomorrow -#}
+                  {%- set tomorrow_idx = i + points_per_day -%}
+                  {%- set tomorrow_price = prices[tomorrow_idx] if prices | length >= (tomorrow_idx + 1) else none -%}
+                  {#- Calculate hours and minutes for the timestamp -#}
+                  {%- set hour = (i // points_per_hour) | int -%}
+                  {%- set minutes = (i % points_per_hour) * interval_minutes -%}
+                  | {{ "%02d"|format(hour) }}:{{ "%02d"|format(minutes) }} | {{ "%i"|format(today_price) }} | {{ "%i"|format(tomorrow_price) if tomorrow_price is not none else "-" }} |
+                {% endfor %}
+              {%- else -%}
+                | - | *Insufficient data available...* | - |
+              {% endif %}
+
+
+              **Start date:** {{ state_attr(data_sensor, 'start') }}
+
+              **Interval:** {{ 60 // points_per_hour }} minutes
+
+              **Datapoints:** {{prices | length}} points / {{points_per_day}}
+              per day
+        visibility:
+          - condition: not
+            conditions:
+              - condition: state
+                entity: update.cheapest_energy_hours_update
+                state: unavailable
+              - condition: state
+                entity: update.cheapest_energy_hours_update
+                state: unknown
     cards: []
     badges:
       - type: entity
