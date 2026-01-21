@@ -36,19 +36,21 @@ Uses a PID controller to maintain ~0W grid power by continuously adjusting batte
 ---
 
 ### Dynamic (Price-based)
-Automatically charges during the cheapest hours, uses self-consumption during the most expensive hours (if price delta justifies battery use), and uses Charge PV during other periods.
+Automatically selects strategies based on energy prices throughout the day. You can configure which strategy to use during cheapest hours, expensive hours, and regular periods.
 
 **Ideal for:** Dynamic/hourly energy contracts to maximize financial savings.
 
 **⚙️ Setup required:** Cheapest Hours integration and energy supplier configuration. See [Dynamic Strategy Setup Guide](05-setup-dynamic.md).
 
-*Active strategy by period:*
+*Configurable strategy by period:*
 
-| Period | Active Strategy | Notes |
-|--------|-----------------|-------|
-| Cheapest hours | Charge | Charge from grid during low-price windows to store energy |
-| Most expensive hours | Self-Consumption | Discharge to minimize grid import and save costs |
-| Other periods | Charge PV | Only charge from solar surplus, avoid grid charging |
+| Period | Available Strategies | Default |
+|--------|---------------------|----------|
+| Regular hours | Charge PV, Self-consumption, Full stop | Charge PV |
+| Cheapest hours | Charge, Charge PV | Charge |
+| Expensive hours | Self-consumption, Sell | Self-consumption |
+
+**Smart activation:** Cheapest period only activates when tariff is below threshold. Expensive period only activates when price spread exceeds minimum price delta.
 
 **Flow:** `02 strategy-dynamic.json`
 

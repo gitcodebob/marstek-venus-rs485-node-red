@@ -395,15 +395,36 @@ input_number:
     unit_of_measurement: "h"
     mode: box
 
-  # Strategy dynamic | minimum difference between cheapest and expensive tariff, before switching to battery power.
-  house_battery_strategy_dynamic_threshold_delta:
-    name: Minimum difference
+  # Strategy dynamic | cheapest period only available when: tariff is below this threshold
+  house_battery_strategy_dynamic_threshold_cheapest_period:
+    name: Cheapest avg tariff is below
+    icon: mdi:cash
+    min: 15
+    max: 30
+    initial: 30
+    step: 1 # Cents
+    unit_of_measurement: "cents"
+    mode: box
+
+  # Strategy dynamic | expensive period only available when: minimum difference between cheapest and expensive tariff
+  house_battery_strategy_dynamic_threshold_delta: # aka threshold_expensive_period if you like
+    name: Minimum spread
     icon: mdi:cash
     min: 0
     max: 20
     step: 1 # Cents
-    unit_of_measurement: "Cents"
+    unit_of_measurement: "cents"
     mode: box
+
+  # Strategy dynamic | select Sell strategy when: profit margin is equal or larger than
+  # house_battery_strategy_dynamic_threshold_sell_for_profit:
+  #   name: Sell when profit is atleast
+  #   icon: mdi:cash
+  #   min: 1
+  #   max: 20
+  #   step: 1 # Cents
+  #   unit_of_measurement: "cents"
+  #   mode: box
 
   # Strategy dynamic | average tariff of cheapest period
   house_battery_strategy_dynamic_cheapest_avg_tariff:
@@ -411,8 +432,8 @@ input_number:
     icon: mdi:cash
     min: 0
     max: 1000
-    step: 0.01 # Cents
-    # unit_of_measurement: "EUR/USD"
+    step: 1 # Cents
+    unit_of_measurement: "cents"
     mode: box
 
   # Strategy dynamic | average tariff of expensive period
@@ -421,8 +442,8 @@ input_number:
     icon: mdi:cash
     min: 0
     max: 1000
-    step: 0.01 # Cents
-    # unit_of_measurement: "Cents"
+    step: 1 # Cents
+    unit_of_measurement: "cents"
     mode: box
 
   # Strategy dynamic | average difference between cheapes and expensive tariff
@@ -431,8 +452,8 @@ input_number:
     icon: mdi:cash
     min: 0
     max: 1000
-    step: 0.01 # Cents
-    # unit_of_measurement: "Cents"
+    step: 1 # Cents
+    unit_of_measurement: "cents"
     mode: box
 
   # SoC limits
@@ -581,7 +602,7 @@ input_select:
 
   # Timed strategy | default strategy
   house_battery_strategy_timed_strat_0:
-    name: Baseline strategy
+    name: Baseline timed strategy
     options: *SubStrategies
     icon: mdi:distribute-horizontal-right
 
@@ -621,6 +642,31 @@ input_select:
       - Octopus Energy
       - Omie
     icon: mdi:factory
+
+  # Dynamic strategy | default strategy
+  house_battery_strategy_dynamic_default:
+    name: Baseline dynamic strategy
+    options:
+      - Charge PV # Charge when surplus PV is available, batteries will not discharge
+      - Self-consumption # Target grid consumption = 0
+      - Full stop # Deactivate batteries
+    icon: mdi:strategy
+
+  # Dynamic strategy | cheapest strategy
+  house_battery_strategy_dynamic_cheapest:
+    name: Strategy during cheapest period
+    options:
+      - Charge
+      - Charge PV
+    icon: mdi:strategy
+
+  # Dynamic strategy | expensive strategy
+  house_battery_strategy_dynamic_expensive:
+    name: Strategy during expensive period
+    options:
+      - Self-consumption
+      - Sell
+    icon: mdi:strategy
 
   # Charge strategy | goal setting
   house_battery_strategy_charge_goal:
@@ -709,6 +755,18 @@ template:
             {{ states(entity_id) }}
           {% endif %}
 
+      # Strategy dynamic | average estimated profit
+      - name: "Estimated profit per kWh"
+        unique_id: house_battery_strategy_dynamic_est_profit_per_kwh
+        icon: mdi:plus-circle-multiple
+        unit_of_measurement: cents
+        state: >
+          {% set low = states('input_number.house_battery_strategy_dynamic_cheapest_avg_tariff') | float(0) %}
+          {% set high = states('input_number.house_battery_strategy_dynamic_expensive_avg_tariff') | float(0) %}
+          {% set threshold = states('input_number.house_battery_strategy_dynamic_threshold_delta') | int %}
+          {% set profit = high - low - threshold | int %}
+          {{ profit | int }}
+
   - binary_sensor:
       # Strategy charge | has the target energy level been reached?
       - name: "Target energy reserve reached"
@@ -723,6 +781,25 @@ template:
         # Optional: Prevents rapid flickering if values change quickly near the threshold
         delay_off:
           seconds: 5
+
+      # Strategy dynamic | is the avg tariff low enough to call this a 'cheap period'
+      - name: "Is below threshold cheapest period tariff"
+        unique_id: house_battery_strategy_dynamic_is_below_threshold_cheapest_tariff
+        # The sensor is 'on' when avg tariff is equal or less than the threshold
+        state: >
+          {% set avg_tariff = states('input_number.house_battery_strategy_dynamic_cheapest_avg_tariff') | float(0) %}
+          {% set threshold = states('input_number.house_battery_strategy_dynamic_threshold_cheapest_period') | float(0) %}
+          {{ avg_tariff > 0 and avg_tariff <= threshold }}
+
+      # Strategy dynamic | is the daily spread large enough to call this an 'expensive period'
+      - name: "Is above threshold price delta"
+        unique_id: house_battery_strategy_dynamic_is_above_threshold_price_delta
+        # The sensor is 'on' when price delta is equal or more than the threshold
+        state: >
+          {% set low = states('input_number.house_battery_strategy_dynamic_cheapest_avg_tariff') | float(0) %}
+          {% set high = states('input_number.house_battery_strategy_dynamic_expensive_avg_tariff') | float(0) %}
+          {% set threshold = states('input_number.house_battery_strategy_dynamic_threshold_delta') | float(0) %}
+          {{ high > 0 and (high - low) >= threshold }}
 
   - trigger:
       - trigger: event
@@ -747,6 +824,19 @@ template:
           {{ logs[-1] if logs | length > 0 else 'No logs' }}
         attributes:
           log: "{{ trigger.event.data.log | default([]) }}"
+
+  - trigger:
+      - trigger: event
+        event_type: "update_energy_prices"
+    sensor:
+      - name: "HBC energy prices data"
+        unique_id: hbc_energy_strategy_data
+        state: "{{ (trigger.event.data.average) | default(0) | round(2) }}"
+        unit_of_measurement: "cents/kWh"
+        attributes:
+          prices: "{{ trigger.event.data.list | default([]) }}"
+          start: "{{ trigger.event.data.start | default('Unknown') }}"
+          datapoints_per_hour: "{{ trigger.event.data.datapoints_per_hour | default(0) }}"
 
 ###########################################################################################################
 # RECORDER - LOGBOOK FILTERING
