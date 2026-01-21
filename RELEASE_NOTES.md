@@ -8,8 +8,11 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
   * **Cheapest period strategy** - Choose between Charge or Charge PV during low-price windows
   * **Expensive period strategy** - Choose between Self-consumption or Sell during high-price windows
   * **Smart activation thresholds** - Configure when cheapest period activates (tariff limit) and when expensive period activates (minimum price spread)
-  * **Price data table** - New dashboard table shows hourly prices for today and tomorrow to help you analyze strategy performance
+  * **Price data table (during beta)** - Temporary dashboard table shows hourly prices for today and tomorrow to help you analyze strategy performance
   * **Estimated profit calculator** - See the estimated profit per kWh based on current price spreads
+
+- **Tech: caching of data source is now supported** 
+  * During beta caching has not been optimized, it is a prelude to upcoming updates requiring this mechanic. 
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
