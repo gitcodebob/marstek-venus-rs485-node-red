@@ -507,7 +507,7 @@ views:
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.3.3)*'
+        content: '### Home Battery Control *(v4.4.0-beta.1)*'
         text_only: true
     cards: []
   - type: sections
