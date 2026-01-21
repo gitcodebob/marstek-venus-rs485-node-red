@@ -21,6 +21,8 @@ View the explanation videos of the general idea behind this strategy:
 * How to SETUP dynamic: _English text and subtitles, NL spoken: [https://youtu.be/PR1XA5GUlAE](https://youtu.be/AdnXlbPMrTA)_
 * How to USE dynamic: _English text and subtitles, NL spoken: [https://youtu.be/PR1XA5GUlAE](https://youtu.be/PR1XA5GUlAE)_
 
+### Solar prediction 
+Tuning of charging levels (SoC) based on PV Forecast can be created by you as a user. Via handmade automations or flows setting the now available SoC and threshold fields. The project will move towards built-in integration in the future.
 
 ## SETUP - getting dynamic up and running
 [![How to setup Dynamic](https://img.youtube.com/vi/AdnXlbPMrTA/hqdefault.jpg)](https://youtu.be/AdnXlbPMrTA)

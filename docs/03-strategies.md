@@ -50,7 +50,7 @@ Automatically selects strategies based on energy prices throughout the day. You 
 | Cheapest hours | Charge, Charge PV | Charge |
 | Expensive hours | Self-consumption, Sell | Self-consumption |
 
-**Smart activation:** Cheapest period only activates when tariff is below threshold. Expensive period only activates when price spread exceeds minimum delta.
+**Smart activation:** Cheapest period only activates when tariff is below threshold. Expensive period only activates when price spread exceeds minimum price delta.
 
 **Flow:** `02 strategy-dynamic.json`
 
