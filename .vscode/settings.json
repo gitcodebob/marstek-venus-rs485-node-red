@@ -5,5 +5,8 @@
         "files.associations": {
             "docs/assets/css/*.scss": "jekyll"
         }
+    },
+    "chat.tools.terminal.autoApprove": {
+        "git stash": true
     }
 }
