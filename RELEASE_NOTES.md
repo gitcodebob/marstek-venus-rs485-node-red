@@ -1,6 +1,19 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.4.0-beta.2
+- **Improvement: Dynamic strategy period detection and price precision**
+  * **More accurate price display** - Price table now shows 1 decimal place instead of rounding to whole cents for better precision
+  * **Negative price support** - Cheapest period threshold can now be set to 0, enabling strategies that only activate during negative energy prices
+  * **Improved period detection** - Fixed `is_now` calculation to use actual time comparison instead of relying on external flags
+  * **Optimized update frequency** - Strategy planning updates every 60 minutes (was 30), with period checks every 15 minutes for more responsive transitions
+  * **Better price precision** - Internal price handling maintains decimal precision throughout calculations
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-dynamic.json`
+
 ## 4.4.0-beta.1
 - **Feature: Selectable strategies per period in Dynamic strategy**
   * **Choose your strategy per period** - Select which strategy to use during cheapest, expensive, and regular periods independently

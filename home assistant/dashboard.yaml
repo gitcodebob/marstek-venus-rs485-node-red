@@ -507,7 +507,7 @@ views:
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.4.0-beta.1)*'
+        content: '### Home Battery Control *(v4.4.0-beta.2)*'
         text_only: true
     cards: []
   - type: sections
@@ -1163,7 +1163,7 @@ views:
             icon: mdi:flask-outline
           - type: markdown
             content: >-
-              | Time | Today (cent) | Tomorrow (cent) |
+              | Time | Today (cents) | Tomorrow (cents) |
 
               |:---:|:-------:|:------:|
 
@@ -1188,7 +1188,7 @@ views:
                   {#- Calculate hours and minutes for the timestamp -#}
                   {%- set hour = (i // points_per_hour) | int -%}
                   {%- set minutes = (i % points_per_hour) * interval_minutes -%}
-                  | {{ "%02d"|format(hour) }}:{{ "%02d"|format(minutes) }} | {{ "%i"|format(today_price) }} | {{ "%i"|format(tomorrow_price) if tomorrow_price is not none else "-" }} |
+                  | {{ "%02d"|format(hour) }}:{{ "%02d"|format(minutes) }} | {{ "%0.1f"|format(today_price) }} | {{ "%0.1f"|format(tomorrow_price) if tomorrow_price is not none else "-" }} |
                 {% endfor %}
               {%- else -%}
                 | - | *Insufficient data available...* | - |

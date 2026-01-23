@@ -399,7 +399,7 @@ input_number:
   house_battery_strategy_dynamic_threshold_cheapest_period:
     name: Cheapest avg tariff is below
     icon: mdi:cash
-    min: 15
+    min: 0 # zero means a cheapest period will only be possible when energy has negative prices
     max: 30
     initial: 30
     step: 1 # Cents
