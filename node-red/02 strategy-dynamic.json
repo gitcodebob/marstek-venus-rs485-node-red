@@ -2,7 +2,7 @@
     {
         "id": "9e1c81935ce65263",
         "type": "tab",
-        "label": "Strategy Dynamic v4.4.0-beta.1",
+        "label": "Strategy Dynamic v4.4.0-beta.2",
         "disabled": false,
         "info": "Dynamic contract automated management",
         "env": []
@@ -62,7 +62,7 @@
         "x": 228,
         "y": 273,
         "w": 1244,
-        "h": 1034
+        "h": 1054
     },
     {
         "id": "a9848e780d8c4ef0",
@@ -179,7 +179,7 @@
             "2cff1346b63fe9f9"
         ],
         "x": 254,
-        "y": 499,
+        "y": 519,
         "w": 752,
         "h": 362
     },
@@ -209,12 +209,13 @@
             "f385d2544b66ddee",
             "ac8df319cfad78ad",
             "af6a03d36d48a7d8",
-            "e015763d0b952f57"
+            "88d18f2264f66110",
+            "ab40255f4379d2e0"
         ],
         "x": 254,
         "y": 299,
         "w": 1192,
-        "h": 182
+        "h": 202
     },
     {
         "id": "a44935d902985d30",
@@ -244,7 +245,7 @@
             "6cfa38c6f6cd36df"
         ],
         "x": 254,
-        "y": 879,
+        "y": 899,
         "w": 872,
         "h": 402
     },
@@ -335,7 +336,7 @@
         "templateLocation": "",
         "templateLocationType": "none",
         "x": 460,
-        "y": 640,
+        "y": 660,
         "wires": [
             [
                 "466378019e0dc875"
@@ -356,7 +357,7 @@
         "templateLocation": "",
         "templateLocationType": "none",
         "x": 470,
-        "y": 700,
+        "y": 720,
         "wires": [
             [
                 "338acc73e19dc2ea"
@@ -378,7 +379,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 910,
-        "y": 1200,
+        "y": 1220,
         "wires": []
     },
     {
@@ -391,7 +392,7 @@
         "action": "obj",
         "pretty": false,
         "x": 555,
-        "y": 640,
+        "y": 660,
         "wires": [
             [
                 "d22893b87a6d7a9f"
@@ -409,7 +410,7 @@
         "action": "obj",
         "pretty": false,
         "x": 575,
-        "y": 700,
+        "y": 720,
         "wires": [
             [
                 "dbc490b53cadf34d"
@@ -423,7 +424,7 @@
         "z": "9e1c81935ce65263",
         "g": "a44935d902985d30",
         "name": "Determine dynamic strategy",
-        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// 1.   Input\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.value_conversion\")) || 1;\n\n// Extract start date objects\nlet start_cheapest = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.start\"));\nlet start_expensive = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_expensive.start\"));\nlet isCheapestNext = true;\n// stored price cheapest period\nlet lastCheapestPrice = context.last_cheapest_price || 0; // unit: cents/kWh\nconst nextCheapestPrice = parseInt(RED.util.getMessageProperty(msg, \"dynamic.data_cheapest.average\") / CONVERSION_RATE * 100); // unit: cents/kWh \n// average price expensive period\nconst lastExpensivePrice = parseInt(RED.util.getMessageProperty(msg, \"dynamic.data_expensive.average\") / CONVERSION_RATE * 100); // unit: cents/kWh\n// threshold rate for cheapest period\nconst cheapestThresholdCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.threshold_cheapest_cents\")) || 0; // unit: cents\n// threshold delta for expensive period\nconst deltaThresholdCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.min_delta_cents\")) || 0; // unit: cents\n\n// 1.1  Enums\nconst STRATEGY = {\n    CHEAPEST: RED.util.getMessageProperty(msg,\"dynamic.strategy_cheapest\") || \"Charge\", \n    NEUTRAL: RED.util.getMessageProperty(msg,\"dynamic.strategy_default\") || \"Charge PV\",\n    EXPENSIVE: RED.util.getMessageProperty(msg,\"dynamic.strategy_expensive\") || \"Self-consumption\"\n}\n\n// 1.2  Defaults   \nmsg.dynamic.avg_cheapest_tariff = 0;\nmsg.dynamic.avg_expensive_tariff = 0;\nmsg.dynamic.avg_delta = 0;\n\n// 2.   Tariffs\n// Check if the Date objects are valid. If 'Invalid Date', stop and warn the user.\nif (isNaN(start_cheapest.getTime()) || isNaN(start_expensive.getTime())) {\n    // warn user\n    log(this, `One or both dates are invalid. Cheap = ${start_cheapest}, Expensive = ${start_expensive}`,\"warn\");\n    node.status({fill:\"red\",shape:\"ring\",text:`One or both dates are invalid: ${start_cheapest}, ${start_expensive}`});\n    // fallback strategy\n    flow.set(\"dynamic_strategy\", STRATEGY.NEUTRAL);\n    // proceed to UI\n    return msg;\n}\n\n// Check if cheapest lies before expensive\nif (start_cheapest < start_expensive) {\n    log(this, `Cheapest moment lies before expensive moment. Cheapest moment: ${start_cheapest}, Expensive = ${start_expensive}`);\n    // store the cheapest price to compare it with future expensive rates, to determine if it's economical to discharge.\n    context.last_cheapest_price = nextCheapestPrice; // store for next iteration\n    lastCheapestPrice = nextCheapestPrice; // used for this iteration\n    log(this, `Cheapest price set to ${lastCheapestPrice} cents`);\n}\n\nif (lastCheapestPrice == 0) {\n    log(this, `I can't recall the tariff used for charging. Cheapest price set to '${lastCheapestPrice}' cents`);\n}\n\n// delta > N cents ? -> charging is economical\nconst delta = (lastExpensivePrice - lastCheapestPrice); // unit: cents\n\n// UI values\nmsg.dynamic.avg_cheapest_tariff = lastCheapestPrice;\nmsg.dynamic.avg_expensive_tariff = lastExpensivePrice;\nmsg.dynamic.avg_delta = delta;\n\n// 3.   Strategy selection logic\n// 3.1  is_now - which period have we entered?\n/** @type {boolean} */\nconst cheapestIsNow = RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.is_now\");\n/** @type {boolean} */\nconst expensiveIsNow = RED.util.getMessageProperty(msg, \"dynamic.data_expensive.is_now\");\n\n// 3.2  Set strategy\n// Default strategy\nmsg.dynamic.strategy = STRATEGY.NEUTRAL;\n\n// Cheapest period?\nif (cheapestIsNow && lastCheapestPrice <= cheapestThresholdCents) {\n    msg.dynamic.strategy = STRATEGY.CHEAPEST;\n    // Explain\n    log(this, `**Cheapest period is NOW**, price limit: ${lastCheapestPrice}/${cheapestThresholdCents} cents OK`);\n} else if(cheapestIsNow) {\n    // Explain why skipped\n    log(this, `**Cheapest period SKIPPED**, the cheapest period is too expensive today. Price limit: ${lastCheapestPrice}/${cheapestThresholdCents} cents.`);\n}\n\n// Expensive period?\nif (expensiveIsNow && delta >= deltaThresholdCents) {\n    msg.dynamic.strategy = STRATEGY.EXPENSIVE;\n    // Explain\n    log(this, `**Expensive period is NOW**, price delta: ${delta}>=${deltaThresholdCents} cents OK`);\n} else if(expensiveIsNow) {\n    // Explain why skipped\n    log(this, `**Expensive period SKIPPED**, price delta too small: ${lastExpensivePrice}-${lastCheapestPrice}=${delta} cents <= ${deltaThresholdCents} cents`); \n}\n\n// 3.3  Store the strategy in flow-context. The 'Execution' area will read from the flow-context.\nflow.set(\"dynamic_strategy\",msg.dynamic.strategy);\n\n// 4.   User feedback\n// Node status\nnode.status({ fill: \"blue\", shape: \"dot\", text: `${msg.dynamic.strategy}; ${cheapestIsNow} + ${expensiveIsNow} @ ${delta} cents` });\n// Explain\nlog(this, `Strategy set to **${msg.dynamic.strategy}**`);\n\n// Proceed to UI update\nreturn msg;",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// 1.   Input\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.value_conversion\")) || 1;\n\n// extract start/end date objects\nconst start_cheapest = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.start\"));\nconst start_expensive = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_expensive.start\"));\nconst end_cheapest = new Date(RED.util.getMessageProperty(msg, \"dynamic.data_cheapest.end\"));\nconst end_expensive = new Date(RED.util.getMessageProperty(msg, \"dynamic.data_expensive.end\"));\nlet isCheapestNext = true;\n// stored price cheapest period\nlet lastCheapestPrice = context.last_cheapest_price || 0; // unit: cents/kWh\nconst nextCheapestPrice = parseInt(RED.util.getMessageProperty(msg, \"dynamic.data_cheapest.average\") / CONVERSION_RATE * 100); // unit: cents/kWh \n// average price expensive period\nconst lastExpensivePrice = parseInt(RED.util.getMessageProperty(msg, \"dynamic.data_expensive.average\") / CONVERSION_RATE * 100); // unit: cents/kWh\n// threshold rate for cheapest period\nconst cheapestThresholdCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.threshold_cheapest_cents\")) || 0; // unit: cents\n// threshold delta for expensive period\nconst deltaThresholdCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.min_delta_cents\")) || 0; // unit: cents\n\n// 1.1  Enums\nconst STRATEGY = {\n    CHEAPEST: RED.util.getMessageProperty(msg,\"dynamic.strategy_cheapest\") || \"Charge\", \n    NEUTRAL: RED.util.getMessageProperty(msg,\"dynamic.strategy_default\") || \"Charge PV\",\n    EXPENSIVE: RED.util.getMessageProperty(msg,\"dynamic.strategy_expensive\") || \"Self-consumption\"\n}\n\n// 1.2  Defaults   \nmsg.dynamic.avg_cheapest_tariff = 0;\nmsg.dynamic.avg_expensive_tariff = 0;\nmsg.dynamic.avg_delta = 0;\n\n// 2.   Tariffs\n// Check if the Date objects are valid. If 'Invalid Date', stop and warn the user.\nif (isNaN(start_cheapest.getTime()) || isNaN(start_expensive.getTime())) {\n    // warn user\n    log(this, `One or both dates are invalid. Cheap = ${start_cheapest}, Expensive = ${start_expensive}`,\"warn\");\n    node.status({fill:\"red\",shape:\"ring\",text:`One or both dates are invalid: ${start_cheapest}, ${start_expensive}`});\n    // fallback strategy\n    flow.set(\"dynamic_strategy\", STRATEGY.NEUTRAL);\n    // proceed to UI\n    return msg;\n}\n\n// Check if cheapest lies before expensive\nif (start_cheapest < start_expensive) {\n    log(this, `Cheapest moment lies before expensive moment. Cheapest moment: ${start_cheapest}, Expensive = ${start_expensive}`);\n    // store the cheapest price to compare it with future expensive rates, to determine if it's economical to discharge.\n    context.last_cheapest_price = nextCheapestPrice; // store for next iteration\n    lastCheapestPrice = nextCheapestPrice; // used for this iteration\n    log(this, `Cheapest price set to ${lastCheapestPrice} cents`);\n}\n\nif (lastCheapestPrice == 0) {\n    log(this, `I can't recall the tariff used for charging. Cheapest price set to '${lastCheapestPrice}' cents`);\n}\n\n// delta > N cents ? -> charging is economical\nconst delta = (lastExpensivePrice - lastCheapestPrice); // unit: cents\n\n// UI values\nmsg.dynamic.avg_cheapest_tariff = lastCheapestPrice;\nmsg.dynamic.avg_expensive_tariff = lastExpensivePrice;\nmsg.dynamic.avg_delta = delta;\n\n// 3.   Strategy selection logic\n// for string time\nfunction isTimeInPeriod(startStr, endStr) {\n    const now = new Date();\n    const start = new Date(startStr);\n    const end = new Date(endStr);\n    return (now >= start && now < end);\n}\n// 3.1  is_now - which period have we entered?\nconst now = new Date();\n/** @type {boolean} */\nconst cheapestIsNow = now >= start_cheapest && now <= end_cheapest;\n// const cheapestIsNow = RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.is_now\");\n/** @type {boolean} */\nconst expensiveIsNow = now >= start_expensive && now <= end_expensive;\n// const expensiveIsNow = RED.util.getMessageProperty(msg, \"dynamic.data_expensive.is_now\");\n\n// 3.2  Set strategy\n// Default strategy\nmsg.dynamic.strategy = STRATEGY.NEUTRAL;\n\n// Cheapest period?\nif (cheapestIsNow && lastCheapestPrice <= cheapestThresholdCents) {\n    msg.dynamic.strategy = STRATEGY.CHEAPEST;\n    // Explain\n    log(this, `**Cheapest period is NOW**, price limit: ${lastCheapestPrice}/${cheapestThresholdCents} cents OK`);\n} else if(cheapestIsNow) {\n    // Explain why skipped\n    log(this, `**Cheapest period SKIPPED**, the cheapest period is too expensive today. Price limit: ${lastCheapestPrice}/${cheapestThresholdCents} cents.`);\n}\n\n// Expensive period?\nif (expensiveIsNow && delta >= deltaThresholdCents) {\n    msg.dynamic.strategy = STRATEGY.EXPENSIVE;\n    // Explain\n    log(this, `**Expensive period is NOW**, price delta: ${delta}>=${deltaThresholdCents} cents OK`);\n} else if(expensiveIsNow) {\n    // Explain why skipped\n    log(this, `**Expensive period SKIPPED**, price delta too small: ${lastExpensivePrice}-${lastCheapestPrice}=${delta} cents <= ${deltaThresholdCents} cents`); \n}\n\n// 3.3  Store the strategy in flow-context. The 'Execution' area will read from the flow-context.\nflow.set(\"dynamic_strategy\",msg.dynamic.strategy);\n\n// 4.   User feedback\n// Node status\nnode.status({ fill: \"blue\", shape: \"dot\", text: `${msg.dynamic.strategy}; ${cheapestIsNow} + ${expensiveIsNow} @ ${delta} cents` });\n// Explain\nlog(this, `Strategy set to **${msg.dynamic.strategy}**`);\n\n// Proceed to UI update\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -431,7 +432,7 @@
         "finalize": "",
         "libs": [],
         "x": 620,
-        "y": 1120,
+        "y": 1140,
         "wires": [
             [
                 "2e62f1c39e0b0dc3",
@@ -518,7 +519,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 900,
-        "y": 920,
+        "y": 940,
         "wires": [
             []
         ]
@@ -550,7 +551,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 900,
-        "y": 960,
+        "y": 980,
         "wires": [
             []
         ]
@@ -582,7 +583,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 900,
-        "y": 1000,
+        "y": 1020,
         "wires": [
             []
         ]
@@ -614,7 +615,7 @@
         "domain": "input_datetime",
         "service": "set_datetime",
         "x": 900,
-        "y": 1040,
+        "y": 1060,
         "wires": [
             []
         ]
@@ -624,7 +625,7 @@
         "type": "inject",
         "z": "9e1c81935ce65263",
         "g": "154236b91b5e54b5",
-        "name": "Every 30 min",
+        "name": "Every 60 min",
         "props": [
             {
                 "p": "payload"
@@ -635,7 +636,7 @@
             }
         ],
         "repeat": "",
-        "crontab": "*/30 0-23 * * *",
+        "crontab": "0 0-23 * * *",
         "once": false,
         "onceDelay": "3",
         "topic": "",
@@ -1014,7 +1015,7 @@
         "finalize": "",
         "libs": [],
         "x": 380,
-        "y": 580,
+        "y": 600,
         "wires": [
             [
                 "270459fa3d61a502"
@@ -1128,7 +1129,7 @@
         "type": "inject",
         "z": "9e1c81935ce65263",
         "g": "154236b91b5e54b5",
-        "name": "On start",
+        "name": "Check period",
         "props": [
             {
                 "p": "payload"
@@ -1139,17 +1140,17 @@
             }
         ],
         "repeat": "",
-        "crontab": "",
+        "crontab": "*/15 0-23 * * *",
         "once": true,
         "onceDelay": "3",
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 360,
+        "x": 380,
         "y": 380,
         "wires": [
             [
-                "e015763d0b952f57"
+                "eeee46277502b43e"
             ]
         ]
     },
@@ -1188,7 +1189,7 @@
         "finalize": "",
         "libs": [],
         "x": 590,
-        "y": 580,
+        "y": 600,
         "wires": [
             [
                 "bafd4b639ffb990d",
@@ -1213,7 +1214,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 850,
-        "y": 600,
+        "y": 620,
         "wires": []
     },
     {
@@ -1231,7 +1232,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 860,
-        "y": 560,
+        "y": 580,
         "wires": []
     },
     {
@@ -1255,7 +1256,7 @@
         "to": "",
         "reg": false,
         "x": 330,
-        "y": 640,
+        "y": 660,
         "wires": [
             [
                 "5d3828fa878b96e1"
@@ -1283,7 +1284,7 @@
         "to": "",
         "reg": false,
         "x": 330,
-        "y": 700,
+        "y": 720,
         "wires": [
             [
                 "51955447fce56b26"
@@ -1309,7 +1310,7 @@
         "to": "",
         "reg": false,
         "x": 340,
-        "y": 820,
+        "y": 840,
         "wires": [
             [
                 "c5a3235ad687da39"
@@ -1331,7 +1332,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 950,
-        "y": 1240,
+        "y": 1260,
         "wires": []
     },
     {
@@ -1475,7 +1476,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 900,
-        "y": 1080,
+        "y": 1100,
         "wires": [
             []
         ]
@@ -1507,7 +1508,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 910,
-        "y": 1120,
+        "y": 1140,
         "wires": [
             []
         ]
@@ -1539,7 +1540,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 880,
-        "y": 1160,
+        "y": 1180,
         "wires": [
             []
         ]
@@ -1588,7 +1589,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 360,
-        "y": 1000,
+        "y": 1020,
         "wires": [
             [
                 "170ff03203e89243"
@@ -1804,7 +1805,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 370,
-        "y": 960,
+        "y": 980,
         "wires": [
             [
                 "e65065ba7454c5a2"
@@ -1855,7 +1856,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 360,
-        "y": 1040,
+        "y": 1060,
         "wires": [
             [
                 "882a3b79f37cc471"
@@ -1906,7 +1907,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 370,
-        "y": 1080,
+        "y": 1100,
         "wires": [
             [
                 "8a7913f81b38a9e0"
@@ -1957,7 +1958,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 370,
-        "y": 1120,
+        "y": 1140,
         "wires": [
             [
                 "bb83810278be291c"
@@ -1978,7 +1979,7 @@
         "finalize": "",
         "libs": [],
         "x": 510,
-        "y": 820,
+        "y": 840,
         "wires": [
             [
                 "634b05801baa4ea9"
@@ -1994,7 +1995,7 @@
         "scope": "group",
         "uncaught": false,
         "x": 1090,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "7135aa07a8789db2"
@@ -2016,7 +2017,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1320,
-        "y": 560,
+        "y": 580,
         "wires": []
     },
     {
@@ -2027,7 +2028,7 @@
         "name": "Cheapest Energy Hours - errors",
         "info": "\"No valid sensor found\" if price_data is none and not valid_sensor,\n\"No valid data in {}\".format(sensor) if price_data is none and data == [] and valid_sensor,\n\"No valid data in provided price_data\" if price_data is not none and not valid_price_data,\n\"Time key '{}' not found in data\".format(time_key) if data and time_key not in data[0],\n\"Value key '{}' not found in data\".format(value_key) if data and value_key not in data[0],\n\"Invalid mode '{}' selected\".format(mode) if mode not in modes,\n\"Boolean input expected for include_today, '{}' can not be processed as a boolean\".format(include_today) if include_today | bool(\"\") is not boolean,\n\"Boolean input expected for include_tomorrow, '{}' can not be processed as a boolean\".format(include_tomorrow) if include_tomorrow | bool(\"\") is not boolean,\n\"Boolean input expected for look_ahead, '{}' can not be processed as a boolean\".format(look_ahead) if look_ahead | bool(\"\") is not boolean,\n\"Boolean input expected for lowest, '{}' can not be processed as a boolean\".format(lowest) if lowest | bool(\"\") is not boolean,\n\"Boolean input expected for latest_possible, '{}' can not be processed as a boolean\".format(latest_possible) if latest_possible | bool(\"\") is not boolean,\n\"Numeric input or percentage expected for price_tolerance, '{}' can not be processed as a float or percentage\".format(price_tolerance) if not valid_pt,\n\"Numeric input expected for kwh, '{}' can not be processed as a float\".format(kwh) if kwh is not none and not kwh | is_number,\n\"Selected program '{}' is not available or has no data\".format(program) if program is not none and w is none,\n\"Selected start parameter is after the end parameter\" if start_end and data,\n\"{} hours between start and end, where {} hours are required\".format(end_start, h | round(3)) if not start_end and end_start < h | round(3) and data,\n\"Invalid combination of source data points per hour '{}' and number of weight points '{}'\".format(dp, dph) if all_keys and not wp_check",
         "x": 1150,
-        "y": 520,
+        "y": 540,
         "wires": []
     },
     {
@@ -2044,7 +2045,7 @@
         "finalize": "",
         "libs": [],
         "x": 1195,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "4017e182f7409f83"
@@ -2104,7 +2105,7 @@
             "ac8df319cfad78ad"
         ],
         "x": 295,
-        "y": 540,
+        "y": 560,
         "wires": [
             [
                 "41eb25ca56c567a9"
@@ -2136,7 +2137,7 @@
             "f385d2544b66ddee"
         ],
         "x": 295,
-        "y": 920,
+        "y": 940,
         "wires": [
             [
                 "2ff7656d60360ce2"
@@ -2154,7 +2155,7 @@
             "6cfa38c6f6cd36df"
         ],
         "x": 635,
-        "y": 820,
+        "y": 840,
         "wires": []
     },
     {
@@ -2210,7 +2211,7 @@
         "templateLocation": "",
         "templateLocationType": "none",
         "x": 450,
-        "y": 760,
+        "y": 780,
         "wires": [
             [
                 "964043538db2a118"
@@ -2227,7 +2228,7 @@
         "action": "obj",
         "pretty": false,
         "x": 535,
-        "y": 760,
+        "y": 780,
         "wires": [
             [
                 "ee9dd764e7851217",
@@ -2257,7 +2258,7 @@
         "to": "",
         "reg": false,
         "x": 330,
-        "y": 760,
+        "y": 780,
         "wires": [
             [
                 "d93b799f1011283e"
@@ -2276,7 +2277,7 @@
         "data": "msg.dynamic.data_all",
         "dataType": "jsonata",
         "x": 860,
-        "y": 760,
+        "y": 780,
         "wires": [
             []
         ]
@@ -2296,7 +2297,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 830,
-        "y": 640,
+        "y": 660,
         "wires": []
     },
     {
@@ -2305,7 +2306,7 @@
         "z": "9e1c81935ce65263",
         "g": "4ca3e4168cb0a19f",
         "name": "Convert price",
-        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.value_conversion\")) || 1;\n\n// Check if the list exists and is an array to prevent errors\nif (msg.dynamic && msg.dynamic.data_all && Array.isArray(msg.dynamic.data_all.list)) {\n    \n    // Create a new array where each value is multiplied\n    if (Array.isArray(msg.dynamic.data_all?.list)) {\n        msg.dynamic.data_all.list = msg.dynamic.data_all.list.map(v => parseInt(v / CONVERSION_RATE * 100)); // cents\n    }\n\n    // Update other fields\n    if (msg.dynamic.data_all?.average) {\n        msg.dynamic.data_all.average = parseInt(msg.dynamic.data_all.average / CONVERSION_RATE * 100); // cents\n    }\n} else {\n    // Do not continue\n    log(this,\"*price data not updated* price data missing\");\n    return null;\n}\n\nreturn msg;",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.value_conversion\")) || 1;\n\n// Check if the list exists and is an array to prevent errors\nif (msg.dynamic && msg.dynamic.data_all && Array.isArray(msg.dynamic.data_all.list)) {\n    \n    // Create a new array where each value is multiplied\n    if (Array.isArray(msg.dynamic.data_all?.list)) {\n        msg.dynamic.data_all.list = msg.dynamic.data_all.list.map(v => v / CONVERSION_RATE * 100); // cents\n    }\n\n    // Update other fields\n    if (msg.dynamic.data_all?.average) {\n        msg.dynamic.data_all.average = parseInt(msg.dynamic.data_all.average / CONVERSION_RATE * 100); // cents\n    }\n} else {\n    // Do not continue\n    log(this,\"*price data not updated* price data missing\");\n    return null;\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2313,7 +2314,7 @@
         "finalize": "",
         "libs": [],
         "x": 670,
-        "y": 760,
+        "y": 780,
         "wires": [
             [
                 "2cff1346b63fe9f9"
@@ -2321,26 +2322,75 @@
         ]
     },
     {
-        "id": "e015763d0b952f57",
-        "type": "function",
+        "id": "88d18f2264f66110",
+        "type": "inject",
         "z": "9e1c81935ce65263",
         "g": "154236b91b5e54b5",
-        "name": "Clear Cache",
-        "func": "// Clear cache\nflow.set(\"cached_dynamic_data\", undefined);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 625,
-        "y": 380,
+        "name": "Test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 410,
+        "y": 460,
         "wires": [
             [
-                "eeee46277502b43e"
+                "ab40255f4379d2e0"
             ]
+        ]
+    },
+    {
+        "id": "ab40255f4379d2e0",
+        "type": "api-call-service",
+        "z": "9e1c81935ce65263",
+        "g": "154236b91b5e54b5",
+        "name": "Debug ON",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_boolean.turn_on",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_boolean.house_battery_control_is_debug_mode"
         ],
-        "l": false
+        "labelId": [],
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [
+            {
+                "property": "debug_mode",
+                "propertyType": "global",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_boolean",
+        "service": "turn_on",
+        "x": 550,
+        "y": 460,
+        "wires": [
+            [
+                "af6a03d36d48a7d8"
+            ]
+        ]
     },
     {
         "id": "176d29a.6f648d6",
@@ -2357,7 +2407,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "aed5dd7ec2941394",
+        "id": "fce13295eac423c4",
         "type": "global-config",
         "env": [],
         "modules": {
