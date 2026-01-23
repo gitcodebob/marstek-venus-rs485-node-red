@@ -5,8 +5,8 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
 - **Improvement: Dynamic strategy period detection and price precision**
   * **More accurate price display** - Price table now shows 1 decimal place instead of rounding to whole cents for better precision
   * **Negative price support** - Cheapest period threshold can now be set to 0, enabling strategies that only activate during negative energy prices
-  * **Improved period detection** - Fixed `is_now` calculation to use actual time comparison instead of relying on external flags
-  * **Optimized update frequency** - Strategy planning updates every 60 minutes (was 30), with period checks every 15 minutes for more responsive transitions
+  * **Improved period detection** - Checks period every 15 mins accurately and without delay
+  * **Better update frequency** - Strategy planning updates every 60 minutes (this could be turned into 1x per day at 15:00 hrs - feedback wanted)
   * **Better price precision** - Internal price handling maintains decimal precision throughout calculations
 
 - **Files Changed:**
