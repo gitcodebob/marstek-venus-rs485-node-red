@@ -18,6 +18,7 @@
            ```powershell
            Get-ChildItem "node-red\*.json" | ForEach-Object { $content = Get-Content $_.FullName -Raw | ConvertFrom-Json; Write-Host "$($_.Name): $($content[0].label)" }
            ```
+        1. Check if `node-red\all-flows-in-one-file.json` has been updated to contain ALL recent changes from individual flow files. If not, inform the user to update it before proceeding.
         1. Update the `Home Battery Control (v <version>)` in `home assistant\dashboard.yaml` to match the new SemVer version.
         1. Update the `"label": <name> v <version>` property in the FIRST object of EVERY json file in `node-red\` that has a version label to match the new SemVer version. This includes:
            - `01 start-flow.json`
