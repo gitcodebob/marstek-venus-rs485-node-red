@@ -500,14 +500,29 @@ views:
           - type: heading
             icon: mdi:spider
             heading_style: subtitle
-            heading: Debug mode
             tap_action:
               action: navigate
               navigation_path: /home-battery/4
+            heading: Problem solver
+          - type: markdown
+            content: '-----'
+            text_only: true
+          - type: heading
+            icon: mdi:star-check-outline
+            heading: Do you like this project? Consider giving a star
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: https://github.com/gitcodebob/marstek-venus-rs485-node-red
+          - type: markdown
+            content: >-
+              [![GitHub
+              stars](https://img.shields.io/github/stars/gitcodebob/marstek-venus-rs485-node-red?style=social)](https://github.com/gitcodebob/marstek-venus-rs485-node-red)
+            text_only: true
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.4.0-beta.2)*'
+        content: '### Home Battery Control *(v4.4.0)*'
         text_only: true
     cards: []
   - type: sections
@@ -1159,10 +1174,17 @@ views:
         cards:
           - type: heading
             heading_style: title
-            heading: Price data (beta | to help you analyse results)
+            heading: Price data (to help you analyse results)
             icon: mdi:flask-outline
+          - type: heading
+            icon: mdi:spider
+            heading: Enable insights mode to view this data
+            heading_style: subtitle
           - type: markdown
             content: >-
+              <small><small>
+
+
               | Time | Today (cents) | Tomorrow (cents) |
 
               |:---:|:-------:|:------:|
@@ -1201,6 +1223,9 @@ views:
 
               **Datapoints:** {{prices | length}} points / {{points_per_day}}
               per day
+
+
+              </small></small>
         visibility:
           - condition: not
             conditions:
@@ -1210,6 +1235,9 @@ views:
               - condition: state
                 entity: update.cheapest_energy_hours_update
                 state: unknown
+          - condition: state
+            entity: input_boolean.house_battery_control_is_debug_mode
+            state: 'on'
     cards: []
     badges:
       - type: entity
@@ -1299,7 +1327,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Insight
+            heading: Insights
             heading_style: title
           - type: heading
             icon: mdi:list-box-outline
@@ -1332,11 +1360,11 @@ views:
         type: markdown
         text_only: true
         content: >-
-          ### Debug
+          ### Help
 
           Need help figuring out what is going on? 
 
-          Hit **Debug mode**. _Auto-off after 5min._
+          Hit **Insights mode**. _Auto-off after 5min._
 
           📘 [Troubleshooting
           documentation](https://docs.homebatterycontrol.com/07-troubleshooting.html)
@@ -1351,8 +1379,7 @@ views:
         entity: input_boolean.house_battery_control_is_debug_mode
         tap_action:
           action: toggle
-        name:
-          type: entity
+        name: Insights mode
       - type: entity
         show_name: true
         show_state: true

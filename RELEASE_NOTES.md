@@ -1,35 +1,29 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
-## 4.4.0-beta.2
-- **Improvement: Dynamic strategy period detection and price precision**
-  * **More accurate price display** - Price table now shows 1 decimal place instead of rounding to whole cents for better precision
-  * **Negative price support** - Cheapest period threshold can now be set to 0, enabling strategies that only activate during negative energy prices
-  * **Improved period detection** - Checks period every 15 mins accurately and without delay
-  * **Better update frequency** - Strategy planning updates every 60 minutes (this could be turned into 1x per day at 15:00 hrs - feedback wanted)
-  * **Better price precision** - Internal price handling maintains decimal precision throughout calculations
-
-- **Files Changed:**
-  - `home assistant/dashboard.yaml`
-  - `home assistant/packages/house_battery_control.yaml`
-  - `node-red/02 strategy-dynamic.json`
-
-## 4.4.0-beta.1
+## 4.4.0
 - **Feature: Selectable strategies per period in Dynamic strategy**
   * **Choose your strategy per period** - Select which strategy to use during cheapest, expensive, and regular periods independently
   * **Baseline strategy** - Choose between Charge PV, Self-consumption, or Full stop for regular hours
   * **Cheapest period strategy** - Choose between Charge or Charge PV during low-price windows
   * **Expensive period strategy** - Choose between Self-consumption or Sell during high-price windows
   * **Smart activation thresholds** - Configure when cheapest period activates (tariff limit) and when expensive period activates (minimum price spread)
-  * **Price data table (during beta)** - Temporary dashboard table shows hourly prices for today and tomorrow to help you analyze strategy performance
+  * **Price data table (insights mode)** - Table shows hourly prices for today and tomorrow to help you analyze strategy performance, when insights mode is enabled
   * **Estimated profit calculator** - See the estimated profit per kWh based on current price spreads
+  * **Negative price support** - Cheapest period threshold can now be set to 0, enabling strategies that only activate during negative energy prices
 
-- **Tech: caching of data source is now supported** 
-  * During beta caching has not been optimized, it is a prelude to upcoming updates requiring this mechanic. 
+- **Improvements in Dynamic strategy**
+  * **Improved period detection** - Checks period every 15 mins accurately and without delay
+  * **Better update frequency** - Data Source updates every 60 minutes (this could be turned into 1x per day at 15:00 hrs)
+
+- **Fix: Insight Mode reliability (formerly Debug Mode)**
+  * **Possibly resolved issue #63** - Fixed Insight Mode not working reliably for some users
+  * **Renamed "Debug Mode" to "Insight Mode"** - Avoids confusion between Node-RED's "debug NNNode" vs HBC's "debug MMMode"
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
   - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/01 start-flow.json`
   - `node-red/02 strategy-dynamic.json`
 
 ## 4.3.3

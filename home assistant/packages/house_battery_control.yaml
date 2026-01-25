@@ -842,7 +842,6 @@ template:
 # RECORDER - LOGBOOK FILTERING
 ###########################################################################################################
 # Exclude high-frequency technical entities from the logbook to reduce noise.
-# History graphs and statistics remain unaffected.
 recorder:
   exclude:
     entities:

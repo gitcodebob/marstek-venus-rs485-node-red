@@ -2,7 +2,7 @@
     {
         "id": "896149ae00e704f5",
         "type": "tab",
-        "label": "Home Battery Start v4.4.0-beta.2",
+        "label": "Home Battery Start v4.4.0",
         "disabled": false,
         "info": "# Home battery control\r\nConsists of three flows:\r\n 1.  Start flow\r\n 1.  Control flow\r\n 1.  Master switch flow\r\n\r\n## Start flow\r\nThis is the starting point of your home battery control.\r\n\r\nIt starts with P1 measurement as a trigger.\r\nIt allows you to connect your battery sensors to the flow.\r\nIt ends with a function node, mapping your batteries to a battery_array\r\n\r\nThe battery_array is passed on to the control flow.\r\n\r\nWhen the control flow has calculated the desired corrections,\r\nit is passed back to this flow and applied to your batteries.",
         "env": []
@@ -26,7 +26,7 @@
     {
         "id": "676ceac4c521834d",
         "type": "tab",
-        "label": "Strategy Charge PV v4.4.0-beta.2",
+        "label": "Strategy Charge PV v4.4.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -34,7 +34,7 @@
     {
         "id": "1d62f5f10ba713f5",
         "type": "tab",
-        "label": "Strategy Charge v4.4.0-beta.2",
+        "label": "Strategy Charge v4.4.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -42,7 +42,7 @@
     {
         "id": "43e2c4565d34c242",
         "type": "tab",
-        "label": "Strategy Dynamic v4.4.0-beta.2",
+        "label": "Strategy Dynamic v4.4.0",
         "disabled": false,
         "info": "Dynamic contract automated management",
         "env": []
@@ -50,7 +50,7 @@
     {
         "id": "5ca05ae5a089b8d2",
         "type": "tab",
-        "label": "Strategy Full stop v4.4.0-beta.2",
+        "label": "Strategy Full stop v4.4.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -58,7 +58,7 @@
     {
         "id": "e184a39d1337c413",
         "type": "tab",
-        "label": "Strategy Self-consumption v4.4.0-beta.2",
+        "label": "Strategy Self-consumption v4.4.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -66,7 +66,7 @@
     {
         "id": "5560f85f8090bf93",
         "type": "tab",
-        "label": "Strategy Sell v4.4.0-beta.2",
+        "label": "Strategy Sell v4.4.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -74,7 +74,7 @@
     {
         "id": "9a0e893446c26063",
         "type": "tab",
-        "label": "Strategy Timed v4.4.0-beta.2",
+        "label": "Strategy Timed v4.4.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -98,28 +98,6 @@
         "y": 19,
         "w": 898,
         "h": 382
-    },
-    {
-        "id": "034635b1ad500f69",
-        "type": "group",
-        "z": "71116bfb3e38272c",
-        "g": "3976d86aa766d5a3",
-        "name": "Loop",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "3721d34b6a06e92e",
-            "c459bdbef50be840",
-            "6941c0d003d9dfc4",
-            "b1076b886d0ae381",
-            "e99d7127740fa14c",
-            "30f8033fefac3897"
-        ],
-        "x": 414,
-        "y": 99,
-        "w": 492,
-        "h": 222
     },
     {
         "id": "1ee5df773a0c4c46",
@@ -297,26 +275,6 @@
         "h": 207
     },
     {
-        "id": "327d0c28a11a705b",
-        "type": "group",
-        "z": "1d62f5f10ba713f5",
-        "g": "44362bab0730561d",
-        "name": "UI helper | set bounds for charge levels",
-        "style": {
-            "label": true,
-            "stroke": "#3f93cf"
-        },
-        "nodes": [
-            "72855d465c41b0ba",
-            "8a7bf3d74e7276cf",
-            "55b3fc51c2f3a0f4"
-        ],
-        "x": 1464,
-        "y": 159,
-        "w": 692,
-        "h": 82
-    },
-    {
         "id": "a5850d6fc8d26fb3",
         "type": "group",
         "z": "1d62f5f10ba713f5",
@@ -475,108 +433,6 @@
         "y": 279,
         "w": 182,
         "h": 82
-    },
-    {
-        "id": "67366e68865750d3",
-        "type": "group",
-        "z": "43e2c4565d34c242",
-        "g": "fab67345066b14d4",
-        "name": "API call to Data Source",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "1a6246ca9abf2e83",
-            "c843bdeae79c0e58",
-            "9860b755ba4b2d4e",
-            "8262ba7519609e5a",
-            "ef1da1d3a7216433",
-            "f9d73dbee7d1d101",
-            "6bd50ca39c76d914",
-            "772f3e317433da1c",
-            "a8208c750ae4a8f5",
-            "eef1de260499e2e8",
-            "21e31d9b506fda62",
-            "08ab42d46d6b4a73",
-            "25837266d45b787a",
-            "89c9eb1d187f7737",
-            "1d4a3f92488da986",
-            "b9a41d9435cf8abd",
-            "0bb50184686abc06",
-            "1bd71d96b5e5525c",
-            "daff0725d784350d",
-            "97f82f3fae5a5912"
-        ],
-        "x": 254,
-        "y": 519,
-        "w": 752,
-        "h": 362
-    },
-    {
-        "id": "5b357349653af8f2",
-        "type": "group",
-        "z": "43e2c4565d34c242",
-        "g": "fab67345066b14d4",
-        "name": "Update when",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "3361691261d2f519",
-            "8ab73e892d2154d9",
-            "3c087a25af39d14b",
-            "0d1c173cfa69474f",
-            "88c7fbbb50fc9eb1",
-            "1a661e75892b6c74",
-            "a2c606034d1f2eaa",
-            "03e0666c92b71771",
-            "02148ab5c5eaaaf9",
-            "8420e8ebe5336bac",
-            "9518a456438a2d54",
-            "b345941d67039862",
-            "22b6bb41ec336a29",
-            "fa3b6960bceef6ce",
-            "685af86a816c2521",
-            "a2e93b4c096f585c",
-            "e27caf3c58554974",
-            "e81dbb3b2450ad3a"
-        ],
-        "x": 254,
-        "y": 299,
-        "w": 1192,
-        "h": 202
-    },
-    {
-        "id": "ccaba979a2207c48",
-        "type": "group",
-        "z": "43e2c4565d34c242",
-        "g": "fab67345066b14d4",
-        "name": "Determine strategy",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "3deb7fec0af7839e",
-            "bbf0eca8289cd464",
-            "f0163b0eeaf865e2",
-            "110b3b19eb5133bc",
-            "56ada86c06d721f7",
-            "a95299c1bf1a13bc",
-            "36c0d33885ed6329",
-            "53acf427d49b2573",
-            "1d789d31e8675fde",
-            "20e01029024a4f0f",
-            "cb43481920102fc0",
-            "e7e2014216c27578",
-            "213320a3faa32b56",
-            "144cc66c5aa6fb0b",
-            "d96bb293f1c1ceef",
-            "4c12a8b240ab8a88"
-        ],
-        "x": 254,
-        "y": 899,
-        "w": 872,
-        "h": 402
     },
     {
         "id": "c3404a37fd9ce4af",
@@ -798,174 +654,6 @@
         "h": 82
     },
     {
-        "id": "286f10603840ceb3",
-        "type": "group",
-        "z": "e184a39d1337c413",
-        "g": "48db379ff2becb41",
-        "name": "PID control inputs",
-        "style": {
-            "label": true,
-            "fill": "#ffffff"
-        },
-        "nodes": [
-            "7913d5674b438fab",
-            "16cd178b1d21594b",
-            "92e069c4fc3861e3",
-            "d59f5a16ea57793f",
-            "9e94ec0db734b8ef",
-            "7562b977cfd31aa3",
-            "cfe162e53efce392",
-            "77234f588c6afaf4",
-            "d6aab6f107b83c3b"
-        ],
-        "x": 314,
-        "y": 59,
-        "w": 572,
-        "h": 162
-    },
-    {
-        "id": "40f615ce16c4b2e1",
-        "type": "group",
-        "z": "e184a39d1337c413",
-        "g": "48db379ff2becb41",
-        "name": "Advanced features",
-        "style": {
-            "label": true,
-            "fill": "#ffffff"
-        },
-        "nodes": [
-            "249d2299dc07a4c6",
-            "683d4daf39f4e598",
-            "dd5f97660464a511"
-        ],
-        "x": 914,
-        "y": 39,
-        "w": 252,
-        "h": 182
-    },
-    {
-        "id": "a53fb0a853ac670a",
-        "type": "group",
-        "z": "e184a39d1337c413",
-        "g": "948129bcfd0c7f43",
-        "name": "",
-        "style": {
-            "fill": "#ffffff",
-            "label": true
-        },
-        "nodes": [
-            "af966047935faa0d",
-            "72e3f43085489268",
-            "13eb9c583fc3cfdd",
-            "0e2a5f169f67e8a3"
-        ],
-        "x": 314,
-        "y": 299,
-        "w": 292,
-        "h": 202
-    },
-    {
-        "id": "9cae1e81780f6ce0",
-        "type": "group",
-        "z": "e184a39d1337c413",
-        "g": "948129bcfd0c7f43",
-        "name": "Derivative - incl. bumpless operation",
-        "style": {
-            "label": true,
-            "stroke": "#a4a4a4",
-            "fill": "#ffffff"
-        },
-        "nodes": [
-            "af60facf037aa8b5",
-            "0b8a2a11d42eb8a6",
-            "1265f27ede4ef136",
-            "390f41c303dfa5dd",
-            "beecf72a05a8eaee"
-        ],
-        "x": 614,
-        "y": 399,
-        "w": 752,
-        "h": 142
-    },
-    {
-        "id": "ed840ffedfca971b",
-        "type": "group",
-        "z": "e184a39d1337c413",
-        "g": "948129bcfd0c7f43",
-        "name": "Processing required? ",
-        "style": {
-            "label": true,
-            "fill": "#ffffff"
-        },
-        "nodes": [
-            "5f0c4cdaaabbc848",
-            "6ffae2de520d2ae0",
-            "0a39a237120c812e"
-        ],
-        "x": 614,
-        "y": 299,
-        "w": 562,
-        "h": 82
-    },
-    {
-        "id": "4e86a2ef81e3975b",
-        "type": "group",
-        "z": "e184a39d1337c413",
-        "g": "46ea1a32d8d14f77",
-        "name": "PID controller",
-        "style": {
-            "label": true,
-            "fill": "#ffffff",
-            "color": "#3f3f3f"
-        },
-        "nodes": [
-            "4a535ea5b5d712c7",
-            "eecf5f770104b73e",
-            "816fd55c2a6c9da0",
-            "57b1e671994ce79a",
-            "d6af403451692bb1",
-            "c5c81b813bef18ee",
-            "13cedb5ac2c99528",
-            "12445fefbe81761d",
-            "2bdc609a4d5236ab",
-            "df2b5ebb83debc1b",
-            "507c788f0acbdf5c",
-            "a401c28b2f97d446",
-            "cea41ec36a638d36",
-            "643312ca6cafd95c",
-            "1b5abf7326e94e89",
-            "5c06841b47b468a5",
-            "f20e44649ce394bd",
-            "6222f1affee6e1d3",
-            "6cb5f9c415ad542c",
-            "54eeded097177b56"
-        ],
-        "x": 314,
-        "y": 619,
-        "w": 872,
-        "h": 482
-    },
-    {
-        "id": "adda2ff093095af5",
-        "type": "group",
-        "z": "e184a39d1337c413",
-        "g": "46ea1a32d8d14f77",
-        "name": "Distribution",
-        "style": {
-            "label": true,
-            "fill": "#ffffff",
-            "color": "#3f3f3f"
-        },
-        "nodes": [
-            "5d6112b5e9fa0f62",
-            "613b62b398624e27"
-        ],
-        "x": 314,
-        "y": 1119,
-        "w": 452,
-        "h": 82
-    },
-    {
         "id": "1c447224bfccb47e",
         "type": "group",
         "z": "5560f85f8090bf93",
@@ -1080,26 +768,6 @@
         "x": 34,
         "y": 379,
         "w": 182,
-        "h": 82
-    },
-    {
-        "id": "5d0d14309a330b0a",
-        "type": "group",
-        "z": "5560f85f8090bf93",
-        "g": "892a7ef3c44be3b7",
-        "name": "UI helper | set bounds for charge levels",
-        "style": {
-            "label": true,
-            "stroke": "#3f93cf"
-        },
-        "nodes": [
-            "727ec8317fa8b94c",
-            "f3d2032b57923bc1",
-            "5c959a0e67fac748"
-        ],
-        "x": 1394,
-        "y": 159,
-        "w": 672,
         "h": 82
     },
     {
@@ -1367,9 +1035,9 @@
             "43327471855bf648",
             "f2792a73e109c2b4"
         ],
-        "x": 28,
+        "x": 34,
         "y": 379,
-        "w": 1664,
+        "w": 1678,
         "h": 242
     },
     {
@@ -1554,7 +1222,7 @@
         ],
         "x": 34,
         "y": 119,
-        "w": 892,
+        "w": 852,
         "h": 82
     },
     {
@@ -1596,6 +1264,338 @@
         "h": 82
     },
     {
+        "id": "034635b1ad500f69",
+        "type": "group",
+        "z": "71116bfb3e38272c",
+        "g": "3976d86aa766d5a3",
+        "name": "Loop",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "3721d34b6a06e92e",
+            "c459bdbef50be840",
+            "6941c0d003d9dfc4",
+            "b1076b886d0ae381",
+            "e99d7127740fa14c",
+            "30f8033fefac3897"
+        ],
+        "x": 414,
+        "y": 99,
+        "w": 492,
+        "h": 222
+    },
+    {
+        "id": "327d0c28a11a705b",
+        "type": "group",
+        "z": "1d62f5f10ba713f5",
+        "g": "44362bab0730561d",
+        "name": "UI helper | set bounds for charge levels",
+        "style": {
+            "label": true,
+            "stroke": "#3f93cf"
+        },
+        "nodes": [
+            "72855d465c41b0ba",
+            "8a7bf3d74e7276cf",
+            "55b3fc51c2f3a0f4"
+        ],
+        "x": 1464,
+        "y": 159,
+        "w": 692,
+        "h": 82
+    },
+    {
+        "id": "67366e68865750d3",
+        "type": "group",
+        "z": "43e2c4565d34c242",
+        "g": "fab67345066b14d4",
+        "name": "API call to Data Source",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "1a6246ca9abf2e83",
+            "c843bdeae79c0e58",
+            "9860b755ba4b2d4e",
+            "8262ba7519609e5a",
+            "ef1da1d3a7216433",
+            "f9d73dbee7d1d101",
+            "6bd50ca39c76d914",
+            "772f3e317433da1c",
+            "a8208c750ae4a8f5",
+            "eef1de260499e2e8",
+            "21e31d9b506fda62",
+            "08ab42d46d6b4a73",
+            "25837266d45b787a",
+            "89c9eb1d187f7737",
+            "1d4a3f92488da986",
+            "b9a41d9435cf8abd",
+            "0bb50184686abc06",
+            "1bd71d96b5e5525c",
+            "daff0725d784350d",
+            "97f82f3fae5a5912"
+        ],
+        "x": 254,
+        "y": 519,
+        "w": 752,
+        "h": 362
+    },
+    {
+        "id": "5b357349653af8f2",
+        "type": "group",
+        "z": "43e2c4565d34c242",
+        "g": "fab67345066b14d4",
+        "name": "Update when",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "3361691261d2f519",
+            "8ab73e892d2154d9",
+            "3c087a25af39d14b",
+            "0d1c173cfa69474f",
+            "88c7fbbb50fc9eb1",
+            "1a661e75892b6c74",
+            "a2c606034d1f2eaa",
+            "03e0666c92b71771",
+            "02148ab5c5eaaaf9",
+            "8420e8ebe5336bac",
+            "9518a456438a2d54",
+            "b345941d67039862",
+            "22b6bb41ec336a29",
+            "fa3b6960bceef6ce",
+            "685af86a816c2521",
+            "a2e93b4c096f585c",
+            "e27caf3c58554974",
+            "e81dbb3b2450ad3a"
+        ],
+        "x": 254,
+        "y": 299,
+        "w": 1192,
+        "h": 202
+    },
+    {
+        "id": "ccaba979a2207c48",
+        "type": "group",
+        "z": "43e2c4565d34c242",
+        "g": "fab67345066b14d4",
+        "name": "Determine strategy",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "3deb7fec0af7839e",
+            "bbf0eca8289cd464",
+            "f0163b0eeaf865e2",
+            "110b3b19eb5133bc",
+            "56ada86c06d721f7",
+            "a95299c1bf1a13bc",
+            "36c0d33885ed6329",
+            "53acf427d49b2573",
+            "1d789d31e8675fde",
+            "20e01029024a4f0f",
+            "cb43481920102fc0",
+            "e7e2014216c27578",
+            "213320a3faa32b56",
+            "144cc66c5aa6fb0b",
+            "d96bb293f1c1ceef",
+            "4c12a8b240ab8a88"
+        ],
+        "x": 254,
+        "y": 899,
+        "w": 872,
+        "h": 402
+    },
+    {
+        "id": "286f10603840ceb3",
+        "type": "group",
+        "z": "e184a39d1337c413",
+        "g": "48db379ff2becb41",
+        "name": "PID control inputs",
+        "style": {
+            "label": true,
+            "fill": "#ffffff"
+        },
+        "nodes": [
+            "7913d5674b438fab",
+            "16cd178b1d21594b",
+            "92e069c4fc3861e3",
+            "d59f5a16ea57793f",
+            "9e94ec0db734b8ef",
+            "7562b977cfd31aa3",
+            "cfe162e53efce392",
+            "77234f588c6afaf4",
+            "d6aab6f107b83c3b"
+        ],
+        "x": 314,
+        "y": 59,
+        "w": 572,
+        "h": 162
+    },
+    {
+        "id": "40f615ce16c4b2e1",
+        "type": "group",
+        "z": "e184a39d1337c413",
+        "g": "48db379ff2becb41",
+        "name": "Advanced features",
+        "style": {
+            "label": true,
+            "fill": "#ffffff"
+        },
+        "nodes": [
+            "249d2299dc07a4c6",
+            "683d4daf39f4e598",
+            "dd5f97660464a511"
+        ],
+        "x": 914,
+        "y": 39,
+        "w": 252,
+        "h": 182
+    },
+    {
+        "id": "a53fb0a853ac670a",
+        "type": "group",
+        "z": "e184a39d1337c413",
+        "g": "948129bcfd0c7f43",
+        "name": "",
+        "style": {
+            "fill": "#ffffff",
+            "label": true
+        },
+        "nodes": [
+            "af966047935faa0d",
+            "72e3f43085489268",
+            "13eb9c583fc3cfdd",
+            "0e2a5f169f67e8a3"
+        ],
+        "x": 314,
+        "y": 299,
+        "w": 292,
+        "h": 202
+    },
+    {
+        "id": "9cae1e81780f6ce0",
+        "type": "group",
+        "z": "e184a39d1337c413",
+        "g": "948129bcfd0c7f43",
+        "name": "Derivative - incl. bumpless operation",
+        "style": {
+            "label": true,
+            "stroke": "#a4a4a4",
+            "fill": "#ffffff"
+        },
+        "nodes": [
+            "af60facf037aa8b5",
+            "0b8a2a11d42eb8a6",
+            "1265f27ede4ef136",
+            "390f41c303dfa5dd",
+            "beecf72a05a8eaee"
+        ],
+        "x": 614,
+        "y": 399,
+        "w": 752,
+        "h": 142
+    },
+    {
+        "id": "ed840ffedfca971b",
+        "type": "group",
+        "z": "e184a39d1337c413",
+        "g": "948129bcfd0c7f43",
+        "name": "Processing required? ",
+        "style": {
+            "label": true,
+            "fill": "#ffffff"
+        },
+        "nodes": [
+            "5f0c4cdaaabbc848",
+            "6ffae2de520d2ae0",
+            "0a39a237120c812e"
+        ],
+        "x": 614,
+        "y": 299,
+        "w": 562,
+        "h": 82
+    },
+    {
+        "id": "4e86a2ef81e3975b",
+        "type": "group",
+        "z": "e184a39d1337c413",
+        "g": "46ea1a32d8d14f77",
+        "name": "PID controller",
+        "style": {
+            "label": true,
+            "fill": "#ffffff",
+            "color": "#3f3f3f"
+        },
+        "nodes": [
+            "4a535ea5b5d712c7",
+            "eecf5f770104b73e",
+            "816fd55c2a6c9da0",
+            "57b1e671994ce79a",
+            "d6af403451692bb1",
+            "c5c81b813bef18ee",
+            "13cedb5ac2c99528",
+            "12445fefbe81761d",
+            "2bdc609a4d5236ab",
+            "df2b5ebb83debc1b",
+            "507c788f0acbdf5c",
+            "a401c28b2f97d446",
+            "cea41ec36a638d36",
+            "643312ca6cafd95c",
+            "1b5abf7326e94e89",
+            "5c06841b47b468a5",
+            "f20e44649ce394bd",
+            "6222f1affee6e1d3",
+            "6cb5f9c415ad542c",
+            "54eeded097177b56"
+        ],
+        "x": 314,
+        "y": 619,
+        "w": 872,
+        "h": 482
+    },
+    {
+        "id": "adda2ff093095af5",
+        "type": "group",
+        "z": "e184a39d1337c413",
+        "g": "46ea1a32d8d14f77",
+        "name": "Distribution",
+        "style": {
+            "label": true,
+            "fill": "#ffffff",
+            "color": "#3f3f3f"
+        },
+        "nodes": [
+            "5d6112b5e9fa0f62",
+            "613b62b398624e27"
+        ],
+        "x": 314,
+        "y": 1119,
+        "w": 452,
+        "h": 82
+    },
+    {
+        "id": "5d0d14309a330b0a",
+        "type": "group",
+        "z": "5560f85f8090bf93",
+        "g": "892a7ef3c44be3b7",
+        "name": "UI helper | set bounds for charge levels",
+        "style": {
+            "label": true,
+            "stroke": "#3f93cf"
+        },
+        "nodes": [
+            "727ec8317fa8b94c",
+            "f3d2032b57923bc1",
+            "5c959a0e67fac748"
+        ],
+        "x": 1394,
+        "y": 159,
+        "w": 672,
+        "h": 82
+    },
+    {
         "id": "27e1bb709915ab2a",
         "type": "group",
         "z": "896149ae00e704f5",
@@ -1616,7 +1616,7 @@
             "e6794aecfb35f261",
             "d5f43067dec64c67"
         ],
-        "x": 54,
+        "x": 74,
         "y": 459,
         "w": 1612,
         "h": 82
@@ -2233,7 +2233,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 160,
+        "x": 180,
         "y": 500,
         "wires": [
             [
@@ -2284,7 +2284,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 850,
+        "x": 870,
         "y": 500,
         "wires": [
             [
@@ -2335,7 +2335,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1270,
+        "x": 1290,
         "y": 500,
         "wires": [
             [
@@ -2386,7 +2386,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 680,
+        "x": 700,
         "y": 500,
         "wires": [
             [
@@ -2437,7 +2437,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1420,
+        "x": 1440,
         "y": 500,
         "wires": [
             [
@@ -2488,7 +2488,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 470,
+        "x": 490,
         "y": 500,
         "wires": [
             [
@@ -2539,7 +2539,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 310,
+        "x": 330,
         "y": 500,
         "wires": [
             [
@@ -3326,7 +3326,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1570,
+        "x": 1590,
         "y": 500,
         "wires": [
             [
@@ -3765,7 +3765,7 @@
         "type": "api-current-state",
         "z": "896149ae00e704f5",
         "g": "e65f575b74b19bb9",
-        "name": "Debug mode",
+        "name": "Insight mode",
         "server": "176d29a.6f648d6",
         "version": 3,
         "outputs": 1,
@@ -3791,13 +3791,7 @@
             {
                 "property": "debug_mode",
                 "propertyType": "msg",
-                "value": "ha_boolean",
-                "valueType": "entityState"
-            },
-            {
-                "property": "debug_mode",
-                "propertyType": "global",
-                "value": "ha_boolean",
+                "value": "string",
                 "valueType": "entityState"
             }
         ],
@@ -3846,7 +3840,7 @@
         "type": "server-state-changed",
         "z": "896149ae00e704f5",
         "g": "e65f575b74b19bb9",
-        "name": "On debug",
+        "name": "Turned ON",
         "server": "176d29a.6f648d6",
         "version": 6,
         "outputs": 2,
@@ -3906,7 +3900,7 @@
         "type": "trigger",
         "z": "896149ae00e704f5",
         "g": "e65f575b74b19bb9",
-        "name": "disable debug after 5 minutes",
+        "name": "disable after 5 minutes",
         "op1": "",
         "op2": "off",
         "op1type": "nul",
@@ -3919,7 +3913,7 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 590,
+        "x": 560,
         "y": 160,
         "wires": [
             [
@@ -3932,7 +3926,7 @@
         "type": "api-call-service",
         "z": "896149ae00e704f5",
         "g": "e65f575b74b19bb9",
-        "name": "Turn debug OFF",
+        "name": "Turn insight OFF",
         "server": "176d29a.6f648d6",
         "version": 7,
         "debugenabled": false,
@@ -3953,7 +3947,7 @@
         "blockInputOverrides": true,
         "domain": "input_boolean",
         "service": "turn_off",
-        "x": 820,
+        "x": 770,
         "y": 160,
         "wires": [
             []
@@ -4173,7 +4167,7 @@
         "g": "87e06966531158e0",
         "name": "Skip rate limiter during debug",
         "property": "debug_mode",
-        "propertyType": "msg",
+        "propertyType": "global",
         "rules": [
             {
                 "t": "false"
@@ -4202,7 +4196,7 @@
         "z": "896149ae00e704f5",
         "g": "e65f575b74b19bb9",
         "name": "Notice",
-        "func": "// Explain when debugging\nif(msg.debug_mode == true){\n    const log = global.get(\"logger\");\n    log(this, \"P1 Rate limiter is *disabled* during *debug mode*\");\n}\nreturn msg;",
+        "func": "// enable or disable Insights Mode\nif(msg.debug_mode == \"on\"){\n    // ENABLED - explain to user\n    const log = global.get(\"logger\");\n    log(this, \"P1 Rate limiter is *disabled* during *debug mode*\");\n\n    // Set global (setting this via current state node has proven irriliable)\n    global.set(\"debug_mode\", true);\n} else {\n    // DISABLED - set global\n    global.set(\"debug_mode\", false);\n}\n\n// Clean up - only use the global\ndelete msg.debug_mode;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4261,7 +4255,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 980,
+        "x": 1000,
         "y": 500,
         "wires": [
             [
@@ -4312,7 +4306,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1120,
+        "x": 1140,
         "y": 500,
         "wires": [
             [
@@ -12727,7 +12721,7 @@
         "wires": []
     },
     {
-        "id": "dfc42473c3e94b14",
+        "id": "386702e72995c4cc",
         "type": "global-config",
         "env": [],
         "modules": {
