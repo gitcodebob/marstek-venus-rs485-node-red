@@ -1,6 +1,24 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.4.1
+- **Fix: Frank Energie integration support (fixes #75)**
+  * Added support for Frank Energie via the [HiDiHo01 Home Assistant integration](https://github.com/HiDiHo01/home-assistant-frank_energie)
+  * Dynamic strategy now includes proper sensor configuration for Frank Energie users
+
+- **Setup: Improved P1 sensor configuration instructions (fixes #64)**
+  * Enhanced documentation in getting started guide for P1 meter setup
+  * Clarified configuration examples in `house_battery_control_config.yaml`
+
+- **Documentation: Alternative energy provider guidance (fixes #57)**
+  * Added suggestions for users whose energy provider isn't directly supported
+  * Improved dynamic strategy setup documentation
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control_config.yaml`
+  - `node-red/02 strategy-dynamic.json`
+
 ## 4.4.0
 - **Feature: Selectable strategies per period in Dynamic strategy**
   * **Choose your strategy per period** - Select which strategy to use during cheapest, expensive, and regular periods independently
