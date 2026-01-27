@@ -29,6 +29,7 @@ Tuning of charging levels (SoC) based on PV Forecast can be created by you as a 
 1. Install [Cheapest Energy Hours](https://github.com/TheFes/cheapest-energy-hours?tab=readme-ov-file#how-to-install) if you have not done so already
 1. Provide data from your Energy supplier to Home Assistant. [See this easy list](https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings) with addons from TheFes.
    - Follow any instructions provided by the Data Provider addon.
+   - Tip: is your energy supplier not supported? Use [ENTSO-e](https://my.home-assistant.io/redirect/hacs_repository/?owner=JaccoR&repository=hass-entso-e&category=integration).
 1. Import the `02 strategy-dynamic.json` flow into Node-RED and *deploy*
 1. Go to your Home Battery Control dashboard in HA
    - Select `Full control` and `Dynamic` to activate the strategy

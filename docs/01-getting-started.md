@@ -14,6 +14,12 @@ nav_order: 1
 1. **Connect batteries to Home Assistant**
    - The project assumes you have connected your batteries to Home Assistant
    - Have a look at these [modbus examples and ready to use configurations](02-modbus-setup.md)
+
+1. **Connect grid power or P1 meter to Home Assistant**
+   - The project assumes you have a grid power sensor available in Home Assistant
+   - A P1 USB-dongle, HomeWizzard P1 monitor, Shelly EM50, any will do. 
+   - 1 Hz refresh preferred
+   - Marstek users: CT002 or CT003 is not a requirement. HBC functions just fine without them. 
    
 1. **Install Node-RED in Home Assistant**
    - *Node-RED as a Home Assistant Add-on (popular)*
@@ -47,7 +53,6 @@ nav_order: 1
        - `packages/house_battery_control_config.yaml` contains configuration-related entities specific for your install. Customize it. Don't overwrite at each update.
      - The main `configuration.yaml` automatically loads all package files from the `packages/` directory
        - Tip: you can add your own package files to the `packages/` folder as well. They will be loaded automatically.
-       - Tip: the `house_battery_control.yaml` includes `recorder:` configuration to reduce logbook clutter by excluding high-frequency technical entities (PID control signals, calculated averages) while preserving user-relevant changes (Master Switch, Strategy selection, configuration changes). History graphs and statistics remain fully functional.
      - This package-based structure provides better organization, easier maintenance, and improved configuration sharing.
      - See instruction [Good to know / Safety](#good-to-know--safety) for safety tips.
 
@@ -56,10 +61,18 @@ nav_order: 1
    - Follow the **additional guidance** on this interactive dashboard.
       1. Set your desired number of batteries (the system can handle any number of batteries, but the dash is designed for max. 4)
       1. Set your P1 sensor (`/packages/house_battery_control_config.yaml`)
+         - Examples for 1 and 3 phase sensors are available. 
+         - Examples of singular (+/-) and split (+production/+consumption) sensors are available.
+         - Uncomment and adapt what is relevant to your situation and place the template sensor name under `p1_meter_power`
       1. Import NR flows, see instructions below.
 
 1. **Import Node-RED Flows**
-    - In Node-RED, go to the menu > Import > and select the relevant JSON files from the `node-red` folder:
+   - In Node-RED, go to the menu > Import > and select the following JSON file from the `node-red` folder:
+       - `all-flows-in-one-file.json` (imports all flows in 1 go, *you are done*)
+   
+      If you require specific flows, the structure is as follows
+   
+   - Import seperate flows:
        - `00 master-switch-flow.json` (enable/disable control)
        - `00 presets-switch-flow.json` (pid control presets)
        - `01 start-flow.json` (the main flow)
@@ -73,7 +86,7 @@ nav_order: 1
    - Deprecated flows are available in `node-red/deprecated/` folder for reference
    - Deploy all flows. No edits required.
 
-5. **Firing up**
+1. **Firing up**
    - Check the dashboard if all checks are green, if you have not done so already.
    - Continue reading **before** switching the master battery mode to `Full Control` to activate.
 
