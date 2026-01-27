@@ -61,6 +61,9 @@ nav_order: 1
    - Follow the **additional guidance** on this interactive dashboard.
       1. Set your desired number of batteries (the system can handle any number of batteries, but the dash is designed for max. 4)
       1. Set your P1 sensor (`/packages/house_battery_control_config.yaml`)
+         - Examples for 1 and 3 phase sensors are available. 
+         - Examples of singular (+/-) and split (+production/+consumption) sensors are available.
+         - Uncomment and adapt what is relevant to your situation and place the template sensor name under `p1_meter_power`
       1. Import NR flows, see instructions below.
 
 1. **Import Node-RED Flows**
