@@ -6,6 +6,9 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
   * Added support for Frank Energie via the [HiDiHo01 Home Assistant integration](https://github.com/HiDiHo01/home-assistant-frank_energie)
   * Dynamic strategy now includes proper sensor configuration for Frank Energie users
 
+- **Fix: Dollarless JSONata not working for some users (fixes #72)**
+  * Resolved compatibility issues with JSONata expressions
+
 - **Setup: Improved P1 sensor configuration instructions (fixes #64)**
   * Enhanced documentation in getting started guide for P1 meter setup
   * Clarified configuration examples in `house_battery_control_config.yaml`
