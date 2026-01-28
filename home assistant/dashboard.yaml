@@ -1509,7 +1509,7 @@ views:
             features_position: bottom
           - type: markdown
             content: >-
-              <font color=grey>The `EV stop trigger` should now indicate wether
+              <font color=grey>The `EV stop trigger` should now indicate whether
               an all stop has been triggered. Stop trigger 'on' = batteries
               'Full stop'.</font>
             text_only: true
