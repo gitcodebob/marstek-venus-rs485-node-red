@@ -1338,7 +1338,7 @@ views:
               {% set logs = state_attr('sensor.home_battery_control_log', 'log')
               %}  {% if logs %}
 
-              | Time |  | Flow | Node | Explenation |
+              | Time |  | Flow | Node | Explanation |
 
               | :--- | :--- | :--- | :--- | :--- |
                 {%- for entry in logs %}
