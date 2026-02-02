@@ -6,7 +6,7 @@ nav_order: 2
 
 # Modbus to Home Assistant
 
-Most home batteries allow control via a ModBus port. To connect your battery via Modbus with Home Assistant there are several ready-to-buy/Microcontroler diy/ESPHome based solutions available.
+Most home batteries allow control via a ModBus port. To connect your battery via Modbus with Home Assistant there are several ready-to-buy/Microcontroller diy/ESPHome based solutions available.
 
 Examples and ready to use configurations for Marstek are found here:
 ### Esphome based:

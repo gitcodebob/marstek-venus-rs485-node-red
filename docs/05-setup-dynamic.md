@@ -38,7 +38,7 @@ Tuning of charging levels (SoC) based on PV Forecast can be created by you as a 
    - The dashboard should (with a small delay) display when it will be charging/idle/discharing in the next 24 hrs.
 1. Minimum price delta
    - Leave the price delta at €0,06/kWh or set it to your desired value
-   - For a Marstek bought at ~ €1250, 6000 cycles at 88% DoD and an 80 RTE = delta at €0,06/kWh
+   - For a Marstek bought at ~ €1250, 6000 cycles at 88% DoD and an 80% RTE = delta at €0,06/kWh
    - If you charge largely using solar power, you can lower the price delta down to €0,00/kWh
 
 Done.
@@ -79,7 +79,7 @@ Done.
 - How many of the most `expensive hours` per day to use for self-consumption (discharging)
 - The system automatically finds the most expensive block of consecutive hours in your data source (often: the current and next day)
 
-- **Only activates** if the [`minimum price delta`](#minimum-price-delta-kWh) threshold is met. Otherwise grid power is cheaper than the energie stored in your battery.
+- **Only activates** if the [`minimum price delta`](#minimum-price-delta-kWh) threshold is met. Otherwise grid power is cheaper than the energy stored in your battery.
    - it will **remain in charge PV** mode during [`expensive hours`](#expensive-hours-number) if the threshold is not met. 
 
 _FAQ_

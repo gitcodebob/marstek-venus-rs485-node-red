@@ -540,7 +540,7 @@ views:
             content: >-
               <font color="grey"><i>These settings tune how aggressive the
               system tries to keep the grid power at the desired power level.
-              Too aggressive is unstable! Too safe  will toss efficiency. This
+              Too aggressive is unstable! Too safe will cost efficiency. This
               PID control can outperform Vendor made software by a great margin,
               according to community feedback.
 
@@ -638,7 +638,7 @@ views:
             hours_to_show: 0.025
           - type: markdown
             content: >-
-              <font color="grey"><i>Click on the labels in the legenda to turn
+              <font color="grey"><i>Click on the labels in the legend to turn
               individual graphs on/off
 
               </i></font>
@@ -743,7 +743,7 @@ views:
           - type: markdown
             content: >-
               <font color=grey><i>Visit the '<ha-icon
-              icon="mdi:cog-outline"></ha-icon>settings tab' for fine grained
+              icon="mdi:cog-outline"></ha-icon>settings tab' for fine-grained
               control **per battery**
 
               </i></font>
@@ -807,7 +807,7 @@ views:
           - type: markdown
             content: >-
               <font color=grey><i>Visit the '<ha-icon
-              icon="mdi:cog-outline"></ha-icon>settings tab' for fine grained
+              icon="mdi:cog-outline"></ha-icon>settings tab' for fine-grained
               control **per battery**
 
               </i></font>
@@ -1331,14 +1331,14 @@ views:
             heading_style: title
           - type: heading
             icon: mdi:list-box-outline
-            heading: 📋 Explenations (last 100 items)
+            heading: 📋 Explanations (last 100 items)
             heading_style: subtitle
           - type: markdown
             content: >
               {% set logs = state_attr('sensor.home_battery_control_log', 'log')
               %}  {% if logs %}
 
-              | Time |  | Flow | Node | Explenation |
+              | Time |  | Flow | Node | Explanation |
 
               | :--- | :--- | :--- | :--- | :--- |
                 {%- for entry in logs %}
@@ -1509,7 +1509,7 @@ views:
             features_position: bottom
           - type: markdown
             content: >-
-              <font color=grey>The `EV stop trigger` should now indicate wether
+              <font color=grey>The `EV stop trigger` should now indicate whether
               an all stop has been triggered. Stop trigger 'on' = batteries
               'Full stop'.</font>
             text_only: true

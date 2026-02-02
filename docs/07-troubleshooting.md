@@ -11,7 +11,7 @@ nav_order: 7
 The debug dashboard provides real-time insight into your battery control system's decision-making process, without having to scroll through Home Assistant and Node-RED. Use it to understand why your system behaves a certain way or to diagnose issues. 
 
 ### Note: more an insights tool than a debug tool
-It shows *known issues*, but is not a full debug tool. Unforseen crashes still require inspection via Node-RED. Also de Node-RED logs can be useful, e.g. `http://homeassistant.local:8123/hassio/addon/******_nodered/logs`
+It shows *known issues*, but is not a full debug tool. Unforeseen crashes still require inspection via Node-RED. Also de Node-RED logs can be useful, e.g. `http://homeassistant.local:8123/hassio/addon/******_nodered/logs`
 
 ### How to Use Debug Mode
 

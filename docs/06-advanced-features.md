@@ -25,7 +25,7 @@ nav_order: 6
    - 0 = apply no hysteresis
 - **Battery charge order:** determines which battery gets charged first (Multi-battery only)
    - Batteries gets charged in order. By changing which battery is first in order, you can optimize battery wear.
-   - Espescially during cloudy periods when the first battery takes the grunt of the charging and discharing.
+   - Especially during cloudy periods when the first battery takes the grunt of the charging and discharging.
    - The **Auto Cycle** feature changes the order of the batteries automatically each night or each week
       - Auto Cycling occurs at 02:00 hrs daily, or 02:00 hrs Sunday morning.
       - Don't want auto cycling? Select Cycle priority "Never". 
