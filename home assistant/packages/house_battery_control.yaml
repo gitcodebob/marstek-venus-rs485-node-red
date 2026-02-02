@@ -630,6 +630,7 @@ input_select:
     options:
       - None
       - Zonneplan
+      - Zonneplan (one)
       - Amber Electric
       - EasyEnergy, EnergyZero (core)
       - ENTSO-E
