@@ -1,6 +1,18 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.4.2
+- **Fix: Zonneplan integration sensor name change (fixes #76)**
+  * Added support for renamed Zonneplan sensor via new datasource option 'Zonneplan (one)'
+
+- **Fix: Spelling corrections in documentation and dashboard**
+  * Corrected 17 spelling errors across documentation files and dashboard
+  * Thanks to Residenteur, sammyjo468, BSmelik and others for pointing out the eye wattering errors and promoting some maintenance.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `node-red/02 strategy-dynamic.json`
+
 ## 4.4.1
 - **Fix: Frank Energie integration support (fixes #75)**
   * Added support for Frank Energie via the [HiDiHo01 Home Assistant integration](https://github.com/HiDiHo01/home-assistant-frank_energie)
