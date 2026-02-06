@@ -56,7 +56,7 @@ Use the [Ziegler-Nichols method](https://en.wikipedia.org/wiki/Proportional%E2%8
     - increase Kp when not resonating
     - decrease Kp if the system runs off. (stay alert, not to damage your system)
 1. Determine the resonant frequency. E.g. by using [HA-history-graph-csv-export-analysis
-](https://github.com/gitcodebob/HA-history-graph-csv-export-analysis). You need to download these CVS data first from the History dashboard, P1 Meter Power sensor. Only use a period there the battery management has actually been able to minimize P1 (i.e., not full stop, charge only, empty or full battery etc).
+](https://github.com/gitcodebob/HA-history-graph-csv-export-analysis). You need to download the CSV data first from the History dashboard, P1 Meter Power sensor. Only use a period where the battery management has actually been able to perform the self-consumption strategy (i.e., not full stop, charge only, empty or full battery etc).
 1. T<sub>u</sub> = 1 / `<resonant frequency>` and K<sub>u</sub> = your current K<sub>p</sub> during resonance
 1. Use the table of the [Ziegler-Nichols method](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller#Ziegler%E2%80%93Nichols_method) to get a baseline. 
     - This baseline can be a bit aggressive.
