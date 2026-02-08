@@ -87,6 +87,52 @@ views:
             text_only: true
           - type: markdown
             content: >-
+              <ha-alert title="(Optional) review power limits"> Use limits and
+              peak shaving to reduce <font color=darkblue>peaks and overload
+              risk</font>.</ha-alert>
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: input_boolean.house_battery_control_has_power_limit_import
+                    state_not: 'on'
+                  - condition: state
+                    entity: input_boolean.house_battery_control_has_power_limit_export
+                    state_not: 'on'
+          - type: heading
+            icon: mdi:cog-outline
+            heading: Review power limits
+            heading_style: subtitle
+            tap_action:
+              action: navigate
+              navigation_path: /home-battery/advanced-settings
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: input_boolean.house_battery_control_has_power_limit_import
+                    state_not: 'on'
+                  - condition: state
+                    entity: input_boolean.house_battery_control_has_power_limit_export
+                    state_not: 'on'
+          - type: markdown
+            content: >-
+              <ha-alert title="Power limits" alert-type="success"> Batteries
+              will help prevent peaks and overloads, when able.</ha-alert>
+            visibility:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity: input_boolean.house_battery_control_has_power_limit_import
+                    state: 'on'
+                  - condition: state
+                    entity: input_boolean.house_battery_control_has_power_limit_export
+                    state: 'on'
+          - type: markdown
+            content: '### Step 5'
+            text_only: true
+          - type: markdown
+            content: >-
               Set the Master Battery Control to `Full Control` only after
               reviewing and checking all installation instructions. 
 
@@ -522,7 +568,7 @@ views:
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.4.2)*'
+        content: '### Home Battery Control *(v4.5.0)*'
         text_only: true
     cards: []
   - type: sections
@@ -725,21 +771,6 @@ views:
               - condition: state
                 entity: input_select.house_battery_strategy_charge_goal
                 state: energy reserve
-          - type: heading
-            icon: mdi:transmission-tower-import
-            heading: Power limit during import from grid
-            heading_style: subtitle
-          - type: entities
-            entities:
-              - entity: input_boolean.house_battery_strategy_charge_has_max_power
-              - type: conditional
-                conditions:
-                  - entity: input_boolean.house_battery_strategy_charge_has_max_power
-                    state: 'off'
-                row:
-                  type: input-number-entity
-                  entity: input_number.house_battery_strategy_charge_target_power
-                  icon: mdi:home-import-outline
           - type: markdown
             content: >-
               <font color=grey><i>Visit the '<ha-icon
@@ -790,20 +821,6 @@ views:
               - condition: state
                 entity: input_select.house_battery_strategy_sell_goal
                 state: energy reserve
-          - type: heading
-            icon: mdi:transmission-tower-export
-            heading: Power limit during export to grid
-            heading_style: subtitle
-          - type: entities
-            entities:
-              - entity: input_boolean.house_battery_strategy_sell_has_max_power
-              - type: conditional
-                conditions:
-                  - entity: input_boolean.house_battery_strategy_sell_has_max_power
-                    state: 'off'
-                row:
-                  type: input-number-entity
-                  entity: input_number.house_battery_strategy_sell_target_power
           - type: markdown
             content: >-
               <font color=grey><i>Visit the '<ha-icon
@@ -1242,6 +1259,14 @@ views:
     badges:
       - type: entity
         show_name: true
+        show_state: false
+        show_icon: true
+        entity: input_boolean.house_battery_control_is_debug_mode
+        tap_action:
+          action: toggle
+        name: Insights mode
+      - type: entity
+        show_name: true
         show_state: true
         show_icon: true
         entity: input_select.house_battery_strategy
@@ -1513,6 +1538,119 @@ views:
               an all stop has been triggered. Stop trigger 'on' = batteries
               'Full stop'.</font>
             text_only: true
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:transmission-tower
+            heading: Grid power limits & peak shaving
+            heading_style: title
+          - type: markdown
+            content: '---'
+            grid_options:
+              columns: full
+            text_only: true
+          - type: heading
+            icon: mdi:information
+            heading: Peak shaving
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://docs.homebatterycontrol.com/06-advanced-features.html#battery-life
+          - type: markdown
+            content: >-
+              <font color=grey><i>Use your batteries to reduce peak loads and
+              reduce 'capacity tariff' (aka CAPTAR, aka capaciteitstarief). 
+
+              When enabled, the batteries will automatically charge or discharge
+              (when able) to reduce peak loads on your **grid connection**.
+              Active during every strategy except "`Full Stop`"</i>
+
+              </font>
+            text_only: true
+            grid_options:
+              columns: full
+        column_span: 3
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:transmission-tower-import
+            heading: Grid power limit during import from grid (CAPTAR)
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: input_boolean.house_battery_control_has_power_limit_import
+              - type: conditional
+                conditions:
+                  - entity: input_boolean.house_battery_control_has_power_limit_import
+                    state: 'on'
+                row:
+                  type: input-number-entity
+                  entity: input_number.house_battery_control_power_limit_import
+                  icon: mdi:home-import-outline
+          - type: markdown
+            content: >-
+              <font color=grey><i>This also determines **Charge strategy**
+              speed</i>
+
+              </font>
+            text_only: true
+            grid_options:
+              columns: full
+        column_span: 1
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:transmission-tower-export
+            heading: Grid power limit during export to grid
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: input_boolean.house_battery_control_has_power_limit_export
+              - type: conditional
+                conditions:
+                  - entity: input_boolean.house_battery_control_has_power_limit_export
+                    state: 'on'
+                row:
+                  type: input-number-entity
+                  entity: input_number.house_battery_control_power_limit_export
+          - type: markdown
+            content: >-
+              <font color=grey><i>This also determines **Sell strategy**
+              discharge speed.</i>
+
+              </font>
+            text_only: true
+            grid_options:
+              columns: full
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:car-electric
+            heading: Home Energy Control
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: >-
+                  input_boolean.house_battery_control_has_power_limit_during_ev_charge
+          - type: markdown
+            content: >-
+              <font color=grey><i>Keep batteries available for peak shaving even
+              when the EV stop trigger is active. The EV stop trigger does stop
+              any other strategies from executing.</i> 
+
+              ℹ️ Your grid import limit should be larger than your EV charge
+              power to prevent your EV from draining your home battery.
+
+              </font>
+            text_only: true
+            grid_options:
+              columns: full
+        visibility:
+          - condition: state
+            entity: >-
+              input_boolean.house_battery_control_has_power_limit_during_ev_charge
+            state_not: unknown
       - type: grid
         cards:
           - type: markdown

@@ -23,19 +23,22 @@ input_boolean:
     name: Enable additional period C
     icon: mdi:clock-outline
 
-  # Strategy Charge / Sell
-  # old name: house_battery_strategy_timed_has_max_power
-  house_battery_strategy_charge_has_max_power:
-    name: Charge at max. power
-    icon: mdi:power-plug-battery-outline
+  # Grid power limits & Peak shaving
+  house_battery_control_has_power_limit_import:
+    name: Enable import peak shaving
+    icon: mdi:transmission-tower-import
 
-  house_battery_strategy_sell_has_max_power:
-    name: Sell at max. power
-    icon: mdi:power-plug-battery-outline
+  house_battery_control_has_power_limit_export:
+    name: Enable export peak shaving
+    icon: mdi:transmission-tower-export
 
-  # Debug
+  # house_battery_control_has_power_limit_during_ev_charge:
+  #   name: Enable peak shaving during EV charge
+  #   icon: mdi:ev-station
+
+  # Insights
   house_battery_control_is_debug_mode:
-    name: Debug mode
+    name: Insight mode
 
   # Onboarding
   house_battery_control_onboarding_finished:
@@ -318,6 +321,27 @@ input_number:
     initial: 0
     icon: mdi:chart-timeline-variant-shimmer # shimmering line chart
 
+  # Peak shaving | import threshold
+  # old name: house_battery_strategy_timed_target_power
+  # old name: house_battery_strategy_charge_target_power
+  house_battery_control_power_limit_import:
+    name: Limit power from grid
+    min: 500
+    max: 25000
+    unit_of_measurement: "W"
+    mode: box
+    icon: mdi:home-import-outline
+
+  # Peak shaving | export threshold
+  # old name: house_battery_strategy_sell_target_power
+  house_battery_control_power_limit_export:
+    name: Limit power to grid
+    min: 500
+    max: 25000
+    unit_of_measurement: "W"
+    mode: box
+    icon: mdi:home-export-outline
+
   # Strategy charge | desired energy reserve (effective energy available excl. cut-off energies)
   # old name: house_battery_strategy_timed_target_energy
   house_battery_strategy_charge_target_energy:
@@ -338,16 +362,6 @@ input_number:
     mode: box
     icon: mdi:battery-90
 
-  # Strategy charge | desired charging power
-  # old name: house_battery_strategy_timed_target_power
-  house_battery_strategy_charge_target_power:
-    name: Limit power from grid
-    min: 500
-    max: 7500
-    unit_of_measurement: "W"
-    mode: box
-    icon: mdi:home-import-outline
-
   # Strategy sell | desired energy reserve (effective energy available excl. cut-off energies)
   house_battery_strategy_sell_target_energy:
     name: Keep energy in reserve
@@ -356,15 +370,6 @@ input_number:
     unit_of_measurement: "kWh"
     mode: box
     icon: mdi:battery-charging
-
-  # Strategy sell | desired grid discharging power
-  house_battery_strategy_sell_target_power:
-    name: Limit power to grid
-    min: 500
-    max: 7500
-    unit_of_measurement: "W"
-    mode: box
-    icon: mdi:home-export-outline
 
   # Strategy sell | sell till battery SoC
   house_battery_strategy_sell_target_soc:
@@ -415,16 +420,6 @@ input_number:
     step: 1 # Cents
     unit_of_measurement: "cents"
     mode: box
-
-  # Strategy dynamic | select Sell strategy when: profit margin is equal or larger than
-  # house_battery_strategy_dynamic_threshold_sell_for_profit:
-  #   name: Sell when profit is atleast
-  #   icon: mdi:cash
-  #   min: 1
-  #   max: 20
-  #   step: 1 # Cents
-  #   unit_of_measurement: "cents"
-  #   mode: box
 
   # Strategy dynamic | average tariff of cheapest period
   house_battery_strategy_dynamic_cheapest_avg_tariff:
@@ -630,7 +625,6 @@ input_select:
     options:
       - None
       - Zonneplan
-      - Zonneplan (one)
       - Amber Electric
       - EasyEnergy, EnergyZero (core)
       - ENTSO-E

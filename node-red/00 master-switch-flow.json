@@ -1,6 +1,6 @@
 [
     {
-        "id": "acde727d4cb42aaa",
+        "id": "60b5d8044cd240a3",
         "type": "tab",
         "label": "Home Battery Master Switch",
         "disabled": false,
@@ -8,19 +8,19 @@
         "env": []
     },
     {
-        "id": "5b3831da1b35bb1d",
+        "id": "d608a4a32e0df080",
         "type": "group",
-        "z": "acde727d4cb42aaa",
+        "z": "60b5d8044cd240a3",
         "name": "Marstek master control switch",
         "style": {
             "label": true
         },
         "nodes": [
-            "b9f84cc9f5a92c37",
-            "db8935b06e0974bc",
-            "ce0d5547e473555e",
-            "64dc39c70599dfc4",
-            "8b5ef482f35ef9c0"
+            "b49db4d0a798f164",
+            "5321fe5ab7f757a6",
+            "3cc99e704b42536a",
+            "052a65658a9d42a7",
+            "880b4bd707f6cd0b"
         ],
         "x": 34,
         "y": 19,
@@ -28,21 +28,21 @@
         "h": 382
     },
     {
-        "id": "8b5ef482f35ef9c0",
+        "id": "880b4bd707f6cd0b",
         "type": "group",
-        "z": "acde727d4cb42aaa",
-        "g": "5b3831da1b35bb1d",
+        "z": "60b5d8044cd240a3",
+        "g": "d608a4a32e0df080",
         "name": "Loop",
         "style": {
             "label": true
         },
         "nodes": [
-            "964d538dd74d6c05",
-            "0a5e50316b0d2b70",
-            "9875fb4be6ce951f",
-            "3141628fc4063a26",
-            "9f47be1a4b1c355b",
-            "06cec7476db26e79"
+            "1457af64557f3041",
+            "b3a11a0e32755bcc",
+            "0d5735b73237bcd7",
+            "dacfd8968c7ae3a0",
+            "bc51a1a250c21426",
+            "9d1fca88cd539df4"
         ],
         "x": 414,
         "y": 99,
@@ -50,10 +50,10 @@
         "h": 222
     },
     {
-        "id": "b9f84cc9f5a92c37",
+        "id": "b49db4d0a798f164",
         "type": "api-current-state",
-        "z": "acde727d4cb42aaa",
-        "g": "5b3831da1b35bb1d",
+        "z": "60b5d8044cd240a3",
+        "g": "d608a4a32e0df080",
         "name": "Your battery count",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -96,15 +96,15 @@
         "y": 60,
         "wires": [
             [
-                "db8935b06e0974bc"
+                "5321fe5ab7f757a6"
             ]
         ]
     },
     {
-        "id": "964d538dd74d6c05",
+        "id": "1457af64557f3041",
         "type": "function",
-        "z": "acde727d4cb42aaa",
-        "g": "8b5ef482f35ef9c0",
+        "z": "60b5d8044cd240a3",
+        "g": "880b4bd707f6cd0b",
         "name": "Set RS485 and Work Modes",
         "func": "// array for output \nlet outputArray = [];\n\n// battery to target\nconst target = `marstek_m${msg.battery_index}`;\n\n// Set | work mode\nconst workModeAction = {\n    \"action\": \"select.select_option\",\n    \"target\": {\n        \"entity_id\": [`select.${target}_user_work_mode`]\n    },\n    \"data\": {\n         \"option\": String(msg.work_mode)\n    }\n};\n// Add to output array. Set null for no action.\noutputArray.push(msg.work_mode ? { payload: workModeAction, topic:\"user_work_mode\"}: null);\n\n// Set | rs485\nconst rs485Action = {\n    \"action\": \"select.select_option\",\n    \"target\": {\n        \"entity_id\": [`select.${target}_rs485_control_mode`]\n    },\n    \"data\": {\n         \"option\": String(msg.rs485)\n    }\n};\n// Add to output array. Set null for no action.\noutputArray.push(msg.rs485 ? { payload: rs485Action, topic: \"rs485_control_mode\" } : null);\n\n// Store calls in msg to allow checking of loop results\nmsg.loop_result = { target, workModeAction, rs485Action };\n\n// Return msg as third output\noutputArray.push(msg);\n\n// Outputs\nreturn outputArray;",
         "outputs": 3,
@@ -117,21 +117,21 @@
         "y": 180,
         "wires": [
             [
-                "0a5e50316b0d2b70"
+                "b3a11a0e32755bcc"
             ],
             [
-                "9875fb4be6ce951f"
+                "0d5735b73237bcd7"
             ],
             [
-                "9f47be1a4b1c355b"
+                "bc51a1a250c21426"
             ]
         ]
     },
     {
-        "id": "db8935b06e0974bc",
+        "id": "5321fe5ab7f757a6",
         "type": "function",
-        "z": "acde727d4cb42aaa",
-        "g": "5b3831da1b35bb1d",
+        "z": "60b5d8044cd240a3",
+        "g": "d608a4a32e0df080",
         "name": "Loop start",
         "func": "// loop through the number of batteries set by the user\nmsg.battery_index = 1; // base-1\n\n// configurables\nlet workMode = null; // manual, anti-feed, ai, null = don't set or alter this setting\nlet rs485 = null;  // enable, disable, null = don't set or alter this setting\n\n// mode select\nswitch (msg.marstek_master_battery_mode) {\n    case \"Manual control\":\n        workMode = \"manual\";\n        rs485 = \"disable\";\n        break;\n    case \"Marstek control\":\n        // the user should select a work mode via the Marstek App or via select.marstek_mX_user_work_mode\n        rs485 = \"disable\";\n        break;\n    case \"Full control\":\n        rs485 = \"enable\";\n        break;\n    default:\n        node.status({fill:\"red\",shape:\"ring\",text:`Unhandled mode: ${msg.marstek_master_battery_mode}`});\n        return null; // stop flow\n}\n\n// Continue\nmsg.work_mode = workMode;\nmsg.rs485 = rs485;\nreturn msg;",
         "outputs": 1,
@@ -144,15 +144,15 @@
         "y": 180,
         "wires": [
             [
-                "964d538dd74d6c05"
+                "1457af64557f3041"
             ]
         ]
     },
     {
-        "id": "9f47be1a4b1c355b",
+        "id": "bc51a1a250c21426",
         "type": "function",
-        "z": "acde727d4cb42aaa",
-        "g": "8b5ef482f35ef9c0",
+        "z": "60b5d8044cd240a3",
+        "g": "880b4bd707f6cd0b",
         "name": "Loop step",
         "func": "// Step index down\nmsg.battery_index += 1;\n\n// Continue\nreturn msg;",
         "outputs": 1,
@@ -165,16 +165,16 @@
         "y": 240,
         "wires": [
             [
-                "3141628fc4063a26",
-                "06cec7476db26e79"
+                "dacfd8968c7ae3a0",
+                "9d1fca88cd539df4"
             ]
         ]
     },
     {
-        "id": "3141628fc4063a26",
+        "id": "dacfd8968c7ae3a0",
         "type": "switch",
-        "z": "acde727d4cb42aaa",
-        "g": "8b5ef482f35ef9c0",
+        "z": "60b5d8044cd240a3",
+        "g": "880b4bd707f6cd0b",
         "name": "Loop until",
         "property": "battery_index",
         "propertyType": "msg",
@@ -195,18 +195,18 @@
         "y": 240,
         "wires": [
             [
-                "964d538dd74d6c05"
+                "1457af64557f3041"
             ],
             [
-                "ce0d5547e473555e"
+                "3cc99e704b42536a"
             ]
         ]
     },
     {
-        "id": "0a5e50316b0d2b70",
+        "id": "b3a11a0e32755bcc",
         "type": "api-call-service",
-        "z": "acde727d4cb42aaa",
-        "g": "8b5ef482f35ef9c0",
+        "z": "60b5d8044cd240a3",
+        "g": "880b4bd707f6cd0b",
         "name": "Set work mode",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -233,10 +233,10 @@
         ]
     },
     {
-        "id": "9875fb4be6ce951f",
+        "id": "0d5735b73237bcd7",
         "type": "api-call-service",
-        "z": "acde727d4cb42aaa",
-        "g": "8b5ef482f35ef9c0",
+        "z": "60b5d8044cd240a3",
+        "g": "880b4bd707f6cd0b",
         "name": "Set RS485",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -263,10 +263,10 @@
         ]
     },
     {
-        "id": "06cec7476db26e79",
+        "id": "9d1fca88cd539df4",
         "type": "debug",
-        "z": "acde727d4cb42aaa",
-        "g": "8b5ef482f35ef9c0",
+        "z": "60b5d8044cd240a3",
+        "g": "880b4bd707f6cd0b",
         "name": "Loop result",
         "active": false,
         "tosidebar": true,
@@ -281,10 +281,10 @@
         "wires": []
     },
     {
-        "id": "ce0d5547e473555e",
+        "id": "3cc99e704b42536a",
         "type": "debug",
-        "z": "acde727d4cb42aaa",
-        "g": "5b3831da1b35bb1d",
+        "z": "60b5d8044cd240a3",
+        "g": "d608a4a32e0df080",
         "name": "Done",
         "active": true,
         "tosidebar": false,
@@ -299,10 +299,10 @@
         "wires": []
     },
     {
-        "id": "64dc39c70599dfc4",
+        "id": "052a65658a9d42a7",
         "type": "server-state-changed",
-        "z": "acde727d4cb42aaa",
-        "g": "5b3831da1b35bb1d",
+        "z": "60b5d8044cd240a3",
+        "g": "d608a4a32e0df080",
         "name": "Master control mode",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -359,7 +359,7 @@
         "y": 60,
         "wires": [
             [
-                "b9f84cc9f5a92c37"
+                "b49db4d0a798f164"
             ]
         ]
     },
@@ -378,11 +378,11 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "f464264ff0889d6b",
+        "id": "4600b0f7cd141a4d",
         "type": "global-config",
         "env": [],
         "modules": {
-            "node-red-contrib-home-assistant-websocket": "0.80.0"
+            "node-red-contrib-home-assistant-websocket": "0.80.3"
         }
     }
 ]

@@ -1,6 +1,6 @@
 [
     {
-        "id": "900dac71a5028dca",
+        "id": "f13f7130a1bda6e5",
         "type": "tab",
         "label": "Home Battery PID presets",
         "disabled": false,
@@ -8,21 +8,21 @@
         "env": []
     },
     {
-        "id": "e44a5d4c33f3cab1",
+        "id": "7079a558e93bec2b",
         "type": "group",
-        "z": "900dac71a5028dca",
+        "z": "f13f7130a1bda6e5",
         "name": "PID presets",
         "style": {
             "label": true
         },
         "nodes": [
-            "4ea9a477ecf0c446",
-            "25b5a08a5bf89ac0",
-            "8feaf80456317a3e",
-            "570ba6efb8eb8dc7",
-            "f91f14aa5a48bda6",
-            "6ef258c42572df05",
-            "54fa9aa06d0d9224"
+            "81f3b4928caf43d3",
+            "5c4059cc4c601488",
+            "e8f07307252629ab",
+            "8b2d473346c90dd3",
+            "995a5b9d3081cc07",
+            "212a37e25ff47b65",
+            "e7afca1d4d663337"
         ],
         "x": 34,
         "y": 19,
@@ -30,10 +30,10 @@
         "h": 242
     },
     {
-        "id": "4ea9a477ecf0c446",
+        "id": "81f3b4928caf43d3",
         "type": "server-state-changed",
-        "z": "900dac71a5028dca",
-        "g": "e44a5d4c33f3cab1",
+        "z": "f13f7130a1bda6e5",
+        "g": "7079a558e93bec2b",
         "name": "PID preset selected",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -84,15 +84,15 @@
         "y": 100,
         "wires": [
             [
-                "f91f14aa5a48bda6"
+                "995a5b9d3081cc07"
             ]
         ]
     },
     {
-        "id": "25b5a08a5bf89ac0",
+        "id": "5c4059cc4c601488",
         "type": "api-call-service",
-        "z": "900dac71a5028dca",
-        "g": "e44a5d4c33f3cab1",
+        "z": "f13f7130a1bda6e5",
+        "g": "7079a558e93bec2b",
         "name": "Kp",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -121,10 +121,10 @@
         ]
     },
     {
-        "id": "8feaf80456317a3e",
+        "id": "e8f07307252629ab",
         "type": "api-call-service",
-        "z": "900dac71a5028dca",
-        "g": "e44a5d4c33f3cab1",
+        "z": "f13f7130a1bda6e5",
+        "g": "7079a558e93bec2b",
         "name": "Ki",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -153,10 +153,10 @@
         ]
     },
     {
-        "id": "570ba6efb8eb8dc7",
+        "id": "8b2d473346c90dd3",
         "type": "api-call-service",
-        "z": "900dac71a5028dca",
-        "g": "e44a5d4c33f3cab1",
+        "z": "f13f7130a1bda6e5",
+        "g": "7079a558e93bec2b",
         "name": "Kd",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -185,10 +185,10 @@
         ]
     },
     {
-        "id": "f91f14aa5a48bda6",
+        "id": "995a5b9d3081cc07",
         "type": "function",
-        "z": "900dac71a5028dca",
-        "g": "e44a5d4c33f3cab1",
+        "z": "f13f7130a1bda6e5",
+        "g": "7079a558e93bec2b",
         "name": "Presets",
         "func": "// See: house_battery_control.yaml > input_select: > house_battery_control_pid_presets\nconst preset = RED.util.getMessageProperty(msg,\"payload\");\nnode.status({fill:\"green\",shape:\"dot\",text:`${preset}`});\n\n\n// Default values\nlet Kp = 0; // Proportional gain\nlet Ki = 0; // Integral gain\nlet Kd = 0; // Differentiating gain\nlet Si = 0; // % Input smoothing (a Low pass moving average filter)\nlet So = 0; // % Output smoothing (a Low pass moving average filter)\n\nswitch (preset) {\n    // For people who have unstable systems with every other preset\n    case \"Very safe\":\n        Kp = 0.1;\n        Ki = 0.1;\n        Si = 0; // without Kd, this is preferred to be zero.\n        So = 10; // %\n        break;\n    // Good starting point for most\n    case \"Safe\":\n        Kp = 0.3;\n        Ki = 0.3;\n        Kd = 0.1;\n        Si = 20; // %\n        So = 0; // %\n        break;\n    // Gitcodebob's October 2025 settings for 3.2kWp PV and 5kW battery transformer power\n    case \"Regular\":\n        Kp = 0.3;\n        Ki = 0.4;\n        Kd = 0.8;\n        Si = 50; // % This high amount of filtering allows the stronger Kd\n        So = 10; // %\n        break;\n    default:\n        // Don't change values\n        return null;\n}\n\n// Prepare for three outputs\nreturn [\n    { \"payload\": Kp },\n    { \"payload\": Ki },\n    { \"payload\": Kd },\n    { \"payload\": Si },\n    { \"payload\": So }\n];",
         "outputs": 5,
@@ -201,27 +201,27 @@
         "y": 100,
         "wires": [
             [
-                "25b5a08a5bf89ac0"
+                "5c4059cc4c601488"
             ],
             [
-                "8feaf80456317a3e"
+                "e8f07307252629ab"
             ],
             [
-                "570ba6efb8eb8dc7"
+                "8b2d473346c90dd3"
             ],
             [
-                "6ef258c42572df05"
+                "212a37e25ff47b65"
             ],
             [
-                "54fa9aa06d0d9224"
+                "e7afca1d4d663337"
             ]
         ]
     },
     {
-        "id": "6ef258c42572df05",
+        "id": "212a37e25ff47b65",
         "type": "api-call-service",
-        "z": "900dac71a5028dca",
-        "g": "e44a5d4c33f3cab1",
+        "z": "f13f7130a1bda6e5",
+        "g": "7079a558e93bec2b",
         "name": "Input Smooth",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -250,10 +250,10 @@
         ]
     },
     {
-        "id": "54fa9aa06d0d9224",
+        "id": "e7afca1d4d663337",
         "type": "api-call-service",
-        "z": "900dac71a5028dca",
-        "g": "e44a5d4c33f3cab1",
+        "z": "f13f7130a1bda6e5",
+        "g": "7079a558e93bec2b",
         "name": "Output Smoothing",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -294,5 +294,13 @@
         "heartbeatInterval": "",
         "statusSeparator": "",
         "enableGlobalContextStore": false
+    },
+    {
+        "id": "e9c6fbca94b7acb9",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.80.3"
+        }
     }
 ]

@@ -1,1 +1,1565 @@
-[{"id":"059df42b6fb40c8f","type":"tab","label":"Strategy Timed v4.4.2","disabled":false,"info":"","env":[]},{"id":"54c94ebd89da685d","type":"group","z":"059df42b6fb40c8f","name":"Battery solutions","style":{"label":true},"nodes":["dfe2c6a1bea7855e","862400c6d21dd101"],"x":1214,"y":419,"w":192,"h":142},{"id":"47542b9ca6cbeca7","type":"group","z":"059df42b6fb40c8f","style":{"stroke":"#565656","stroke-opacity":"1","fill":"#3a3a3a","fill-opacity":"0.5","label":true,"label-position":"nw","color":"#cccccc"},"nodes":["2526333e20dd12a7","1454735410b05248","6db1379591bfe759"],"x":24,"y":79,"w":192,"h":162},{"id":"9c4e09f921f03854","type":"group","z":"059df42b6fb40c8f","style":{"stroke":"#565656","stroke-opacity":"1","fill":"#3a3a3a","fill-opacity":"0.5","label":true,"label-position":"nw","color":"#cccccc"},"nodes":["fb150113a4c1de3c","3a41d48c81926976","2d7ba70c066363c0"],"x":454,"y":79,"w":532,"h":82},{"id":"326723fc916894d1","type":"group","z":"059df42b6fb40c8f","style":{"stroke":"#565656","stroke-opacity":"1","fill":"#3a3a3a","fill-opacity":"0.5","label":true,"label-position":"nw","color":"#cccccc"},"nodes":["d0c66ec7e53841f8","1dd62f335fa0392d","3d6b81b908d110c9","95a2097fd2b90b20"],"x":254,"y":179,"w":732,"h":82},{"id":"c3bf08334b36b559","type":"group","z":"059df42b6fb40c8f","style":{"stroke":"#565656","stroke-opacity":"1","fill":"#3a3a3a","fill-opacity":"0.5","label":true,"label-position":"nw","color":"#cccccc"},"nodes":["781d2ddbdd72e2b7"],"x":254,"y":79,"w":192,"h":82},{"id":"c89689164328352d","type":"group","z":"059df42b6fb40c8f","name":"Determine sub-strategy based on time period","style":{"label":true},"nodes":["14c1279b689c4df0","19579bdfea370e1c","8fd2a175e4d213ba","7860ba68827463ce","6d165e26bcff9ed4","4aeef0d0ed5c67dd","3a62780ffe351c2d","9d5167ce7c43746e","27ee1e841ce5b2c0","d112ed1e5a183b13","a636b630f3a9c1fc","07ad1169b9613dc9","bc3d259ced5fde17","556dd462477b15fe","186805b4463f923c","0fb9198963763397","8e322b2e6f2aea1e","9897b7f3dc833704","f2df8dc9510bd4f2","6e56572d2180359c","b342ac6090a56194"],"x":254,"y":379,"w":692,"h":402},{"id":"87822a8a14e45fc9","type":"group","z":"059df42b6fb40c8f","name":"Execute sub-strategy","style":{"label":true},"nodes":["9ba25cf153586bc6","9180815f676d24ec"],"x":984,"y":419,"w":192,"h":142},{"id":"de9a63f0b8b3e254","type":"group","z":"059df42b6fb40c8f","style":{"stroke":"#565656","stroke-opacity":"1","fill":"#3a3a3a","fill-opacity":"0.5","label":true,"label-position":"nw","color":"#cccccc"},"nodes":["ae687ab1c8fcf60e","7a5edc228dc385b9","d7faeecdf09ca23f","1ffbe114697d433f"],"x":254,"y":279,"w":732,"h":82},{"id":"9f48c9fdc05ee4fb","type":"group","z":"059df42b6fb40c8f","name":"Unhandled exceptions","style":{"label":true,"stroke":"#d88a8a","color":"#d88a8a"},"nodes":["03e443615c7073c3","b984d39ccd73cd62","59f0d60f98e74381"],"x":24,"y":279,"w":182,"h":82},{"id":"2526333e20dd12a7","type":"link in","z":"059df42b6fb40c8f","g":"47542b9ca6cbeca7","name":"Timed","links":[],"x":110,"y":160,"wires":[["6db1379591bfe759"]],"l":true},{"id":"996cf4bf92e045e9","type":"comment","z":"059df42b6fb40c8f","name":"Home Battery Strategy","info":"The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon\u0027t modify other parts of the Start and End groups.\nThey handle the calling and returning for you.","x":130,"y":40,"wires":[]},{"id":"1454735410b05248","type":"comment","z":"059df42b6fb40c8f","g":"47542b9ca6cbeca7","name":"Start (readme)","info":"# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the \u003cselect\u003e option configured in your\nselect_input.house_battery_strategy\n\nconfigure select options in:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select \u0027AcmE example\u0027\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled \u0027AcmE example\u0027 (case sensitive).","x":120,"y":120,"wires":[]},{"id":"dfe2c6a1bea7855e","type":"link out","z":"059df42b6fb40c8f","g":"54c94ebd89da685d","name":"Return","mode":"return","links":[],"x":1255,"y":520,"wires":[]},{"id":"862400c6d21dd101","type":"comment","z":"059df42b6fb40c8f","g":"54c94ebd89da685d","name":"End (readme)","info":"Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ","x":1310,"y":460,"wires":[]},{"id":"fb150113a4c1de3c","type":"api-current-state","z":"059df42b6fb40c8f","g":"9c4e09f921f03854","name":"Period A start","server":"176d29a.6f648d6","version":3,"outputs":1,"halt_if":"","halt_if_type":"str","halt_if_compare":"is","entity_id":"input_datetime.house_battery_strategy_timed_period_a1","state_type":"str","blockInputOverrides":true,"outputProperties":[{"property":"payload","propertyType":"msg","value":"string","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"house_battery_strategy_timed_period_a1","propertyType":"msg","value":"string","valueType":"entityState"}],"for":"0","forType":"num","forUnits":"minutes","override_topic":false,"state_location":"payload","override_payload":"msg","entity_location":"data","override_data":"msg","x":550,"y":120,"wires":[["3a41d48c81926976"]]},{"id":"3a41d48c81926976","type":"api-current-state","z":"059df42b6fb40c8f","g":"9c4e09f921f03854","name":"Period A end","server":"176d29a.6f648d6","version":3,"outputs":1,"halt_if":"","halt_if_type":"str","halt_if_compare":"is","entity_id":"input_datetime.house_battery_strategy_timed_period_a2","state_type":"str","blockInputOverrides":true,"outputProperties":[{"property":"payload","propertyType":"msg","value":"string","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"house_battery_strategy_timed_period_a2","propertyType":"msg","value":"string","valueType":"entityState"}],"for":"0","forType":"num","forUnits":"minutes","override_topic":false,"state_location":"payload","override_payload":"msg","entity_location":"data","override_data":"msg","x":710,"y":120,"wires":[["2d7ba70c066363c0"]]},{"id":"d0c66ec7e53841f8","type":"api-current-state","z":"059df42b6fb40c8f","g":"326723fc916894d1","name":"Period B start","server":"176d29a.6f648d6","version":3,"outputs":1,"halt_if":"","halt_if_type":"str","halt_if_compare":"is","entity_id":"input_datetime.house_battery_strategy_timed_period_b1","state_type":"str","blockInputOverrides":true,"outputProperties":[{"property":"payload","propertyType":"msg","value":"string","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"house_battery_strategy_timed_period_b1","propertyType":"msg","value":"string","valueType":"entityState"}],"for":"0","forType":"num","forUnits":"minutes","override_topic":false,"state_location":"payload","override_payload":"msg","entity_location":"data","override_data":"msg","x":540,"y":220,"wires":[["1dd62f335fa0392d"]]},{"id":"1dd62f335fa0392d","type":"api-current-state","z":"059df42b6fb40c8f","g":"326723fc916894d1","name":"Period B end","server":"176d29a.6f648d6","version":3,"outputs":1,"halt_if":"","halt_if_type":"str","halt_if_compare":"is","entity_id":"input_datetime.house_battery_strategy_timed_period_b2","state_type":"str","blockInputOverrides":true,"outputProperties":[{"property":"payload","propertyType":"msg","value":"string","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"house_battery_strategy_timed_period_b2","propertyType":"msg","value":"string","valueType":"entityState"}],"for":"0","forType":"num","forUnits":"minutes","override_topic":false,"state_location":"payload","override_payload":"msg","entity_location":"data","override_data":"msg","x":710,"y":220,"wires":[["3d6b81b908d110c9"]]},{"id":"2d7ba70c066363c0","type":"api-current-state","z":"059df42b6fb40c8f","g":"9c4e09f921f03854","name":"Strat during A","server":"176d29a.6f648d6","version":3,"outputs":1,"halt_if":"","halt_if_type":"str","halt_if_compare":"is","entity_id":"input_select.house_battery_strategy_timed_strat_a","state_type":"str","blockInputOverrides":true,"outputProperties":[{"property":"payload","propertyType":"msg","value":"string","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"house_battery_strategy_timed_strat_a","propertyType":"msg","value":"string","valueType":"entityState"}],"for":"0","forType":"num","forUnits":"minutes","override_topic":false,"state_location":"payload","override_payload":"msg","entity_location":"data","override_data":"msg","x":880,"y":120,"wires":[["95a2097fd2b90b20"]]},{"id":"3d6b81b908d110c9","type":"api-current-state","z":"059df42b6fb40c8f","g":"326723fc916894d1","name":"Strat during B","server":"176d29a.6f648d6","version":3,"outputs":1,"halt_if":"","halt_if_type":"str","halt_if_compare":"is","entity_id":"input_select.house_battery_strategy_timed_strat_b","state_type":"str","blockInputOverrides":true,"outputProperties":[{"property":"payload","propertyType":"msg","value":"string","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"house_battery_strategy_timed_strat_b","propertyType":"msg","value":"string","valueType":"entityState"}],"for":"0","forType":"num","forUnits":"minutes","override_topic":false,"state_location":"payload","override_payload":"msg","entity_location":"data","override_data":"msg","x":880,"y":220,"wires":[["1ffbe114697d433f"]]},{"id":"95a2097fd2b90b20","type":"api-current-state","z":"059df42b6fb40c8f","g":"326723fc916894d1","name":"Has period B","server":"176d29a.6f648d6","version":3,"outputs":1,"halt_if":"","halt_if_type":"str","halt_if_compare":"is","entity_id":"input_boolean.house_battery_strategy_timed_has_period_b","state_type":"str","blockInputOverrides":true,"outputProperties":[{"property":"payload","propertyType":"msg","value":"string","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"house_battery_strategy_timed_has_period_b","propertyType":"msg","value":"string","valueType":"entityState"}],"for":"0","forType":"num","forUnits":"minutes","override_topic":false,"state_location":"payload","override_payload":"msg","entity_location":"data","override_data":"msg","x":350,"y":220,"wires":[["d0c66ec7e53841f8"]]},{"id":"01a134155e9375c8","type":"inject","z":"059df42b6fb40c8f","name":"Test","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"","payloadType":"date","x":330,"y":40,"wires":[["781d2ddbdd72e2b7"]]},{"id":"14c1279b689c4df0","type":"change","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"set Strat 0","rules":[{"t":"set","p":"timed_strategy","pt":"msg","to":"house_battery_strategy_timed_strat_0","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":630,"y":460,"wires":[["8fd2a175e4d213ba"]]},{"id":"19579bdfea370e1c","type":"change","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"set Strat A","rules":[{"t":"set","p":"timed_strategy","pt":"msg","to":"house_battery_strategy_timed_strat_a","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":630,"y":420,"wires":[["556dd462477b15fe","d112ed1e5a183b13"]]},{"id":"8fd2a175e4d213ba","type":"switch","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"has period B","property":"house_battery_strategy_timed_has_period_b","propertyType":"msg","rules":[{"t":"eq","v":"off","vt":"str"},{"t":"eq","v":"on","vt":"str"}],"checkall":"false","repair":false,"outputs":2,"x":630,"y":500,"wires":[["556dd462477b15fe","a636b630f3a9c1fc"],["4aeef0d0ed5c67dd"]]},{"id":"7860ba68827463ce","type":"function","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"config A","func":"msg.__config = {\n    startTime: RED.util.getMessageProperty(msg,\u0027house_battery_strategy_timed_period_a1\u0027),\n    endTime: RED.util.getMessageProperty(msg,\u0027house_battery_strategy_timed_period_a2\u0027),\n    startOffset: 0,\n    endOffset: 0\n}\n  \nreturn msg;","outputs":1,"timeout":0,"noerr":0,"initialize":"","finalize":"","libs":[],"x":340,"y":440,"wires":[["6d165e26bcff9ed4"]]},{"id":"6d165e26bcff9ed4","type":"time-range-switch","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"Period A","lat":"","lon":"","startTime":"00:00","endTime":"00:00","startOffset":0,"endOffset":0,"x":480,"y":440,"wires":[["19579bdfea370e1c"],["14c1279b689c4df0"]]},{"id":"4aeef0d0ed5c67dd","type":"function","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"config B","func":"msg.__config = {\n    startTime: RED.util.getMessageProperty(msg,\u0027house_battery_strategy_timed_period_b1\u0027),\n    endTime: RED.util.getMessageProperty(msg,\u0027house_battery_strategy_timed_period_b2\u0027),\n    startOffset: 0,\n    endOffset: 0\n}\n  \nreturn msg;","outputs":1,"timeout":0,"noerr":0,"initialize":"","finalize":"","libs":[],"x":340,"y":580,"wires":[["3a62780ffe351c2d"]]},{"id":"3a62780ffe351c2d","type":"time-range-switch","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"Period B","lat":"","lon":"","startTime":"00:00","endTime":"00:00","startOffset":0,"endOffset":0,"x":480,"y":580,"wires":[["9d5167ce7c43746e"],["27ee1e841ce5b2c0"]]},{"id":"9d5167ce7c43746e","type":"change","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"set Strat B","rules":[{"t":"set","p":"timed_strategy","pt":"msg","to":"house_battery_strategy_timed_strat_b","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":630,"y":560,"wires":[["556dd462477b15fe","07ad1169b9613dc9"]]},{"id":"27ee1e841ce5b2c0","type":"change","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"set Strat 0","rules":[{"t":"set","p":"timed_strategy","pt":"msg","to":"house_battery_strategy_timed_strat_0","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":630,"y":600,"wires":[["186805b4463f923c"]]},{"id":"781d2ddbdd72e2b7","type":"api-current-state","z":"059df42b6fb40c8f","g":"c3bf08334b36b559","name":"Default Strat","server":"176d29a.6f648d6","version":3,"outputs":1,"halt_if":"","halt_if_type":"str","halt_if_compare":"is","entity_id":"input_select.house_battery_strategy_timed_strat_0","state_type":"str","blockInputOverrides":true,"outputProperties":[{"property":"payload","propertyType":"msg","value":"string","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"house_battery_strategy_timed_strat_0","propertyType":"msg","value":"string","valueType":"entityState"}],"for":"0","forType":"num","forUnits":"minutes","override_topic":false,"state_location":"payload","override_payload":"msg","entity_location":"data","override_data":"msg","x":350,"y":120,"wires":[["fb150113a4c1de3c"]]},{"id":"9ba25cf153586bc6","type":"link call","z":"059df42b6fb40c8f","g":"87822a8a14e45fc9","name":"Sub strategy","links":[],"linkType":"dynamic","timeout":"30","x":1080,"y":520,"wires":[["dfe2c6a1bea7855e"]]},{"id":"556dd462477b15fe","type":"change","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"Select flow","rules":[{"t":"set","p":"target","pt":"msg","to":"timed_strategy","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":850,"y":520,"wires":[["9ba25cf153586bc6","9180815f676d24ec"]]},{"id":"d112ed1e5a183b13","type":"debug","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"A","active":true,"tosidebar":false,"console":false,"tostatus":true,"complete":"strategy","targetType":"msg","statusVal":"","statusType":"counter","x":830,"y":420,"wires":[]},{"id":"a636b630f3a9c1fc","type":"debug","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"0","active":true,"tosidebar":false,"console":false,"tostatus":true,"complete":"strategy","targetType":"msg","statusVal":"","statusType":"counter","x":830,"y":460,"wires":[]},{"id":"07ad1169b9613dc9","type":"debug","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"B","active":true,"tosidebar":false,"console":false,"tostatus":true,"complete":"strategy","targetType":"msg","statusVal":"","statusType":"counter","x":830,"y":560,"wires":[]},{"id":"bc3d259ced5fde17","type":"debug","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"0","active":true,"tosidebar":false,"console":false,"tostatus":true,"complete":"strategy","targetType":"msg","statusVal":"","statusType":"counter","x":830,"y":600,"wires":[]},{"id":"9180815f676d24ec","type":"debug","z":"059df42b6fb40c8f","g":"87822a8a14e45fc9","name":"Target","active":true,"tosidebar":false,"console":false,"tostatus":true,"complete":"target","targetType":"msg","statusVal":"target","statusType":"auto","x":1060,"y":460,"wires":[]},{"id":"ae687ab1c8fcf60e","type":"api-current-state","z":"059df42b6fb40c8f","g":"de9a63f0b8b3e254","name":"Period C start","server":"176d29a.6f648d6","version":3,"outputs":1,"halt_if":"","halt_if_type":"str","halt_if_compare":"is","entity_id":"input_datetime.house_battery_strategy_timed_period_c1","state_type":"str","blockInputOverrides":true,"outputProperties":[{"property":"payload","propertyType":"msg","value":"string","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"house_battery_strategy_timed_period_c1","propertyType":"msg","value":"string","valueType":"entityState"}],"for":"0","forType":"num","forUnits":"minutes","override_topic":false,"state_location":"payload","override_payload":"msg","entity_location":"data","override_data":"msg","x":540,"y":320,"wires":[["7a5edc228dc385b9"]]},{"id":"7a5edc228dc385b9","type":"api-current-state","z":"059df42b6fb40c8f","g":"de9a63f0b8b3e254","name":"Period C end","server":"176d29a.6f648d6","version":3,"outputs":1,"halt_if":"","halt_if_type":"str","halt_if_compare":"is","entity_id":"input_datetime.house_battery_strategy_timed_period_c2","state_type":"str","blockInputOverrides":true,"outputProperties":[{"property":"payload","propertyType":"msg","value":"string","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"house_battery_strategy_timed_period_c2","propertyType":"msg","value":"string","valueType":"entityState"}],"for":"0","forType":"num","forUnits":"minutes","override_topic":false,"state_location":"payload","override_payload":"msg","entity_location":"data","override_data":"msg","x":710,"y":320,"wires":[["d7faeecdf09ca23f"]]},{"id":"d7faeecdf09ca23f","type":"api-current-state","z":"059df42b6fb40c8f","g":"de9a63f0b8b3e254","name":"Strat during C","server":"176d29a.6f648d6","version":3,"outputs":1,"halt_if":"","halt_if_type":"str","halt_if_compare":"is","entity_id":"input_select.house_battery_strategy_timed_strat_c","state_type":"str","blockInputOverrides":true,"outputProperties":[{"property":"payload","propertyType":"msg","value":"string","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"house_battery_strategy_timed_strat_c","propertyType":"msg","value":"string","valueType":"entityState"}],"for":"0","forType":"num","forUnits":"minutes","override_topic":false,"state_location":"payload","override_payload":"msg","entity_location":"data","override_data":"msg","x":880,"y":320,"wires":[["7860ba68827463ce"]]},{"id":"1ffbe114697d433f","type":"api-current-state","z":"059df42b6fb40c8f","g":"de9a63f0b8b3e254","name":"Has period C","server":"176d29a.6f648d6","version":3,"outputs":1,"halt_if":"","halt_if_type":"str","halt_if_compare":"is","entity_id":"input_boolean.house_battery_strategy_timed_has_period_c","state_type":"str","blockInputOverrides":true,"outputProperties":[{"property":"payload","propertyType":"msg","value":"string","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"house_battery_strategy_timed_has_period_c","propertyType":"msg","value":"string","valueType":"entityState"}],"for":"0","forType":"num","forUnits":"minutes","override_topic":false,"state_location":"payload","override_payload":"msg","entity_location":"data","override_data":"msg","x":350,"y":320,"wires":[["ae687ab1c8fcf60e"]]},{"id":"186805b4463f923c","type":"switch","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"has period C","property":"house_battery_strategy_timed_has_period_c","propertyType":"msg","rules":[{"t":"eq","v":"off","vt":"str"},{"t":"eq","v":"on","vt":"str"}],"checkall":"false","repair":false,"outputs":2,"x":630,"y":640,"wires":[["556dd462477b15fe","bc3d259ced5fde17"],["8e322b2e6f2aea1e"]]},{"id":"0fb9198963763397","type":"debug","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"C","active":true,"tosidebar":false,"console":false,"tostatus":true,"complete":"strategy","targetType":"msg","statusVal":"","statusType":"counter","x":830,"y":700,"wires":[]},{"id":"8e322b2e6f2aea1e","type":"function","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"config C","func":"msg.__config = {\n    startTime: RED.util.getMessageProperty(msg,\u0027house_battery_strategy_timed_period_c1\u0027),\n    endTime: RED.util.getMessageProperty(msg,\u0027house_battery_strategy_timed_period_c2\u0027),\n    startOffset: 0,\n    endOffset: 0\n}\n  \nreturn msg;","outputs":1,"timeout":0,"noerr":0,"initialize":"","finalize":"","libs":[],"x":340,"y":720,"wires":[["9897b7f3dc833704"]]},{"id":"9897b7f3dc833704","type":"time-range-switch","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"Period C","lat":"","lon":"","startTime":"00:00","endTime":"00:00","startOffset":0,"endOffset":0,"x":480,"y":720,"wires":[["f2df8dc9510bd4f2"],["6e56572d2180359c"]]},{"id":"f2df8dc9510bd4f2","type":"change","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"set Strat C","rules":[{"t":"set","p":"timed_strategy","pt":"msg","to":"house_battery_strategy_timed_strat_c","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":630,"y":700,"wires":[["0fb9198963763397","556dd462477b15fe"]]},{"id":"6e56572d2180359c","type":"change","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"set Strat 0","rules":[{"t":"set","p":"timed_strategy","pt":"msg","to":"house_battery_strategy_timed_strat_0","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":630,"y":740,"wires":[["556dd462477b15fe","b342ac6090a56194"]]},{"id":"b342ac6090a56194","type":"debug","z":"059df42b6fb40c8f","g":"c89689164328352d","name":"0","active":true,"tosidebar":false,"console":false,"tostatus":true,"complete":"strategy","targetType":"msg","statusVal":"","statusType":"counter","x":830,"y":740,"wires":[]},{"id":"6db1379591bfe759","type":"change","z":"059df42b6fb40c8f","g":"47542b9ca6cbeca7","name":"Trace","rules":[{"t":"set","p":"strategy.trace","pt":"msg","to":"[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]","tot":"jsonata"}],"action":"","property":"","from":"","to":"","reg":false,"x":110,"y":200,"wires":[["781d2ddbdd72e2b7"]],"info":"Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"},{"id":"03e443615c7073c3","type":"catch","z":"059df42b6fb40c8f","g":"9f48c9fdc05ee4fb","name":"","scope":null,"uncaught":false,"x":65,"y":320,"wires":[["b984d39ccd73cd62"]],"l":false},{"id":"b984d39ccd73cd62","type":"function","z":"059df42b6fb40c8f","g":"9f48c9fdc05ee4fb","name":"Unhandled Exception","func":"const handle = global.get(\u0027unhandledException\u0027);\n\nhandle(this);\n\nreturn msg;","outputs":1,"timeout":0,"noerr":0,"initialize":"","finalize":"","libs":[],"x":115,"y":320,"wires":[["59f0d60f98e74381"]],"l":false},{"id":"59f0d60f98e74381","type":"link out","z":"059df42b6fb40c8f","g":"9f48c9fdc05ee4fb","name":"link out 8","mode":"return","links":[],"x":165,"y":320,"wires":[]},{"id":"176d29a.6f648d6","type":"server","name":"Home Assistant","addon":true,"rejectUnauthorizedCerts":true,"ha_boolean":"","connectionDelay":false,"cacheJson":false,"heartbeat":false,"heartbeatInterval":"","statusSeparator":"","enableGlobalContextStore":false},{"id":"af169a08cc56cdc4","type":"global-config","env":[],"modules":{"node-red-contrib-home-assistant-websocket":"0.80.3","node-red-contrib-time-range-switch":"1.2.0"}}]
+[
+    {
+        "id": "7ad69230540da69c",
+        "type": "tab",
+        "label": "Strategy Timed v4.5.0",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3e61db12ab9ec746",
+        "type": "group",
+        "z": "7ad69230540da69c",
+        "name": "Battery solutions",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "10b88d926e62fc43",
+            "8688c94fc23a39f1"
+        ],
+        "x": 1214,
+        "y": 419,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "625ddf51bcddd6d8",
+        "type": "group",
+        "z": "7ad69230540da69c",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "5cdb5b87b60a9596",
+            "b579274aa36f5869",
+            "fe5f9bd8fa4fb3b0"
+        ],
+        "x": 24,
+        "y": 79,
+        "w": 192,
+        "h": 162
+    },
+    {
+        "id": "07d17bb77341b573",
+        "type": "group",
+        "z": "7ad69230540da69c",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "862e1c9a9172113a",
+            "cb3f2e2562113494",
+            "59e01da2ebbe4d9f"
+        ],
+        "x": 454,
+        "y": 79,
+        "w": 532,
+        "h": 82
+    },
+    {
+        "id": "2a59c566702b8da8",
+        "type": "group",
+        "z": "7ad69230540da69c",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "f13e4350a5114372",
+            "e40da2421d8f9cb0",
+            "9a9f396a54144d0d",
+            "51b5976f23083ce7"
+        ],
+        "x": 254,
+        "y": 179,
+        "w": 732,
+        "h": 82
+    },
+    {
+        "id": "cbce06bb2136caf8",
+        "type": "group",
+        "z": "7ad69230540da69c",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "49a249eef6b43cf0"
+        ],
+        "x": 254,
+        "y": 79,
+        "w": 192,
+        "h": 82
+    },
+    {
+        "id": "48cafddd134e3402",
+        "type": "group",
+        "z": "7ad69230540da69c",
+        "name": "Determine sub-strategy based on time period",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "7e109254edf61448",
+            "92836e38d91ae339",
+            "256d297b98117c3a",
+            "8ee8798e914ce432",
+            "9bf779ebdde8d940",
+            "e90ac5f52dc12133",
+            "691cb14543314b20",
+            "071144d523359769",
+            "f0a1f9077fdd4dac",
+            "1fa906e4d8e1e062",
+            "70e0f6f67e622d45",
+            "0444818ae1eee4ab",
+            "b64e28ae6da3580c",
+            "1cea360de98de682",
+            "659992bc19a91722",
+            "4a2711dc9e3ed139",
+            "329803e521815281",
+            "9324ce3dab0d0e9d",
+            "9a70d7c7db693180",
+            "ddd2843d2e762a02",
+            "dce0914e11299c06"
+        ],
+        "x": 254,
+        "y": 379,
+        "w": 692,
+        "h": 402
+    },
+    {
+        "id": "444a65715eadb146",
+        "type": "group",
+        "z": "7ad69230540da69c",
+        "name": "Execute sub-strategy",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "452e1f477e8029a6",
+            "7b57378a60081d0b"
+        ],
+        "x": 984,
+        "y": 419,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "e562cc8cfb587524",
+        "type": "group",
+        "z": "7ad69230540da69c",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "36993a3e8c23f28a",
+            "697ac49e61a9ad5d",
+            "273bf45aa2185edd",
+            "005e021e311896c4"
+        ],
+        "x": 254,
+        "y": 279,
+        "w": 732,
+        "h": 82
+    },
+    {
+        "id": "bff3a9d3ddb4bec7",
+        "type": "group",
+        "z": "7ad69230540da69c",
+        "name": "Unhandled exceptions",
+        "style": {
+            "label": true,
+            "stroke": "#d88a8a",
+            "color": "#d88a8a"
+        },
+        "nodes": [
+            "c5f64e32389db2be",
+            "9e610234d28c499e",
+            "874cc6f3278f0ca2"
+        ],
+        "x": 24,
+        "y": 279,
+        "w": 182,
+        "h": 82
+    },
+    {
+        "id": "5cdb5b87b60a9596",
+        "type": "link in",
+        "z": "7ad69230540da69c",
+        "g": "625ddf51bcddd6d8",
+        "name": "Timed",
+        "links": [],
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "fe5f9bd8fa4fb3b0"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "08e555f55fdb3747",
+        "type": "comment",
+        "z": "7ad69230540da69c",
+        "name": "Home Battery Strategy",
+        "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
+        "x": 130,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b579274aa36f5869",
+        "type": "comment",
+        "z": "7ad69230540da69c",
+        "g": "625ddf51bcddd6d8",
+        "name": "Start (readme)",
+        "info": "# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the <select> option configured in your\nselect_input.house_battery_strategy\n\nconfigure select options in:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select 'AcmE example'\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
+        "x": 120,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "10b88d926e62fc43",
+        "type": "link out",
+        "z": "7ad69230540da69c",
+        "g": "3e61db12ab9ec746",
+        "name": "Return",
+        "mode": "return",
+        "links": [],
+        "x": 1255,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "8688c94fc23a39f1",
+        "type": "comment",
+        "z": "7ad69230540da69c",
+        "g": "3e61db12ab9ec746",
+        "name": "End (readme)",
+        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
+        "x": 1310,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "862e1c9a9172113a",
+        "type": "api-current-state",
+        "z": "7ad69230540da69c",
+        "g": "07d17bb77341b573",
+        "name": "Period A start",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.house_battery_strategy_timed_period_a1",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_period_a1",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 550,
+        "y": 120,
+        "wires": [
+            [
+                "cb3f2e2562113494"
+            ]
+        ]
+    },
+    {
+        "id": "cb3f2e2562113494",
+        "type": "api-current-state",
+        "z": "7ad69230540da69c",
+        "g": "07d17bb77341b573",
+        "name": "Period A end",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.house_battery_strategy_timed_period_a2",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_period_a2",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 710,
+        "y": 120,
+        "wires": [
+            [
+                "59e01da2ebbe4d9f"
+            ]
+        ]
+    },
+    {
+        "id": "f13e4350a5114372",
+        "type": "api-current-state",
+        "z": "7ad69230540da69c",
+        "g": "2a59c566702b8da8",
+        "name": "Period B start",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.house_battery_strategy_timed_period_b1",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_period_b1",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 540,
+        "y": 220,
+        "wires": [
+            [
+                "e40da2421d8f9cb0"
+            ]
+        ]
+    },
+    {
+        "id": "e40da2421d8f9cb0",
+        "type": "api-current-state",
+        "z": "7ad69230540da69c",
+        "g": "2a59c566702b8da8",
+        "name": "Period B end",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.house_battery_strategy_timed_period_b2",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_period_b2",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 710,
+        "y": 220,
+        "wires": [
+            [
+                "9a9f396a54144d0d"
+            ]
+        ]
+    },
+    {
+        "id": "59e01da2ebbe4d9f",
+        "type": "api-current-state",
+        "z": "7ad69230540da69c",
+        "g": "07d17bb77341b573",
+        "name": "Strat during A",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_timed_strat_a",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_strat_a",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 880,
+        "y": 120,
+        "wires": [
+            [
+                "51b5976f23083ce7"
+            ]
+        ]
+    },
+    {
+        "id": "9a9f396a54144d0d",
+        "type": "api-current-state",
+        "z": "7ad69230540da69c",
+        "g": "2a59c566702b8da8",
+        "name": "Strat during B",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_timed_strat_b",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_strat_b",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 880,
+        "y": 220,
+        "wires": [
+            [
+                "005e021e311896c4"
+            ]
+        ]
+    },
+    {
+        "id": "51b5976f23083ce7",
+        "type": "api-current-state",
+        "z": "7ad69230540da69c",
+        "g": "2a59c566702b8da8",
+        "name": "Has period B",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.house_battery_strategy_timed_has_period_b",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_has_period_b",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "f13e4350a5114372"
+            ]
+        ]
+    },
+    {
+        "id": "7e33ee0e7c5c5b84",
+        "type": "inject",
+        "z": "7ad69230540da69c",
+        "name": "Test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 330,
+        "y": 40,
+        "wires": [
+            [
+                "49a249eef6b43cf0"
+            ]
+        ]
+    },
+    {
+        "id": "7e109254edf61448",
+        "type": "change",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "set Strat 0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "timed_strategy",
+                "pt": "msg",
+                "to": "house_battery_strategy_timed_strat_0",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 460,
+        "wires": [
+            [
+                "256d297b98117c3a"
+            ]
+        ]
+    },
+    {
+        "id": "92836e38d91ae339",
+        "type": "change",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "set Strat A",
+        "rules": [
+            {
+                "t": "set",
+                "p": "timed_strategy",
+                "pt": "msg",
+                "to": "house_battery_strategy_timed_strat_a",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 420,
+        "wires": [
+            [
+                "1cea360de98de682",
+                "1fa906e4d8e1e062"
+            ]
+        ]
+    },
+    {
+        "id": "256d297b98117c3a",
+        "type": "switch",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "has period B",
+        "property": "house_battery_strategy_timed_has_period_b",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 500,
+        "wires": [
+            [
+                "1cea360de98de682",
+                "70e0f6f67e622d45"
+            ],
+            [
+                "e90ac5f52dc12133"
+            ]
+        ]
+    },
+    {
+        "id": "8ee8798e914ce432",
+        "type": "function",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "config A",
+        "func": "msg.__config = {\n    startTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_a1'),\n    endTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_a2'),\n    startOffset: 0,\n    endOffset: 0\n}\n  \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 440,
+        "wires": [
+            [
+                "9bf779ebdde8d940"
+            ]
+        ]
+    },
+    {
+        "id": "9bf779ebdde8d940",
+        "type": "time-range-switch",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "Period A",
+        "lat": "",
+        "lon": "",
+        "startTime": "00:00",
+        "endTime": "00:00",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 480,
+        "y": 440,
+        "wires": [
+            [
+                "92836e38d91ae339"
+            ],
+            [
+                "7e109254edf61448"
+            ]
+        ]
+    },
+    {
+        "id": "e90ac5f52dc12133",
+        "type": "function",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "config B",
+        "func": "msg.__config = {\n    startTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_b1'),\n    endTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_b2'),\n    startOffset: 0,\n    endOffset: 0\n}\n  \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 580,
+        "wires": [
+            [
+                "691cb14543314b20"
+            ]
+        ]
+    },
+    {
+        "id": "691cb14543314b20",
+        "type": "time-range-switch",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "Period B",
+        "lat": "",
+        "lon": "",
+        "startTime": "00:00",
+        "endTime": "00:00",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 480,
+        "y": 580,
+        "wires": [
+            [
+                "071144d523359769"
+            ],
+            [
+                "f0a1f9077fdd4dac"
+            ]
+        ]
+    },
+    {
+        "id": "071144d523359769",
+        "type": "change",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "set Strat B",
+        "rules": [
+            {
+                "t": "set",
+                "p": "timed_strategy",
+                "pt": "msg",
+                "to": "house_battery_strategy_timed_strat_b",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 560,
+        "wires": [
+            [
+                "1cea360de98de682",
+                "0444818ae1eee4ab"
+            ]
+        ]
+    },
+    {
+        "id": "f0a1f9077fdd4dac",
+        "type": "change",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "set Strat 0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "timed_strategy",
+                "pt": "msg",
+                "to": "house_battery_strategy_timed_strat_0",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 600,
+        "wires": [
+            [
+                "659992bc19a91722"
+            ]
+        ]
+    },
+    {
+        "id": "49a249eef6b43cf0",
+        "type": "api-current-state",
+        "z": "7ad69230540da69c",
+        "g": "cbce06bb2136caf8",
+        "name": "Default Strat",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_timed_strat_0",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_strat_0",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 350,
+        "y": 120,
+        "wires": [
+            [
+                "862e1c9a9172113a"
+            ]
+        ]
+    },
+    {
+        "id": "452e1f477e8029a6",
+        "type": "link call",
+        "z": "7ad69230540da69c",
+        "g": "444a65715eadb146",
+        "name": "Sub strategy",
+        "links": [],
+        "linkType": "dynamic",
+        "timeout": "30",
+        "x": 1080,
+        "y": 520,
+        "wires": [
+            [
+                "10b88d926e62fc43"
+            ]
+        ]
+    },
+    {
+        "id": "1cea360de98de682",
+        "type": "change",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "Select flow",
+        "rules": [
+            {
+                "t": "set",
+                "p": "target",
+                "pt": "msg",
+                "to": "timed_strategy",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 520,
+        "wires": [
+            [
+                "452e1f477e8029a6",
+                "7b57378a60081d0b"
+            ]
+        ]
+    },
+    {
+        "id": "1fa906e4d8e1e062",
+        "type": "debug",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "A",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "strategy",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 830,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "70e0f6f67e622d45",
+        "type": "debug",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "0",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "strategy",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 830,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "0444818ae1eee4ab",
+        "type": "debug",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "B",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "strategy",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 830,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "b64e28ae6da3580c",
+        "type": "debug",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "0",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "strategy",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 830,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "7b57378a60081d0b",
+        "type": "debug",
+        "z": "7ad69230540da69c",
+        "g": "444a65715eadb146",
+        "name": "Target",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "target",
+        "targetType": "msg",
+        "statusVal": "target",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "36993a3e8c23f28a",
+        "type": "api-current-state",
+        "z": "7ad69230540da69c",
+        "g": "e562cc8cfb587524",
+        "name": "Period C start",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.house_battery_strategy_timed_period_c1",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_period_c1",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 540,
+        "y": 320,
+        "wires": [
+            [
+                "697ac49e61a9ad5d"
+            ]
+        ]
+    },
+    {
+        "id": "697ac49e61a9ad5d",
+        "type": "api-current-state",
+        "z": "7ad69230540da69c",
+        "g": "e562cc8cfb587524",
+        "name": "Period C end",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_datetime.house_battery_strategy_timed_period_c2",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_period_c2",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 710,
+        "y": 320,
+        "wires": [
+            [
+                "273bf45aa2185edd"
+            ]
+        ]
+    },
+    {
+        "id": "273bf45aa2185edd",
+        "type": "api-current-state",
+        "z": "7ad69230540da69c",
+        "g": "e562cc8cfb587524",
+        "name": "Strat during C",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_timed_strat_c",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_strat_c",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 880,
+        "y": 320,
+        "wires": [
+            [
+                "8ee8798e914ce432"
+            ]
+        ]
+    },
+    {
+        "id": "005e021e311896c4",
+        "type": "api-current-state",
+        "z": "7ad69230540da69c",
+        "g": "e562cc8cfb587524",
+        "name": "Has period C",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.house_battery_strategy_timed_has_period_c",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy_timed_has_period_c",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 350,
+        "y": 320,
+        "wires": [
+            [
+                "36993a3e8c23f28a"
+            ]
+        ]
+    },
+    {
+        "id": "659992bc19a91722",
+        "type": "switch",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "has period C",
+        "property": "house_battery_strategy_timed_has_period_c",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 640,
+        "wires": [
+            [
+                "1cea360de98de682",
+                "b64e28ae6da3580c"
+            ],
+            [
+                "329803e521815281"
+            ]
+        ]
+    },
+    {
+        "id": "4a2711dc9e3ed139",
+        "type": "debug",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "C",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "strategy",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 830,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "329803e521815281",
+        "type": "function",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "config C",
+        "func": "msg.__config = {\n    startTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_c1'),\n    endTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_c2'),\n    startOffset: 0,\n    endOffset: 0\n}\n  \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 720,
+        "wires": [
+            [
+                "9324ce3dab0d0e9d"
+            ]
+        ]
+    },
+    {
+        "id": "9324ce3dab0d0e9d",
+        "type": "time-range-switch",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "Period C",
+        "lat": "",
+        "lon": "",
+        "startTime": "00:00",
+        "endTime": "00:00",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 480,
+        "y": 720,
+        "wires": [
+            [
+                "9a70d7c7db693180"
+            ],
+            [
+                "ddd2843d2e762a02"
+            ]
+        ]
+    },
+    {
+        "id": "9a70d7c7db693180",
+        "type": "change",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "set Strat C",
+        "rules": [
+            {
+                "t": "set",
+                "p": "timed_strategy",
+                "pt": "msg",
+                "to": "house_battery_strategy_timed_strat_c",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 700,
+        "wires": [
+            [
+                "4a2711dc9e3ed139",
+                "1cea360de98de682"
+            ]
+        ]
+    },
+    {
+        "id": "ddd2843d2e762a02",
+        "type": "change",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "set Strat 0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "timed_strategy",
+                "pt": "msg",
+                "to": "house_battery_strategy_timed_strat_0",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 740,
+        "wires": [
+            [
+                "1cea360de98de682",
+                "dce0914e11299c06"
+            ]
+        ]
+    },
+    {
+        "id": "dce0914e11299c06",
+        "type": "debug",
+        "z": "7ad69230540da69c",
+        "g": "48cafddd134e3402",
+        "name": "0",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "strategy",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 830,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "fe5f9bd8fa4fb3b0",
+        "type": "change",
+        "z": "7ad69230540da69c",
+        "g": "625ddf51bcddd6d8",
+        "name": "Trace",
+        "rules": [
+            {
+                "t": "set",
+                "p": "strategy.trace",
+                "pt": "msg",
+                "to": "[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "49a249eef6b43cf0"
+            ]
+        ],
+        "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
+    },
+    {
+        "id": "c5f64e32389db2be",
+        "type": "catch",
+        "z": "7ad69230540da69c",
+        "g": "bff3a9d3ddb4bec7",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 65,
+        "y": 320,
+        "wires": [
+            [
+                "9e610234d28c499e"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "9e610234d28c499e",
+        "type": "function",
+        "z": "7ad69230540da69c",
+        "g": "bff3a9d3ddb4bec7",
+        "name": "Unhandled Exception",
+        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 115,
+        "y": 320,
+        "wires": [
+            [
+                "874cc6f3278f0ca2"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "874cc6f3278f0ca2",
+        "type": "link out",
+        "z": "7ad69230540da69c",
+        "g": "bff3a9d3ddb4bec7",
+        "name": "link out 8",
+        "mode": "return",
+        "links": [],
+        "x": 165,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "",
+        "connectionDelay": false,
+        "cacheJson": false,
+        "heartbeat": false,
+        "heartbeatInterval": "",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
+    },
+    {
+        "id": "07e317def96d7fc5",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.80.3",
+            "node-red-contrib-time-range-switch": "1.2.0"
+        }
+    }
+]

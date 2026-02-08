@@ -1,6 +1,37 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.5.0
+- **Feature: Peak Shaving & grid limits**
+  * When Peak Shaving you utilize your batteries (when able) to reduce import/export peaks on your grid connections
+  * Ideal for 'capacity tariff' contracts (aka CAPTAR, capaciteitstarief)
+  * Or to reduce risk of blowing fuses when using multiple heavy appliances (EV, heat-pumps) under changing PV conditions
+  * Note: all strategies seamlessly allow peak shaving to take control. Excl. Full Stop, which takes precedence.
+  * Note: configurable grid power limits for both import and export thresholds
+  * Note: captar usually only requires _import_ limiting
+  * Disclaimer: peak shaving is not a safeguard or replacement for peak protection, overloads or fuses.
+
+- **Improvements: Power limit configuration**
+  * Refactored power limit settings from strategy-specific to global configuration
+  * Charge and Sell strategies now use centralized grid power limits
+  * The limits can now be found on the settings tab
+  * Onboarding now contains a step to review battery and grid limits 
+
+- **Fix: Removed deprecated Zonneplan workaround**
+  * Removed "Zonneplan (one)" data source option - no longer needed after sensor naming was fixed
+
+- **Fix: Missing icons**
+  * Added missing icons to various UI elements
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/01 start-flow.json`
+  - `node-red/02 strategy-charge.json`
+  - `node-red/02 strategy-dynamic.json`
+  - `node-red/02 strategy-self-consumption.json`
+  - `node-red/02 strategy-sell.json`
+
 ## 4.4.2
 - **Fix: Zonneplan integration sensor name change (fixes #76)**
   * Added support for renamed Zonneplan sensor via new datasource option 'Zonneplan (one)'
