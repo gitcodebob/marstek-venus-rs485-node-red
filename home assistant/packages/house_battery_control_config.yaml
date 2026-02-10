@@ -2,6 +2,11 @@
 # It should be included in the main configuration.yaml file as a `package` via `!include_dir_named` https://www.home-assistant.io/docs/configuration/packages/.
 # Use the values below as a `template` for your specific needs
 
+recorder:
+  exclude:
+    entities:
+    - sensor.l1_meter_power
+    
 template:
   - sensor:
       # Example: sensor for single-phase power meter (split into consumption and production)
@@ -9,7 +14,6 @@ template:
         unique_id: "l1_meter_power"
         unit_of_measurement: "W"
         device_class: "power"
-        state_class: "measurement"
         state: >
           {% set consumption = states('sensor.electricity_meter_power_consumption_phase_l1') | float(0) %}
           {% set production = states('sensor.electricity_meter_power_production_phase_l1') | float(0) %}
