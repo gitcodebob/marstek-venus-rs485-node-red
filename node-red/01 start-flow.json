@@ -1,6 +1,6 @@
 [
     {
-        "id": "4fa393a8555c4828",
+        "id": "50a4e17a9f336335",
         "type": "tab",
         "label": "Home Battery Start v4.5.0",
         "disabled": false,
@@ -8,18 +8,18 @@
         "env": []
     },
     {
-        "id": "93fae62e20994779",
+        "id": "5238c6958682d053",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Start",
         "style": {
             "label": true,
             "stroke": "#009ac7"
         },
         "nodes": [
-            "2505deeb7c0389c3",
-            "be507464a5e06a07",
-            "332b24a6ab254412"
+            "605d7bc6c8328f3a",
+            "df77d7a8c43beca1",
+            "940e52473a16d6c1"
         ],
         "x": 34,
         "y": 19,
@@ -27,49 +27,45 @@
         "h": 82
     },
     {
-        "id": "3f152b5eb7fdc5e7",
+        "id": "26895d85c82dde91",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Strategy selection",
         "style": {
             "label": true
         },
         "nodes": [
-            "3ef84ca5442c3d21",
-            "5441ac7b5b8758c7",
-            "7e6677a9dcd080a7",
-            "922a1cef748edc37",
-            "9d4d24638cc2f155",
-            "f8741348d2bc359e",
-            "279bb2c3e2e28ccd",
-            "7910760d285c9133",
-            "ded3614eb8f8ecfc",
-            "18d962635499cd83",
-            "e94c3a04e7a9d2a7",
-            "dcf9fc1d8f697cf5"
+            "f06446ad0b0a622d",
+            "f3fce76b063d839f",
+            "c0538092966e59a7",
+            "2502adec99c513ad",
+            "44640491b5d26543",
+            "be7ae9cdbb7d2ac3",
+            "4441773c20495756",
+            "8a5312bc5cf85003"
         ],
         "x": 34,
-        "y": 839,
-        "w": 952,
+        "y": 939,
+        "w": 852,
         "h": 162
     },
     {
-        "id": "1af821b1ea5f3ef7",
+        "id": "9f1b7e0ead0331df",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Get batteries information",
         "style": {
             "label": true
         },
         "nodes": [
-            "e1f1ad3a85578284",
-            "e9c4818dd3845ec3",
-            "a69b13f0e8f590fc",
-            "dc38c5a6418ae3ff",
-            "e68bfdd197a5c350",
-            "57405345ac4727b0",
-            "20bcb4ba6389e848",
-            "687efaf1f4258dc7"
+            "8e43afe0206fdd4b",
+            "2c5305a0b2b3a76b",
+            "eeeba772da490941",
+            "9349e7f7ae6dca61",
+            "7022c7cffd979729",
+            "a922881ae08fe9ea",
+            "e0ac64653a0bd464",
+            "a09accf67ca6ddd9"
         ],
         "x": 34,
         "y": 379,
@@ -77,18 +73,18 @@
         "h": 242
     },
     {
-        "id": "340bafa0a45c11a4",
+        "id": "d550daeddc6bd3af",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "On deploy and global logger",
         "style": {
             "label": true,
             "stroke": "#92d04f"
         },
         "nodes": [
-            "75e14ed9492b24ef",
-            "b20f56e99c307c83",
-            "98514c016fc8a965"
+            "1cca99bbd08c0b9e",
+            "e1beed9bbf904c5c",
+            "069e80ec5980efc9"
         ],
         "x": 1294,
         "y": 19,
@@ -96,45 +92,45 @@
         "h": 82
     },
     {
-        "id": "076f8a5285290364",
+        "id": "e578bc1366a974d4",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Set Batteries",
         "style": {
             "label": true
         },
         "nodes": [
-            "dd230fe338877151",
-            "a0a24786a2d38580",
-            "e87c50697ac2318d",
-            "5c028a0bbd76fd01",
-            "12ebffd319648313",
-            "96ad48c14fd7a70a",
-            "7b9267f46a10ea62"
+            "2826afb51b17017f",
+            "c8029e3eeafd8f23",
+            "b93af161d1d1e2f1",
+            "8bbc13c26b567c65",
+            "1bade2bb34434503",
+            "eebdfa5b298cfe74",
+            "01c76e560a0a50f6"
         ],
         "x": 34,
-        "y": 1019,
+        "y": 1119,
         "w": 858,
         "h": 342
     },
     {
-        "id": "797ba13c8801e128",
+        "id": "1432f3d36d6227f3",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Battery priority",
         "style": {
             "label": true
         },
         "nodes": [
-            "d91a338be1ac46dd",
-            "a421ae030b1b82ac",
-            "1598669edf482f28",
-            "405d544edd3db888",
-            "a58e4396fb0cefb1",
-            "f447e45f159e62d4",
-            "0ff37f8d68f03045",
-            "0f3f303d3ab2a4fe",
-            "60d677d2f52a6602"
+            "ec4dc29afec0c515",
+            "72b7e5167d8e725c",
+            "04a4a5d2f18ff6e1",
+            "30465ea2551f171e",
+            "9ecdd324aabba371",
+            "ee8fbe938dfd5b0f",
+            "d2f976b0a92cebe0",
+            "3883f43dc1ff61d5",
+            "a49f69320a2014ec"
         ],
         "x": 34,
         "y": 739,
@@ -142,15 +138,15 @@
         "h": 82
     },
     {
-        "id": "b72f950a5a15303b",
+        "id": "4fc0bfbe8a8126d4",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Calculate totals",
         "style": {
             "label": true
         },
         "nodes": [
-            "7794dddf7be36dde"
+            "937489266b802f6f"
         ],
         "x": 34,
         "y": 639,
@@ -158,24 +154,24 @@
         "h": 82
     },
     {
-        "id": "94586bd63d9e74c8",
+        "id": "819387ee9aced7d9",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Rate limiter",
         "style": {
             "label": true
         },
         "nodes": [
-            "41d76ae14998265f",
-            "0e576cfd8b40b5d7",
-            "0b87eb54ec2b196b",
-            "bc3ad3c1f8d26c15",
-            "14a4c310acda4d3a",
-            "0ea9d539e51a7498",
-            "1a307158f0039bfe",
-            "d76db26abf7e5d4e",
-            "469eb510a7ca5fde",
-            "530fa128a53df9f7"
+            "683e500f48b2728b",
+            "c78cbf3e23248dd8",
+            "149d3d350de92e5c",
+            "5e04455bc42d39c6",
+            "133fb56760e7ee7b",
+            "a519cb7f9e078e1e",
+            "faa61154730d7905",
+            "616289c13ee6716d",
+            "50f6f937e098e7a3",
+            "80e5462c6bfc306b"
         ],
         "x": 34,
         "y": 219,
@@ -183,39 +179,39 @@
         "h": 122
     },
     {
-        "id": "68622b9188a4774e",
+        "id": "73a67d7cd6637cb2",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Update UI: debug dashboard",
         "style": {
             "label": true,
             "stroke": "#3f5787"
         },
         "nodes": [
-            "ca2e1c21f5414412",
-            "921eb37a1805274c",
-            "a10b2556f2de7b9c",
-            "f6b19b12736d3aee",
-            "fc28859c417b3d92",
-            "3a5061dcfd2c4769"
+            "8b07ab8f26447a77",
+            "8766e262944d6c2c",
+            "d4bc7cbe97063b07",
+            "c393dab7fce22497",
+            "9a17fa0e52c23f41",
+            "4a602d8229b9900b"
         ],
         "x": 1234,
-        "y": 1219,
+        "y": 1319,
         "w": 632,
         "h": 202
     },
     {
-        "id": "68864485499fd6f8",
+        "id": "c6d3ba1fdf73770a",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Update UI: usable energy",
         "style": {
             "label": true,
             "stroke": "#3f5787"
         },
         "nodes": [
-            "e6c2ce093fe4c009",
-            "899aee48b22076d2"
+            "b7ad03520da20ba8",
+            "f0fc7a81a2a5173c"
         ],
         "x": 1474,
         "y": 639,
@@ -223,39 +219,39 @@
         "h": 82
     },
     {
-        "id": "eedac5512dc57f43",
+        "id": "3f024f2536a19b9f",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Update UI: active sub-strategy",
         "style": {
             "label": true,
             "stroke": "#3f5787"
         },
         "nodes": [
-            "8d68dd3ef8a623f2",
-            "ba48ad0adc83f9cd",
-            "b8bb329c246eeb80"
+            "84fda5edca5ec9a9",
+            "2447661efe785f69",
+            "5a8e58b665f9e650"
         ],
         "x": 1254,
-        "y": 919,
+        "y": 1019,
         "w": 632,
         "h": 82
     },
     {
-        "id": "f69c2270a138a539",
+        "id": "f855fb6228986402",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Insight",
         "style": {
             "label": true
         },
         "nodes": [
-            "ebe806032fc43afb",
-            "96de4440c0dd7d09",
-            "ae3652e02a66aea6",
-            "da006d734f34fd10",
-            "773341d4e688c315",
-            "5c91c55afb52368a"
+            "e465e35f5875d707",
+            "f58350f3ae00c778",
+            "e4d36d900e9e8c1b",
+            "1e910df6700a3d03",
+            "96b7b5ce54ab390a",
+            "4ced9cd49af7d1af"
         ],
         "x": 34,
         "y": 119,
@@ -263,17 +259,17 @@
         "h": 82
     },
     {
-        "id": "d64e789214dc9395",
+        "id": "87f92832d04bbd3b",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Log and Error handling",
         "style": {
             "stroke": "#ff3f3f",
             "label": true
         },
         "nodes": [
-            "cfaccbd752135261",
-            "19ddc15fdcd20ced"
+            "8236d40be5a10e29",
+            "1e89b13f44bc3598"
         ],
         "x": 1634,
         "y": 119,
@@ -281,9 +277,9 @@
         "h": 142
     },
     {
-        "id": "23fb2f7d6c019d9d",
+        "id": "6509013f878e097f",
         "type": "group",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "name": "Unhandled exceptions",
         "style": {
             "label": true,
@@ -291,9 +287,9 @@
             "color": "#d88a8a"
         },
         "nodes": [
-            "027e60b14741775b",
-            "7bd9fa57186d65ba",
-            "254d9ed65a1c6c6b"
+            "b6a77099141516d9",
+            "8708c74ca72c9a4b",
+            "03b477732f3bb88e"
         ],
         "x": 1704,
         "y": 279,
@@ -301,25 +297,44 @@
         "h": 82
     },
     {
-        "id": "e68bfdd197a5c350",
+        "id": "dc159e4c83f8b9a5",
         "type": "group",
-        "z": "4fa393a8555c4828",
-        "g": "1af821b1ea5f3ef7",
+        "z": "50a4e17a9f336335",
+        "name": "Peak shave settings",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e74aa9d4d9cde6ca",
+            "1ba4db3c4ca346d2",
+            "afe3e8d997dcacdf",
+            "ad52d85f8c74b184"
+        ],
+        "x": 34,
+        "y": 839,
+        "w": 752,
+        "h": 82
+    },
+    {
+        "id": "7022c7cffd979729",
+        "type": "group",
+        "z": "50a4e17a9f336335",
+        "g": "9f1b7e0ead0331df",
         "name": "Loop",
         "style": {
             "label": true
         },
         "nodes": [
-            "52661d97f41323f6",
-            "42a7f22f1d4a59bd",
-            "ad6ff4dc81be1579",
-            "6b118f1edf97619f",
-            "f4078a919e5ad58e",
-            "819c969a6f3c4c65",
-            "e946a0cfda958d21",
-            "94a84302163f81e9",
-            "e3f2b9967f49f6e0",
-            "6c8f75324ec67498"
+            "adda09ea14b2952e",
+            "34d1a06be2d403ff",
+            "f47be9050fc9f4c2",
+            "1a6e51ae22cfe831",
+            "9a4abe0176c2affa",
+            "a4d9dddb0d18ca53",
+            "f04bc904e921c375",
+            "15731d4e8d22c8cf",
+            "70221fcda8a269a2",
+            "10e2bdc21cd7559e"
         ],
         "x": 74,
         "y": 459,
@@ -327,45 +342,45 @@
         "h": 82
     },
     {
-        "id": "5c028a0bbd76fd01",
+        "id": "8bbc13c26b567c65",
         "type": "group",
-        "z": "4fa393a8555c4828",
-        "g": "076f8a5285290364",
+        "z": "50a4e17a9f336335",
+        "g": "e578bc1366a974d4",
         "name": "Loop",
         "style": {
             "label": true
         },
         "nodes": [
-            "a2f88b899af4afa3",
-            "46e3e69d3e7a227d",
-            "0f256f5a535853cb",
-            "7898ddee3b09f0f4",
-            "854ecdb616028dc2",
-            "bcd7a384a04cfd9e",
-            "590fa7f97c982ac0"
+            "feb3e51ca565f84f",
+            "35e13f154e0dfbe3",
+            "2d5258801858339b",
+            "067e7ece0de071a3",
+            "c289ff01d4bd08ca",
+            "5c3e1128129c6c14",
+            "9baec44d7594b5ff"
         ],
         "x": 314,
-        "y": 1059,
+        "y": 1159,
         "w": 552,
         "h": 222
     },
     {
-        "id": "2c8897bc1659f287",
+        "id": "9453db3462c3ec82",
         "type": "junction",
-        "z": "4fa393a8555c4828",
+        "z": "50a4e17a9f336335",
         "x": 40,
         "y": 360,
         "wires": [
             [
-                "dc38c5a6418ae3ff"
+                "9349e7f7ae6dca61"
             ]
         ]
     },
     {
-        "id": "2505deeb7c0389c3",
+        "id": "605d7bc6c8328f3a",
         "type": "server-state-changed",
-        "z": "4fa393a8555c4828",
-        "g": "93fae62e20994779",
+        "z": "50a4e17a9f336335",
+        "g": "5238c6958682d053",
         "name": "P1 meter",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -428,15 +443,15 @@
         "y": 60,
         "wires": [
             [
-                "be507464a5e06a07"
+                "df77d7a8c43beca1"
             ]
         ]
     },
     {
-        "id": "be507464a5e06a07",
+        "id": "df77d7a8c43beca1",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "93fae62e20994779",
+        "z": "50a4e17a9f336335",
+        "g": "5238c6958682d053",
         "name": "Master Control Mode",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -479,15 +494,15 @@
         "y": 60,
         "wires": [
             [
-                "332b24a6ab254412"
+                "940e52473a16d6c1"
             ]
         ]
     },
     {
-        "id": "332b24a6ab254412",
+        "id": "940e52473a16d6c1",
         "type": "switch",
-        "z": "4fa393a8555c4828",
-        "g": "93fae62e20994779",
+        "z": "50a4e17a9f336335",
+        "g": "5238c6958682d053",
         "name": "when in \"Full Control\" mode",
         "property": "payload",
         "propertyType": "msg",
@@ -505,106 +520,55 @@
         "y": 60,
         "wires": [
             [
-                "ebe806032fc43afb"
+                "e465e35f5875d707"
             ]
         ]
     },
     {
-        "id": "3ef84ca5442c3d21",
-        "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "3f152b5eb7fdc5e7",
-        "name": "Battery Strategy",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_select.house_battery_strategy",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "house_battery_strategy",
-                "propertyType": "flow",
-                "value": "string",
-                "valueType": "entityState"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 140,
-        "y": 880,
-        "wires": [
-            [
-                "279bb2c3e2e28ccd"
-            ]
-        ]
-    },
-    {
-        "id": "5441ac7b5b8758c7",
+        "id": "f06446ad0b0a622d",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "3f152b5eb7fdc5e7",
+        "z": "50a4e17a9f336335",
+        "g": "26895d85c82dde91",
         "name": "Strategy selection",
-        "func": "// Logger\nconst log = global.get(\"logger\");\n\n// INFLOW\nlet strategy = flow.get(\"house_battery_strategy\");\n\n// Configure msg.strategy object\nRED.util.setMessageProperty(msg,\"strategy.selected\",strategy,true);\nRED.util.setMessageProperty(msg,\"strategy.trace\",[],true);\nRED.util.setMessageProperty(msg,\"strategy.is_peakshaving\",false,true);\n\n// stop on error\nif(msg.batteries === undefined) {\n    log(this, \"Battery configuration undefined\", \"error\");\n    return null;\n}\nif(strategy === undefined) {\n    log(this, \"Battery strategy undefined\", \"error\");\n    return null;\n}\n\n// Peak shaving | settings\nconst hasImportLimit = RED.util.getMessageProperty(msg,\"grid_power_has_limit_import\") == \"on\" ? true : false; // on, off -> boolean\nconst hasExportLimit = RED.util.getMessageProperty(msg,\"grid_power_has_limit_export\") == \"on\" ? true : false; // on, off -> boolean\nconst importLimit = parseInt(RED.util.getMessageProperty(msg,\"grid_power_limit_import\")); // Watt\nconst exportLimit = parseInt(RED.util.getMessageProperty(msg,\"grid_power_limit_export\")); // Watt\nconst P1_power = parseInt(RED.util.getMessageProperty(msg,\"grid_power\")); // Watt\n// explain\nif(global.get(\"debug_mode\")){\n    if(hasImportLimit || hasExportLimit){\n        const importStr = hasImportLimit ? `import: ${importLimit} W, ` : ``;\n        const exportStr = hasExportLimit ? `export: ${exportLimit} W` : ``;\n        log(this, `Peak shaving set @ ${importStr}${exportStr}`);\n    } else {\n        log(this,`Peak shaving disabled: no grid power limits set`);\n    }\n}\n\n// Peak shaving | do we need to employ peak shaving?\nlet isPeakShaving = false;\nlet peakShavingTargetGridPower = 0; // target grid power when shaving\n\n// Peak shaving | logic for Import Peak Shaving\nif (hasImportLimit === true && P1_power > importLimit) {\n    isPeakShaving = true;\n    peakShavingTargetGridPower = importLimit;\n    log(this, `Peak shaving requested: import ${P1_power}W exceeds limit ${importLimit}W`, \"info\");\n}\n// Peak shaving | logic for Export Peak Shaving\nelse if (hasExportLimit === true && P1_power < (exportLimit * -1)) {\n    isPeakShaving = true;\n    peakShavingTargetGridPower = -exportLimit;\n    log(this, `Peak shaving requested: export ${P1_power}W exceeds limit -${exportLimit}W`, \"info\");\n}\n\n// EV Charge stop trigger | full stop trigger overrules ALL selected strategies\nconst stopTrigger = RED.util.getMessageProperty(msg,\"full_stop_trigger\");\nconst isEvCharging = (stopTrigger == \"on\" || stopTrigger === true || stopTrigger === 1) ? true : false;\n\n// Select strategy\n// default: user's input_select `house_battery_strategy`\nmsg.target = `${strategy}`;\n\n// Peak shave\nif(isPeakShaving && !isEvCharging) {\n    if(msg.target == 'Full stop'){\n        // Explain\n        log(this, `Peak shaving request: **denied**. **Full stop** strategy overrules peak shaving'`);\n    } else { // Peak shave\n        // used to show if the system is peak shaving\n        RED.util.setMessageProperty(msg,\"strategy.is_peakshaving\",true);\n        // change strategy to use PID\n        msg.target = \"Self-consumption\";\n        // set target grid consumption for the PID controller\n        msg.house_target_grid_consumption_in_w = peakShavingTargetGridPower * 0.95; // target % below user's threshold for responsive operation\n        // Explain\n        log(this, `**Peak shaving**, selected **self-consumption** for shave to ${peakShavingTargetGridPower}`);\n    }\n}\n// Full stop\nif (isEvCharging){\n    msg.target = 'Full stop';\n    // Explain\n    log(this, `**Full Stop** strategy selected, due to (EV) stop trigger: '${stopTrigger}'`);\n}\n\n// add execution marker\nRED.util.setMessageProperty(msg,\"strategy.execution_start\",Date.now()); // when do we start executing the selected strategy\n\n// OUTPUT\nnode.status({\n    fill: isPeakShaving ? \"yellow\" : \"grey\",\n    shape: isPeakShaving ? \"ring\" : \"dot\",\n    text: msg.target\n});\nreturn msg;",
+        "func": "// Logger\nconst logger = global.get(\"logger\");\n\n// INFLOW\nlet strategy = flow.get(\"house_battery_strategy\");\n\n// Configure msg.strategy object\nRED.util.setMessageProperty(msg,\"strategy.selected\",strategy,true); // by user\nRED.util.setMessageProperty(msg,\"strategy.trace\",[],true); // init trace: which flows have been executed\n\n// stop on error\nif(msg.batteries === undefined) {\n    logger(this, \"Battery configuration undefined\", \"error\");\n    return null;\n}\nif(strategy === undefined) {\n    logger(this, \"Battery strategy undefined\", \"error\");\n    return null;\n}\n\n// Default | select target flow based on the input_select `house_battery_strategy`\nmsg.target = `${strategy}`;\n\n// full stop trigger overrules ALL selected strategies\nconst stopTrigger = RED.util.getMessageProperty(msg,\"full_stop_trigger\");\nif(stopTrigger == \"on\" || stopTrigger === true || stopTrigger === 1) {\n    msg.target = 'Full stop';\n    // Explain\n    logger(this, `**Full Stop** strategy selected, due to (EV) stop trigger: '${stopTrigger}'`);\n}\n\n// add execution marker\nRED.util.setMessageProperty(msg,\"strategy.execution_start\",Date.now()); // when do we start executing the selected strategy\n\n// OUTPUT\nnode.status({fill:\"grey\",shape:\"dot\",text:msg.target});\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
-        "y": 880,
+        "x": 510,
+        "y": 980,
         "wires": [
             [
-                "922a1cef748edc37",
-                "7e6677a9dcd080a7"
+                "c0538092966e59a7",
+                "f3fce76b063d839f"
             ]
         ]
     },
     {
-        "id": "7e6677a9dcd080a7",
+        "id": "f3fce76b063d839f",
         "type": "link call",
-        "z": "4fa393a8555c4828",
-        "g": "3f152b5eb7fdc5e7",
+        "z": "50a4e17a9f336335",
+        "g": "26895d85c82dde91",
         "name": "Call \"Link in\" node",
         "links": [],
         "linkType": "dynamic",
         "timeout": "1.2",
-        "x": 550,
-        "y": 920,
+        "x": 510,
+        "y": 1020,
         "wires": [
             [
-                "9d4d24638cc2f155",
-                "f8741348d2bc359e"
+                "2502adec99c513ad",
+                "44640491b5d26543"
             ]
         ]
     },
     {
-        "id": "922a1cef748edc37",
+        "id": "c0538092966e59a7",
         "type": "debug",
-        "z": "4fa393a8555c4828",
-        "g": "3f152b5eb7fdc5e7",
+        "z": "50a4e17a9f336335",
+        "g": "26895d85c82dde91",
         "name": "Input msg",
         "active": false,
         "tosidebar": true,
@@ -614,15 +578,15 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
-        "y": 880,
+        "x": 720,
+        "y": 980,
         "wires": []
     },
     {
-        "id": "9d4d24638cc2f155",
+        "id": "2502adec99c513ad",
         "type": "debug",
-        "z": "4fa393a8555c4828",
-        "g": "3f152b5eb7fdc5e7",
+        "z": "50a4e17a9f336335",
+        "g": "26895d85c82dde91",
         "name": "Returned msg",
         "active": false,
         "tosidebar": true,
@@ -632,15 +596,15 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 840,
-        "y": 920,
+        "x": 740,
+        "y": 1020,
         "wires": []
     },
     {
-        "id": "f8741348d2bc359e",
+        "id": "44640491b5d26543",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "3f152b5eb7fdc5e7",
+        "z": "50a4e17a9f336335",
+        "g": "26895d85c82dde91",
         "name": "Strategy evaluation",
         "func": "// add execution marker\nlet execution_end = Date.now();\nRED.util.setMessageProperty(msg, \"strategy.execution_end\", execution_end);\n\n// retrieve execution markers\nlet execution_start = RED.util.getMessageProperty(msg,\"strategy.execution_start\");\n\n// report execution time\nif (execution_start !== undefined && execution_end !== undefined) {\n    // exec time\n    let execution_time = (execution_end - execution_start) / 1000; // seconds\n    // report\n    if (execution_time <= 0) node.status({ fill: \"red\", shape: \"dot\", text: `negative or zero timing` });\n    if (execution_time > 0) node.status({ fill: \"green\", shape: \"dot\", text: `${execution_time} sec`});\n    if (execution_time >= 0.7) node.status({ fill: \"yellow\", shape: \"dot\", text: `${execution_time} sec` });\n    if (execution_time >= 1) node.status({ fill: \"red\", shape: \"dot\", text: `${execution_time} sec` });\n\n} else {\n    node.status({fill:\"grey\",shape:\"dot\",text:\"timing error\"});\n}\n\nreturn msg;",
         "outputs": 1,
@@ -649,21 +613,21 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
-        "y": 960,
+        "x": 510,
+        "y": 1060,
         "wires": [
             [
-                "e87c50697ac2318d",
-                "7910760d285c9133",
-                "8d68dd3ef8a623f2"
+                "b93af161d1d1e2f1",
+                "be7ae9cdbb7d2ac3",
+                "84fda5edca5ec9a9"
             ]
         ]
     },
     {
-        "id": "e1f1ad3a85578284",
+        "id": "8e43afe0206fdd4b",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "1af821b1ea5f3ef7",
+        "z": "50a4e17a9f336335",
+        "g": "9f1b7e0ead0331df",
         "name": "Loop start",
         "func": "// loop through the number of batteries set by the user\nmsg.battery_index = 1; // base-1\n\n// Init an array for battery status and value information\nmsg.batteries = [];\n\n// Continue\nreturn msg;",
         "outputs": 1,
@@ -676,15 +640,15 @@
         "y": 420,
         "wires": [
             [
-                "52661d97f41323f6"
+                "adda09ea14b2952e"
             ]
         ]
     },
     {
-        "id": "57405345ac4727b0",
+        "id": "a922881ae08fe9ea",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "1af821b1ea5f3ef7",
+        "z": "50a4e17a9f336335",
+        "g": "9f1b7e0ead0331df",
         "name": "Mapping",
         "func": "// Map to batteries array\nmsg.batteries.push({\n    id: `M${msg.battery_index}`,\n    power: parseInt(msg.battery_power,10),\n    charging_max: parseInt(msg.max_charge_power,10),\n    discharging_max: parseInt(msg.max_discharge_power,10),\n    soc: parseInt(msg.battery_state_of_charge,10),\n    soc_max: parseInt(msg.charging_cutoff_capacity,10),\n    soc_min: parseInt(msg.discharging_cutoff_capacity,10),\n    inverter: String(msg.inverter_state),\n    energy: Number(msg.battery_remaining_capacity),\n    energy_max: Number(msg.battery_total_energy),\n    rs485: String(msg.rs485_control_mode)\n    });\n\n// Continue\nreturn msg;",
         "outputs": 1,
@@ -697,15 +661,15 @@
         "y": 580,
         "wires": [
             [
-                "20bcb4ba6389e848"
+                "e0ac64653a0bd464"
             ]
         ]
     },
     {
-        "id": "e9c4818dd3845ec3",
+        "id": "2c5305a0b2b3a76b",
         "type": "switch",
-        "z": "4fa393a8555c4828",
-        "g": "1af821b1ea5f3ef7",
+        "z": "50a4e17a9f336335",
+        "g": "9f1b7e0ead0331df",
         "name": "Loop until",
         "property": "battery_index",
         "propertyType": "msg",
@@ -726,18 +690,18 @@
         "y": 580,
         "wires": [
             [
-                "52661d97f41323f6"
+                "adda09ea14b2952e"
             ],
             [
-                "687efaf1f4258dc7"
+                "a09accf67ca6ddd9"
             ]
         ]
     },
     {
-        "id": "a69b13f0e8f590fc",
+        "id": "eeeba772da490941",
         "type": "debug",
-        "z": "4fa393a8555c4828",
-        "g": "1af821b1ea5f3ef7",
+        "z": "50a4e17a9f336335",
+        "g": "9f1b7e0ead0331df",
         "name": "Loop result",
         "active": false,
         "tosidebar": true,
@@ -752,10 +716,10 @@
         "wires": []
     },
     {
-        "id": "dc38c5a6418ae3ff",
+        "id": "9349e7f7ae6dca61",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "1af821b1ea5f3ef7",
+        "z": "50a4e17a9f336335",
+        "g": "9f1b7e0ead0331df",
         "name": "Your battery count",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -798,15 +762,15 @@
         "y": 420,
         "wires": [
             [
-                "e1f1ad3a85578284"
+                "8e43afe0206fdd4b"
             ]
         ]
     },
     {
-        "id": "52661d97f41323f6",
+        "id": "adda09ea14b2952e",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "e68bfdd197a5c350",
+        "z": "50a4e17a9f336335",
+        "g": "7022c7cffd979729",
         "name": "Control mode",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -849,15 +813,15 @@
         "y": 500,
         "wires": [
             [
-                "e946a0cfda958d21"
+                "f04bc904e921c375"
             ]
         ]
     },
     {
-        "id": "42a7f22f1d4a59bd",
+        "id": "34d1a06be2d403ff",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "e68bfdd197a5c350",
+        "z": "50a4e17a9f336335",
+        "g": "7022c7cffd979729",
         "name": "SoC",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -900,15 +864,15 @@
         "y": 500,
         "wires": [
             [
-                "e3f2b9967f49f6e0"
+                "70221fcda8a269a2"
             ]
         ]
     },
     {
-        "id": "ad6ff4dc81be1579",
+        "id": "f47be9050fc9f4c2",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "e68bfdd197a5c350",
+        "z": "50a4e17a9f336335",
+        "g": "7022c7cffd979729",
         "name": "Inverter state",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -951,15 +915,15 @@
         "y": 500,
         "wires": [
             [
-                "f4078a919e5ad58e"
+                "9a4abe0176c2affa"
             ]
         ]
     },
     {
-        "id": "6b118f1edf97619f",
+        "id": "1a6e51ae22cfe831",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "e68bfdd197a5c350",
+        "z": "50a4e17a9f336335",
+        "g": "7022c7cffd979729",
         "name": "Max discharge power",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1002,15 +966,15 @@
         "y": 500,
         "wires": [
             [
-                "42a7f22f1d4a59bd"
+                "34d1a06be2d403ff"
             ]
         ]
     },
     {
-        "id": "f4078a919e5ad58e",
+        "id": "9a4abe0176c2affa",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "e68bfdd197a5c350",
+        "z": "50a4e17a9f336335",
+        "g": "7022c7cffd979729",
         "name": "Energy",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1053,15 +1017,15 @@
         "y": 500,
         "wires": [
             [
-                "94a84302163f81e9"
+                "15731d4e8d22c8cf"
             ]
         ]
     },
     {
-        "id": "819c969a6f3c4c65",
+        "id": "a4d9dddb0d18ca53",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "e68bfdd197a5c350",
+        "z": "50a4e17a9f336335",
+        "g": "7022c7cffd979729",
         "name": "Max charge power",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1104,15 +1068,15 @@
         "y": 500,
         "wires": [
             [
-                "6b118f1edf97619f"
+                "1a6e51ae22cfe831"
             ]
         ]
     },
     {
-        "id": "e946a0cfda958d21",
+        "id": "f04bc904e921c375",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "e68bfdd197a5c350",
+        "z": "50a4e17a9f336335",
+        "g": "7022c7cffd979729",
         "name": "Power",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1155,15 +1119,15 @@
         "y": 500,
         "wires": [
             [
-                "819c969a6f3c4c65"
+                "a4d9dddb0d18ca53"
             ]
         ]
     },
     {
-        "id": "75e14ed9492b24ef",
+        "id": "1cca99bbd08c0b9e",
         "type": "api-call-service",
-        "z": "4fa393a8555c4828",
-        "g": "340bafa0a45c11a4",
+        "z": "50a4e17a9f336335",
+        "g": "d550daeddc6bd3af",
         "name": "Node-RED status: OK",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1192,10 +1156,10 @@
         ]
     },
     {
-        "id": "b20f56e99c307c83",
+        "id": "e1beed9bbf904c5c",
         "type": "inject",
-        "z": "4fa393a8555c4828",
-        "g": "340bafa0a45c11a4",
+        "z": "50a4e17a9f336335",
+        "g": "d550daeddc6bd3af",
         "name": "On deploy",
         "props": [
             {
@@ -1217,16 +1181,16 @@
         "y": 60,
         "wires": [
             [
-                "98514c016fc8a965",
-                "cfaccbd752135261"
+                "069e80ec5980efc9",
+                "8236d40be5a10e29"
             ]
         ]
     },
     {
-        "id": "a2f88b899af4afa3",
+        "id": "feb3e51ca565f84f",
         "type": "api-call-service",
-        "z": "4fa393a8555c4828",
-        "g": "5c028a0bbd76fd01",
+        "z": "50a4e17a9f336335",
+        "g": "8bbc13c26b567c65",
         "name": "Set mode (charge/discharge/stop)",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1247,16 +1211,16 @@
         "domain": "input_text",
         "service": "set_value",
         "x": 660,
-        "y": 1100,
+        "y": 1200,
         "wires": [
             []
         ]
     },
     {
-        "id": "46e3e69d3e7a227d",
+        "id": "35e13f154e0dfbe3",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "5c028a0bbd76fd01",
+        "z": "50a4e17a9f336335",
+        "g": "8bbc13c26b567c65",
         "name": "Set Batteries",
         "func": "// Logger\nconst log = global.get(\"logger\");\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// Output format and target\nlet outputArray = [];\nlet solution = msg.solutions[msg.battery_index-1]; // Base-0, thus -1\nif (solution === undefined) {\n    log(this,`Can't find solution for index ${msg.battery_index - 1} in ${msg.solutions}, aborting...`,\"error\");\n    return null;\n}\nlet target = `marstek_${solution.id.toLowerCase()}`;\n\n// Safety | Id exists\nlet battery = msg.batteries.find(battery => battery.id === solution.id);\nif (battery === undefined) {\n    log(`Can't set battery ${solution.id}, aborting...`,\"error\");\n    return null;\n}\n// Safety | Power limit\nsolution.power = Math.min(solution.power, solution.mode == CMODE.CHARGE ? battery.charging_max: battery.discharging_max);\n\n// Set | Mode\nconst serviceCallMode = {\n    \"action\": \"select.select_option\",\n    \"target\": {\n        \"entity_id\": [`select.${target}_forcible_charge_discharge`]\n    },\n    \"data\": {\n         \"option\": String(solution.mode) // forced charge mode (stop, charge, discharge)\n    }\n};\n// Add topic to allow correct 'on change' filtering\noutputArray.push({payload: serviceCallMode, topic:solution.id});\n\n// Set | Power\nconst serviceCallPower = {\n    \"action\": \"number.set_value\",\n    \"target\": {\n        \"entity_id\": [\n            `number.${target}_forcible_charge_power`,\n            `number.${target}_forcible_discharge_power`\n            ]\n    },\n    \"data\": {\n        \"value\": Number(solution.power)\n    } \n};\n// Add topic to allow correct 'on change' filtering\noutputArray.push({payload: serviceCallPower, topic:solution.id});\n\n// Store service calls in msg to allow checking of loop results\nmsg.loop_result = { target, serviceCallMode, serviceCallPower };\n\n// Return msg as third output\noutputArray.push(msg);\n\n// Explain\nlog(this,`${target} ${String(solution.mode)} @ ${Number(solution.power)} Watt`);\n\n// Output\nreturn outputArray;",
         "outputs": 3,
@@ -1266,16 +1230,16 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 1140,
+        "y": 1240,
         "wires": [
             [
-                "a2f88b899af4afa3"
+                "feb3e51ca565f84f"
             ],
             [
-                "590fa7f97c982ac0"
+                "9baec44d7594b5ff"
             ],
             [
-                "7898ddee3b09f0f4"
+                "067e7ece0de071a3"
             ]
         ],
         "inputLabels": [
@@ -1288,10 +1252,10 @@
         ]
     },
     {
-        "id": "dd230fe338877151",
+        "id": "2826afb51b17017f",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "076f8a5285290364",
+        "z": "50a4e17a9f336335",
+        "g": "e578bc1366a974d4",
         "name": "Loop start",
         "func": "// loop through the number of batteries set by the user\nmsg.battery_index = msg.battery_count;\n\n// Debug\nRED.util.setMessageProperty(msg, \"debug\", `## Cohort ${Date.now()} ##`);\n\n// Continue\nreturn msg;",
         "outputs": 1,
@@ -1301,18 +1265,18 @@
         "finalize": "",
         "libs": [],
         "x": 120,
-        "y": 1140,
+        "y": 1240,
         "wires": [
             [
-                "46e3e69d3e7a227d"
+                "35e13f154e0dfbe3"
             ]
         ]
     },
     {
-        "id": "0f256f5a535853cb",
+        "id": "2d5258801858339b",
         "type": "switch",
-        "z": "4fa393a8555c4828",
-        "g": "5c028a0bbd76fd01",
+        "z": "50a4e17a9f336335",
+        "g": "8bbc13c26b567c65",
         "name": "Loop until",
         "property": "battery_index",
         "propertyType": "msg",
@@ -1330,21 +1294,21 @@
         "repair": false,
         "outputs": 2,
         "x": 740,
-        "y": 1200,
+        "y": 1300,
         "wires": [
             [
-                "46e3e69d3e7a227d"
+                "35e13f154e0dfbe3"
             ],
             [
-                "12ebffd319648313"
+                "1bade2bb34434503"
             ]
         ]
     },
     {
-        "id": "7898ddee3b09f0f4",
+        "id": "067e7ece0de071a3",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "5c028a0bbd76fd01",
+        "z": "50a4e17a9f336335",
+        "g": "8bbc13c26b567c65",
         "name": "Loop step",
         "func": "// Step index down\nmsg.battery_index -= 1;\n\n// Continue\nreturn msg;",
         "outputs": 1,
@@ -1354,19 +1318,19 @@
         "finalize": "",
         "libs": [],
         "x": 580,
-        "y": 1200,
+        "y": 1300,
         "wires": [
             [
-                "0f256f5a535853cb",
-                "bcd7a384a04cfd9e"
+                "2d5258801858339b",
+                "5c3e1128129c6c14"
             ]
         ]
     },
     {
-        "id": "854ecdb616028dc2",
+        "id": "c289ff01d4bd08ca",
         "type": "api-call-service",
-        "z": "4fa393a8555c4828",
-        "g": "5c028a0bbd76fd01",
+        "z": "50a4e17a9f336335",
+        "g": "8bbc13c26b567c65",
         "name": "Set power (W)",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1387,16 +1351,16 @@
         "domain": "input_text",
         "service": "set_value",
         "x": 760,
-        "y": 1140,
+        "y": 1240,
         "wires": [
             []
         ]
     },
     {
-        "id": "a0a24786a2d38580",
+        "id": "c8029e3eeafd8f23",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "076f8a5285290364",
+        "z": "50a4e17a9f336335",
+        "g": "e578bc1366a974d4",
         "name": "Timing start",
         "func": "RED.util.setMessageProperty(msg,\"setbatteries.execution_start\",Date.now());\nRED.util.setMessageProperty(msg,\"setbatteries.marker\", `M1_${Date.now()}`);\nreturn msg;",
         "outputs": 1,
@@ -1406,18 +1370,18 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 1100,
+        "y": 1200,
         "wires": [
             [
-                "dd230fe338877151"
+                "2826afb51b17017f"
             ]
         ]
     },
     {
-        "id": "e87c50697ac2318d",
+        "id": "b93af161d1d1e2f1",
         "type": "switch",
-        "z": "4fa393a8555c4828",
-        "g": "076f8a5285290364",
+        "z": "50a4e17a9f336335",
+        "g": "e578bc1366a974d4",
         "name": "solutions present",
         "property": "solutions",
         "propertyType": "msg",
@@ -1437,21 +1401,21 @@
         "repair": false,
         "outputs": 2,
         "x": 150,
-        "y": 1060,
+        "y": 1160,
         "wires": [
             [
-                "7b9267f46a10ea62"
+                "01c76e560a0a50f6"
             ],
             [
-                "a0a24786a2d38580"
+                "c8029e3eeafd8f23"
             ]
         ]
     },
     {
-        "id": "12ebffd319648313",
+        "id": "1bade2bb34434503",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "076f8a5285290364",
+        "z": "50a4e17a9f336335",
+        "g": "e578bc1366a974d4",
         "name": "Timing end",
         "func": "let start = RED.util.getMessageProperty(msg,\"setbatteries.execution_start\");\nlet end = Date.now();\nlet delta = end - start;\nlet timingString = `${delta/1000} sec`;\n\nnode.status({fill:\"green\",shape:\"dot\",text: timingString});\nmsg.delta = delta;\nmsg.timing = timingString;\n\nreturn msg;",
         "outputs": 1,
@@ -1461,19 +1425,19 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 1320,
+        "y": 1420,
         "wires": [
             [
-                "96ad48c14fd7a70a",
-                "921eb37a1805274c"
+                "eebdfa5b298cfe74",
+                "8766e262944d6c2c"
             ]
         ]
     },
     {
-        "id": "bcd7a384a04cfd9e",
+        "id": "5c3e1128129c6c14",
         "type": "debug",
-        "z": "4fa393a8555c4828",
-        "g": "5c028a0bbd76fd01",
+        "z": "50a4e17a9f336335",
+        "g": "8bbc13c26b567c65",
         "name": "Step result",
         "active": false,
         "tosidebar": true,
@@ -1484,14 +1448,14 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 750,
-        "y": 1240,
+        "y": 1340,
         "wires": []
     },
     {
-        "id": "590fa7f97c982ac0",
+        "id": "9baec44d7594b5ff",
         "type": "rbe",
-        "z": "4fa393a8555c4828",
-        "g": "5c028a0bbd76fd01",
+        "z": "50a4e17a9f336335",
+        "g": "8bbc13c26b567c65",
         "name": "on change",
         "func": "rbe",
         "gap": "",
@@ -1501,18 +1465,18 @@
         "property": "payload",
         "topi": "topic",
         "x": 590,
-        "y": 1140,
+        "y": 1240,
         "wires": [
             [
-                "854ecdb616028dc2"
+                "c289ff01d4bd08ca"
             ]
         ]
     },
     {
-        "id": "96ad48c14fd7a70a",
+        "id": "eebdfa5b298cfe74",
         "type": "debug",
-        "z": "4fa393a8555c4828",
-        "g": "076f8a5285290364",
+        "z": "50a4e17a9f336335",
+        "g": "e578bc1366a974d4",
         "name": "Done",
         "active": true,
         "tosidebar": false,
@@ -1523,14 +1487,14 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 270,
-        "y": 1320,
+        "y": 1420,
         "wires": []
     },
     {
-        "id": "20bcb4ba6389e848",
+        "id": "e0ac64653a0bd464",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "1af821b1ea5f3ef7",
+        "z": "50a4e17a9f336335",
+        "g": "9f1b7e0ead0331df",
         "name": "Loop step",
         "func": "// Step index down\nmsg.battery_index += 1;\n\n// Continue\nreturn msg;",
         "outputs": 1,
@@ -1543,15 +1507,15 @@
         "y": 580,
         "wires": [
             [
-                "e9c4818dd3845ec3"
+                "2c5305a0b2b3a76b"
             ]
         ]
     },
     {
-        "id": "d91a338be1ac46dd",
+        "id": "ec4dc29afec0c515",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "797ba13c8801e128",
+        "z": "50a4e17a9f336335",
+        "g": "1432f3d36d6227f3",
         "name": "Update battery order",
         "func": "// Cycles battery priority as follows\n// M=1 [1,2,3,4] | M=2 [2,3,4,1] | M=3 [3,4,1,2] | etc.\n// With M the battery to prioritize\n\n// msg.batteries (original order)\nlet currentArray = msg.batteries;\n\n// Prioritize the Mth battery\nconst M = RED.util.getMessageProperty(msg,\"prioritize_battery\") || 1;\n\n// 1st battery has prio? Skip and continue without change\nif (M==1) return msg;\n\n// N equals the number of items to take from the front to the back of the array, effectivly rotating battery priority\nconst N = M - 1; // base-0 version of M\nnode.status({fill:\"blue\",shape:\"ring\",text:`N = ${N}`});\n\n// 1. Check if the array is valid and long enough\nif (!Array.isArray(currentArray) || currentArray.length < N) {\n    // Send an error or the original array back if the array is invalid/too short\n    node.error(`Array is not valid or shorter than ${N} items.`, msg);\n    return null;\n}\n\n// 2. Get the first N items (these will go to the back)\n// slice(0, N) retrieves elements from the start (index 0) up to index N (exclusive).\nlet firstN = currentArray.slice(0, N);\n\n// 3. Get the remaining items (these will stay at the front)\n// slice(N) retrieves elements from index N to the end of the array.\nlet remaining = currentArray.slice(N);\n\n// 4. Concatenate them: remaining items (front) + first N items (back)\nlet newArray = remaining.concat(firstN);\n\n// 5. Place the new array back into msg.batteries\nmsg.batteries = newArray;\n\nreturn msg;\n",
         "outputs": 1,
@@ -1564,15 +1528,15 @@
         "y": 780,
         "wires": [
             [
-                "3ef84ca5442c3d21"
+                "e74aa9d4d9cde6ca"
             ]
         ]
     },
     {
-        "id": "a421ae030b1b82ac",
+        "id": "72b7e5167d8e725c",
         "type": "inject",
-        "z": "4fa393a8555c4828",
-        "g": "797ba13c8801e128",
+        "z": "50a4e17a9f336335",
+        "g": "1432f3d36d6227f3",
         "name": "Every day 02:00",
         "props": [
             {
@@ -1594,15 +1558,15 @@
         "y": 780,
         "wires": [
             [
-                "0ff37f8d68f03045"
+                "d2f976b0a92cebe0"
             ]
         ]
     },
     {
-        "id": "1598669edf482f28",
+        "id": "04a4a5d2f18ff6e1",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "797ba13c8801e128",
+        "z": "50a4e17a9f336335",
+        "g": "1432f3d36d6227f3",
         "name": "Change priority",
         "func": "// Current prioritized battery is the Mth battery\nlet M = RED.util.getMessageProperty(msg,\"prioritize_battery\") || 1;\n\n// Prioritize the next battery\nM += 1;\n\n// If the next battery does not exist, prioritize the first again\nif(M > msg.battery_count) M = 1;\n\n// Pass along as payload\nmsg.payload = M;\n\n// Show which battery has priority\nnode.status({fill:\"green\",shape:\"dot\",text:`Prioritize battery #${M}`});\n\n// Done\nreturn msg;",
         "outputs": 1,
@@ -1615,15 +1579,15 @@
         "y": 780,
         "wires": [
             [
-                "f447e45f159e62d4"
+                "ee8fbe938dfd5b0f"
             ]
         ]
     },
     {
-        "id": "405d544edd3db888",
+        "id": "30465ea2551f171e",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "797ba13c8801e128",
+        "z": "50a4e17a9f336335",
+        "g": "1432f3d36d6227f3",
         "name": "Your battery count",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1666,15 +1630,15 @@
         "y": 780,
         "wires": [
             [
-                "1598669edf482f28"
+                "04a4a5d2f18ff6e1"
             ]
         ]
     },
     {
-        "id": "a58e4396fb0cefb1",
+        "id": "9ecdd324aabba371",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "797ba13c8801e128",
+        "z": "50a4e17a9f336335",
+        "g": "1432f3d36d6227f3",
         "name": "Prioritize battery M",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1717,15 +1681,15 @@
         "y": 780,
         "wires": [
             [
-                "d91a338be1ac46dd"
+                "ec4dc29afec0c515"
             ]
         ]
     },
     {
-        "id": "f447e45f159e62d4",
+        "id": "ee8fbe938dfd5b0f",
         "type": "api-call-service",
-        "z": "4fa393a8555c4828",
-        "g": "797ba13c8801e128",
+        "z": "50a4e17a9f336335",
+        "g": "1432f3d36d6227f3",
         "name": "Update prioritized battery",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1754,10 +1718,10 @@
         ]
     },
     {
-        "id": "0ff37f8d68f03045",
+        "id": "d2f976b0a92cebe0",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "797ba13c8801e128",
+        "z": "50a4e17a9f336335",
+        "g": "1432f3d36d6227f3",
         "name": "Desired interval",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1794,15 +1758,15 @@
         "y": 780,
         "wires": [
             [
-                "0f3f303d3ab2a4fe"
+                "3883f43dc1ff61d5"
             ]
         ]
     },
     {
-        "id": "0f3f303d3ab2a4fe",
+        "id": "3883f43dc1ff61d5",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "797ba13c8801e128",
+        "z": "50a4e17a9f336335",
+        "g": "1432f3d36d6227f3",
         "name": "Check interval ",
         "func": "// Manual priority, never pass\nif(msg.payload == \"Never\") {\n    node.status({fill:\"yellow\",shape:\"dot\",text:\"Auto cycle disabled\"});\n    return null;\n}\n\n// Daily interval, always pass\nif(msg.payload == \"Daily\") {\n    node.status({ fill: \"green\", shape: \"dot\", text: `Pass` });\n    return msg;\n}\n\n// Weekly interval\nconst today = new Date();\n// Get the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)\nconst dayOfWeek = today.getDay();\n\n// Check if the day is Sunday (which is represented by the number 0)\nif (dayOfWeek === 0) {\n    // If it is Sunday, pass\n    node.status({ fill: \"green\", shape: \"dot\", text: `Passed on Sunday` });\n    return msg;\n} else {\n    // If it is not Sunday, stop\n    node.status({ fill: \"yellow\", shape: \"dot\", text: `Halted, not Sunday` });\n    return null;\n}",
         "outputs": 1,
@@ -1815,15 +1779,15 @@
         "y": 780,
         "wires": [
             [
-                "60d677d2f52a6602"
+                "a49f69320a2014ec"
             ]
         ]
     },
     {
-        "id": "60d677d2f52a6602",
+        "id": "a49f69320a2014ec",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "797ba13c8801e128",
+        "z": "50a4e17a9f336335",
+        "g": "1432f3d36d6227f3",
         "name": "Current priority",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1866,15 +1830,15 @@
         "y": 780,
         "wires": [
             [
-                "405d544edd3db888"
+                "30465ea2551f171e"
             ]
         ]
     },
     {
-        "id": "7794dddf7be36dde",
+        "id": "937489266b802f6f",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "b72f950a5a15303b",
+        "z": "50a4e17a9f336335",
+        "g": "4fc0bfbe8a8126d4",
         "name": "Batteries (totals)",
         "func": "// batteries | calculate total and max. power delivered by batteries\nlet batteries = msg.batteries;\nlet batteries_total_power = 0;\nlet batteries_max_charging_power = 0;\nlet batteries_max_discharging_power = 0;\nlet batteries_available_energy = 0;\nlet batteries_max_energy = 0;\n\nbatteries.forEach(battery => {\n    batteries_total_power += Number(battery.power);\n    batteries_max_charging_power += Number(battery.charging_max);\n    batteries_max_discharging_power += Number(battery.discharging_max);\n    batteries_available_energy += Number(battery.energy - battery.energy_max*battery.soc_min/100);\n    batteries_max_energy += (Number(battery.energy_max*battery.soc_max) - Number(battery.energy_max*battery.soc_min))/100; // kWh\n});\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries_total_power\", batteries_total_power, true); // W\nRED.util.setMessageProperty(msg, \"batteries_max_charge_power\", batteries_max_charging_power,true); // W\nRED.util.setMessageProperty(msg, \"batteries_max_discharge_power\", batteries_max_discharging_power,true); // W\nRED.util.setMessageProperty(msg, \"batteries_available_energy\",batteries_available_energy,true); // kWh usable\nRED.util.setMessageProperty(msg, \"batteries_max_energy\", batteries_max_energy, true); // kWh usable\nreturn msg;",
         "outputs": 1,
@@ -1887,8 +1851,8 @@
         "y": 680,
         "wires": [
             [
-                "a58e4396fb0cefb1",
-                "899aee48b22076d2"
+                "9ecdd324aabba371",
+                "f0fc7a81a2a5173c"
             ]
         ],
         "inputLabels": [
@@ -1896,10 +1860,10 @@
         ]
     },
     {
-        "id": "94a84302163f81e9",
+        "id": "15731d4e8d22c8cf",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "e68bfdd197a5c350",
+        "z": "50a4e17a9f336335",
+        "g": "7022c7cffd979729",
         "name": "Energy max",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1942,15 +1906,15 @@
         "y": 500,
         "wires": [
             [
-                "57405345ac4727b0"
+                "a922881ae08fe9ea"
             ]
         ]
     },
     {
-        "id": "687efaf1f4258dc7",
+        "id": "a09accf67ca6ddd9",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "1af821b1ea5f3ef7",
+        "z": "50a4e17a9f336335",
+        "g": "9f1b7e0ead0331df",
         "name": "Loop end",
         "func": "// cleanup \ndelete msg.battery_index;\n\ndelete msg.battery_power;\ndelete msg.max_charge_power;\ndelete msg.max_discharge_power;\ndelete msg.battery_state_of_charge;\ndelete msg.charging_cutoff_capacity;\ndelete msg.discharging_cutoff_capacity;\ndelete msg.inverter_state;\ndelete msg.battery_remaining_capacity;\ndelete msg.battery_total_energy;\ndelete msg.rs485_control_mode;\n\nreturn msg;",
         "outputs": 1,
@@ -1963,16 +1927,16 @@
         "y": 580,
         "wires": [
             [
-                "a69b13f0e8f590fc",
-                "7794dddf7be36dde"
+                "eeeba772da490941",
+                "937489266b802f6f"
             ]
         ]
     },
     {
-        "id": "e6c2ce093fe4c009",
+        "id": "b7ad03520da20ba8",
         "type": "api-call-service",
-        "z": "4fa393a8555c4828",
-        "g": "68864485499fd6f8",
+        "z": "50a4e17a9f336335",
+        "g": "c6d3ba1fdf73770a",
         "name": "Set total usable energy",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -2001,61 +1965,10 @@
         ]
     },
     {
-        "id": "279bb2c3e2e28ccd",
-        "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "3f152b5eb7fdc5e7",
-        "name": "Full Stop Trigger",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "sensor.ev_is_charging",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "full_stop_trigger",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 320,
-        "y": 880,
-        "wires": [
-            [
-                "ded3614eb8f8ecfc"
-            ]
-        ]
-    },
-    {
-        "id": "899aee48b22076d2",
+        "id": "f0fc7a81a2a5173c",
         "type": "rbe",
-        "z": "4fa393a8555c4828",
-        "g": "68864485499fd6f8",
+        "z": "50a4e17a9f336335",
+        "g": "c6d3ba1fdf73770a",
         "name": "On change",
         "func": "rbe",
         "gap": "",
@@ -2068,15 +1981,15 @@
         "y": 680,
         "wires": [
             [
-                "e6c2ce093fe4c009"
+                "b7ad03520da20ba8"
             ]
         ]
     },
     {
-        "id": "41d76ae14998265f",
+        "id": "683e500f48b2728b",
         "type": "switch",
-        "z": "4fa393a8555c4828",
-        "g": "94586bd63d9e74c8",
+        "z": "50a4e17a9f336335",
+        "g": "819387ee9aced7d9",
         "name": "Select rate limit",
         "property": "p1_rate_limit.save_power",
         "propertyType": "msg",
@@ -2095,18 +2008,18 @@
         "y": 280,
         "wires": [
             [
-                "bc3ad3c1f8d26c15"
+                "5e04455bc42d39c6"
             ],
             [
-                "0b87eb54ec2b196b"
+                "149d3d350de92e5c"
             ]
         ]
     },
     {
-        "id": "0e576cfd8b40b5d7",
+        "id": "c78cbf3e23248dd8",
         "type": "delay",
-        "z": "4fa393a8555c4828",
-        "g": "94586bd63d9e74c8",
+        "z": "50a4e17a9f336335",
+        "g": "819387ee9aced7d9",
         "name": "Rate limit",
         "pauseType": "rate",
         "timeout": "5",
@@ -2124,10 +2037,10 @@
         "y": 280,
         "wires": [
             [
-                "1a307158f0039bfe"
+                "faa61154730d7905"
             ],
             [
-                "d76db26abf7e5d4e"
+                "616289c13ee6716d"
             ]
         ],
         "outputLabels": [
@@ -2136,10 +2049,10 @@
         ]
     },
     {
-        "id": "0b87eb54ec2b196b",
+        "id": "149d3d350de92e5c",
         "type": "change",
-        "z": "4fa393a8555c4828",
-        "g": "94586bd63d9e74c8",
+        "z": "50a4e17a9f336335",
+        "g": "819387ee9aced7d9",
         "name": "1 msg/s",
         "rules": [
             {
@@ -2159,15 +2072,15 @@
         "y": 300,
         "wires": [
             [
-                "0e576cfd8b40b5d7"
+                "c78cbf3e23248dd8"
             ]
         ]
     },
     {
-        "id": "bc3ad3c1f8d26c15",
+        "id": "5e04455bc42d39c6",
         "type": "change",
-        "z": "4fa393a8555c4828",
-        "g": "94586bd63d9e74c8",
+        "z": "50a4e17a9f336335",
+        "g": "819387ee9aced7d9",
         "name": "0.333 msg/s",
         "rules": [
             {
@@ -2187,15 +2100,15 @@
         "y": 260,
         "wires": [
             [
-                "0e576cfd8b40b5d7"
+                "c78cbf3e23248dd8"
             ]
         ]
     },
     {
-        "id": "14a4c310acda4d3a",
+        "id": "133fb56760e7ee7b",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "94586bd63d9e74c8",
+        "z": "50a4e17a9f336335",
+        "g": "819387ee9aced7d9",
         "name": "P1 change (20W or 2%)",
         "func": "// Switch between low and high rate limiting to decrease load and power consumption\n// --\n// The flow should always be rate limited by atleast the total execution time of strategies\n// The flow should not lock up indefinitly when grid_power is constant.\n// In the latter case, a more relaxed rate limit can help reduce system load.\n// Devs: don't set msg.rate directly. Use nodes, so novice users can easily read the flow.\n\n// Thresholds for change in power, before switching to high rate limit\nconst THRESHOLD_POWER = 20; // Watt change\nconst THRESHOLD_PERCENT = 2; // Percentage\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_power\", THRESHOLD_POWER,true);\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_percent\", THRESHOLD_PERCENT, true);\n\n// Get the previous value from this node's context\n// If it doesn't exist yet, initialize it as null\nlet previousValue = context.get('previousValue') || null;\nlet currentValue = Number(msg.grid_power);\n\n// Save the current value for the next time the node is triggered\ncontext.set('previousValue', currentValue);\n\n// Default rate limiting\nRED.util.setMessageProperty(msg,\"p1_rate_limit.save_power\",true);\n\n// Check if we have a valid history to compare with\nif (previousValue !== null) {\n    let powerChange = Math.abs(currentValue - previousValue);\n    let percentageChange = previousValue !== 0 ? Math.abs((powerChange / previousValue) * 100):0;\n\n    // Condition: Absolute difference > N Watt AND percentage change > M %\n    if (powerChange > THRESHOLD_POWER && percentageChange > THRESHOLD_PERCENT) {\n        // Enable faster refresh rate\n        RED.util.setMessageProperty(msg,\"p1_rate_limit.save_power\",false);\n    }\n}\n\nreturn msg;",
         "outputs": 1,
@@ -2208,15 +2121,15 @@
         "y": 280,
         "wires": [
             [
-                "41d76ae14998265f"
+                "683e500f48b2728b"
             ]
         ]
     },
     {
-        "id": "0ea9d539e51a7498",
+        "id": "a519cb7f9e078e1e",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "94586bd63d9e74c8",
+        "z": "50a4e17a9f336335",
+        "g": "819387ee9aced7d9",
         "name": "CPU power saved",
         "func": "// Logger\nconst logger = global.get(\"logger\");\n\n// Passed or blocked\nconst hasPassed = msg.payload; // 0 = blocked, 1 = passed\n\n// 1. Get evaluations (Total attempts)\nlet evaluations = (context.get(\"p1_rate_limit_evaluations\") || 0) + 1;\ncontext.set(\"p1_rate_limit_evaluations\", evaluations);\n\n// 2. Increment and get passes (Filtered/successful events)\nlet passes = (context.get(\"p1_rate_limit_passes\") || 0) + hasPassed;\ncontext.set(\"p1_rate_limit_passes\", passes);\n\n// 3a. Calculate percentage (Rate of passing vs total evaluations)\nlet percentage = evaluations > 0 ? (passes / evaluations) * 100 : 0;\n// 3b. Display the percentage rate of not-passing as a measure of efficiency gained\npercentage = 100 - percentage;\n\n// 4. Update Node Status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Saved: ${percentage.toFixed(2)}% (${evaluations-passes}/${evaluations})`\n});\n\n// 5. Explain\n// On block\nif(hasPassed === 0) {\n    if(msg.p1_rate_limit.save_power === true) {\n        // This is good\n        logger(this, `<font color=\"#009ac7\">Power saved</font> by P1 Rate Limiter, execution stopped.`); \n    } else {\n        // This is not so good. P1 updates are coming in fast.\n        logger(this, `<font color=\"orange\">Blocked</font> by P1 Rate Limiter. ${Number(1000/msg.rate).toFixed(2)} messages per second exceeded.`); \n    }\n    \n    // Send message onward to debug dashboard\n    return msg;\n}\n// No output on pass\nreturn null;",
         "outputs": 1,
@@ -2229,15 +2142,15 @@
         "y": 280,
         "wires": [
             [
-                "469eb510a7ca5fde"
+                "50f6f937e098e7a3"
             ]
         ]
     },
     {
-        "id": "7910760d285c9133",
+        "id": "be7ae9cdbb7d2ac3",
         "type": "debug",
-        "z": "4fa393a8555c4828",
-        "g": "3f152b5eb7fdc5e7",
+        "z": "50a4e17a9f336335",
+        "g": "26895d85c82dde91",
         "name": "Strategy evaluation",
         "active": false,
         "tosidebar": true,
@@ -2247,15 +2160,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 850,
-        "y": 960,
+        "x": 750,
+        "y": 1060,
         "wires": []
     },
     {
-        "id": "ba48ad0adc83f9cd",
+        "id": "2447661efe785f69",
         "type": "api-call-service",
-        "z": "4fa393a8555c4828",
-        "g": "eedac5512dc57f43",
+        "z": "50a4e17a9f336335",
+        "g": "3f024f2536a19b9f",
         "name": "Show on dashboard",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -2278,16 +2191,16 @@
         "domain": "input_text",
         "service": "set_value",
         "x": 1760,
-        "y": 960,
+        "y": 1060,
         "wires": [
             []
         ]
     },
     {
-        "id": "8d68dd3ef8a623f2",
+        "id": "84fda5edca5ec9a9",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "eedac5512dc57f43",
+        "z": "50a4e17a9f336335",
+        "g": "3f024f2536a19b9f",
         "name": "current UI value",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -2327,20 +2240,20 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1360,
-        "y": 960,
+        "y": 1060,
         "wires": [
             [
-                "b8bb329c246eeb80"
+                "5a8e58b665f9e650"
             ]
         ]
     },
     {
-        "id": "b8bb329c246eeb80",
+        "id": "5a8e58b665f9e650",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "eedac5512dc57f43",
+        "z": "50a4e17a9f336335",
+        "g": "3f024f2536a19b9f",
         "name": "on new UI value",
-        "func": "// Block when undefined (don't update UI)\nif(msg.ui_value_current === undefined) return null;\n\n// We show the 2nd strategy in the trace (if available) on the dashboard as the 'active sub-strategy'\nconst secondTraceEntry = msg.strategy?.trace?.[1];\nif (secondTraceEntry) {\n    // Handle case where 2nd flow is present\n    msg.ui_value_new =  secondTraceEntry.flow;\n} else {\n    // Handle case where the 2nd flow is missing\n    // Get a sensible alternative\n    msg.ui_value_new = msg.strategy?.selected || \"\"; // don't use unknown or unavailable as these are reserved HA keywords\n}\n\n// Improve human readability\nif(msg.ui_value_new == \"Self-consumption\" && secondTraceEntry?.flow_settings?.discharge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (charge only)\";\n}\nif(msg.ui_value_new == \"Self-consumption\" && secondTraceEntry?.flow_settings?.charge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (no charging)\";\n}\nif(msg.strategy?.is_peakshaving === true){\n    msg.ui_value_new = \"Peak shaving\";\n}\n\n// Node status for devs\nnode.status({fill:\"grey\",shape:\"dot\",text:`new: ${msg.ui_value_new}`});\n\n// Block when equal (don't update UI)\nif(msg.ui_value_current === msg.ui_value_new) return null;\n\n// Pass otherwise\nreturn msg;",
+        "func": "// Block when undefined (don't update UI)\nif(msg.ui_value_current === undefined) return null;\n\n// We show the 2nd strategy in the trace (if available) on the dashboard as the 'active sub-strategy'\nconst secondTraceEntry = msg.strategy?.trace?.[1];\nif (secondTraceEntry) {\n    // Handle case where 2nd flow is present\n    msg.ui_value_new =  secondTraceEntry.flow;\n} else {\n    // Handle case where the 2nd flow is missing\n    // Get a sensible alternative\n    msg.ui_value_new = msg.strategy?.selected || \"\"; // don't use unknown or unavailable as these are reserved HA keywords\n}\n\n// Improve human readability\nif(msg.ui_value_new == \"Self-consumption\" && secondTraceEntry?.flow_settings?.discharge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (charge only)\";\n}\nif(msg.ui_value_new == \"Self-consumption\" && secondTraceEntry?.flow_settings?.charge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (no charging)\";\n}\nif(msg.strategy?.is_peak_shaving === true){\n    msg.ui_value_new = \"Peak shaving\";\n}\n\n// Node status for devs\nnode.status({fill:\"grey\",shape:\"dot\",text:`new: ${msg.ui_value_new}`});\n\n// Block when equal (don't update UI)\nif(msg.ui_value_current === msg.ui_value_new) return null;\n\n// Pass otherwise\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2348,18 +2261,18 @@
         "finalize": "",
         "libs": [],
         "x": 1560,
-        "y": 960,
+        "y": 1060,
         "wires": [
             [
-                "ba48ad0adc83f9cd"
+                "2447661efe785f69"
             ]
         ]
     },
     {
-        "id": "ca2e1c21f5414412",
+        "id": "8b07ab8f26447a77",
         "type": "ha-fire-event",
-        "z": "4fa393a8555c4828",
-        "g": "68622b9188a4774e",
+        "z": "50a4e17a9f336335",
+        "g": "73a67d7cd6637cb2",
         "name": "Show on debug board",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -2367,16 +2280,16 @@
         "data": "{\t   \"trace\": $$.strategy.trace ? $$.strategy.trace : [],\t   \"start\": $$.strategy.execution_start ? $$.strategy.execution_start : 0,\t   \"end\": $$.strategy.execution_end ? $$.strategy.execution_end : 0,\t   \"log\": $$.log ? $$.log : []\t}",
         "dataType": "jsonata",
         "x": 1740,
-        "y": 1320,
+        "y": 1420,
         "wires": [
             []
         ]
     },
     {
-        "id": "ebe806032fc43afb",
+        "id": "e465e35f5875d707",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "f69c2270a138a539",
+        "z": "50a4e17a9f336335",
+        "g": "f855fb6228986402",
         "name": "Insight mode",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -2419,15 +2332,15 @@
         "y": 160,
         "wires": [
             [
-                "96de4440c0dd7d09"
+                "f58350f3ae00c778"
             ]
         ]
     },
     {
-        "id": "921eb37a1805274c",
+        "id": "8766e262944d6c2c",
         "type": "switch",
-        "z": "4fa393a8555c4828",
-        "g": "68622b9188a4774e",
+        "z": "50a4e17a9f336335",
+        "g": "73a67d7cd6637cb2",
         "name": "Debug mode?",
         "property": "debug_mode",
         "propertyType": "global",
@@ -2440,18 +2353,18 @@
         "repair": false,
         "outputs": 1,
         "x": 1540,
-        "y": 1320,
+        "y": 1420,
         "wires": [
             [
-                "ca2e1c21f5414412"
+                "8b07ab8f26447a77"
             ]
         ]
     },
     {
-        "id": "ae3652e02a66aea6",
+        "id": "e4d36d900e9e8c1b",
         "type": "server-state-changed",
-        "z": "4fa393a8555c4828",
-        "g": "f69c2270a138a539",
+        "z": "50a4e17a9f336335",
+        "g": "f855fb6228986402",
         "name": "Turned ON",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -2502,16 +2415,16 @@
         "y": 160,
         "wires": [
             [
-                "da006d734f34fd10"
+                "1e910df6700a3d03"
             ],
             []
         ]
     },
     {
-        "id": "da006d734f34fd10",
+        "id": "1e910df6700a3d03",
         "type": "trigger",
-        "z": "4fa393a8555c4828",
-        "g": "f69c2270a138a539",
+        "z": "50a4e17a9f336335",
+        "g": "f855fb6228986402",
         "name": "disable after 5 minutes",
         "op1": "",
         "op2": "off",
@@ -2529,15 +2442,15 @@
         "y": 160,
         "wires": [
             [
-                "773341d4e688c315"
+                "96b7b5ce54ab390a"
             ]
         ]
     },
     {
-        "id": "773341d4e688c315",
+        "id": "96b7b5ce54ab390a",
         "type": "api-call-service",
-        "z": "4fa393a8555c4828",
-        "g": "f69c2270a138a539",
+        "z": "50a4e17a9f336335",
+        "g": "f855fb6228986402",
         "name": "Turn insight OFF",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -2566,10 +2479,10 @@
         ]
     },
     {
-        "id": "98514c016fc8a965",
+        "id": "069e80ec5980efc9",
         "type": "delay",
-        "z": "4fa393a8555c4828",
-        "g": "340bafa0a45c11a4",
+        "z": "50a4e17a9f336335",
+        "g": "d550daeddc6bd3af",
         "name": "",
         "pauseType": "delay",
         "timeout": "2",
@@ -2587,15 +2500,15 @@
         "y": 60,
         "wires": [
             [
-                "75e14ed9492b24ef"
+                "1cca99bbd08c0b9e"
             ]
         ]
     },
     {
-        "id": "cfaccbd752135261",
+        "id": "8236d40be5a10e29",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "d64e789214dc9395",
+        "z": "50a4e17a9f336335",
+        "g": "87f92832d04bbd3b",
         "name": "Custom logger",
         "func": "/**\n * Custom Logger Function\n * * Provides centralized logging, node-status updates, and message tracing.\n * Specifically designed for Home Battery Control logic within Node-RED.\n * \n * Debug dashboard updating:\n * A msg needs to reach 'Strategy Evaluation' or be passed to the \"Show on debug board\" trigger node.\n * Errors are automatically passed to the \"Show on debug board\" trigger node.\n * \n * * @param {object} callingNode - The context of the calling node (pass 'this').\n * @param {string} text - The log message/explanation.\n * @param {string} level - Log level: 'log', 'warn', 'error', or 'info' (default: 'info').\n * \n * Note: anything above 'info' will also write to the Node-RED log files \n * \n * * @usage: \n * const log = global.get(\"logger\");\n * log(this, \"Charging cycle started\");\n */\nconst customLogger = (callingNode, text, level = 'info') => {\n    \n    // Log only when debug_mode is ON\n    const debug_mode = global.get(\"debug_mode\") || false;\n    if(debug_mode == false) return null;\n\n    // Max log elements to keep\n    const MAX_ELEMENTS = 100;\n\n    // Create the YYYY-MM-DD HH:MM:SS.mmm format\n    const now = new Date();\n    const timestamp = now.getHours().toString().padStart(2, '0') + \":\" +\n                now.getMinutes().toString().padStart(2, '0') + \":\" +\n                now.getSeconds().toString().padStart(2, '0') + \".\" +\n                now.getMilliseconds().toString().padStart(3, '0');\n\n    const formattedTimeLevel = `${timestamp} [${level.toLowerCase()}]`;\n    \n    // Get the name of the node or fallback to the ID\n    const nodeName = callingNode.__node__ ? callingNode.__node__.name || callingNode.__node__.id : undefined;\n    // Get the name of the Flow/Tab\n    const flowName = callingNode.env.get(\"NR_FLOW_NAME\") || \"Unknown flow\";\n    // Explain to the Home Battery Control user what is going on\n    const formattedExplenation = `[${flowName} >> ${nodeName}]: ${text}`;\n\n    // Level icons\n    let icon = \"⚪\";\n    switch (level) {\n        case \"info\":\n            icon = \"ℹ️\";\n            break;\n        case \"log\":\n            icon = \"🔧\";\n            break;\n        case \"warn\":\n            icon = \"⚠️\";      \n            break;\n        case \"error\":\n            icon = \"❌\";\n            break;\n    }\n\n    // Enrich msg with log info\n    const msg = callingNode.msg;\n    (msg.log = msg.log || []).push({ timestamp: timestamp, level:level, flow:flowName, node:nodeName, payload: text, icon: icon});\n\n    if (msg.log.length > MAX_ELEMENTS) {\n        // Slice keeps the last X elements\n        msg.log = msg.log.slice(-MAX_ELEMENTS);\n    }\n\n    // Log to the Node-RED system log\n    switch (level) {\n        case \"log\":\n            node.log(`${formattedExplenation}`);\n            break;\n        case \"warn\":\n            node.warn(`${formattedExplenation}`);       \n            break;\n        case \"error\":\n            node.error(`${formattedExplenation}`, callingNode.msg);\n            break;\n        default:\n            // don't log to logfiles by default\n    }\n\n};\n\nglobal.set('logger', customLogger);\nglobal.set('unhandledException', \"\");\nreturn msg;",
         "outputs": 1,
@@ -2608,15 +2521,15 @@
         "y": 160,
         "wires": [
             [
-                "19ddc15fdcd20ced"
+                "1e89b13f44bc3598"
             ]
         ]
     },
     {
-        "id": "1a307158f0039bfe",
+        "id": "faa61154730d7905",
         "type": "change",
-        "z": "4fa393a8555c4828",
-        "g": "94586bd63d9e74c8",
+        "z": "50a4e17a9f336335",
+        "g": "819387ee9aced7d9",
         "name": "Pass",
         "rules": [
             {
@@ -2636,16 +2549,16 @@
         "y": 300,
         "wires": [
             [
-                "0ea9d539e51a7498",
-                "2c8897bc1659f287"
+                "a519cb7f9e078e1e",
+                "9453db3462c3ec82"
             ]
         ]
     },
     {
-        "id": "d76db26abf7e5d4e",
+        "id": "616289c13ee6716d",
         "type": "change",
-        "z": "4fa393a8555c4828",
-        "g": "94586bd63d9e74c8",
+        "z": "50a4e17a9f336335",
+        "g": "819387ee9aced7d9",
         "name": "Block",
         "rules": [
             {
@@ -2665,68 +2578,68 @@
         "y": 260,
         "wires": [
             [
-                "0ea9d539e51a7498"
+                "a519cb7f9e078e1e"
             ]
         ]
     },
     {
-        "id": "a10b2556f2de7b9c",
+        "id": "d4bc7cbe97063b07",
         "type": "link in",
-        "z": "4fa393a8555c4828",
-        "g": "68622b9188a4774e",
+        "z": "50a4e17a9f336335",
+        "g": "73a67d7cd6637cb2",
         "name": "Update debug dashboard",
         "links": [
-            "469eb510a7ca5fde",
-            "7b9267f46a10ea62",
-            "254d9ed65a1c6c6b"
+            "50f6f937e098e7a3",
+            "01c76e560a0a50f6",
+            "03b477732f3bb88e"
         ],
         "x": 1395,
-        "y": 1260,
+        "y": 1360,
         "wires": [
             [
-                "921eb37a1805274c",
-                "3a5061dcfd2c4769"
+                "8766e262944d6c2c",
+                "4a602d8229b9900b"
             ]
         ]
     },
     {
-        "id": "469eb510a7ca5fde",
+        "id": "50f6f937e098e7a3",
         "type": "link out",
-        "z": "4fa393a8555c4828",
-        "g": "94586bd63d9e74c8",
+        "z": "50a4e17a9f336335",
+        "g": "819387ee9aced7d9",
         "name": "goto Debug Dashboard update",
         "mode": "link",
         "links": [
-            "a10b2556f2de7b9c"
+            "d4bc7cbe97063b07"
         ],
         "x": 1395,
         "y": 280,
         "wires": []
     },
     {
-        "id": "f6b19b12736d3aee",
+        "id": "c393dab7fce22497",
         "type": "catch",
-        "z": "4fa393a8555c4828",
-        "g": "68622b9188a4774e",
+        "z": "50a4e17a9f336335",
+        "g": "73a67d7cd6637cb2",
         "name": "Custom logger",
         "scope": [
-            "cfaccbd752135261"
+            "8236d40be5a10e29"
         ],
         "uncaught": false,
         "x": 1340,
-        "y": 1380,
+        "y": 1480,
         "wires": [
             [
-                "921eb37a1805274c",
-                "fc28859c417b3d92"
+                "8766e262944d6c2c",
+                "9a17fa0e52c23f41"
             ]
         ]
     },
     {
-        "id": "fc28859c417b3d92",
+        "id": "9a17fa0e52c23f41",
         "type": "debug",
-        "z": "4fa393a8555c4828",
-        "g": "68622b9188a4774e",
+        "z": "50a4e17a9f336335",
+        "g": "73a67d7cd6637cb2",
         "name": "Via Catch",
         "active": true,
         "tosidebar": false,
@@ -2737,14 +2650,14 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1520,
-        "y": 1380,
+        "y": 1480,
         "wires": []
     },
     {
-        "id": "3a5061dcfd2c4769",
+        "id": "4a602d8229b9900b",
         "type": "debug",
-        "z": "4fa393a8555c4828",
-        "g": "68622b9188a4774e",
+        "z": "50a4e17a9f336335",
+        "g": "73a67d7cd6637cb2",
         "name": "Via link",
         "active": true,
         "tosidebar": false,
@@ -2755,28 +2668,28 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1520,
-        "y": 1260,
+        "y": 1360,
         "wires": []
     },
     {
-        "id": "7b9267f46a10ea62",
+        "id": "01c76e560a0a50f6",
         "type": "link out",
-        "z": "4fa393a8555c4828",
-        "g": "076f8a5285290364",
+        "z": "50a4e17a9f336335",
+        "g": "e578bc1366a974d4",
         "name": "link out 1",
         "mode": "link",
         "links": [
-            "a10b2556f2de7b9c"
+            "d4bc7cbe97063b07"
         ],
         "x": 285,
-        "y": 1060,
+        "y": 1160,
         "wires": []
     },
     {
-        "id": "530fa128a53df9f7",
+        "id": "80e5462c6bfc306b",
         "type": "switch",
-        "z": "4fa393a8555c4828",
-        "g": "94586bd63d9e74c8",
+        "z": "50a4e17a9f336335",
+        "g": "819387ee9aced7d9",
         "name": "Skip rate limiter during debug",
         "property": "debug_mode",
         "propertyType": "global",
@@ -2795,18 +2708,18 @@
         "y": 280,
         "wires": [
             [
-                "14a4c310acda4d3a"
+                "133fb56760e7ee7b"
             ],
             [
-                "2c8897bc1659f287"
+                "9453db3462c3ec82"
             ]
         ]
     },
     {
-        "id": "96de4440c0dd7d09",
+        "id": "f58350f3ae00c778",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "f69c2270a138a539",
+        "z": "50a4e17a9f336335",
+        "g": "f855fb6228986402",
         "name": "Notice",
         "func": "// enable or disable Insights Mode\nif(msg.debug_mode == \"on\"){\n    // ENABLED - explain to user\n    const log = global.get(\"logger\");\n    log(this, \"P1 Rate limiter is *disabled* during *debug mode*\");\n\n    // Set global (setting this via current state node has proven irriliable)\n    global.set(\"debug_mode\", true);\n} else {\n    // DISABLED - set global\n    global.set(\"debug_mode\", false);\n}\n\n// Clean up - only use the global\ndelete msg.debug_mode;\n\nreturn msg;",
         "outputs": 1,
@@ -2819,16 +2732,16 @@
         "y": 160,
         "wires": [
             [
-                "5c91c55afb52368a"
+                "4ced9cd49af7d1af"
             ]
         ],
         "l": false
     },
     {
-        "id": "e3f2b9967f49f6e0",
+        "id": "70221fcda8a269a2",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "e68bfdd197a5c350",
+        "z": "50a4e17a9f336335",
+        "g": "7022c7cffd979729",
         "name": "SoC min",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -2871,15 +2784,15 @@
         "y": 500,
         "wires": [
             [
-                "6c8f75324ec67498"
+                "10e2bdc21cd7559e"
             ]
         ]
     },
     {
-        "id": "6c8f75324ec67498",
+        "id": "10e2bdc21cd7559e",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "e68bfdd197a5c350",
+        "z": "50a4e17a9f336335",
+        "g": "7022c7cffd979729",
         "name": "SoC max",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -2922,15 +2835,15 @@
         "y": 500,
         "wires": [
             [
-                "ad6ff4dc81be1579"
+                "f47be9050fc9f4c2"
             ]
         ]
     },
     {
-        "id": "19ddc15fdcd20ced",
+        "id": "1e89b13f44bc3598",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "d64e789214dc9395",
+        "z": "50a4e17a9f336335",
+        "g": "87f92832d04bbd3b",
         "name": "Unhandled Exception",
         "func": "/**\n * Handles exceptions by extracting node details and routing them to a global logger.\n * This is designed to be called from within a Node-RED Function node or sub-flow.\n *\n * @param {Object} callingNode - The Node-RED 'this' context or msg object containing node metadata.\n * @param {Object} [callingNode.msg] - The message object associated with the error.\n * @param {Object} [callingNode.msg.error] - Error details provided by a Node-RED error catch.\n * @param {string} [callingNode.msg.error.message] - The specific error message.\n * @param {Object} [callingNode.msg.error.source] - The node that triggered the error.\n * * @example\n * // Usage in a Function Node:\n * const unhandledException = global.get('unhandledException');\n * unhandledException(this);\n */\nconst unhandledException = (callingNode) => {\n    // 1. Get the custom logger from global context\n    const log = global.get(\"logger\");\n\n    // 2. Extract error details from the msg object\n    const errorData = callingNode.msg?.error || {};\n    const errorMessage = errorData.message || \"Unknown error occurred\";\n    const sourceName = errorData.source ? (errorData.source.name || errorData.source.id) : \"Unknown Node\";\n    const sourceType = errorData.source ? errorData.source.type : \"unknown-type\";\n\n    // 3. Construct a user-friendly message for the logger\n    const friendlyMessage = `**Unhandled exception** (${sourceType} node) ${errorMessage}`;\n    callingNode.__node__ ??= {};\n    callingNode.__node__.name = sourceName;\n\n    // 4. Call the logger with level 'error'\n    // Note: the logger uses 'callingNode', we pass on whatever we have.\n    log(callingNode, friendlyMessage, 'error');\n\n};\n\nglobal.set('unhandledException', unhandledException);\n\nreturn msg;",
         "outputs": 1,
@@ -2946,10 +2859,10 @@
         ]
     },
     {
-        "id": "027e60b14741775b",
+        "id": "b6a77099141516d9",
         "type": "catch",
-        "z": "4fa393a8555c4828",
-        "g": "23fb2f7d6c019d9d",
+        "z": "50a4e17a9f336335",
+        "g": "6509013f878e097f",
         "name": "",
         "scope": null,
         "uncaught": true,
@@ -2957,16 +2870,16 @@
         "y": 320,
         "wires": [
             [
-                "7bd9fa57186d65ba"
+                "8708c74ca72c9a4b"
             ]
         ],
         "l": false
     },
     {
-        "id": "7bd9fa57186d65ba",
+        "id": "8708c74ca72c9a4b",
         "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "23fb2f7d6c019d9d",
+        "z": "50a4e17a9f336335",
+        "g": "6509013f878e097f",
         "name": "Unhandled Exception",
         "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
         "outputs": 1,
@@ -2979,30 +2892,132 @@
         "y": 320,
         "wires": [
             [
-                "254d9ed65a1c6c6b"
+                "03b477732f3bb88e"
             ]
         ],
         "l": false
     },
     {
-        "id": "254d9ed65a1c6c6b",
+        "id": "03b477732f3bb88e",
         "type": "link out",
-        "z": "4fa393a8555c4828",
-        "g": "23fb2f7d6c019d9d",
+        "z": "50a4e17a9f336335",
+        "g": "6509013f878e097f",
         "name": "link out 9",
         "mode": "link",
         "links": [
-            "a10b2556f2de7b9c"
+            "d4bc7cbe97063b07"
         ],
         "x": 1845,
         "y": 320,
         "wires": []
     },
     {
-        "id": "ded3614eb8f8ecfc",
+        "id": "4441773c20495756",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "3f152b5eb7fdc5e7",
+        "z": "50a4e17a9f336335",
+        "g": "26895d85c82dde91",
+        "name": "Battery Strategy",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "house_battery_strategy",
+                "propertyType": "flow",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 140,
+        "y": 980,
+        "wires": [
+            [
+                "8a5312bc5cf85003"
+            ]
+        ]
+    },
+    {
+        "id": "8a5312bc5cf85003",
+        "type": "api-current-state",
+        "z": "50a4e17a9f336335",
+        "g": "26895d85c82dde91",
+        "name": "Full Stop Trigger",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.ev_is_charging",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "full_stop_trigger",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 320,
+        "y": 980,
+        "wires": [
+            [
+                "f06446ad0b0a622d"
+            ]
+        ]
+    },
+    {
+        "id": "e74aa9d4d9cde6ca",
+        "type": "api-current-state",
+        "z": "50a4e17a9f336335",
+        "g": "dc159e4c83f8b9a5",
         "name": "Has import limit?",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -3029,8 +3044,8 @@
             {
                 "property": "grid_power_has_limit_import",
                 "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
+                "value": "$entity().state = \"on\"",
+                "valueType": "jsonata"
             }
         ],
         "for": "0",
@@ -3042,18 +3057,91 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 150,
-        "y": 920,
+        "y": 880,
         "wires": [
             [
-                "18d962635499cd83"
+                "1ba4db3c4ca346d2"
             ]
         ]
     },
     {
-        "id": "18d962635499cd83",
+        "id": "1ba4db3c4ca346d2",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "3f152b5eb7fdc5e7",
+        "z": "50a4e17a9f336335",
+        "g": "dc159e4c83f8b9a5",
+        "name": "Has export limit?",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.house_battery_control_has_power_limit_export",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "grid_power_has_limit_export",
+                "propertyType": "msg",
+                "value": "$entity().state = \"on\"",
+                "valueType": "jsonata"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 350,
+        "y": 880,
+        "wires": [
+            [
+                "afe3e8d997dcacdf"
+            ]
+        ]
+    },
+    {
+        "id": "4ced9cd49af7d1af",
+        "type": "function",
+        "z": "50a4e17a9f336335",
+        "g": "f855fb6228986402",
+        "name": "Grid power",
+        "func": "const log = global.get(\"logger\");\n\n// prepare grid power message\nlet state = \"measure\";\nlet ending = \"\";\nif(msg.grid_power>0) {state = \"import\"; ending = \"from grid\";}\nif(msg.grid_power<0) {state = \"export\"; ending = \"to grid\";}\nconst displayPower = Math.abs(Math.round(msg.grid_power));\n\n// explain\nlog(this, `You currently ${state} ${displayPower} W ${ending}`);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 285,
+        "y": 160,
+        "wires": [
+            [
+                "80e5462c6bfc306b"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "afe3e8d997dcacdf",
+        "type": "api-current-state",
+        "z": "50a4e17a9f336335",
+        "g": "dc159e4c83f8b9a5",
         "name": "Import limit",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -3092,70 +3180,19 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 330,
-        "y": 920,
+        "x": 530,
+        "y": 880,
         "wires": [
             [
-                "e94c3a04e7a9d2a7"
+                "ad52d85f8c74b184"
             ]
         ]
     },
     {
-        "id": "e94c3a04e7a9d2a7",
+        "id": "ad52d85f8c74b184",
         "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "3f152b5eb7fdc5e7",
-        "name": "Has export limit?",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_boolean.house_battery_control_has_power_limit_export",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "grid_power_has_limit_export",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 150,
-        "y": 960,
-        "wires": [
-            [
-                "dcf9fc1d8f697cf5"
-            ]
-        ]
-    },
-    {
-        "id": "dcf9fc1d8f697cf5",
-        "type": "api-current-state",
-        "z": "4fa393a8555c4828",
-        "g": "3f152b5eb7fdc5e7",
+        "z": "50a4e17a9f336335",
+        "g": "dc159e4c83f8b9a5",
         "name": "Export limit",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -3194,35 +3231,13 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 330,
-        "y": 960,
+        "x": 690,
+        "y": 880,
         "wires": [
             [
-                "5441ac7b5b8758c7"
+                "4441773c20495756"
             ]
         ]
-    },
-    {
-        "id": "5c91c55afb52368a",
-        "type": "function",
-        "z": "4fa393a8555c4828",
-        "g": "f69c2270a138a539",
-        "name": "Grid power",
-        "func": "const log = global.get(\"logger\");\n\n// prepare grid power message\nlet state = \"measure\";\nlet ending = \"\";\nif(msg.grid_power>0) {state = \"import\"; ending = \"from grid\";}\nif(msg.grid_power<0) {state = \"export\"; ending = \"to grid\";}\nconst displayPower = Math.abs(Math.round(msg.grid_power));\n\n// explain\nlog(this, `You currently ${state} ${displayPower} W ${ending}`);\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 285,
-        "y": 160,
-        "wires": [
-            [
-                "530fa128a53df9f7"
-            ]
-        ],
-        "l": false
     },
     {
         "id": "176d29a.6f648d6",
@@ -3239,7 +3254,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "d445137ac0e92881",
+        "id": "2889a109bc61e998",
         "type": "global-config",
         "env": [],
         "modules": {

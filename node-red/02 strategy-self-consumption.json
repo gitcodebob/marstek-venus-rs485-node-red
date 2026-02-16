@@ -1,6 +1,6 @@
 [
     {
-        "id": "f30ba466ccfa5f11",
+        "id": "736b000263ea5101",
         "type": "tab",
         "label": "Strategy Self-consumption v4.5.0",
         "disabled": false,
@@ -8,18 +8,18 @@
         "env": []
     },
     {
-        "id": "5a25d3747903420b",
+        "id": "4ce329cb8b239ba2",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
+        "z": "736b000263ea5101",
         "name": "Strategy start",
         "style": {
             "fill": "#ffffff",
             "label": true
         },
         "nodes": [
-            "46f5f9a8e4c51ee9",
-            "d6b67fbaa2192bce",
-            "60ae32376ecfc80f"
+            "1852defce98288fc",
+            "8a71b9ce10eac63f",
+            "a3a9b9b775eab2a1"
         ],
         "x": 54,
         "y": 79,
@@ -27,18 +27,18 @@
         "h": 162
     },
     {
-        "id": "7aa71fce7fa5adc9",
+        "id": "56e138bc0644795e",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
+        "z": "736b000263ea5101",
         "name": "Battery solutions",
         "style": {
             "label": true,
             "fill": "#ffffff"
         },
         "nodes": [
-            "f9cc7a018490fe24",
-            "729e9e68ce2d8b56",
-            "01e259655b17ba2a"
+            "60a5c81cd74bd901",
+            "52e3329a2293e4f8",
+            "b9e7afddfa210c5c"
         ],
         "x": 64,
         "y": 1139,
@@ -46,19 +46,19 @@
         "h": 142
     },
     {
-        "id": "b39ddac4951e7907",
+        "id": "70e0df07ee2d77bf",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
+        "z": "736b000263ea5101",
         "name": "Bumpless operation",
         "style": {
             "label": true,
             "stroke": "#bfdbef"
         },
         "nodes": [
-            "9e4a55fdf3500677",
-            "2cd163f3f2e93dfc",
-            "1783e45fba24da24",
-            "5e4b00499bceeeeb"
+            "cf08e5bfb82c576a",
+            "dc0396a51827da45",
+            "7881ce1931c29d87",
+            "3f2938b9cc871abd"
         ],
         "x": 1614,
         "y": 19,
@@ -66,27 +66,27 @@
         "h": 242
     },
     {
-        "id": "41f1728bdbe183cb",
+        "id": "da2b8fa1e322a5de",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
+        "z": "736b000263ea5101",
         "name": "Bumpless operation - switching control modes",
         "style": {
             "stroke": "#bfdbef",
             "label": true
         },
         "nodes": [
-            "2ef57587dad8999b",
-            "74f0cc1ef0e4faa3",
-            "85db1915733f9134",
-            "f797fa52dd751e21",
-            "90913bc4071123b3",
-            "e72e1046cb4b42cf",
-            "4d1d5194748cec47",
-            "188e0772bb1b3a61",
-            "314ecb69a511116c",
-            "b4d8893b99b0eaf1",
-            "13b59a4be4c7a1aa",
-            "40566ce60eabcfca"
+            "861dd31258980fcb",
+            "c24241d293c4f916",
+            "bf016cf689d36e48",
+            "c954ab9c7a49f43e",
+            "3501bde71e40e35e",
+            "ce2ec7bbd77ebecc",
+            "b0b0303025f88b42",
+            "c8f8da0ac18bf1b0",
+            "f72f648f572a4153",
+            "cbd8f390b98c3913",
+            "f019a4f59fdb506e",
+            "f43673715d28e4f9"
         ],
         "x": 1614,
         "y": 279,
@@ -94,9 +94,9 @@
         "h": 289.5
     },
     {
-        "id": "b8cfc00bd7c9bbb6",
+        "id": "9a41df5d41b48596",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
+        "z": "736b000263ea5101",
         "name": "Inputs",
         "style": {
             "fill": "#7fb7df",
@@ -104,8 +104,8 @@
             "color": "#ffffff"
         },
         "nodes": [
-            "b40bcf8fad0f5e9f",
-            "53477c0ec892ed5f"
+            "4e4100130b7f0ca9",
+            "364a13bc622967cf"
         ],
         "x": 288,
         "y": 13,
@@ -113,9 +113,9 @@
         "h": 234
     },
     {
-        "id": "bc2d3133e7d296ac",
+        "id": "c91b1cc3e7298d2c",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
+        "z": "736b000263ea5101",
         "name": "Pre processing",
         "style": {
             "fill": "#bfdbef",
@@ -123,9 +123,9 @@
             "color": "#ffffff"
         },
         "nodes": [
-            "59a13baba838f062",
-            "f0a4e0caf2ef89eb",
-            "bcda8fc81ea90fe1"
+            "3c0e615c0cbb4902",
+            "be83e07daf2747a9",
+            "2d9b52f337448412"
         ],
         "x": 288,
         "y": 273,
@@ -133,9 +133,9 @@
         "h": 294
     },
     {
-        "id": "e560113e07695f25",
+        "id": "585b2be7a030ec96",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
+        "z": "736b000263ea5101",
         "name": "Control",
         "style": {
             "fill": "#7fb7df",
@@ -143,8 +143,8 @@
             "color": "#ffffff"
         },
         "nodes": [
-            "bead7269d369539c",
-            "2f668d531907bf2a"
+            "c2a23d4fdd3d7304",
+            "a42c5a459f690c83"
         ],
         "x": 288,
         "y": 593,
@@ -152,9 +152,9 @@
         "h": 634
     },
     {
-        "id": "7fd13baf56fa632b",
+        "id": "d0770aa009626dae",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
+        "z": "736b000263ea5101",
         "name": "Unhandled exceptions",
         "style": {
             "label": true,
@@ -162,9 +162,9 @@
             "color": "#d88a8a"
         },
         "nodes": [
-            "c090a5b5b0f37a65",
-            "f2b5a2f2a264627c",
-            "2eaf01f6ced1f662"
+            "d2f1f1c4504b2852",
+            "8062af9511651ec9",
+            "e2a8a8cdf1dac6b7"
         ],
         "x": 54,
         "y": 279,
@@ -172,25 +172,25 @@
         "h": 82
     },
     {
-        "id": "b40bcf8fad0f5e9f",
+        "id": "4e4100130b7f0ca9",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
-        "g": "b8cfc00bd7c9bbb6",
+        "z": "736b000263ea5101",
+        "g": "9a41df5d41b48596",
         "name": "PID control inputs",
         "style": {
             "label": true,
             "fill": "#ffffff"
         },
         "nodes": [
-            "12429f8a27b41d1c",
-            "5bbd29d4b6389baa",
-            "c4cb8d31f9c14e04",
-            "4b9f21dfd8fa55c7",
-            "32624c4b5fb3b407",
-            "9c803ff2895a167d",
-            "5f6beb75f62df3c8",
-            "a25912032dc02406",
-            "d66cc2ca81439996"
+            "3cf19ceecdac96f5",
+            "731d52ff96bce3df",
+            "34b18d84ec6d8180",
+            "f32dd984a7b6f591",
+            "03630347c379bb1f",
+            "ff5ef58906e1ec3a",
+            "509c9772362a2eec",
+            "e681d8eb39dd0a25",
+            "8cd08e89cdf530fa"
         ],
         "x": 314,
         "y": 59,
@@ -198,19 +198,19 @@
         "h": 162
     },
     {
-        "id": "53477c0ec892ed5f",
+        "id": "364a13bc622967cf",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
-        "g": "b8cfc00bd7c9bbb6",
+        "z": "736b000263ea5101",
+        "g": "9a41df5d41b48596",
         "name": "Advanced features",
         "style": {
             "label": true,
             "fill": "#ffffff"
         },
         "nodes": [
-            "596717de66b14275",
-            "3cd9d1135d75d941",
-            "9b9ee0f7e8b416f5"
+            "2ebe82672c25e18f",
+            "320d98d424c9cd53",
+            "dc9bf614b6a32e07"
         ],
         "x": 914,
         "y": 39,
@@ -218,20 +218,20 @@
         "h": 182
     },
     {
-        "id": "59a13baba838f062",
+        "id": "3c0e615c0cbb4902",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
-        "g": "bc2d3133e7d296ac",
+        "z": "736b000263ea5101",
+        "g": "c91b1cc3e7298d2c",
         "name": "",
         "style": {
             "fill": "#ffffff",
             "label": true
         },
         "nodes": [
-            "9c7935138e14d814",
-            "3ee0ae1af15fbe39",
-            "e4cbd18d1609dc26",
-            "09d9beaf92f43a38"
+            "c7faaa6f3eed92a1",
+            "2d7410e3efbd896a",
+            "fc6b2ee2fec3ee88",
+            "4a1eb5dd886744ac"
         ],
         "x": 314,
         "y": 299,
@@ -239,10 +239,10 @@
         "h": 202
     },
     {
-        "id": "f0a4e0caf2ef89eb",
+        "id": "be83e07daf2747a9",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
-        "g": "bc2d3133e7d296ac",
+        "z": "736b000263ea5101",
+        "g": "c91b1cc3e7298d2c",
         "name": "Derivative - incl. bumpless operation",
         "style": {
             "label": true,
@@ -250,11 +250,11 @@
             "fill": "#ffffff"
         },
         "nodes": [
-            "f64b13ecda52ca22",
-            "a88f985a2a21bccc",
-            "8e8b694bcd3a0e53",
-            "0b02ac6aef110356",
-            "04860510ab37e6ad"
+            "64c3e741a92df917",
+            "7003cdb6960ef7ff",
+            "255dbd408a7575a6",
+            "cf945fa7f8955eb4",
+            "538a4fe6b9518bb1"
         ],
         "x": 614,
         "y": 399,
@@ -262,19 +262,19 @@
         "h": 142
     },
     {
-        "id": "bcda8fc81ea90fe1",
+        "id": "2d9b52f337448412",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
-        "g": "bc2d3133e7d296ac",
+        "z": "736b000263ea5101",
+        "g": "c91b1cc3e7298d2c",
         "name": "Processing required? ",
         "style": {
             "label": true,
             "fill": "#ffffff"
         },
         "nodes": [
-            "b762b8f6bde0d274",
-            "071f6eb866d173ae",
-            "a749c7afc466eaf0"
+            "b373e63ddffbad5e",
+            "1e1f80ad7d25a31d",
+            "3fe1f7700644c554"
         ],
         "x": 614,
         "y": 299,
@@ -282,10 +282,10 @@
         "h": 82
     },
     {
-        "id": "bead7269d369539c",
+        "id": "c2a23d4fdd3d7304",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
-        "g": "e560113e07695f25",
+        "z": "736b000263ea5101",
+        "g": "585b2be7a030ec96",
         "name": "PID controller",
         "style": {
             "label": true,
@@ -293,26 +293,26 @@
             "color": "#3f3f3f"
         },
         "nodes": [
-            "2ac4e669dc9ab3ea",
-            "7d60129431706c51",
-            "ab664906fb402eb4",
-            "76bd10a47c99eb1c",
-            "df735b02d2f38765",
-            "7de32c37f343e855",
-            "c1b4a407fc1e8aec",
-            "2bf21c643a4315cc",
-            "8c1250ad99db8517",
-            "cb4a2324369b0f74",
-            "ae9aaa66db434271",
-            "ae2da60518d7735b",
-            "41a518ccc83f4dea",
-            "980352036928d79e",
-            "3635c761c1682fa4",
-            "3c5a686080cb7fd3",
-            "44a58f7a54dc0540",
-            "ff917eec2bac8506",
-            "93303882aa169239",
-            "f93516b97ce4a769"
+            "331f73154575403c",
+            "1d60d079758d9657",
+            "4b8080cdd7eaf856",
+            "0ec9e194e96bc396",
+            "4c5a83c8798d044f",
+            "0cefba675b67ed4c",
+            "d411ede7cf965b41",
+            "800c6944d1522eef",
+            "48e4141a80c46309",
+            "f7967d450a19199c",
+            "502cb96ca41d467a",
+            "69d839264c367b51",
+            "4dd1012407cb2215",
+            "b9f6b0762c77478c",
+            "37aac13285133e28",
+            "1d6f200c7f1ffbe9",
+            "b37e5d6417e0bb85",
+            "48c11315ddd79c95",
+            "06950d2887f2c392",
+            "6afdc3d9621128ea"
         ],
         "x": 314,
         "y": 619,
@@ -320,10 +320,10 @@
         "h": 482
     },
     {
-        "id": "2f668d531907bf2a",
+        "id": "a42c5a459f690c83",
         "type": "group",
-        "z": "f30ba466ccfa5f11",
-        "g": "e560113e07695f25",
+        "z": "736b000263ea5101",
+        "g": "585b2be7a030ec96",
         "name": "Distribution",
         "style": {
             "label": true,
@@ -331,8 +331,8 @@
             "color": "#3f3f3f"
         },
         "nodes": [
-            "1c3dd42576562b1d",
-            "85692847b71b7803"
+            "c65dfd73b1eb17ec",
+            "223e0c2ea4ed0643"
         ],
         "x": 314,
         "y": 1119,
@@ -340,66 +340,66 @@
         "h": 82
     },
     {
-        "id": "9c803ff2895a167d",
+        "id": "ff5ef58906e1ec3a",
         "type": "junction",
-        "z": "f30ba466ccfa5f11",
-        "g": "b40bcf8fad0f5e9f",
+        "z": "736b000263ea5101",
+        "g": "4e4100130b7f0ca9",
         "x": 460,
         "y": 100,
         "wires": [
             [
-                "a25912032dc02406"
+                "e681d8eb39dd0a25"
             ]
         ]
     },
     {
-        "id": "a25912032dc02406",
+        "id": "e681d8eb39dd0a25",
         "type": "junction",
-        "z": "f30ba466ccfa5f11",
-        "g": "b40bcf8fad0f5e9f",
+        "z": "736b000263ea5101",
+        "g": "4e4100130b7f0ca9",
         "x": 700,
         "y": 100,
         "wires": [
             [
-                "5f6beb75f62df3c8",
-                "d66cc2ca81439996"
+                "509c9772362a2eec",
+                "8cd08e89cdf530fa"
             ]
         ]
     },
     {
-        "id": "d66cc2ca81439996",
+        "id": "8cd08e89cdf530fa",
         "type": "junction",
-        "z": "f30ba466ccfa5f11",
-        "g": "b40bcf8fad0f5e9f",
+        "z": "736b000263ea5101",
+        "g": "4e4100130b7f0ca9",
         "x": 720,
         "y": 120,
         "wires": [
             [
-                "5bbd29d4b6389baa"
+                "731d52ff96bce3df"
             ]
         ]
     },
     {
-        "id": "46f5f9a8e4c51ee9",
+        "id": "1852defce98288fc",
         "type": "link in",
-        "z": "f30ba466ccfa5f11",
-        "g": "5a25d3747903420b",
+        "z": "736b000263ea5101",
+        "g": "4ce329cb8b239ba2",
         "name": "Self-consumption",
         "links": [],
         "x": 160,
         "y": 160,
         "wires": [
             [
-                "60ae32376ecfc80f"
+                "a3a9b9b775eab2a1"
             ]
         ],
         "l": true
     },
     {
-        "id": "d6b67fbaa2192bce",
+        "id": "8a71b9ce10eac63f",
         "type": "comment",
-        "z": "f30ba466ccfa5f11",
-        "g": "5a25d3747903420b",
+        "z": "736b000263ea5101",
+        "g": "4ce329cb8b239ba2",
         "name": "Start (readme)",
         "info": "# Setting up your battery strategy flow\n\n## Setup\nName the Link In in this start group exactly after the option configured in your\nselect_input.house_battery_strategy\n\nfound in the file:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nWill point to the flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
         "x": 150,
@@ -407,9 +407,9 @@
         "wires": []
     },
     {
-        "id": "24910b4b57b06f30",
+        "id": "9aa739d2f143c392",
         "type": "comment",
-        "z": "f30ba466ccfa5f11",
+        "z": "736b000263ea5101",
         "name": "Home Battery Strategy",
         "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
         "x": 120,
@@ -417,10 +417,10 @@
         "wires": []
     },
     {
-        "id": "9e4a55fdf3500677",
+        "id": "cf08e5bfb82c576a",
         "type": "server-state-changed",
-        "z": "f30ba466ccfa5f11",
-        "g": "b39ddac4951e7907",
+        "z": "736b000263ea5101",
+        "g": "70e0df07ee2d77bf",
         "name": "User Ki change",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -471,15 +471,15 @@
         "y": 100,
         "wires": [
             [
-                "2cd163f3f2e93dfc"
+                "dc0396a51827da45"
             ]
         ]
     },
     {
-        "id": "2cd163f3f2e93dfc",
+        "id": "dc0396a51827da45",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "b39ddac4951e7907",
+        "z": "736b000263ea5101",
+        "g": "70e0df07ee2d77bf",
         "name": "Integral term adjust",
         "func": "// On change of Ki setting\nlet logdata = \"bumpless \";\nlet I_sum = flow.get(\"I_integral_sum\");\nlet Ki = msg.payload || 0;     // Integral gain\nlet Ki_last = context.get(\"house_battery_control_ki_last\")||0;\n\n// if Ki was or has become zero\nif(Ki == 0 || Ki_last == 0){\n    // passify the integral-sum\n    flow.set(\"I_integral_sum\",0);\n    context.set(\"house_battery_control_ki_last\", Ki);\n    logdata += `to/from 0, Ki=${Ki_last} -> ${Ki} | `;\n    // done\n    return { payload: logdata };\n}\n\n// change in Ki\nlet dKi = parseFloat(Ki/Ki_last);\nif(dKi <= 0) dKi = 1; // ignore erroneous changes\n\n// keep I-term constant by compensating the integral-sum for the change in Ki\n// e.g. if Ki got 10% smaller, then integral-sum should increase 10%, to keep the I-term constant\nlet I_sum_new = I_sum / dKi;\nlogdata += `change of I: from ${Ki_last} to ${Ki} (${dKi * 100}%) | `;\n\n// OUTFLOW\nflow.set(\"I_integral_sum\", I_sum_new);\ncontext.set(\"house_battery_control_ki_last\", Ki);\n\n// OUTPUT\nreturn { payload: logdata };",
         "outputs": 1,
@@ -492,15 +492,15 @@
         "y": 160,
         "wires": [
             [
-                "5e4b00499bceeeeb"
+                "3f2938b9cc871abd"
             ]
         ]
     },
     {
-        "id": "1783e45fba24da24",
+        "id": "7881ce1931c29d87",
         "type": "comment",
-        "z": "f30ba466ccfa5f11",
-        "g": "b39ddac4951e7907",
+        "z": "736b000263ea5101",
+        "g": "70e0df07ee2d77bf",
         "name": "Bumpless Ki changes",
         "info": "Recalc I-term whenever Ki changes\n\nNote: always be mindful of making changes to control parameters of systems in operation.",
         "x": 1740,
@@ -508,10 +508,10 @@
         "wires": []
     },
     {
-        "id": "5e4b00499bceeeeb",
+        "id": "3f2938b9cc871abd",
         "type": "debug",
-        "z": "f30ba466ccfa5f11",
-        "g": "b39ddac4951e7907",
+        "z": "736b000263ea5101",
+        "g": "70e0df07ee2d77bf",
         "name": "Logdata",
         "active": false,
         "tosidebar": true,
@@ -526,10 +526,10 @@
         "wires": []
     },
     {
-        "id": "2ef57587dad8999b",
+        "id": "861dd31258980fcb",
         "type": "switch",
-        "z": "f30ba466ccfa5f11",
-        "g": "41f1728bdbe183cb",
+        "z": "736b000263ea5101",
+        "g": "da2b8fa1e322a5de",
         "name": "Check for custom/auto mode",
         "property": "payload",
         "propertyType": "msg",
@@ -557,24 +557,24 @@
         "y": 520,
         "wires": [
             [
-                "e72e1046cb4b42cf",
-                "74f0cc1ef0e4faa3"
+                "ce2ec7bbd77ebecc",
+                "c24241d293c4f916"
             ],
             [
-                "e72e1046cb4b42cf",
-                "74f0cc1ef0e4faa3"
+                "ce2ec7bbd77ebecc",
+                "c24241d293c4f916"
             ],
             [
-                "74f0cc1ef0e4faa3"
+                "c24241d293c4f916"
             ]
         ],
         "l": false
     },
     {
-        "id": "74f0cc1ef0e4faa3",
+        "id": "c24241d293c4f916",
         "type": "debug",
-        "z": "f30ba466ccfa5f11",
-        "g": "41f1728bdbe183cb",
+        "z": "736b000263ea5101",
+        "g": "da2b8fa1e322a5de",
         "name": "Master control switch",
         "active": false,
         "tosidebar": true,
@@ -589,10 +589,10 @@
         "wires": []
     },
     {
-        "id": "85db1915733f9134",
+        "id": "bf016cf689d36e48",
         "type": "server-state-changed",
-        "z": "f30ba466ccfa5f11",
-        "g": "41f1728bdbe183cb",
+        "z": "736b000263ea5101",
+        "g": "da2b8fa1e322a5de",
         "name": "Master control mode",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -643,15 +643,15 @@
         "y": 520,
         "wires": [
             [
-                "2ef57587dad8999b"
+                "861dd31258980fcb"
             ]
         ]
     },
     {
-        "id": "f797fa52dd751e21",
+        "id": "c954ab9c7a49f43e",
         "type": "api-call-service",
-        "z": "f30ba466ccfa5f11",
-        "g": "41f1728bdbe183cb",
+        "z": "736b000263ea5101",
+        "g": "da2b8fa1e322a5de",
         "name": "Integral PID to zero",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -677,15 +677,15 @@
         "y": 360,
         "wires": [
             [
-                "90913bc4071123b3"
+                "3501bde71e40e35e"
             ]
         ]
     },
     {
-        "id": "90913bc4071123b3",
+        "id": "3501bde71e40e35e",
         "type": "api-call-service",
-        "z": "f30ba466ccfa5f11",
-        "g": "41f1728bdbe183cb",
+        "z": "736b000263ea5101",
+        "g": "da2b8fa1e322a5de",
         "name": "Differential PID to zero",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -711,15 +711,15 @@
         "y": 400,
         "wires": [
             [
-                "4d1d5194748cec47"
+                "b0b0303025f88b42"
             ]
         ]
     },
     {
-        "id": "e72e1046cb4b42cf",
+        "id": "ce2ec7bbd77ebecc",
         "type": "api-call-service",
-        "z": "f30ba466ccfa5f11",
-        "g": "41f1728bdbe183cb",
+        "z": "736b000263ea5101",
+        "g": "da2b8fa1e322a5de",
         "name": "Proportinal PID to zero",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -745,15 +745,15 @@
         "y": 320,
         "wires": [
             [
-                "f797fa52dd751e21"
+                "c954ab9c7a49f43e"
             ]
         ]
     },
     {
-        "id": "4d1d5194748cec47",
+        "id": "b0b0303025f88b42",
         "type": "api-call-service",
-        "z": "f30ba466ccfa5f11",
-        "g": "41f1728bdbe183cb",
+        "z": "736b000263ea5101",
+        "g": "da2b8fa1e322a5de",
         "name": "PID Output to zero",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -779,15 +779,15 @@
         "y": 440,
         "wires": [
             [
-                "188e0772bb1b3a61"
+                "c8f8da0ac18bf1b0"
             ]
         ]
     },
     {
-        "id": "188e0772bb1b3a61",
+        "id": "c8f8da0ac18bf1b0",
         "type": "change",
-        "z": "f30ba466ccfa5f11",
-        "g": "41f1728bdbe183cb",
+        "z": "736b000263ea5101",
+        "g": "da2b8fa1e322a5de",
         "name": "Integral sum to zero",
         "rules": [
             {
@@ -810,10 +810,10 @@
         ]
     },
     {
-        "id": "12429f8a27b41d1c",
+        "id": "3cf19ceecdac96f5",
         "type": "api-current-state",
-        "z": "f30ba466ccfa5f11",
-        "g": "b40bcf8fad0f5e9f",
+        "z": "736b000263ea5101",
+        "g": "4e4100130b7f0ca9",
         "name": "Target grid consumption",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -856,16 +856,16 @@
         "y": 120,
         "wires": [
             [
-                "a25912032dc02406"
+                "e681d8eb39dd0a25"
             ]
         ],
         "info": "Set at 0 to strive for zero consumption"
     },
     {
-        "id": "9b9ee0f7e8b416f5",
+        "id": "dc9bf614b6a32e07",
         "type": "api-current-state",
-        "z": "f30ba466ccfa5f11",
-        "g": "53477c0ec892ed5f",
+        "z": "736b000263ea5101",
+        "g": "364a13bc622967cf",
         "name": "Hysteresis",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -908,15 +908,15 @@
         "y": 120,
         "wires": [
             [
-                "596717de66b14275"
+                "2ebe82672c25e18f"
             ]
         ]
     },
     {
-        "id": "5bbd29d4b6389baa",
+        "id": "731d52ff96bce3df",
         "type": "api-current-state",
-        "z": "f30ba466ccfa5f11",
-        "g": "b40bcf8fad0f5e9f",
+        "z": "736b000263ea5101",
+        "g": "4e4100130b7f0ca9",
         "name": "PID P-value",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -959,15 +959,15 @@
         "y": 180,
         "wires": [
             [
-                "c4cb8d31f9c14e04"
+                "34b18d84ec6d8180"
             ]
         ]
     },
     {
-        "id": "c4cb8d31f9c14e04",
+        "id": "34b18d84ec6d8180",
         "type": "api-current-state",
-        "z": "f30ba466ccfa5f11",
-        "g": "b40bcf8fad0f5e9f",
+        "z": "736b000263ea5101",
+        "g": "4e4100130b7f0ca9",
         "name": "PID I-value",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1010,15 +1010,15 @@
         "y": 180,
         "wires": [
             [
-                "4b9f21dfd8fa55c7"
+                "f32dd984a7b6f591"
             ]
         ]
     },
     {
-        "id": "4b9f21dfd8fa55c7",
+        "id": "f32dd984a7b6f591",
         "type": "api-current-state",
-        "z": "f30ba466ccfa5f11",
-        "g": "b40bcf8fad0f5e9f",
+        "z": "736b000263ea5101",
+        "g": "4e4100130b7f0ca9",
         "name": "PID D-value",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1061,15 +1061,15 @@
         "y": 180,
         "wires": [
             [
-                "3cd9d1135d75d941"
+                "320d98d424c9cd53"
             ]
         ]
     },
     {
-        "id": "596717de66b14275",
+        "id": "2ebe82672c25e18f",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "53477c0ec892ed5f",
+        "z": "736b000263ea5101",
+        "g": "364a13bc622967cf",
         "name": "Advanced settings",
         "func": "// 1. Hard coded advanced settings (flow level)\nflow.set(\"has_soc_charging_limiter\", true);         // slows charging from 90% to 100% to improve battery life\nflow.set(\"has_reverse_priority_discharge\", true);   // Prioritize discharging and charging the same battery when possible\nflow.set(\"master_gain\", 1);                         // Gain scheduling. Not Implemented!\n\n// 2. Configurable advanced settings (msg level)\nmsg.advanced_settings ||= {}; // creates 'advanced_settings' if it does net yet exist\nlet mas = msg.advanced_settings;\n\n// disable charge or dicharge solutions and changes them to stop solutions\nRED.util.setMessageProperty(msg,\"advanced_settings.discharge_disabled\", mas.discharge_disabled ?? false);\nRED.util.setMessageProperty(msg,\"advanced_settings.charge_disabled\", mas.charge_disabled ?? false);\n// The nullish coalescing (??) operator is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined\n\n// 3. continue\nreturn msg;\n\n// Notes for home battery tinkerer friends:\n// Using RED.util.getMessageProperty / RED.util.setMessageProperty is more performant and safe.\n// If any part of the path (\"foo.bar\") is missing, it will return 'undefined' without throwing an error.",
         "outputs": 1,
@@ -1082,15 +1082,15 @@
         "y": 180,
         "wires": [
             [
-                "3ee0ae1af15fbe39"
+                "2d7410e3efbd896a"
             ]
         ]
     },
     {
-        "id": "3cd9d1135d75d941",
+        "id": "320d98d424c9cd53",
         "type": "api-current-state",
-        "z": "f30ba466ccfa5f11",
-        "g": "53477c0ec892ed5f",
+        "z": "736b000263ea5101",
+        "g": "364a13bc622967cf",
         "name": "Idle time before Stop",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1133,15 +1133,15 @@
         "y": 80,
         "wires": [
             [
-                "9b9ee0f7e8b416f5"
+                "dc9bf614b6a32e07"
             ]
         ]
     },
     {
-        "id": "9c7935138e14d814",
+        "id": "c7faaa6f3eed92a1",
         "type": "comment",
-        "z": "f30ba466ccfa5f11",
-        "g": "59a13baba838f062",
+        "z": "736b000263ea5101",
+        "g": "3c0e615c0cbb4902",
         "name": "Setpoint ramping / damping",
         "info": "",
         "x": 460,
@@ -1149,10 +1149,10 @@
         "wires": []
     },
     {
-        "id": "3ee0ae1af15fbe39",
+        "id": "2d7410e3efbd896a",
         "type": "api-current-state",
-        "z": "f30ba466ccfa5f11",
-        "g": "59a13baba838f062",
+        "z": "736b000263ea5101",
+        "g": "3c0e615c0cbb4902",
         "name": "Error signal dampening",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1195,15 +1195,15 @@
         "y": 340,
         "wires": [
             [
-                "e4cbd18d1609dc26"
+                "fc6b2ee2fec3ee88"
             ]
         ]
     },
     {
-        "id": "e4cbd18d1609dc26",
+        "id": "fc6b2ee2fec3ee88",
         "type": "api-current-state",
-        "z": "f30ba466ccfa5f11",
-        "g": "59a13baba838f062",
+        "z": "736b000263ea5101",
+        "g": "3c0e615c0cbb4902",
         "name": "Output signal dampening",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1246,15 +1246,15 @@
         "y": 380,
         "wires": [
             [
-                "09d9beaf92f43a38"
+                "4a1eb5dd886744ac"
             ]
         ]
     },
     {
-        "id": "09d9beaf92f43a38",
+        "id": "4a1eb5dd886744ac",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "59a13baba838f062",
+        "z": "736b000263ea5101",
+        "g": "3c0e615c0cbb4902",
         "name": "Set: Error signal",
         "func": "// INPUTS\nlet P1_error_last = Number(context.get(\"p1_error_last\"))||0; // last error signal level in W\nlet dampening = Number(flow.get(\"house_battery_control_error_signal_dampening\")) || 0; // 0% - 100%\ndampening = dampening / 100; // to Number\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = msg.grid_power; // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = Number(RED.util.getMessageProperty(msg,\"house_target_grid_consumption_in_w\")); // SP: target value\n\n// Calc error signal\nlet P1_error_unfiltered = P1_setpoint - P1_power;\n\n// Simple averaging filter\nlet P1_error_filtered = (1 - dampening) * P1_error_unfiltered + (dampening) * P1_error_last;\n\n// OUTFLOW\ncontext.set(\"p1_error_last\", P1_error_filtered);\n\n// OUTPUT\nmsg.grid_error = P1_error_filtered; // W (watt), error signal = SP - PV\nreturn msg;",
         "outputs": 1,
@@ -1267,15 +1267,15 @@
         "y": 420,
         "wires": [
             [
-                "b762b8f6bde0d274"
+                "b373e63ddffbad5e"
             ]
         ]
     },
     {
-        "id": "f64b13ecda52ca22",
+        "id": "64c3e741a92df917",
         "type": "comment",
-        "z": "f30ba466ccfa5f11",
-        "g": "f0a4e0caf2ef89eb",
+        "z": "736b000263ea5101",
+        "g": "be83e07daf2747a9",
         "name": "Bumpless target grid consumption",
         "info": "The error value is used by default to calculate the derivative.\nWhen the target grid consumption (tgc) is changed, the system is takes the derivative of the process variable instead.\nThis prevents irratic behavior during sudden changes of the error or setpoint value.\n\ne.g. you change the setpoint from 0 to 100W \nThe error would make an instantanious jump and cause a huge derivative-term.\nThe pv stays continous and fluent.\n\nAfter 1 control tick the derivative is taken from error again.\nUntil the `tgc` is changed again.",
         "x": 780,
@@ -1283,10 +1283,10 @@
         "wires": []
     },
     {
-        "id": "a88f985a2a21bccc",
+        "id": "7003cdb6960ef7ff",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "f0a4e0caf2ef89eb",
+        "z": "736b000263ea5101",
+        "g": "be83e07daf2747a9",
         "name": "Derivative PV",
         "func": "var P1_power = msg.grid_power||0;\nvar P1_last_power = Number(context.get(\"p1_last_power\")) ||0;\n\n// PV derivative\nvar p1_derivative = P1_power - P1_last_power; // devided by unity seconds\n\n// OUTFLOW\ncontext.set(\"p1_last_power\", P1_power);\n\n// OUTPUT\nmsg.grid_derivative = p1_derivative;\nreturn msg;",
         "outputs": 1,
@@ -1299,15 +1299,15 @@
         "y": 500,
         "wires": [
             [
-                "04860510ab37e6ad"
+                "538a4fe6b9518bb1"
             ]
         ]
     },
     {
-        "id": "8e8b694bcd3a0e53",
+        "id": "255dbd408a7575a6",
         "type": "switch",
-        "z": "f30ba466ccfa5f11",
-        "g": "f0a4e0caf2ef89eb",
+        "z": "736b000263ea5101",
+        "g": "be83e07daf2747a9",
         "name": "Target grid consumption unchanged",
         "property": "house_target_grid_consumption_in_w",
         "propertyType": "flow",
@@ -1330,18 +1330,18 @@
         "y": 480,
         "wires": [
             [
-                "0b02ac6aef110356"
+                "cf945fa7f8955eb4"
             ],
             [
-                "a88f985a2a21bccc"
+                "7003cdb6960ef7ff"
             ]
         ]
     },
     {
-        "id": "0b02ac6aef110356",
+        "id": "cf945fa7f8955eb4",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "f0a4e0caf2ef89eb",
+        "z": "736b000263ea5101",
+        "g": "be83e07daf2747a9",
         "name": "Derivative Error",
         "func": "var P1_error = msg.grid_error||0;\nvar P1_last_error = Number(context.get(\"p1_last_error\")) ||0;\n\n// Error derivative\n// note: error = -PV\n// note: for simplicity we assume 1 second time steps\nlet p1_derivative = -(P1_error - P1_last_error); // devided by unity seconds\n\n// OUTFLOW\ncontext.set(\"p1_last_error\", P1_error);\n\n// OUTPUT\nmsg.grid_derivative = p1_derivative;\nreturn msg;",
         "outputs": 1,
@@ -1354,15 +1354,15 @@
         "y": 460,
         "wires": [
             [
-                "04860510ab37e6ad"
+                "538a4fe6b9518bb1"
             ]
         ]
     },
     {
-        "id": "04860510ab37e6ad",
+        "id": "538a4fe6b9518bb1",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "f0a4e0caf2ef89eb",
+        "z": "736b000263ea5101",
+        "g": "be83e07daf2747a9",
         "name": "Derivative final value",
         "func": "\nreturn msg;",
         "outputs": 1,
@@ -1375,15 +1375,15 @@
         "y": 480,
         "wires": [
             [
-                "2ac4e669dc9ab3ea"
+                "331f73154575403c"
             ]
         ]
     },
     {
-        "id": "b762b8f6bde0d274",
+        "id": "b373e63ddffbad5e",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "bcda8fc81ea90fe1",
+        "z": "736b000263ea5101",
+        "g": "2d9b52f337448412",
         "name": "Deadband (15W)",
         "func": "// Deadband\n// Stop processing if error is within .. Watt of target grid consumption.\n// This to reduce CPU loads \n\n// Logger\nconst log = global.get(\"logger\");\n\n// P1\nlet P1_error = msg.grid_error; // Watt\nlet P1_deadband = 15; // Watt\n\n// TODO\n// based on last 'assignable power' and current error, if (error > assignable power) the system will never enter the deadband. And keep calculating each interation.\n// however since we don't know if the is the assignable power will change, until we calculate the Control Value / load balancer\n// we could end up in a deadlock if we simply stop execution here, based on assignable power alone.\n\n// Within Deadband\nif(Math.abs(P1_error) < P1_deadband) {\n    // stop processing\n    node.status({fill:\"yellow\",shape:\"dot\",text:`Halt, ${Math.round(Math.abs(P1_error))} W`});\n    log(this, `**Stopped processing**🌿power saving, ${Math.round(Math.abs(P1_error))} W is within deadband of ${P1_deadband} W`);\n    msg.payload = 'halted by deadband';\n    return msg;\n} \n\n// Outside deadband\nnode.status({fill:\"green\",shape:\"dot\",text:`Pass, ${Math.round(Math.abs(P1_error))} W`});\nreturn msg;\n",
         "outputs": 1,
@@ -1396,17 +1396,17 @@
         "y": 340,
         "wires": [
             [
-                "071f6eb866d173ae"
+                "1e1f80ad7d25a31d"
             ]
         ]
     },
     {
-        "id": "2ac4e669dc9ab3ea",
+        "id": "331f73154575403c",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "Calculate corrections",
-        "func": "// Logger\nvar logdata = \"\"; // deprecated\nconst log = global.get(\"logger\");\n\n// Timing\nlet time_last = context.get('time_last') || Date.now(); // Milliseconds\nlet time_current = Date.now(); // Milliseconds\nlet time_delta = (time_current - time_last) / 1000; // Convert to seconds\n// note: due to inherent 1 sec intervals of P1 meter we omit dt terms. This is mostly for bug checking and optimizations.\n\n// Batteries\nvar B_power = msg.batteries_total_power; // charging is positive, discharging negative\nvar anti_windup_threshold = Number(flow.get(\"batteries_total_assignable_power\")) || 0; // max available charge/discharge power.\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = msg.grid_power; // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\nvar P1_error = msg.grid_error;  // W (watt), error signal = SP - PV\nvar P1_derivative = msg.grid_derivative; // Derivative of PV, not the error\n\n// PID values\nvar Kp = flow.get(\"house_battery_control_kp\") || 0.75;  // Proportional gain\nvar Ki = flow.get(\"house_battery_control_ki\") || 0;     // Integral gain        Ki = Kp/Ti\nvar Kd = flow.get(\"house_battery_control_kd\") || 0;     // Derivative gain      Kd = Kp*Td\n\n// helpers\nvar I_integral_sum = context.get('I_integral_sum') || 0;\nvar Gm = flow.get(\"master_gain\")||1; // gain scheduling\n\n// optimizations\nvar hysteresis = flow.get(\"house_battery_control_hysteresis_in_w\"); // W (watt)\n\n// advanced settings\nconst isDischargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.discharge_disabled\");\nconst isChargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.charge_disabled\");\n\n// -- PID regulator --\n// Proportional term\nlet p_term = Gm * Kp * P1_error;\n\n// Integral term\nlet integral_max = 0;\nif (Ki > 0) {\n    // Integral term | integrate\n    I_integral_sum += P1_error; \n    // Integral term | apply anti-windup\n    integral_max = anti_windup_threshold / Ki; // the anti-windup value is set to the current controlable range of the batteries, given by the previous load balancer calculations\n    I_integral_sum = Math.min(Math.max(I_integral_sum, -integral_max), integral_max);\n} else {\n    // If Ki is 0, keep everything 0\n    I_integral_sum = 0;\n    integral_max = 0;\n}\n\n// Integral term | the term\nlet i_term = Ki * I_integral_sum;\n\n// Integral term | explain\nlogdata += `anti_windup_threshold=${anti_windup_threshold}, integral_max=${integral_max}| `; // deprecated\n\n// Differential term\nlet d_term = Gm * Kd * (-P1_derivative); // omitted '/time_delta'. inherent P1 refresh fequency.\n\n// Total PID output\nvar PID_output = p_term + i_term + d_term; // W (watt), the control input for the battery packs\n\n// Charging or Discharging states\nvar B_was_charging = context.get(\"batteries_charging_last\") || false;\nvar B_is_charging = PID_output > 0 ? true : false;\n\n// Explain\nlogdata += `U(${time_delta}s)[${PID_output}] = P(${Kp})[${p_term}] + I(${Ki})[${i_term}] + D(${Kd})[${d_term}] | `; // deprecated\nlog(this,`**PID Controller**`);\nlog(this,`Step size: ${time_delta} s`);\nif(Kp == 0 && Ki == 0 && Kd == 0) {\n    log(this, `<font color=\"orange\">**Controller disabled**</font> All PID gains are 0. Choose a PID preset or set gains > 0.`,\"warn\");\n} else {\n    log(this, `P-term: ${Math.floor(p_term)} W @ P-gain ${Kp}`);\n    log(this, `I-term: ${Math.floor(i_term)} W @ I-gain ${Ki} (max. ${anti_windup_threshold} W)`);\n    log(this, `D-term: ${Math.floor(d_term)} W @ D-gain ${Kd}`);\n    log(this, `**PID ${B_is_charging ? 'Charge' : 'Discharge'}:** ${Math.floor(p_term)} + ${Math.floor(i_term)} + ${Math.floor(d_term)} = **${Math.round(PID_output)} Watt**`);\n}\n\n// Only one of the advanced settings below can be active at once.\n// Advanced setting | discharge disabled\nif(isDischargeDisabled && !B_is_charging) {\n    // log explain\n    logdata += `Discharging disabled, PID unwound U(${time_delta})[0]=0+0+0 | `;\n    log(this,'**PID set to 0**. Discharge was disabled via `msg.advanced_settings`.');\n    // Set all PID terms to 0 and unwind integral sum\n    PID_output = 0;\n    p_term = 0;\n    i_term = 0;\n    d_term = 0;\n    I_integral_sum = 0; // unwind\n    // maintain charge scenario\n    B_is_charging = true;\n    \n// Advanced setting | charge disabled\n} else if (isChargeDisabled && B_is_charging) {\n    // log explain\n    logdata += `Charging disabled, PID unwound U(${time_delta})[0]=0+0+0 | `;\n    log(this,'**PID set to 0**. Charge was disabled via `msg.advanced_settings`.');\n    // Set all PID terms to 0 and unwind integral sum\n    PID_output = 0;\n    p_term = 0;\n    i_term = 0;\n    d_term = 0;\n    I_integral_sum = 0; // unwind\n    // maintain discharge scenario\n    B_is_charging = false;\n\n// Advanced setting | hysteresis\n} else if \n// prevents excessive switching between (dis)charge mode around the zero point.\n// if new PID_output lies within hysteresis, it will not switch charge mode. \n// set hysteresis to 0, to apply no hysteresis\n(B_is_charging !== B_was_charging && Math.abs(PID_output) < hysteresis){\n    // log explain\n    logdata += `Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst) | `;\n    log(this,`Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst)`);\n    // prevent negative charging or positive discharging values (not allowed)\n    PID_output = (PID_output < 0 && B_is_charging) || ((PID_output > 0 && !B_is_charging)) ? 0 : PID_output;\n    // maintain previous scenario\n    B_is_charging = B_was_charging;\n} \n\n// save for next iteration\ncontext.set(\"batteries_charging_last\", B_is_charging); //boolean\n\n// OUTFLOW\ncontext.set(\"time_last\", Date.now());\ncontext.set(\"I_integral_sum\", I_integral_sum);\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries_charging\", B_is_charging, true);\nRED.util.setMessageProperty(msg, \"I_integral_sum\", I_integral_sum,true);\nmsg.payload = Number(PID_output);\n\n\nreturn [msg, // payload = PID_output\n        { payload: Number(P1_error)},\n        { payload: parseFloat(p_term)},\n        { payload: parseFloat(i_term)},\n        { payload: parseFloat(d_term)},\n        { payload: B_is_charging},\n        { payload: logdata }];",
+        "func": "// Logger\nvar logdata = \"\"; // deprecated\nconst log = global.get(\"logger\");\n\n// Timing\nlet time_last = context.get('time_last') || Date.now(); // Milliseconds\nlet time_current = Date.now(); // Milliseconds\nlet time_delta = (time_current - time_last) / 1000; // Convert to seconds\n// note: due to inherent 1 sec intervals of P1 meter we omit dt terms. This is mostly for bug checking and optimizations.\n\n// Batteries\nvar B_power = msg.batteries_total_power; // charging is positive, discharging negative\nvar anti_windup_threshold = Number(flow.get(\"batteries_total_assignable_power\")) || 0; // max available charge/discharge power.\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = msg.grid_power; // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\nvar P1_error = msg.grid_error;  // W (watt), error signal = SP - PV\nvar P1_derivative = msg.grid_derivative; // Derivative of PV, not the error\n\n// PID values\nvar Kp = flow.get(\"house_battery_control_kp\") || 0.75;  // Proportional gain\nvar Ki = flow.get(\"house_battery_control_ki\") || 0;     // Integral gain        Ki = Kp/Ti\nvar Kd = flow.get(\"house_battery_control_kd\") || 0;     // Derivative gain      Kd = Kp*Td\n\n// helpers\nvar I_integral_sum = context.get('I_integral_sum') || 0;\nvar Gm = flow.get(\"master_gain\")||1; // gain scheduling\n\n// optimizations\nvar hysteresis = flow.get(\"house_battery_control_hysteresis_in_w\"); // W (watt)\n\n// advanced settings\nconst isDischargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.discharge_disabled\");\nconst isChargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.charge_disabled\");\n\n// -- PID regulator --\n// Proportional term\nlet p_term = Gm * Kp * P1_error;\n\n// Integral term\nlet integral_max = 0;\nif (Ki > 0) {\n    // Integral term | integrate\n    I_integral_sum += P1_error; \n    // Integral term | apply anti-windup\n    integral_max = anti_windup_threshold / Ki; // the anti-windup value is set to the current controlable range of the batteries, given by the previous load balancer calculations\n    I_integral_sum = Math.min(Math.max(I_integral_sum, -integral_max), integral_max);\n} else {\n    // If Ki is 0, keep everything 0\n    I_integral_sum = 0;\n    integral_max = 0;\n}\n\n// Integral term | the term\nlet i_term = Ki * I_integral_sum;\n\n// Integral term | explain\nlogdata += `anti_windup_threshold=${anti_windup_threshold}, integral_max=${integral_max}| `; // deprecated\n\n// Differential term\nlet d_term = Gm * Kd * (-P1_derivative); // omitted '/time_delta'. inherent P1 refresh fequency.\n\n// Total PID output\nvar PID_output = p_term + i_term + d_term; // W (watt), the control input for the battery packs\n\n// Charging or Discharging states\nvar B_was_charging = context.get(\"batteries_charging_last\") || false;\nvar B_is_charging = PID_output > 0 ? true : false;\n\n// Explain\nlogdata += `U(${time_delta}s)[${PID_output}] = P(${Kp})[${p_term}] + I(${Ki})[${i_term}] + D(${Kd})[${d_term}] | `; // deprecated\nlog(this,`**PID Controller**`);\nlog(this,`Step size: ${time_delta} s`);\nif(Kp == 0 && Ki == 0 && Kd == 0) {\n    log(this, `<font color=\"orange\">**Controller disabled**</font> All PID gains are 0. Choose a PID preset or set gains > 0.`,\"warn\");\n} else {\n    // log(this, `P-term: ${Math.floor(p_term)} W @ P-gain ${Kp}`);\n    // log(this, `I-term: ${Math.floor(i_term)} W @ I-gain ${Ki} (max. ${anti_windup_threshold} W)`);\n    // log(this, `D-term: ${Math.floor(d_term)} W @ D-gain ${Kd}`);\n    log(this, `**P** ${Math.floor(p_term)} W @ gain ${Kp}<br>**I** ${Math.floor(i_term)} W @ gain ${Ki} (max. ${anti_windup_threshold} W)<br>**D** ${Math.floor(d_term)} W @ gain ${Kd}`);\n    log(this, `**PID ${B_is_charging ? 'Charge' : 'Discharge'}:** ${Math.floor(p_term)} + ${Math.floor(i_term)} + ${Math.floor(d_term)} = **${Math.round(PID_output)} Watt**`);\n}\n\n// Only one of the advanced settings below can be active at once.\n// Advanced setting | discharge disabled\nif(isDischargeDisabled && !B_is_charging) {\n    // log explain\n    logdata += `Discharging disabled, PID unwound U(${time_delta})[0]=0+0+0 | `;\n    log(this,'**PID capped at 0**. Discharge is disabled in this strategy'); // via `msg.advanced_settings`\n    // Set all PID terms to 0 and unwind integral sum\n    PID_output = 0;\n    p_term = 0;\n    i_term = 0;\n    d_term = 0;\n    I_integral_sum = 0; // unwind\n    // maintain charge scenario\n    B_is_charging = true;\n    \n// Advanced setting | charge disabled\n} else if (isChargeDisabled && B_is_charging) {\n    // log explain\n    logdata += `Charging disabled, PID unwound U(${time_delta})[0]=0+0+0 | `;\n    log(this,'**PID capped at 0**. Charge is disabled in this strategy'); // via `msg.advanced_settings`\n    // Set all PID terms to 0 and unwind integral sum\n    PID_output = 0;\n    p_term = 0;\n    i_term = 0;\n    d_term = 0;\n    I_integral_sum = 0; // unwind\n    // maintain discharge scenario\n    B_is_charging = false;\n\n// Advanced setting | hysteresis\n} else if \n// prevents excessive switching between (dis)charge mode around the zero point.\n// if new PID_output lies within hysteresis, it will not switch charge mode. \n// set hysteresis to 0, to apply no hysteresis\n(B_is_charging !== B_was_charging && Math.abs(PID_output) < hysteresis){\n    // log explain\n    logdata += `Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst) | `;\n    log(this,`Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst)`);\n    // prevent negative charging or positive discharging values (not allowed)\n    PID_output = (PID_output < 0 && B_is_charging) || ((PID_output > 0 && !B_is_charging)) ? 0 : PID_output;\n    // maintain previous scenario\n    B_is_charging = B_was_charging;\n} \n\n// save for next iteration\ncontext.set(\"batteries_charging_last\", B_is_charging); //boolean\n\n// OUTFLOW\ncontext.set(\"time_last\", Date.now());\ncontext.set(\"I_integral_sum\", I_integral_sum);\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries_charging\", B_is_charging, true);\nRED.util.setMessageProperty(msg, \"I_integral_sum\", I_integral_sum,true);\nmsg.payload = Number(PID_output);\n\nreturn [msg, // payload = PID_output\n        { payload: Number(P1_error)},\n        { payload: parseFloat(p_term)},\n        { payload: parseFloat(i_term)},\n        { payload: parseFloat(d_term)},\n        { payload: B_is_charging},\n        { payload: logdata }];",
         "outputs": 7,
         "timeout": 0,
         "noerr": 0,
@@ -1417,25 +1417,25 @@
         "y": 700,
         "wires": [
             [
-                "41a518ccc83f4dea"
+                "4dd1012407cb2215"
             ],
             [
-                "ab664906fb402eb4"
+                "4b8080cdd7eaf856"
             ],
             [
-                "ff917eec2bac8506"
+                "48c11315ddd79c95"
             ],
             [
-                "3635c761c1682fa4"
+                "37aac13285133e28"
             ],
             [
-                "93303882aa169239"
+                "06950d2887f2c392"
             ],
             [
-                "f93516b97ce4a769"
+                "6afdc3d9621128ea"
             ],
             [
-                "7d60129431706c51"
+                "1d60d079758d9657"
             ]
         ],
         "inputLabels": [
@@ -1443,10 +1443,10 @@
         ]
     },
     {
-        "id": "7d60129431706c51",
+        "id": "1d60d079758d9657",
         "type": "debug",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "Logdata",
         "active": false,
         "tosidebar": true,
@@ -1461,10 +1461,10 @@
         "wires": []
     },
     {
-        "id": "ab664906fb402eb4",
+        "id": "4b8080cdd7eaf856",
         "type": "api-call-service",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "Error Signal",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1490,15 +1490,15 @@
         "y": 760,
         "wires": [
             [
-                "ae9aaa66db434271"
+                "502cb96ca41d467a"
             ]
         ]
     },
     {
-        "id": "76bd10a47c99eb1c",
+        "id": "0ec9e194e96bc396",
         "type": "api-call-service",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "PID Output",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1524,15 +1524,15 @@
         "y": 700,
         "wires": [
             [
-                "8c1250ad99db8517"
+                "48e4141a80c46309"
             ]
         ]
     },
     {
-        "id": "df735b02d2f38765",
+        "id": "4c5a83c8798d044f",
         "type": "api-call-service",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "Proportinal term",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1561,10 +1561,10 @@
         ]
     },
     {
-        "id": "7de32c37f343e855",
+        "id": "0cefba675b67ed4c",
         "type": "api-call-service",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "Integral term",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1593,10 +1593,10 @@
         ]
     },
     {
-        "id": "c1b4a407fc1e8aec",
+        "id": "d411ede7cf965b41",
         "type": "api-call-service",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "Differential term",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1625,10 +1625,10 @@
         ]
     },
     {
-        "id": "2bf21c643a4315cc",
+        "id": "800c6944d1522eef",
         "type": "debug",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "Charging",
         "active": false,
         "tosidebar": false,
@@ -1643,10 +1643,10 @@
         "wires": []
     },
     {
-        "id": "8c1250ad99db8517",
+        "id": "48e4141a80c46309",
         "type": "smooth",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "",
         "property": "payload",
         "action": "sd",
@@ -1658,15 +1658,15 @@
         "y": 700,
         "wires": [
             [
-                "cb4a2324369b0f74"
+                "f7967d450a19199c"
             ]
         ]
     },
     {
-        "id": "cb4a2324369b0f74",
+        "id": "f7967d450a19199c",
         "type": "api-call-service",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "PID deviation",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1695,10 +1695,10 @@
         ]
     },
     {
-        "id": "ae9aaa66db434271",
+        "id": "502cb96ca41d467a",
         "type": "smooth",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "",
         "property": "payload",
         "action": "sd",
@@ -1710,15 +1710,15 @@
         "y": 760,
         "wires": [
             [
-                "ae2da60518d7735b"
+                "69d839264c367b51"
             ]
         ]
     },
     {
-        "id": "ae2da60518d7735b",
+        "id": "69d839264c367b51",
         "type": "api-call-service",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "Error deviation",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1747,10 +1747,10 @@
         ]
     },
     {
-        "id": "41a518ccc83f4dea",
+        "id": "4dd1012407cb2215",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "Output dampening",
         "func": "// INPUT\nlet PID_unfiltered = msg.payload; // W Watt\nlet PID_last = context.get(\"PID_last\")||0; // W watt\nlet PID_damp = Number(flow.get(\"house_battery_control_pid_output_dampening\"))||0; // 0% - 100%\nPID_damp = PID_damp/100; // to Number\n\n// simple averaging filter\nlet PID_filtered = (1-PID_damp)*PID_unfiltered + (PID_damp)*PID_last;\n\n// OUTFLOW\ncontext.set(\"PID_last\", PID_filtered);\n\n// OUTPUT\nmsg.payload = Number(PID_filtered)\nreturn msg;",
         "outputs": 1,
@@ -1763,15 +1763,15 @@
         "y": 660,
         "wires": [
             [
-                "980352036928d79e"
+                "b9f6b0762c77478c"
             ]
         ]
     },
     {
-        "id": "980352036928d79e",
+        "id": "b9f6b0762c77478c",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "Output failsafe",
         "func": "// INFLOW\nlet maxCharge = msg.batteries_max_charge_power||undefined;\nlet maxDischarge = msg.batteries_max_discharge_power||undefined;\nlet isCharging = msg.batteries_charging||undefined;\nlet PID_output = msg.payload; // Watt\n\n// No failsafe\nif (maxCharge === undefined || maxDischarge == undefined) {\n    node.status({ fill: \"red\", shape: \"dot\", text: \"disabled\" });\n    node.warn(`Output Failsafe is INACTIVE. Max charge or discharge limits are undefined`);\n    // continue without safeguard\n    return msg;\n} \n\n// limit\nlet limit = 0;\n\n// charging state unknown\nif(isCharging === undefined) {\n    // limit on lowest of charge / discharge\n    limit = Math.min(maxCharge,maxDischarge);    \n}\n// charging state known\nlimit = isCharging ? maxCharge : maxDischarge;\n\n// Safe output\nif (PID_output <= limit){\n    node.status({ fill: \"green\", shape: \"dot\", text: \"safe\" });\n    return msg;\n} \n\n// Unsafe, limit output\nnode.status({ fill: \"yellow\", shape: \"ring\", text: \"power limiting\" });\nmsg.payload = Number(limit);\nreturn msg;",
         "outputs": 1,
@@ -1784,16 +1784,16 @@
         "y": 660,
         "wires": [
             [
-                "1c3dd42576562b1d",
-                "76bd10a47c99eb1c"
+                "c65dfd73b1eb17ec",
+                "0ec9e194e96bc396"
             ]
         ]
     },
     {
-        "id": "3635c761c1682fa4",
+        "id": "37aac13285133e28",
         "type": "rbe",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "on change",
         "func": "rbe",
         "gap": "",
@@ -1806,17 +1806,17 @@
         "y": 880,
         "wires": [
             [
-                "7de32c37f343e855"
+                "0cefba675b67ed4c"
             ]
         ]
     },
     {
-        "id": "1c3dd42576562b1d",
+        "id": "c65dfd73b1eb17ec",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "2f668d531907bf2a",
+        "z": "736b000263ea5101",
+        "g": "a42c5a459f690c83",
         "name": "Load distribution",
-        "func": "// Logger\nconst log = global.get(\"logger\");\nlog(this,\"**PID load distribution**\");\n\n// INPUT\nvar batteries = msg.batteries; // Battery configuration as provided by `Home Batteries IO` flow\nvar isCharging = msg.batteries_charging; // Are we in a battery charging scenario?\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\nvar hasReverseDischargePriority = flow.get(\"has_reverse_priority_discharge\") || false; // Prioritize (dis)charging the same battery\nconst isDischargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.discharge_disabled\"); // Disallow discharging?\n\n// how much power do the batteries need to compensate?\nvar unassigned_power = Math.round(Math.abs(msg.payload)); // Power in W to compensate using batteries\nlog(this,`How much power do the batteries need to compensate: ${unassigned_power} W`);\n\n// inits \nvar solution_array = []; // load distribution solutions\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n/**\n** Battery life improvement (slow charge near max SoC)\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    // Must be greater than zero\n    let limitedPower = Math.max(0, max_power); \n\n    // Limit charge at high SoC\n    if (hasChargingLimiter) {\n        if (soc >= 98)      limitedPower = Math.min(300, limitedPower);\n        else if (soc >= 95) limitedPower = Math.min(500, limitedPower);\n        else if (soc >= 85) limitedPower = Math.min(1500, limitedPower);\n    }\n    return limitedPower;\n}\n\n/**\n* battery life improvement (disconnects battery only if the battery is not used for ... seconds)\n* @param {string | number} batteryID\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getStopSolution(batteryID) {\n    // idle time, before stop is given to inverter relay.\n    let time_idle_minimum = flow.get(\"idle_time_minutes\")*60*1000||0; // Milliseconds\n\n    // retrieve last registered active times for each battery based on their ids\n    let lasttime_active = context.get(\"lasttime_active\");\n    \n    // battery exists in register \n    if(lasttime_active[batteryID] !== undefined){\n        // timing\n        let time_last = lasttime_active[batteryID]; // Milliseconds \n        let time_now = Date.now();                  // Milliseconds \n        let time_idle = (time_now - time_last); // Milliseconds\n        \n        // battery is ready for STOP\n        if (time_idle >= time_idle_minimum) {\n            log(this,`Battery ${batteryID} [STOP]: 0 Watt and disconnect relay.`);\n            return {id: batteryID, mode: CMODE.STOP, power:0}; // STOP or 0 Watt disconnects relay\n        }\n        \n        // battery is kept IDLE, while awaiting minimum inactive time\n        log(this,`Battery ${batteryID} [IDLE]: 1 Watt for ${Math.round((time_idle_minimum-time_idle)/1000)}s. Keep relay engaged.`);\n        return { id: batteryID, mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE, power: 1 }; // 1 Watt keeps battery IDLE, keeping relay engaged\n    }\n\n    // battery missing in register\n    log(this,`Battery ${batteryID} [IDLE]: unknown last active time`);\n    return getActiveSolution(batteryID, 1); // set a last active time and engage idle state\n}\n\n/**\n* Get battery solution and register a last active time.\n* @param {any} batteryID\n* @param {number} assigned_power\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getActiveSolution(batteryID, assigned_power){\n    // register battery as active\n    let lasttime_active = context.get(\"lasttime_active\")||[]; // last registered active times for each battery based on their ids\n    lasttime_active[batteryID] = Date.now();\n    context.set(\"lasttime_active\", lasttime_active);\n\n    // solution\n    return {\n        id: batteryID,\n        mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE,\n        power: Math.round(assigned_power)\n    };\n}\n\n// -- BATTERY DISCHARGE PRIORITY\nif (!isCharging && hasReverseDischargePriority) {\n   batteries.reverse();\n}\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ id: any; soc: number; soc_min: number; soc_max: number; rs485: string; charging_max: number; discharging_max: any; }} */ battery) => {\n    \n    // Explain\n    log(this, `Battery ${battery.id}: ${battery.soc}% (min: ${battery.soc_min}%, max: ${battery.soc_max}%) ; RS485: ${battery.rs485=='enable'?'OK':'Nok'}`);\n\n    // track if the battery should be skipped and why\n    let skipReason = null;\n    if (battery.rs485 !== \"enable\") {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped because RS485 is not 'enable'`;\n    } else if (isCharging && battery.soc >= battery.soc_max) {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped because SoC (${battery.soc}%) >= Max (${battery.soc_max}%) while charging`;\n    } else if (!isCharging && battery.soc <= battery.soc_min) {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped because SoC (${battery.soc}%) <= Min (${battery.soc_min}%) while discharging`;\n    } else if (!isCharging && isDischargeDisabled) {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped, discharging was disabled via msg property`;\n    }\n\n    // battery NOT AVAIABLE, skip via soft stop\n    if (skipReason !== null) {\n        log(this, skipReason);                      // communicate reason\n        let solution = getStopSolution(battery.id); // get a soft stop solution for this battery\n        solution_array.push(solution);              // add solution, do not update last active time.\n        // next battery\n        return; \n    }\n\n    // battery is AVAILABLE, assign power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power);\n    \n    // select solution\n    var solution;\n    if (assign <= 0 ) {\n        // no power solution\n        solution = getStopSolution(battery.id); // a soft stop solution\n        assign = 0;\n    } else {\n        // assigned power solution\n        solution = getActiveSolution(battery.id, Math.round(assign));\n    }\n    solution_array.push(solution);\n    \n    // Explain: charge limiting\n    if(unassigned_power > battery_assignable_power && battery_assignable_power < battery.charging_max) {\n        log(this,`Charging limited to protect battery (${battery.soc}%): ${battery.charging_max}W -> ${battery_assignable_power}W`);\n    }\n    // Explain: solution result\n    log(this, `<font color=\"#009ac7\">Battery ${solution.id}</font>: assigned to ${solution.mode} with ${solution.power}W / ${isCharging ? battery.charging_max : battery.discharging_max }W max.`)\n\n    // remaining power to assign\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n});\n\n// battery discharge priority - put solutions back in initial order\nif (!isCharging && hasReverseDischargePriority) {\n    solution_array.reverse();\n}\n\n// store solutions in msg\nRED.util.setMessageProperty(msg, \"solutions\", solution_array,true);\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power); // this is set for the anti-windup calculation in the earlier 'calculate corrections' node, which will pick this up during next iteration.\n\n// OUTPUT\nreturn msg; // to Home Battery flow",
+        "func": "// Logger\nconst log = global.get(\"logger\");\nlog(this,\"**PID load distribution**\");\n\n// INPUT\nvar batteries = msg.batteries; // Battery configuration as provided by `Home Batteries IO` flow\nvar isCharging = msg.batteries_charging; // Are we in a battery charging scenario?\nvar hasChargingLimiter = flow.get(\"has_soc_charging_limiter\") || false; // Battery life improvement\nvar hasReverseDischargePriority = flow.get(\"has_reverse_priority_discharge\") || false; // Prioritize (dis)charging the same battery\nconst isDischargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.discharge_disabled\"); // Disallow discharging?\n\n// how much power do the batteries need to compensate?\nconst unassigned_power_initial = Math.round(Math.abs(msg.payload)); // Power in W to compensate using batteries\nvar unassigned_power = unassigned_power_initial; // Before distribution\nlog(this,`How much power do the batteries need to compensate: ${unassigned_power} W`);\n\n// inits \nvar solution_array = []; // load distribution solutions\nvar batteries_total_assignable_power = 0; // Current max. available total (dis)charge power. Exceeding this max should trigger the anti-windup routine for the Integral terms\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n/**\n** Battery life improvement (slow charge near max SoC)\n* @param {number} soc\n* @param {number} max_power\n*/\nfunction chargingLimiter(soc, max_power) {\n    // Must be greater than zero\n    let limitedPower = Math.max(0, max_power); \n\n    // Limit charge at high SoC\n    if (hasChargingLimiter) {\n        if (soc >= 98)      limitedPower = Math.min(300, limitedPower);\n        else if (soc >= 95) limitedPower = Math.min(500, limitedPower);\n        else if (soc >= 85) limitedPower = Math.min(1500, limitedPower);\n    }\n    return limitedPower;\n}\n\n/**\n* battery life improvement (disconnects battery only if the battery is not used for ... seconds)\n* @param {string | number} batteryID\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getStopSolution(batteryID) {\n    // idle time, before stop is given to inverter relay.\n    let time_idle_minimum = flow.get(\"idle_time_minutes\")*60*1000||0; // Milliseconds\n\n    // retrieve last registered active times for each battery based on their ids\n    let lasttime_active = context.get(\"lasttime_active\");\n    \n    // battery exists in register \n    if(lasttime_active[batteryID] !== undefined){\n        // timing\n        let time_last = lasttime_active[batteryID]; // Milliseconds \n        let time_now = Date.now();                  // Milliseconds \n        let time_idle = (time_now - time_last); // Milliseconds\n        \n        // battery is ready for STOP\n        if (time_idle >= time_idle_minimum) {\n            log(this,`Battery ${batteryID} [STOP]: 0 Watt and disconnect relay.`);\n            return {id: batteryID, mode: CMODE.STOP, power:0}; // STOP or 0 Watt disconnects relay\n        }\n        \n        // battery is kept IDLE, while awaiting minimum inactive time\n        log(this,`Battery ${batteryID} [IDLE]: 1 Watt for ${Math.round((time_idle_minimum-time_idle)/1000)}s. Keep relay engaged.`);\n        return { id: batteryID, mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE, power: 1 }; // 1 Watt keeps battery IDLE, keeping relay engaged\n    }\n\n    // battery missing in register\n    log(this,`Battery ${batteryID} [IDLE]: unknown last active time`);\n    return getActiveSolution(batteryID, 1); // set a last active time and engage idle state\n}\n\n/**\n* Get battery solution and register a last active time.\n* @param {any} batteryID\n* @param {number} assigned_power\n* @returns {{id: string|number, mode: string, power: number}} battery solution\n*/\nfunction getActiveSolution(batteryID, assigned_power){\n    // register battery as active\n    let lasttime_active = context.get(\"lasttime_active\")||[]; // last registered active times for each battery based on their ids\n    lasttime_active[batteryID] = Date.now();\n    context.set(\"lasttime_active\", lasttime_active);\n\n    // solution\n    return {\n        id: batteryID,\n        mode: isCharging ? CMODE.CHARGE : CMODE.DISCHARGE,\n        power: Math.round(assigned_power)\n    };\n}\n\n// -- BATTERY DISCHARGE PRIORITY\nif (!isCharging && hasReverseDischargePriority) {\n   batteries.reverse();\n}\n\n// -- LOAD BALANCER --\nbatteries.forEach((/** @type {{ id: any; soc: number; soc_min: number; soc_max: number; rs485: string; charging_max: number; discharging_max: any; }} */ battery) => {\n    \n    // Explain\n    log(this, `Battery ${battery.id}: ${battery.soc}% (min: ${battery.soc_min}%, max: ${battery.soc_max}%) ; RS485: ${battery.rs485=='enable'?'OK':'Nok'}`);\n\n    // track if the battery should be skipped and why\n    let skipReason = null;\n    if (battery.rs485 !== \"enable\") {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped because RS485 is not 'enable'`;\n    } else if (isCharging && battery.soc >= battery.soc_max) {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped because SoC (${battery.soc}%) >= Max (${battery.soc_max}%) while charging`;\n    } else if (!isCharging && battery.soc <= battery.soc_min) {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped because SoC (${battery.soc}%) <= Min (${battery.soc_min}%) while discharging`;\n    } else if (!isCharging && isDischargeDisabled) {\n        skipReason = `Battery ${battery.id} [SKIP]: skipped, discharging was disabled via msg property`;\n    }\n\n    // battery NOT AVAIABLE, skip via soft stop\n    if (skipReason !== null) {\n        log(this, skipReason);                      // communicate reason\n        let solution = getStopSolution(battery.id); // get a soft stop solution for this battery\n        solution_array.push(solution);              // add solution, do not update last active time.\n        // next battery\n        return; \n    }\n\n    // battery is AVAILABLE, assign power\n    let battery_assignable_power = isCharging ? chargingLimiter(battery.soc, battery.charging_max) : battery.discharging_max;\n    let assign = Math.min(unassigned_power, battery_assignable_power);\n    \n    // select solution\n    var solution;\n    if (assign <= 0 ) {\n        // no power solution\n        solution = getStopSolution(battery.id); // a soft stop solution\n        assign = 0;\n    } else {\n        // assigned power solution\n        solution = getActiveSolution(battery.id, Math.round(assign));\n    }\n    solution_array.push(solution);\n    \n    // Explain: charge limiting\n    if(unassigned_power > battery_assignable_power && battery_assignable_power < battery.charging_max) {\n        log(this,`Charging limited to protect battery (${battery.soc}%): ${battery.charging_max}W -> ${battery_assignable_power}W`);\n    }\n    // Explain: solution result\n    log(this, `<font color=\"#009ac7\">Battery ${solution.id}</font>: assigned to ${solution.mode} with ${solution.power}W / ${isCharging ? battery.charging_max : battery.discharging_max }W max.`)\n\n    // remaining power to assign\n    unassigned_power -= assign;\n    batteries_total_assignable_power += Number(battery_assignable_power);\n});\n\n// battery discharge priority - put solutions back in initial order\nif (!isCharging && hasReverseDischargePriority) {\n    solution_array.reverse();\n}\n\n// store solutions in msg\nRED.util.setMessageProperty(msg, \"solutions\", solution_array,true);\n// store remaining load distribution results and PID_OUPUT in msg\nRED.util.setMessageProperty(msg, \"pid.output\", unassigned_power_initial, true); // the dampenend & filtered PID_output equals the load requirement\nRED.util.setMessageProperty(msg, \"pid.load\", unassigned_power_initial, true); \nRED.util.setMessageProperty(msg, \"pid.load_capacity\", batteries_total_assignable_power, true);\nRED.util.setMessageProperty(msg, \"pid.load_assigned\", parseInt(unassigned_power_initial - unassigned_power), true);\nRED.util.setMessageProperty(msg, \"pid.load_unassigned\", unassigned_power,true);\n\n// OUTFLOW\nflow.set(\"batteries_total_assignable_power\", batteries_total_assignable_power); // this is set for the anti-windup calculation in the earlier 'calculate corrections' node, which will pick this up during next iteration.\n\n// OUTPUT\nreturn msg; // to Home Battery flow",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1827,8 +1827,8 @@
         "y": 1160,
         "wires": [
             [
-                "85692847b71b7803",
-                "f9cc7a018490fe24"
+                "223e0c2ea4ed0643",
+                "60a5c81cd74bd901"
             ]
         ],
         "inputLabels": [
@@ -1836,10 +1836,10 @@
         ]
     },
     {
-        "id": "85692847b71b7803",
+        "id": "223e0c2ea4ed0643",
         "type": "debug",
-        "z": "f30ba466ccfa5f11",
-        "g": "2f668d531907bf2a",
+        "z": "736b000263ea5101",
+        "g": "a42c5a459f690c83",
         "name": "Load distribution",
         "active": false,
         "tosidebar": true,
@@ -1854,10 +1854,10 @@
         "wires": []
     },
     {
-        "id": "071f6eb866d173ae",
+        "id": "1e1f80ad7d25a31d",
         "type": "switch",
-        "z": "f30ba466ccfa5f11",
-        "g": "bcda8fc81ea90fe1",
+        "z": "736b000263ea5101",
+        "g": "2d9b52f337448412",
         "name": "Pass or Halt",
         "property": "payload",
         "propertyType": "msg",
@@ -1880,18 +1880,18 @@
         "y": 340,
         "wires": [
             [
-                "a749c7afc466eaf0"
+                "3fe1f7700644c554"
             ],
             [
-                "8e8b694bcd3a0e53"
+                "255dbd408a7575a6"
             ]
         ]
     },
     {
-        "id": "f9cc7a018490fe24",
+        "id": "60a5c81cd74bd901",
         "type": "link out",
-        "z": "f30ba466ccfa5f11",
-        "g": "7aa71fce7fa5adc9",
+        "z": "736b000263ea5101",
+        "g": "56e138bc0644795e",
         "name": "Return",
         "mode": "return",
         "links": [],
@@ -1900,10 +1900,10 @@
         "wires": []
     },
     {
-        "id": "729e9e68ce2d8b56",
+        "id": "52e3329a2293e4f8",
         "type": "comment",
-        "z": "f30ba466ccfa5f11",
-        "g": "7aa71fce7fa5adc9",
+        "z": "736b000263ea5101",
+        "g": "56e138bc0644795e",
         "name": "End (readme)",
         "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
         "x": 170,
@@ -1911,14 +1911,14 @@
         "wires": []
     },
     {
-        "id": "a749c7afc466eaf0",
+        "id": "3fe1f7700644c554",
         "type": "link out",
-        "z": "f30ba466ccfa5f11",
-        "g": "bcda8fc81ea90fe1",
+        "z": "736b000263ea5101",
+        "g": "2d9b52f337448412",
         "name": "go to End",
         "mode": "link",
         "links": [
-            "01e259655b17ba2a"
+            "b9e7afddfa210c5c"
         ],
         "x": 1090,
         "y": 340,
@@ -1929,27 +1929,27 @@
         "l": true
     },
     {
-        "id": "01e259655b17ba2a",
+        "id": "b9e7afddfa210c5c",
         "type": "link in",
-        "z": "f30ba466ccfa5f11",
-        "g": "7aa71fce7fa5adc9",
+        "z": "736b000263ea5101",
+        "g": "56e138bc0644795e",
         "name": "link to End",
         "links": [
-            "a749c7afc466eaf0"
+            "3fe1f7700644c554"
         ],
         "x": 105,
         "y": 1240,
         "wires": [
             [
-                "f9cc7a018490fe24"
+                "60a5c81cd74bd901"
             ]
         ]
     },
     {
-        "id": "3c5a686080cb7fd3",
+        "id": "1d6f200c7f1ffbe9",
         "type": "api-call-service",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "Is charging",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1976,10 +1976,10 @@
         ]
     },
     {
-        "id": "44a58f7a54dc0540",
+        "id": "b37e5d6417e0bb85",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "Config action",
         "func": "const value = msg.payload;\nconst target = \"input_boolean.house_battery_control_is_charging\";\n\nmsg.payload = {\n    \"action\": value?\"input_boolean.turn_on\":\"input_boolean.turn_off\",\n    \"target\": {\n        \"entity_id\": [target]\n    },\n    \"data\": {}\n}\n\n\nreturn msg;",
         "outputs": 1,
@@ -1992,15 +1992,15 @@
         "y": 1000,
         "wires": [
             [
-                "3c5a686080cb7fd3"
+                "1d6f200c7f1ffbe9"
             ]
         ]
     },
     {
-        "id": "32624c4b5fb3b407",
+        "id": "03630347c379bb1f",
         "type": "switch",
-        "z": "f30ba466ccfa5f11",
-        "g": "b40bcf8fad0f5e9f",
+        "z": "736b000263ea5101",
+        "g": "4e4100130b7f0ca9",
         "name": "Target",
         "property": "house_target_grid_consumption_in_w",
         "propertyType": "msg",
@@ -2019,18 +2019,18 @@
         "y": 120,
         "wires": [
             [
-                "9c803ff2895a167d"
+                "ff5ef58906e1ec3a"
             ],
             [
-                "12429f8a27b41d1c"
+                "3cf19ceecdac96f5"
             ]
         ]
     },
     {
-        "id": "5f6beb75f62df3c8",
+        "id": "509c9772362a2eec",
         "type": "debug",
-        "z": "f30ba466ccfa5f11",
-        "g": "b40bcf8fad0f5e9f",
+        "z": "736b000263ea5101",
+        "g": "4e4100130b7f0ca9",
         "name": "Target",
         "active": true,
         "tosidebar": false,
@@ -2045,10 +2045,10 @@
         "wires": []
     },
     {
-        "id": "314ecb69a511116c",
+        "id": "f72f648f572a4153",
         "type": "server-state-changed",
-        "z": "f30ba466ccfa5f11",
-        "g": "41f1728bdbe183cb",
+        "z": "736b000263ea5101",
+        "g": "da2b8fa1e322a5de",
         "name": "Strategy changes",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -2100,15 +2100,15 @@
         "y": 340,
         "wires": [
             [
-                "b4d8893b99b0eaf1"
+                "cbd8f390b98c3913"
             ]
         ]
     },
     {
-        "id": "b4d8893b99b0eaf1",
+        "id": "cbd8f390b98c3913",
         "type": "switch",
-        "z": "f30ba466ccfa5f11",
-        "g": "41f1728bdbe183cb",
+        "z": "736b000263ea5101",
+        "g": "da2b8fa1e322a5de",
         "name": "",
         "property": "payload",
         "propertyType": "msg",
@@ -2126,16 +2126,16 @@
         "y": 340,
         "wires": [
             [
-                "e72e1046cb4b42cf"
+                "ce2ec7bbd77ebecc"
             ]
         ],
         "l": false
     },
     {
-        "id": "13b59a4be4c7a1aa",
+        "id": "f019a4f59fdb506e",
         "type": "server-state-changed",
-        "z": "f30ba466ccfa5f11",
-        "g": "41f1728bdbe183cb",
+        "z": "736b000263ea5101",
+        "g": "da2b8fa1e322a5de",
         "name": "Full stop trigger",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -2186,15 +2186,15 @@
         "y": 420,
         "wires": [
             [
-                "40566ce60eabcfca"
+                "f43673715d28e4f9"
             ]
         ]
     },
     {
-        "id": "40566ce60eabcfca",
+        "id": "f43673715d28e4f9",
         "type": "switch",
-        "z": "f30ba466ccfa5f11",
-        "g": "41f1728bdbe183cb",
+        "z": "736b000263ea5101",
+        "g": "da2b8fa1e322a5de",
         "name": "",
         "property": "payload",
         "propertyType": "msg",
@@ -2212,16 +2212,16 @@
         "y": 420,
         "wires": [
             [
-                "e72e1046cb4b42cf"
+                "ce2ec7bbd77ebecc"
             ]
         ],
         "l": false
     },
     {
-        "id": "ff917eec2bac8506",
+        "id": "48c11315ddd79c95",
         "type": "rbe",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "on change",
         "func": "rbe",
         "gap": "",
@@ -2234,15 +2234,15 @@
         "y": 820,
         "wires": [
             [
-                "df735b02d2f38765"
+                "4c5a83c8798d044f"
             ]
         ]
     },
     {
-        "id": "93303882aa169239",
+        "id": "06950d2887f2c392",
         "type": "rbe",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "on change",
         "func": "rbe",
         "gap": "",
@@ -2255,15 +2255,15 @@
         "y": 940,
         "wires": [
             [
-                "c1b4a407fc1e8aec"
+                "d411ede7cf965b41"
             ]
         ]
     },
     {
-        "id": "f93516b97ce4a769",
+        "id": "6afdc3d9621128ea",
         "type": "rbe",
-        "z": "f30ba466ccfa5f11",
-        "g": "bead7269d369539c",
+        "z": "736b000263ea5101",
+        "g": "c2a23d4fdd3d7304",
         "name": "on change",
         "func": "rbe",
         "gap": "",
@@ -2276,16 +2276,16 @@
         "y": 1000,
         "wires": [
             [
-                "44a58f7a54dc0540",
-                "2bf21c643a4315cc"
+                "b37e5d6417e0bb85",
+                "800c6944d1522eef"
             ]
         ]
     },
     {
-        "id": "60ae32376ecfc80f",
+        "id": "a3a9b9b775eab2a1",
         "type": "change",
-        "z": "f30ba466ccfa5f11",
-        "g": "5a25d3747903420b",
+        "z": "736b000263ea5101",
+        "g": "4ce329cb8b239ba2",
         "name": "Trace",
         "rules": [
             {
@@ -2305,16 +2305,16 @@
         "y": 200,
         "wires": [
             [
-                "32624c4b5fb3b407"
+                "03630347c379bb1f"
             ]
         ],
         "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     },
     {
-        "id": "c090a5b5b0f37a65",
+        "id": "d2f1f1c4504b2852",
         "type": "catch",
-        "z": "f30ba466ccfa5f11",
-        "g": "7fd13baf56fa632b",
+        "z": "736b000263ea5101",
+        "g": "d0770aa009626dae",
         "name": "",
         "scope": null,
         "uncaught": false,
@@ -2322,16 +2322,16 @@
         "y": 320,
         "wires": [
             [
-                "f2b5a2f2a264627c"
+                "8062af9511651ec9"
             ]
         ],
         "l": false
     },
     {
-        "id": "f2b5a2f2a264627c",
+        "id": "8062af9511651ec9",
         "type": "function",
-        "z": "f30ba466ccfa5f11",
-        "g": "7fd13baf56fa632b",
+        "z": "736b000263ea5101",
+        "g": "d0770aa009626dae",
         "name": "Unhandled Exception",
         "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
         "outputs": 1,
@@ -2344,16 +2344,16 @@
         "y": 320,
         "wires": [
             [
-                "2eaf01f6ced1f662"
+                "e2a8a8cdf1dac6b7"
             ]
         ],
         "l": false
     },
     {
-        "id": "2eaf01f6ced1f662",
+        "id": "e2a8a8cdf1dac6b7",
         "type": "link out",
-        "z": "f30ba466ccfa5f11",
-        "g": "7fd13baf56fa632b",
+        "z": "736b000263ea5101",
+        "g": "d0770aa009626dae",
         "name": "link out 7",
         "mode": "return",
         "links": [],
@@ -2376,7 +2376,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "ea5a586be9b0992d",
+        "id": "6738951dd17e623e",
         "type": "global-config",
         "env": [],
         "modules": {
