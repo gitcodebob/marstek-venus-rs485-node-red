@@ -57,15 +57,54 @@ nav_order: 6
    - Remove the `Loop step` and `Loop until`, tie the `Mapping` to the `Battery strategy` directly.
    - Deploy as per normal instructions.
 
-## Charging/Discharging limits
-- Marstek Venus E batteries with hardware versions prior to 3 allowed setting the discharging
-  limit (minimum state of charge) and the charging limit (maximum state of charge).
-  These limits are no longer exposed in the v3 batteries. 
-  To overcome this, a number of `input_number` helpers are defined which are used for 
-  all batteries instead of the device limits.
-  They can be configured from the Power Limits tab in the dashboard.
-- Using the `input_number`s also allows a higher discharging cutoff limit than the
-  Marstek limits. This can therefore be used for example to implement something like
-  the [Victron BatteryLife](https://www.victronenergy.com/media/pg/Energy_Storage_System/en/controlling-depth-of-discharge.html#UUID-af4a7478-4b75-68ac-cf3c-16c381335d1e)
-  strategy to ensure the battery reaches 100% State of Charge regularly for 
-  calibration purposes.
+## Power Limits Configuration
+The system uses two distinct types of power limits, each serving different purposes:
+
+### Battery State of Charge (SoC) Limits
+These protect your battery by preventing over-charging and over-discharging.
+
+- Marstek Venus E batteries with hardware versions prior to V3 allowed setting these limits directly on the device. These are no longer exposed in V3 batteries.
+- Home Battery Control uses `input_number` helpers to manage SoC limits globally across all batteries
+- **Minimum SoC (Discharge limit):** Prevents the battery from discharging below this level (protects battery health and ensures reserve capacity)
+  - Example: Set to 10% to keep a minimum reserve for emergencies
+  - Can be set higher than manufacturer limits using the software helpers
+- **Maximum SoC (Charge limit):** Prevents charging beyond this level (extends battery lifespan)
+  - Example: Set to 95% to reduce stress on battery cells
+- **Configuration:** Adjust from the "Power Limits" tab in the Home Assistant dashboard
+- **Advanced use case:** Implement [Victron BatteryLife-like strategies](https://www.victronenergy.com/media/pg/Energy_Storage_System/en/controlling-depth-of-discharge.html#UUID-af4a7478-4b75-68ac-cf3c-16c381335d1e) by enforcing regular full charge cycles for battery calibration
+
+### Grid Power Limits
+Controls grid import/export thresholds for `peak shaving` functionality.
+
+- **Import limit:** Maximum power to draw from the grid (example: 16A × 230V = 3680W for CAPTAR contracts)
+- **Export limit:** Maximum power to feed back to the grid (example: 3000W if grid connection has export limits)
+- **Configuration:** Adjust from the "Settings" tab in the Home Assistant dashboard
+
+## Peak Shaving
+Peak Shaving helps reduce import and export peaks on your grid connection by intelligently using your battery capacity. This is particularly valuable for customers on capacity tariff contracts (CAPTAR, capaciteitstarief).
+
+**How it works:**
+- When grid power exceeds your configured limits, Peak Shaving activates automatically
+- Your batteries discharge (during import peaks) or charge (during export peaks) to keep grid power within limits
+- Peak Shaving takes control across all strategies, allowing them to continue working while respecting power limits
+- Peak Shaving releases automatically once grid power returns to normal for a short duration (timeout period)
+
+**Use cases:**
+- **Capacity tariffs (CAPTAR):** Reduce billing costs by limiting maximum import power
+- **Grid constraint management:** Prevent fuses from blowing when multiple high-power appliances (EV, heat pump) operate together
+- **Smooth PV generation:** Reduce export spikes during rapid sunshine changes
+
+**Configuration:**
+- Set your **import limit** on the "Settings" tab (maximum power you want to draw from the grid)
+- Set your **export limit** on the "Settings" tab (maximum power you want to feed back to the grid)
+  - Note: Most capacity tariff contracts only require import limiting
+- Peak Shaving integrates seamlessly with Charge, Self-consumption, Sell, Dynamic, and Timed strategies
+- Full Stop strategy takes precedence and will not be overridden by peak shaving
+
+**Limitations to understand:**
+- Peak Shaving is **not a safety mechanism** and should not replace proper overload protection or fuses
+- Requires available battery capacity:
+  - Import peak shaving requires the battery to have charge available (not empty)
+  - Export peak shaving requires the battery to have room to charge (not full)
+- Charge and Sell strategies will peak shave AFTER reaching their primary goals (desired SoC or sell target)
+- Lack of available capacity isn't explicitly shown to the user (must be inferred from battery state)

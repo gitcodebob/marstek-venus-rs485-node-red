@@ -1556,7 +1556,7 @@ views:
             tap_action:
               action: url
               url_path: >-
-                https://docs.homebatterycontrol.com/06-advanced-features.html#battery-life
+                https://docs.homebatterycontrol.com/06-advanced-features.html#peak-shaving
           - type: markdown
             content: >-
               <font color=grey><i>Use your batteries to reduce peak loads and
