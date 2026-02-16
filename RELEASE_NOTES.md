@@ -9,7 +9,7 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
   * Note: all strategies seamlessly allow peak shaving to take control. Excl. Full Stop, which takes precedence.
   * Note: configurable grid power limits for both import and export thresholds
   * Note: captar usually only requires _import_ limiting
-  * Disclaimer: peak shaving is not a safeguard or replacement for peak protection, overloads or fuses.
+  * Disclaimer: peak shaving is not a safeguard or replacement for peak protection, overload protection or fuses.
 
 - **Improvements: Power limit configuration**
   * Refactored power limit settings from strategy-specific to global configuration
@@ -22,6 +22,12 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
 
 - **Fix: Missing icons**
   * Added missing icons to various UI elements
+
+- **Discussion points**
+  * Charge / Sell perform power limiting, but do not peak shave until they reach their charge/sell goal. 
+    * E.g. Charge does not discharge to help peak shave unless it's desired SoC/reserve has been reached.
+  * A lack of available capacity or charge to perform the peak shaving is not communicated to the user.
+    * E.g. if your batteries are empty, they cannot perform an import peak shave. This can be inferred, but is not explicitly visible. 
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
