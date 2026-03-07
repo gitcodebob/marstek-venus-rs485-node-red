@@ -43,6 +43,8 @@ Tuning of charging levels (SoC) based on PV Forecast can be created by you as a 
 
 Done.
 
+Need an example of a Data Provider utilizing a blueprint and template sensor? See [Nordpool (core)](#nordpool-core) example.
+
 ## USE - the dynamic strategy
 [![How to use Dynamic](https://img.youtube.com/vi/PR1XA5GUlAE/hqdefault.jpg)](https://youtu.be/PR1XA5GUlAE)
 
@@ -99,3 +101,24 @@ _FAQ_
 - **Charged at**: Shows the average price during charging hours  
 - **Price delta**: The difference between expensive and cheap periods
 
+### Examples
+#### Nordpool (core)
+1. Install Nordpool Core integration [(link)](https://www.home-assistant.io/integrations/nordpool/)
+2. Install Cheapest Energy Hours integration trough HACS [(link)](https://github.com/TheFes/cheapest-energy-hours)
+3. Install blueprint from Cheapest Energy Hours [(link)](https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/blueprints/energy_price_sensor.md)
+4. Put following code into your template.yaml file, make sure that file is linked from your configuration.yaml file
+
+```
+- use_blueprint:
+    path: TheFes/energy_price_sensor.yaml
+    input:
+      entity_id: sensor.nordpool_ceh_prices
+      source: nordpool
+      resolution: 15
+      name: Nordpool Cheapest Energy Hours
+  unique_id: 881b6558-26c6-44bb-81c5-d86c05451bd4
+```
+
+5. Now you have a sensor called sensor.nordpool_ceh_prices
+6. Replace this sensor name in the Node Red flow for Dynamic Strategy as show in this first post: go to Node Red, select tab Strategy Dynamic, double click 'Data Source Settings'
+7. Probably you have to wait some time until data is loaded
