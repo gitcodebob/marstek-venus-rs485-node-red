@@ -418,7 +418,7 @@ views:
             entities:
               - entity: sensor.marstek_m1_battery_state_of_charge
                 name: M1 SoC
-              - entity: sensor.marstek_m1_battery_power
+              - entity: sensor.marstek_m1_ac_power
                 name: M1 Power
               - entity: number.marstek_m1_max_charge_power
                 name: Max Charge
@@ -445,7 +445,7 @@ views:
             entities:
               - entity: sensor.marstek_m2_battery_state_of_charge
                 name: M2 SoC
-              - entity: sensor.marstek_m2_battery_power
+              - entity: sensor.marstek_m2_ac_power
                 name: M2 Power
               - entity: number.marstek_m2_max_charge_power
                 name: Max Charge
@@ -477,7 +477,7 @@ views:
             entities:
               - entity: sensor.marstek_m3_battery_state_of_charge
                 name: M3 SoC
-              - entity: sensor.marstek_m3_battery_power
+              - entity: sensor.marstek_m3_ac_power
                 name: M3 Power
               - entity: number.marstek_m3_max_charge_power
                 name: Max Charge
@@ -509,7 +509,7 @@ views:
             entities:
               - entity: sensor.marstek_m4_battery_state_of_charge
                 name: M4 SoC
-              - entity: sensor.marstek_m4_battery_power
+              - entity: sensor.marstek_m4_ac_power
                 name: M4 Power
               - entity: number.marstek_m4_max_charge_power
                 name: Max Charge
@@ -568,7 +568,7 @@ views:
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.5.0)*'
+        content: '### Home Battery Control *(v4.5.1)*'
         text_only: true
     cards: []
   - type: sections

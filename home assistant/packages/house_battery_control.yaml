@@ -630,8 +630,9 @@ input_select:
       - ENTSO-E
       - Frank Energie
       - GE-Spot
-      - Tibber, Nordpool (core)
+      - Tibber (core)
       - Tibber (custom)
+      - Nordpool (core)
       - Nordpool (custom)
       - PVPC (Spain)
       - Octopus Energy

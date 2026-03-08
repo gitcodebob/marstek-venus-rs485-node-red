@@ -1,6 +1,22 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.5.1
+- **Tweak: AC power displayed on dashboard**
+  * At the main dashboard, the batteries now show the AC power instead of DC power.
+  * AC is simpler and more logical for users to understand. e.g. Charging at 800W now displays 800W instead of 723W (the net internal battery power)
+  * Note: the sign has flipped. Positive is now battery consumption, negative is battery charging.
+
+- **Fix: Nordpool (core) dynamic price loading (fixes #91)**
+  * Split combined "Tibber, Nordpool (core)" option into separate "Tibber (core)" and "Nordpool (core)" entries
+  * Resolves price data not loading correctly for Nordpool (core) users
+  * Added setup instructions for Nordpool (core) using the Cheapest Energy Hours blueprint
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-dynamic.json`
+
 ## 4.5.0
 - **Feature: Peak Shaving & grid limits**
   * When Peak Shaving you utilize your batteries (when able) to reduce import/export peaks on your grid connections
