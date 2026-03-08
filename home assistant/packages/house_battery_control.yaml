@@ -425,8 +425,9 @@ input_number:
   house_battery_strategy_dynamic_cheapest_avg_tariff:
     name: Avg cheapest tariff
     icon: mdi:cash
-    min: 0
+    min: -1000
     max: 1000
+    initial: 0
     step: 1 # Cents
     unit_of_measurement: "cents"
     mode: box
@@ -435,8 +436,9 @@ input_number:
   house_battery_strategy_dynamic_expensive_avg_tariff:
     name: Avg expensive tariff
     icon: mdi:cash
-    min: 0
+    min: -1000
     max: 1000
+    initial: 0
     step: 1 # Cents
     unit_of_measurement: "cents"
     mode: box
@@ -783,19 +785,19 @@ template:
         unique_id: house_battery_strategy_dynamic_is_below_threshold_cheapest_tariff
         # The sensor is 'on' when avg tariff is equal or less than the threshold
         state: >
-          {% set avg_tariff = states('input_number.house_battery_strategy_dynamic_cheapest_avg_tariff') | float(0) %}
-          {% set threshold = states('input_number.house_battery_strategy_dynamic_threshold_cheapest_period') | float(0) %}
-          {{ avg_tariff > 0 and avg_tariff <= threshold }}
+          {% set avg_tariff = states('input_number.house_battery_strategy_dynamic_cheapest_avg_tariff') | float(default=none) %}
+          {% set threshold = states('input_number.house_battery_strategy_dynamic_threshold_cheapest_period') | float(default=none) %}
+          {{ threshold is not none and avg_tariff is not none and avg_tariff <= threshold }}
 
       # Strategy dynamic | is the daily spread large enough to call this an 'expensive period'
       - name: "Is above threshold price delta"
         unique_id: house_battery_strategy_dynamic_is_above_threshold_price_delta
         # The sensor is 'on' when price delta is equal or more than the threshold
         state: >
-          {% set low = states('input_number.house_battery_strategy_dynamic_cheapest_avg_tariff') | float(0) %}
-          {% set high = states('input_number.house_battery_strategy_dynamic_expensive_avg_tariff') | float(0) %}
-          {% set threshold = states('input_number.house_battery_strategy_dynamic_threshold_delta') | float(0) %}
-          {{ high > 0 and (high - low) >= threshold }}
+          {% set low = states('input_number.house_battery_strategy_dynamic_cheapest_avg_tariff') | float(default=none) %}
+          {% set high = states('input_number.house_battery_strategy_dynamic_expensive_avg_tariff') | float(default=none) %}
+          {% set threshold = states('input_number.house_battery_strategy_dynamic_threshold_delta') | float(default=none) %}
+          {{ high is not none and low is not none and threshold is not none and (high - low) >= threshold }}
 
   - trigger:
       - trigger: event
