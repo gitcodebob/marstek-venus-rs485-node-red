@@ -2,6 +2,8 @@
 
 Thanks for your interest in contributing to this project!
 
+Note: yaml and json files are not the easiest to review or merge into software projects. For larger or multiple changes, please open an issue and get in touch to discuss solution design and how to make contributing fun and easier to integrate. Quite a few people use this project so we are a bit beyond: "works on my machine" testing as well. 
+
 ## Before you submit a pull request
 
 Run the validation script from the repository root to catch any inconsistencies before committing:

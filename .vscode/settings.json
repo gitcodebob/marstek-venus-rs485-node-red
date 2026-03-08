@@ -8,6 +8,7 @@
     },
     "chat.tools.terminal.autoApprove": {
         "git stash": true,
-        "Get-Item": true
+        "Get-Item": true,
+        ".\\contribute\\check.ps1": true
     }
 }
