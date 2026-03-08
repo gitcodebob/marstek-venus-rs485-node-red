@@ -1,6 +1,15 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.5.2
+- **Fix: Negative, None and 0 cents energy price handling in Dynamic strategy**
+  * Fix by *yavasura* for None values
+  * Fix negative price compatibility
+
+- **Files Changed:**
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-dynamic.json`
+
 ## 4.5.1
 - **Tweak: AC power displayed on dashboard**
   * At the main dashboard, the batteries now show the AC power instead of DC power.
