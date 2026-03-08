@@ -425,8 +425,9 @@ input_number:
   house_battery_strategy_dynamic_cheapest_avg_tariff:
     name: Avg cheapest tariff
     icon: mdi:cash
-    min: 0
+    min: -1000
     max: 1000
+    initial: 0
     step: 1 # Cents
     unit_of_measurement: "cents"
     mode: box
@@ -435,8 +436,9 @@ input_number:
   house_battery_strategy_dynamic_expensive_avg_tariff:
     name: Avg expensive tariff
     icon: mdi:cash
-    min: 0
+    min: -1000
     max: 1000
+    initial: 0
     step: 1 # Cents
     unit_of_measurement: "cents"
     mode: box
@@ -856,4 +858,3 @@ recorder:
       # Status fields (updated frequently)
       - input_number.house_battery_total_available_energy
       - sensor.battery_time_remaining
-
