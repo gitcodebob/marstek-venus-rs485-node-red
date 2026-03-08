@@ -4,9 +4,14 @@
 - Prioritize security, performance, and readability in code suggestions.
 - Use clear and concise language.
 
+## Contribute Scripts:
+The `contribute/` folder contains automation scripts. See `contribute/AGENTS.md` for the full reference.
+- **`.\contribute\check.ps1`** — Validates JSON, node counts, version consistency, combined file sync, and release notes. Run before every commit.
+- **`.\contribute\bump-version.ps1 -Type <patch|minor|major>`** — Bumps the SemVer in all flow labels and `dashboard.yaml`. Use `-DryRun` to preview.
+
 ## Commit Workflow:
 - When asked to commit, or "commit and push", always:
-    1. Check all /node-red/ json files if they contain atleast 5 nodes or more. Otherwise halt and inform the user some files might be missing nodes.
+    1. Run `.\contribute\check.ps1`. If it fails, halt and report the errors to the user before proceeding.
     1. Stage all relevant modified and new files in git.
     1. Perform `git status` to check the current state of the repository.
     1. Generate a concise, descriptive commit message in the imperative mood (e.g., "Fix: Resolve login issue," "Feat: Add user profiles").
@@ -14,16 +19,8 @@
     1. If documentation related to the changes exists (e.g., in `README.md`), suggest updates or ask if updates are needed.
     1. Use the approved commit message to update the `RELEASE_NOTES.md` if applicable.
         1. Ask the user if they want a major, minor, or patch version bump according to Semantic Versioning (SemVer).
-        1. **CRITICAL**: Check ALL Node-RED flow file version labels by running a PowerShell command to list current versions:
-           ```powershell
-           Get-ChildItem "node-red\*.json" | ForEach-Object { $content = Get-Content $_.FullName -Raw | ConvertFrom-Json; Write-Host "$($_.Name): $($content[0].label)" }
-           ```
+        1. **CRITICAL**: Run `.\contribute\bump-version.ps1 -Type <type>` to apply the version bump, then run `.\contribute\check.ps1` to verify all files are consistent.
         1. Check if `node-red\all-flows-in-one-file.json` has been updated to contain ALL recent changes from individual flow files. If not, inform the user to update it before proceeding.
-        1. Update the `Home Battery Control (v <version>)` in `home assistant\dashboard.yaml` to match the new SemVer version.
-        1. Update the `"label": <name> v <version>` property in the FIRST object of EVERY json file in `node-red\` that has a version label to match the new SemVer version. This includes:
-           - `01 start-flow.json`
-           - All `02 strategy-*.json` files (charge-pv, charge, dynamic, full-stop, self-consumption, sell, timed)
-           - Do NOT update `00 master-switch-flow.json` or `00 presets-switch-flow.json` (they don't have version labels)
         1. Update the release notes "**Files Changed:**" section:
            - **ALWAYS include** `home assistant\dashboard.yaml` (user-facing version indicator)
            - **ONLY include** `node-red\` files that have functional/code changes beyond just version label updates
