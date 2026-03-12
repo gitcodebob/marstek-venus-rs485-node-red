@@ -10,6 +10,9 @@
       - node-red/all-flows-in-one-file.json      (all version labels)
       - home assistant/dashboard.yaml            (version string in content card)
 
+    Before bumping, verifies that all-flows-in-one-file.json contains the
+    same current version as the individual flow files.
+
     Use -DryRun to preview all changes without writing any files.
 
 .PARAMETER Type
@@ -99,6 +102,27 @@ Write-Host "  $Type bump: v$oldVersion  -->  v$newVersion" -ForegroundColor $(if
 Write-Host ""
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Pre-flight: verify all-flows-in-one-file.json has the current version
+# ─────────────────────────────────────────────────────────────────────────────
+$allFlowsPath = Join-Path $NR 'all-flows-in-one-file.json'
+$allFlowsRaw = Get-Content $allFlowsPath -Raw
+$allFlowsJson = $allFlowsRaw | ConvertFrom-Json
+
+# Collect versioned tab labels from all-flows-in-one-file.json
+$allFlowsTabs = @($allFlowsJson) | Where-Object { $_.type -eq 'tab' -and $_.label -match 'v(\d+\.\d+\.\d+)' }
+foreach ($tab in $allFlowsTabs) {
+    if ($tab.label -match 'v(\d+\.\d+\.\d+)') {
+        $tabVersion = $matches[1]
+        if ($tabVersion -ne $oldVersion) {
+            Write-Error "all-flows-in-one-file.json tab '$($tab.label)' has version v$tabVersion but expected v$oldVersion. Re-export your flows first."
+            exit 1
+        }
+    }
+}
+Write-Host "  [ OK  ] all-flows-in-one-file.json: all versioned tabs match v$oldVersion" -ForegroundColor Green
+Write-Host ""
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Update node-red/01 start-flow.json
 # ─────────────────────────────────────────────────────────────────────────────
 $newStartRaw = $startRaw -replace "v$([regex]::Escape($oldVersion))", "v$newVersion"
@@ -127,11 +151,9 @@ foreach ($file in $strategyFiles) {
 # ─────────────────────────────────────────────────────────────────────────────
 # Update node-red/all-flows-in-one-file.json
 # ─────────────────────────────────────────────────────────────────────────────
-$combinedFile = Join-Path $NR 'all-flows-in-one-file.json'
-$combinedRaw = Get-Content $combinedFile -Raw
-$newCombinedRaw = $combinedRaw -replace "v$([regex]::Escape($oldVersion))", "v$newVersion"
-if ($newCombinedRaw -ne $combinedRaw) {
-    Save-File $combinedFile $newCombinedRaw
+$newAllFlowsRaw = $allFlowsRaw -replace "v$([regex]::Escape($oldVersion))", "v$newVersion"
+if ($newAllFlowsRaw -ne $allFlowsRaw) {
+    Save-File $allFlowsPath $newAllFlowsRaw
 }
 else {
     Write-Skip "all-flows-in-one-file.json (no change)"

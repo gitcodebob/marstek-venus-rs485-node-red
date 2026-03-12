@@ -27,7 +27,8 @@ The `contribute/` folder contains automation scripts. See `contribute/AGENTS.md`
     1. If documentation related to the changes exists (e.g., in `README.md`), suggest updates or ask if updates are needed.
     1. Use the approved commit message to update the `RELEASE_NOTES.md` if applicable.
         1. Ask the user if they want a major, minor, or patch version bump according to Semantic Versioning (SemVer).
-        1. **CRITICAL**: Run `.\contribute\bump-version.ps1 -Type <type>` to apply the version bump, then run `.\contribute\check.ps1` to verify all files are consistent.
+        1. **CRITICAL**: First run `.\contribute\check.ps1` to validate the current state. If it passes, run `.\contribute\bump-version.ps1 -Type <type>` to apply the version bump, then run `.\contribute\check.ps1` again to verify all files are consistent.
+        1. Check if `node-red\all-flows-in-one-file.json` has been updated to contain ALL recent **functional** changes from individual flow files. Version labels are bumped automatically by `bump-version.ps1`, but any other flow changes require a re-export first.
         1. Update the release notes "**Files Changed:**" section:
            - **ALWAYS include** `home assistant\dashboard.yaml` (user-facing version indicator)
            - **ONLY include** `node-red\` files that have functional/code changes beyond just version label updates
