@@ -1368,7 +1368,7 @@
             heading_style: title
           - type: heading
             icon: mdi:list-status
-            heading: ðŸ•µï¸ Flow trace
+            heading: 🕵️ Flow trace
             heading_style: subtitle
           - type: markdown
             content: >-
@@ -1410,7 +1410,7 @@
                 {%- set next_dt = (next_ts / 1000) | as_datetime if next_ts is number else as_datetime(next_ts) -%}
                 {%- set delta = (next_dt - current_dt).total_seconds() if next_dt and current_dt else 0 -%}
                 | {{ loop.index }} | {{ entry.flow }} | `{{ "{:.3f}".format(delta) }}s` |
-              {% endfor %} | âœ”ï¸ | Home Battery Start | `Done` |
+              {% endfor %} | ✔️ | Home Battery Start | `Done` |
 
 
               **Total `{{ "{:.3f}".format(total_dt) }}s`** spent in strategy
@@ -1422,7 +1422,7 @@
             heading_style: title
           - type: heading
             icon: mdi:list-box-outline
-            heading: ðŸ“‹ Explanations (last 100 items)
+            heading: 📋 Explanations (last 100 items)
             heading_style: subtitle
           - type: markdown
             content: >
@@ -1457,7 +1457,7 @@
 
           Hit **Insights mode**. _Auto-off after 5min._
 
-          ðŸ“˜ [Troubleshooting
+          📘 [Troubleshooting
           documentation](https://docs.homebatterycontrol.com/07-troubleshooting.html)
       layout: center
       badges_position: top
@@ -1705,7 +1705,7 @@
               when the EV stop trigger is active. The EV stop trigger does stop
               any other strategies from executing.</i> 
 
-              â„¹ï¸ Your grid import limit should be larger than your EV charge
+              ℹ️ Your grid import limit should be larger than your EV charge
               power to prevent your EV from draining your home battery.
 
               </font>

@@ -146,6 +146,29 @@ if ($currentVersion) {
     else {
         Write-Fail "dashboard.yaml: version string 'Home Battery Control *(v<x.y.z>)*' not found"
     }
+
+    # Check all-flows-in-one-file.json
+    if ($allFlowsJson) {
+        $allFlowsVersionLabel = @($allFlowsJson) |
+        Where-Object { $_.type -eq 'tab' -and $_.label -match 'v(\d+\.\d+\.\d+)' } |
+        Select-Object -First 1 -ExpandProperty label
+        if ($allFlowsVersionLabel -and $allFlowsVersionLabel -match 'v(\d+\.\d+\.\d+)') {
+            $allFlowsVersion = $matches[1]
+            if ($allFlowsVersion -eq $currentVersion) {
+                Write-Pass "all-flows-in-one-file.json: v$allFlowsVersion"
+            }
+            else {
+                # Parse both versions to hint whether the combined file is ahead or behind
+                $cur = [version]$currentVersion
+                $aio = [version]$allFlowsVersion
+                $hint = if ($aio -lt $cur) { "combined file appears OLDER than expected" } else { "combined file appears NEWER than expected" }
+                Write-Fail "all-flows-in-one-file.json: version mismatch - found v$allFlowsVersion, expected v$currentVersion ($hint)"
+            }
+        }
+        else {
+            Write-Fail "all-flows-in-one-file.json: no versioned tab label found (expected v$currentVersion)"
+        }
+    }
 }
 
 Write-Host ""
