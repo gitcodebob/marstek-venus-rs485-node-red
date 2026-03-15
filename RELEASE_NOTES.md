@@ -1,6 +1,18 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.6.0
+- **Feature: Solar forecast aware charging (Solcast)**
+  * The "Charge until solar forecast" goal now works out of the box, pre-configured with the recommended Solcast PV Forecast integration (`sensor.solcast_pv_forecast_forecast_today`)
+  * Batteries automatically leave room to store solar surplus on sunny days, and charge further from the grid on cloudy days
+  * This ensures there is always plenty of energy at the lowest price in the battery
+  * The solar forecast entity can still be changed to any other forecast integration in the settings
+  * Existing installs that already configured a custom entity are unaffected
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+
 ## 4.5.2
 - **Fix: Negative, None and 0 cents energy price handling in Dynamic strategy**
   * Fix by *yavasura* for None values

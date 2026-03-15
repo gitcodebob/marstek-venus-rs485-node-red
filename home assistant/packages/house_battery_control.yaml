@@ -555,6 +555,7 @@ input_text:
   house_battery_strategy_solar_forecast_entity_id:
     name: "[entity_id] solar forecast sensor (kWh today)"
     icon: mdi:identifier
+    initial: "sensor.solcast_pv_forecast_forecast_today"
 
 ###########################################################################################################
 # INPUT_SELECT
@@ -849,6 +850,7 @@ template:
       - trigger: template
         value_template: >
           {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_entity_id') %}
+          {% set entity_id = entity_id if entity_id not in ['', 'unknown', 'unavailable'] else 'sensor.solcast_pv_forecast_forecast_today' %}
           {{ states(entity_id) }}
 
       # 3. Trigger when the threshold itself changes
@@ -862,6 +864,7 @@ template:
       - variables:
           raw_forecast: >
             {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_entity_id') %}
+            {% set entity_id = entity_id if entity_id not in ['', 'unknown', 'unavailable'] else 'sensor.solcast_pv_forecast_forecast_today' %}
             {{ states(entity_id) }}
           threshold: "{{ states('input_number.house_battery_strategy_charge_sf_threshold_low') | float(0) }}"
     sensor:
