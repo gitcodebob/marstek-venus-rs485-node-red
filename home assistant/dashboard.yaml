@@ -758,8 +758,47 @@ views:
                     state: state of charge
                 row:
                   entity: input_number.house_battery_strategy_charge_target_soc
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy_charge_goal
+                    state: solar forecast
+                row:
+                  entity: sensor.solar_forecast_today
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy_charge_goal
+                    state: solar forecast
+                row:
+                  entity: sensor.solar_forecast_surplus_today
+                  name: Solar surplus
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy
+                    state: Charge
+                  - entity: input_select.house_battery_strategy_charge_goal
+                    state: solar forecast
+                  - condition: numeric_state
+                    entity: input_number.house_battery_strategy_charge_target_energy
+                    above: 0
+                row:
+                  entity: input_number.house_battery_strategy_charge_target_energy
+                  type: simple-entity
+                  name: Charging until reserve is
             show_header_toggle: false
             state_color: false
+          - type: markdown
+            content: >-
+              <i>Batteries can be charged using 100% <ha-icon
+              icon="mdi:weather-sunny"></ha-icon> PV today</i>
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: input_select.house_battery_strategy_charge_goal
+                    state: solar forecast
+                  - condition: numeric_state
+                    entity: input_number.house_battery_strategy_charge_target_energy
+                    below: 0.1
           - type: markdown
             content: >-
               <font color=grey>_'Reserve' is usable energy in your batteries
@@ -768,9 +807,14 @@ views:
               </font>
             text_only: true
             visibility:
-              - condition: state
-                entity: input_select.house_battery_strategy_charge_goal
-                state: energy reserve
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity: input_select.house_battery_strategy_charge_goal
+                    state: energy reserve
+                  - condition: state
+                    entity: input_select.house_battery_strategy_charge_goal
+                    state: solar forecast
           - type: markdown
             content: >-
               <font color=grey><i>Visit the '<ha-icon
@@ -779,6 +823,28 @@ views:
 
               </i></font>
             text_only: true
+          - type: heading
+            icon: mdi:information-slab-circle
+            heading: Configure your solar forecast
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://docs.homebatterycontrol.com/03-strategies.html#charge-from-grid
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_charge_goal
+                state: solar forecast
+          - type: entities
+            entities:
+              - entity: input_text.house_battery_strategy_solar_forecast_entity_id
+                name: Solar forecast sensor (kWh today) [entity_id]
+              - entity: input_number.house_battery_strategy_charge_sf_threshold_low
+                name: Solar consumed by house
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_charge_goal
+                state: solar forecast
       - type: grid
         cards:
           - type: heading

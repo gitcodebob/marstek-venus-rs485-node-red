@@ -362,6 +362,16 @@ input_number:
     mode: box
     icon: mdi:battery-90
 
+  # Strategy charge | solar forecast - estimated daily energy consumption
+  # This amount of solar is assumed to be used by the household itself
+  house_battery_strategy_charge_sf_threshold_low:
+    name: Est. daily PV consumption
+    min: 0
+    max: 500
+    unit_of_measurement: "kWh"
+    mode: box
+    icon: mdi:home-lightning-bolt
+
   # Strategy sell | desired energy reserve (effective energy available excl. cut-off energies)
   house_battery_strategy_sell_target_energy:
     name: Keep energy in reserve
@@ -542,6 +552,10 @@ input_text:
     name: "EV is charging entity_id (input_boolean)"
     icon: mdi:identifier
 
+  house_battery_strategy_solar_forecast_entity_id:
+    name: "[entity_id] solar forecast sensor (kWh today)"
+    icon: mdi:identifier
+
 ###########################################################################################################
 # INPUT_SELECT
 ###########################################################################################################
@@ -672,6 +686,7 @@ input_select:
     options:
       - batteries are full
       - state of charge
+      - solar forecast
       - energy reserve
     icon: mdi:battery-charging-80
 
@@ -799,6 +814,7 @@ template:
           {% set threshold = states('input_number.house_battery_strategy_dynamic_threshold_delta') | float(default=none) %}
           {{ high is not none and low is not none and threshold is not none and (high - low) >= threshold }}
 
+  # Insights mode
   - trigger:
       - trigger: event
         event_type: "update_trace_sensor"
@@ -823,6 +839,52 @@ template:
         attributes:
           log: "{{ trigger.event.data.log | default([]) }}"
 
+  # Strategy charge | charge until solar forecast
+  - trigger:
+      # 1. Trigger when the pointer entity changes
+      - trigger: state
+        entity_id: input_text.house_battery_strategy_solar_forecast_entity_id
+
+      # 2. Trigger when the actual solar data changes (dynamic entity)
+      - trigger: template
+        value_template: >
+          {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_entity_id') %}
+          {{ states(entity_id) }}
+
+      # 3. Trigger when the threshold itself changes
+      - trigger: state
+        entity_id: input_number.house_battery_strategy_charge_sf_threshold_low
+
+      # 4. Update on Home Assistant startup to prevent 'unknown' state
+      - trigger: homeassistant
+        event: start
+    action:
+      - variables:
+          raw_forecast: >
+            {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_entity_id') %}
+            {{ states(entity_id) }}
+          threshold: "{{ states('input_number.house_battery_strategy_charge_sf_threshold_low') | float(0) }}"
+    sensor:
+      # Sensor #1 - Solar forecast today
+      - name: "Solar forecast today"
+        unique_id: house_battery_strategy_charge_solar_forecast_today
+        icon: mdi:solar-power-variant
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: >
+          {{ raw_forecast | float(0) | round(2) if is_number(raw_forecast) else 'unavailable' }}
+        availability: "{{ is_number(raw_forecast) }}"
+      # Sensor #2 - Surplus
+      - name: "Solar forecast surplus today"
+        unique_id: house_battery_strategy_solar_forecast_surplus_today
+        icon: mdi:solar-power-variant-outline
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: >
+          {{ (raw_forecast | float(0) - threshold | float(0)) | round(2) if is_number(raw_forecast) else 'unavailable' }}
+        availability: "{{ is_number(raw_forecast) }}"
+
+  # Strategy dynamic | update energy prices
   - trigger:
       - trigger: event
         event_type: "update_energy_prices"
