@@ -7,6 +7,7 @@
     the new version according to the requested bump type, then updates:
       - node-red/01 start-flow.json              (label)
       - node-red/02 strategy-*.json              (label of first object)
+      - node-red/all-flows-in-one-file.json      (all version labels)
       - home assistant/dashboard.yaml            (version string in content card)
 
     Use -DryRun to preview all changes without writing any files.
@@ -124,6 +125,19 @@ foreach ($file in $strategyFiles) {
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Update node-red/all-flows-in-one-file.json
+# ─────────────────────────────────────────────────────────────────────────────
+$combinedFile = Join-Path $NR 'all-flows-in-one-file.json'
+$combinedRaw = Get-Content $combinedFile -Raw
+$newCombinedRaw = $combinedRaw -replace "v$([regex]::Escape($oldVersion))", "v$newVersion"
+if ($newCombinedRaw -ne $combinedRaw) {
+    Save-File $combinedFile $newCombinedRaw
+}
+else {
+    Write-Skip "all-flows-in-one-file.json (no change)"
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Update home assistant/dashboard.yaml
 # ─────────────────────────────────────────────────────────────────────────────
 $dashPath = Join-Path (Join-Path $ROOT 'home assistant') 'dashboard.yaml'
@@ -150,9 +164,8 @@ if ($DryRun) {
 else {
     Write-Host "  Done. Version bumped from v$oldVersion to v$newVersion." -ForegroundColor Green
     Write-Host "  Remember to:" -ForegroundColor White
-    Write-Host "    1. Update all-flows-in-one-file.json with the new flow versions." -ForegroundColor White
-    Write-Host "    2. Add a '## $newVersion' section to RELEASE_NOTES.md." -ForegroundColor White
-    Write-Host "    3. Run .\contribute\check.ps1 to verify all files are consistent." -ForegroundColor White
+    Write-Host "    1. Add a '## $newVersion' section to RELEASE_NOTES.md." -ForegroundColor White
+    Write-Host "    2. Run .\contribute\check.ps1 to verify all files are consistent." -ForegroundColor White
 }
 Write-Host "=====================================================" -ForegroundColor White
 Write-Host ""
