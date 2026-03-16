@@ -133,13 +133,53 @@ input_number:
     mode: box
     icon: mdi:battery-arrow-up
 
-  # Total usable energy in batteries
+  # Totals | Total usable energy in batteries
   house_battery_total_available_energy:
     name: "Total available energy"
     min: -10
     max: 1000
     initial: 0
     unit_of_measurement: "kWh"
+    mode: box
+    icon: mdi:power-plug-battery
+
+  # Totals | Max. usable energy in batteries given current cutoff settings
+  house_battery_total_max_available_energy:
+    name: "Max. available energy"
+    min: -10
+    max: 1000
+    initial: 0
+    unit_of_measurement: "kWh"
+    mode: box
+    icon: mdi:power-plug-battery
+
+  # Totals | Sum of all current battery powers
+  house_battery_total_battery_power:
+    name: "Total battery power"
+    min: -25000
+    max: 25000
+    initial: 0
+    unit_of_measurement: "W"
+    mode: box
+    icon: mdi:power-plug-battery
+
+  # Totals | Sum of all battery charging power limits
+  house_battery_total_max_charge_power:
+    name: "Max. charge power"
+    min: 0
+    max: 15000
+    initial: 0
+    unit_of_measurement: "W"
+    mode: box
+    icon: mdi:power-plug-battery
+
+  # Totals | Sum of all battery discharging power limits
+  house_battery_total_max_discharge_power:
+    name: "Max. discharge power"
+    min: 0
+    max: 15000
+    initial: 0
+    unit_of_measurement: "W"
     mode: box
     icon: mdi:power-plug-battery
 
