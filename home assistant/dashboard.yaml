@@ -796,9 +796,9 @@
                   - condition: state
                     entity: input_select.house_battery_strategy_charge_goal
                     state: solar forecast
-                  - condition: numeric_state
-                    entity: input_number.house_battery_strategy_charge_target_energy
-                    below: 0.1
+                  - condition: state
+                    entity: binary_sensor.solar_surplus_covers_battery_capacity
+                    state: 'on'
           - type: markdown
             content: >-
               <font color=grey>_'Reserve' is usable energy in your batteries
