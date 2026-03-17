@@ -760,8 +760,6 @@
                   entity: input_number.house_battery_strategy_charge_target_soc
               - type: conditional
                 conditions:
-                  - entity: input_select.house_battery_strategy
-                    state: Charge
                   - entity: input_select.house_battery_strategy_charge_goal
                     state: solar forecast
                   - condition: numeric_state

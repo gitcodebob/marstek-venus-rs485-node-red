@@ -1039,3 +1039,29 @@ recorder:
       # Status fields (updated frequently)
       - input_number.house_battery_total_available_energy
       - sensor.battery_time_remaining
+
+###########################################################################################################
+# AUTOMATIONS
+###########################################################################################################
+automation:
+  # Reset charge_target_energy when the Charge strategy is no longer executing.
+  # Node-RED writes this value only while the Charge flow is active. When it stops,
+  # the value becomes stale and should be cleared so the dashboard row disappears.
+  - id: house_battery_reset_charge_target_energy_on_strategy_change
+    alias: "HBC | Reset charge target energy when Charge strategy stops executing"
+    trigger:
+      - trigger: state
+        entity_id: input_text.house_battery_strategy_active_sub_strategy
+    condition:
+      # Reset when the active sub-strategy is no longer the Charge flow.
+      # "Charge PV" also contains "Charge" in its flow name — exclude it explicitly.
+      - condition: template
+        value_template: >
+          {{ 'Charge' not in trigger.to_state.state or
+             'Charge PV' in trigger.to_state.state }}
+    action:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.house_battery_strategy_charge_target_energy
+        data:
+          value: 0
