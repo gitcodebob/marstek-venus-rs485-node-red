@@ -837,10 +837,10 @@
                 state: solar forecast
           - type: entities
             entities:
-              - entity: input_text.house_battery_strategy_solar_forecast_entity_id
-                name: Solar forecast sensor (kWh today) [entity_id]
               - entity: input_number.house_battery_strategy_charge_sf_threshold_low
                 name: Solar consumed by house
+              - entity: input_text.house_battery_strategy_solar_forecast_entity_id
+                name: Solar forecast sensor (kWh today) [entity_id]
             visibility:
               - condition: state
                 entity: input_select.house_battery_strategy_charge_goal
@@ -852,6 +852,10 @@
               - entity: input_number.house_battery_total_battery_power
               - entity: input_number.house_battery_total_max_charge_power
               - entity: input_number.house_battery_total_max_discharge_power
+            visibility:
+              - condition: state
+                entity: input_boolean.house_battery_control_is_debug_mode
+                state: 'on'
       - type: grid
         cards:
           - type: heading
