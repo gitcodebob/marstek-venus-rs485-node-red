@@ -770,7 +770,21 @@
                     state: solar forecast
                 row:
                   entity: sensor.solar_forecast_surplus_today
-                  name: Solar surplus
+                  name: Solar surplus today
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy_charge_goal
+                    state: solar forecast
+                row:
+                  entity: sensor.solar_forecast_tomorrow
+                  name: Solar forecast tomorrow
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy_charge_goal
+                    state: solar forecast
+                row:
+                  entity: sensor.solar_forecast_surplus_tomorrow
+                  name: Solar surplus tomorrow
               - type: conditional
                 conditions:
                   - entity: input_select.house_battery_strategy
@@ -841,6 +855,8 @@
                 name: Solar consumed by house
               - entity: input_text.house_battery_strategy_solar_forecast_entity_id
                 name: Solar forecast sensor (kWh today) [entity_id]
+              - entity: input_text.house_battery_strategy_solar_forecast_tomorrow_entity_id
+                name: Solar forecast sensor (kWh tomorrow) [entity_id]
             visibility:
               - condition: state
                 entity: input_select.house_battery_strategy_charge_goal

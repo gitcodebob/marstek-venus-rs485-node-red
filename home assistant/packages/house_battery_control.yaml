@@ -597,6 +597,11 @@ input_text:
     icon: mdi:identifier
     initial: "sensor.solcast_pv_forecast_forecast_today"
 
+  house_battery_strategy_solar_forecast_tomorrow_entity_id:
+    name: "[entity_id] solar forecast sensor (kWh tomorrow)"
+    icon: mdi:identifier
+    initial: "sensor.solcast_pv_forecast_forecast_tomorrow"
+
 ###########################################################################################################
 # INPUT_SELECT
 ###########################################################################################################
@@ -932,6 +937,53 @@ template:
       # Sensor #2 - Surplus
       - name: "Solar forecast surplus today"
         unique_id: house_battery_strategy_solar_forecast_surplus_today
+        icon: mdi:solar-power-variant-outline
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: >
+          {{ [raw_forecast | float(0) - threshold | float(0), 0] | max | round(2) if is_number(raw_forecast) else 'unavailable' }}
+        availability: "{{ is_number(raw_forecast) }}"
+
+  # Strategy charge | charge until solar forecast (tomorrow)
+  - trigger:
+      # 1. Trigger when the pointer entity changes
+      - trigger: state
+        entity_id: input_text.house_battery_strategy_solar_forecast_tomorrow_entity_id
+
+      # 2. Trigger when the actual solar data changes (dynamic entity)
+      - trigger: template
+        value_template: >
+          {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_tomorrow_entity_id') %}
+          {% set entity_id = entity_id if entity_id not in ['', 'unknown', 'unavailable'] else 'sensor.solcast_pv_forecast_forecast_tomorrow' %}
+          {{ states(entity_id) }}
+
+      # 3. Trigger when the threshold itself changes
+      - trigger: state
+        entity_id: input_number.house_battery_strategy_charge_sf_threshold_low
+
+      # 4. Update on Home Assistant startup to prevent 'unknown' state
+      - trigger: homeassistant
+        event: start
+    action:
+      - variables:
+          raw_forecast: >
+            {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_tomorrow_entity_id') %}
+            {% set entity_id = entity_id if entity_id not in ['', 'unknown', 'unavailable'] else 'sensor.solcast_pv_forecast_forecast_tomorrow' %}
+            {{ states(entity_id) }}
+          threshold: "{{ states('input_number.house_battery_strategy_charge_sf_threshold_low') | float(0) }}"
+    sensor:
+      # Sensor #1 - Solar forecast tomorrow
+      - name: "Solar forecast tomorrow"
+        unique_id: house_battery_strategy_charge_solar_forecast_tomorrow
+        icon: mdi:solar-power-variant
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: >
+          {{ raw_forecast | float(0) | round(2) if is_number(raw_forecast) else 'unavailable' }}
+        availability: "{{ is_number(raw_forecast) }}"
+      # Sensor #2 - Surplus tomorrow
+      - name: "Solar forecast surplus tomorrow"
+        unique_id: house_battery_strategy_solar_forecast_surplus_tomorrow
         icon: mdi:solar-power-variant-outline
         unit_of_measurement: "kWh"
         device_class: energy
