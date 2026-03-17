@@ -760,33 +760,6 @@
                   entity: input_number.house_battery_strategy_charge_target_soc
               - type: conditional
                 conditions:
-                  - entity: input_select.house_battery_strategy_charge_goal
-                    state: solar forecast
-                row:
-                  entity: sensor.solar_forecast_today
-              - type: conditional
-                conditions:
-                  - entity: input_select.house_battery_strategy_charge_goal
-                    state: solar forecast
-                row:
-                  entity: sensor.solar_forecast_surplus_today
-                  name: Solar surplus today
-              - type: conditional
-                conditions:
-                  - entity: input_select.house_battery_strategy_charge_goal
-                    state: solar forecast
-                row:
-                  entity: sensor.solar_forecast_tomorrow
-                  name: Solar forecast tomorrow
-              - type: conditional
-                conditions:
-                  - entity: input_select.house_battery_strategy_charge_goal
-                    state: solar forecast
-                row:
-                  entity: sensor.solar_forecast_surplus_tomorrow
-                  name: Solar surplus tomorrow
-              - type: conditional
-                conditions:
                   - entity: input_select.house_battery_strategy
                     state: Charge
                   - entity: input_select.house_battery_strategy_charge_goal
@@ -800,6 +773,23 @@
                   name: Charging until reserve is
             show_header_toggle: false
             state_color: false
+          - type: heading
+            icon: mdi:weather-sunny
+            heading: Forecast today
+            heading_style: subtitle
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_charge_goal
+                state: solar forecast
+          - type: entities
+            entities:
+              - entity: sensor.solar_forecast_today
+              - entity: sensor.solar_forecast_surplus_today
+            show_header_toggle: false
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_charge_goal
+                state: solar forecast
           - type: markdown
             content: >-
               <i>Batteries can be charged using 100% <ha-icon
@@ -813,6 +803,62 @@
                   - condition: state
                     entity: binary_sensor.solar_surplus_covers_battery_capacity
                     state: 'on'
+          - type: heading
+            icon: mdi:weather-sunny
+            heading: Forecast tomorrow
+            heading_style: subtitle
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_charge_goal
+                state: solar forecast
+          - type: entities
+            entities:
+              - entity: sensor.solar_forecast_tomorrow
+              - entity: sensor.solar_forecast_surplus_tomorrow
+            show_header_toggle: false
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_charge_goal
+                state: solar forecast
+          - type: markdown
+            content: >-
+              <i>Batteries can be charged using 100% <ha-icon
+              icon="mdi:weather-sunny"></ha-icon> PV tomorrow</i>
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: input_select.house_battery_strategy_charge_goal
+                    state: solar forecast
+                  - condition: state
+                    entity: >-
+                      binary_sensor.solar_surplus_covers_battery_capacity_tomorrow
+                    state: 'on'
+          - type: heading
+            icon: mdi:information-slab-circle
+            heading: Configure your solar forecast
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: >-
+                https://docs.homebatterycontrol.com/03-strategies.html#charge-from-grid
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_charge_goal
+                state: solar forecast
+          - type: entities
+            entities:
+              - entity: input_number.house_battery_strategy_charge_sf_threshold_low
+                name: Solar reserved for house
+              - entity: input_text.house_battery_strategy_solar_forecast_entity_id
+                name: Solar forecast sensor (kWh today) [entity_id]
+              - entity: >-
+                  input_text.house_battery_strategy_solar_forecast_tomorrow_entity_id
+                name: Solar forecast sensor (kWh tomorrow) [entity_id]
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_charge_goal
+                state: solar forecast
           - type: markdown
             content: >-
               <font color=grey>_'Reserve' is usable energy in your batteries
@@ -837,30 +883,6 @@
 
               </i></font>
             text_only: true
-          - type: heading
-            icon: mdi:information-slab-circle
-            heading: Configure your solar forecast
-            heading_style: subtitle
-            tap_action:
-              action: url
-              url_path: >-
-                https://docs.homebatterycontrol.com/03-strategies.html#charge-from-grid
-            visibility:
-              - condition: state
-                entity: input_select.house_battery_strategy_charge_goal
-                state: solar forecast
-          - type: entities
-            entities:
-              - entity: input_number.house_battery_strategy_charge_sf_threshold_low
-                name: Solar consumed by house
-              - entity: input_text.house_battery_strategy_solar_forecast_entity_id
-                name: Solar forecast sensor (kWh today) [entity_id]
-              - entity: input_text.house_battery_strategy_solar_forecast_tomorrow_entity_id
-                name: Solar forecast sensor (kWh tomorrow) [entity_id]
-            visibility:
-              - condition: state
-                entity: input_select.house_battery_strategy_charge_goal
-                state: solar forecast
           - type: entities
             entities:
               - entity: input_number.house_battery_total_available_energy

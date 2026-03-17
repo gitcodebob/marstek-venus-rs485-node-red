@@ -862,6 +862,18 @@ template:
              states('sensor.solar_forecast_surplus_today') | float(0) >=
              states('input_number.house_battery_total_max_available_energy') | float(0) }}
 
+      # Strategy charge | can PV surplus cover the full battery capacity tomorrow?
+      - name: "Solar surplus covers battery capacity tomorrow"
+        unique_id: house_battery_strategy_solar_surplus_covers_battery_tomorrow
+        icon: mdi:solar-power-variant
+        # 'on' when tomorrow's solar surplus (forecast minus self-consumption) is >= max. available battery capacity
+        state: >
+          {{ states('sensor.solar_forecast_surplus_tomorrow') | float(default=none) is not none and
+             states('input_number.house_battery_total_max_available_energy') | float(default=none) is not none and
+             states('sensor.solar_forecast_surplus_tomorrow') | float(0) > 0 and
+             states('sensor.solar_forecast_surplus_tomorrow') | float(0) >=
+             states('input_number.house_battery_total_max_available_energy') | float(0) }}
+
       # Strategy dynamic | is the daily spread large enough to call this an 'expensive period'
       - name: "Is above threshold price delta"
         unique_id: house_battery_strategy_dynamic_is_above_threshold_price_delta
