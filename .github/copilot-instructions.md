@@ -3,6 +3,7 @@
 ## General Guidelines:
 - Prioritize security, performance, and readability in code suggestions.
 - Use clear and concise language.
+- This project contains a Node-RED integration for Home Assistant, with a focus on maintaining a user-friendly dashboard and ensuring seamless updates across all flow files.
 
 ## Contribute Scripts:
 The `contribute/` folder contains automation scripts. See `contribute/AGENTS.md` for the full reference.
@@ -10,7 +11,13 @@ The `contribute/` folder contains automation scripts. See `contribute/AGENTS.md`
 - **`.\contribute\bump-version.ps1 -Type <patch|minor|major>`** — Bumps the SemVer in all flow labels, `all-flows-in-one-file.json`, and `dashboard.yaml`. Use `-DryRun` to preview.
 
 ## Commit Workflow:
-- When asked to commit, or "commit and push", always:
+- When asked to "commit", "commit only" or "commit wip", always:
+    1. Stage all relevant modified and new files in git.
+    1. Perform `git status` to check the current state of the repository.
+    1. Generate a concise, descriptive commit message in the imperative mood (e.g., "Fix: Resolve login issue," "Feat: Add user profiles").
+    1. Try to generate a commit command that can be auto-approved.
+    1. Commit the changes with the generated message, but do not push yet.
+- When asked to "commit and push", always:
     1. Run `.\contribute\check.ps1`. If it fails, halt and report the errors to the user before proceeding.
     1. Stage all relevant modified and new files in git.
     1. Perform `git status` to check the current state of the repository.
