@@ -788,25 +788,15 @@
               states('input_number.house_battery_total_max_available_energy') |
               float(0) %}
 
-              <div style="text-align: right"><i>{{ current | round(2) }} / {{ max | round(2) }} kWh</i></div>
+              Energy: <i>{{ current | round(2) }} / {{ max | round(2) }} kWh</i></div>
             grid_options:
               columns: 8
               rows: 1
           - type: markdown
             content: >
-              {% if is_state('input_boolean.house_battery_strategy_charge_goal_reached', 'on') %}
-
-              <ha-icon icon="mdi:check-circle-outline"></ha-icon>
-
-              {% else %}
-
               {% set target =
-              states('input_number.house_battery_strategy_charge_target_energy')
-              | float(0) %}
-
-              <i>{{ target | round(2) }} kWh</i>
-
-              {% endif %}
+              states('input_number.house_battery_strategy_charge_target_energy') | float(0) %}
+              Target: <i>{{ target | round(2) }} kWh</i>
             grid_options:
               columns: 4
               rows: 1
