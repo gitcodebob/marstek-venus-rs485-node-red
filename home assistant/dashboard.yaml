@@ -778,28 +778,18 @@
                   name: Solar reserved for house
             show_header_toggle: false
             state_color: false
-          - type: markdown
-            content: >
-              {% set current =
-              states('input_number.house_battery_total_available_energy') |
-              float(0) %}
-
-              {% set max =
-              states('input_number.house_battery_total_max_available_energy') |
-              float(0) %}
-
-              Energy: <i>{{ current | round(2) }} / {{ max | round(2) }} kWh</i></div>
+          - type: distribution
+            title: Battery energy
+            entities:
+              - entity: sensor.charge_available_energy
+                name: Available
+              - entity: sensor.charge_grid_energy_portion
+                name: Grid charge
+              - entity: sensor.charge_solar_energy_portion
+                name: Solar charge
             grid_options:
-              columns: 8
-              rows: 1
-          - type: markdown
-            content: >
-              {% set target =
-              states('input_number.house_battery_strategy_charge_target_energy') | float(0) %}
-              Target: <i>{{ target | round(2) }} kWh</i>
-            grid_options:
-              columns: 4
-              rows: 1
+              columns: full
+              rows: 2
           - type: heading
             icon: mdi:weather-sunny
             heading: Forecast today
