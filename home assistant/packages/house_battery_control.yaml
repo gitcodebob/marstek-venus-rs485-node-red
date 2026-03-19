@@ -410,7 +410,7 @@ input_number:
 
   # Strategy charge | solar forecast - estimated daily energy consumption
   # This amount of solar is assumed to be used by the household itself
-  house_battery_strategy_charge_sf_threshold_low:
+  house_battery_solar_reserved_for_house:
     name: Est. daily PV consumption
     min: 0
     max: 500
@@ -964,7 +964,7 @@ template:
 
       # 3. Trigger when the threshold itself changes
       - trigger: state
-        entity_id: input_number.house_battery_strategy_charge_sf_threshold_low
+        entity_id: input_number.house_battery_solar_reserved_for_house
 
       # 4. Update on Home Assistant startup to prevent 'unknown' state
       - trigger: homeassistant
@@ -979,7 +979,7 @@ template:
             {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_entity_id') %}
             {% set entity_id = entity_id if entity_id not in ['', 'unknown', 'unavailable'] else 'sensor.solcast_pv_forecast_forecast_today' %}
             {{ states(entity_id) }}
-          threshold: "{{ states('input_number.house_battery_strategy_charge_sf_threshold_low') | float(0) }}"
+          threshold: "{{ states('input_number.house_battery_solar_reserved_for_house') | float(0) }}"
           max_energy: "{{ states('input_number.house_battery_total_max_available_energy') | float(0) }}"
     sensor:
       # Sensor #1 - Solar forecast today
@@ -1026,7 +1026,7 @@ template:
 
       # 3. Trigger when the threshold itself changes
       - trigger: state
-        entity_id: input_number.house_battery_strategy_charge_sf_threshold_low
+        entity_id: input_number.house_battery_solar_reserved_for_house
 
       # 4. Update on Home Assistant startup to prevent 'unknown' state
       - trigger: homeassistant
@@ -1037,7 +1037,7 @@ template:
             {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_tomorrow_entity_id') %}
             {% set entity_id = entity_id if entity_id not in ['', 'unknown', 'unavailable'] else 'sensor.solcast_pv_forecast_forecast_tomorrow' %}
             {{ states(entity_id) }}
-          threshold: "{{ states('input_number.house_battery_strategy_charge_sf_threshold_low') | float(0) }}"
+          threshold: "{{ states('input_number.house_battery_solar_reserved_for_house') | float(0) }}"
     sensor:
       # Sensor #1 - Solar forecast tomorrow
       - name: "Solar forecast tomorrow"

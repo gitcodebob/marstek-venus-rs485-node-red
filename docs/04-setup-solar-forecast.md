@@ -6,7 +6,7 @@ nav_order: 4.5
 
 # Solar Forecast Setup
 
-The **Charge** strategy supports a **solar forecast** goal. Instead of charging to a fixed energy level, it calculates how much grid charging is actually needed based on today's expected solar production. It automatically switches to solar charging (Charge PV) when it hits the calculated level.
+The **Charge** strategy supports a **solar forecast** goal. Instead of charging to a fixed energy level, it calculates how much grid charging is actually needed to charge the battery to its cutoff capacity, based on today's expected solar production. It automatically switches to solar charging (Charge PV) when it hits the calculated level.
 This way you optimise self-use and prevent unnescesarry exports to grid.
 
 ## How It Works
@@ -23,7 +23,7 @@ charge_target  ~= max_battery_energy − solar_surplus
 
 This calculation updates automatically whenever any input changes (forecast value, threshold, or battery capacity).
 
-## Prerequisites
+## Step 1 - Prerequisites
 
 You need a solar forecast integration installed in Home Assistant that provides a **daily kWh sensor**. Common options:
 
@@ -35,16 +35,16 @@ You need a solar forecast integration installed in Home Assistant that provides 
 
 Any sensor that reports today's expected solar production in **kWh** will work.
 
-## Configuration
+## Step 2 - Configuration
 
 - [ ] On the dashboard, set the **Charge goal** to `solar forecast`.
 - [ ] Under **Configure your solar forecast**, enter your forecast sensor entity IDs:
    - **Solar forecast sensor (kWh today)** — e.g. `sensor.solcast_pv_forecast_forecast_today`
    - **Solar forecast sensor (kWh tomorrow)** — e.g. `sensor.solcast_pv_forecast_forecast_tomorrow`
-- [ ] Set **Solar reserved for house** (`house_battery_strategy_charge_sf_threshold_low`) to your estimated daily household consumption in kWh. Only solar production _above_ this value is considered available for battery charging.
+- [ ] Set **Solar reserved for house** (`house_battery_solar_reserved_for_house`) to your estimated daily household consumption in kWh. Only solar production _above_ this value is considered available for battery charging.
     - 30% of your average daily household energy use as a good starting point.
 
-## Tips
+## Step 3 - Tips
 
 - Start with a conservative **Solar reserved for house** value (e.g. your average daily consumption). You can fine-tune it over time.
 - The forecast goal works well with the **Dynamic** strategy: during cheap hours it charges only what solar won't cover, saving grid costs.
@@ -74,5 +74,5 @@ All values update in real time when the forecast, threshold, or battery capacity
 | `sensor.charge_target_energy` | Template sensor | Calculated charge target considering solar surplus |
 | `sensor.charge_grid_energy_portion` | Template sensor | Energy that needs to come from the grid |
 | `sensor.charge_solar_energy_portion` | Template sensor | Energy expected from solar |
-| `input_number.house_battery_strategy_charge_sf_threshold_low` | Input number | Estimated daily household consumption |
+| `input_number.house_battery_solar_reserved_for_house` | Input number | Estimated daily household consumption |
 | `input_number.house_battery_strategy_charge_target_energy` | Input number | Manual charge target (used by energy reserve goal) |

@@ -1144,7 +1144,7 @@
         "halt_if": "",
         "halt_if_type": "str",
         "halt_if_compare": "is",
-        "entity_id": "input_number.house_battery_strategy_charge_sf_threshold_low",
+        "entity_id": "input_number.house_battery_solar_reserved_for_house",
         "state_type": "str",
         "blockInputOverrides": true,
         "outputProperties": [

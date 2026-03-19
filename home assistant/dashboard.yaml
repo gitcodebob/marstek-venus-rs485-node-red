@@ -763,7 +763,7 @@
                   - entity: input_select.house_battery_strategy_charge_goal
                     state: solar forecast
                 row:
-                  entity: input_number.house_battery_strategy_charge_sf_threshold_low
+                  entity: input_number.house_battery_solar_reserved_for_house
                   name: Solar reserved for house
               - type: conditional
                 conditions:
