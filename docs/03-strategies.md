@@ -13,7 +13,7 @@ nav_order: 3
 | **Self-Consumption** | Maximize solar usage, minimize grid power | [Setup guide](04-setup-self-consumption.md) ⚙️ |
 | **Dynamic** | Optimize for hourly energy prices | [Setup guide](05-setup-dynamic.md) ⚙️ |
 | **Timed** | Fixed schedule charging/discharging | Dashboard config only |
-| **Charge** | Force charge from grid | Dashboard config only |
+| **Charge** | Force charge from grid | [Solar forecast setup](04-setup-solar-forecast.md) ⚙️ (optional) |
 | **Sell** | Discharge to grid for profit | Dashboard config only |
 | **Charge PV** | Charge only from solar surplus | No setup needed |
 | **Full Stop** | Disable all battery operations | No setup needed |
@@ -68,11 +68,19 @@ Charge or discharge based on a fixed schedule. Configure time windows through th
 ### Charge (from grid)
 Charges batteries from the grid. You can configure when to start and stop charging based on battery State of Charge (SoC) or Energy level (kWh).
 
+**Charge goals:**
+- **Batteries are full:** Charge until all batteries have reached their maximum state of charge (respecting cuttoff capacity settings)
+- **Energy reserve:** Charge to a fixed energy target (kWh)
+- **State of charge:** Charge to a fixed SoC percentage
+- **Solar forecast:** Automatically calculate how much grid charging is needed based on today's solar forecast. See [Solar Forecast Setup](04-setup-solar-forecast.md).
+
 **Power options:**
 - **Maximum power:** Charges at full battery capacity for fastest charging
 - **Regulated power:** Uses PID-controller to charge at a controlled rate, useful to prevent overloading your grid connection. Require battery specific charging limits? Review the settings tab.
 
 **Ideal for:** Preparing for power outages or charging before expensive rate periods.
+
+**⚙️ Setup:** [Solar Forecast Setup](04-setup-solar-forecast.md) (optional, for solar forecast goal)
 
 **🔧 Settings:** [video explainer charge settings](https://www.youtube.com/watch?v=UbeJaRjFK_o&t=193s) (on YouTube)
 - This video is a bit dated, but gives an idea.

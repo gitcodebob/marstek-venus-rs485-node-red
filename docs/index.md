@@ -16,6 +16,7 @@ Open-source battery control for Home Assistant & Node-RED. Control your home bat
 ### ⚡ Control Strategies
 - **[Strategy Overview](/03-strategies)** - Compare all available strategies
 - **[Self-Consumption Setup](/04-setup-self-consumption)** - PID controller tuning guide
+- **[Solar Forecast Setup](/04-setup-solar-forecast)** - Charge using solar predictions
 - **[Dynamic Strategy Setup](/05-setup-dynamic)** - Price-based automation
 
 ### 🔧 Advanced Topics

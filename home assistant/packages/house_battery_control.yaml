@@ -14,6 +14,12 @@ input_boolean:
   house_battery_control_is_charging:
     name: Charging
 
+  # Charge strategy
+  house_battery_strategy_charge_goal_reached:
+    name: Target energy reserve reached
+    icon: mdi:battery-check-outline
+    initial: false
+
   # Strategy Timed
   house_battery_strategy_timed_has_period_b:
     name: Enable additional period B
@@ -133,13 +139,53 @@ input_number:
     mode: box
     icon: mdi:battery-arrow-up
 
-  # Total usable energy in batteries
+  # Totals | Total usable energy in batteries
   house_battery_total_available_energy:
     name: "Total available energy"
     min: -10
     max: 1000
     initial: 0
     unit_of_measurement: "kWh"
+    mode: box
+    icon: mdi:power-plug-battery
+
+  # Totals | Max. usable energy in batteries given current cutoff settings
+  house_battery_total_max_available_energy:
+    name: "Max. available energy"
+    min: -10
+    max: 1000
+    initial: 0
+    unit_of_measurement: "kWh"
+    mode: box
+    icon: mdi:power-plug-battery
+
+  # Totals | Sum of all current battery powers
+  house_battery_total_battery_power:
+    name: "Total battery power"
+    min: -25000
+    max: 25000
+    initial: 0
+    unit_of_measurement: "W"
+    mode: box
+    icon: mdi:power-plug-battery
+
+  # Totals | Sum of all battery charging power limits
+  house_battery_total_max_charge_power:
+    name: "Max. charge power"
+    min: 0
+    max: 15000
+    initial: 0
+    unit_of_measurement: "W"
+    mode: box
+    icon: mdi:power-plug-battery
+
+  # Totals | Sum of all battery discharging power limits
+  house_battery_total_max_discharge_power:
+    name: "Max. discharge power"
+    min: 0
+    max: 15000
+    initial: 0
+    unit_of_measurement: "W"
     mode: box
     icon: mdi:power-plug-battery
 
@@ -362,6 +408,16 @@ input_number:
     mode: box
     icon: mdi:battery-90
 
+  # Strategy charge | solar forecast - estimated daily energy consumption
+  # This amount of solar is assumed to be used by the household itself
+  house_battery_solar_reserved_for_house:
+    name: Est. daily PV consumption
+    min: 0
+    max: 500
+    unit_of_measurement: "kWh"
+    mode: box
+    icon: mdi:home-lightning-bolt
+
   # Strategy sell | desired energy reserve (effective energy available excl. cut-off energies)
   house_battery_strategy_sell_target_energy:
     name: Keep energy in reserve
@@ -542,6 +598,16 @@ input_text:
     name: "EV is charging entity_id (input_boolean)"
     icon: mdi:identifier
 
+  house_battery_strategy_solar_forecast_entity_id:
+    name: "[entity_id] solar forecast sensor (kWh today)"
+    icon: mdi:identifier
+    initial: "sensor.solcast_pv_forecast_forecast_today"
+
+  house_battery_strategy_solar_forecast_tomorrow_entity_id:
+    name: "[entity_id] solar forecast sensor (kWh tomorrow)"
+    icon: mdi:identifier
+    initial: "sensor.solcast_pv_forecast_forecast_tomorrow"
+
 ###########################################################################################################
 # INPUT_SELECT
 ###########################################################################################################
@@ -672,6 +738,7 @@ input_select:
     options:
       - batteries are full
       - state of charge
+      - solar forecast
       - energy reserve
     icon: mdi:battery-charging-80
 
@@ -765,21 +832,55 @@ template:
           {% set profit = high - low - threshold | int %}
           {{ profit | int }}
 
-  - binary_sensor:
-      # Strategy charge | has the target energy level been reached?
-      - name: "Target energy reserve reached"
-        unique_id: house_battery_strategy_target_energy_status
-        icon: mdi:battery-check
-
-        # The sensor is 'on' (true) if the available
+      # Strategy charge | how much energy still needs to be charged to reach the target reserve
+      - name: "Charge remaining energy"
+        unique_id: house_battery_charge_remaining_energy
+        icon: mdi:battery-clock
+        unit_of_measurement: "kWh"
         state: >
-          {{ states('input_number.house_battery_total_available_energy') | float(0) >= 
-              states('input_number.house_battery_strategy_charge_target_energy') | float(0) }}
+          {% set target = states('sensor.charge_target_energy') | float(default=none) %}
+          {% set current = states('input_number.house_battery_total_available_energy') | float(default=none) %}
+          {% if target is none or current is none or target <= 0 %}
+            unavailable
+          {% else %}
+            {{ [target - current, 0] | max | round(2) }}
+          {% endif %}
 
-        # Optional: Prevents rapid flickering if values change quickly near the threshold
-        delay_off:
-          seconds: 5
+      # Strategy charge | available energy (sensor mirror for dashboard distribution card)
+      - name: "Charge available energy"
+        unique_id: house_battery_charge_available_energy
+        icon: mdi:battery
+        unit_of_measurement: "kWh"
+        state: >
+          {{ states('input_number.house_battery_total_available_energy') | float(0) | round(2) }}
 
+      # Strategy charge | energy portion that will be charged from the grid
+      - name: "Charge grid energy portion"
+        unique_id: house_battery_charge_grid_energy_portion
+        icon: mdi:transmission-tower-import
+        unit_of_measurement: "kWh"
+        state: >
+          {% set available = states('input_number.house_battery_total_available_energy') | float(default=none) %}
+          {% set target = states('sensor.charge_target_energy') | float(default=none) %}
+          {% if available is none or target is none %}
+            {{ 0 | round(2) }}
+          {% else %}
+            {{ [target - available, 0] | max | round(2) }}
+          {% endif %}
+
+      # Strategy charge | energy portion that will be charged from solar
+      - name: "Charge solar energy portion"
+        unique_id: house_battery_charge_solar_energy_portion
+        icon: mdi:solar-power
+        unit_of_measurement: "kWh"
+        state: >
+          {% set available = states('input_number.house_battery_total_available_energy') | float(0) %}
+          {% set max_available = states('input_number.house_battery_total_max_available_energy') | float(0) %}
+          {% set target = states('sensor.charge_target_energy') | float(default=none) %}
+          {% set filled = [target, available] | max if target is not none else available %}
+          {{ [max_available - filled, 0] | max | round(2) if max_available > 0 else 0 }}
+
+  - binary_sensor:
       # Strategy dynamic | is the avg tariff low enough to call this a 'cheap period'
       - name: "Is below threshold cheapest period tariff"
         unique_id: house_battery_strategy_dynamic_is_below_threshold_cheapest_tariff
@@ -788,6 +889,30 @@ template:
           {% set avg_tariff = states('input_number.house_battery_strategy_dynamic_cheapest_avg_tariff') | float(default=none) %}
           {% set threshold = states('input_number.house_battery_strategy_dynamic_threshold_cheapest_period') | float(default=none) %}
           {{ threshold is not none and avg_tariff is not none and avg_tariff <= threshold }}
+
+      # Strategy charge | can PV surplus cover the full battery capacity today?
+      - name: "Solar surplus covers battery capacity"
+        unique_id: house_battery_strategy_solar_surplus_covers_battery
+        icon: mdi:solar-power-variant
+        # 'on' when today's solar surplus (forecast minus self-consumption) is >= max. available battery capacity
+        state: >
+          {{ states('sensor.solar_forecast_surplus_today') | float(default=none) is not none and
+             states('input_number.house_battery_total_max_available_energy') | float(default=none) is not none and
+             states('sensor.solar_forecast_surplus_today') | float(0) > 0 and
+             states('sensor.solar_forecast_surplus_today') | float(0) >=
+             states('input_number.house_battery_total_max_available_energy') | float(0) }}
+
+      # Strategy charge | can PV surplus cover the full battery capacity tomorrow?
+      - name: "Solar surplus covers battery capacity tomorrow"
+        unique_id: house_battery_strategy_solar_surplus_covers_battery_tomorrow
+        icon: mdi:solar-power-variant
+        # 'on' when tomorrow's solar surplus (forecast minus self-consumption) is >= max. available battery capacity
+        state: >
+          {{ states('sensor.solar_forecast_surplus_tomorrow') | float(default=none) is not none and
+             states('input_number.house_battery_total_max_available_energy') | float(default=none) is not none and
+             states('sensor.solar_forecast_surplus_tomorrow') | float(0) > 0 and
+             states('sensor.solar_forecast_surplus_tomorrow') | float(0) >=
+             states('input_number.house_battery_total_max_available_energy') | float(0) }}
 
       # Strategy dynamic | is the daily spread large enough to call this an 'expensive period'
       - name: "Is above threshold price delta"
@@ -799,6 +924,7 @@ template:
           {% set threshold = states('input_number.house_battery_strategy_dynamic_threshold_delta') | float(default=none) %}
           {{ high is not none and low is not none and threshold is not none and (high - low) >= threshold }}
 
+  # Insights mode
   - trigger:
       - trigger: event
         event_type: "update_trace_sensor"
@@ -823,6 +949,116 @@ template:
         attributes:
           log: "{{ trigger.event.data.log | default([]) }}"
 
+  # Strategy charge | charge until solar forecast
+  - trigger:
+      # 1. Trigger when the pointer entity changes
+      - trigger: state
+        entity_id: input_text.house_battery_strategy_solar_forecast_entity_id
+
+      # 2. Trigger when the actual solar data changes (dynamic entity)
+      - trigger: template
+        value_template: >
+          {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_entity_id') %}
+          {% set entity_id = entity_id if entity_id not in ['', 'unknown', 'unavailable'] else 'sensor.solcast_pv_forecast_forecast_today' %}
+          {{ states(entity_id) }}
+
+      # 3. Trigger when the threshold itself changes
+      - trigger: state
+        entity_id: input_number.house_battery_solar_reserved_for_house
+
+      # 4. Update on Home Assistant startup to prevent 'unknown' state
+      - trigger: homeassistant
+        event: start
+
+      # 5. Trigger when max available energy changes (for target energy calculation)
+      - trigger: state
+        entity_id: input_number.house_battery_total_max_available_energy
+    action:
+      - variables:
+          raw_forecast: >
+            {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_entity_id') %}
+            {% set entity_id = entity_id if entity_id not in ['', 'unknown', 'unavailable'] else 'sensor.solcast_pv_forecast_forecast_today' %}
+            {{ states(entity_id) }}
+          threshold: "{{ states('input_number.house_battery_solar_reserved_for_house') | float(0) }}"
+          max_energy: "{{ states('input_number.house_battery_total_max_available_energy') | float(0) }}"
+    sensor:
+      # Sensor #1 - Solar forecast today
+      - name: "Solar forecast today"
+        unique_id: house_battery_strategy_charge_solar_forecast_today
+        icon: mdi:solar-power-variant
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: >
+          {{ raw_forecast | float(0) | round(2) if is_number(raw_forecast) else 'unavailable' }}
+        availability: "{{ is_number(raw_forecast) }}"
+      # Sensor #2 - Surplus
+      - name: "Solar forecast surplus today"
+        unique_id: house_battery_strategy_solar_forecast_surplus_today
+        icon: mdi:solar-power-variant-outline
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: >
+          {{ [raw_forecast | float(0) - threshold | float(0), 0] | max | round(2) if is_number(raw_forecast) else 'unavailable' }}
+        availability: "{{ is_number(raw_forecast) }}"
+      # Sensor #3 - Charge target energy (reactive: updates when forecast, threshold, or max energy changes)
+      - name: "Charge target energy"
+        unique_id: house_battery_strategy_charge_target_energy_sensor
+        icon: mdi:battery-charging
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: >
+          {% set surplus = [raw_forecast | float(0) - threshold | float(0), 0] | max %}
+          {{ [max_energy | float(0) - surplus, 0] | max | round(2) if is_number(raw_forecast) else 'unavailable' }}
+        availability: "{{ is_number(raw_forecast) }}"
+
+  # Strategy charge | charge until solar forecast (tomorrow)
+  - trigger:
+      # 1. Trigger when the pointer entity changes
+      - trigger: state
+        entity_id: input_text.house_battery_strategy_solar_forecast_tomorrow_entity_id
+
+      # 2. Trigger when the actual solar data changes (dynamic entity)
+      - trigger: template
+        value_template: >
+          {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_tomorrow_entity_id') %}
+          {% set entity_id = entity_id if entity_id not in ['', 'unknown', 'unavailable'] else 'sensor.solcast_pv_forecast_forecast_tomorrow' %}
+          {{ states(entity_id) }}
+
+      # 3. Trigger when the threshold itself changes
+      - trigger: state
+        entity_id: input_number.house_battery_solar_reserved_for_house
+
+      # 4. Update on Home Assistant startup to prevent 'unknown' state
+      - trigger: homeassistant
+        event: start
+    action:
+      - variables:
+          raw_forecast: >
+            {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_tomorrow_entity_id') %}
+            {% set entity_id = entity_id if entity_id not in ['', 'unknown', 'unavailable'] else 'sensor.solcast_pv_forecast_forecast_tomorrow' %}
+            {{ states(entity_id) }}
+          threshold: "{{ states('input_number.house_battery_solar_reserved_for_house') | float(0) }}"
+    sensor:
+      # Sensor #1 - Solar forecast tomorrow
+      - name: "Solar forecast tomorrow"
+        unique_id: house_battery_strategy_charge_solar_forecast_tomorrow
+        icon: mdi:solar-power-variant
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: >
+          {{ raw_forecast | float(0) | round(2) if is_number(raw_forecast) else 'unavailable' }}
+        availability: "{{ is_number(raw_forecast) }}"
+      # Sensor #2 - Surplus tomorrow
+      - name: "Solar forecast surplus tomorrow"
+        unique_id: house_battery_strategy_solar_forecast_surplus_tomorrow
+        icon: mdi:solar-power-variant-outline
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: >
+          {{ [raw_forecast | float(0) - threshold | float(0), 0] | max | round(2) if is_number(raw_forecast) else 'unavailable' }}
+        availability: "{{ is_number(raw_forecast) }}"
+
+  # Strategy dynamic | update energy prices
   - trigger:
       - trigger: event
         event_type: "update_energy_prices"
