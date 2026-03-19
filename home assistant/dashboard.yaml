@@ -862,7 +862,7 @@
             tap_action:
               action: url
               url_path: >-
-                https://docs.homebatterycontrol.com/03-strategies.html#charge-from-grid
+                https://docs.homebatterycontrol.com/04-setup-solar-forecast
             visibility:
               - condition: state
                 entity: input_select.house_battery_strategy_charge_goal
