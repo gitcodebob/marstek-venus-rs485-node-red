@@ -6,15 +6,16 @@ nav_order: 4.5
 
 # Solar Forecast Setup
 
-The **Charge** strategy supports a **solar forecast** goal. Instead of charging to a fixed energy level, it calculates how much grid charging is actually needed based on today's expected solar production.
+The **Charge** strategy supports a **solar forecast** goal. Instead of charging to a fixed energy level, it calculates how much grid charging is actually needed based on today's expected solar production. It automatically switches to solar charging (Charge PV) when it hits the calculated level.
+This way you optimise self-use and prevent unnescesarry exports to grid.
 
 ## How It Works
 
-When the charge goal is set to **solar forecast**, the system calculates a charge target:
+When the charge goal is set to **solar forecast**, the system calculates a `charge target`:
 
 ```
-solar_surplus  = max(forecast_today − reserved_for_house, 0)
-charge_target  = max(max_battery_energy − solar_surplus, 0)
+solar_surplus  ~= forecast_today − reserved_for_house
+charge_target  ~= max_battery_energy − solar_surplus
 ```
 
 - If the forecast covers the full battery capacity, no grid charging is needed.
@@ -53,7 +54,7 @@ When the solar forecast goal is active, the dashboard shows:
 | **Distribution card** | Visual split: available energy, grid charge portion, and solar charge portion |
 | **Solar forecast today** | Raw forecast value from your sensor |
 | **Solar surplus today** | Forecast minus household reservation |
-| **Surplus covers capacity** | Whether solar alone can fill the battery |
+| **Surplus covers capacity** | Whether solar alone can fill the entire battery from flat to full |
 
 All values update in real time when the forecast, threshold, or battery capacity changes.
 
@@ -73,4 +74,3 @@ All values update in real time when the forecast, threshold, or battery capacity
 
 - Start with a conservative **Solar reserved for house** value (e.g. your average daily consumption). You can fine-tune it over time.
 - The forecast goal works well with the **Dynamic** strategy: during cheap hours it charges only what solar won't cover, saving grid costs.
-- Check the **surplus covers capacity** indicator — if it reads `on` often, your solar array may produce enough to skip grid charging entirely on sunny days.

@@ -12,6 +12,7 @@ The `contribute/` folder contains automation scripts. See `contribute/AGENTS.md`
 
 ## Commit Workflow:
 - When asked to "commit", "commit only" or "commit wip", always:
+    1. Save all files.
     1. Stage all relevant modified and new files in git.
     1. Perform `git status` to check the current state of the repository.
     1. Generate a concise, descriptive commit message in the imperative mood (e.g., "Fix: Resolve login issue," "Feat: Add user profiles").

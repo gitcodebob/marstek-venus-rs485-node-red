@@ -69,6 +69,7 @@ Charge or discharge based on a fixed schedule. Configure time windows through th
 Charges batteries from the grid. You can configure when to start and stop charging based on battery State of Charge (SoC) or Energy level (kWh).
 
 **Charge goals:**
+- **Batteries are full:** Charge until all batteries have reached their maximum state of charge (respecting cuttoff capacity settings)
 - **Energy reserve:** Charge to a fixed energy target (kWh)
 - **State of charge:** Charge to a fixed SoC percentage
 - **Solar forecast:** Automatically calculate how much grid charging is needed based on today's solar forecast. See [Solar Forecast Setup](04-setup-solar-forecast.md).
