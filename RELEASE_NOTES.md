@@ -13,6 +13,7 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
   - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/01 start-flow.json`
   - `node-red/02 strategy-charge.json`
 
 ## 4.5.2
