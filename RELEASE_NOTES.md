@@ -1,6 +1,16 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.6.1
+- **Fix: Solar forecast sensor not updating when forecast value changed**
+  * The template trigger used to watch the solar forecast entity was unreliable — it only fires on false→true transitions, not on every value change. Replaced with a `time_pattern` trigger (every 15 min).
+  * Changed the default solar forecast fallback to `sensor.solcast_pv_forecast_forecast_remaining_today` for better intraday accuracy (remaining forecast vs. full day).
+  * Removed `initial` values from solar forecast `input_text` entities to prevent user settings being overwritten on every HA restart.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+
 ## 4.6.0
 - **Feature: Solar forecast aware charging (Solcast)**
   * Batteries automatically leave room to store solar surplus on sunny days, and charge more from the grid on cloudy days.
