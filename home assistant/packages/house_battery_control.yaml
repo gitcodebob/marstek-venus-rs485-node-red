@@ -601,12 +601,10 @@ input_text:
   house_battery_strategy_solar_forecast_entity_id:
     name: "[entity_id] solar forecast sensor (kWh today)"
     icon: mdi:identifier
-    initial: "sensor.solcast_pv_forecast_forecast_today"
 
   house_battery_strategy_solar_forecast_tomorrow_entity_id:
     name: "[entity_id] solar forecast sensor (kWh tomorrow)"
     icon: mdi:identifier
-    initial: "sensor.solcast_pv_forecast_forecast_tomorrow"
 
 ###########################################################################################################
 # INPUT_SELECT
@@ -974,7 +972,7 @@ template:
       - variables:
           raw_forecast: >
             {% set entity_id = states('input_text.house_battery_strategy_solar_forecast_entity_id') %}
-            {% set entity_id = entity_id if entity_id not in ['', 'unknown', 'unavailable'] else 'sensor.solcast_pv_forecast_forecast_today' %}
+            {% set entity_id = entity_id if entity_id not in ['', 'unknown', 'unavailable'] else 'sensor.solcast_pv_forecast_forecast_remaining_today' %}
             {{ states(entity_id) }}
           threshold: "{{ states('input_number.house_battery_solar_reserved_for_house') | float(0) }}"
           max_energy: "{{ states('input_number.house_battery_total_max_available_energy') | float(0) }}"
