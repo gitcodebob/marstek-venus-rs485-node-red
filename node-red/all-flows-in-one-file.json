@@ -1,4 +1,4 @@
-[
+﻿[
     {
         "id": "29a16008cff7c9af",
         "type": "tab",
@@ -18,7 +18,7 @@
     {
         "id": "3bdd7205df94aa18",
         "type": "tab",
-        "label": "Home Battery Start v4.6.0",
+        "label": "Home Battery Start v4.6.1",
         "disabled": false,
         "info": "# Home battery control\r\nConsists of three flows:\r\n 1.  Start flow\r\n 1.  Control flow\r\n 1.  Master switch flow\r\n\r\n## Start flow\r\nThis is the starting point of your home battery control.\r\n\r\nIt starts with P1 measurement as a trigger.\r\nIt allows you to connect your battery sensors to the flow.\r\nIt ends with a function node, mapping your batteries to a battery_array\r\n\r\nThe battery_array is passed on to the control flow.\r\n\r\nWhen the control flow has calculated the desired corrections,\r\nit is passed back to this flow and applied to your batteries.",
         "env": []
@@ -26,7 +26,7 @@
     {
         "id": "3c4f6ba4bc013364",
         "type": "tab",
-        "label": "Strategy Charge PV v4.6.0",
+        "label": "Strategy Charge PV v4.6.1",
         "disabled": false,
         "info": "",
         "env": []
@@ -34,7 +34,7 @@
     {
         "id": "cadd4bc3495462b9",
         "type": "tab",
-        "label": "Strategy Charge v4.6.0",
+        "label": "Strategy Charge v4.6.1",
         "disabled": false,
         "info": "",
         "env": []
@@ -42,7 +42,7 @@
     {
         "id": "2e94fca1a2d59c7c",
         "type": "tab",
-        "label": "Strategy Dynamic v4.6.0",
+        "label": "Strategy Dynamic v4.6.1",
         "disabled": false,
         "info": "Dynamic contract automated management",
         "env": []
@@ -50,7 +50,7 @@
     {
         "id": "cb575f5456952af8",
         "type": "tab",
-        "label": "Strategy Full stop v4.6.0",
+        "label": "Strategy Full stop v4.6.1",
         "disabled": false,
         "info": "",
         "env": []
@@ -58,7 +58,7 @@
     {
         "id": "c7ff11a1b5431c51",
         "type": "tab",
-        "label": "Strategy Self-consumption v4.6.0",
+        "label": "Strategy Self-consumption v4.6.1",
         "disabled": false,
         "info": "",
         "env": []
@@ -66,7 +66,7 @@
     {
         "id": "413024a179ba9f2e",
         "type": "tab",
-        "label": "Strategy Sell v4.6.0",
+        "label": "Strategy Sell v4.6.1",
         "disabled": false,
         "info": "",
         "env": []
@@ -74,7 +74,7 @@
     {
         "id": "e412e10a87675ed3",
         "type": "tab",
-        "label": "Strategy Timed v4.6.0",
+        "label": "Strategy Timed v4.6.1",
         "disabled": false,
         "info": "",
         "env": []
@@ -4558,7 +4558,7 @@
         "z": "3bdd7205df94aa18",
         "g": "151af492b62d47f9",
         "name": "Custom logger",
-        "func": "/**\n * Custom Logger Function\n * * Provides centralized logging, node-status updates, and message tracing.\n * Specifically designed for Home Battery Control logic within Node-RED.\n * \n * Debug dashboard updating:\n * A msg needs to reach 'Strategy Evaluation' or be passed to the \"Show on debug board\" trigger node.\n * Errors are automatically passed to the \"Show on debug board\" trigger node.\n * \n * * @param {object} callingNode - The context of the calling node (pass 'this').\n * @param {string} text - The log message/explanation.\n * @param {string} level - Log level: 'log', 'warn', 'error', or 'info' (default: 'info').\n * \n * Note: anything above 'info' will also write to the Node-RED log files \n * \n * * @usage: \n * const log = global.get(\"logger\");\n * log(this, \"Charging cycle started\");\n */\nconst customLogger = (callingNode, text, level = 'info') => {\n    \n    // Log only when debug_mode is ON\n    const debug_mode = global.get(\"debug_mode\") || false;\n    if(debug_mode == false) return null;\n\n    // Max log elements to keep\n    const MAX_ELEMENTS = 100;\n\n    // Create the YYYY-MM-DD HH:MM:SS.mmm format\n    const now = new Date();\n    const timestamp = now.getHours().toString().padStart(2, '0') + \":\" +\n                now.getMinutes().toString().padStart(2, '0') + \":\" +\n                now.getSeconds().toString().padStart(2, '0') + \".\" +\n                now.getMilliseconds().toString().padStart(3, '0');\n\n    const formattedTimeLevel = `${timestamp} [${level.toLowerCase()}]`;\n    \n    // Get the name of the node or fallback to the ID\n    const nodeName = callingNode.__node__ ? callingNode.__node__.name || callingNode.__node__.id : undefined;\n    // Get the name of the Flow/Tab\n    const flowName = callingNode.env.get(\"NR_FLOW_NAME\") || \"Unknown flow\";\n    // Explain to the Home Battery Control user what is going on\n    const formattedExplenation = `[${flowName} >> ${nodeName}]: ${text}`;\n\n    // Level icons\n    let icon = \"⚪\";\n    switch (level) {\n        case \"info\":\n            icon = \"ℹ️\";\n            break;\n        case \"log\":\n            icon = \"🔧\";\n            break;\n        case \"warn\":\n            icon = \"⚠️\";      \n            break;\n        case \"error\":\n            icon = \"❌\";\n            break;\n    }\n\n    // Enrich msg with log info\n    const msg = callingNode.msg;\n    (msg.log = msg.log || []).push({ timestamp: timestamp, level:level, flow:flowName, node:nodeName, payload: text, icon: icon});\n\n    if (msg.log.length > MAX_ELEMENTS) {\n        // Slice keeps the last X elements\n        msg.log = msg.log.slice(-MAX_ELEMENTS);\n    }\n\n    // Log to the Node-RED system log\n    switch (level) {\n        case \"log\":\n            node.log(`${formattedExplenation}`);\n            break;\n        case \"warn\":\n            node.warn(`${formattedExplenation}`);       \n            break;\n        case \"error\":\n            node.error(`${formattedExplenation}`, callingNode.msg);\n            break;\n        default:\n            // don't log to logfiles by default\n    }\n\n};\n\nglobal.set('logger', customLogger);\nglobal.set('unhandledException', \"\");\nreturn msg;",
+        "func": "/**\n * Custom Logger Function\n * * Provides centralized logging, node-status updates, and message tracing.\n * Specifically designed for Home Battery Control logic within Node-RED.\n * \n * Debug dashboard updating:\n * A msg needs to reach 'Strategy Evaluation' or be passed to the \"Show on debug board\" trigger node.\n * Errors are automatically passed to the \"Show on debug board\" trigger node.\n * \n * * @param {object} callingNode - The context of the calling node (pass 'this').\n * @param {string} text - The log message/explanation.\n * @param {string} level - Log level: 'log', 'warn', 'error', or 'info' (default: 'info').\n * \n * Note: anything above 'info' will also write to the Node-RED log files \n * \n * * @usage: \n * const log = global.get(\"logger\");\n * log(this, \"Charging cycle started\");\n */\nconst customLogger = (callingNode, text, level = 'info') => {\n    \n    // Log only when debug_mode is ON\n    const debug_mode = global.get(\"debug_mode\") || false;\n    if(debug_mode == false) return null;\n\n    // Max log elements to keep\n    const MAX_ELEMENTS = 100;\n\n    // Create the YYYY-MM-DD HH:MM:SS.mmm format\n    const now = new Date();\n    const timestamp = now.getHours().toString().padStart(2, '0') + \":\" +\n                now.getMinutes().toString().padStart(2, '0') + \":\" +\n                now.getSeconds().toString().padStart(2, '0') + \".\" +\n                now.getMilliseconds().toString().padStart(3, '0');\n\n    const formattedTimeLevel = `${timestamp} [${level.toLowerCase()}]`;\n    \n    // Get the name of the node or fallback to the ID\n    const nodeName = callingNode.__node__ ? callingNode.__node__.name || callingNode.__node__.id : undefined;\n    // Get the name of the Flow/Tab\n    const flowName = callingNode.env.get(\"NR_FLOW_NAME\") || \"Unknown flow\";\n    // Explain to the Home Battery Control user what is going on\n    const formattedExplenation = `[${flowName} >> ${nodeName}]: ${text}`;\n\n    // Level icons\n    let icon = \"âšª\";\n    switch (level) {\n        case \"info\":\n            icon = \"â„¹ï¸\";\n            break;\n        case \"log\":\n            icon = \"ðŸ”§\";\n            break;\n        case \"warn\":\n            icon = \"âš ï¸\";      \n            break;\n        case \"error\":\n            icon = \"âŒ\";\n            break;\n    }\n\n    // Enrich msg with log info\n    const msg = callingNode.msg;\n    (msg.log = msg.log || []).push({ timestamp: timestamp, level:level, flow:flowName, node:nodeName, payload: text, icon: icon});\n\n    if (msg.log.length > MAX_ELEMENTS) {\n        // Slice keeps the last X elements\n        msg.log = msg.log.slice(-MAX_ELEMENTS);\n    }\n\n    // Log to the Node-RED system log\n    switch (level) {\n        case \"log\":\n            node.log(`${formattedExplenation}`);\n            break;\n        case \"warn\":\n            node.warn(`${formattedExplenation}`);       \n            break;\n        case \"error\":\n            node.error(`${formattedExplenation}`, callingNode.msg);\n            break;\n        default:\n            // don't log to logfiles by default\n    }\n\n};\n\nglobal.set('logger', customLogger);\nglobal.set('unhandledException', \"\");\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -10234,7 +10234,7 @@
         "z": "c7ff11a1b5431c51",
         "g": "08589e7db838d76a",
         "name": "Deadband (15W)",
-        "func": "// Deadband\n// Stop processing if error is within .. Watt of target grid consumption.\n// This to reduce CPU loads \n\n// Logger\nconst log = global.get(\"logger\");\n\n// P1\nlet P1_error = msg.grid_error; // Watt\nlet P1_deadband = 15; // Watt\n\n// TODO\n// based on last 'assignable power' and current error, if (error > assignable power) the system will never enter the deadband. And keep calculating each interation.\n// however since we don't know if the is the assignable power will change, until we calculate the Control Value / load balancer\n// we could end up in a deadlock if we simply stop execution here, based on assignable power alone.\n\n// Within Deadband\nif(Math.abs(P1_error) < P1_deadband) {\n    // stop processing\n    node.status({fill:\"yellow\",shape:\"dot\",text:`Halt, ${Math.round(Math.abs(P1_error))} W`});\n    log(this, `**Stopped processing**🌿power saving, ${Math.round(Math.abs(P1_error))} W is within deadband of ${P1_deadband} W`);\n    msg.payload = 'halted by deadband';\n    return msg;\n} \n\n// Outside deadband\nnode.status({fill:\"green\",shape:\"dot\",text:`Pass, ${Math.round(Math.abs(P1_error))} W`});\nreturn msg;\n",
+        "func": "// Deadband\n// Stop processing if error is within .. Watt of target grid consumption.\n// This to reduce CPU loads \n\n// Logger\nconst log = global.get(\"logger\");\n\n// P1\nlet P1_error = msg.grid_error; // Watt\nlet P1_deadband = 15; // Watt\n\n// TODO\n// based on last 'assignable power' and current error, if (error > assignable power) the system will never enter the deadband. And keep calculating each interation.\n// however since we don't know if the is the assignable power will change, until we calculate the Control Value / load balancer\n// we could end up in a deadlock if we simply stop execution here, based on assignable power alone.\n\n// Within Deadband\nif(Math.abs(P1_error) < P1_deadband) {\n    // stop processing\n    node.status({fill:\"yellow\",shape:\"dot\",text:`Halt, ${Math.round(Math.abs(P1_error))} W`});\n    log(this, `**Stopped processing**ðŸŒ¿power saving, ${Math.round(Math.abs(P1_error))} W is within deadband of ${P1_deadband} W`);\n    msg.payload = 'halted by deadband';\n    return msg;\n} \n\n// Outside deadband\nnode.status({fill:\"green\",shape:\"dot\",text:`Pass, ${Math.round(Math.abs(P1_error))} W`});\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
