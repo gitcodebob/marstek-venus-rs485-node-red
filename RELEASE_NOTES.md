@@ -1,6 +1,30 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.6.2
+- **Fix: UTF-8 encoding in release scripts corrupting emoji icons**
+  * A script used in development was breaking emoji characters (⚪ℹ️🔧⚠️❌).
+  * Restored corrupted emoji icons in `all-flows-in-one-file.json`.
+
+- **Fix: Align chargingLimiter with battery specifications**
+  * The software charging limiter was more aggressive than the battery's own BMS limiter present in newer firmware versions, causing unnecessarily slow charging near full SoC.
+  * New thresholds: 1500W at 95% SoC, 1000W at 99% SoC (was: 1500W at 85%, 500W at 95%, 300W at 98%).
+  * Thanks goes out to `Gely` and others for noting this.
+
+- **Fix: Lower minimum SoC cutoff from 12% to 11%**
+  * Updated discharging cutoff capacity minimum for all batteries (M1–M4) from 12% to 11%.
+  * This should increase your usable energie by 1%
+  * `Note 1` requires manually setting SoC to 11% for each existing battery.
+  * `Note 2` Please let us know your results. 11% should work for Marstek Venus E v1/v2/v3. And is expected to work on other models. 
+  * See [Discord discussion](https://discord.com/channels/1422227123925680228/1422227124391252080/1486096929841483858) for more background. 
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-self-consumption.json`
+  - `node-red/02 strategy-sell.json`
+  - `node-red/02 strategy-charge.json`
+
 ## 4.6.1
 - **Fix: Solar forecast sensor not updating when forecast value changed**
   * The template trigger used to watch the solar forecast entity was unreliable — it only fires on false→true transitions, not on every value change. Replaced with a `time_pattern` trigger (every 15 min).
