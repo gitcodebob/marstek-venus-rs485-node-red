@@ -704,7 +704,7 @@
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.6.1)*'
+        content: '### Home Battery Control *(v4.6.2)*'
         text_only: true
     cards: []
   - type: sections
