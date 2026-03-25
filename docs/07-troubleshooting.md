@@ -37,7 +37,7 @@ It shows *known issues*, but is not a full debug tool. Some unforeseen errors st
 - Shows up to 100 recent log entries
 - Each entry includes: timestamp, flow name, node name, and explanation
 
-### Common Troubleshooting Scenarios
+## Common Troubleshooting Scenarios
 
 #### Why isn't my battery charging/discharging?
 - Enable debug mode and wait for one execution cycle
@@ -79,7 +79,7 @@ It shows *known issues*, but is not a full debug tool. Some unforeseen errors st
 #### Modbus error function code: 0x3 exception: 2 (or similar)
 - Update the latest firmware on your battery. 
 
-### Raspberry Pi slows down due to lack of power
+#### Raspberry Pi slows down due to lack of power
 - Check the `RPi Power Status` entity. Does it show OK or PROBLEM?
 - Replace the power supply with a stronger one. E.g. test with your laptop adapter.
 
