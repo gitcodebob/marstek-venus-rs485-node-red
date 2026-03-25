@@ -1,4 +1,4 @@
-﻿views:
+views:
   - type: sections
     path: home-battery-control
     max_columns: 3
@@ -884,7 +884,7 @@
           - type: markdown
             content: >-
               <font color=grey>_'Reserve' is usable energy in your batteries
-              (e.g. above 12% SoC)_
+              (e.g. above 11% SoC)_
 
               </font>
             text_only: true
@@ -950,7 +950,7 @@
           - type: markdown
             content: >-
               <font color=grey>_'Reserve' is usable energy in your batteries
-              (e.g. above 12% SoC)_
+              (e.g. above 11% SoC)_
 
               </font>
             text_only: true
