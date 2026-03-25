@@ -62,7 +62,8 @@ function Save-File {
         Write-DryRun "Would write: $rel"
     }
     else {
-        [System.IO.File]::WriteAllText($path, $content, [System.Text.Encoding]::UTF8)
+        $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+        [System.IO.File]::WriteAllText($path, $content, $utf8NoBom)
         Write-Action $rel
     }
 }
@@ -71,7 +72,7 @@ function Save-File {
 # Read current version
 # ─────────────────────────────────────────────────────────────────────────────
 $startFile = Join-Path $NR '01 start-flow.json'
-$startRaw = Get-Content $startFile -Raw
+$startRaw = Get-Content $startFile -Raw -Encoding UTF8
 $startJson = $startRaw | ConvertFrom-Json
 $startLabel = @($startJson)[0].label   # e.g. "Home Battery Start v4.5.2"
 
@@ -105,7 +106,7 @@ Write-Host ""
 # Pre-flight: verify all-flows-in-one-file.json has the current version
 # ─────────────────────────────────────────────────────────────────────────────
 $allFlowsPath = Join-Path $NR 'all-flows-in-one-file.json'
-$allFlowsRaw = Get-Content $allFlowsPath -Raw
+$allFlowsRaw = Get-Content $allFlowsPath -Raw -Encoding UTF8
 $allFlowsJson = $allFlowsRaw | ConvertFrom-Json
 
 # Collect versioned tab labels from all-flows-in-one-file.json
@@ -138,7 +139,7 @@ else {
 # ─────────────────────────────────────────────────────────────────────────────
 $strategyFiles = Get-ChildItem (Join-Path $NR '02 strategy-*.json')
 foreach ($file in $strategyFiles) {
-    $raw = Get-Content $file.FullName -Raw
+    $raw = Get-Content $file.FullName -Raw -Encoding UTF8
     $new = $raw -replace "v$([regex]::Escape($oldVersion))", "v$newVersion"
     if ($new -ne $raw) {
         Save-File $file.FullName $new
@@ -163,7 +164,7 @@ else {
 # Update home assistant/dashboard.yaml
 # ─────────────────────────────────────────────────────────────────────────────
 $dashPath = Join-Path (Join-Path $ROOT 'home assistant') 'dashboard.yaml'
-$dashRaw = Get-Content $dashPath -Raw
+$dashRaw = Get-Content $dashPath -Raw -Encoding UTF8
 $dashPattern = "Home Battery Control \*\(v$([regex]::Escape($oldVersion))\)\*"
 $dashReplace = "Home Battery Control *(v$newVersion)*"
 $newDashRaw = $dashRaw -replace $dashPattern, $dashReplace
