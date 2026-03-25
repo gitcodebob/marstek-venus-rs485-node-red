@@ -1,6 +1,18 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.6.2
+- **Extend multi-battery support from 4 to 8 (fixes #103)**
+  * Dashboard now supports up to 8 batteries (M1–M8) out of the box with glance cards, headings, and per-battery configuration grids
+  * Added per-battery charging and discharging cutoff capacity helpers for M5–M8
+  * Increased `house_battery_count` and `prioritize_battery` max from 4 to 8
+  * Aggregated battery power template sensor now includes M5–M8
+  * Updated documentation to reflect 8-battery default support
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+
 ## 4.6.1
 - **Fix: Solar forecast sensor not updating when forecast value changed**
   * The template trigger used to watch the solar forecast entity was unreliable — it only fires on false→true transitions, not on every value change. Replaced with a `time_pattern` trigger (every 15 min).
