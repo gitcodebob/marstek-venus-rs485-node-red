@@ -83,5 +83,5 @@ It shows *known issues*, but is not a full debug tool. Some unforeseen errors st
 - Check the `RPi Power Status` entity. Does it show OK or PROBLEM?
 - Replace the power supply with a stronger one. E.g. test with your laptop adapter.
 
-![Raspberry Pi low power warning](http://cdn.homebatterycontrol.com/img/raspberry-low-power.jpg)
+![Raspberry Pi low power warning](https://cdn.homebatterycontrol.com/img/raspberry-low-power.jpg)
 
