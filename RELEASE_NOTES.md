@@ -1,6 +1,29 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.6.2
+- **Fix: UTF-8 encoding in bump-version.ps1 corrupting emoji icons**
+  * `Get-Content` was reading JSON files without explicit UTF-8 encoding, causing PowerShell 5.1 to interpret multi-byte emoji characters (⚪ℹ️🔧⚠️❌) as mojibake.
+  * `Save-File` now writes UTF-8 without BOM, which is the correct encoding for JSON files.
+  * Restored corrupted emoji icons in `all-flows-in-one-file.json`.
+
+- **Fix: Align chargingLimiter with battery specifications**
+  * The software charging limiter was more aggressive than the battery's own limiter, causing unnecessarily slow charging near full SoC.
+  * New thresholds: 1500W at 95% SoC, 1000W at 99% SoC (was: 1500W at 85%, 500W at 95%, 300W at 98%).
+
+- **Fix: Lower minimum SoC cutoff from 12% to 11%**
+  * Updated discharging cutoff capacity minimum for all batteries (M1–M4) from 12% to 11%.
+  * Updated sell strategy SoC guard and fallback from 12% to 11%.
+  * Updated charge strategy SoC guard from 12% to 11%.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-self-consumption.json`
+  - `node-red/02 strategy-sell.json`
+  - `node-red/02 strategy-charge.json`
+  - `contribute/bump-version.ps1`
+
 ## 4.6.1
 - **Fix: Solar forecast sensor not updating when forecast value changed**
   * The template trigger used to watch the solar forecast entity was unreliable — it only fires on false→true transitions, not on every value change. Replaced with a `time_pattern` trigger (every 15 min).

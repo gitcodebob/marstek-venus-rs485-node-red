@@ -18,7 +18,7 @@
     {
         "id": "3bdd7205df94aa18",
         "type": "tab",
-        "label": "Home Battery Start v4.6.1",
+        "label": "Home Battery Start v4.6.2",
         "disabled": false,
         "info": "# Home battery control\r\nConsists of three flows:\r\n 1.  Start flow\r\n 1.  Control flow\r\n 1.  Master switch flow\r\n\r\n## Start flow\r\nThis is the starting point of your home battery control.\r\n\r\nIt starts with P1 measurement as a trigger.\r\nIt allows you to connect your battery sensors to the flow.\r\nIt ends with a function node, mapping your batteries to a battery_array\r\n\r\nThe battery_array is passed on to the control flow.\r\n\r\nWhen the control flow has calculated the desired corrections,\r\nit is passed back to this flow and applied to your batteries.",
         "env": []
@@ -26,7 +26,7 @@
     {
         "id": "3c4f6ba4bc013364",
         "type": "tab",
-        "label": "Strategy Charge PV v4.6.1",
+        "label": "Strategy Charge PV v4.6.2",
         "disabled": false,
         "info": "",
         "env": []
@@ -34,7 +34,7 @@
     {
         "id": "cadd4bc3495462b9",
         "type": "tab",
-        "label": "Strategy Charge v4.6.1",
+        "label": "Strategy Charge v4.6.2",
         "disabled": false,
         "info": "",
         "env": []
@@ -42,7 +42,7 @@
     {
         "id": "2e94fca1a2d59c7c",
         "type": "tab",
-        "label": "Strategy Dynamic v4.6.1",
+        "label": "Strategy Dynamic v4.6.2",
         "disabled": false,
         "info": "Dynamic contract automated management",
         "env": []
@@ -50,7 +50,7 @@
     {
         "id": "cb575f5456952af8",
         "type": "tab",
-        "label": "Strategy Full stop v4.6.1",
+        "label": "Strategy Full stop v4.6.2",
         "disabled": false,
         "info": "",
         "env": []
@@ -58,7 +58,7 @@
     {
         "id": "c7ff11a1b5431c51",
         "type": "tab",
-        "label": "Strategy Self-consumption v4.6.1",
+        "label": "Strategy Self-consumption v4.6.2",
         "disabled": false,
         "info": "",
         "env": []
@@ -66,7 +66,7 @@
     {
         "id": "413024a179ba9f2e",
         "type": "tab",
-        "label": "Strategy Sell v4.6.1",
+        "label": "Strategy Sell v4.6.2",
         "disabled": false,
         "info": "",
         "env": []
@@ -74,7 +74,7 @@
     {
         "id": "e412e10a87675ed3",
         "type": "tab",
-        "label": "Strategy Timed v4.6.1",
+        "label": "Strategy Timed v4.6.2",
         "disabled": false,
         "info": "",
         "env": []
