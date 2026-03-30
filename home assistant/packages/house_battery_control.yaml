@@ -812,7 +812,7 @@ template:
         icon: mdi:ev-station
         state: >
           {% set entity_id = states('input_text.house_battery_strategy_ev_sensor_entity_id') %}
-          {% if entity_id is none or bron_entity_id == '' %}
+          {% if entity_id is none or entity_id == '' %}
             off
           {% else %}
             {{ states(entity_id) }}
