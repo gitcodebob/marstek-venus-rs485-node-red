@@ -373,7 +373,6 @@ views:
                   - condition: numeric_state
                     entity: input_number.house_battery_control_error_signal_dampening
                     above: 70
-                    below: 0
                   - condition: numeric_state
                     entity: input_number.house_battery_control_pid_output_dampening
                     above: 50
