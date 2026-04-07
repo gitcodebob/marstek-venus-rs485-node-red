@@ -334,7 +334,7 @@ views:
             text_only: true
           - type: history-graph
             entities:
-              - entity: input_number.house_battery_control_pid_output
+              - entity: sensor.pid_output
                 name: PID control
               - entity: sensor.p1_meter_power
                 name: Grid power

@@ -881,6 +881,14 @@ template:
           {% set filled = [target, available] | max if target is not none else available %}
           {{ [max_available - filled, 0] | max | round(2) if max_available > 0 else 0 }}
 
+      # PID output rounded to whole numbers (for display in history-graph)
+      - name: "PID output"
+        unique_id: house_battery_control_pid_output_rounded
+        icon: mdi:chart-timeline-variant-shimmer
+        unit_of_measurement: "W"
+        state: >
+          {{ states('input_number.house_battery_control_pid_output') | float(0) | round(0) | int }}
+
   - binary_sensor:
       # Strategy dynamic | is the avg tariff low enough to call this a 'cheap period'
       - name: "Is below threshold cheapest period tariff"
