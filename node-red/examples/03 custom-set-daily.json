@@ -1,0 +1,128 @@
+[
+    {
+        "id": "e4b1bbea4e63beb3",
+        "type": "tab",
+        "label": "Custom daily triggers",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "25fbfac3345d1b73",
+        "type": "inject",
+        "z": "e4b1bbea4e63beb3",
+        "name": "Daily after Midnight",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "01 00 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "e58c5849257ef007"
+            ]
+        ]
+    },
+    {
+        "id": "e58c5849257ef007",
+        "type": "function",
+        "z": "e4b1bbea4e63beb3",
+        "name": "Determine Daily Value",
+        "func": "// Get current day of the week (0 = Sunday, 1 = Monday, etc.)\nconst day = new Date().getDay();\nlet targetValue = 8.0; // Default fallback\n\n// Hardcoded values per day\nswitch (day) {\n    case 1: // Monday\n        targetValue = 11;\n        break;\n    case 2: // Tuesday\n        targetValue = 15.0;\n        break;\n    case 3: // Wednesday\n        targetValue = 12.0;\n        break;\n    case 4: // Thursday\n        targetValue = 20.0;\n        break;\n    case 5: // Friday\n        targetValue = 25.0;\n        break;\n    case 6: // Saturday\n        targetValue = 30.0;\n        break;\n    case 0: // Sunday\n        targetValue = 8.0;\n        break;\n}\n\nmsg.payload = {\n    data: {\n        value: Number(targetValue)\n    }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 100,
+        "wires": [
+            [
+                "922e7cf92708c865"
+            ]
+        ]
+    },
+    {
+        "id": "922e7cf92708c865",
+        "type": "api-call-service",
+        "z": "e4b1bbea4e63beb3",
+        "name": "Update Input Number",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_solar_reserved_for_house"
+        ],
+        "labelId": [],
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": false,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 740,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2a0e23964e52aa23",
+        "type": "comment",
+        "z": "e4b1bbea4e63beb3",
+        "name": "Set your logic in this function",
+        "info": "",
+        "x": 460,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "e7b8c5cc3fc5309c",
+        "type": "comment",
+        "z": "e4b1bbea4e63beb3",
+        "name": "Pick the target entity in this node",
+        "info": "",
+        "x": 770,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": [],
+        "connectionDelay": false,
+        "cacheJson": false,
+        "heartbeat": false,
+        "heartbeatInterval": "",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
+    },
+    {
+        "id": "b37e001d607420ea",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.80.3"
+        }
+    }
+]
