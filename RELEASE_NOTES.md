@@ -1,6 +1,33 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.6.3
+- **Fix: EV trigger template fallback**
+  * Fixed a bug in the EV is charging template using an undefined variable `bron_entity_id`.
+  * Also fixed duplicate and incorrect dampening warning conditions on the dashboard.
+  * Thanks to _yavasura_ for the PR (#117).
+
+- **Fix: Invalid states in 2 template sensors**
+  * `sensor.charge_remaining_energy` and `sensor.house_total_battery_power_in_w` could return the literal string `"unavailable"` instead of being properly unavailable.
+  * Fixed using the `availability:` key. Thanks to _satscan_ for reporting.
+
+- **Fix: Missing icon in self-consumption power saving log**
+  * A log remark was missing its icon. Thanks to _adjego_ for reporting.
+
+- **Fix: Zonneplan data source failing during DST transition**
+  * The Zonneplan data source broke at the DST clock change due to incorrect hour handling.
+  * Thanks to _MarckNL_ for reporting.
+
+- **Chore: PID output on dashboard shows rounded numbers**
+  * The history-graph now shows the PID output as whole numbers (W) for a cleaner graph.
+  * Thanks to _BigTasty_ for reporting.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-dynamic.json`
+  - `node-red/02 strategy-self-consumption.json`
+
 ## 4.6.2
 - **Fix: UTF-8 encoding in release scripts corrupting emoji icons**
   * A script used in development was breaking emoji characters (⚪ℹ️🔧⚠️❌).
