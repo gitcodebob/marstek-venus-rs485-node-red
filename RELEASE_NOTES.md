@@ -1,6 +1,16 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.7.0
+- **Feat: Multi-battery support extended from 4 to 6 (M5–M6) — fixes #103**
+  * HBC now supports up to 6 batteries (M1–M6) out of the box with glance cards and per-battery configuration grids.
+  * Three phase homes using 2 batteries per phase, can now use HBC without modification.
+  * Thanks to _nickles-lee_ for the PR (#104) and _Stievo9997_ for field-testing with 6 batteries.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+
 ## 4.6.3
 - **Fix: EV trigger template fallback**
   * Fixed a bug in the EV is charging template using an undefined variable `bron_entity_id`.
