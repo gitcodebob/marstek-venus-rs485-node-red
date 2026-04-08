@@ -1,4 +1,4 @@
-views:
+﻿views:
   - type: sections
     path: home-battery-control
     max_columns: 3
@@ -346,6 +346,10 @@ views:
                 name: M3
               - entity: select.marstek_m4_forcible_charge_discharge
                 name: M4
+              - entity: select.marstek_m5_forcible_charge_discharge
+                name: M5
+              - entity: select.marstek_m6_forcible_charge_discharge
+                name: M6
             hours_to_show: 0.05
           - type: heading
             icon: mdi:information
@@ -524,6 +528,70 @@ views:
                     entity: input_number.house_battery_count
                     above: 3
           - type: heading
+            heading: Marstek M5
+            heading_style: subtitle
+            icon: ''
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m5_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 4
+          - type: glance
+            entities:
+              - entity: sensor.marstek_m5_battery_state_of_charge
+                name: M5 SoC
+              - entity: sensor.marstek_m5_ac_power
+                name: M5 Power
+              - entity: number.marstek_m5_max_charge_power
+                name: Max Charge
+              - entity: number.marstek_m5_max_discharge_power
+                name: Max Discharge
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m5_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 4
+          - type: heading
+            heading: Marstek M6
+            heading_style: subtitle
+            icon: ''
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m6_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 5
+          - type: glance
+            entities:
+              - entity: sensor.marstek_m6_battery_state_of_charge
+                name: M6 SoC
+              - entity: sensor.marstek_m6_ac_power
+                name: M6 Power
+              - entity: number.marstek_m6_max_charge_power
+                name: Max Charge
+              - entity: number.marstek_m6_max_discharge_power
+                name: Max Discharge
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: sensor.marstek_m6_device_name
+                    state_not: unknown
+                  - condition: numeric_state
+                    entity: input_number.house_battery_count
+                    above: 5
+          - type: heading
             heading: Info and guides
             heading_style: title
             icon: mdi:book-open-page-variant
@@ -567,7 +635,7 @@ views:
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.6.3)*'
+        content: '### Home Battery Control *(v4.7.0)*'
         text_only: true
     cards: []
   - type: sections
@@ -2058,6 +2126,136 @@ views:
           - condition: numeric_state
             entity: input_number.house_battery_count
             above: 3
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:power-plug-battery
+            heading: Marstek M5
+            heading_style: title
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: '**<font color="#9b9b9b">Discharging</font>**'
+                text_only: true
+              - type: tile
+                entity: input_number.marstek_m5_discharging_cutoff_capacity
+                name: Cutoff capacity
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+              - type: tile
+                entity: number.marstek_m5_max_discharge_power
+                name: Max Power
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+            grid_options:
+              columns: 12
+              rows: auto
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: '**<font color="#9b9b9b">Charging</font>**'
+                text_only: true
+              - type: tile
+                grid_options:
+                  columns: 12
+                  rows: 2
+                entity: input_number.marstek_m5_charging_cutoff_capacity
+                name: Cutoff capacity
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+              - type: tile
+                grid_options:
+                  columns: 12
+                  rows: 2
+                entity: number.marstek_m5_max_charge_power
+                name: 'Max. Power '
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+        visibility:
+          - condition: numeric_state
+            entity: input_number.house_battery_count
+            above: 4
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:power-plug-battery
+            heading: Marstek M6
+            heading_style: title
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: '**<font color="#9b9b9b">Discharging</font>**'
+                text_only: true
+              - type: tile
+                entity: input_number.marstek_m6_discharging_cutoff_capacity
+                name: Cutoff capacity
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+              - type: tile
+                entity: number.marstek_m6_max_discharge_power
+                name: Max Power
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+            grid_options:
+              columns: 12
+              rows: auto
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: '**<font color="#9b9b9b">Charging</font>**'
+                text_only: true
+              - type: tile
+                grid_options:
+                  columns: 12
+                  rows: 2
+                entity: input_number.marstek_m6_charging_cutoff_capacity
+                name: Cutoff capacity
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+              - type: tile
+                grid_options:
+                  columns: 12
+                  rows: 2
+                entity: number.marstek_m6_max_charge_power
+                name: 'Max. Power '
+                hide_state: true
+                vertical: false
+                features:
+                  - type: numeric-input
+                    style: buttons
+                features_position: inline
+        visibility:
+          - condition: numeric_state
+            entity: input_number.house_battery_count
+            above: 5
     cards: []
     badges:
       - type: entity
@@ -2079,3 +2277,4 @@ views:
       layout: center
       badges_position: top
       badges_wrap: scroll
+  
