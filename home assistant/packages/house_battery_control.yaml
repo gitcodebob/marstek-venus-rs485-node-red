@@ -682,8 +682,9 @@ input_select:
 
   # How often is battery priority cycled automatically?
   house_battery_control_priority_change_interval:
-    name: "Auto Cycle"
+    name: "Cycle"
     options:
+      - Auto balance
       - Weekly
       - Daily
       - Never

@@ -1561,7 +1561,7 @@
         "type": "inject",
         "z": "8ec5147c0b5a7c62",
         "g": "3c42f1a5bf93f5bf",
-        "name": "Every day 02:00",
+        "name": "Every 30 min",
         "props": [
             {
                 "p": "payload"
@@ -1572,7 +1572,7 @@
             }
         ],
         "repeat": "",
-        "crontab": "00 02 * * *",
+        "crontab": "0,30 * * * *",
         "once": false,
         "onceDelay": "5",
         "topic": "cycle_battery_priority",
@@ -1792,7 +1792,7 @@
         "z": "8ec5147c0b5a7c62",
         "g": "3c42f1a5bf93f5bf",
         "name": "Check interval ",
-        "func": "// Manual priority, never pass\nif(msg.payload == \"Never\") {\n    node.status({fill:\"yellow\",shape:\"dot\",text:\"Auto cycle disabled\"});\n    return null;\n}\n\n// Daily interval, always pass\nif(msg.payload == \"Daily\") {\n    node.status({ fill: \"green\", shape: \"dot\", text: `Pass` });\n    return msg;\n}\n\n// Weekly interval\nconst today = new Date();\n// Get the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)\nconst dayOfWeek = today.getDay();\n\n// Check if the day is Sunday (which is represented by the number 0)\nif (dayOfWeek === 0) {\n    // If it is Sunday, pass\n    node.status({ fill: \"green\", shape: \"dot\", text: `Passed on Sunday` });\n    return msg;\n} else {\n    // If it is not Sunday, stop\n    node.status({ fill: \"yellow\", shape: \"dot\", text: `Halted, not Sunday` });\n    return null;\n}",
+        "func": "// Manual priority, never pass\nif(msg.payload == \"Never\") {\n    node.status({fill:\"yellow\",shape:\"dot\",text:\"Auto cycle disabled\"});\n    return null;\n}\n\nconst now = new Date();\n\n// Auto balance: pass every 30 min trigger\nif(msg.payload == \"Auto balance\") {\n    node.status({ fill: \"green\", shape: \"dot\", text: `Auto balance` });\n    return msg;\n}\n\n// Daily interval: pass at 02:00\nif(msg.payload == \"Daily\") {\n    if (now.getHours() === 2 && now.getMinutes() === 0) {\n        node.status({ fill: \"green\", shape: \"dot\", text: `Daily at 02:00` });\n        return msg;\n    } else {\n        node.status({ fill: \"yellow\", shape: \"dot\", text: `Halted, not 02:00` });\n        return null;\n    }\n}\n\n// Weekly interval\nconst dayOfWeek = now.getDay();\n\nif (dayOfWeek === 0 && now.getHours() === 2 && now.getMinutes() === 0) {\n    node.status({ fill: \"green\", shape: \"dot\", text: `Passed on Sunday` });\n    return msg;\n} else {\n    node.status({ fill: \"yellow\", shape: \"dot\", text: `Halted, not Sunday 02:00` });\n    return null;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
