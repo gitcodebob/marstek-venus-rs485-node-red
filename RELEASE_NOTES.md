@@ -2,13 +2,12 @@
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
 ## 4.8.0
-- **Feat: Auto balance battery priority cycle — fixes #114**
+- **Feat: Auto balance battery priority cycle — fixes #114 #113**
   * New **Auto balance** option for the battery priority cycle setting.
   * Rotates battery priority every 30 minutes, spreading the energy reserve more evenly across all batteries throughout the day.
   * This maximizes combined charge and discharge power delivery when batteries would otherwise drift to different SoC levels.
   * When Auto balance is active, the _reverse discharge priority_ optimization is automatically disabled, as it conflicts with balanced multi-battery operation.
-  * Daily and Weekly cycle options now only trigger at 02:00, preventing unintended mid-cycle rotations.
-  * Thanks to _sjoerd-creator_ for the feature request and suggested implementation.
+  * Daily and Weekly cycle options trigger at 02:00, this is unchanged
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
