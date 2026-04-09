@@ -26,9 +26,17 @@ nav_order: 6
 - **Battery charge order:** determines which battery gets charged first (Multi-battery only)
    - Batteries gets charged in order. By changing which battery is first in order, you can optimize battery wear.
    - Especially during cloudy periods when the first battery takes the grunt of the charging and discharging.
-   - The **Auto Cycle** feature changes the order of the batteries automatically each night or each week
-      - Auto Cycling occurs at 02:00 hrs daily, or 02:00 hrs Sunday morning.
-      - Don't want auto cycling? Select Cycle priority "Never". 
+   - The **Cycle** setting controls how battery priority changes over time:
+
+     | Option | Behaviour |
+     |---|---|
+     | **Auto balance** | Rotates priority every 30 minutes throughout the day. Spreads energy reserve more evenly across all batteries, maximizing combined charge and discharge power delivery. Best for multi-battery setups where keeping batteries at similar SoC matters. |
+     | **Daily** | Rotates once per day at 02:00. |
+     | **Weekly** | Rotates once per week on Sunday at 02:00. |
+     | **Never** | Keeps the manually set priority. No automatic cycling. |
+
+   - **Auto balance** automatically disables the _reverse discharge priority_ optimization, since that feature is designed for batteries at different SoC levels and conflicts with balanced operation.
+   - **Tip:** For single-battery setups, cycling has no effect — any setting works.
 - **Controller Output Protection:** Software protection based on battery maximum charge/discharge values
   - Adjusts control output to stay within configured battery capabilities
 
