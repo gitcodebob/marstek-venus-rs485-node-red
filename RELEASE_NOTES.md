@@ -1,6 +1,14 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.7.1
+- Rounded power and PID values for better display on the dashboards
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-self-consumption.json`
+
 ## 4.7.0
 - **Feat: Multi-battery support extended from 4 to 6 (M5–M6) — fixes #103**
   * HBC now supports up to 6 batteries (M1–M6) out of the box with glance cards and per-battery configuration grids.

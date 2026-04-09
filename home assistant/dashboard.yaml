@@ -1,4 +1,4 @@
-﻿views:
+views:
   - type: sections
     path: home-battery-control
     max_columns: 3
@@ -336,7 +336,7 @@
             entities:
               - entity: sensor.pid_output
                 name: PID control
-              - entity: sensor.p1_meter_power
+              - entity: input_number.house_battery_control_pid_output
                 name: Grid power
               - entity: select.marstek_m1_forcible_charge_discharge
                 name: M1
@@ -635,7 +635,7 @@
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.7.0)*'
+        content: '### Home Battery Control *(v4.7.1)*'
         text_only: true
     cards: []
   - type: sections
@@ -2277,4 +2277,3 @@
       layout: center
       badges_position: top
       badges_wrap: scroll
-  
