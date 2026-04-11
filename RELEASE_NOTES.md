@@ -1,6 +1,14 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.8.1
+- **Fix: Correct entities in dashboard history-graph**
+  * The PID history-graph was referencing a non-existent `sensor.pid_output` for PID control, and the `input_number` for PID was mislabelled as "Grid power".
+  * Fixed to use `input_number.house_battery_control_pid_output` for PID control and `sensor.p1_meter_power` for grid power.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+
 ## 4.8.0
 - **Feat: Auto balance battery priority cycle — fixes #114 #113**
   * New **Auto balance** option for the battery priority cycle setting.
