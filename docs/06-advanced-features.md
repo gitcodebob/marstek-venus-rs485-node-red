@@ -23,7 +23,7 @@ nav_order: 6
 - **Hysteresis:** Prevents excessive switching between charge and discharge mode around the 0 Watt line. 
    - If the PID output level lies within hysteresis, it will not switch from charge to discharge or vise versa. 
    - 0 = apply no hysteresis
-- **Battery charge order:** determines which battery gets charged first (Multi-battery only)
+- **Cycle which battery to charge first:** (Multi-battery only)
    - Batteries gets charged in order. By changing which battery is first in order, you can optimize battery wear.
    - Especially during cloudy periods when the first battery takes the grunt of the charging and discharging.
    - The **Cycle** setting controls how battery priority changes over time:
