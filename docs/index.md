@@ -23,6 +23,9 @@ Open-source battery control for Home Assistant & Node-RED. Control your home bat
 - **[Advanced Features](/06-advanced-features)** - EV trigger, multi-battery, 3-phase
 - **[Troubleshooting](/07-troubleshooting)** - Common issues and solutions
 
+### 🔄 Updating
+- **[How to Update](/08-how-to-update)** - Update HA config, dashboard and Node-RED flows
+
 ---
 
 ## About This Project

@@ -63,7 +63,7 @@ This project is designed for hobbyists who want full control over their home bat
 - **[Troubleshooting](docs/07-troubleshooting.md)** - Common issues and solutions
 
 ### Updating
-Check the [release notes](RELEASE_NOTES.md) to see which files have changed. In most cases your `Battery Start` flow stays unchanged (contains your custom settings). Copy the other files and import Node-RED flows as per [installation guide](docs/01-getting-started.md).
+Check the [release notes](RELEASE_NOTES.md) to see which files have changed. In most cases your `Battery Start` flow stays unchanged (contains your custom settings). Copy the other files and import Node-RED flows as per the **[How to Update guide](docs/08-how-to-update.md)**.
 
 ## Credits
 The Node-RED + HA control schema is based on the approach by Ruald Ordelman. And the easy to use Modbus to HA boards by Fonske. Many thanks for sharing your work and ideas with the community!
