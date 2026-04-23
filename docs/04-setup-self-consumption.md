@@ -10,6 +10,8 @@ For the `self-consumption strategy` a PID controller is used. This keeps grid in
 ## What is a PID Controller
 A proportional–integral–derivative controller (PID controller or three-term controller) is a feedback-based control loop mechanism commonly used to manage machines and processes that require continuous control and automatic adjustment. See [Wikipedia - Fundamental operation](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller#Fundamental_operation)
 
+[![Self-consumption PID tuning](https://img.youtube.com/vi/z-fhwwJtAm8/0.jpg)](https://youtu.be/z-fhwwJtAm8)
+
 ## PID Operation
 Complete the [getting started](01-getting-started.md) first.
 
