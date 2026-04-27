@@ -16,13 +16,16 @@ nav_order: 6
   - Configurable through the Advanced Settings dashboard
 
 ## Battery Life
-- **Minimum Idle Time:** Configurable minimum time before allowing battery grid relay disengagement
+- **Stop after idle time:** Configurable minimum time before allowing battery grid relay disengagement
   - Reduces relay wear and extends battery life
   - Eliminates clicking/clacking noises during frequent charge/discharge transitions around 0W
   - Configurable through Home Assistant dashboard
-- **Hysteresis:** Prevents excessive switching between charge and discharge mode around the 0 Watt line. 
+  - Recommended setting: 5 min
+- **Hysteresis:** Prevents excessive switching between charge and discharge mode around the 0 Watt line.
    - If the PID output level lies within hysteresis, it will not switch from charge to discharge or vise versa. 
    - 0 = apply no hysteresis
+   - Recommended setting: 0W = off, if your system performs well when your home's production equals consumption
+   - Alternative setting: 200W 
 - **Cycle which battery to charge first:** (Multi-battery only)
    - Batteries gets charged in order. By changing which battery is first in order, you can optimize battery wear.
    - Especially during cloudy periods when the first battery takes the grunt of the charging and discharging.
