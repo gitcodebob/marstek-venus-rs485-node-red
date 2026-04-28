@@ -21,11 +21,14 @@ nav_order: 6
   - Eliminates clicking/clacking noises during frequent charge/discharge transitions around 0W
   - Configurable through Home Assistant dashboard
   - Recommended setting: 5 min
-- **Hysteresis:** Prevents excessive switching between charge and discharge mode around the 0 Watt line.
+- **Hysteresis:** Smooths your system during the period where your energy usage equals the energy production (equilibrium)
+   - Prevents excessive switching between charge and discharge mode around the 0 Watt line.
    - If the PID output level lies within hysteresis, it will not switch from charge to discharge or vise versa. 
    - 0 = apply no hysteresis
-   - Recommended setting: 0W = off, if your system performs well when your home's production equals consumption
-   - Alternative setting: 200W 
+   - _Recommended setting_: off (0W)
+    - Observe your home with hysteresis turned off during equilibrium. If it looks good. Leave it off. 
+   - _Alternate setting_: 200W 
+     - If the system swings up and down a lot during equilibrium, turn hysteresis up to see if it improves. 
 - **Cycle which battery to charge first:** (Multi-battery only)
    - Batteries gets charged in order. By changing which battery is first in order, you can optimize battery wear.
    - Especially during cloudy periods when the first battery takes the grunt of the charging and discharging.
