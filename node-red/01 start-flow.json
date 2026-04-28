@@ -2,7 +2,7 @@
     {
         "id": "cf69560481408644",
         "type": "tab",
-        "label": "Home Battery Start v4.8.1",
+        "label": "Home Battery Start v4.8.2",
         "disabled": false,
         "info": "# Home battery control\r\nConsists of three flows:\r\n 1.  Start flow\r\n 1.  Control flow\r\n 1.  Master switch flow\r\n\r\n## Start flow\r\nThis is the starting point of your home battery control.\r\n\r\nIt starts with P1 measurement as a trigger.\r\nIt allows you to connect your battery sensors to the flow.\r\nIt ends with a function node, mapping your batteries to a battery_array\r\n\r\nThe battery_array is passed on to the control flow.\r\n\r\nWhen the control flow has calculated the desired corrections,\r\nit is passed back to this flow and applied to your batteries.",
         "env": []
@@ -176,7 +176,7 @@
         ],
         "x": 34,
         "y": 219,
-        "w": 1402,
+        "w": 1382,
         "h": 122
     },
     {
@@ -579,7 +579,7 @@
         "name": "Call \"Link in\" node",
         "links": [],
         "linkType": "dynamic",
-        "timeout": "1.2",
+        "timeout": "1",
         "x": 510,
         "y": 1180,
         "wires": [
@@ -631,7 +631,7 @@
         "z": "cf69560481408644",
         "g": "6373da5467ce39eb",
         "name": "Strategy evaluation",
-        "func": "// add execution marker\nlet execution_end = Date.now();\nRED.util.setMessageProperty(msg, \"strategy.execution_end\", execution_end);\n\n// retrieve execution markers\nlet execution_start = RED.util.getMessageProperty(msg,\"strategy.execution_start\");\n\n// report execution time\nif (execution_start !== undefined && execution_end !== undefined) {\n    // exec time\n    let execution_time = (execution_end - execution_start) / 1000; // seconds\n    // report\n    if (execution_time <= 0) node.status({ fill: \"red\", shape: \"dot\", text: `negative or zero timing` });\n    if (execution_time > 0) node.status({ fill: \"green\", shape: \"dot\", text: `${execution_time} sec`});\n    if (execution_time >= 0.7) node.status({ fill: \"yellow\", shape: \"dot\", text: `${execution_time} sec` });\n    if (execution_time >= 1) node.status({ fill: \"red\", shape: \"dot\", text: `${execution_time} sec` });\n\n} else {\n    node.status({fill:\"grey\",shape:\"dot\",text:\"timing error\"});\n}\n\nreturn msg;",
+        "func": "// add execution marker\nlet execution_end = Date.now();\nRED.util.setMessageProperty(msg, \"strategy.execution_end\", execution_end);\n\n// retrieve execution markers\nlet execution_start = RED.util.getMessageProperty(msg,\"strategy.execution_start\");\n\n// report execution time\nif (execution_start !== undefined && execution_end !== undefined) {\n    // exec time\n    let execution_time = (execution_end - execution_start) / 1000; // seconds\n    // report\n    if (execution_time <= 0) node.status({ fill: \"red\", shape: \"dot\", text: `negative or zero timing` });\n    if (execution_time > 0) node.status({ fill: \"green\", shape: \"dot\", text: `${execution_time} sec`});\n    if (execution_time >= 0.7) node.status({ fill: \"yellow\", shape: \"dot\", text: `${execution_time} sec` });\n    if (execution_time >= 1) node.status({ fill: \"red\", shape: \"dot\", text: `${execution_time} sec` });\n    // store in flow context (so the rate limiter can evaluate at next pass)\n    flow.set(\"strategy_execution_time\", execution_time); // negative = error\n} else {\n    // report\n    node.status({fill:\"grey\",shape:\"dot\",text:\"timing error\"});\n    // store in flow context (so the rate limiter can evaluate at next pass)\n    flow.set(\"strategy_execution_time\", -1); // negative = error\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1876,9 +1876,9 @@
         "y": 680,
         "wires": [
             [
-                "356be5dd2eb5c348",
                 "401335054122a6b3",
-                "02a0f3158b254cb7"
+                "02a0f3158b254cb7",
+                "356be5dd2eb5c348"
             ]
         ],
         "inputLabels": [
@@ -2030,7 +2030,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 660,
+        "x": 640,
         "y": 280,
         "wires": [
             [
@@ -2059,7 +2059,7 @@
         "drop": true,
         "allowrate": true,
         "outputs": 2,
-        "x": 980,
+        "x": 960,
         "y": 280,
         "wires": [
             [
@@ -2094,7 +2094,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 820,
+        "x": 800,
         "y": 300,
         "wires": [
             [
@@ -2122,7 +2122,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 830,
+        "x": 810,
         "y": 260,
         "wires": [
             [
@@ -2135,15 +2135,15 @@
         "type": "function",
         "z": "cf69560481408644",
         "g": "a72bb94548f2183c",
-        "name": "P1 change (20W or 2%)",
-        "func": "// Switch between low and high rate limiting to decrease load and power consumption\n// --\n// The flow should always be rate limited by atleast the total execution time of strategies\n// The flow should not lock up indefinitly when grid_power is constant.\n// In the latter case, a more relaxed rate limit can help reduce system load.\n// Devs: don't set msg.rate directly. Use nodes, so novice users can easily read the flow.\n\n// Thresholds for change in power, before switching to high rate limit\nconst THRESHOLD_POWER = 20; // Watt change\nconst THRESHOLD_PERCENT = 2; // Percentage\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_power\", THRESHOLD_POWER,true);\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_percent\", THRESHOLD_PERCENT, true);\n\n// Get the previous value from this node's context\n// If it doesn't exist yet, initialize it as null\nlet previousValue = context.get('previousValue') || null;\nlet currentValue = Number(msg.grid_power);\n\n// Save the current value for the next time the node is triggered\ncontext.set('previousValue', currentValue);\n\n// Default rate limiting\nRED.util.setMessageProperty(msg,\"p1_rate_limit.save_power\",true);\n\n// Check if we have a valid history to compare with\nif (previousValue !== null) {\n    let powerChange = Math.abs(currentValue - previousValue);\n    let percentageChange = previousValue !== 0 ? Math.abs((powerChange / previousValue) * 100):0;\n\n    // Condition: Absolute difference > N Watt AND percentage change > M %\n    if (powerChange > THRESHOLD_POWER && percentageChange > THRESHOLD_PERCENT) {\n        // Enable faster refresh rate\n        RED.util.setMessageProperty(msg,\"p1_rate_limit.save_power\",false);\n    }\n}\n\nreturn msg;",
+        "name": "Operational thresholds ",
+        "func": "// Switch between low and high rate limiting to decrease load and power consumption\n// --\n// The flow should always be rate limited by atleast the total execution time of strategies\n// The flow should not lock up indefinitly when grid_power is constant.\n// In the latter case, a more relaxed rate limit can help reduce system load.\n// Devs: don't set msg.rate directly. Use nodes, so novice users can easily read the flow.\n\n// Thresholds for change in power, before switching to high rate limit\nconst THRESHOLD_POWER = 20; // Watt change\nconst THRESHOLD_PERCENT = 2; // Percentage\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_power\", THRESHOLD_POWER,true);\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_percent\", THRESHOLD_PERCENT, true);\n\n// Threshold strategy execution times\nconst THRESHOLD_EXECUTION_TIME = 1.0; // strategy execution time in seconds\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_execution_time\", THRESHOLD_EXECUTION_TIME, true);\nconst previousExecutionTime = flow.get(\"strategy_execution_time\") || 0;\nRED.util.setMessageProperty(msg, \"p1_rate_limit.previous_execution_time\", previousExecutionTime, true);\n\n// Default rate limiting\nRED.util.setMessageProperty(msg,\"p1_rate_limit.save_power\",true);\n\n// Evaluate execution time\nRED.util.setMessageProperty(msg,\"p1_rate_limit.high_load_detected\",false);\nif(previousExecutionTime < 0 || previousExecutionTime > THRESHOLD_EXECUTION_TIME){\n    // HIGH LOAD detected, let system the system cool down for the duration of the save power limiter\n    RED.util.setMessageProperty(msg,\"p1_rate_limit.high_load_detected\",true);\n    node.status({fill:\"yellow\",shape:\"dot\",text:\"High load, cooling down\"});\n    return msg;\n}\n\n// Get the previous value from this node's context\n// If it doesn't exist yet, initialize it as null\nlet previousP1Value = context.get('previousValue') || null;\nlet currentP1Value = Number(msg.grid_power);\n\n// Save the current value for the next time the node is triggered\ncontext.set('previousValue', currentP1Value);\n\n// Check if we have a valid history to compare with\nif (previousP1Value !== null) {\n    let powerChange = Math.abs(currentP1Value - previousP1Value);\n    let percentageChange = previousP1Value !== 0 ? Math.abs((powerChange / previousP1Value) * 100):0;\n\n    // Condition: Absolute difference > N Watt AND percentage change > M %\n    if (powerChange > THRESHOLD_POWER && percentageChange > THRESHOLD_PERCENT) {\n        // Enable faster refresh rate\n        RED.util.setMessageProperty(msg,\"p1_rate_limit.save_power\",false);\n        node.status({fill:\"green\",shape:\"dot\",text:\"Nominal\"});\n    } else {\n        node.status({fill:\"green\",shape:\"dot\",text:\"Stable\"});\n    }\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 450,
+        "x": 440,
         "y": 280,
         "wires": [
             [
@@ -2157,14 +2157,14 @@
         "z": "cf69560481408644",
         "g": "a72bb94548f2183c",
         "name": "CPU power saved",
-        "func": "// Logger\nconst logger = global.get(\"logger\");\n\n// Passed or blocked\nconst hasPassed = msg.payload; // 0 = blocked, 1 = passed\n\n// 1. Get evaluations (Total attempts)\nlet evaluations = (context.get(\"p1_rate_limit_evaluations\") || 0) + 1;\ncontext.set(\"p1_rate_limit_evaluations\", evaluations);\n\n// 2. Increment and get passes (Filtered/successful events)\nlet passes = (context.get(\"p1_rate_limit_passes\") || 0) + hasPassed;\ncontext.set(\"p1_rate_limit_passes\", passes);\n\n// 3a. Calculate percentage (Rate of passing vs total evaluations)\nlet percentage = evaluations > 0 ? (passes / evaluations) * 100 : 0;\n// 3b. Display the percentage rate of not-passing as a measure of efficiency gained\npercentage = 100 - percentage;\n\n// 4. Update Node Status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Saved: ${percentage.toFixed(2)}% (${evaluations-passes}/${evaluations})`\n});\n\n// 5. Explain\n// On block\nif(hasPassed === 0) {\n    if(msg.p1_rate_limit.save_power === true) {\n        // This is good\n        logger(this, `<font color=\"#009ac7\">Power saved</font> by P1 Rate Limiter, execution stopped.`); \n    } else {\n        // This is not so good. P1 updates are coming in fast.\n        logger(this, `<font color=\"orange\">Blocked</font> by P1 Rate Limiter. ${Number(1000/msg.rate).toFixed(2)} messages per second exceeded.`); \n    }\n    \n    // Send message onward to debug dashboard\n    return msg;\n}\n// No output on pass\nreturn null;",
+        "func": "// Logger\nconst logger = global.get(\"logger\");\n\n// Passed or blocked\nconst hasPassed = msg.payload; // 0 = blocked, 1 = passed\n\n// 1. Get evaluations (Total attempts)\nlet evaluations = (context.get(\"p1_rate_limit_evaluations\") || 0) + 1;\ncontext.set(\"p1_rate_limit_evaluations\", evaluations);\n\n// 2. Increment and get passes (Filtered/successful events)\nlet passes = (context.get(\"p1_rate_limit_passes\") || 0) + hasPassed;\ncontext.set(\"p1_rate_limit_passes\", passes);\n\n// 3a. Calculate percentage (Rate of passing vs total evaluations)\nlet percentage = evaluations > 0 ? (passes / evaluations) * 100 : 0;\n// 3b. Display the percentage rate of not-passing as a measure of efficiency gained\npercentage = 100 - percentage;\n\n// 4. Update Node Status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Saved: ${percentage.toFixed(2)}% (${evaluations-passes}/${evaluations})`\n});\n\n// 5. Explain\n// On block\nif(hasPassed === 0) {\n    if(msg.p1_rate_limit.save_power === true) {\n        if(msg.p1_rate_limit.high_load_detected === false){\n            // This is good\n            logger(this, `<font color=\"#009ac7\">Power saved</font> by P1 Rate Limiter, execution stopped.`); \n        } else {\n            // This is not so good. The system is overloaded and needs to 'cool'\n            logger(this, `<font color=\"orange\">Blocked</font> by P1 Rate Limiter. High load detected. Cool down active. Execution time: ${Number(msg.p1_rate_limit.previous_execution_time).toFixed(3)} sec.`);     \n        }\n    } else {\n        // This is not so good. P1 updates are coming in fast.\n        logger(this, `<font color=\"orange\">Blocked</font> by P1 Rate Limiter. ${Number(1000/msg.rate).toFixed(2)} messages per second exceeded.`); \n    }\n    \n    // Send message onward to debug dashboard\n    return msg;\n}\n// No output on pass\nreturn null;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1270,
+        "x": 1250,
         "y": 280,
         "wires": [
             [
@@ -2571,7 +2571,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1110,
+        "x": 1090,
         "y": 300,
         "wires": [
             [
@@ -2600,7 +2600,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1110,
+        "x": 1090,
         "y": 260,
         "wires": [
             [
@@ -2638,7 +2638,7 @@
         "links": [
             "77fcca25ab84e044"
         ],
-        "x": 1395,
+        "x": 1375,
         "y": 280,
         "wires": []
     },
@@ -2649,7 +2649,8 @@
         "g": "61d5ed93c178a2b0",
         "name": "Custom logger",
         "scope": [
-            "0544c5403e05ad49"
+            "0544c5403e05ad49",
+            "296bdf43fd34ab09"
         ],
         "uncaught": false,
         "x": 1340,
@@ -2907,7 +2908,7 @@
         "z": "cf69560481408644",
         "g": "3dec8998f704c25f",
         "name": "Unhandled Exception",
-        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3560,7 +3561,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "c7931e922a8a614c",
+        "id": "e8b8bda130c0e8da",
         "type": "global-config",
         "env": [],
         "modules": {

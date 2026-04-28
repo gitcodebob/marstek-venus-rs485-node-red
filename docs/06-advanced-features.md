@@ -47,11 +47,13 @@ nav_order: 6
   - Adjusts control output to stay within configured battery capabilities
 
 ## Performance Optimizations
-- **Rate Limiter:** Dynamically adjusts processing rate based on grid power changes to reduce CPU load
+- **Rate Limiter:** Dynamically adjusts processing rate based on grid power changes and system load to reduce CPU load
   - *Power saving mode:* Processes 0.333 messages/second (every 3 seconds) during stable operation
   - *Responsive mode:* Increases to 1 message/second when significant changes detected (>20W AND >2%)
-  - Automatically switches between modes based on power fluctuations
-  - Change thresholds in `Home Battery Start` → `Rate limiter` → `F:node P1 change (20W or 2%)`
+  - *High load cool-down:* If the previous strategy execution took ≥ 1.0 second, high load is detected and the system is forced into power saving mode for the next cycle, regardless of power changes. This gives the system time to recover and helps prevent Node-RED from grinding to a halt during error storms or excessive load.
+  - Automatically switches between modes based on power fluctuations and execution time
+  - Change P1 change thresholds in `Home Battery Start` → `Rate limiter` → `F:node P1 change (20W or 2%)`
+  - Change the execution time threshold in `Home Battery Start` → `Rate limiter` → `F:node Operational thresholds`
 - **Deadband:** Control loop only activates when _P1 error_ is outside the deadband threshold
   - Further reduces unnecessary battery adjustments during stable operation
   - Change the deadband in `Strategy Self-consumption` → `F:node Deadband(15W)` 

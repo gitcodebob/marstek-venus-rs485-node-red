@@ -1,6 +1,31 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.8.2
+- **Feat: High load detection reduces update rate**
+  * When excessive system load is detected, the control loop update rate is automatically throttled down.
+  * Together with the fixes below, this may address situations where Node-RED completely grinds to a halt due to excessive load and error storms.
+
+- **Fix: Unhandled exceptions no longer trigger the 'Missing return' warning**
+  * Exceptions in function nodes are now caught and handled, preventing spurious 'Missing return' warnings from polluting the debug log.
+
+- **Fix: Catch node scoping on Start flow and Self-consumption flow**
+  * Catch nodes were incorrectly scoped, causing unintended error capture across flows.
+
+- **Fix: Bumpless Ki working again**
+  * Bumpless integral gain (Ki) initialization is restored to correct behavior.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `node-red/01 start-flow.json`
+  - `node-red/02 strategy-charge-pv.json`
+  - `node-red/02 strategy-charge.json`
+  - `node-red/02 strategy-dynamic.json`
+  - `node-red/02 strategy-full-stop.json`
+  - `node-red/02 strategy-self-consumption.json`
+  - `node-red/02 strategy-sell.json`
+  - `node-red/02 strategy-timed.json`
+
 ## 4.8.1
 - **Fix: Correct entities in dashboard history-graph**
   * The PID history-graph was referencing a non-existent `sensor.pid_output` for PID control, and the `input_number` for PID was mislabelled as "Grid power".

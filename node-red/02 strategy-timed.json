@@ -1,23 +1,23 @@
 [
     {
-        "id": "7ad69230540da69c",
+        "id": "7728870d8f926144",
         "type": "tab",
-        "label": "Strategy Timed v4.8.1",
+        "label": "Strategy Timed v4.8.2",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "3e61db12ab9ec746",
+        "id": "aa9a8c2151c85271",
         "type": "group",
-        "z": "7ad69230540da69c",
+        "z": "7728870d8f926144",
         "name": "Battery solutions",
         "style": {
             "label": true
         },
         "nodes": [
-            "10b88d926e62fc43",
-            "8688c94fc23a39f1"
+            "cafa5d012f5fdaf2",
+            "8a32838a8c79bf4a"
         ],
         "x": 1214,
         "y": 419,
@@ -25,9 +25,9 @@
         "h": 142
     },
     {
-        "id": "625ddf51bcddd6d8",
+        "id": "1ac9173cb5645b2b",
         "type": "group",
-        "z": "7ad69230540da69c",
+        "z": "7728870d8f926144",
         "style": {
             "stroke": "#565656",
             "stroke-opacity": "1",
@@ -38,9 +38,9 @@
             "color": "#cccccc"
         },
         "nodes": [
-            "5cdb5b87b60a9596",
-            "b579274aa36f5869",
-            "fe5f9bd8fa4fb3b0"
+            "11dc623036e469ad",
+            "7ff152bad6905193",
+            "6768b3cff1163215"
         ],
         "x": 24,
         "y": 79,
@@ -48,9 +48,9 @@
         "h": 162
     },
     {
-        "id": "07d17bb77341b573",
+        "id": "d3ce8a12f2c155cf",
         "type": "group",
-        "z": "7ad69230540da69c",
+        "z": "7728870d8f926144",
         "style": {
             "stroke": "#565656",
             "stroke-opacity": "1",
@@ -61,9 +61,9 @@
             "color": "#cccccc"
         },
         "nodes": [
-            "862e1c9a9172113a",
-            "cb3f2e2562113494",
-            "59e01da2ebbe4d9f"
+            "fe240db986d87771",
+            "924e9c4c42b058de",
+            "73b213fd354a679a"
         ],
         "x": 454,
         "y": 79,
@@ -71,9 +71,9 @@
         "h": 82
     },
     {
-        "id": "2a59c566702b8da8",
+        "id": "efabab2c09637430",
         "type": "group",
-        "z": "7ad69230540da69c",
+        "z": "7728870d8f926144",
         "style": {
             "stroke": "#565656",
             "stroke-opacity": "1",
@@ -84,10 +84,10 @@
             "color": "#cccccc"
         },
         "nodes": [
-            "f13e4350a5114372",
-            "e40da2421d8f9cb0",
-            "9a9f396a54144d0d",
-            "51b5976f23083ce7"
+            "e999809a75872f7a",
+            "0ab45cf50f015b2f",
+            "d553b4c4cb0cbeba",
+            "176ce75d581e3a52"
         ],
         "x": 254,
         "y": 179,
@@ -95,9 +95,9 @@
         "h": 82
     },
     {
-        "id": "cbce06bb2136caf8",
+        "id": "5b5cf5c78c3c259e",
         "type": "group",
-        "z": "7ad69230540da69c",
+        "z": "7728870d8f926144",
         "style": {
             "stroke": "#565656",
             "stroke-opacity": "1",
@@ -108,7 +108,7 @@
             "color": "#cccccc"
         },
         "nodes": [
-            "49a249eef6b43cf0"
+            "f276d5f8bfa30850"
         ],
         "x": 254,
         "y": 79,
@@ -116,35 +116,35 @@
         "h": 82
     },
     {
-        "id": "48cafddd134e3402",
+        "id": "4239a1ccb22ed61c",
         "type": "group",
-        "z": "7ad69230540da69c",
+        "z": "7728870d8f926144",
         "name": "Determine sub-strategy based on time period",
         "style": {
             "label": true
         },
         "nodes": [
-            "7e109254edf61448",
-            "92836e38d91ae339",
-            "256d297b98117c3a",
-            "8ee8798e914ce432",
-            "9bf779ebdde8d940",
-            "e90ac5f52dc12133",
-            "691cb14543314b20",
-            "071144d523359769",
-            "f0a1f9077fdd4dac",
-            "1fa906e4d8e1e062",
-            "70e0f6f67e622d45",
-            "0444818ae1eee4ab",
-            "b64e28ae6da3580c",
-            "1cea360de98de682",
-            "659992bc19a91722",
-            "4a2711dc9e3ed139",
-            "329803e521815281",
-            "9324ce3dab0d0e9d",
-            "9a70d7c7db693180",
-            "ddd2843d2e762a02",
-            "dce0914e11299c06"
+            "39cbc1af3386caf0",
+            "2d7615d223ee5983",
+            "6ab34e4e35f274bb",
+            "b568ae99d540090d",
+            "cda3b2f1d5eb2181",
+            "9e93a840a96e933f",
+            "ce85c460fb8b4988",
+            "2e7ffa7c0d8e58df",
+            "9d305e0d681f4c66",
+            "d453318d4dbdef08",
+            "54e9d5b502e76eae",
+            "d274e82c7734e2b2",
+            "02717c01863276c6",
+            "0aa5a903b67c3e26",
+            "87b335d1fe6d2f46",
+            "29e67c0706cc405b",
+            "7f8de8db550ac02b",
+            "609c9c3fb0e928a4",
+            "30ac5ad7145e3133",
+            "22d1626908ece0d6",
+            "f6a7fbe779fa5f27"
         ],
         "x": 254,
         "y": 379,
@@ -152,16 +152,16 @@
         "h": 402
     },
     {
-        "id": "444a65715eadb146",
+        "id": "66c00370a8ddeaaf",
         "type": "group",
-        "z": "7ad69230540da69c",
+        "z": "7728870d8f926144",
         "name": "Execute sub-strategy",
         "style": {
             "label": true
         },
         "nodes": [
-            "452e1f477e8029a6",
-            "7b57378a60081d0b"
+            "b12eeda26dafc00f",
+            "e904f83bb6d20bda"
         ],
         "x": 984,
         "y": 419,
@@ -169,9 +169,9 @@
         "h": 142
     },
     {
-        "id": "e562cc8cfb587524",
+        "id": "1d1c93f655554bae",
         "type": "group",
-        "z": "7ad69230540da69c",
+        "z": "7728870d8f926144",
         "style": {
             "stroke": "#565656",
             "stroke-opacity": "1",
@@ -182,10 +182,10 @@
             "color": "#cccccc"
         },
         "nodes": [
-            "36993a3e8c23f28a",
-            "697ac49e61a9ad5d",
-            "273bf45aa2185edd",
-            "005e021e311896c4"
+            "5f1b2a04fada1fa5",
+            "319f6ef4aca6761c",
+            "d005ebbd483a1e0c",
+            "cd420a276517cedc"
         ],
         "x": 254,
         "y": 279,
@@ -193,9 +193,9 @@
         "h": 82
     },
     {
-        "id": "bff3a9d3ddb4bec7",
+        "id": "033d84ec511d515c",
         "type": "group",
-        "z": "7ad69230540da69c",
+        "z": "7728870d8f926144",
         "name": "Unhandled exceptions",
         "style": {
             "label": true,
@@ -203,9 +203,9 @@
             "color": "#d88a8a"
         },
         "nodes": [
-            "c5f64e32389db2be",
-            "9e610234d28c499e",
-            "874cc6f3278f0ca2"
+            "2948decbcaf1f466",
+            "a790ce2ae5080f6f",
+            "b59ee0cf12bb58c8"
         ],
         "x": 24,
         "y": 279,
@@ -213,25 +213,25 @@
         "h": 82
     },
     {
-        "id": "5cdb5b87b60a9596",
+        "id": "11dc623036e469ad",
         "type": "link in",
-        "z": "7ad69230540da69c",
-        "g": "625ddf51bcddd6d8",
+        "z": "7728870d8f926144",
+        "g": "1ac9173cb5645b2b",
         "name": "Timed",
         "links": [],
         "x": 110,
         "y": 160,
         "wires": [
             [
-                "fe5f9bd8fa4fb3b0"
+                "6768b3cff1163215"
             ]
         ],
         "l": true
     },
     {
-        "id": "08e555f55fdb3747",
+        "id": "f736d86dc7b7fd1f",
         "type": "comment",
-        "z": "7ad69230540da69c",
+        "z": "7728870d8f926144",
         "name": "Home Battery Strategy",
         "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
         "x": 130,
@@ -239,10 +239,10 @@
         "wires": []
     },
     {
-        "id": "b579274aa36f5869",
+        "id": "7ff152bad6905193",
         "type": "comment",
-        "z": "7ad69230540da69c",
-        "g": "625ddf51bcddd6d8",
+        "z": "7728870d8f926144",
+        "g": "1ac9173cb5645b2b",
         "name": "Start (readme)",
         "info": "# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the <select> option configured in your\nselect_input.house_battery_strategy\n\nconfigure select options in:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select 'AcmE example'\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
         "x": 120,
@@ -250,10 +250,10 @@
         "wires": []
     },
     {
-        "id": "10b88d926e62fc43",
+        "id": "cafa5d012f5fdaf2",
         "type": "link out",
-        "z": "7ad69230540da69c",
-        "g": "3e61db12ab9ec746",
+        "z": "7728870d8f926144",
+        "g": "aa9a8c2151c85271",
         "name": "Return",
         "mode": "return",
         "links": [],
@@ -262,10 +262,10 @@
         "wires": []
     },
     {
-        "id": "8688c94fc23a39f1",
+        "id": "8a32838a8c79bf4a",
         "type": "comment",
-        "z": "7ad69230540da69c",
-        "g": "3e61db12ab9ec746",
+        "z": "7728870d8f926144",
+        "g": "aa9a8c2151c85271",
         "name": "End (readme)",
         "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
         "x": 1310,
@@ -273,10 +273,10 @@
         "wires": []
     },
     {
-        "id": "862e1c9a9172113a",
+        "id": "fe240db986d87771",
         "type": "api-current-state",
-        "z": "7ad69230540da69c",
-        "g": "07d17bb77341b573",
+        "z": "7728870d8f926144",
+        "g": "d3ce8a12f2c155cf",
         "name": "Period A start",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -319,15 +319,15 @@
         "y": 120,
         "wires": [
             [
-                "cb3f2e2562113494"
+                "924e9c4c42b058de"
             ]
         ]
     },
     {
-        "id": "cb3f2e2562113494",
+        "id": "924e9c4c42b058de",
         "type": "api-current-state",
-        "z": "7ad69230540da69c",
-        "g": "07d17bb77341b573",
+        "z": "7728870d8f926144",
+        "g": "d3ce8a12f2c155cf",
         "name": "Period A end",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -370,15 +370,15 @@
         "y": 120,
         "wires": [
             [
-                "59e01da2ebbe4d9f"
+                "73b213fd354a679a"
             ]
         ]
     },
     {
-        "id": "f13e4350a5114372",
+        "id": "e999809a75872f7a",
         "type": "api-current-state",
-        "z": "7ad69230540da69c",
-        "g": "2a59c566702b8da8",
+        "z": "7728870d8f926144",
+        "g": "efabab2c09637430",
         "name": "Period B start",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -421,15 +421,15 @@
         "y": 220,
         "wires": [
             [
-                "e40da2421d8f9cb0"
+                "0ab45cf50f015b2f"
             ]
         ]
     },
     {
-        "id": "e40da2421d8f9cb0",
+        "id": "0ab45cf50f015b2f",
         "type": "api-current-state",
-        "z": "7ad69230540da69c",
-        "g": "2a59c566702b8da8",
+        "z": "7728870d8f926144",
+        "g": "efabab2c09637430",
         "name": "Period B end",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -472,15 +472,15 @@
         "y": 220,
         "wires": [
             [
-                "9a9f396a54144d0d"
+                "d553b4c4cb0cbeba"
             ]
         ]
     },
     {
-        "id": "59e01da2ebbe4d9f",
+        "id": "73b213fd354a679a",
         "type": "api-current-state",
-        "z": "7ad69230540da69c",
-        "g": "07d17bb77341b573",
+        "z": "7728870d8f926144",
+        "g": "d3ce8a12f2c155cf",
         "name": "Strat during A",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -523,15 +523,15 @@
         "y": 120,
         "wires": [
             [
-                "51b5976f23083ce7"
+                "176ce75d581e3a52"
             ]
         ]
     },
     {
-        "id": "9a9f396a54144d0d",
+        "id": "d553b4c4cb0cbeba",
         "type": "api-current-state",
-        "z": "7ad69230540da69c",
-        "g": "2a59c566702b8da8",
+        "z": "7728870d8f926144",
+        "g": "efabab2c09637430",
         "name": "Strat during B",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -574,15 +574,15 @@
         "y": 220,
         "wires": [
             [
-                "005e021e311896c4"
+                "cd420a276517cedc"
             ]
         ]
     },
     {
-        "id": "51b5976f23083ce7",
+        "id": "176ce75d581e3a52",
         "type": "api-current-state",
-        "z": "7ad69230540da69c",
-        "g": "2a59c566702b8da8",
+        "z": "7728870d8f926144",
+        "g": "efabab2c09637430",
         "name": "Has period B",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -625,14 +625,14 @@
         "y": 220,
         "wires": [
             [
-                "f13e4350a5114372"
+                "e999809a75872f7a"
             ]
         ]
     },
     {
-        "id": "7e33ee0e7c5c5b84",
+        "id": "6a140e0f16616d32",
         "type": "inject",
-        "z": "7ad69230540da69c",
+        "z": "7728870d8f926144",
         "name": "Test",
         "props": [
             {
@@ -654,15 +654,15 @@
         "y": 40,
         "wires": [
             [
-                "49a249eef6b43cf0"
+                "f276d5f8bfa30850"
             ]
         ]
     },
     {
-        "id": "7e109254edf61448",
+        "id": "39cbc1af3386caf0",
         "type": "change",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "set Strat 0",
         "rules": [
             {
@@ -682,15 +682,15 @@
         "y": 460,
         "wires": [
             [
-                "256d297b98117c3a"
+                "6ab34e4e35f274bb"
             ]
         ]
     },
     {
-        "id": "92836e38d91ae339",
+        "id": "2d7615d223ee5983",
         "type": "change",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "set Strat A",
         "rules": [
             {
@@ -710,16 +710,16 @@
         "y": 420,
         "wires": [
             [
-                "1cea360de98de682",
-                "1fa906e4d8e1e062"
+                "0aa5a903b67c3e26",
+                "d453318d4dbdef08"
             ]
         ]
     },
     {
-        "id": "256d297b98117c3a",
+        "id": "6ab34e4e35f274bb",
         "type": "switch",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "has period B",
         "property": "house_battery_strategy_timed_has_period_b",
         "propertyType": "msg",
@@ -742,19 +742,19 @@
         "y": 500,
         "wires": [
             [
-                "1cea360de98de682",
-                "70e0f6f67e622d45"
+                "0aa5a903b67c3e26",
+                "54e9d5b502e76eae"
             ],
             [
-                "e90ac5f52dc12133"
+                "9e93a840a96e933f"
             ]
         ]
     },
     {
-        "id": "8ee8798e914ce432",
+        "id": "b568ae99d540090d",
         "type": "function",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "config A",
         "func": "msg.__config = {\n    startTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_a1'),\n    endTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_a2'),\n    startOffset: 0,\n    endOffset: 0\n}\n  \nreturn msg;",
         "outputs": 1,
@@ -767,15 +767,15 @@
         "y": 440,
         "wires": [
             [
-                "9bf779ebdde8d940"
+                "cda3b2f1d5eb2181"
             ]
         ]
     },
     {
-        "id": "9bf779ebdde8d940",
+        "id": "cda3b2f1d5eb2181",
         "type": "time-range-switch",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "Period A",
         "lat": "",
         "lon": "",
@@ -787,18 +787,18 @@
         "y": 440,
         "wires": [
             [
-                "92836e38d91ae339"
+                "2d7615d223ee5983"
             ],
             [
-                "7e109254edf61448"
+                "39cbc1af3386caf0"
             ]
         ]
     },
     {
-        "id": "e90ac5f52dc12133",
+        "id": "9e93a840a96e933f",
         "type": "function",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "config B",
         "func": "msg.__config = {\n    startTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_b1'),\n    endTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_b2'),\n    startOffset: 0,\n    endOffset: 0\n}\n  \nreturn msg;",
         "outputs": 1,
@@ -811,15 +811,15 @@
         "y": 580,
         "wires": [
             [
-                "691cb14543314b20"
+                "ce85c460fb8b4988"
             ]
         ]
     },
     {
-        "id": "691cb14543314b20",
+        "id": "ce85c460fb8b4988",
         "type": "time-range-switch",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "Period B",
         "lat": "",
         "lon": "",
@@ -831,18 +831,18 @@
         "y": 580,
         "wires": [
             [
-                "071144d523359769"
+                "2e7ffa7c0d8e58df"
             ],
             [
-                "f0a1f9077fdd4dac"
+                "9d305e0d681f4c66"
             ]
         ]
     },
     {
-        "id": "071144d523359769",
+        "id": "2e7ffa7c0d8e58df",
         "type": "change",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "set Strat B",
         "rules": [
             {
@@ -862,16 +862,16 @@
         "y": 560,
         "wires": [
             [
-                "1cea360de98de682",
-                "0444818ae1eee4ab"
+                "0aa5a903b67c3e26",
+                "d274e82c7734e2b2"
             ]
         ]
     },
     {
-        "id": "f0a1f9077fdd4dac",
+        "id": "9d305e0d681f4c66",
         "type": "change",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "set Strat 0",
         "rules": [
             {
@@ -891,15 +891,15 @@
         "y": 600,
         "wires": [
             [
-                "659992bc19a91722"
+                "87b335d1fe6d2f46"
             ]
         ]
     },
     {
-        "id": "49a249eef6b43cf0",
+        "id": "f276d5f8bfa30850",
         "type": "api-current-state",
-        "z": "7ad69230540da69c",
-        "g": "cbce06bb2136caf8",
+        "z": "7728870d8f926144",
+        "g": "5b5cf5c78c3c259e",
         "name": "Default Strat",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -942,15 +942,15 @@
         "y": 120,
         "wires": [
             [
-                "862e1c9a9172113a"
+                "fe240db986d87771"
             ]
         ]
     },
     {
-        "id": "452e1f477e8029a6",
+        "id": "b12eeda26dafc00f",
         "type": "link call",
-        "z": "7ad69230540da69c",
-        "g": "444a65715eadb146",
+        "z": "7728870d8f926144",
+        "g": "66c00370a8ddeaaf",
         "name": "Sub strategy",
         "links": [],
         "linkType": "dynamic",
@@ -959,15 +959,15 @@
         "y": 520,
         "wires": [
             [
-                "10b88d926e62fc43"
+                "cafa5d012f5fdaf2"
             ]
         ]
     },
     {
-        "id": "1cea360de98de682",
+        "id": "0aa5a903b67c3e26",
         "type": "change",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "Select flow",
         "rules": [
             {
@@ -987,16 +987,16 @@
         "y": 520,
         "wires": [
             [
-                "452e1f477e8029a6",
-                "7b57378a60081d0b"
+                "b12eeda26dafc00f",
+                "e904f83bb6d20bda"
             ]
         ]
     },
     {
-        "id": "1fa906e4d8e1e062",
+        "id": "d453318d4dbdef08",
         "type": "debug",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "A",
         "active": true,
         "tosidebar": false,
@@ -1011,10 +1011,10 @@
         "wires": []
     },
     {
-        "id": "70e0f6f67e622d45",
+        "id": "54e9d5b502e76eae",
         "type": "debug",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "0",
         "active": true,
         "tosidebar": false,
@@ -1029,10 +1029,10 @@
         "wires": []
     },
     {
-        "id": "0444818ae1eee4ab",
+        "id": "d274e82c7734e2b2",
         "type": "debug",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "B",
         "active": true,
         "tosidebar": false,
@@ -1047,10 +1047,10 @@
         "wires": []
     },
     {
-        "id": "b64e28ae6da3580c",
+        "id": "02717c01863276c6",
         "type": "debug",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "0",
         "active": true,
         "tosidebar": false,
@@ -1065,10 +1065,10 @@
         "wires": []
     },
     {
-        "id": "7b57378a60081d0b",
+        "id": "e904f83bb6d20bda",
         "type": "debug",
-        "z": "7ad69230540da69c",
-        "g": "444a65715eadb146",
+        "z": "7728870d8f926144",
+        "g": "66c00370a8ddeaaf",
         "name": "Target",
         "active": true,
         "tosidebar": false,
@@ -1083,10 +1083,10 @@
         "wires": []
     },
     {
-        "id": "36993a3e8c23f28a",
+        "id": "5f1b2a04fada1fa5",
         "type": "api-current-state",
-        "z": "7ad69230540da69c",
-        "g": "e562cc8cfb587524",
+        "z": "7728870d8f926144",
+        "g": "1d1c93f655554bae",
         "name": "Period C start",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1129,15 +1129,15 @@
         "y": 320,
         "wires": [
             [
-                "697ac49e61a9ad5d"
+                "319f6ef4aca6761c"
             ]
         ]
     },
     {
-        "id": "697ac49e61a9ad5d",
+        "id": "319f6ef4aca6761c",
         "type": "api-current-state",
-        "z": "7ad69230540da69c",
-        "g": "e562cc8cfb587524",
+        "z": "7728870d8f926144",
+        "g": "1d1c93f655554bae",
         "name": "Period C end",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1180,15 +1180,15 @@
         "y": 320,
         "wires": [
             [
-                "273bf45aa2185edd"
+                "d005ebbd483a1e0c"
             ]
         ]
     },
     {
-        "id": "273bf45aa2185edd",
+        "id": "d005ebbd483a1e0c",
         "type": "api-current-state",
-        "z": "7ad69230540da69c",
-        "g": "e562cc8cfb587524",
+        "z": "7728870d8f926144",
+        "g": "1d1c93f655554bae",
         "name": "Strat during C",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1231,15 +1231,15 @@
         "y": 320,
         "wires": [
             [
-                "8ee8798e914ce432"
+                "b568ae99d540090d"
             ]
         ]
     },
     {
-        "id": "005e021e311896c4",
+        "id": "cd420a276517cedc",
         "type": "api-current-state",
-        "z": "7ad69230540da69c",
-        "g": "e562cc8cfb587524",
+        "z": "7728870d8f926144",
+        "g": "1d1c93f655554bae",
         "name": "Has period C",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1282,15 +1282,15 @@
         "y": 320,
         "wires": [
             [
-                "36993a3e8c23f28a"
+                "5f1b2a04fada1fa5"
             ]
         ]
     },
     {
-        "id": "659992bc19a91722",
+        "id": "87b335d1fe6d2f46",
         "type": "switch",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "has period C",
         "property": "house_battery_strategy_timed_has_period_c",
         "propertyType": "msg",
@@ -1313,19 +1313,19 @@
         "y": 640,
         "wires": [
             [
-                "1cea360de98de682",
-                "b64e28ae6da3580c"
+                "0aa5a903b67c3e26",
+                "02717c01863276c6"
             ],
             [
-                "329803e521815281"
+                "7f8de8db550ac02b"
             ]
         ]
     },
     {
-        "id": "4a2711dc9e3ed139",
+        "id": "29e67c0706cc405b",
         "type": "debug",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "C",
         "active": true,
         "tosidebar": false,
@@ -1340,10 +1340,10 @@
         "wires": []
     },
     {
-        "id": "329803e521815281",
+        "id": "7f8de8db550ac02b",
         "type": "function",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "config C",
         "func": "msg.__config = {\n    startTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_c1'),\n    endTime: RED.util.getMessageProperty(msg,'house_battery_strategy_timed_period_c2'),\n    startOffset: 0,\n    endOffset: 0\n}\n  \nreturn msg;",
         "outputs": 1,
@@ -1356,15 +1356,15 @@
         "y": 720,
         "wires": [
             [
-                "9324ce3dab0d0e9d"
+                "609c9c3fb0e928a4"
             ]
         ]
     },
     {
-        "id": "9324ce3dab0d0e9d",
+        "id": "609c9c3fb0e928a4",
         "type": "time-range-switch",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "Period C",
         "lat": "",
         "lon": "",
@@ -1376,18 +1376,18 @@
         "y": 720,
         "wires": [
             [
-                "9a70d7c7db693180"
+                "30ac5ad7145e3133"
             ],
             [
-                "ddd2843d2e762a02"
+                "22d1626908ece0d6"
             ]
         ]
     },
     {
-        "id": "9a70d7c7db693180",
+        "id": "30ac5ad7145e3133",
         "type": "change",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "set Strat C",
         "rules": [
             {
@@ -1407,16 +1407,16 @@
         "y": 700,
         "wires": [
             [
-                "4a2711dc9e3ed139",
-                "1cea360de98de682"
+                "29e67c0706cc405b",
+                "0aa5a903b67c3e26"
             ]
         ]
     },
     {
-        "id": "ddd2843d2e762a02",
+        "id": "22d1626908ece0d6",
         "type": "change",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "set Strat 0",
         "rules": [
             {
@@ -1436,16 +1436,16 @@
         "y": 740,
         "wires": [
             [
-                "1cea360de98de682",
-                "dce0914e11299c06"
+                "0aa5a903b67c3e26",
+                "f6a7fbe779fa5f27"
             ]
         ]
     },
     {
-        "id": "dce0914e11299c06",
+        "id": "f6a7fbe779fa5f27",
         "type": "debug",
-        "z": "7ad69230540da69c",
-        "g": "48cafddd134e3402",
+        "z": "7728870d8f926144",
+        "g": "4239a1ccb22ed61c",
         "name": "0",
         "active": true,
         "tosidebar": false,
@@ -1460,10 +1460,10 @@
         "wires": []
     },
     {
-        "id": "fe5f9bd8fa4fb3b0",
+        "id": "6768b3cff1163215",
         "type": "change",
-        "z": "7ad69230540da69c",
-        "g": "625ddf51bcddd6d8",
+        "z": "7728870d8f926144",
+        "g": "1ac9173cb5645b2b",
         "name": "Trace",
         "rules": [
             {
@@ -1483,16 +1483,16 @@
         "y": 200,
         "wires": [
             [
-                "49a249eef6b43cf0"
+                "f276d5f8bfa30850"
             ]
         ],
         "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     },
     {
-        "id": "c5f64e32389db2be",
+        "id": "2948decbcaf1f466",
         "type": "catch",
-        "z": "7ad69230540da69c",
-        "g": "bff3a9d3ddb4bec7",
+        "z": "7728870d8f926144",
+        "g": "033d84ec511d515c",
         "name": "",
         "scope": null,
         "uncaught": false,
@@ -1500,18 +1500,18 @@
         "y": 320,
         "wires": [
             [
-                "9e610234d28c499e"
+                "a790ce2ae5080f6f"
             ]
         ],
         "l": false
     },
     {
-        "id": "9e610234d28c499e",
+        "id": "a790ce2ae5080f6f",
         "type": "function",
-        "z": "7ad69230540da69c",
-        "g": "bff3a9d3ddb4bec7",
+        "z": "7728870d8f926144",
+        "g": "033d84ec511d515c",
         "name": "Unhandled Exception",
-        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1522,16 +1522,16 @@
         "y": 320,
         "wires": [
             [
-                "874cc6f3278f0ca2"
+                "b59ee0cf12bb58c8"
             ]
         ],
         "l": false
     },
     {
-        "id": "874cc6f3278f0ca2",
+        "id": "b59ee0cf12bb58c8",
         "type": "link out",
-        "z": "7ad69230540da69c",
-        "g": "bff3a9d3ddb4bec7",
+        "z": "7728870d8f926144",
+        "g": "033d84ec511d515c",
         "name": "link out 8",
         "mode": "return",
         "links": [],
@@ -1545,7 +1545,7 @@
         "name": "Home Assistant",
         "addon": true,
         "rejectUnauthorizedCerts": true,
-        "ha_boolean": "",
+        "ha_boolean": [],
         "connectionDelay": false,
         "cacheJson": false,
         "heartbeat": false,
@@ -1554,7 +1554,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "07e317def96d7fc5",
+        "id": "360fea02021712f8",
         "type": "global-config",
         "env": [],
         "modules": {

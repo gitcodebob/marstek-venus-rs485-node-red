@@ -18,7 +18,7 @@
     {
         "id": "cf69560481408644",
         "type": "tab",
-        "label": "Home Battery Start v4.8.1",
+        "label": "Home Battery Start v4.8.2",
         "disabled": false,
         "info": "# Home battery control\r\nConsists of three flows:\r\n 1.  Start flow\r\n 1.  Control flow\r\n 1.  Master switch flow\r\n\r\n## Start flow\r\nThis is the starting point of your home battery control.\r\n\r\nIt starts with P1 measurement as a trigger.\r\nIt allows you to connect your battery sensors to the flow.\r\nIt ends with a function node, mapping your batteries to a battery_array\r\n\r\nThe battery_array is passed on to the control flow.\r\n\r\nWhen the control flow has calculated the desired corrections,\r\nit is passed back to this flow and applied to your batteries.",
         "env": []
@@ -26,7 +26,7 @@
     {
         "id": "c872e72f7240c80d",
         "type": "tab",
-        "label": "Strategy Charge PV v4.8.1",
+        "label": "Strategy Charge PV v4.8.2",
         "disabled": false,
         "info": "",
         "env": []
@@ -34,7 +34,7 @@
     {
         "id": "e0fc2f0ad8192691",
         "type": "tab",
-        "label": "Strategy Charge v4.8.1",
+        "label": "Strategy Charge v4.8.2",
         "disabled": false,
         "info": "",
         "env": []
@@ -42,7 +42,7 @@
     {
         "id": "f543b6c0f1e80bcf",
         "type": "tab",
-        "label": "Strategy Dynamic v4.8.1",
+        "label": "Strategy Dynamic v4.8.2",
         "disabled": false,
         "info": "Dynamic contract automated management",
         "env": []
@@ -50,7 +50,7 @@
     {
         "id": "c6efb67773d1041c",
         "type": "tab",
-        "label": "Strategy Full stop v4.8.1",
+        "label": "Strategy Full stop v4.8.2",
         "disabled": false,
         "info": "",
         "env": []
@@ -58,7 +58,7 @@
     {
         "id": "08bd910806aaf74c",
         "type": "tab",
-        "label": "Strategy Self-consumption v4.8.1",
+        "label": "Strategy Self-consumption v4.8.2",
         "disabled": false,
         "info": "",
         "env": []
@@ -66,7 +66,7 @@
     {
         "id": "851936bd2b585b86",
         "type": "tab",
-        "label": "Strategy Sell v4.8.1",
+        "label": "Strategy Sell v4.8.2",
         "disabled": false,
         "info": "",
         "env": []
@@ -74,7 +74,7 @@
     {
         "id": "7728870d8f926144",
         "type": "tab",
-        "label": "Strategy Timed v4.8.1",
+        "label": "Strategy Timed v4.8.2",
         "disabled": false,
         "info": "",
         "env": []
@@ -1187,7 +1187,7 @@
         ],
         "x": 34,
         "y": 219,
-        "w": 1402,
+        "w": 1382,
         "h": 122
     },
     {
@@ -2710,7 +2710,7 @@
         "name": "Call \"Link in\" node",
         "links": [],
         "linkType": "dynamic",
-        "timeout": "1.2",
+        "timeout": "1",
         "x": 510,
         "y": 1180,
         "wires": [
@@ -2762,7 +2762,7 @@
         "z": "cf69560481408644",
         "g": "6373da5467ce39eb",
         "name": "Strategy evaluation",
-        "func": "// add execution marker\nlet execution_end = Date.now();\nRED.util.setMessageProperty(msg, \"strategy.execution_end\", execution_end);\n\n// retrieve execution markers\nlet execution_start = RED.util.getMessageProperty(msg,\"strategy.execution_start\");\n\n// report execution time\nif (execution_start !== undefined && execution_end !== undefined) {\n    // exec time\n    let execution_time = (execution_end - execution_start) / 1000; // seconds\n    // report\n    if (execution_time <= 0) node.status({ fill: \"red\", shape: \"dot\", text: `negative or zero timing` });\n    if (execution_time > 0) node.status({ fill: \"green\", shape: \"dot\", text: `${execution_time} sec`});\n    if (execution_time >= 0.7) node.status({ fill: \"yellow\", shape: \"dot\", text: `${execution_time} sec` });\n    if (execution_time >= 1) node.status({ fill: \"red\", shape: \"dot\", text: `${execution_time} sec` });\n\n} else {\n    node.status({fill:\"grey\",shape:\"dot\",text:\"timing error\"});\n}\n\nreturn msg;",
+        "func": "// add execution marker\nlet execution_end = Date.now();\nRED.util.setMessageProperty(msg, \"strategy.execution_end\", execution_end);\n\n// retrieve execution markers\nlet execution_start = RED.util.getMessageProperty(msg,\"strategy.execution_start\");\n\n// report execution time\nif (execution_start !== undefined && execution_end !== undefined) {\n    // exec time\n    let execution_time = (execution_end - execution_start) / 1000; // seconds\n    // report\n    if (execution_time <= 0) node.status({ fill: \"red\", shape: \"dot\", text: `negative or zero timing` });\n    if (execution_time > 0) node.status({ fill: \"green\", shape: \"dot\", text: `${execution_time} sec`});\n    if (execution_time >= 0.7) node.status({ fill: \"yellow\", shape: \"dot\", text: `${execution_time} sec` });\n    if (execution_time >= 1) node.status({ fill: \"red\", shape: \"dot\", text: `${execution_time} sec` });\n    // store in flow context (so the rate limiter can evaluate at next pass)\n    flow.set(\"strategy_execution_time\", execution_time); // negative = error\n} else {\n    // report\n    node.status({fill:\"grey\",shape:\"dot\",text:\"timing error\"});\n    // store in flow context (so the rate limiter can evaluate at next pass)\n    flow.set(\"strategy_execution_time\", -1); // negative = error\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4007,9 +4007,9 @@
         "y": 680,
         "wires": [
             [
-                "356be5dd2eb5c348",
                 "401335054122a6b3",
-                "02a0f3158b254cb7"
+                "02a0f3158b254cb7",
+                "356be5dd2eb5c348"
             ]
         ],
         "inputLabels": [
@@ -4161,7 +4161,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 660,
+        "x": 640,
         "y": 280,
         "wires": [
             [
@@ -4190,7 +4190,7 @@
         "drop": true,
         "allowrate": true,
         "outputs": 2,
-        "x": 980,
+        "x": 960,
         "y": 280,
         "wires": [
             [
@@ -4225,7 +4225,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 820,
+        "x": 800,
         "y": 300,
         "wires": [
             [
@@ -4253,7 +4253,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 830,
+        "x": 810,
         "y": 260,
         "wires": [
             [
@@ -4266,15 +4266,15 @@
         "type": "function",
         "z": "cf69560481408644",
         "g": "a72bb94548f2183c",
-        "name": "P1 change (20W or 2%)",
-        "func": "// Switch between low and high rate limiting to decrease load and power consumption\n// --\n// The flow should always be rate limited by atleast the total execution time of strategies\n// The flow should not lock up indefinitly when grid_power is constant.\n// In the latter case, a more relaxed rate limit can help reduce system load.\n// Devs: don't set msg.rate directly. Use nodes, so novice users can easily read the flow.\n\n// Thresholds for change in power, before switching to high rate limit\nconst THRESHOLD_POWER = 20; // Watt change\nconst THRESHOLD_PERCENT = 2; // Percentage\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_power\", THRESHOLD_POWER,true);\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_percent\", THRESHOLD_PERCENT, true);\n\n// Get the previous value from this node's context\n// If it doesn't exist yet, initialize it as null\nlet previousValue = context.get('previousValue') || null;\nlet currentValue = Number(msg.grid_power);\n\n// Save the current value for the next time the node is triggered\ncontext.set('previousValue', currentValue);\n\n// Default rate limiting\nRED.util.setMessageProperty(msg,\"p1_rate_limit.save_power\",true);\n\n// Check if we have a valid history to compare with\nif (previousValue !== null) {\n    let powerChange = Math.abs(currentValue - previousValue);\n    let percentageChange = previousValue !== 0 ? Math.abs((powerChange / previousValue) * 100):0;\n\n    // Condition: Absolute difference > N Watt AND percentage change > M %\n    if (powerChange > THRESHOLD_POWER && percentageChange > THRESHOLD_PERCENT) {\n        // Enable faster refresh rate\n        RED.util.setMessageProperty(msg,\"p1_rate_limit.save_power\",false);\n    }\n}\n\nreturn msg;",
+        "name": "Operational thresholds ",
+        "func": "// Switch between low and high rate limiting to decrease load and power consumption\n// --\n// The flow should always be rate limited by atleast the total execution time of strategies\n// The flow should not lock up indefinitly when grid_power is constant.\n// In the latter case, a more relaxed rate limit can help reduce system load.\n// Devs: don't set msg.rate directly. Use nodes, so novice users can easily read the flow.\n\n// Thresholds for change in power, before switching to high rate limit\nconst THRESHOLD_POWER = 20; // Watt change\nconst THRESHOLD_PERCENT = 2; // Percentage\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_power\", THRESHOLD_POWER,true);\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_percent\", THRESHOLD_PERCENT, true);\n\n// Threshold strategy execution times\nconst THRESHOLD_EXECUTION_TIME = 1.0; // strategy execution time in seconds\nRED.util.setMessageProperty(msg, \"p1_rate_limit.threshold_execution_time\", THRESHOLD_EXECUTION_TIME, true);\nconst previousExecutionTime = flow.get(\"strategy_execution_time\") || 0;\nRED.util.setMessageProperty(msg, \"p1_rate_limit.previous_execution_time\", previousExecutionTime, true);\n\n// Default rate limiting\nRED.util.setMessageProperty(msg,\"p1_rate_limit.save_power\",true);\n\n// Evaluate execution time\nRED.util.setMessageProperty(msg,\"p1_rate_limit.high_load_detected\",false);\nif(previousExecutionTime < 0 || previousExecutionTime > THRESHOLD_EXECUTION_TIME){\n    // HIGH LOAD detected, let system the system cool down for the duration of the save power limiter\n    RED.util.setMessageProperty(msg,\"p1_rate_limit.high_load_detected\",true);\n    node.status({fill:\"yellow\",shape:\"dot\",text:\"High load, cooling down\"});\n    return msg;\n}\n\n// Get the previous value from this node's context\n// If it doesn't exist yet, initialize it as null\nlet previousP1Value = context.get('previousValue') || null;\nlet currentP1Value = Number(msg.grid_power);\n\n// Save the current value for the next time the node is triggered\ncontext.set('previousValue', currentP1Value);\n\n// Check if we have a valid history to compare with\nif (previousP1Value !== null) {\n    let powerChange = Math.abs(currentP1Value - previousP1Value);\n    let percentageChange = previousP1Value !== 0 ? Math.abs((powerChange / previousP1Value) * 100):0;\n\n    // Condition: Absolute difference > N Watt AND percentage change > M %\n    if (powerChange > THRESHOLD_POWER && percentageChange > THRESHOLD_PERCENT) {\n        // Enable faster refresh rate\n        RED.util.setMessageProperty(msg,\"p1_rate_limit.save_power\",false);\n        node.status({fill:\"green\",shape:\"dot\",text:\"Nominal\"});\n    } else {\n        node.status({fill:\"green\",shape:\"dot\",text:\"Stable\"});\n    }\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 450,
+        "x": 440,
         "y": 280,
         "wires": [
             [
@@ -4288,14 +4288,14 @@
         "z": "cf69560481408644",
         "g": "a72bb94548f2183c",
         "name": "CPU power saved",
-        "func": "// Logger\nconst logger = global.get(\"logger\");\n\n// Passed or blocked\nconst hasPassed = msg.payload; // 0 = blocked, 1 = passed\n\n// 1. Get evaluations (Total attempts)\nlet evaluations = (context.get(\"p1_rate_limit_evaluations\") || 0) + 1;\ncontext.set(\"p1_rate_limit_evaluations\", evaluations);\n\n// 2. Increment and get passes (Filtered/successful events)\nlet passes = (context.get(\"p1_rate_limit_passes\") || 0) + hasPassed;\ncontext.set(\"p1_rate_limit_passes\", passes);\n\n// 3a. Calculate percentage (Rate of passing vs total evaluations)\nlet percentage = evaluations > 0 ? (passes / evaluations) * 100 : 0;\n// 3b. Display the percentage rate of not-passing as a measure of efficiency gained\npercentage = 100 - percentage;\n\n// 4. Update Node Status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Saved: ${percentage.toFixed(2)}% (${evaluations-passes}/${evaluations})`\n});\n\n// 5. Explain\n// On block\nif(hasPassed === 0) {\n    if(msg.p1_rate_limit.save_power === true) {\n        // This is good\n        logger(this, `<font color=\"#009ac7\">Power saved</font> by P1 Rate Limiter, execution stopped.`); \n    } else {\n        // This is not so good. P1 updates are coming in fast.\n        logger(this, `<font color=\"orange\">Blocked</font> by P1 Rate Limiter. ${Number(1000/msg.rate).toFixed(2)} messages per second exceeded.`); \n    }\n    \n    // Send message onward to debug dashboard\n    return msg;\n}\n// No output on pass\nreturn null;",
+        "func": "// Logger\nconst logger = global.get(\"logger\");\n\n// Passed or blocked\nconst hasPassed = msg.payload; // 0 = blocked, 1 = passed\n\n// 1. Get evaluations (Total attempts)\nlet evaluations = (context.get(\"p1_rate_limit_evaluations\") || 0) + 1;\ncontext.set(\"p1_rate_limit_evaluations\", evaluations);\n\n// 2. Increment and get passes (Filtered/successful events)\nlet passes = (context.get(\"p1_rate_limit_passes\") || 0) + hasPassed;\ncontext.set(\"p1_rate_limit_passes\", passes);\n\n// 3a. Calculate percentage (Rate of passing vs total evaluations)\nlet percentage = evaluations > 0 ? (passes / evaluations) * 100 : 0;\n// 3b. Display the percentage rate of not-passing as a measure of efficiency gained\npercentage = 100 - percentage;\n\n// 4. Update Node Status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Saved: ${percentage.toFixed(2)}% (${evaluations-passes}/${evaluations})`\n});\n\n// 5. Explain\n// On block\nif(hasPassed === 0) {\n    if(msg.p1_rate_limit.save_power === true) {\n        if(msg.p1_rate_limit.high_load_detected === false){\n            // This is good\n            logger(this, `<font color=\"#009ac7\">Power saved</font> by P1 Rate Limiter, execution stopped.`); \n        } else {\n            // This is not so good. The system is overloaded and needs to 'cool'\n            logger(this, `<font color=\"orange\">Blocked</font> by P1 Rate Limiter. High load detected. Cool down active. Execution time: ${Number(msg.p1_rate_limit.previous_execution_time).toFixed(3)} sec.`);     \n        }\n    } else {\n        // This is not so good. P1 updates are coming in fast.\n        logger(this, `<font color=\"orange\">Blocked</font> by P1 Rate Limiter. ${Number(1000/msg.rate).toFixed(2)} messages per second exceeded.`); \n    }\n    \n    // Send message onward to debug dashboard\n    return msg;\n}\n// No output on pass\nreturn null;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1270,
+        "x": 1250,
         "y": 280,
         "wires": [
             [
@@ -4702,7 +4702,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1110,
+        "x": 1090,
         "y": 300,
         "wires": [
             [
@@ -4731,7 +4731,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1110,
+        "x": 1090,
         "y": 260,
         "wires": [
             [
@@ -4769,7 +4769,7 @@
         "links": [
             "77fcca25ab84e044"
         ],
-        "x": 1395,
+        "x": 1375,
         "y": 280,
         "wires": []
     },
@@ -4780,7 +4780,8 @@
         "g": "61d5ed93c178a2b0",
         "name": "Custom logger",
         "scope": [
-            "0544c5403e05ad49"
+            "0544c5403e05ad49",
+            "296bdf43fd34ab09"
         ],
         "uncaught": false,
         "x": 1340,
@@ -5038,7 +5039,7 @@
         "z": "cf69560481408644",
         "g": "3dec8998f704c25f",
         "name": "Unhandled Exception",
-        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5826,7 +5827,7 @@
         "z": "c872e72f7240c80d",
         "g": "36b4ee89330bb2c4",
         "name": "Unhandled Exception",
-        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -6836,7 +6837,7 @@
         "z": "e0fc2f0ad8192691",
         "g": "7eacd993ac5414f3",
         "name": "Unhandled Exception",
-        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -8569,7 +8570,7 @@
         "z": "f543b6c0f1e80bcf",
         "g": "adf10324b0358a9e",
         "name": "Unhandled Exception",
-        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -9360,7 +9361,7 @@
         "z": "c6efb67773d1041c",
         "g": "0147f48b57013d77",
         "name": "Unhandled Exception",
-        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif (handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -10394,7 +10395,7 @@
         "z": "08bd910806aaf74c",
         "g": "d76042051ef987a8",
         "name": "Deadband (15W)",
-        "func": "// Deadband\n// Stop processing if error is within .. Watt of target grid consumption.\n// This to reduce CPU loads \n\n// Logger\nconst log = global.get(\"logger\");\n\n// P1\nlet P1_error = msg.grid_error; // Watt\nlet P1_deadband = 15; // Watt\n\n// TODO\n// based on last 'assignable power' and current error, if (error > assignable power) the system will never enter the deadband. And keep calculating each interation.\n// however since we don't know if the is the assignable power will change, until we calculate the Control Value / load balancer\n// we could end up in a deadlock if we simply stop execution here, based on assignable power alone.\n\n// Within Deadband\nif(Math.abs(P1_error) < P1_deadband) {\n    // stop processing\n    node.status({fill:\"yellow\",shape:\"dot\",text:`Halt, ${Math.round(Math.abs(P1_error))} W`});\n    log(this, `**Stopped processing**ðŸŒ¿power saving, ${Math.round(Math.abs(P1_error))} W is within deadband of ${P1_deadband} W`);\n    msg.payload = 'halted by deadband';\n    return msg;\n} \n\n// Outside deadband\nnode.status({fill:\"green\",shape:\"dot\",text:`Pass, ${Math.round(Math.abs(P1_error))} W`});\nreturn msg;\n",
+        "func": "// Deadband\n// Stop processing if error is within .. Watt of target grid consumption.\n// This to reduce CPU loads \n\n// Logger\nconst log = global.get(\"logger\");\n\n// P1\nlet P1_error = msg.grid_error; // Watt\nlet P1_deadband = 15; // Watt\n\n// TODO\n// based on last 'assignable power' and current error, if (error > assignable power) the system will never enter the deadband. And keep calculating each interation.\n// however since we don't know if the is the assignable power will change, until we calculate the Control Value / load balancer\n// we could end up in a deadlock if we simply stop execution here, based on assignable power alone.\n\n// Within Deadband\nif(Math.abs(P1_error) < P1_deadband) {\n    // stop processing\n    node.status({fill:\"yellow\",shape:\"dot\",text:`Halt, ${Math.round(Math.abs(P1_error))} W`});\n    log(this, `**Stopped processing** 🌿power saving, ${Math.round(Math.abs(P1_error))} W is within deadband of ${P1_deadband} W`);\n    msg.payload = 'halted by deadband';\n    return msg;\n} \n\n// Outside deadband\nnode.status({fill:\"green\",shape:\"dot\",text:`Pass, ${Math.round(Math.abs(P1_error))} W`});\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -10415,7 +10416,7 @@
         "z": "08bd910806aaf74c",
         "g": "e3296059eb36b879",
         "name": "Calculate corrections",
-        "func": "// Logger\nvar logdata = \"\"; // deprecated\nconst log = global.get(\"logger\");\n\n// Timing\nlet time_last = context.get('time_last') || Date.now(); // Milliseconds\nlet time_current = Date.now(); // Milliseconds\nlet time_delta = (time_current - time_last) / 1000; // Convert to seconds\n// note: due to inherent 1 sec intervals of P1 meter we omit dt terms. This is mostly for bug checking and optimizations.\n\n// Batteries\nvar B_power = msg.batteries_total_power; // charging is positive, discharging negative\nvar anti_windup_threshold = Number(flow.get(\"batteries_total_assignable_power\")) || 0; // max available charge/discharge power.\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = msg.grid_power; // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\nvar P1_error = msg.grid_error;  // W (watt), error signal = SP - PV\nvar P1_derivative = msg.grid_derivative; // Derivative of PV, not the error\n\n// PID values\nvar Kp = flow.get(\"house_battery_control_kp\") || 0.75;  // Proportional gain\nvar Ki = flow.get(\"house_battery_control_ki\") || 0;     // Integral gain        Ki = Kp/Ti\nvar Kd = flow.get(\"house_battery_control_kd\") || 0;     // Derivative gain      Kd = Kp*Td\n\n// helpers\nvar I_integral_sum = context.get('I_integral_sum') || 0;\nvar Gm = flow.get(\"master_gain\")||1; // gain scheduling\n\n// optimizations\nvar hysteresis = flow.get(\"house_battery_control_hysteresis_in_w\"); // W (watt)\n\n// advanced settings\nconst isDischargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.discharge_disabled\");\nconst isChargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.charge_disabled\");\n\n// -- PID regulator --\n// Proportional term\nlet p_term = Gm * Kp * P1_error;\n\n// Integral term\nlet integral_max = 0;\nif (Ki > 0) {\n    // Integral term | integrate\n    I_integral_sum += P1_error; \n    // Integral term | apply anti-windup\n    integral_max = anti_windup_threshold / Ki; // the anti-windup value is set to the current controlable range of the batteries, given by the previous load balancer calculations\n    I_integral_sum = Math.min(Math.max(I_integral_sum, -integral_max), integral_max);\n} else {\n    // If Ki is 0, keep everything 0\n    I_integral_sum = 0;\n    integral_max = 0;\n}\n\n// Integral term | the term\nlet i_term = Ki * I_integral_sum;\n\n// Integral term | explain\nlogdata += `anti_windup_threshold=${anti_windup_threshold}, integral_max=${integral_max}| `; // deprecated\n\n// Differential term\nlet d_term = Gm * Kd * (-P1_derivative); // omitted '/time_delta'. inherent P1 refresh fequency.\n\n// Total PID output\nvar PID_output = p_term + i_term + d_term; // W (watt), the control input for the battery packs\n\n// Charging or Discharging states\nvar B_was_charging = context.get(\"batteries_charging_last\") || false;\nvar B_is_charging = PID_output > 0 ? true : false;\n\n// Explain\nlogdata += `U(${time_delta}s)[${PID_output}] = P(${Kp})[${p_term}] + I(${Ki})[${i_term}] + D(${Kd})[${d_term}] | `; // deprecated\nlog(this,`**PID Controller**`);\nlog(this,`Step size: ${time_delta} s`);\nif(Kp == 0 && Ki == 0 && Kd == 0) {\n    log(this, `<font color=\"orange\">**Controller disabled**</font> All PID gains are 0. Choose a PID preset or set gains > 0.`,\"warn\");\n} else {\n    // log(this, `P-term: ${Math.floor(p_term)} W @ P-gain ${Kp}`);\n    // log(this, `I-term: ${Math.floor(i_term)} W @ I-gain ${Ki} (max. ${anti_windup_threshold} W)`);\n    // log(this, `D-term: ${Math.floor(d_term)} W @ D-gain ${Kd}`);\n    log(this, `**P** ${Math.floor(p_term)} W @ gain ${Kp}<br>**I** ${Math.floor(i_term)} W @ gain ${Ki} (max. ${anti_windup_threshold} W)<br>**D** ${Math.floor(d_term)} W @ gain ${Kd}`);\n    log(this, `**PID ${B_is_charging ? 'Charge' : 'Discharge'}:** ${Math.floor(p_term)} + ${Math.floor(i_term)} + ${Math.floor(d_term)} = **${Math.round(PID_output)} Watt**`);\n}\n\n// Only one of the advanced settings below can be active at once.\n// Advanced setting | discharge disabled\nif(isDischargeDisabled && !B_is_charging) {\n    // log explain\n    logdata += `Discharging disabled, PID unwound U(${time_delta})[0]=0+0+0 | `;\n    log(this,'**PID capped at 0**. Discharge is disabled in this strategy'); // via `msg.advanced_settings`\n    // Set all PID terms to 0 and unwind integral sum\n    PID_output = 0;\n    p_term = 0;\n    i_term = 0;\n    d_term = 0;\n    I_integral_sum = 0; // unwind\n    // maintain charge scenario\n    B_is_charging = true;\n    \n// Advanced setting | charge disabled\n} else if (isChargeDisabled && B_is_charging) {\n    // log explain\n    logdata += `Charging disabled, PID unwound U(${time_delta})[0]=0+0+0 | `;\n    log(this,'**PID capped at 0**. Charge is disabled in this strategy'); // via `msg.advanced_settings`\n    // Set all PID terms to 0 and unwind integral sum\n    PID_output = 0;\n    p_term = 0;\n    i_term = 0;\n    d_term = 0;\n    I_integral_sum = 0; // unwind\n    // maintain discharge scenario\n    B_is_charging = false;\n\n// Advanced setting | hysteresis\n} else if \n// prevents excessive switching between (dis)charge mode around the zero point.\n// if new PID_output lies within hysteresis, it will not switch charge mode. \n// set hysteresis to 0, to apply no hysteresis\n(B_is_charging !== B_was_charging && Math.abs(PID_output) < hysteresis){\n    // log explain\n    logdata += `Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst) | `;\n    log(this,`Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst)`);\n    // prevent negative charging or positive discharging values (not allowed)\n    PID_output = (PID_output < 0 && B_is_charging) || ((PID_output > 0 && !B_is_charging)) ? 0 : PID_output;\n    // maintain previous scenario\n    B_is_charging = B_was_charging;\n} \n\n// save for next iteration\ncontext.set(\"batteries_charging_last\", B_is_charging); //boolean\n\n// OUTFLOW\ncontext.set(\"time_last\", Date.now());\ncontext.set(\"I_integral_sum\", I_integral_sum);\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries_charging\", B_is_charging, true);\nRED.util.setMessageProperty(msg, \"I_integral_sum\", I_integral_sum,true);\nmsg.payload = Number(PID_output);\n\nreturn [msg, // payload = PID_output\n        { payload: Math.round(Number(P1_error))},\n        { payload: Math.round(parseFloat(p_term))},\n        { payload: Math.round(parseFloat(i_term))},\n        { payload: Math.round(parseFloat(d_term))},\n        { payload: B_is_charging},\n        { payload: logdata }];",
+        "func": "// Logger\nvar logdata = \"\"; // deprecated\nconst log = global.get(\"logger\");\n\n// Timing\nlet time_last = context.get('time_last') || Date.now(); // Milliseconds\nlet time_current = Date.now(); // Milliseconds\nlet time_delta = (time_current - time_last) / 1000; // Convert to seconds\n// note: due to inherent 1 sec intervals of P1 meter we omit dt terms. This is mostly for bug checking and optimizations.\n\n// Batteries\nvar B_power = msg.batteries_total_power; // charging is positive, discharging negative\nvar anti_windup_threshold = Number(flow.get(\"batteries_total_assignable_power\")) || 0; // max available charge/discharge power.\n\n// Process Variable (PV) currently measured grid power, Setpoint (SP) desired grid power, set 0 for NoM\nvar P1_power = msg.grid_power; // PV: consume is positive, supply to grid is negative\nvar P1_setpoint = flow.get(\"house_target_grid_consumption_in_w\"); // SP: target value\nvar P1_error = msg.grid_error;  // W (watt), error signal = SP - PV\nvar P1_derivative = msg.grid_derivative; // Derivative of PV, not the error\n\n// PID values\nvar Kp = flow.get(\"house_battery_control_kp\") || 0.75;  // Proportional gain\nvar Ki = flow.get(\"house_battery_control_ki\") || 0;     // Integral gain        Ki = Kp/Ti\nvar Kd = flow.get(\"house_battery_control_kd\") || 0;     // Derivative gain      Kd = Kp*Td\n\n// helpers\nvar I_integral_sum = flow.get('I_integral_sum') || 0;\nvar Gm = flow.get(\"master_gain\")||1; // gain scheduling\n\n// optimizations\nvar hysteresis = flow.get(\"house_battery_control_hysteresis_in_w\"); // W (watt)\n\n// advanced settings\nconst isDischargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.discharge_disabled\");\nconst isChargeDisabled = RED.util.getMessageProperty(msg,\"advanced_settings.charge_disabled\");\n\n// -- PID regulator --\n// Proportional term\nlet p_term = Gm * Kp * P1_error;\n\n// Integral term\nlet integral_max = 0;\nif (Ki > 0) {\n    // Integral term | integrate\n    I_integral_sum += P1_error; \n    // Integral term | apply anti-windup\n    integral_max = anti_windup_threshold / Ki; // the anti-windup value is set to the current controlable range of the batteries, given by the previous load balancer calculations\n    I_integral_sum = Math.min(Math.max(I_integral_sum, -integral_max), integral_max);\n} else {\n    // If Ki is 0, keep everything 0\n    I_integral_sum = 0;\n    integral_max = 0;\n}\n\n// Integral term | the term\nlet i_term = Ki * I_integral_sum;\n\n// Integral term | explain\nlogdata += `anti_windup_threshold=${anti_windup_threshold}, integral_max=${integral_max}| `; // deprecated\n\n// Differential term\nlet d_term = Gm * Kd * (-P1_derivative); // omitted '/time_delta'. inherent P1 refresh fequency.\n\n// Total PID output\nvar PID_output = p_term + i_term + d_term; // W (watt), the control input for the battery packs\n\n// Charging or Discharging states\nvar B_was_charging = context.get(\"batteries_charging_last\") || false;\nvar B_is_charging = PID_output > 0 ? true : false;\n\n// Explain\nlogdata += `U(${time_delta}s)[${PID_output}] = P(${Kp})[${p_term}] + I(${Ki})[${i_term}] + D(${Kd})[${d_term}] | `; // deprecated\nlog(this,`**PID Controller**`);\nlog(this,`Step size: ${time_delta} s`);\nif(Kp == 0 && Ki == 0 && Kd == 0) {\n    log(this, `<font color=\"orange\">**Controller disabled**</font> All PID gains are 0. Choose a PID preset or set gains > 0.`,\"warn\");\n} else {\n    // log(this, `P-term: ${Math.floor(p_term)} W @ P-gain ${Kp}`);\n    // log(this, `I-term: ${Math.floor(i_term)} W @ I-gain ${Ki} (max. ${anti_windup_threshold} W)`);\n    // log(this, `D-term: ${Math.floor(d_term)} W @ D-gain ${Kd}`);\n    log(this, `**P** ${Math.floor(p_term)} W @ gain ${Kp}<br>**I** ${Math.floor(i_term)} W @ gain ${Ki} (max. ${anti_windup_threshold} W)<br>**D** ${Math.floor(d_term)} W @ gain ${Kd}`);\n    log(this, `**PID ${B_is_charging ? 'Charge' : 'Discharge'}:** ${Math.floor(p_term)} + ${Math.floor(i_term)} + ${Math.floor(d_term)} = **${Math.round(PID_output)} Watt**`);\n}\n\n// Only one of the advanced settings below can be active at once.\n// Advanced setting | discharge disabled\nif(isDischargeDisabled && !B_is_charging) {\n    // log explain\n    logdata += `Discharging disabled, PID unwound U(${time_delta})[0]=0+0+0 | `;\n    log(this,'**PID capped at 0**. Discharge is disabled in this strategy'); // via `msg.advanced_settings`\n    // Set all PID terms to 0 and unwind integral sum\n    PID_output = 0;\n    p_term = 0;\n    i_term = 0;\n    d_term = 0;\n    I_integral_sum = 0; // unwind\n    // maintain charge scenario\n    B_is_charging = true;\n    \n// Advanced setting | charge disabled\n} else if (isChargeDisabled && B_is_charging) {\n    // log explain\n    logdata += `Charging disabled, PID unwound U(${time_delta})[0]=0+0+0 | `;\n    log(this,'**PID capped at 0**. Charge is disabled in this strategy'); // via `msg.advanced_settings`\n    // Set all PID terms to 0 and unwind integral sum\n    PID_output = 0;\n    p_term = 0;\n    i_term = 0;\n    d_term = 0;\n    I_integral_sum = 0; // unwind\n    // maintain discharge scenario\n    B_is_charging = false;\n\n// Advanced setting | hysteresis\n} else if \n// prevents excessive switching between (dis)charge mode around the zero point.\n// if new PID_output lies within hysteresis, it will not switch charge mode. \n// set hysteresis to 0, to apply no hysteresis\n(B_is_charging !== B_was_charging && Math.abs(PID_output) < hysteresis){\n    // log explain\n    logdata += `Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst) | `;\n    log(this,`Hysteresis prevented charge mode switch from ${B_was_charging ? \"charging\" : \"discharging\"} to ${B_is_charging ? \"charging\" : \"discharging\"} as ${Math.abs(PID_output)}W <= ${hysteresis}(hyst)`);\n    // prevent negative charging or positive discharging values (not allowed)\n    PID_output = (PID_output < 0 && B_is_charging) || ((PID_output > 0 && !B_is_charging)) ? 0 : PID_output;\n    // maintain previous scenario\n    B_is_charging = B_was_charging;\n} \n\n// save for next iteration\ncontext.set(\"batteries_charging_last\", B_is_charging); //boolean\n\n// OUTFLOW\ncontext.set(\"time_last\", Date.now());\nflow.set(\"I_integral_sum\", I_integral_sum);\n\n// OUTPUT\nRED.util.setMessageProperty(msg, \"batteries_charging\", B_is_charging, true);\nRED.util.setMessageProperty(msg, \"I_integral_sum\", I_integral_sum,true);\nmsg.payload = Number(PID_output);\n\nreturn [msg, // payload = PID_output\n        { payload: Math.round(Number(P1_error))},\n        { payload: Math.round(parseFloat(p_term))},\n        { payload: Math.round(parseFloat(i_term))},\n        { payload: Math.round(parseFloat(d_term))},\n        { payload: B_is_charging},\n        { payload: logdata }];",
         "outputs": 7,
         "timeout": 0,
         "noerr": 0,
@@ -10655,6 +10656,7 @@
         "id": "8437c31637a6f0ba",
         "type": "smooth",
         "z": "08bd910806aaf74c",
+        "d": true,
         "g": "e3296059eb36b879",
         "name": "",
         "property": "payload",
@@ -10675,6 +10677,7 @@
         "id": "93d29b8830a4343d",
         "type": "api-call-service",
         "z": "08bd910806aaf74c",
+        "d": true,
         "g": "e3296059eb36b879",
         "name": "PID deviation",
         "server": "176d29a.6f648d6",
@@ -10707,6 +10710,7 @@
         "id": "147cc3466e39c07e",
         "type": "smooth",
         "z": "08bd910806aaf74c",
+        "d": true,
         "g": "e3296059eb36b879",
         "name": "",
         "property": "payload",
@@ -10727,6 +10731,7 @@
         "id": "e058b898103e9f7b",
         "type": "api-call-service",
         "z": "08bd910806aaf74c",
+        "d": true,
         "g": "e3296059eb36b879",
         "name": "Error deviation",
         "server": "176d29a.6f648d6",
@@ -11342,7 +11347,7 @@
         "z": "08bd910806aaf74c",
         "g": "24021743686240ed",
         "name": "Unhandled Exception",
-        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -12216,7 +12221,7 @@
         "z": "851936bd2b585b86",
         "g": "9a54303eba6d60e3",
         "name": "Unhandled Exception",
-        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -13543,7 +13548,7 @@
         "z": "7728870d8f926144",
         "g": "033d84ec511d515c",
         "name": "Unhandled Exception",
-        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
