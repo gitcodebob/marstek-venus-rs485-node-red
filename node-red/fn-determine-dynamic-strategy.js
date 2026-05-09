@@ -24,26 +24,32 @@ const n = prices.length;
 const startTime = new Date(dataAll.start);
 const intervalMs = (dataAll.hours / dataAll.datapoints) * 3_600_000;
 
-// 3.  Mark intervals: pair lower-half LOWs with upper-half HIGHs
+// 3.  Mark intervals: pair extremes inward
 //
 // Each HIGH interval is backed by a specific LOW interval — one-to-one
 // pairing, no element used twice. The minDelta threshold accounts for
-// round-trip efficiency and other losses, so a pair is only viable when its spread covers
-// the loss.
+// round-trip efficiency and other losses, so a pair is only viable when
+// its spread covers the loss.
 //
-// Method (Adjacent-Halves Matching, O(n log n)):
+// Method (Extreme-Pair Matching, O(n log n)):
 //   1. Sort intervals by price, keep original time-index for re-mapping.
-//   2. Conceptually split into a lower half (LOW candidates) and an upper
-//      half (HIGH candidates). With n intervals the maximum number of
-//      cycles is floor(n/2) — capped by whichever half is smaller.
-//   3. Two-pointer walk: for each LOW (cheapest first), advance the HIGH
-//      pointer until the spread clears minDelta. Pair them, then advance
-//      both. If a LOW cannot find any viable HIGH, the upper half is
-//      exhausted and the loop ends.
+//   2. Two pointers walk inward from the extremes — `lo` from the cheapest
+//      unmatched, `hi` from the most-expensive unmatched.
+//   3. If the spread between them clears minDelta: mark them, advance both.
+//   4. If it does not clear minDelta: the cheapest unmatched LOW paired
+//      with the most-expensive unmatched HIGH yields the largest spread
+//      still achievable. If even that fails, no remaining pair can satisfy
+//      the threshold, so we stop.
 //
-// Maximises the number of viable charge/discharge cycles; every marked
-// pair is guaranteed economical after round-trip losses.
-//
+// This algorithm prefers to mark the truly extreme
+// hours (highest-priced as HIGH, lowest-priced as LOW). On well-behaved
+// daily curves this produces the same number of pairs as 
+// other algorithm variants; but in tight cases it can produce one or two fewer
+// pairs. Why choose this version? It marks the price peaks/troughs the user
+// would intuitively expect, which is good for user confidence and acceptance of the strategy. It is also efficient and straightforward to implement, without needing complex data structures or backtracking. 
+// The main goal is to identify a set of HIGH and LOW intervals that are economically justified by their price spread, while keeping the logic transparent and explainable to the user.
+
+// Note:
 // It is up to the user to set minDelta appropriately for their system's efficiency and other costs, to ensure that marked cycles are truly beneficial.
 // Also the user can pick strategies that reflect their preferences for what to do during LOW and HIGH intervals, e.g. prioritising self-consumption during HIGH intervals, or selling back to the grid if allowed and profitable.
 // This makes optimisation flexible and user-configurable, while still being based on a clear economic rationale.
@@ -64,21 +70,22 @@ for (let i = 0; i < n; i++) {
 const sortedIdx = Array.from({ length: n }, (_, i) => i)
     .sort((a, b) => prices[a] - prices[b]);
 
-const mid = Math.floor(n / 2);
 let lo = 0;
-let hi = mid;
+let hi = n - 1;
 let pairCount = 0;
-while (lo < mid && hi < n) {
+while (lo < hi) {
     const loIdx = sortedIdx[lo];
     const hiIdx = sortedIdx[hi];
     if (prices[hiIdx] - prices[loIdx] >= minDeltaCents) {
         intervals[loIdx].mark = 'low';
         intervals[hiIdx].mark = 'high';
         pairCount++;
-        lo++; hi++;
+        lo++; hi--;
     } else {
-        // Current LOW too close to this HIGH — try a pricier HIGH partner.
-        hi++;
+        // sorted[lo] is the cheapest unmatched, sorted[hi] the most-expensive
+        // unmatched. Their spread is the largest still possible — if it falls
+        // below minDelta, no further pair can satisfy the threshold.
+        break;
     }
 }
 
