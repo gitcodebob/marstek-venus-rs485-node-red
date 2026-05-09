@@ -1,0 +1,1895 @@
+[
+    {
+        "id": "a71dfbac6fdac4b5",
+        "type": "tab",
+        "label": "Strategy Dynamic 2 v4.8.2",
+        "disabled": false,
+        "info": "Dynamic contract automated management",
+        "env": []
+    },
+    {
+        "id": "fce326f46b6e76ac",
+        "type": "group",
+        "z": "a71dfbac6fdac4b5",
+        "name": "Battery solutions",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "bac1cd43b7d7ecb8",
+            "8d8e4799567ce0fc"
+        ],
+        "x": 934,
+        "y": 79,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "4dd8dc0a7934e610",
+        "type": "group",
+        "z": "a71dfbac6fdac4b5",
+        "name": "Home battery start",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "2c6fc3d1b79cc3e3",
+            "6fcf5db8eed2760d",
+            "6a27e77e93869d50"
+        ],
+        "x": 14,
+        "y": 79,
+        "w": 192,
+        "h": 162
+    },
+    {
+        "id": "8eaa0311b9e4b98d",
+        "type": "group",
+        "z": "a71dfbac6fdac4b5",
+        "name": "Plan",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "595c952928788c67",
+            "cd68b9f4c07a157d",
+            "a603b10174d5819d",
+            "a6b72d7fd91aad42",
+            "52ebd55cc452ccfc",
+            "57b4db976551e932",
+            "db4b44b735ac43ee"
+        ],
+        "x": 228,
+        "y": 273,
+        "w": 1244,
+        "h": 834
+    },
+    {
+        "id": "aa5e96d3bef02b79",
+        "type": "group",
+        "z": "a71dfbac6fdac4b5",
+        "name": "Execute",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "3a9b63ba30cdac47",
+            "93bcfe4b3038b147",
+            "e5632a01c5305602",
+            "f4f16d4ad1ad82a6",
+            "f99db07f970cac5c"
+        ],
+        "x": 234,
+        "y": 119,
+        "w": 672,
+        "h": 122
+    },
+    {
+        "id": "caf09b765df1919c",
+        "type": "group",
+        "z": "a71dfbac6fdac4b5",
+        "name": "Test area",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "0ddd0244e3f65cce",
+            "0d5ffe105eea9e08",
+            "1c6348659ad24976",
+            "a602164ad932dc41",
+            "b425d47bf26d6d1f",
+            "e2d3420500b1a905",
+            "6ec195cc61a7619d",
+            "b3aab11dce0d9cb6"
+        ],
+        "x": 234,
+        "y": 1479,
+        "w": 912,
+        "h": 162
+    },
+    {
+        "id": "f996917e30915fed",
+        "type": "group",
+        "z": "a71dfbac6fdac4b5",
+        "name": "All data",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "31fa842ac5923646",
+            "a3de6fad38a99222",
+            "1db56d7f2849f1da",
+            "440777c8e0d14feb",
+            "4b8910a5222a3756"
+        ],
+        "x": 234,
+        "y": 1659,
+        "w": 672,
+        "h": 142
+    },
+    {
+        "id": "bcdf9f322362c32b",
+        "type": "group",
+        "z": "a71dfbac6fdac4b5",
+        "name": "Unhandled exceptions",
+        "style": {
+            "label": true,
+            "stroke": "#d88a8a",
+            "color": "#d88a8a"
+        },
+        "nodes": [
+            "6e901a52bc0385e1",
+            "5ee21d35157af5ea",
+            "3c88289eecad1a13"
+        ],
+        "x": 24,
+        "y": 279,
+        "w": 182,
+        "h": 82
+    },
+    {
+        "id": "52ebd55cc452ccfc",
+        "type": "group",
+        "z": "a71dfbac6fdac4b5",
+        "g": "8eaa0311b9e4b98d",
+        "name": "API call to Data Source",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "5de918ab18a86459",
+            "631f20f21931c613",
+            "a48088403e594929",
+            "16c5b0ee055e1e31",
+            "8455f3d26219e40d",
+            "58be4788029f3e50",
+            "3bec39f7b4db4981",
+            "1dd20569f6a79e3d",
+            "289052d4452078dd",
+            "e318a34eb1af8b80",
+            "3243519ff4e0840d"
+        ],
+        "x": 254,
+        "y": 519,
+        "w": 652,
+        "h": 242
+    },
+    {
+        "id": "57b4db976551e932",
+        "type": "group",
+        "z": "a71dfbac6fdac4b5",
+        "g": "8eaa0311b9e4b98d",
+        "name": "Update when",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "48775ca2c1de50cc",
+            "1de2021d01a8a14c",
+            "502e0f0790c889b3",
+            "4af06c3e3966bac6",
+            "b75455d9c02dec63",
+            "81a27c25d6a79757",
+            "878559d20833f0e6",
+            "04ac6fe47feb030e",
+            "7c9497ec00d15d32",
+            "950689e94d8fa291",
+            "4e97e117d960a46e",
+            "bd0dec161c645156",
+            "7db4940e3e120a97",
+            "34859e1b41755531",
+            "51c1e8419494d6c8",
+            "0e1ac05e72625550",
+            "39c1cbf570f8c9b0"
+        ],
+        "x": 254,
+        "y": 299,
+        "w": 1192,
+        "h": 202
+    },
+    {
+        "id": "db4b44b735ac43ee",
+        "type": "group",
+        "z": "a71dfbac6fdac4b5",
+        "g": "8eaa0311b9e4b98d",
+        "name": "Determine strategy",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "2de7e820efa6dfe7",
+            "121b9ae8bd7687c3",
+            "695819d2149eac9b",
+            "ea83376fcc7030f8",
+            "ede00ea12cde9d77",
+            "9c871533e5e43bd1",
+            "04f502aa5ebaef09",
+            "5452d508e944defb",
+            "52ce1fdd4ac9dc6f"
+        ],
+        "x": 254,
+        "y": 799,
+        "w": 852,
+        "h": 282
+    },
+    {
+        "id": "4e97e117d960a46e",
+        "type": "junction",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "x": 640,
+        "y": 340,
+        "wires": [
+            [
+                "81a27c25d6a79757"
+            ]
+        ]
+    },
+    {
+        "id": "2c6fc3d1b79cc3e3",
+        "type": "link in",
+        "z": "a71dfbac6fdac4b5",
+        "g": "4dd8dc0a7934e610",
+        "name": "Dynamic 2",
+        "links": [],
+        "x": 100,
+        "y": 160,
+        "wires": [
+            [
+                "6a27e77e93869d50"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "89e47bdcab3ad5d1",
+        "type": "comment",
+        "z": "a71dfbac6fdac4b5",
+        "name": "Home Battery Strategy",
+        "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
+        "x": 120,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "6fcf5db8eed2760d",
+        "type": "comment",
+        "z": "a71dfbac6fdac4b5",
+        "g": "4dd8dc0a7934e610",
+        "name": "Start (readme)",
+        "info": "# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the <select> option configured in your\nselect_input.house_battery_strategy\n\nconfigure select options in:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select 'AcmE example'\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
+        "x": 110,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "bac1cd43b7d7ecb8",
+        "type": "link out",
+        "z": "a71dfbac6fdac4b5",
+        "g": "fce326f46b6e76ac",
+        "name": "Return",
+        "mode": "return",
+        "links": [],
+        "x": 975,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "8d8e4799567ce0fc",
+        "type": "comment",
+        "z": "a71dfbac6fdac4b5",
+        "g": "fce326f46b6e76ac",
+        "name": "End (readme)",
+        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
+        "x": 1030,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "2de7e820efa6dfe7",
+        "type": "debug",
+        "z": "a71dfbac6fdac4b5",
+        "g": "db4b44b735ac43ee",
+        "name": "Complete message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "121b9ae8bd7687c3",
+        "type": "function",
+        "z": "a71dfbac6fdac4b5",
+        "g": "db4b44b735ac43ee",
+        "name": "Determine dynamic strategy",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// 1.  Input\nconst minDeltaCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.min_delta_cents\")) || 0;\nconst dataAll = RED.util.getMessageProperty(msg, \"dynamic.data_all\");\n\nif (!dataAll || !Array.isArray(dataAll.list) || dataAll.list.length === 0) {\n    log(this, \"Price list missing or empty\", \"warn\");\n    node.status({ fill: \"red\", shape: \"ring\", text: \"No price data\" });\n    return null;\n}\n\nconst STRATEGY = {\n    HIGH: RED.util.getMessageProperty(msg, \"dynamic.strategy_expensive\") || \"Self-consumption\",\n    LOW: RED.util.getMessageProperty(msg, \"dynamic.strategy_cheapest\") || \"Charge\",\n    NEUTRAL: RED.util.getMessageProperty(msg, \"dynamic.strategy_default\") || \"Charge PV\",\n};\n\n// 2.  Build interval timestamps\n// Each datapoint covers (hours / datapoints) hours.\nconst prices = dataAll.list; // cents/kWh — already converted by \"Convert price\" node\nconst n = prices.length;\nconst startTime = new Date(dataAll.start);\nconst intervalMs = (dataAll.hours / dataAll.datapoints) * 3_600_000;\n\n// 3.  Mark intervals: pair extremes inward\n//\n// Each HIGH interval is backed by a specific LOW interval — one-to-one\n// pairing, no element used twice. The minDelta threshold accounts for\n// round-trip efficiency and other losses, so a pair is only viable when\n// its spread covers the loss.\n//\n// Method (Extreme-Pair Matching, O(n log n)):\n//   1. Sort intervals by price, keep original time-index for re-mapping.\n//   2. Two pointers walk inward from the extremes — `lo` from the cheapest\n//      unmatched, `hi` from the most-expensive unmatched.\n//   3. If the spread between them clears minDelta: mark them, advance both.\n//   4. If it does not clear minDelta: the cheapest unmatched LOW paired\n//      with the most-expensive unmatched HIGH yields the largest spread\n//      still achievable. If even that fails, no remaining pair can satisfy\n//      the threshold, so we stop.\n//\n// This algorithm prefers to mark the truly extreme\n// hours (highest-priced as HIGH, lowest-priced as LOW). On well-behaved\n// daily curves this produces the same number of pairs as \n// other algorithm variants; but in tight cases it can produce one or two fewer\n// pairs. Why choose this version? It marks the price peaks/troughs the user\n// would intuitively expect, which is good for user confidence and acceptance of the strategy. It is also efficient and straightforward to implement, without needing complex data structures or backtracking. \n// The main goal is to identify a set of HIGH and LOW intervals that are economically justified by their price spread, while keeping the logic transparent and explainable to the user.\n\n// Note:\n// It is up to the user to set minDelta appropriately for their system's efficiency and other costs, to ensure that marked cycles are truly beneficial.\n// Also the user can pick strategies that reflect their preferences for what to do during LOW and HIGH intervals, e.g. prioritising self-consumption during HIGH intervals, or selling back to the grid if allowed and profitable.\n// This makes optimisation flexible and user-configurable, while still being based on a clear economic rationale.\n// However, the algorithm does not attempt to find the optimal global pairing (which would be more complex), but rather a good local pairing that is computationally efficient and easy to understand.\n\n/**\n * @typedef {{ start: Date, end: Date, price: number, mark: 'high'|'low'|null }} Interval\n * @type {Interval[]}\n */\nconst intervals = new Array(n);\nfor (let i = 0; i < n; i++) {\n    const iStart = new Date(startTime.getTime() + i * intervalMs);\n    const iEnd = new Date(iStart.getTime() + intervalMs);\n    intervals[i] = { start: iStart, end: iEnd, price: prices[i], mark: null };\n}\n\n// Indices into `prices`, sorted ascending by price (stable on ties).\nconst sortedIdx = Array.from({ length: n }, (_, i) => i)\n    .sort((a, b) => prices[a] - prices[b]);\n\nlet lo = 0;\nlet hi = n - 1;\nlet pairCount = 0;\nwhile (lo < hi) {\n    const loIdx = sortedIdx[lo];\n    const hiIdx = sortedIdx[hi];\n    if (prices[hiIdx] - prices[loIdx] >= minDeltaCents) {\n        intervals[loIdx].mark = 'low';\n        intervals[hiIdx].mark = 'high';\n        pairCount++;\n        lo++; hi--;\n    } else {\n        // sorted[lo] is the cheapest unmatched, sorted[hi] the most-expensive\n        // unmatched. Their spread is the largest still possible — if it falls\n        // below minDelta, no further pair can satisfy the threshold.\n        break;\n    }\n}\n\n// 4.  Determine current strategy\nconst now = new Date();\nconst currentInterval = intervals.find(iv => now >= iv.start && now < iv.end);\nconst currentMark = currentInterval ? currentInterval.mark : null;\n\nconst strategy =\n    currentMark === 'high' ? STRATEGY.HIGH :\n        currentMark === 'low' ? STRATEGY.LOW :\n            STRATEGY.NEUTRAL;\n\n// 5.  Store results\nRED.util.setMessageProperty(msg,\"data_all.list_marked\",intervals,true);\nRED.util.setMessageProperty(msg,\"dynamic.strategy\",strategy);\nflow.set(\"dynamic_strategy\", strategy); // this is the strategy executed when dynamic strategy is active, see the 'Execute' section of this flow.\n\n// 6.  Explain to user\n// Gross spread: sum of (high - low) over all paired cycles, in cents/kWh.\n// Net spread:   minus round-trip losses + wear. Indicator of the realisable potential.\nconst grossSpread = Math.round(intervals\n    .filter(iv => iv.mark !== null)\n    .reduce((sum, iv) => sum + (iv.mark === 'high' ? iv.price : -iv.price), 0));\nconst netSpread = grossSpread - pairCount * minDeltaCents;\n\nnode.status({\n    fill: \"blue\", shape: \"dot\",\n    text: `${strategy} | ${pairCount} cycle${pairCount === 1 ? '' : 's'} | net Σ${netSpread}¢`\n});\nlog(this, `Strategy: **${strategy}** | cycles=${pairCount} unmarked=${n - 2 * pairCount} | gross=${grossSpread}¢ net=${netSpread}¢ minDelta=${minDeltaCents}¢`);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 1000,
+        "wires": [
+            [
+                "2de7e820efa6dfe7",
+                "695819d2149eac9b",
+                "52ce1fdd4ac9dc6f"
+            ]
+        ]
+    },
+    {
+        "id": "3a9b63ba30cdac47",
+        "type": "change",
+        "z": "a71dfbac6fdac4b5",
+        "g": "aa5e96d3bef02b79",
+        "name": "Set strategy",
+        "rules": [
+            {
+                "t": "set",
+                "p": "target",
+                "pt": "msg",
+                "to": "dynamic_strategy",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 200,
+        "wires": [
+            [
+                "f99db07f970cac5c"
+            ]
+        ]
+    },
+    {
+        "id": "93bcfe4b3038b147",
+        "type": "link call",
+        "z": "a71dfbac6fdac4b5",
+        "g": "aa5e96d3bef02b79",
+        "name": "Sub-strategy",
+        "links": [],
+        "linkType": "dynamic",
+        "timeout": "3",
+        "x": 810,
+        "y": 180,
+        "wires": [
+            [
+                "bac1cd43b7d7ecb8"
+            ]
+        ]
+    },
+    {
+        "id": "48775ca2c1de50cc",
+        "type": "inject",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "Every 60 min",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "0 0-23 * * *",
+        "once": false,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 380,
+        "y": 420,
+        "wires": [
+            [
+                "1de2021d01a8a14c"
+            ]
+        ]
+    },
+    {
+        "id": "e5632a01c5305602",
+        "type": "switch",
+        "z": "a71dfbac6fdac4b5",
+        "g": "aa5e96d3bef02b79",
+        "name": "Has strategy",
+        "property": "dynamic_strategy",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "f4f16d4ad1ad82a6"
+            ],
+            [
+                "3a9b63ba30cdac47"
+            ]
+        ]
+    },
+    {
+        "id": "f4f16d4ad1ad82a6",
+        "type": "change",
+        "z": "a71dfbac6fdac4b5",
+        "g": "aa5e96d3bef02b79",
+        "name": "Set Full stop",
+        "rules": [
+            {
+                "t": "set",
+                "p": "target",
+                "pt": "msg",
+                "to": "Full stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 160,
+        "wires": [
+            [
+                "f99db07f970cac5c"
+            ]
+        ]
+    },
+    {
+        "id": "0d5ffe105eea9e08",
+        "type": "inject",
+        "z": "a71dfbac6fdac4b5",
+        "g": "caf09b765df1919c",
+        "name": "Test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 330,
+        "y": 1520,
+        "wires": [
+            [
+                "0ddd0244e3f65cce"
+            ]
+        ]
+    },
+    {
+        "id": "0ddd0244e3f65cce",
+        "type": "api-render-template",
+        "z": "a71dfbac6fdac4b5",
+        "g": "caf09b765df1919c",
+        "name": "Cheapest",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    hours=1,\n    mode=\"all\"\n) | to_json }}",
+        "resultsLocation": "cheapest",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 500,
+        "y": 1520,
+        "wires": [
+            [
+                "1c6348659ad24976"
+            ]
+        ]
+    },
+    {
+        "id": "1c6348659ad24976",
+        "type": "json",
+        "z": "a71dfbac6fdac4b5",
+        "g": "caf09b765df1919c",
+        "name": "",
+        "property": "cheapest",
+        "action": "obj",
+        "pretty": false,
+        "x": 595,
+        "y": 1520,
+        "wires": [
+            [
+                "a602164ad932dc41"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "a602164ad932dc41",
+        "type": "api-render-template",
+        "z": "a71dfbac6fdac4b5",
+        "g": "caf09b765df1919c",
+        "name": "Expensive",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    lowest=false,\n    hours=1,\n    mode=\"all\"\n) | to_json }}",
+        "resultsLocation": "expensive",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 750,
+        "y": 1520,
+        "wires": [
+            [
+                "b425d47bf26d6d1f"
+            ]
+        ]
+    },
+    {
+        "id": "b425d47bf26d6d1f",
+        "type": "json",
+        "z": "a71dfbac6fdac4b5",
+        "g": "caf09b765df1919c",
+        "name": "",
+        "property": "expensive",
+        "action": "obj",
+        "pretty": false,
+        "x": 855,
+        "y": 1520,
+        "wires": [
+            [
+                "e2d3420500b1a905",
+                "6ec195cc61a7619d",
+                "b3aab11dce0d9cb6"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "e2d3420500b1a905",
+        "type": "debug",
+        "z": "a71dfbac6fdac4b5",
+        "g": "caf09b765df1919c",
+        "name": "Cheap",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "cheapest.start",
+        "targetType": "msg",
+        "statusVal": "cheapest.start",
+        "statusType": "auto",
+        "x": 990,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "6ec195cc61a7619d",
+        "type": "debug",
+        "z": "a71dfbac6fdac4b5",
+        "g": "caf09b765df1919c",
+        "name": "Expensive",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "expensive.start",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "31fa842ac5923646",
+        "type": "api-render-template",
+        "z": "a71dfbac6fdac4b5",
+        "g": "f996917e30915fed",
+        "name": "All Zonneplan",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n    sensor=\"sensor.zonneplan_current_electricity_tariff\",\n    source_settings=\"zonneplan\",\n    include_tomorrow=true,\n    hours=\"all\",\n    mode=\"all\"\n) | to_json }}",
+        "resultsLocation": "all_data",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 480,
+        "y": 1700,
+        "wires": [
+            [
+                "1db56d7f2849f1da"
+            ]
+        ]
+    },
+    {
+        "id": "a3de6fad38a99222",
+        "type": "inject",
+        "z": "a71dfbac6fdac4b5",
+        "g": "f996917e30915fed",
+        "name": "Fetch",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 330,
+        "y": 1700,
+        "wires": [
+            [
+                "31fa842ac5923646"
+            ]
+        ]
+    },
+    {
+        "id": "1db56d7f2849f1da",
+        "type": "json",
+        "z": "a71dfbac6fdac4b5",
+        "g": "f996917e30915fed",
+        "name": "",
+        "property": "all_data",
+        "action": "obj",
+        "pretty": false,
+        "x": 595,
+        "y": 1700,
+        "wires": [
+            [
+                "440777c8e0d14feb",
+                "4b8910a5222a3756"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "1de2021d01a8a14c",
+        "type": "delay",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 540,
+        "y": 420,
+        "wires": [
+            [
+                "51c1e8419494d6c8"
+            ]
+        ]
+    },
+    {
+        "id": "502e0f0790c889b3",
+        "type": "api-current-state",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "Source",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_dynamic_data_source",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.data_source",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 860,
+        "y": 380,
+        "wires": [
+            [
+                "04ac6fe47feb030e"
+            ]
+        ]
+    },
+    {
+        "id": "5de918ab18a86459",
+        "type": "function",
+        "z": "a71dfbac6fdac4b5",
+        "g": "52ebd55cc452ccfc",
+        "name": "Data source settings",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n/*    From cheapes-energy-hours macro\n      See: https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings\n\n      - None (default selection)\n      - Zonneplan\n      - Amber Electric\n      - EasyEnergy, EnergyZero (core)\n      - ENTSO-E\n      - Frank Energie\n      - GE-Spot\n      - Tibber, Nordpool (core)\n      - Tibber (custom)\n      - Nordpool (custom)\n      - PVPC (Spain)\n      - Octopus Energy\n      - Omie\n*/\n\nswitch (msg.dynamic.data_source) {\n      case \"None\":\n            // Handle the 'None' case (e.g., no supplier selected or data is unavailable)\n            log(this,\"No data source selected.\");\n            // Add config here...\n            break;\n\n      case \"Zonneplan\":\n            // Code for Zonneplan (a Dutch energy supplier)\n            log(this,\"Processing Zonneplan data.\");\n            // Add config here...\n            msg.dynamic.sensor='sensor.zonneplan_current_electricity_tariff'; // when using: https://github.com/fsaris/home-assistant-zonneplan-one\n            msg.dynamic.source_settings='zonneplan'\n            // msg.dynamic.attr_all='forecast';\n            // msg.dynamic.value_key='electricity_price';\n            msg.dynamic.value_conversion = 10000000; // whole currency / kWh\n            break;\n\n      case \"Amber Electric\":\n            // Code for Amber Electric (Australian energy retailer)\n            log(this,\"Processing Amber Electric data.\");\n            // Add config here...\n            msg.dynamic.attr_all='forecasts'; \n            msg.dynamic.time_key='start_time'; \n            msg.dynamic.value_key='per_kwh';\n            break;\n\n      case \"EasyEnergy, EnergyZero (core)\":\n            // Code for EasyEnergy and EnergyZero (core/default implementation)\n            log(this,\"Processing EasyEnergy/EnergyZero core data.\");\n            // Add config here...\n            break;\n\n      case \"ENTSO-E\":\n            // Code for ENTSO-E (European Network of Transmission System Operators for Electricity)\n            log(this,\"Processing ENTSO-E data.\");\n            // Add config here...\n            msg.dynamic.attr_today='prices_today'; \n            msg.dynamic.attr_tomorrow='prices_tomorrow'; \n            msg.dynamic.time_key='time';\n            msg.dynamic.value_key='price';\n            break;\n\n      case \"Frank Energie\":\n            // Code for Frank Energie (Dutch energy supplier)\n            log(this,\"Processing Frank Energie data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.frank_energie_prijzen_gemiddelde_elektriciteitsprijs_alle_uren_all_in'; // when using: https://github.com/HiDiHo01/home-assistant-frank_energie\n            msg.dynamic.attr_all = 'prices'; \n            msg.dynamic.time_key = 'from'; \n            msg.dynamic.value_key = 'price';\n            break;\n\n      case \"GE-Spot\":\n            // Code for GE-Spot (Global Electric Spot price)\n            log(this,\"Processing GE-Spot data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today_hourly_prices'; // using the hourly version. today_interval_prices is per 15 mins\n            msg.dynamic.attr_tomorrow = 'tomorrow_hourly_prices'; // using the hourly version\n            msg.dynamic.time_key = 'time'; \n            msg.dynamic.value_key = 'value';\n            break;\n\n      case \"Nordpool (core)\":\n            // Code for Nordpool (core/default implementation)\n            log(this, \"Processing Nordpool core data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.nordpool_ceh_prices';\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.time_key = 'start';\n            msg.dynamic.value_key = 'value';\n            msg.dynamic.datetime_in_data = true; // datetime is in the data\n            break;\n\n      case \"Tibber (core)\":\n            // Code for Tibber (core/default implementation)\n            log(this,\"Processing Tibber core data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.tibber_ceh_prices';\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.time_key = 'start';\n            msg.dynamic.value_key = 'value';\n            msg.dynamic.datetime_in_data = true; // datetime is in the data\n            break;\n\n      case \"Tibber (custom)\":\n            // Code for a custom Tibber setup/configuration\n            log(this,\"Processing Tibber custom data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.datetime_in_data = false;\n            break;\n\n      case \"Nordpool (custom)\":\n            // Code for a custom Nordpool setup/configuration\n            log(this,\"Processing Nordpool custom data.\");\n            // Add config here...\n            break;\n\n      case \"PVPC (Spain)\":\n            // Code for PVPC (Voluntary Price for Small Consumers in Spain)\n            log(this,\"Processing Spanish PVPC data.\");\n            // Add config here...\n            break;\n\n      case \"Octopus Energy\":\n            // Code for Octopus Energy (UK/international energy supplier)\n            log(this,\"Processing Octopus Energy data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'rates'; \n            msg.dynamic.value_key = 'value_incl_vat';\n            break;\n\n      case \"Omie\":\n            // Code for Omie (Iberian Energy Market Operator)\n            log(this,\"Processing Omie data.\");\n            // Add config here...\n            break;\n\n      default:\n            // Code to execute if the supplier does not match any of the above cases\n            node.warn(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            log(this,`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            // Add default error handling...\n}\n\nlog(this, \"Performing API calls...\");\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 600,
+        "wires": [
+            [
+                "631f20f21931c613"
+            ]
+        ]
+    },
+    {
+        "id": "4af06c3e3966bac6",
+        "type": "api-current-state",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "Threshold delta",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_dynamic_threshold_delta",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.min_delta_cents",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1100,
+        "y": 400,
+        "wires": [
+            [
+                "bd0dec161c645156"
+            ]
+        ]
+    },
+    {
+        "id": "b75455d9c02dec63",
+        "type": "inject",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "Check period",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "*/15 0-23 * * *",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 380,
+        "y": 380,
+        "wires": [
+            [
+                "81a27c25d6a79757"
+            ]
+        ]
+    },
+    {
+        "id": "81a27c25d6a79757",
+        "type": "function",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "Init",
+        "func": "msg.dynamic = {};\nmsg.log = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 380,
+        "wires": [
+            [
+                "502e0f0790c889b3"
+            ]
+        ]
+    },
+    {
+        "id": "631f20f21931c613",
+        "type": "function",
+        "z": "a71dfbac6fdac4b5",
+        "g": "52ebd55cc452ccfc",
+        "name": "Generate templates",
+        "func": "// final template initialization\nmsg.dynamic.template_all = \"\";\n\n// temporary template parts\nlet template_start = \"\";\nlet template_common = [];\nlet template_all = [];\nlet template_end = \"\";\n\n// load the macro\ntemplate_start = `{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n`;\ntemplate_end = `) | to_json }}`;\n\n// collect arguments | strings\nconst stringKeys = [\n    'sensor',\n    'attr_all',\n    'value_key',\n    'attr_today',\n    'attr_tomorrow',\n    'time_key',\n    'source_settings'\n];\n\nstringKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}='${msg.dynamic[key]}'`);\n    }\n});\n\n// collect arguments | boolean, integer\nconst otherKeys = [\n    'datetime_in_data',\n    'data_minutes',\n];\n\notherKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}=${msg.dynamic[key]}`);\n    }\n});\n\n// copy common items\ntemplate_all = [...template_common];\n\n// collect all hours | via extra call\ntemplate_all.push(`hours=\"all\"`);\ntemplate_all.push(`include_tomorrow=true`);\ntemplate_all.push(`mode=\"all\"`);\n\n/**\n * Formats an array of strings into a single string:\n * - Each item starts with 4 spaces.\n * - Each item ends with a comma, except the last one.\n * - Items are separated by a newline.\n */\nfunction formatTemplateArray(array) {\n    if (!array || array.length === 0) {\n        return \"\";\n    }\n\n    const indent = \"    \"; \n\n    const formatted_lines = array.map((element, index) => {\n        const suffix = (index < array.length - 1) ? \",\" : \"\";\n        return `${indent}${element}${suffix}`;\n    });\n\n    return formatted_lines.join('\\n');\n}\n\n// generate string templates\nconst template_all_string = formatTemplateArray(template_all);\n\n// done\nmsg.dynamic.template_all = `${template_start}${template_all_string}${template_end}`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 600,
+        "wires": [
+            [
+                "e318a34eb1af8b80",
+                "289052d4452078dd"
+            ]
+        ]
+    },
+    {
+        "id": "a48088403e594929",
+        "type": "change",
+        "z": "a71dfbac6fdac4b5",
+        "g": "52ebd55cc452ccfc",
+        "name": "Cleanup",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "template",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 720,
+        "wires": [
+            [
+                "16c5b0ee055e1e31"
+            ]
+        ]
+    },
+    {
+        "id": "695819d2149eac9b",
+        "type": "debug",
+        "z": "a71dfbac6fdac4b5",
+        "g": "db4b44b735ac43ee",
+        "name": "Log: activate 'debug mode' first",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "log",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "878559d20833f0e6",
+        "type": "server-state-changed",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "User input",
+        "server": "176d29a.6f648d6",
+        "version": 6,
+        "outputs": 1,
+        "exposeAsEntityConfig": "",
+        "entities": {
+            "entity": [
+                "input_number.house_battery_strategy_dynamic_cheapest_hrs",
+                "input_number.house_battery_strategy_dynamic_expensive_hrs",
+                "input_select.house_battery_strategy_dynamic_data_source",
+                "input_number.house_battery_strategy_dynamic_threshold_delta",
+                "input_number.house_battery_strategy_dynamic_threshold_cheapest_period"
+            ],
+            "substring": [],
+            "regex": []
+        },
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 360,
+        "y": 340,
+        "wires": [
+            [
+                "4e97e117d960a46e"
+            ]
+        ]
+    },
+    {
+        "id": "04ac6fe47feb030e",
+        "type": "switch",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "Source selected?",
+        "property": "dynamic.data_source",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "None",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 965,
+        "y": 380,
+        "wires": [
+            [
+                "950689e94d8fa291"
+            ],
+            [
+                "4af06c3e3966bac6"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "7c9497ec00d15d32",
+        "type": "debug",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "Not set",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 1340,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "950689e94d8fa291",
+        "type": "change",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "Set dynamic strategy to null",
+        "rules": [
+            {
+                "t": "set",
+                "p": "dynamic_strategy",
+                "pt": "flow",
+                "to": "null",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1140,
+        "y": 360,
+        "wires": [
+            [
+                "7c9497ec00d15d32"
+            ]
+        ]
+    },
+    {
+        "id": "440777c8e0d14feb",
+        "type": "debug",
+        "z": "a71dfbac6fdac4b5",
+        "g": "f996917e30915fed",
+        "name": "All data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "all_data",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "b3aab11dce0d9cb6",
+        "type": "debug",
+        "z": "a71dfbac6fdac4b5",
+        "g": "caf09b765df1919c",
+        "name": "Complete msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "6a27e77e93869d50",
+        "type": "change",
+        "z": "a71dfbac6fdac4b5",
+        "g": "4dd8dc0a7934e610",
+        "name": "Trace",
+        "rules": [
+            {
+                "t": "set",
+                "p": "strategy.trace",
+                "pt": "msg",
+                "to": "[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 90,
+        "y": 200,
+        "wires": [
+            [
+                "e5632a01c5305602"
+            ]
+        ],
+        "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
+    },
+    {
+        "id": "f99db07f970cac5c",
+        "type": "function",
+        "z": "a71dfbac6fdac4b5",
+        "g": "aa5e96d3bef02b79",
+        "name": "Selected",
+        "func": "// Logger\nconst log = global.get(\"logger\");\nlog(this,`${msg.target} strategy`);\n\n// Status\nnode.status({fill:\"green\",shape:\"dot\",text:`${msg.target}`});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 180,
+        "wires": [
+            [
+                "93bcfe4b3038b147"
+            ]
+        ]
+    },
+    {
+        "id": "6e901a52bc0385e1",
+        "type": "catch",
+        "z": "a71dfbac6fdac4b5",
+        "g": "bcdf9f322362c32b",
+        "name": "",
+        "scope": null,
+        "uncaught": true,
+        "x": 65,
+        "y": 320,
+        "wires": [
+            [
+                "5ee21d35157af5ea"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "5ee21d35157af5ea",
+        "type": "function",
+        "z": "a71dfbac6fdac4b5",
+        "g": "bcdf9f322362c32b",
+        "name": "Unhandled Exception",
+        "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 115,
+        "y": 320,
+        "wires": [
+            [
+                "3c88289eecad1a13"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "3c88289eecad1a13",
+        "type": "link out",
+        "z": "a71dfbac6fdac4b5",
+        "g": "bcdf9f322362c32b",
+        "name": "link out 5",
+        "mode": "return",
+        "links": [],
+        "x": 165,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "ea83376fcc7030f8",
+        "type": "api-current-state",
+        "z": "a71dfbac6fdac4b5",
+        "g": "db4b44b735ac43ee",
+        "name": "Threshold cheapest",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_dynamic_threshold_cheapest_period",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.threshold_cheapest_cents",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 370,
+        "y": 880,
+        "wires": [
+            [
+                "ede00ea12cde9d77"
+            ]
+        ]
+    },
+    {
+        "id": "ede00ea12cde9d77",
+        "type": "api-current-state",
+        "z": "a71dfbac6fdac4b5",
+        "g": "db4b44b735ac43ee",
+        "name": "Strategy default",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_dynamic_default",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.strategy_default",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 360,
+        "y": 920,
+        "wires": [
+            [
+                "9c871533e5e43bd1"
+            ]
+        ]
+    },
+    {
+        "id": "9c871533e5e43bd1",
+        "type": "api-current-state",
+        "z": "a71dfbac6fdac4b5",
+        "g": "db4b44b735ac43ee",
+        "name": "Strategy cheapest",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_dynamic_cheapest",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.strategy_cheapest",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 370,
+        "y": 960,
+        "wires": [
+            [
+                "04f502aa5ebaef09"
+            ]
+        ]
+    },
+    {
+        "id": "04f502aa5ebaef09",
+        "type": "api-current-state",
+        "z": "a71dfbac6fdac4b5",
+        "g": "db4b44b735ac43ee",
+        "name": "Strategy expensive",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_dynamic_expensive",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.strategy_expensive",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 370,
+        "y": 1000,
+        "wires": [
+            [
+                "121b9ae8bd7687c3"
+            ]
+        ]
+    },
+    {
+        "id": "16c5b0ee055e1e31",
+        "type": "function",
+        "z": "a71dfbac6fdac4b5",
+        "g": "52ebd55cc452ccfc",
+        "name": "Cache data source",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\nconst dynamicData = msg.dynamic;\n\n// Helper to check for errors in the object\nconst isInvalid = (data) => {\n    if (!data) return true;\n    // Check if the stringified object contains \"error\"\n    return JSON.stringify(data).toLowerCase().includes(\"error\");\n};\n\nif (isInvalid(dynamicData)) {\n    // Explain issue\n    log(this, \"Invalid data received, clearing cache\", \"warn\");\n    // Clear cache\n    flow.set(\"cached_dynamic_data\", undefined);\n} else {\n    // Cache on success\n    log(this, \"Caching `msg.dynamic`\");\n    // Save the entire object to flow context\n    flow.set(\"cached_dynamic_data\", dynamicData);\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 720,
+        "wires": [
+            [
+                "58be4788029f3e50"
+            ]
+        ]
+    },
+    {
+        "id": "595c952928788c67",
+        "type": "catch",
+        "z": "a71dfbac6fdac4b5",
+        "g": "8eaa0311b9e4b98d",
+        "name": "Catch group",
+        "scope": "group",
+        "uncaught": false,
+        "x": 1090,
+        "y": 580,
+        "wires": [
+            [
+                "a6b72d7fd91aad42"
+            ]
+        ]
+    },
+    {
+        "id": "cd68b9f4c07a157d",
+        "type": "debug",
+        "z": "a71dfbac6fdac4b5",
+        "g": "8eaa0311b9e4b98d",
+        "name": "Strategy errors",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "a603b10174d5819d",
+        "type": "comment",
+        "z": "a71dfbac6fdac4b5",
+        "g": "8eaa0311b9e4b98d",
+        "name": "Cheapest Energy Hours - errors",
+        "info": "\"No valid sensor found\" if price_data is none and not valid_sensor,\n\"No valid data in {}\".format(sensor) if price_data is none and data == [] and valid_sensor,\n\"No valid data in provided price_data\" if price_data is not none and not valid_price_data,\n\"Time key '{}' not found in data\".format(time_key) if data and time_key not in data[0],\n\"Value key '{}' not found in data\".format(value_key) if data and value_key not in data[0],\n\"Invalid mode '{}' selected\".format(mode) if mode not in modes,\n\"Boolean input expected for include_today, '{}' can not be processed as a boolean\".format(include_today) if include_today | bool(\"\") is not boolean,\n\"Boolean input expected for include_tomorrow, '{}' can not be processed as a boolean\".format(include_tomorrow) if include_tomorrow | bool(\"\") is not boolean,\n\"Boolean input expected for look_ahead, '{}' can not be processed as a boolean\".format(look_ahead) if look_ahead | bool(\"\") is not boolean,\n\"Boolean input expected for lowest, '{}' can not be processed as a boolean\".format(lowest) if lowest | bool(\"\") is not boolean,\n\"Boolean input expected for latest_possible, '{}' can not be processed as a boolean\".format(latest_possible) if latest_possible | bool(\"\") is not boolean,\n\"Numeric input or percentage expected for price_tolerance, '{}' can not be processed as a float or percentage\".format(price_tolerance) if not valid_pt,\n\"Numeric input expected for kwh, '{}' can not be processed as a float\".format(kwh) if kwh is not none and not kwh | is_number,\n\"Selected program '{}' is not available or has no data\".format(program) if program is not none and w is none,\n\"Selected start parameter is after the end parameter\" if start_end and data,\n\"{} hours between start and end, where {} hours are required\".format(end_start, h | round(3)) if not start_end and end_start < h | round(3) and data,\n\"Invalid combination of source data points per hour '{}' and number of weight points '{}'\".format(dp, dph) if all_keys and not wp_check",
+        "x": 1150,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "a6b72d7fd91aad42",
+        "type": "function",
+        "z": "a71dfbac6fdac4b5",
+        "g": "8eaa0311b9e4b98d",
+        "name": "Unhandled Exception",
+        "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1195,
+        "y": 580,
+        "wires": [
+            [
+                "cd68b9f4c07a157d"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "bd0dec161c645156",
+        "type": "function",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "Cache check",
+        "func": "// Check if cache can be used or a new call to Data Source is required\nconst log = global.get('logger');\n\n// Retrieve stored data from flow context\nconst previousValues = flow.get(\"previous_sensor_values\") || {};\nconst cachedData = flow.get(\"cached_dynamic_data\");\n\n// Create a string or object to represent current state\nconst currentValues = {\n    src: msg.dynamic.data_source,\n    mtd: msg.dynamic.min_delta_cents\n};\n\n// Compare current with previous (JSON stringify is a quick way to compare objects)\nconst inputsMatch = JSON.stringify(currentValues) === JSON.stringify(previousValues);\n\n// Determine cache hit\nif (inputsMatch && cachedData){\n    // Cache HIT\n    node.status({ fill: \"green\", shape: \"dot\", text: `Cache hit` });\n    log(this,`*CACHE HIT* using stored tariff data`);\n\n    // Attach cached data to the message so following nodes can use it\n    msg.dynamic = cachedData;\n\n    // Output #1\n    return [msg, null];\n\n} else {\n    // Cache MISS\n    node.status({ fill: \"green\", shape: \"ring\", text: `Cache miss: ${JSON.stringify(currentValues) }` });\n\n    // Save current values for the next run\n    flow.set(\"previous_sensor_values\", currentValues);\n    \n    // Output #2\n    return [null, msg];\n}",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 420,
+        "wires": [
+            [
+                "7db4940e3e120a97"
+            ],
+            [
+                "34859e1b41755531"
+            ]
+        ],
+        "outputLabels": [
+            "Cache HIT",
+            "Cache MISS"
+        ]
+    },
+    {
+        "id": "7db4940e3e120a97",
+        "type": "link out",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "from Cache Check ok",
+        "mode": "link",
+        "links": [
+            "5452d508e944defb"
+        ],
+        "x": 1375,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "8455f3d26219e40d",
+        "type": "link in",
+        "z": "a71dfbac6fdac4b5",
+        "g": "52ebd55cc452ccfc",
+        "name": "link Fetch from Data Source",
+        "links": [
+            "34859e1b41755531"
+        ],
+        "x": 295,
+        "y": 560,
+        "wires": [
+            [
+                "5de918ab18a86459"
+            ]
+        ]
+    },
+    {
+        "id": "34859e1b41755531",
+        "type": "link out",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "from Cache Check NoK",
+        "mode": "link",
+        "links": [
+            "8455f3d26219e40d"
+        ],
+        "x": 1375,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "5452d508e944defb",
+        "type": "link in",
+        "z": "a71dfbac6fdac4b5",
+        "g": "db4b44b735ac43ee",
+        "name": "link Determine Strategy",
+        "links": [
+            "58be4788029f3e50",
+            "7db4940e3e120a97"
+        ],
+        "x": 295,
+        "y": 840,
+        "wires": [
+            [
+                "ea83376fcc7030f8"
+            ]
+        ]
+    },
+    {
+        "id": "58be4788029f3e50",
+        "type": "link out",
+        "z": "a71dfbac6fdac4b5",
+        "g": "52ebd55cc452ccfc",
+        "name": "link out 12",
+        "mode": "link",
+        "links": [
+            "5452d508e944defb"
+        ],
+        "x": 635,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "51c1e8419494d6c8",
+        "type": "function",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "Clear Cache",
+        "func": "// Clear cache\nflow.set(\"cached_dynamic_data\", undefined);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 635,
+        "y": 420,
+        "wires": [
+            [
+                "81a27c25d6a79757"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "4b8910a5222a3756",
+        "type": "ha-fire-event",
+        "z": "a71dfbac6fdac4b5",
+        "g": "f996917e30915fed",
+        "name": "",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "event": "update_energy_prices",
+        "data": "msg.all_data",
+        "dataType": "jsonata",
+        "x": 760,
+        "y": 1760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3bec39f7b4db4981",
+        "type": "api-render-template",
+        "z": "a71dfbac6fdac4b5",
+        "g": "52ebd55cc452ccfc",
+        "name": "All",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "",
+        "resultsLocation": "dynamic.data_all",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 450,
+        "y": 660,
+        "wires": [
+            [
+                "1dd20569f6a79e3d"
+            ]
+        ]
+    },
+    {
+        "id": "1dd20569f6a79e3d",
+        "type": "json",
+        "z": "a71dfbac6fdac4b5",
+        "g": "52ebd55cc452ccfc",
+        "name": "",
+        "property": "dynamic.data_all",
+        "action": "obj",
+        "pretty": false,
+        "x": 535,
+        "y": 660,
+        "wires": [
+            [
+                "3243519ff4e0840d"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "289052d4452078dd",
+        "type": "change",
+        "z": "a71dfbac6fdac4b5",
+        "g": "52ebd55cc452ccfc",
+        "name": "Set",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "dynamic.template_all",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 660,
+        "wires": [
+            [
+                "3bec39f7b4db4981"
+            ]
+        ]
+    },
+    {
+        "id": "52ce1fdd4ac9dc6f",
+        "type": "ha-fire-event",
+        "z": "a71dfbac6fdac4b5",
+        "g": "db4b44b735ac43ee",
+        "name": "Update energy prices",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "event": "update_energy_prices",
+        "data": "msg.dynamic.data_all",
+        "dataType": "jsonata",
+        "x": 900,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e318a34eb1af8b80",
+        "type": "debug",
+        "z": "a71dfbac6fdac4b5",
+        "g": "52ebd55cc452ccfc",
+        "name": "Template all",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "dynamic.template_all",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "3243519ff4e0840d",
+        "type": "function",
+        "z": "a71dfbac6fdac4b5",
+        "g": "52ebd55cc452ccfc",
+        "name": "Convert price",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.value_conversion\")) || 1;\n\n// Check if the list exists and is an array to prevent errors\nif (msg.dynamic && msg.dynamic.data_all && Array.isArray(msg.dynamic.data_all.list)) {\n    \n    // Create a new array where each value is multiplied\n    if (Array.isArray(msg.dynamic.data_all?.list)) {\n        msg.dynamic.data_all.list = msg.dynamic.data_all.list.map(v => v / CONVERSION_RATE * 100); // cents\n    }\n\n    // Update other fields\n    if (msg.dynamic.data_all?.average) {\n        msg.dynamic.data_all.average = parseInt(msg.dynamic.data_all.average / CONVERSION_RATE * 100); // cents\n    }\n    if (msg.dynamic.data_all?.weighted_average){\n        msg.dynamic.data_all.weighted_average = parseInt(msg.dynamic.data_all.weighted_average / CONVERSION_RATE * 100); // cents\n    }\n    if (msg.dynamic.data_all?.min) {\n        msg.dynamic.data_all.min = parseInt(msg.dynamic.data_all.min / CONVERSION_RATE * 100); // cents\n    }\n    if (msg.dynamic.data_all?.max) {\n        msg.dynamic.data_all.max = parseInt(msg.dynamic.data_all.max / CONVERSION_RATE * 100); // cents\n    }\n} else {\n    // Do not continue\n    log(this,\"*price data not updated* price data missing\");\n    return null;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 660,
+        "wires": [
+            [
+                "a48088403e594929"
+            ]
+        ]
+    },
+    {
+        "id": "0e1ac05e72625550",
+        "type": "inject",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "Test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 410,
+        "y": 460,
+        "wires": [
+            [
+                "39c1cbf570f8c9b0"
+            ]
+        ]
+    },
+    {
+        "id": "39c1cbf570f8c9b0",
+        "type": "api-call-service",
+        "z": "a71dfbac6fdac4b5",
+        "g": "57b4db976551e932",
+        "name": "Debug ON",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_boolean.turn_on",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_boolean.house_battery_control_is_debug_mode"
+        ],
+        "labelId": [],
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [
+            {
+                "property": "debug_mode",
+                "propertyType": "global",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_boolean",
+        "service": "turn_on",
+        "x": 550,
+        "y": 460,
+        "wires": [
+            [
+                "51c1e8419494d6c8"
+            ]
+        ]
+    },
+    {
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": [],
+        "connectionDelay": false,
+        "cacheJson": false,
+        "heartbeat": false,
+        "heartbeatInterval": "",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
+    },
+    {
+        "id": "27911f8eec93322c",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.80.3"
+        }
+    }
+]
