@@ -1644,7 +1644,7 @@ views:
                   {%- set tom_bar   = (bars[((tom_price - pmin) / rng * 7) | round(0) | int] if (tom_price is not none and rng > 0) else (bars[0] if tom_price is not none else '-')) -%}
                   {%- set t_emoji   = '🔴' if t_mark == 'high' else ('🟢' if t_mark == 'low' else '—') -%}
                   {%- set tom_emoji = '🔴' if tom_mark == 'high' else ('🟢' if tom_mark == 'low' else ('—' if tom_price is not none else '-')) -%}
-                  | {{ "%02d"|format(hour) }}:{{ "%02d"|format(minute) }} | {{ "%0.1f"|format(t_price) }} | {{ t_emoji }} | {{ t_bar }} | {{ "%0.1f"|format(tom_price) if tom_price is not none else '-' }} | {{ tom_emoji }} | {{ tom_bar }} |
+                  | {{ "%02d"|format(hour) }}:{{ "%02d"|format(minute) }} | {% if t_mark == 'high' %}<font color="orange">{{ "%0.1f"|format(t_price) }}</font>{% elif t_mark == 'low' %}<font color="lightgreen">{{ "%0.1f"|format(t_price) }}</font>{% else %}{{ "%0.1f"|format(t_price) }}{% endif %} | {{ t_emoji }} | {% if t_mark == 'high' %}<font color="orange">{{ t_bar }}</font>{% elif t_mark == 'low' %}<font color="lightgreen">{{ t_bar }}</font>{% else %}{{ t_bar }}{% endif %} | {% if tom_price is not none %}{% if tom_mark == 'high' %}<font color="orange">{{ "%0.1f"|format(tom_price) }}</font>{% elif tom_mark == 'low' %}<font color="lightgreen">{{ "%0.1f"|format(tom_price) }}</font>{% else %}{{ "%0.1f"|format(tom_price) }}{% endif %}{% else %}-{% endif %} | {{ tom_emoji }} | {% if tom_mark == 'high' %}<font color="orange">{{ tom_bar }}</font>{% elif tom_mark == 'low' %}<font color="lightgreen">{{ tom_bar }}</font>{% else %}{{ tom_bar }}{% endif %} |
                 {% endfor %}
               {%- else -%}
                 | - | *Insufficient data available...* | - | - | - | - | - |
@@ -1669,15 +1669,15 @@ views:
             entity: input_boolean.house_battery_control_is_debug_mode
             state: 'on'
       - type: grid
-        column_span: 2
+        column_span: 3
         cards:
           - type: heading
-            heading: FEAT | Price marks (transposed, wide view)
+            heading: FEAT | Price periods table
             heading_style: title
             icon: mdi:table-row
           - type: heading
             icon: mdi:spider
-            heading: Enable insights mode to view this data
+            heading: TODO explain table
             heading_style: subtitle
           - type: markdown
             content: >
@@ -1710,22 +1710,24 @@ views:
               **Today**
 
 
-              | |{% for i in range(ppd) %} {{ "%02d"|format(i // pph) }}{% if
-              pph > 1 %}:{{ "%02d"|format((i % pph) * step) }}{% endif %} |{%
+              | |{% for i in range(ppd) %} {{ "%02d"|format(i // pph) }}:{{
+              "%02d"|format((i % pph) * step) }} |{% endfor %}
+
+              |:---:|{% for i in range(ppd) %}:---:|{% endfor %}
+
+              | Cents |{% for i in range(ppd) %} {%- set m = marks[i].mark if
+              (marks | length) > i else none -%}{% if m == 'high' %}<font
+              color="orange">{{ "%0.1f"|format(prices[i]) }}</font>{% elif m ==
+              'low' %}<font color="lightgreen">{{ "%0.1f"|format(prices[i])
+              }}</font>{% else %}{{ "%0.1f"|format(prices[i]) }}{% endif %} |{%
               endfor %}
 
-              |---|{% for i in range(ppd) %}---|{% endfor %}
-
-              | Cents |{% for i in range(ppd) %} {{ "%0.1f"|format(prices[i]) }}
-              |{% endfor %}
-
-              | Period |{% for i in range(ppd) %} {%- set m = marks[i].mark if
-              (marks | length) > i else none -%}{{ '🔴' if m == 'high' else
-              ('🟢' if m == 'low' else '—') }} |{% endfor %}
-
-              | Trend |{% for i in range(ppd) %} {{ bars[((prices[i] - pmin) /
-              rng * 7) | round(0) | int] if rng > 0 else bars[0] }} |{% endfor
-              %}
+              | Trend |{% for i in range(ppd) %} {%- set b = bars[((prices[i] -
+              pmin) / rng * 7) | round(0) | int] if rng > 0 else bars[0] -%}{%-
+              set m = marks[i].mark if (marks | length) > i else none -%}{% if m
+              == 'high' %}<font color="orange">{{ b }}</font>{% elif m == 'low'
+              %}<font color="lightgreen">{{ b }}</font>{% else %}{{ b }}{% endif
+              %} |{% endfor %}
 
               {%- else %}
 
@@ -1739,28 +1741,32 @@ views:
               **Tomorrow**
 
 
-              | |{% for i in range(ppd) %} {{ "%02d"|format(i // pph) }}{% if
-              pph > 1 %}:{{ "%02d"|format((i % pph) * step) }}{% endif %} |{%
-              endfor %}
+              | |{% for i in range(ppd) %} {{ "%02d"|format(i // pph) }}:{{
+              "%02d"|format((i % pph) * step) }} |{% endfor %}
 
-              |---|{% for i in range(ppd) %}---|{% endfor %}
+              |:---:|{% for i in range(ppd) %}:---:|{% endfor %}
 
-              | Cents |{% for i in range(ppd) %} {{ "%0.1f"|format(prices[i +
-              ppd]) }} |{% endfor %}
+              | Cents |{% for i in range(ppd) %} {%- set m = marks[i + ppd].mark
+              if (marks | length) > (i + ppd) else none -%}{% if m == 'high'
+              %}<font color="orange">{{ "%0.1f"|format(prices[i + ppd])
+              }}</font>{% elif m == 'low' %}<font color="lightgreen">{{
+              "%0.1f"|format(prices[i + ppd]) }}</font>{% else %}{{
+              "%0.1f"|format(prices[i + ppd]) }}{% endif %} |{% endfor %}
 
-              | Period |{% for i in range(ppd) %} {%- set m = marks[i +
-              ppd].mark if (marks | length) > (i + ppd) else none -%}{{ '🔴' if
-              m == 'high' else ('🟢' if m == 'low' else '—') }} |{% endfor %}
-
-              | Trend |{% for i in range(ppd) %} {{ bars[((prices[i + ppd] -
-              pmin) / rng * 7) | round(0) | int] if rng > 0 else bars[0] }} |{%
-              endfor %}
+              | Trend |{% for i in range(ppd) %} {%- set b = bars[((prices[i +
+              ppd] - pmin) / rng * 7) | round(0) | int] if rng > 0 else bars[0]
+              -%}{%- set m = marks[i + ppd].mark if (marks | length) > (i + ppd)
+              else none -%}{% if m == 'high' %}<font color="orange">{{ b
+              }}</font>{% elif m == 'low' %}<font color="lightgreen">{{ b
+              }}</font>{% else %}{{ b }}{% endif %} |{% endfor %}
 
               {%- endif %}
 
 
               **Range:** {{ "%0.1f"|format(pmin) }} – {{ "%0.1f"|format(pmax) }}
-              cents  •  **Spread:** {{ "%0.1f"|format(rng) }} cents
+              cents
+
+              **Spread:** {{ "%0.1f"|format(rng) }} cents
 
 
               </small></small>
@@ -1777,7 +1783,7 @@ views:
                 state: unknown
           - condition: state
             entity: input_boolean.house_battery_control_is_debug_mode
-            state: 'on'
+            state_not: unknown
     badges:
       - type: entity
         show_name: true
