@@ -665,6 +665,7 @@ input_select:
       - Self-consumption # Use your own solar production. Don't buy or sell. Target grid consumption = 0, e.g. "Nul op de meter (NoM)" in Dutch.
       - Timed # Configure which strategy should be active during given periods of the day.
       - Dynamic # Requires a dynamic tariff contract and the Cheapest Hours HACS add-on
+      - Dynamic 2 # Requires a dynamic tariff contract and the Cheapest Hours HACS add-on
       - Charge # Uses self-consumption strategy with smart settings and target grid consumption > 0
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
       - Sell # Discharge batteries
@@ -1107,6 +1108,7 @@ template:
         unit_of_measurement: "cents/kWh"
         attributes:
           prices: "{{ trigger.event.data.list | default([]) }}"
+          marks: "{{ trigger.event.data.list_marked | default([]) }}"
           start: "{{ trigger.event.data.start | default('Unknown') }}"
           datapoints_per_hour: "{{ trigger.event.data.datapoints_per_hour | default(0) }}"
 
@@ -1124,7 +1126,7 @@ recorder:
       # PID control signals (updated every 2-40 seconds during operation)
       - input_number.house_battery_control_*_term
       - input_number.house_battery_control_*_deviation
-      - input_number.house_battery_control_error_signal
+      # - input_number.house_battery_control_error_signal
       # - input_number.house_battery_control_pid_output  # optional: this is useful for debugging
       - input_number.house_battery_control_debug
       # Dynamic strategy calculated values (updated hourly)
