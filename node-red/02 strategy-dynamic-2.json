@@ -61,7 +61,7 @@
         ],
         "x": 228,
         "y": 273,
-        "w": 1244,
+        "w": 1364,
         "h": 834
     },
     {
@@ -200,11 +200,12 @@
             "bd31ed23c53d88ae",
             "1b18292ae5da8c4a",
             "8a2264a5f6d6dfd2",
-            "eeef05a7b8913b56"
+            "eeef05a7b8913b56",
+            "be05aedb262562b7"
         ],
         "x": 254,
         "y": 299,
-        "w": 1192,
+        "w": 1312,
         "h": 202
     },
     {
@@ -241,7 +242,7 @@
         "y": 340,
         "wires": [
             [
-                "63fbf4e436af63e0"
+                "be05aedb262562b7"
             ]
         ]
     },
@@ -764,7 +765,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 860,
+        "x": 980,
         "y": 380,
         "wires": [
             [
@@ -836,7 +837,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1100,
+        "x": 1220,
         "y": 400,
         "wires": [
             [
@@ -870,7 +871,7 @@
         "y": 380,
         "wires": [
             [
-                "63fbf4e436af63e0"
+                "be05aedb262562b7"
             ]
         ]
     },
@@ -880,14 +881,14 @@
         "z": "7cb2c3c95ae25465",
         "g": "42148c9790cc8f7e",
         "name": "Init",
-        "func": "msg.dynamic = {};\nmsg.log = [];\nreturn msg;",
+        "func": "if(msg.payload !== \"Dynamic 2\") {\n    node.status({fill:\"red\",shape:\"ring\",text:\"Strategy not selected\"});\n    return null;\n}\nnode.status({fill:\"green\",shape:\"dot\",text:\"Ok\"});\n\n// Init\nmsg.dynamic = {};\nmsg.log = [];\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 730,
+        "x": 850,
         "y": 380,
         "wires": [
             [
@@ -977,7 +978,8 @@
                 "input_number.house_battery_strategy_dynamic_expensive_hrs",
                 "input_select.house_battery_strategy_dynamic_data_source",
                 "input_number.house_battery_strategy_dynamic_threshold_delta",
-                "input_number.house_battery_strategy_dynamic_threshold_cheapest_period"
+                "input_number.house_battery_strategy_dynamic_threshold_cheapest_period",
+                "input_select.house_battery_strategy"
             ],
             "substring": [],
             "regex": []
@@ -1045,7 +1047,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 965,
+        "x": 1085,
         "y": 380,
         "wires": [
             [
@@ -1071,7 +1073,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 1340,
+        "x": 1460,
         "y": 360,
         "wires": []
     },
@@ -1095,7 +1097,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1140,
+        "x": 1260,
         "y": 360,
         "wires": [
             [
@@ -1545,7 +1547,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1270,
+        "x": 1390,
         "y": 420,
         "wires": [
             [
@@ -1570,7 +1572,7 @@
         "links": [
             "cb239dde075cdc6b"
         ],
-        "x": 1375,
+        "x": 1495,
         "y": 400,
         "wires": []
     },
@@ -1601,7 +1603,7 @@
         "links": [
             "cc1e309cb2e18d5d"
         ],
-        "x": 1375,
+        "x": 1495,
         "y": 440,
         "wires": []
     },
@@ -1654,7 +1656,7 @@
         "y": 420,
         "wires": [
             [
-                "63fbf4e436af63e0"
+                "be05aedb262562b7"
             ]
         ],
         "l": false
@@ -1871,6 +1873,51 @@
         ]
     },
     {
+        "id": "be05aedb262562b7",
+        "type": "api-current-state",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
+        "name": "Strat",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 730,
+        "y": 380,
+        "wires": [
+            [
+                "63fbf4e436af63e0"
+            ]
+        ]
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -1885,7 +1932,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "8c95aa8f2c4b404f",
+        "id": "f70922e6e61eb226",
         "type": "global-config",
         "env": [],
         "modules": {

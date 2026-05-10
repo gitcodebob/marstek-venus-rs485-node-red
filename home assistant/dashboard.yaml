@@ -2361,11 +2361,11 @@ views:
           - type: heading
             icon: mdi:information
             heading_style: subtitle
-            heading: TODO daily energy management
+            heading: Tips for strategy selection
             tap_action:
               action: url
               url_path: >-
-                https://docs.homebatterycontrol.com/05-setup-dynamic.html#period-startend-times-read-only
+                https://docs.homebatterycontrol.com/05-setup-dynamic.html#strategy-configuration
           - type: entities
             entities:
               - entity: input_number.house_battery_strategy_dynamic_threshold_delta
@@ -2438,7 +2438,8 @@ views:
 
               {%- set rng    = pmax - pmin -%}
 
-              {%- set current_idx = now().hour * pph + (now().minute // step) -%}
+              {%- set current_idx = now().hour * pph + (now().minute // step)
+              -%}
 
               {%- if prices and (prices | length) >= ppd -%}
                 {%- for i in range(ppd) -%}
@@ -2486,8 +2487,11 @@ views:
             icon: mdi:table-row
           - type: heading
             icon: mdi:spider
-            heading: TODO explain table
+            heading: Table and strategy explained
             heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: https://docs.homebatterycontrol.com/05-dynamic-v2.html
           - type: markdown
             content: >
               {%- set s = 'sensor.hbc_energy_prices_data' -%}
@@ -2511,7 +2515,8 @@ views:
 
               {%- set rng    = pmax - pmin -%}
 
-              {%- set current_idx = now().hour * pph + (now().minute // step) -%}
+              {%- set current_idx = now().hour * pph + (now().minute // step)
+              -%}
 
               <small><small>
 
@@ -2521,13 +2526,28 @@ views:
               **Today**
 
 
-              | |{% for i in range(ppd) %} {% if i == current_idx %}<font color="#009ac7">{{ "%02d"|format(i // pph) }}:{{ "%02d"|format((i % pph) * step) }}</font>{% else %}{{ "%02d"|format(i // pph) }}:{{ "%02d"|format((i % pph) * step) }}{% endif %} |{% endfor %}
+              | |{% for i in range(ppd) %} {% if i == current_idx %}<font
+              color="#009ac7">{{ "%02d"|format(i // pph) }}:{{ "%02d"|format((i
+              % pph) * step) }}</font>{% else %}{{ "%02d"|format(i // pph) }}:{{
+              "%02d"|format((i % pph) * step) }}{% endif %} |{% endfor %}
 
               |:---:|{% for i in range(ppd) %}:---:|{% endfor %}
 
-              | Cents |{% for i in range(ppd) %} {%- set m = marks[i].mark if (marks | length) > i else none -%}{% if i == current_idx %}<font color="#009ac7">{{ "%0.1f"|format(prices[i]) }}</font>{% elif m == 'high' %}<font color="orange">{{ "%0.1f"|format(prices[i]) }}</font>{% elif m == 'low' %}<font color="#4caf50">{{ "%0.1f"|format(prices[i]) }}</font>{% else %}{{ "%0.1f"|format(prices[i]) }}{% endif %} |{% endfor %}
+              | Cents |{% for i in range(ppd) %} {%- set m = marks[i].mark if
+              (marks | length) > i else none -%}{% if i == current_idx %}<font
+              color="#009ac7">{{ "%0.1f"|format(prices[i]) }}</font>{% elif m ==
+              'high' %}<font color="orange">{{ "%0.1f"|format(prices[i])
+              }}</font>{% elif m == 'low' %}<font color="#4caf50">{{
+              "%0.1f"|format(prices[i]) }}</font>{% else %}{{
+              "%0.1f"|format(prices[i]) }}{% endif %} |{% endfor %}
 
-              | Trend |{% for i in range(ppd) %} {%- set b = bars[((prices[i] - pmin) / rng * 7) | round(0) | int] if rng > 0 else bars[0] -%}{%- set m = marks[i].mark if (marks | length) > i else none -%}{% if i == current_idx %}<font color="#009ac7">{{ b }}</font>{% elif m == 'high' %}<font color="orange">{{ b }}</font>{% elif m == 'low' %}<font color="#4caf50">{{ b }}</font>{% else %}{{ b }}{% endif %} |{% endfor %}
+              | Trend |{% for i in range(ppd) %} {%- set b = bars[((prices[i] -
+              pmin) / rng * 7) | round(0) | int] if rng > 0 else bars[0] -%}{%-
+              set m = marks[i].mark if (marks | length) > i else none -%}{% if i
+              == current_idx %}<font color="#009ac7">{{ b }}</font>{% elif m ==
+              'high' %}<font color="orange">{{ b }}</font>{% elif m == 'low'
+              %}<font color="#4caf50">{{ b }}</font>{% else %}{{ b }}{% endif %}
+              |{% endfor %}
 
               {%- else %}
 
@@ -2572,6 +2592,70 @@ views:
               </small></small>
             grid_options:
               columns: full
+          - type: heading
+            icon: mdi:comment-quote
+            heading: Give feedback on this feature
+            heading_style: title
+            tap_action:
+              action: url
+              url_path: https://forms.gle/6cqjc1YefDAEb8Pz9
+            badges:
+              - type: button
+                icon: mdi:gesture-tap-button
+                tap_action:
+                  action: url
+                  url_path: https://forms.gle/6cqjc1YefDAEb8Pz9
+                color: teal
+          - type: custom:apexcharts-card
+            header:
+              show: true
+              show_states: false
+              title: Prijsintervallen
+            graph_span: 48h
+            span:
+              start: day
+            now:
+              show: true
+              color: '#009ac7'
+              label: Now
+            apex_config:
+              plotOptions:
+                bar:
+                  borderRadius: 2
+                  columnWidth: 90%
+              legend:
+                show: false
+              xaxis:
+                type: datetime
+                labels:
+                  datetimeUTC: false
+                  format: HH:mm
+                  rotate: -45
+                  rotateAlways: true
+              yaxis:
+                decimalsInFloat: 1
+                title:
+                  text: ¢/kWh
+              tooltip:
+                x:
+                  format: ddd dd MMM HH:mm
+            series:
+              - entity: sensor.hbc_energy_prices_data
+                name: Prijs
+                type: column
+                float_precision: 1
+                show:
+                  legend_value: false
+                data_generator: |
+                  const marks = entity.attributes.marks || [];
+                  const colours = { high: '#ff9800', low: '#4caf50' };
+                  return marks.map(iv => ({
+                    x: new Date(iv.start).getTime(),
+                    y: iv.price,
+                    fillColor: iv.is_now
+                      ? '#009ac7'
+                      : (colours[iv.mark] || '#9e9e9e')
+                  }));
         visibility:
           - condition: not
             conditions:
@@ -2608,6 +2692,16 @@ views:
         entity: input_text.house_battery_strategy_active_sub_strategy
         show_entity_picture: false
         name: Executing
+      - type: entity
+        show_name: true
+        show_state: false
+        show_icon: false
+        tap_action:
+          action: url
+          url_path: https://forms.gle/6cqjc1YefDAEb8Pz9
+        entity: input_select.house_battery_strategy
+        name: Give feedback
+        color: teal
     header:
       card:
         type: markdown

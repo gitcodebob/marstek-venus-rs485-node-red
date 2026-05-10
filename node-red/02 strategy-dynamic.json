@@ -1,6 +1,6 @@
 [
     {
-        "id": "f543b6c0f1e80bcf",
+        "id": "53e17bc333a64fb6",
         "type": "tab",
         "label": "Strategy Dynamic v4.8.2",
         "disabled": false,
@@ -8,16 +8,16 @@
         "env": []
     },
     {
-        "id": "6496e76e193c6bba",
+        "id": "e7d0bc73bf3a0ead",
         "type": "group",
-        "z": "f543b6c0f1e80bcf",
+        "z": "53e17bc333a64fb6",
         "name": "Battery solutions",
         "style": {
             "label": true
         },
         "nodes": [
-            "79f5e5f0ad451e23",
-            "1c85e04ba488e02e"
+            "9abc973c2c301c1a",
+            "aa3c8350bbc67f79"
         ],
         "x": 934,
         "y": 79,
@@ -25,17 +25,17 @@
         "h": 142
     },
     {
-        "id": "e6de8a387261b310",
+        "id": "cafa7f1f83c230ca",
         "type": "group",
-        "z": "f543b6c0f1e80bcf",
+        "z": "53e17bc333a64fb6",
         "name": "Home battery start",
         "style": {
             "label": true
         },
         "nodes": [
-            "c9c9a260d9d91c48",
-            "f7cb43400c1d0102",
-            "b8c24314aad2aedc"
+            "a17f27ed077c48cc",
+            "fac117739ce0075b",
+            "d0972f3c833d9ed7"
         ],
         "x": 14,
         "y": 79,
@@ -43,41 +43,41 @@
         "h": 162
     },
     {
-        "id": "4064de1388b7a773",
+        "id": "f049f7345bad50fa",
         "type": "group",
-        "z": "f543b6c0f1e80bcf",
+        "z": "53e17bc333a64fb6",
         "name": "Plan",
         "style": {
             "label": true
         },
         "nodes": [
-            "595ca727ad8111bf",
-            "ff51550ac0a4f767",
-            "beabe1713018af5a",
-            "3be6f7f1efbda112",
-            "df2c074c2975de89",
-            "05021dbd27dffb6e",
-            "8338b90a5c8488bf"
+            "179a6544970607a2",
+            "ca36b723377536b3",
+            "db6ccd1c80d518cb",
+            "87b9a790059c88d6",
+            "45991c4c07807d2b",
+            "42ba28a9b56c30b2",
+            "2f86c094b23107e0"
         ],
         "x": 228,
         "y": 273,
-        "w": 1244,
+        "w": 1384,
         "h": 1054
     },
     {
-        "id": "ad2a27269576bfcd",
+        "id": "82918a3adb2ac020",
         "type": "group",
-        "z": "f543b6c0f1e80bcf",
+        "z": "53e17bc333a64fb6",
         "name": "Execute",
         "style": {
             "label": true
         },
         "nodes": [
-            "3a516a3fa2d14c9f",
-            "428ac70b923347dc",
-            "995fe76079260ba5",
-            "22f1768ddaf0bde3",
-            "3bff3d5b45e34645"
+            "5c6ca9a9fd93cc07",
+            "260b17641f0582b8",
+            "e410249d9426cf0b",
+            "e78a156c7e68455b",
+            "dd7c46b551d5f17d"
         ],
         "x": 234,
         "y": 119,
@@ -85,22 +85,22 @@
         "h": 122
     },
     {
-        "id": "2d4f8828866f3b76",
+        "id": "ce94c0a52d303397",
         "type": "group",
-        "z": "f543b6c0f1e80bcf",
+        "z": "53e17bc333a64fb6",
         "name": "Test area",
         "style": {
             "label": true
         },
         "nodes": [
-            "1b4cfd301aa745e1",
-            "46cffc4c9a137a58",
-            "5d8481e8b1578024",
-            "a5a1df3b63c53548",
-            "369fe42c71ea5393",
-            "fed194b689cf0cab",
-            "fd01499016f9826a",
-            "666da4934321e436"
+            "289e1570cefaf803",
+            "c60d7182338316ab",
+            "9ea7a1ef6bcbc029",
+            "461987165f7a3821",
+            "ddc5bcf6464e6924",
+            "cba02aef5d306923",
+            "1b8d136e5f3229e8",
+            "b10e710ca7f7a230"
         ],
         "x": 234,
         "y": 1479,
@@ -108,19 +108,19 @@
         "h": 162
     },
     {
-        "id": "70abe4143659a268",
+        "id": "ca7403d479c8c81b",
         "type": "group",
-        "z": "f543b6c0f1e80bcf",
+        "z": "53e17bc333a64fb6",
         "name": "All data",
         "style": {
             "label": true
         },
         "nodes": [
-            "c6b5efd3b152628c",
-            "714e5594acc1b006",
-            "a2a553ae59f7cf59",
-            "b0ed401580a36865",
-            "60c0c6d747687efd"
+            "98648bbd60782aaa",
+            "b18eb5e73c425699",
+            "39e219b45d46aaad",
+            "7bff3dbf95b96087",
+            "a2ee605012a06a64"
         ],
         "x": 234,
         "y": 1659,
@@ -128,9 +128,9 @@
         "h": 142
     },
     {
-        "id": "adf10324b0358a9e",
+        "id": "bda1475e83a23e8a",
         "type": "group",
-        "z": "f543b6c0f1e80bcf",
+        "z": "53e17bc333a64fb6",
         "name": "Unhandled exceptions",
         "style": {
             "label": true,
@@ -138,9 +138,9 @@
             "color": "#d88a8a"
         },
         "nodes": [
-            "e28c7b3280e8e7d9",
-            "9e3554b3f58fe165",
-            "91c1e33fbcb0506e"
+            "436686495b2e5560",
+            "b31cf1870dde9df6",
+            "da75e0b76b974cd4"
         ],
         "x": 24,
         "y": 279,
@@ -148,35 +148,35 @@
         "h": 82
     },
     {
-        "id": "df2c074c2975de89",
+        "id": "45991c4c07807d2b",
         "type": "group",
-        "z": "f543b6c0f1e80bcf",
-        "g": "4064de1388b7a773",
+        "z": "53e17bc333a64fb6",
+        "g": "f049f7345bad50fa",
         "name": "API call to Data Source",
         "style": {
             "label": true
         },
         "nodes": [
-            "154d7c5db85f0bd1",
-            "569fb3141dfcc3aa",
-            "e288c99db8101fa4",
-            "7b694746d719dee9",
-            "f97bea0d85b1f33c",
-            "2fefefe22290038c",
-            "c9f112518aee0f61",
-            "2d4282f7d09035aa",
-            "f3c1640f35b0b96b",
-            "4ac7ca15f5bee0f8",
-            "f78333fb483b19e4",
-            "bb49f72770dc993d",
-            "ce9797172492222d",
-            "688802fc164edabe",
-            "4e3424ad5faba8d9",
-            "42a2ad6c795b38a1",
-            "c81639ce89ef4041",
-            "5b48ade2e61b5e91",
-            "86eaf64c6188c832",
-            "d9147541d5078de3"
+            "4b93479c2371c270",
+            "26ee2c357e0a4286",
+            "966a1d5cb6df0a65",
+            "ca98cd68c1fe02a4",
+            "f6a1142b90f9375b",
+            "3050be3a905d6902",
+            "a55f3f89e2535ec5",
+            "d8e9f913929effca",
+            "d6903c124c9db00d",
+            "1c3ae6df759ff22c",
+            "62c9d509784fd2fb",
+            "0ec9dd6a1cc49382",
+            "47fee38ffe2fe3d8",
+            "e1813908c8b0ab65",
+            "8c56a16131f182ad",
+            "e516b7c55e429393",
+            "225c87c56ffcb31a",
+            "6bf235402926200b",
+            "22ea4f5769feb79b",
+            "766bd59076369230"
         ],
         "x": 254,
         "y": 519,
@@ -184,65 +184,66 @@
         "h": 362
     },
     {
-        "id": "05021dbd27dffb6e",
+        "id": "42ba28a9b56c30b2",
         "type": "group",
-        "z": "f543b6c0f1e80bcf",
-        "g": "4064de1388b7a773",
+        "z": "53e17bc333a64fb6",
+        "g": "f049f7345bad50fa",
         "name": "Update when",
         "style": {
             "label": true
         },
         "nodes": [
-            "0150d75120a807b4",
-            "7f23e9710d8e8a5b",
-            "d4820a0cbc17ab43",
-            "434d7b87fe4407ca",
-            "310d30dad46739f0",
-            "29ef53771d6f45c4",
-            "c4049616a5352db4",
-            "978278f8a4c815bd",
-            "768cf505d4f3e8ef",
-            "b9fbb8de41e2caf3",
-            "a0d2119ac918a681",
-            "78061fdb8fdf775e",
-            "fa97964c94141dce",
-            "884ad1da6f47a041",
-            "997bfcdcbba702cd",
-            "a9210df7c3cc6a27",
-            "bfee95f6dc1cf9ab",
-            "1f70b2da3e71bba2"
+            "59fae181f3d2561c",
+            "e66fbf9634c454dd",
+            "a58c31baacf4f05f",
+            "59e31c5b04dc829b",
+            "6f6064f98e8bf2fa",
+            "2ed7c4edda825ad9",
+            "1d545f7631cdfed9",
+            "4c2802bfc3585e7b",
+            "ffccb2ebb9c72c30",
+            "779260a394c0b6da",
+            "9d06982e33260285",
+            "bc468039bbb56b0c",
+            "15004f5373d31bcf",
+            "c1246148f0672793",
+            "407840aa3995a9dd",
+            "dc8cc489c7694efa",
+            "f6d46a4f862cc7e9",
+            "647b842d8e337591",
+            "fa3779d04977207b"
         ],
         "x": 254,
         "y": 299,
-        "w": 1192,
+        "w": 1332,
         "h": 202
     },
     {
-        "id": "8338b90a5c8488bf",
+        "id": "2f86c094b23107e0",
         "type": "group",
-        "z": "f543b6c0f1e80bcf",
-        "g": "4064de1388b7a773",
+        "z": "53e17bc333a64fb6",
+        "g": "f049f7345bad50fa",
         "name": "Determine strategy",
         "style": {
             "label": true
         },
         "nodes": [
-            "8e9d29fcf19c54af",
-            "34b33044abf901b6",
-            "92358bbd0f4e113f",
-            "d382f432dbe831e1",
-            "e2f0a758d5136d01",
-            "be0edcd70b10feb3",
-            "85e1bf5e64f18e1a",
-            "64ceb2249b271e02",
-            "915494305f189bfb",
-            "70a7d49cab6a1e8f",
-            "2e123e8d93f9a4d9",
-            "498ca66b4f342682",
-            "d58db909f8ccbfbc",
-            "bf0496471492ed96",
-            "e444089d10bf1201",
-            "0189d38570ae5aee"
+            "f938d7ae2a10cc91",
+            "ba6b7df249af19c2",
+            "b9a6d72f24d59829",
+            "b92b5fb3c14f6f7c",
+            "fbc4f8fd03c24b77",
+            "90f584f6546d3c83",
+            "042152fce2ea8cbd",
+            "4ed1e8e3a482d74c",
+            "3816bb375994b9a5",
+            "3b443f1f71a15da4",
+            "0eece60aaf5b82e2",
+            "71651ebf0fad2dcf",
+            "d8efc3a0c1b29ccc",
+            "3f6a27cd4d87648a",
+            "235d981e58f5c301",
+            "24075c68effa9621"
         ],
         "x": 254,
         "y": 899,
@@ -250,38 +251,38 @@
         "h": 402
     },
     {
-        "id": "78061fdb8fdf775e",
+        "id": "9d06982e33260285",
         "type": "junction",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "x": 640,
         "y": 340,
         "wires": [
             [
-                "c4049616a5352db4"
+                "fa3779d04977207b"
             ]
         ]
     },
     {
-        "id": "c9c9a260d9d91c48",
+        "id": "a17f27ed077c48cc",
         "type": "link in",
-        "z": "f543b6c0f1e80bcf",
-        "g": "e6de8a387261b310",
+        "z": "53e17bc333a64fb6",
+        "g": "cafa7f1f83c230ca",
         "name": "Dynamic",
         "links": [],
         "x": 100,
         "y": 160,
         "wires": [
             [
-                "b8c24314aad2aedc"
+                "d0972f3c833d9ed7"
             ]
         ],
         "l": true
     },
     {
-        "id": "7f907bc1574df711",
+        "id": "1fa006bdd8f470ba",
         "type": "comment",
-        "z": "f543b6c0f1e80bcf",
+        "z": "53e17bc333a64fb6",
         "name": "Home Battery Strategy",
         "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
         "x": 120,
@@ -289,10 +290,10 @@
         "wires": []
     },
     {
-        "id": "f7cb43400c1d0102",
+        "id": "fac117739ce0075b",
         "type": "comment",
-        "z": "f543b6c0f1e80bcf",
-        "g": "e6de8a387261b310",
+        "z": "53e17bc333a64fb6",
+        "g": "cafa7f1f83c230ca",
         "name": "Start (readme)",
         "info": "# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the <select> option configured in your\nselect_input.house_battery_strategy\n\nconfigure select options in:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select 'AcmE example'\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
         "x": 110,
@@ -300,10 +301,10 @@
         "wires": []
     },
     {
-        "id": "79f5e5f0ad451e23",
+        "id": "9abc973c2c301c1a",
         "type": "link out",
-        "z": "f543b6c0f1e80bcf",
-        "g": "6496e76e193c6bba",
+        "z": "53e17bc333a64fb6",
+        "g": "e7d0bc73bf3a0ead",
         "name": "Return",
         "mode": "return",
         "links": [],
@@ -312,10 +313,10 @@
         "wires": []
     },
     {
-        "id": "1c85e04ba488e02e",
+        "id": "aa3c8350bbc67f79",
         "type": "comment",
-        "z": "f543b6c0f1e80bcf",
-        "g": "6496e76e193c6bba",
+        "z": "53e17bc333a64fb6",
+        "g": "e7d0bc73bf3a0ead",
         "name": "End (readme)",
         "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
         "x": 1030,
@@ -323,10 +324,10 @@
         "wires": []
     },
     {
-        "id": "154d7c5db85f0bd1",
+        "id": "4b93479c2371c270",
         "type": "api-render-template",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Cheapest",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -339,15 +340,15 @@
         "y": 660,
         "wires": [
             [
-                "e288c99db8101fa4"
+                "966a1d5cb6df0a65"
             ]
         ]
     },
     {
-        "id": "569fb3141dfcc3aa",
+        "id": "26ee2c357e0a4286",
         "type": "api-render-template",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Expensive",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -360,15 +361,15 @@
         "y": 720,
         "wires": [
             [
-                "7b694746d719dee9"
+                "ca98cd68c1fe02a4"
             ]
         ]
     },
     {
-        "id": "8e9d29fcf19c54af",
+        "id": "f938d7ae2a10cc91",
         "type": "debug",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Complete message",
         "active": true,
         "tosidebar": true,
@@ -383,10 +384,10 @@
         "wires": []
     },
     {
-        "id": "e288c99db8101fa4",
+        "id": "966a1d5cb6df0a65",
         "type": "json",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "",
         "property": "dynamic.data_cheapest",
         "action": "obj",
@@ -395,16 +396,16 @@
         "y": 660,
         "wires": [
             [
-                "2d4282f7d09035aa"
+                "d8e9f913929effca"
             ]
         ],
         "l": false
     },
     {
-        "id": "7b694746d719dee9",
+        "id": "ca98cd68c1fe02a4",
         "type": "json",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "",
         "property": "dynamic.data_expensive",
         "action": "obj",
@@ -413,16 +414,16 @@
         "y": 720,
         "wires": [
             [
-                "c81639ce89ef4041"
+                "225c87c56ffcb31a"
             ]
         ],
         "l": false
     },
     {
-        "id": "34b33044abf901b6",
+        "id": "ba6b7df249af19c2",
         "type": "function",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Determine dynamic strategy",
         "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// 1.   Input\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.value_conversion\")) || 1;\n\n// extract start/end date objects\nconst start_cheapest = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.start\"));\nconst start_expensive = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_expensive.start\"));\nconst end_cheapest = new Date(RED.util.getMessageProperty(msg, \"dynamic.data_cheapest.end\"));\nconst end_expensive = new Date(RED.util.getMessageProperty(msg, \"dynamic.data_expensive.end\"));\nlet isCheapestNext = true;\n// stored price cheapest period\nlet lastCheapestPrice = context.last_cheapest_price || 0; // unit: cents/kWh\nconst nextCheapestPrice = parseInt(RED.util.getMessageProperty(msg, \"dynamic.data_cheapest.average\") / CONVERSION_RATE * 100); // unit: cents/kWh \n// average price expensive period\nconst lastExpensivePrice = parseInt(RED.util.getMessageProperty(msg, \"dynamic.data_expensive.average\") / CONVERSION_RATE * 100); // unit: cents/kWh\n// threshold rate for cheapest period\nconst cheapestThresholdCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.threshold_cheapest_cents\")) || 0; // unit: cents\n// threshold delta for expensive period\nconst deltaThresholdCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.min_delta_cents\")) || 0; // unit: cents\n\n// 1.1  Enums\nconst STRATEGY = {\n    CHEAPEST: RED.util.getMessageProperty(msg,\"dynamic.strategy_cheapest\") || \"Charge\", \n    NEUTRAL: RED.util.getMessageProperty(msg,\"dynamic.strategy_default\") || \"Charge PV\",\n    EXPENSIVE: RED.util.getMessageProperty(msg,\"dynamic.strategy_expensive\") || \"Self-consumption\"\n}\n\n// 1.2  Defaults   \nmsg.dynamic.avg_cheapest_tariff = 0;\nmsg.dynamic.avg_expensive_tariff = 0;\nmsg.dynamic.avg_delta = 0;\n\n// 2.   Tariffs\n// Check if the Date objects are valid. If 'Invalid Date', stop and warn the user.\nif (isNaN(start_cheapest.getTime()) || isNaN(start_expensive.getTime())) {\n    // warn user\n    log(this, `One or both dates are invalid. Cheap = ${start_cheapest}, Expensive = ${start_expensive}`,\"warn\");\n    node.status({fill:\"red\",shape:\"ring\",text:`One or both dates are invalid: ${start_cheapest}, ${start_expensive}`});\n    // fallback strategy\n    flow.set(\"dynamic_strategy\", STRATEGY.NEUTRAL);\n    // proceed to UI\n    return msg;\n}\n\n// Check if cheapest lies before expensive\nif (start_cheapest < start_expensive) {\n    log(this, `Cheapest moment lies before expensive moment. Cheapest moment: ${start_cheapest}, Expensive = ${start_expensive}`);\n    // store the cheapest price to compare it with future expensive rates, to determine if it's economical to discharge.\n    context.last_cheapest_price = nextCheapestPrice; // store for next iteration\n    lastCheapestPrice = nextCheapestPrice; // used for this iteration\n    log(this, `Cheapest price set to ${lastCheapestPrice} cents`);\n}\n\nif (lastCheapestPrice == 0) {\n    log(this, `I can't recall the tariff used for charging. Cheapest price set to '${lastCheapestPrice}' cents`);\n}\n\n// delta > N cents ? -> charging is economical\nconst delta = (lastExpensivePrice - lastCheapestPrice); // unit: cents\n\n// UI values\nmsg.dynamic.avg_cheapest_tariff = lastCheapestPrice;\nmsg.dynamic.avg_expensive_tariff = lastExpensivePrice;\nmsg.dynamic.avg_delta = delta;\n\n// 3.   Strategy selection logic\n// for string time\nfunction isTimeInPeriod(startStr, endStr) {\n    const now = new Date();\n    const start = new Date(startStr);\n    const end = new Date(endStr);\n    return (now >= start && now < end);\n}\n// 3.1  is_now - which period have we entered?\nconst now = new Date();\n/** @type {boolean} */\nconst cheapestIsNow = now >= start_cheapest && now <= end_cheapest;\n// const cheapestIsNow = RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.is_now\");\n/** @type {boolean} */\nconst expensiveIsNow = now >= start_expensive && now <= end_expensive;\n// const expensiveIsNow = RED.util.getMessageProperty(msg, \"dynamic.data_expensive.is_now\");\n\n// 3.2  Set strategy\n// Default strategy\nmsg.dynamic.strategy = STRATEGY.NEUTRAL;\n\n// Cheapest period?\nif (cheapestIsNow && lastCheapestPrice <= cheapestThresholdCents) {\n    msg.dynamic.strategy = STRATEGY.CHEAPEST;\n    // Explain\n    log(this, `**Cheapest period is NOW**, price limit: ${lastCheapestPrice}/${cheapestThresholdCents} cents OK`);\n} else if(cheapestIsNow) {\n    // Explain why skipped\n    log(this, `**Cheapest period SKIPPED**, the cheapest period is too expensive today. Price limit: ${lastCheapestPrice}/${cheapestThresholdCents} cents.`);\n}\n\n// Expensive period?\nif (expensiveIsNow && delta >= deltaThresholdCents) {\n    msg.dynamic.strategy = STRATEGY.EXPENSIVE;\n    // Explain\n    log(this, `**Expensive period is NOW**, price delta: ${delta}>=${deltaThresholdCents} cents OK`);\n} else if(expensiveIsNow) {\n    // Explain why skipped\n    log(this, `**Expensive period SKIPPED**, price delta too small: ${lastExpensivePrice}-${lastCheapestPrice}=${delta} cents <= ${deltaThresholdCents} cents`); \n}\n\n// 3.3  Store the strategy in flow-context. The 'Execution' area will read from the flow-context.\nflow.set(\"dynamic_strategy\",msg.dynamic.strategy);\n\n// 4.   User feedback\n// Node status\nnode.status({ fill: \"blue\", shape: \"dot\", text: `${msg.dynamic.strategy}; ${cheapestIsNow} + ${expensiveIsNow} @ ${delta} cents` });\n// Explain\nlog(this, `Strategy set to **${msg.dynamic.strategy}**`);\n\n// Proceed to UI update\nreturn msg;",
         "outputs": 1,
@@ -435,23 +436,23 @@
         "y": 1140,
         "wires": [
             [
-                "8e9d29fcf19c54af",
-                "92358bbd0f4e113f",
-                "d382f432dbe831e1",
-                "e2f0a758d5136d01",
-                "be0edcd70b10feb3",
-                "85e1bf5e64f18e1a",
-                "64ceb2249b271e02",
-                "915494305f189bfb",
-                "70a7d49cab6a1e8f"
+                "f938d7ae2a10cc91",
+                "b9a6d72f24d59829",
+                "b92b5fb3c14f6f7c",
+                "fbc4f8fd03c24b77",
+                "90f584f6546d3c83",
+                "042152fce2ea8cbd",
+                "4ed1e8e3a482d74c",
+                "3816bb375994b9a5",
+                "3b443f1f71a15da4"
             ]
         ]
     },
     {
-        "id": "3a516a3fa2d14c9f",
+        "id": "5c6ca9a9fd93cc07",
         "type": "change",
-        "z": "f543b6c0f1e80bcf",
-        "g": "ad2a27269576bfcd",
+        "z": "53e17bc333a64fb6",
+        "g": "82918a3adb2ac020",
         "name": "Set strategy",
         "rules": [
             {
@@ -471,15 +472,15 @@
         "y": 200,
         "wires": [
             [
-                "3bff3d5b45e34645"
+                "dd7c46b551d5f17d"
             ]
         ]
     },
     {
-        "id": "428ac70b923347dc",
+        "id": "260b17641f0582b8",
         "type": "link call",
-        "z": "f543b6c0f1e80bcf",
-        "g": "ad2a27269576bfcd",
+        "z": "53e17bc333a64fb6",
+        "g": "82918a3adb2ac020",
         "name": "Sub-strategy",
         "links": [],
         "linkType": "dynamic",
@@ -488,15 +489,15 @@
         "y": 180,
         "wires": [
             [
-                "79f5e5f0ad451e23"
+                "9abc973c2c301c1a"
             ]
         ]
     },
     {
-        "id": "92358bbd0f4e113f",
+        "id": "b9a6d72f24d59829",
         "type": "api-call-service",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Cheapest Start",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -525,10 +526,10 @@
         ]
     },
     {
-        "id": "d382f432dbe831e1",
+        "id": "b92b5fb3c14f6f7c",
         "type": "api-call-service",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Cheapest End",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -557,10 +558,10 @@
         ]
     },
     {
-        "id": "e2f0a758d5136d01",
+        "id": "fbc4f8fd03c24b77",
         "type": "api-call-service",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Expensive Start",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -589,10 +590,10 @@
         ]
     },
     {
-        "id": "be0edcd70b10feb3",
+        "id": "90f584f6546d3c83",
         "type": "api-call-service",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Expensive End",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -621,10 +622,10 @@
         ]
     },
     {
-        "id": "0150d75120a807b4",
+        "id": "59fae181f3d2561c",
         "type": "inject",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "Every 60 min",
         "props": [
             {
@@ -646,15 +647,15 @@
         "y": 420,
         "wires": [
             [
-                "7f23e9710d8e8a5b"
+                "e66fbf9634c454dd"
             ]
         ]
     },
     {
-        "id": "995fe76079260ba5",
+        "id": "e410249d9426cf0b",
         "type": "switch",
-        "z": "f543b6c0f1e80bcf",
-        "g": "ad2a27269576bfcd",
+        "z": "53e17bc333a64fb6",
+        "g": "82918a3adb2ac020",
         "name": "Has strategy",
         "property": "dynamic_strategy",
         "propertyType": "flow",
@@ -673,18 +674,18 @@
         "y": 180,
         "wires": [
             [
-                "22f1768ddaf0bde3"
+                "e78a156c7e68455b"
             ],
             [
-                "3a516a3fa2d14c9f"
+                "5c6ca9a9fd93cc07"
             ]
         ]
     },
     {
-        "id": "22f1768ddaf0bde3",
+        "id": "e78a156c7e68455b",
         "type": "change",
-        "z": "f543b6c0f1e80bcf",
-        "g": "ad2a27269576bfcd",
+        "z": "53e17bc333a64fb6",
+        "g": "82918a3adb2ac020",
         "name": "Set Full stop",
         "rules": [
             {
@@ -704,15 +705,15 @@
         "y": 160,
         "wires": [
             [
-                "3bff3d5b45e34645"
+                "dd7c46b551d5f17d"
             ]
         ]
     },
     {
-        "id": "46cffc4c9a137a58",
+        "id": "c60d7182338316ab",
         "type": "inject",
-        "z": "f543b6c0f1e80bcf",
-        "g": "2d4f8828866f3b76",
+        "z": "53e17bc333a64fb6",
+        "g": "ce94c0a52d303397",
         "name": "Test",
         "props": [
             {
@@ -734,15 +735,15 @@
         "y": 1520,
         "wires": [
             [
-                "1b4cfd301aa745e1"
+                "289e1570cefaf803"
             ]
         ]
     },
     {
-        "id": "1b4cfd301aa745e1",
+        "id": "289e1570cefaf803",
         "type": "api-render-template",
-        "z": "f543b6c0f1e80bcf",
-        "g": "2d4f8828866f3b76",
+        "z": "53e17bc333a64fb6",
+        "g": "ce94c0a52d303397",
         "name": "Cheapest",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -755,15 +756,15 @@
         "y": 1520,
         "wires": [
             [
-                "5d8481e8b1578024"
+                "9ea7a1ef6bcbc029"
             ]
         ]
     },
     {
-        "id": "5d8481e8b1578024",
+        "id": "9ea7a1ef6bcbc029",
         "type": "json",
-        "z": "f543b6c0f1e80bcf",
-        "g": "2d4f8828866f3b76",
+        "z": "53e17bc333a64fb6",
+        "g": "ce94c0a52d303397",
         "name": "",
         "property": "cheapest",
         "action": "obj",
@@ -772,16 +773,16 @@
         "y": 1520,
         "wires": [
             [
-                "a5a1df3b63c53548"
+                "461987165f7a3821"
             ]
         ],
         "l": false
     },
     {
-        "id": "a5a1df3b63c53548",
+        "id": "461987165f7a3821",
         "type": "api-render-template",
-        "z": "f543b6c0f1e80bcf",
-        "g": "2d4f8828866f3b76",
+        "z": "53e17bc333a64fb6",
+        "g": "ce94c0a52d303397",
         "name": "Expensive",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -794,15 +795,15 @@
         "y": 1520,
         "wires": [
             [
-                "369fe42c71ea5393"
+                "ddc5bcf6464e6924"
             ]
         ]
     },
     {
-        "id": "369fe42c71ea5393",
+        "id": "ddc5bcf6464e6924",
         "type": "json",
-        "z": "f543b6c0f1e80bcf",
-        "g": "2d4f8828866f3b76",
+        "z": "53e17bc333a64fb6",
+        "g": "ce94c0a52d303397",
         "name": "",
         "property": "expensive",
         "action": "obj",
@@ -811,18 +812,18 @@
         "y": 1520,
         "wires": [
             [
-                "fed194b689cf0cab",
-                "fd01499016f9826a",
-                "666da4934321e436"
+                "cba02aef5d306923",
+                "1b8d136e5f3229e8",
+                "b10e710ca7f7a230"
             ]
         ],
         "l": false
     },
     {
-        "id": "fed194b689cf0cab",
+        "id": "cba02aef5d306923",
         "type": "debug",
-        "z": "f543b6c0f1e80bcf",
-        "g": "2d4f8828866f3b76",
+        "z": "53e17bc333a64fb6",
+        "g": "ce94c0a52d303397",
         "name": "Cheap",
         "active": true,
         "tosidebar": false,
@@ -837,10 +838,10 @@
         "wires": []
     },
     {
-        "id": "fd01499016f9826a",
+        "id": "1b8d136e5f3229e8",
         "type": "debug",
-        "z": "f543b6c0f1e80bcf",
-        "g": "2d4f8828866f3b76",
+        "z": "53e17bc333a64fb6",
+        "g": "ce94c0a52d303397",
         "name": "Expensive",
         "active": true,
         "tosidebar": false,
@@ -855,10 +856,10 @@
         "wires": []
     },
     {
-        "id": "c6b5efd3b152628c",
+        "id": "98648bbd60782aaa",
         "type": "api-render-template",
-        "z": "f543b6c0f1e80bcf",
-        "g": "70abe4143659a268",
+        "z": "53e17bc333a64fb6",
+        "g": "ca7403d479c8c81b",
         "name": "All Zonneplan",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -871,15 +872,15 @@
         "y": 1700,
         "wires": [
             [
-                "a2a553ae59f7cf59"
+                "39e219b45d46aaad"
             ]
         ]
     },
     {
-        "id": "714e5594acc1b006",
+        "id": "b18eb5e73c425699",
         "type": "inject",
-        "z": "f543b6c0f1e80bcf",
-        "g": "70abe4143659a268",
+        "z": "53e17bc333a64fb6",
+        "g": "ca7403d479c8c81b",
         "name": "Fetch",
         "props": [
             {
@@ -901,15 +902,15 @@
         "y": 1700,
         "wires": [
             [
-                "c6b5efd3b152628c"
+                "98648bbd60782aaa"
             ]
         ]
     },
     {
-        "id": "a2a553ae59f7cf59",
+        "id": "39e219b45d46aaad",
         "type": "json",
-        "z": "f543b6c0f1e80bcf",
-        "g": "70abe4143659a268",
+        "z": "53e17bc333a64fb6",
+        "g": "ca7403d479c8c81b",
         "name": "",
         "property": "all_data",
         "action": "obj",
@@ -918,17 +919,17 @@
         "y": 1700,
         "wires": [
             [
-                "b0ed401580a36865",
-                "60c0c6d747687efd"
+                "7bff3dbf95b96087",
+                "a2ee605012a06a64"
             ]
         ],
         "l": false
     },
     {
-        "id": "7f23e9710d8e8a5b",
+        "id": "e66fbf9634c454dd",
         "type": "delay",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "",
         "pauseType": "delay",
         "timeout": "1",
@@ -946,15 +947,15 @@
         "y": 420,
         "wires": [
             [
-                "a9210df7c3cc6a27"
+                "407840aa3995a9dd"
             ]
         ]
     },
     {
-        "id": "d4820a0cbc17ab43",
+        "id": "a58c31baacf4f05f",
         "type": "api-current-state",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "Source",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -993,19 +994,19 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 860,
+        "x": 1000,
         "y": 380,
         "wires": [
             [
-                "768cf505d4f3e8ef"
+                "4c2802bfc3585e7b"
             ]
         ]
     },
     {
-        "id": "f97bea0d85b1f33c",
+        "id": "f6a1142b90f9375b",
         "type": "function",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Data source settings",
         "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n/*    From cheapes-energy-hours macro\n      See: https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings\n\n      - None (default selection)\n      - Zonneplan\n      - Amber Electric\n      - EasyEnergy, EnergyZero (core)\n      - ENTSO-E\n      - Frank Energie\n      - GE-Spot\n      - Tibber, Nordpool (core)\n      - Tibber (custom)\n      - Nordpool (custom)\n      - PVPC (Spain)\n      - Octopus Energy\n      - Omie\n*/\n\nswitch (msg.dynamic.data_source) {\n      case \"None\":\n            // Handle the 'None' case (e.g., no supplier selected or data is unavailable)\n            log(this,\"No data source selected.\");\n            // Add config here...\n            break;\n\n      case \"Zonneplan\":\n            // Code for Zonneplan (a Dutch energy supplier)\n            log(this,\"Processing Zonneplan data.\");\n            // Add config here...\n            msg.dynamic.sensor='sensor.zonneplan_current_electricity_tariff'; // when using: https://github.com/fsaris/home-assistant-zonneplan-one\n            msg.dynamic.source_settings='zonneplan'\n            // msg.dynamic.attr_all='forecast';\n            // msg.dynamic.value_key='electricity_price';\n            msg.dynamic.value_conversion = 10000000; // whole currency / kWh\n            break;\n\n      case \"Amber Electric\":\n            // Code for Amber Electric (Australian energy retailer)\n            log(this,\"Processing Amber Electric data.\");\n            // Add config here...\n            msg.dynamic.attr_all='forecasts'; \n            msg.dynamic.time_key='start_time'; \n            msg.dynamic.value_key='per_kwh';\n            break;\n\n      case \"EasyEnergy, EnergyZero (core)\":\n            // Code for EasyEnergy and EnergyZero (core/default implementation)\n            log(this,\"Processing EasyEnergy/EnergyZero core data.\");\n            // Add config here...\n            break;\n\n      case \"ENTSO-E\":\n            // Code for ENTSO-E (European Network of Transmission System Operators for Electricity)\n            log(this,\"Processing ENTSO-E data.\");\n            // Add config here...\n            msg.dynamic.attr_today='prices_today'; \n            msg.dynamic.attr_tomorrow='prices_tomorrow'; \n            msg.dynamic.time_key='time';\n            msg.dynamic.value_key='price';\n            break;\n\n      case \"Frank Energie\":\n            // Code for Frank Energie (Dutch energy supplier)\n            log(this,\"Processing Frank Energie data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.frank_energie_prijzen_gemiddelde_elektriciteitsprijs_alle_uren_all_in'; // when using: https://github.com/HiDiHo01/home-assistant-frank_energie\n            msg.dynamic.attr_all = 'prices'; \n            msg.dynamic.time_key = 'from'; \n            msg.dynamic.value_key = 'price';\n            break;\n\n      case \"GE-Spot\":\n            // Code for GE-Spot (Global Electric Spot price)\n            log(this,\"Processing GE-Spot data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today_hourly_prices'; // using the hourly version. today_interval_prices is per 15 mins\n            msg.dynamic.attr_tomorrow = 'tomorrow_hourly_prices'; // using the hourly version\n            msg.dynamic.time_key = 'time'; \n            msg.dynamic.value_key = 'value';\n            break;\n\n      case \"Nordpool (core)\":\n            // Code for Nordpool (core/default implementation)\n            log(this, \"Processing Nordpool core data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.nordpool_ceh_prices';\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.time_key = 'start';\n            msg.dynamic.value_key = 'value';\n            msg.dynamic.datetime_in_data = true; // datetime is in the data\n            break;\n\n      case \"Tibber (core)\":\n            // Code for Tibber (core/default implementation)\n            log(this,\"Processing Tibber core data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.tibber_ceh_prices';\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.time_key = 'start';\n            msg.dynamic.value_key = 'value';\n            msg.dynamic.datetime_in_data = true; // datetime is in the data\n            break;\n\n      case \"Tibber (custom)\":\n            // Code for a custom Tibber setup/configuration\n            log(this,\"Processing Tibber custom data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.datetime_in_data = false;\n            break;\n\n      case \"Nordpool (custom)\":\n            // Code for a custom Nordpool setup/configuration\n            log(this,\"Processing Nordpool custom data.\");\n            // Add config here...\n            break;\n\n      case \"PVPC (Spain)\":\n            // Code for PVPC (Voluntary Price for Small Consumers in Spain)\n            log(this,\"Processing Spanish PVPC data.\");\n            // Add config here...\n            break;\n\n      case \"Octopus Energy\":\n            // Code for Octopus Energy (UK/international energy supplier)\n            log(this,\"Processing Octopus Energy data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'rates'; \n            msg.dynamic.value_key = 'value_incl_vat';\n            break;\n\n      case \"Omie\":\n            // Code for Omie (Iberian Energy Market Operator)\n            log(this,\"Processing Omie data.\");\n            // Add config here...\n            break;\n\n      default:\n            // Code to execute if the supplier does not match any of the above cases\n            node.warn(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            log(this,`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            // Add default error handling...\n}\n\nlog(this, \"Performing API calls...\");\n\nreturn msg;",
         "outputs": 1,
@@ -1018,15 +1019,15 @@
         "y": 600,
         "wires": [
             [
-                "2fefefe22290038c"
+                "3050be3a905d6902"
             ]
         ]
     },
     {
-        "id": "434d7b87fe4407ca",
+        "id": "59e31c5b04dc829b",
         "type": "api-current-state",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "Cheapest N hrs",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1065,19 +1066,19 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1100,
+        "x": 1240,
         "y": 380,
         "wires": [
             [
-                "310d30dad46739f0"
+                "6f6064f98e8bf2fa"
             ]
         ]
     },
     {
-        "id": "310d30dad46739f0",
+        "id": "6f6064f98e8bf2fa",
         "type": "api-current-state",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "Expensive N hrs",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1116,19 +1117,19 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1100,
+        "x": 1240,
         "y": 420,
         "wires": [
             [
-                "fa97964c94141dce"
+                "bc468039bbb56b0c"
             ]
         ]
     },
     {
-        "id": "29ef53771d6f45c4",
+        "id": "2ed7c4edda825ad9",
         "type": "inject",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "Check period",
         "props": [
             {
@@ -1150,36 +1151,15 @@
         "y": 380,
         "wires": [
             [
-                "c4049616a5352db4"
+                "fa3779d04977207b"
             ]
         ]
     },
     {
-        "id": "c4049616a5352db4",
+        "id": "3050be3a905d6902",
         "type": "function",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
-        "name": "Init",
-        "func": "msg.dynamic = {};\nmsg.log = [];\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 730,
-        "y": 380,
-        "wires": [
-            [
-                "d4820a0cbc17ab43"
-            ]
-        ]
-    },
-    {
-        "id": "2fefefe22290038c",
-        "type": "function",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Generate templates",
         "func": "// final template initialization\nmsg.dynamic.template_cheapest = \"\";\nmsg.dynamic.template_expensive = \"\";\n\n// temporary template parts\nlet template_start = \"\";\nlet template_common = [];\nlet template_cheapest = [];\nlet template_expensive = [];\nlet template_all = [];\nlet template_end = \"\";\n\n// 1. IMPROVEMENT: Use radix 10 and Logical OR (||) for cleaner default handling\nconst cheapest_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.cheapest_hrs\"), 10) || 1;\nconst expensive_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.expensive_hrs\"), 10) || 1;\n\n// load the macro\ntemplate_start = `{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n`;\ntemplate_end = `) | to_json }}`;\n\n// collect arguments | strings\nconst stringKeys = [\n    'sensor',\n    'attr_all',\n    'value_key',\n    'attr_today',\n    'attr_tomorrow',\n    'time_key',\n    'source_settings'\n];\n\nstringKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}='${msg.dynamic[key]}'`);\n    }\n});\n\n// collect arguments | boolean, integer\nconst otherKeys = [\n    'datetime_in_data',\n    'data_minutes',\n];\n\notherKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}=${msg.dynamic[key]}`);\n    }\n});\n\n// copy common items\ntemplate_cheapest = [...template_common];\ntemplate_expensive = [...template_common];\ntemplate_all = [...template_common];\n\n// collect arguments | cheapest specific\ntemplate_cheapest.push(`hours=${cheapest_hrs}`);\n// template_cheapest.push(`include_tomorrow=true`);\ntemplate_cheapest.push(`mode=\"all\"`);\n\n// collect arguments | expensive specific\ntemplate_expensive.push(`hours=${expensive_hrs}`);\n// template_expensive.push(`include_tomorrow=true`);\ntemplate_expensive.push(`lowest=false`);\ntemplate_expensive.push(`mode=\"all\"`);\n\n// collect all hours | via extra call\ntemplate_all.push(`hours=\"all\"`);\ntemplate_all.push(`include_tomorrow=true`);\ntemplate_all.push(`mode=\"all\"`);\n\n/**\n * Formats an array of strings into a single string:\n * - Each item starts with 4 spaces.\n * - Each item ends with a comma, except the last one.\n * - Items are separated by a newline.\n */\nfunction formatTemplateArray(array) {\n    if (!array || array.length === 0) {\n        return \"\";\n    }\n\n    const indent = \"    \"; \n\n    const formatted_lines = array.map((element, index) => {\n        const suffix = (index < array.length - 1) ? \",\" : \"\";\n        return `${indent}${element}${suffix}`;\n    });\n\n    return formatted_lines.join('\\n');\n}\n\n// generate string templates\nconst template_cheapest_string = formatTemplateArray(template_cheapest);\nconst template_expensive_string = formatTemplateArray(template_expensive);\nconst template_all_string = formatTemplateArray(template_all);\n\n// done\nmsg.dynamic.template_cheapest = `${template_start}${template_cheapest_string}${template_end}`;\nmsg.dynamic.template_expensive = `${template_start}${template_expensive_string}${template_end}`;\nmsg.dynamic.template_all = `${template_start}${template_all_string}${template_end}`;\n\nreturn msg;",
         "outputs": 1,
@@ -1192,18 +1172,18 @@
         "y": 600,
         "wires": [
             [
-                "f78333fb483b19e4",
-                "bb49f72770dc993d",
-                "c9f112518aee0f61",
-                "5b48ade2e61b5e91"
+                "62c9d509784fd2fb",
+                "0ec9dd6a1cc49382",
+                "a55f3f89e2535ec5",
+                "6bf235402926200b"
             ]
         ]
     },
     {
-        "id": "f78333fb483b19e4",
+        "id": "62c9d509784fd2fb",
         "type": "debug",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Template cheapest",
         "active": false,
         "tosidebar": true,
@@ -1218,10 +1198,10 @@
         "wires": []
     },
     {
-        "id": "bb49f72770dc993d",
+        "id": "0ec9dd6a1cc49382",
         "type": "debug",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Template expensive",
         "active": false,
         "tosidebar": true,
@@ -1236,10 +1216,10 @@
         "wires": []
     },
     {
-        "id": "c9f112518aee0f61",
+        "id": "a55f3f89e2535ec5",
         "type": "change",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Set",
         "rules": [
             {
@@ -1259,15 +1239,15 @@
         "y": 660,
         "wires": [
             [
-                "154d7c5db85f0bd1"
+                "4b93479c2371c270"
             ]
         ]
     },
     {
-        "id": "2d4282f7d09035aa",
+        "id": "d8e9f913929effca",
         "type": "change",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Set",
         "rules": [
             {
@@ -1287,15 +1267,15 @@
         "y": 720,
         "wires": [
             [
-                "569fb3141dfcc3aa"
+                "26ee2c357e0a4286"
             ]
         ]
     },
     {
-        "id": "f3c1640f35b0b96b",
+        "id": "d6903c124c9db00d",
         "type": "change",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Cleanup",
         "rules": [
             {
@@ -1313,15 +1293,15 @@
         "y": 840,
         "wires": [
             [
-                "4ac7ca15f5bee0f8"
+                "1c3ae6df759ff22c"
             ]
         ]
     },
     {
-        "id": "85e1bf5e64f18e1a",
+        "id": "042152fce2ea8cbd",
         "type": "debug",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Log: activate 'debug mode' first",
         "active": true,
         "tosidebar": true,
@@ -1336,10 +1316,10 @@
         "wires": []
     },
     {
-        "id": "978278f8a4c815bd",
+        "id": "1d545f7631cdfed9",
         "type": "server-state-changed",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "User input",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -1351,7 +1331,8 @@
                 "input_number.house_battery_strategy_dynamic_expensive_hrs",
                 "input_select.house_battery_strategy_dynamic_data_source",
                 "input_number.house_battery_strategy_dynamic_threshold_delta",
-                "input_number.house_battery_strategy_dynamic_threshold_cheapest_period"
+                "input_number.house_battery_strategy_dynamic_threshold_cheapest_period",
+                "input_select.house_battery_strategy"
             ],
             "substring": [],
             "regex": []
@@ -1394,15 +1375,15 @@
         "y": 340,
         "wires": [
             [
-                "78061fdb8fdf775e"
+                "9d06982e33260285"
             ]
         ]
     },
     {
-        "id": "768cf505d4f3e8ef",
+        "id": "4c2802bfc3585e7b",
         "type": "switch",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "Source selected?",
         "property": "dynamic.data_source",
         "propertyType": "msg",
@@ -1419,23 +1400,23 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 965,
+        "x": 1105,
         "y": 380,
         "wires": [
             [
-                "a0d2119ac918a681"
+                "779260a394c0b6da"
             ],
             [
-                "434d7b87fe4407ca"
+                "59e31c5b04dc829b"
             ]
         ],
         "l": false
     },
     {
-        "id": "b9fbb8de41e2caf3",
+        "id": "ffccb2ebb9c72c30",
         "type": "debug",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "Not set",
         "active": true,
         "tosidebar": false,
@@ -1445,15 +1426,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 1340,
+        "x": 1480,
         "y": 340,
         "wires": []
     },
     {
-        "id": "64ceb2249b271e02",
+        "id": "4ed1e8e3a482d74c",
         "type": "api-call-service",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Avg cheap tariff",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1482,10 +1463,10 @@
         ]
     },
     {
-        "id": "915494305f189bfb",
+        "id": "3816bb375994b9a5",
         "type": "api-call-service",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Avg expensive tariff",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1514,10 +1495,10 @@
         ]
     },
     {
-        "id": "70a7d49cab6a1e8f",
+        "id": "3b443f1f71a15da4",
         "type": "api-call-service",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Avg delta",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1546,10 +1527,10 @@
         ]
     },
     {
-        "id": "2e123e8d93f9a4d9",
+        "id": "0eece60aaf5b82e2",
         "type": "api-current-state",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Threshold delta",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1592,15 +1573,15 @@
         "y": 1020,
         "wires": [
             [
-                "d58db909f8ccbfbc"
+                "d8efc3a0c1b29ccc"
             ]
         ]
     },
     {
-        "id": "a0d2119ac918a681",
+        "id": "779260a394c0b6da",
         "type": "change",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "Set dynamic strategy to null",
         "rules": [
             {
@@ -1616,19 +1597,19 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1140,
+        "x": 1280,
         "y": 340,
         "wires": [
             [
-                "b9fbb8de41e2caf3"
+                "ffccb2ebb9c72c30"
             ]
         ]
     },
     {
-        "id": "b0ed401580a36865",
+        "id": "7bff3dbf95b96087",
         "type": "debug",
-        "z": "f543b6c0f1e80bcf",
-        "g": "70abe4143659a268",
+        "z": "53e17bc333a64fb6",
+        "g": "ca7403d479c8c81b",
         "name": "All data",
         "active": true,
         "tosidebar": true,
@@ -1643,10 +1624,10 @@
         "wires": []
     },
     {
-        "id": "666da4934321e436",
+        "id": "b10e710ca7f7a230",
         "type": "debug",
-        "z": "f543b6c0f1e80bcf",
-        "g": "2d4f8828866f3b76",
+        "z": "53e17bc333a64fb6",
+        "g": "ce94c0a52d303397",
         "name": "Complete msg",
         "active": true,
         "tosidebar": true,
@@ -1661,10 +1642,10 @@
         "wires": []
     },
     {
-        "id": "b8c24314aad2aedc",
+        "id": "d0972f3c833d9ed7",
         "type": "change",
-        "z": "f543b6c0f1e80bcf",
-        "g": "e6de8a387261b310",
+        "z": "53e17bc333a64fb6",
+        "g": "cafa7f1f83c230ca",
         "name": "Trace",
         "rules": [
             {
@@ -1684,16 +1665,16 @@
         "y": 200,
         "wires": [
             [
-                "995fe76079260ba5"
+                "e410249d9426cf0b"
             ]
         ],
         "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     },
     {
-        "id": "3bff3d5b45e34645",
+        "id": "dd7c46b551d5f17d",
         "type": "function",
-        "z": "f543b6c0f1e80bcf",
-        "g": "ad2a27269576bfcd",
+        "z": "53e17bc333a64fb6",
+        "g": "82918a3adb2ac020",
         "name": "Selected",
         "func": "// Logger\nconst log = global.get(\"logger\");\nlog(this,`${msg.target} strategy`);\n\n// Status\nnode.status({fill:\"green\",shape:\"dot\",text:`${msg.target}`});\n\nreturn msg;",
         "outputs": 1,
@@ -1706,15 +1687,15 @@
         "y": 180,
         "wires": [
             [
-                "428ac70b923347dc"
+                "260b17641f0582b8"
             ]
         ]
     },
     {
-        "id": "e28c7b3280e8e7d9",
+        "id": "436686495b2e5560",
         "type": "catch",
-        "z": "f543b6c0f1e80bcf",
-        "g": "adf10324b0358a9e",
+        "z": "53e17bc333a64fb6",
+        "g": "bda1475e83a23e8a",
         "name": "",
         "scope": null,
         "uncaught": true,
@@ -1722,16 +1703,16 @@
         "y": 320,
         "wires": [
             [
-                "9e3554b3f58fe165"
+                "b31cf1870dde9df6"
             ]
         ],
         "l": false
     },
     {
-        "id": "9e3554b3f58fe165",
+        "id": "b31cf1870dde9df6",
         "type": "function",
-        "z": "f543b6c0f1e80bcf",
-        "g": "adf10324b0358a9e",
+        "z": "53e17bc333a64fb6",
+        "g": "bda1475e83a23e8a",
         "name": "Unhandled Exception",
         "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
@@ -1744,16 +1725,16 @@
         "y": 320,
         "wires": [
             [
-                "91c1e33fbcb0506e"
+                "da75e0b76b974cd4"
             ]
         ],
         "l": false
     },
     {
-        "id": "91c1e33fbcb0506e",
+        "id": "da75e0b76b974cd4",
         "type": "link out",
-        "z": "f543b6c0f1e80bcf",
-        "g": "adf10324b0358a9e",
+        "z": "53e17bc333a64fb6",
+        "g": "bda1475e83a23e8a",
         "name": "link out 5",
         "mode": "return",
         "links": [],
@@ -1762,10 +1743,10 @@
         "wires": []
     },
     {
-        "id": "498ca66b4f342682",
+        "id": "71651ebf0fad2dcf",
         "type": "api-current-state",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Threshold cheapest",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1808,15 +1789,15 @@
         "y": 980,
         "wires": [
             [
-                "2e123e8d93f9a4d9"
+                "0eece60aaf5b82e2"
             ]
         ]
     },
     {
-        "id": "d58db909f8ccbfbc",
+        "id": "d8efc3a0c1b29ccc",
         "type": "api-current-state",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Strategy default",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1859,15 +1840,15 @@
         "y": 1060,
         "wires": [
             [
-                "bf0496471492ed96"
+                "3f6a27cd4d87648a"
             ]
         ]
     },
     {
-        "id": "bf0496471492ed96",
+        "id": "3f6a27cd4d87648a",
         "type": "api-current-state",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Strategy cheapest",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1910,15 +1891,15 @@
         "y": 1100,
         "wires": [
             [
-                "e444089d10bf1201"
+                "235d981e58f5c301"
             ]
         ]
     },
     {
-        "id": "e444089d10bf1201",
+        "id": "235d981e58f5c301",
         "type": "api-current-state",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "Strategy expensive",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1961,15 +1942,15 @@
         "y": 1140,
         "wires": [
             [
-                "34b33044abf901b6"
+                "ba6b7df249af19c2"
             ]
         ]
     },
     {
-        "id": "4ac7ca15f5bee0f8",
+        "id": "1c3ae6df759ff22c",
         "type": "function",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Cache data source",
         "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\nconst dynamicData = msg.dynamic;\n\n// Helper to check for errors in the object\nconst isInvalid = (data) => {\n    if (!data) return true;\n    // Check if the stringified object contains \"error\"\n    return JSON.stringify(data).toLowerCase().includes(\"error\");\n};\n\nif (isInvalid(dynamicData)) {\n    // Explain issue\n    log(this, \"Invalid data received, clearing cache\", \"warn\");\n    // Clear cache\n    flow.set(\"cached_dynamic_data\", undefined);\n} else {\n    // Cache on success\n    log(this, \"Caching `msg.dynamic`\");\n    // Save the entire object to flow context\n    flow.set(\"cached_dynamic_data\", dynamicData);\n}\n\nreturn msg;",
         "outputs": 1,
@@ -1982,15 +1963,15 @@
         "y": 840,
         "wires": [
             [
-                "688802fc164edabe"
+                "e1813908c8b0ab65"
             ]
         ]
     },
     {
-        "id": "595ca727ad8111bf",
+        "id": "179a6544970607a2",
         "type": "catch",
-        "z": "f543b6c0f1e80bcf",
-        "g": "4064de1388b7a773",
+        "z": "53e17bc333a64fb6",
+        "g": "f049f7345bad50fa",
         "name": "Catch group",
         "scope": "group",
         "uncaught": false,
@@ -1998,15 +1979,15 @@
         "y": 580,
         "wires": [
             [
-                "3be6f7f1efbda112"
+                "87b9a790059c88d6"
             ]
         ]
     },
     {
-        "id": "ff51550ac0a4f767",
+        "id": "ca36b723377536b3",
         "type": "debug",
-        "z": "f543b6c0f1e80bcf",
-        "g": "4064de1388b7a773",
+        "z": "53e17bc333a64fb6",
+        "g": "f049f7345bad50fa",
         "name": "Strategy errors",
         "active": true,
         "tosidebar": true,
@@ -2021,10 +2002,10 @@
         "wires": []
     },
     {
-        "id": "beabe1713018af5a",
+        "id": "db6ccd1c80d518cb",
         "type": "comment",
-        "z": "f543b6c0f1e80bcf",
-        "g": "4064de1388b7a773",
+        "z": "53e17bc333a64fb6",
+        "g": "f049f7345bad50fa",
         "name": "Cheapest Energy Hours - errors",
         "info": "\"No valid sensor found\" if price_data is none and not valid_sensor,\n\"No valid data in {}\".format(sensor) if price_data is none and data == [] and valid_sensor,\n\"No valid data in provided price_data\" if price_data is not none and not valid_price_data,\n\"Time key '{}' not found in data\".format(time_key) if data and time_key not in data[0],\n\"Value key '{}' not found in data\".format(value_key) if data and value_key not in data[0],\n\"Invalid mode '{}' selected\".format(mode) if mode not in modes,\n\"Boolean input expected for include_today, '{}' can not be processed as a boolean\".format(include_today) if include_today | bool(\"\") is not boolean,\n\"Boolean input expected for include_tomorrow, '{}' can not be processed as a boolean\".format(include_tomorrow) if include_tomorrow | bool(\"\") is not boolean,\n\"Boolean input expected for look_ahead, '{}' can not be processed as a boolean\".format(look_ahead) if look_ahead | bool(\"\") is not boolean,\n\"Boolean input expected for lowest, '{}' can not be processed as a boolean\".format(lowest) if lowest | bool(\"\") is not boolean,\n\"Boolean input expected for latest_possible, '{}' can not be processed as a boolean\".format(latest_possible) if latest_possible | bool(\"\") is not boolean,\n\"Numeric input or percentage expected for price_tolerance, '{}' can not be processed as a float or percentage\".format(price_tolerance) if not valid_pt,\n\"Numeric input expected for kwh, '{}' can not be processed as a float\".format(kwh) if kwh is not none and not kwh | is_number,\n\"Selected program '{}' is not available or has no data\".format(program) if program is not none and w is none,\n\"Selected start parameter is after the end parameter\" if start_end and data,\n\"{} hours between start and end, where {} hours are required\".format(end_start, h | round(3)) if not start_end and end_start < h | round(3) and data,\n\"Invalid combination of source data points per hour '{}' and number of weight points '{}'\".format(dp, dph) if all_keys and not wp_check",
         "x": 1150,
@@ -2032,10 +2013,10 @@
         "wires": []
     },
     {
-        "id": "3be6f7f1efbda112",
+        "id": "87b9a790059c88d6",
         "type": "function",
-        "z": "f543b6c0f1e80bcf",
-        "g": "4064de1388b7a773",
+        "z": "53e17bc333a64fb6",
+        "g": "f049f7345bad50fa",
         "name": "Unhandled Exception",
         "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
         "outputs": 1,
@@ -2048,16 +2029,16 @@
         "y": 580,
         "wires": [
             [
-                "ff51550ac0a4f767"
+                "ca36b723377536b3"
             ]
         ],
         "l": false
     },
     {
-        "id": "fa97964c94141dce",
+        "id": "bc468039bbb56b0c",
         "type": "function",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "Cache check",
         "func": "// Check if cache can be used or a new call to Data Source is required\nconst log = global.get('logger');\n\n// Retrieve stored data from flow context\nconst previousValues = flow.get(\"previous_sensor_values\") || {};\nconst cachedData = flow.get(\"cached_dynamic_data\");\n\n// Create a string or object to represent current state\nconst currentValues = {\n    src: msg.dynamic.data_source,\n    hc: msg.dynamic.cheapest_hrs,\n    he: msg.dynamic.expensive_hrs\n};\n\n// Compare current with previous (JSON stringify is a quick way to compare objects)\nconst inputsMatch = JSON.stringify(currentValues) === JSON.stringify(previousValues);\n\n// Determine cache hit\nif (inputsMatch && cachedData){\n    // Cache HIT\n    node.status({ fill: \"green\", shape: \"dot\", text: `Cache hit` });\n    log(this,`*CACHE HIT* using stored tariff data`);\n\n    // Attach cached data to the message so following nodes can use it\n    msg.dynamic = cachedData;\n\n    // Output #1\n    return [msg, null];\n\n} else {\n    // Cache MISS\n    node.status({ fill: \"green\", shape: \"ring\", text: `Cache miss: ${JSON.stringify(currentValues) }` });\n\n    // Save current values for the next run\n    flow.set(\"previous_sensor_values\", currentValues);\n    \n    // Output #2\n    return [null, msg];\n}",
         "outputs": 2,
@@ -2066,14 +2047,14 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1270,
+        "x": 1410,
         "y": 420,
         "wires": [
             [
-                "884ad1da6f47a041"
+                "15004f5373d31bcf"
             ],
             [
-                "997bfcdcbba702cd"
+                "c1246148f0672793"
             ]
         ],
         "outputLabels": [
@@ -2082,87 +2063,87 @@
         ]
     },
     {
-        "id": "884ad1da6f47a041",
+        "id": "15004f5373d31bcf",
         "type": "link out",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "from Cache Check ok",
         "mode": "link",
         "links": [
-            "0189d38570ae5aee"
+            "24075c68effa9621"
         ],
-        "x": 1375,
+        "x": 1515,
         "y": 400,
         "wires": []
     },
     {
-        "id": "ce9797172492222d",
+        "id": "47fee38ffe2fe3d8",
         "type": "link in",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "link Fetch from Data Source",
         "links": [
-            "997bfcdcbba702cd"
+            "c1246148f0672793"
         ],
         "x": 295,
         "y": 560,
         "wires": [
             [
-                "f97bea0d85b1f33c"
+                "f6a1142b90f9375b"
             ]
         ]
     },
     {
-        "id": "997bfcdcbba702cd",
+        "id": "c1246148f0672793",
         "type": "link out",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "from Cache Check NoK",
         "mode": "link",
         "links": [
-            "ce9797172492222d"
+            "47fee38ffe2fe3d8"
         ],
-        "x": 1375,
+        "x": 1515,
         "y": 440,
         "wires": []
     },
     {
-        "id": "0189d38570ae5aee",
+        "id": "24075c68effa9621",
         "type": "link in",
-        "z": "f543b6c0f1e80bcf",
-        "g": "8338b90a5c8488bf",
+        "z": "53e17bc333a64fb6",
+        "g": "2f86c094b23107e0",
         "name": "link Determine Strategy",
         "links": [
-            "688802fc164edabe",
-            "884ad1da6f47a041"
+            "e1813908c8b0ab65",
+            "15004f5373d31bcf"
         ],
         "x": 295,
         "y": 940,
         "wires": [
             [
-                "498ca66b4f342682"
+                "71651ebf0fad2dcf"
             ]
         ]
     },
     {
-        "id": "688802fc164edabe",
+        "id": "e1813908c8b0ab65",
         "type": "link out",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "link out 12",
         "mode": "link",
         "links": [
-            "0189d38570ae5aee"
+            "24075c68effa9621"
         ],
         "x": 635,
         "y": 840,
         "wires": []
     },
     {
-        "id": "a9210df7c3cc6a27",
+        "id": "407840aa3995a9dd",
         "type": "function",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "Clear Cache",
         "func": "// Clear cache\nflow.set(\"cached_dynamic_data\", undefined);\nreturn msg;",
         "outputs": 1,
@@ -2175,16 +2156,16 @@
         "y": 420,
         "wires": [
             [
-                "c4049616a5352db4"
+                "fa3779d04977207b"
             ]
         ],
         "l": false
     },
     {
-        "id": "60c0c6d747687efd",
+        "id": "a2ee605012a06a64",
         "type": "ha-fire-event",
-        "z": "f543b6c0f1e80bcf",
-        "g": "70abe4143659a268",
+        "z": "53e17bc333a64fb6",
+        "g": "ca7403d479c8c81b",
         "name": "",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -2198,10 +2179,10 @@
         ]
     },
     {
-        "id": "4e3424ad5faba8d9",
+        "id": "8c56a16131f182ad",
         "type": "api-render-template",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "All",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -2214,15 +2195,15 @@
         "y": 780,
         "wires": [
             [
-                "42a2ad6c795b38a1"
+                "e516b7c55e429393"
             ]
         ]
     },
     {
-        "id": "42a2ad6c795b38a1",
+        "id": "e516b7c55e429393",
         "type": "json",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "",
         "property": "dynamic.data_all",
         "action": "obj",
@@ -2231,17 +2212,17 @@
         "y": 780,
         "wires": [
             [
-                "f3c1640f35b0b96b",
-                "86eaf64c6188c832"
+                "d6903c124c9db00d",
+                "22ea4f5769feb79b"
             ]
         ],
         "l": false
     },
     {
-        "id": "c81639ce89ef4041",
+        "id": "225c87c56ffcb31a",
         "type": "change",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Set",
         "rules": [
             {
@@ -2261,15 +2242,15 @@
         "y": 780,
         "wires": [
             [
-                "4e3424ad5faba8d9"
+                "8c56a16131f182ad"
             ]
         ]
     },
     {
-        "id": "d9147541d5078de3",
+        "id": "766bd59076369230",
         "type": "ha-fire-event",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Update energy prices",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -2283,10 +2264,10 @@
         ]
     },
     {
-        "id": "5b48ade2e61b5e91",
+        "id": "6bf235402926200b",
         "type": "debug",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Template all",
         "active": false,
         "tosidebar": true,
@@ -2301,10 +2282,10 @@
         "wires": []
     },
     {
-        "id": "86eaf64c6188c832",
+        "id": "22ea4f5769feb79b",
         "type": "function",
-        "z": "f543b6c0f1e80bcf",
-        "g": "df2c074c2975de89",
+        "z": "53e17bc333a64fb6",
+        "g": "45991c4c07807d2b",
         "name": "Convert price",
         "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.value_conversion\")) || 1;\n\n// Check if the list exists and is an array to prevent errors\nif (msg.dynamic && msg.dynamic.data_all && Array.isArray(msg.dynamic.data_all.list)) {\n    \n    // Create a new array where each value is multiplied\n    if (Array.isArray(msg.dynamic.data_all?.list)) {\n        msg.dynamic.data_all.list = msg.dynamic.data_all.list.map(v => v / CONVERSION_RATE * 100); // cents\n    }\n\n    // Update other fields\n    if (msg.dynamic.data_all?.average) {\n        msg.dynamic.data_all.average = parseInt(msg.dynamic.data_all.average / CONVERSION_RATE * 100); // cents\n    }\n} else {\n    // Do not continue\n    log(this,\"*price data not updated* price data missing\");\n    return null;\n}\n\nreturn msg;",
         "outputs": 1,
@@ -2317,15 +2298,15 @@
         "y": 780,
         "wires": [
             [
-                "d9147541d5078de3"
+                "766bd59076369230"
             ]
         ]
     },
     {
-        "id": "bfee95f6dc1cf9ab",
+        "id": "dc8cc489c7694efa",
         "type": "inject",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "Test",
         "props": [
             {
@@ -2347,15 +2328,15 @@
         "y": 460,
         "wires": [
             [
-                "1f70b2da3e71bba2"
+                "f6d46a4f862cc7e9"
             ]
         ]
     },
     {
-        "id": "1f70b2da3e71bba2",
+        "id": "f6d46a4f862cc7e9",
         "type": "api-call-service",
-        "z": "f543b6c0f1e80bcf",
-        "g": "05021dbd27dffb6e",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
         "name": "Debug ON",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -2388,7 +2369,73 @@
         "y": 460,
         "wires": [
             [
-                "a9210df7c3cc6a27"
+                "407840aa3995a9dd"
+            ]
+        ]
+    },
+    {
+        "id": "647b842d8e337591",
+        "type": "function",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
+        "name": "Init",
+        "func": "if(msg.payload === \"Dynamic 2\") {\n    node.status({fill:\"red\",shape:\"ring\",text:\"Lab feature has control\"});\n    return null;\n}\nnode.status({fill:\"green\",shape:\"dot\",text:\"Ok\"});\n\n// Init\nmsg.dynamic = {};\nmsg.log = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 380,
+        "wires": [
+            [
+                "a58c31baacf4f05f"
+            ]
+        ]
+    },
+    {
+        "id": "fa3779d04977207b",
+        "type": "api-current-state",
+        "z": "53e17bc333a64fb6",
+        "g": "42ba28a9b56c30b2",
+        "name": "Strat",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 750,
+        "y": 380,
+        "wires": [
+            [
+                "647b842d8e337591"
             ]
         ]
     },
@@ -2407,7 +2454,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "8b32c279c885114a",
+        "id": "aafd38de2faa0ded",
         "type": "global-config",
         "env": [],
         "modules": {
