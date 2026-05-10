@@ -1109,6 +1109,7 @@ template:
         attributes:
           prices: "{{ trigger.event.data.list | default([]) }}"
           marks: "{{ trigger.event.data.list_marked | default([]) }}"
+          mark_now: "{{ trigger.event.data.mark_now | default('Unknown')}}"
           start: "{{ trigger.event.data.start | default('Unknown') }}"
           datapoints_per_hour: "{{ trigger.event.data.datapoints_per_hour | default(0) }}"
 
