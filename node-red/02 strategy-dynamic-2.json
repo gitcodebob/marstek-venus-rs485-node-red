@@ -2,7 +2,7 @@
     {
         "id": "7cb2c3c95ae25465",
         "type": "tab",
-        "label": "Strategy Dynamic 2 v4.8.2",
+        "label": "Strategy Dynamic 2 v4.9.0",
         "disabled": false,
         "info": "Dynamic contract automated management",
         "env": []
@@ -61,8 +61,8 @@
         ],
         "x": 228,
         "y": 273,
-        "w": 1364,
-        "h": 834
+        "w": 1384,
+        "h": 794
     },
     {
         "id": "b9013bda8ac76f05",
@@ -187,7 +187,6 @@
             "e56d4ffbc852e0db",
             "df2f545ecd40a29b",
             "4347418aa9b5800d",
-            "e6254201aae26ee3",
             "860a9e473c5843bf",
             "63fbf4e436af63e0",
             "0167518c7fb2da15",
@@ -201,11 +200,12 @@
             "1b18292ae5da8c4a",
             "8a2264a5f6d6dfd2",
             "eeef05a7b8913b56",
-            "be05aedb262562b7"
+            "be05aedb262562b7",
+            "57d8a02127936f91"
         ],
         "x": 254,
         "y": 299,
-        "w": 1312,
+        "w": 1332,
         "h": 202
     },
     {
@@ -221,17 +221,19 @@
             "59df6507d5eb1a3d",
             "74cfa360edc4c60f",
             "e6cf3ebcbea69b8f",
-            "c93a5ad257d40bf7",
             "57cc05efbb79cc77",
             "992e224d6cddac70",
             "3945027f12d9fbf8",
             "cb239dde075cdc6b",
-            "c5c2aa6f819a9dd3"
+            "c5c2aa6f819a9dd3",
+            "e6254201aae26ee3",
+            "4a9518f70862ed8c",
+            "95346a4ab49638b8"
         ],
         "x": 254,
         "y": 799,
-        "w": 852,
-        "h": 282
+        "w": 1072,
+        "h": 242
     },
     {
         "id": "03cb769d07379249",
@@ -320,8 +322,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 890,
-        "y": 1000,
+        "x": 1110,
+        "y": 960,
         "wires": []
     },
     {
@@ -330,15 +332,15 @@
         "z": "7cb2c3c95ae25465",
         "g": "ca48b6f96b385b48",
         "name": "Determine dynamic strategy",
-        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// 1.  Input\nconst minDeltaCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.min_delta_cents\")) || 0;\nconst dataAll = RED.util.getMessageProperty(msg, \"dynamic.data_all\");\n\nif (!dataAll || !Array.isArray(dataAll.list) || dataAll.list.length === 0) {\n    log(this, \"Price list missing or empty\", \"warn\");\n    node.status({ fill: \"red\", shape: \"ring\", text: \"No price data\" });\n    return null;\n}\n\nconst STRATEGY = {\n    HIGH: RED.util.getMessageProperty(msg, \"dynamic.strategy_expensive\") || \"Self-consumption\",\n    LOW: RED.util.getMessageProperty(msg, \"dynamic.strategy_cheapest\") || \"Charge\",\n    NEUTRAL: RED.util.getMessageProperty(msg, \"dynamic.strategy_default\") || \"Charge PV\",\n};\n\n// 2.  Build interval timestamps\n// Each datapoint covers (hours / datapoints) hours.\nconst prices = dataAll.list; // cents/kWh — already converted by \"Convert price\" node\nconst n = prices.length;\nconst startTime = new Date(dataAll.start);\nconst intervalMs = (dataAll.hours / dataAll.datapoints) * 3_600_000;\n\n// 3.  Mark intervals: pair extremes inward — independently per calendar day\n//\n// Pairing runs separately within each local calendar day, so today's marks\n// don't shift when tomorrow's prices arrive. Each HIGH interval is backed\n// by a specific LOW interval — one-to-one pairing, no element used twice.\n// The minDelta threshold accounts for round-trip efficiency and other\n// losses, so a pair is only viable when its spread covers the loss.\n//\n// Method (Extreme-Pair Matching, O(n log n)):\n//   1. Sort intervals by price, keep original time-index for re-mapping.\n//   2. Two pointers walk inward from the extremes — `lo` from the cheapest\n//      unmatched, `hi` from the most-expensive unmatched.\n//   3. If the spread between them clears minDelta: mark them, advance both.\n//   4. If it does not clear minDelta: the cheapest unmatched LOW paired\n//      with the most-expensive unmatched HIGH yields the largest spread\n//      still achievable. If even that fails, no remaining pair can satisfy\n//      the threshold, so we stop.\n//\n// This algorithm prefers to mark the truly extreme\n// hours (highest-priced as HIGH, lowest-priced as LOW). On well-behaved\n// daily curves this produces the same number of pairs as \n// other algorithm variants; but in tight cases it can produce one or two fewer\n// pairs. Why choose this version? It marks the price peaks/troughs the user\n// would intuitively expect, which is good for user confidence and acceptance of the strategy. It is also efficient and straightforward to implement, without needing complex data structures or backtracking. \n// The main goal is to identify a set of HIGH and LOW intervals that are economically justified by their price spread, while keeping the logic transparent and explainable to the user.\n\n// Note:\n// It is up to the user to set minDelta appropriately for their system's efficiency and other costs, to ensure that marked cycles are truly beneficial.\n// Also the user can pick strategies that reflect their preferences for what to do during LOW and HIGH intervals, e.g. prioritising self-consumption during HIGH intervals, or selling back to the grid if allowed and profitable.\n// This makes optimisation flexible and user-configurable, while still being based on a clear economic rationale.\n// However, the algorithm does not attempt to find the optimal global pairing (which would be more complex), but rather a good local pairing that is computationally efficient and easy to understand.\n\n/**\n * @typedef {{ start: Date, end: Date, price: number, mark: 'high'|'low'|null, is_now: boolean }} Interval\n * @type {Interval[]}\n */\nconst intervals = new Array(n);\nfor (let i = 0; i < n; i++) {\n    const iStart = new Date(startTime.getTime() + i * intervalMs);\n    const iEnd = new Date(iStart.getTime() + intervalMs);\n    intervals[i] = { start: iStart, end: iEnd, price: prices[i], mark: null, is_now: false };\n}\n\n// Group interval indices by local calendar day (key = Y-M-D in local TZ).\nconst dayBuckets = new Map();\nfor (let i = 0; i < n; i++) {\n    const d = intervals[i].start;\n    const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;\n    let bucket = dayBuckets.get(key);\n    if (!bucket) { bucket = []; dayBuckets.set(key, bucket); }\n    bucket.push(i);\n}\n\n// Per dag de markeringen zetten.\nlet pairCount = 0;\nfor (const dayIndices of dayBuckets.values()) {\n    // This day's indices sorted ascending by price (stable on ties).\n    const sortedIdx = [...dayIndices].sort((a, b) => prices[a] - prices[b]);\n    let lo = 0;\n    let hi = sortedIdx.length - 1;\n    while (lo < hi) {\n        const loIdx = sortedIdx[lo];\n        const hiIdx = sortedIdx[hi];\n        if (prices[hiIdx] - prices[loIdx] >= minDeltaCents) {\n            intervals[loIdx].mark = 'low';\n            intervals[hiIdx].mark = 'high';\n            pairCount++;\n            lo++; hi--;\n        } else {\n            // sortedIdx[lo] is the cheapest unmatched within this day,\n            // sortedIdx[hi] the most-expensive. Their spread is the largest\n            // still possible today — if it falls below minDelta, no further\n            // pair on this day can satisfy the threshold.\n            break;\n        }\n    }\n}\n\n// 4.  Determine current strategy\nconst now = new Date();\nconst currentInterval = intervals.find(iv => now >= iv.start && now < iv.end);\nif (currentInterval) currentInterval.is_now = true;\nconst currentMark = currentInterval ? currentInterval.mark : null;\n\nconst strategy =\n    currentMark === 'high' ? STRATEGY.HIGH :\n        currentMark === 'low' ? STRATEGY.LOW :\n            STRATEGY.NEUTRAL;\n\nconst strategyMark = \n    currentMark === 'high' ? 'Expensive' :\n        currentMark === 'low' ? 'Cheap' :\n            'Regular';\n\n\n// 5.  Store results\nRED.util.setMessageProperty(msg,\"dynamic.data_all.list_marked\",intervals,true);\nRED.util.setMessageProperty(msg, \"dynamic.data_all.mark_now\", strategyMark, true);\nRED.util.setMessageProperty(msg,\"dynamic.strategy\",strategy);\nflow.set(\"dynamic_strategy\", strategy); // this is the strategy executed when dynamic strategy is active, see the 'Execute' section of this flow.\n\n// 6.  Explain to user\n// Gross spread: sum of (high - low) over all paired cycles, in cents/kWh.\n// Net spread:   minus round-trip losses + wear. Indicator of the realisable potential.\nconst grossSpread = Math.round(intervals\n    .filter(iv => iv.mark !== null)\n    .reduce((sum, iv) => sum + (iv.mark === 'high' ? iv.price : -iv.price), 0));\nconst netSpread = grossSpread - pairCount * minDeltaCents;\n\nnode.status({\n    fill: \"blue\", shape: \"dot\",\n    text: `${strategy} | ${pairCount} cycle${pairCount === 1 ? '' : 's'} | net Σ${netSpread}¢`\n});\nlog(this, `Strategy: **${strategy}** | cycles=${pairCount} unmarked=${n - 2 * pairCount} | gross=${grossSpread}¢ net=${netSpread}¢ minDelta=${minDeltaCents}¢`);\n\nreturn msg;",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// 1.  Input\nconst minDeltaCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.min_delta_cents\")) || 0;\n// Per-day caps on the number of LOW / HIGH marks, expressed in hours.\n// 0 (or missing/invalid/negative) means no limit.\nconst cheapestHrs = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.cheapest_hrs\")) || 0;\nconst expensiveHrs = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.expensive_hrs\")) || 0;\nconst dataAll = RED.util.getMessageProperty(msg, \"dynamic.data_all\");\n\nif (!dataAll || !Array.isArray(dataAll.list) || dataAll.list.length === 0) {\n    log(this, \"Price list missing or empty\", \"warn\");\n    node.status({ fill: \"red\", shape: \"ring\", text: \"No price data\" });\n    return null;\n}\n\nconst STRATEGY = {\n    HIGH: RED.util.getMessageProperty(msg, \"dynamic.strategy_expensive\") || \"Self-consumption\",\n    LOW: RED.util.getMessageProperty(msg, \"dynamic.strategy_cheapest\") || \"Charge\",\n    NEUTRAL: RED.util.getMessageProperty(msg, \"dynamic.strategy_default\") || \"Charge PV\",\n};\n\n// 2.  Build interval timestamps\n// Each datapoint covers (hours / datapoints) hours.\nconst prices = dataAll.list; // cents/kWh — already converted by \"Convert price\" node\nconst n = prices.length;\nconst startTime = new Date(dataAll.start);\nconst intervalMs = (dataAll.hours / dataAll.datapoints) * 3_600_000;\n\n// 3.  Mark intervals: pair extremes inward — independently per calendar day\n//\n// Pairing runs separately within each local calendar day, so today's marks\n// don't shift when tomorrow's prices arrive. Pair detection is one-to-one\n// (each candidate HIGH is matched against one candidate LOW), but the\n// per-day cheapest_hrs / expensive_hrs caps may suppress one side of a\n// detected pair — so the final marks can be asymmetric (e.g. 2 LOW + 1 HIGH\n// in a day if expensive_hrs caps HIGH at 1). The minDelta threshold\n// accounts for round-trip efficiency and other losses, so a pair is only\n// considered viable when its spread covers the loss.\n//\n// Method (Extreme-Pair Matching, O(n log n)):\n//   1. Sort intervals by price, keep original time-index for re-mapping.\n//   2. Two pointers walk inward from the extremes — `lo` from the cheapest\n//      unmatched, `hi` from the most-expensive unmatched.\n//   3. If the spread between them clears minDelta: mark them, advance both.\n//   4. If it does not clear minDelta: the cheapest unmatched LOW paired\n//      with the most-expensive unmatched HIGH yields the largest spread\n//      still achievable. If even that fails, no remaining pair can satisfy\n//      the threshold, so we stop.\n//\n// This algorithm prefers to mark the truly extreme\n// hours (highest-priced as HIGH, lowest-priced as LOW). On well-behaved\n// daily curves this produces the same number of pairs as \n// other algorithm variants; but in tight cases it can produce one or two fewer\n// pairs. Why choose this version? It marks the price peaks/troughs the user\n// would intuitively expect, which is good for user confidence and acceptance of the strategy. It is also efficient and straightforward to implement, without needing complex data structures or backtracking. \n// The main goal is to identify a set of HIGH and LOW intervals that are economically justified by their price spread, while keeping the logic transparent and explainable to the user.\n\n// Note:\n// It is up to the user to set minDelta appropriately for their system's efficiency and other costs, to ensure that marked cycles are truly beneficial.\n// Also the user can pick strategies that reflect their preferences for what to do during LOW and HIGH intervals, e.g. prioritising self-consumption during HIGH intervals, or selling back to the grid if allowed and profitable.\n// This makes optimisation flexible and user-configurable, while still being based on a clear economic rationale.\n// However, the algorithm does not attempt to find the optimal global pairing (which would be more complex), but rather a good local pairing that is computationally efficient and easy to understand.\n\n/**\n * @typedef {{ start: Date, end: Date, price: number, mark: 'high'|'low'|null, is_now: boolean }} Interval\n * @type {Interval[]}\n */\nconst intervals = new Array(n);\nfor (let i = 0; i < n; i++) {\n    const iStart = new Date(startTime.getTime() + i * intervalMs);\n    const iEnd = new Date(iStart.getTime() + intervalMs);\n    intervals[i] = { start: iStart, end: iEnd, price: prices[i], mark: null, is_now: false };\n}\n\n// Group interval indices by local calendar day (key = Y-M-D in local TZ).\nconst dayBuckets = new Map();\nfor (let i = 0; i < n; i++) {\n    const d = intervals[i].start;\n    const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;\n    let bucket = dayBuckets.get(key);\n    if (!bucket) { bucket = []; dayBuckets.set(key, bucket); }\n    bucket.push(i);\n}\n\n// Convert per-day hour caps to per-day interval counts.\n// intervalsPerHour = datapoints / hours (e.g. 4 for 15-min intervals).\n// 0 hrs => Infinity (no cap). Negatives are treated as 0 (no cap).\nconst intervalsPerHour = dataAll.datapoints / dataAll.hours;\nconst maxLowPerDay = cheapestHrs > 0 ? Math.round(cheapestHrs * intervalsPerHour) : Infinity;\nconst maxHighPerDay = expensiveHrs > 0 ? Math.round(expensiveHrs * intervalsPerHour) : Infinity;\n\n// Per dag de markeringen zetten.\nlet fullPairCount = 0;   // pairs where BOTH sides were marked (a complete cycle)\nlet lowMarkCount = 0;    // total LOW marks across all days\nlet highMarkCount = 0;   // total HIGH marks across all days\nfor (const dayIndices of dayBuckets.values()) {\n    // This day's indices sorted ascending by price (stable on ties).\n    const sortedIdx = [...dayIndices].sort((a, b) => prices[a] - prices[b]);\n    let lo = 0;\n    let hi = sortedIdx.length - 1;\n    let lowMarkedToday = 0;\n    let highMarkedToday = 0;\n    while (lo < hi) {\n        const loIdx = sortedIdx[lo];\n        const hiIdx = sortedIdx[hi];\n        if (prices[hiIdx] - prices[loIdx] >= minDeltaCents) {\n            const markLow = lowMarkedToday < maxLowPerDay;\n            const markHigh = highMarkedToday < maxHighPerDay;\n            // Both caps reached on this day — no more useful work here.\n            if (!markLow && !markHigh) break;\n            if (markLow) {\n                intervals[loIdx].mark = 'low';\n                lowMarkedToday++;\n                lowMarkCount++;\n            }\n            if (markHigh) {\n                intervals[hiIdx].mark = 'high';\n                highMarkedToday++;\n                highMarkCount++;\n            }\n            if (markLow && markHigh) fullPairCount++;\n            lo++; hi--;\n        } else {\n            // sortedIdx[lo] is the cheapest unmatched within this day,\n            // sortedIdx[hi] the most-expensive. Their spread is the largest\n            // still possible today — if it falls below minDelta, no further\n            // pair on this day can satisfy the threshold.\n            break;\n        }\n    }\n}\n\n// 4.  Determine current strategy\nconst now = new Date();\nconst currentInterval = intervals.find(iv => now >= iv.start && now < iv.end);\nif (currentInterval) currentInterval.is_now = true;\nconst currentMark = currentInterval ? currentInterval.mark : null;\n\nconst strategy =\n    currentMark === 'high' ? STRATEGY.HIGH :\n        currentMark === 'low' ? STRATEGY.LOW :\n            STRATEGY.NEUTRAL;\n\nconst strategyMark = \n    currentMark === 'high' ? 'Expensive' :\n        currentMark === 'low' ? 'Cheap' :\n            'Regular';\n\n\n// 5.  Store results\nRED.util.setMessageProperty(msg,\"dynamic.data_all.list_marked\",intervals,true);\nRED.util.setMessageProperty(msg, \"dynamic.data_all.mark_now\", strategyMark, true);\nRED.util.setMessageProperty(msg,\"dynamic.strategy\",strategy);\nflow.set(\"dynamic_strategy\", strategy); // this is the strategy executed when dynamic strategy is active, see the 'Execute' section of this flow.\n\n// 6.  Explain\n// Gross spread: sum over all marked intervals of (+price for HIGH, -price for LOW), in cents/kWh.\n//               With symmetric caps this equals the sum of (high - low) over paired cycles;\n//               with asymmetric caps it also includes unpaired single-side marks.\n// Net spread:   minus round-trip losses on complete cycles (one minDelta per full pair).\n//               Half-pairs (one side suppressed by a cap) incur no round-trip loss here.\nconst grossSpread = Math.round(intervals\n    .filter(iv => iv.mark !== null)\n    .reduce((sum, iv) => sum + (iv.mark === 'high' ? iv.price : -iv.price), 0));\nconst netSpread = grossSpread - fullPairCount * minDeltaCents;\nconst markedCount = lowMarkCount + highMarkCount;\n\nnode.status({\n    fill: \"blue\", shape: \"dot\",\n    text: `${strategy} | ${fullPairCount} cycle${fullPairCount === 1 ? '' : 's'} | net Σ${netSpread}¢`\n});\nlog(this, `Strategy: **${strategy}** | cycles=${fullPairCount} low=${lowMarkCount} high=${highMarkCount} unmarked=${n - markedCount} | gross=${grossSpread}¢ net=${netSpread}¢ minDelta=${minDeltaCents}¢ caps=L${cheapestHrs}h/H${expensiveHrs}h`);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 620,
-        "y": 1000,
+        "x": 840,
+        "y": 960,
         "wires": [
             [
                 "59df6507d5eb1a3d",
@@ -397,7 +399,7 @@
         "type": "inject",
         "z": "7cb2c3c95ae25465",
         "g": "42148c9790cc8f7e",
-        "name": "Every 60 min",
+        "name": "Clear cache",
         "props": [
             {
                 "p": "payload"
@@ -408,13 +410,13 @@
             }
         ],
         "repeat": "",
-        "crontab": "0 0-23 * * *",
+        "crontab": "00 15 * * *",
         "once": false,
         "onceDelay": "3",
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 380,
+        "x": 370,
         "y": 420,
         "wires": [
             [
@@ -795,62 +797,11 @@
         ]
     },
     {
-        "id": "e6254201aae26ee3",
-        "type": "api-current-state",
-        "z": "7cb2c3c95ae25465",
-        "g": "42148c9790cc8f7e",
-        "name": "Threshold delta",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_number.house_battery_strategy_dynamic_threshold_delta",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "dynamic.min_delta_cents",
-                "propertyType": "msg",
-                "value": "number",
-                "valueType": "entityState"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 1220,
-        "y": 400,
-        "wires": [
-            [
-                "7cd31066ad7e3d0e"
-            ]
-        ]
-    },
-    {
         "id": "860a9e473c5843bf",
         "type": "inject",
         "z": "7cb2c3c95ae25465",
         "g": "42148c9790cc8f7e",
-        "name": "Check period",
+        "name": "Update strat",
         "props": [
             {
                 "p": "payload"
@@ -889,7 +840,7 @@
         "finalize": "",
         "libs": [],
         "x": 850,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "4347418aa9b5800d"
@@ -958,8 +909,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 930,
-        "y": 1040,
+        "x": 1150,
+        "y": 1000,
         "wires": []
     },
     {
@@ -1054,7 +1005,7 @@
                 "845440fe66e2b137"
             ],
             [
-                "e6254201aae26ee3"
+                "7cd31066ad7e3d0e"
             ]
         ],
         "l": false
@@ -1073,8 +1024,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 1460,
-        "y": 360,
+        "x": 1480,
+        "y": 340,
         "wires": []
     },
     {
@@ -1097,8 +1048,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1260,
-        "y": 360,
+        "x": 1280,
+        "y": 340,
         "wires": [
             [
                 "1d265be5e5436d5d"
@@ -1243,57 +1194,6 @@
         "wires": []
     },
     {
-        "id": "c93a5ad257d40bf7",
-        "type": "api-current-state",
-        "z": "7cb2c3c95ae25465",
-        "g": "ca48b6f96b385b48",
-        "name": "Threshold cheapest",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_number.house_battery_strategy_dynamic_threshold_cheapest_period",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "dynamic.threshold_cheapest_cents",
-                "propertyType": "msg",
-                "value": "number",
-                "valueType": "entityState"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 370,
-        "y": 880,
-        "wires": [
-            [
-                "57cc05efbb79cc77"
-            ]
-        ]
-    },
-    {
         "id": "57cc05efbb79cc77",
         "type": "api-current-state",
         "z": "7cb2c3c95ae25465",
@@ -1337,7 +1237,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 360,
-        "y": 920,
+        "y": 880,
         "wires": [
             [
                 "992e224d6cddac70"
@@ -1388,7 +1288,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 370,
-        "y": 960,
+        "y": 920,
         "wires": [
             [
                 "3945027f12d9fbf8"
@@ -1439,10 +1339,10 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 370,
-        "y": 1000,
+        "y": 960,
         "wires": [
             [
-                "74cfa360edc4c60f"
+                "e6254201aae26ee3"
             ]
         ]
     },
@@ -1540,14 +1440,14 @@
         "z": "7cb2c3c95ae25465",
         "g": "42148c9790cc8f7e",
         "name": "Cache check",
-        "func": "// Check if cache can be used or a new call to Data Source is required\nconst log = global.get('logger');\n\n// Retrieve stored data from flow context\nconst previousValues = flow.get(\"previous_sensor_values\") || {};\nconst cachedData = flow.get(\"cached_dynamic_data\");\n\n// Create a string or object to represent current state\nconst currentValues = {\n    src: msg.dynamic.data_source,\n    mtd: msg.dynamic.min_delta_cents\n};\n\n// Compare current with previous (JSON stringify is a quick way to compare objects)\nconst inputsMatch = JSON.stringify(currentValues) === JSON.stringify(previousValues);\n\n// Determine cache hit\nif (inputsMatch && cachedData){\n    // Cache HIT\n    node.status({ fill: \"green\", shape: \"dot\", text: `Cache hit` });\n    log(this,`*CACHE HIT* using stored tariff data`);\n\n    // Attach cached data to the message so following nodes can use it\n    msg.dynamic = cachedData;\n\n    // Output #1\n    return [msg, null];\n\n} else {\n    // Cache MISS\n    node.status({ fill: \"green\", shape: \"ring\", text: `Cache miss: ${JSON.stringify(currentValues) }` });\n\n    // Save current values for the next run\n    flow.set(\"previous_sensor_values\", currentValues);\n    \n    // Output #2\n    return [null, msg];\n}",
+        "func": "// Check if cache can be used or a new call to Data Source is required\nconst log = global.get('logger');\n\n// Retrieve stored data from flow context\nconst cachedData = flow.get(\"cached_dynamic_data\");\n\n// Determine cache hit\nif (cachedData){\n    // Cache HIT\n    node.status({ fill: \"green\", shape: \"dot\", text: `Cache hit` });\n    log(this,`*CACHE HIT* using stored tariff data`);\n\n    // Attach cached data to the message so following nodes can use it\n    msg.dynamic = cachedData;\n\n    // Output #1\n    return [msg, null];\n\n} else {\n    // Cache MISS\n    node.status({ fill: \"green\", shape: \"ring\", text: `Cache miss }` });\n\n    // Output #2\n    return [null, msg];\n}",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1390,
+        "x": 1230,
         "y": 420,
         "wires": [
             [
@@ -1572,7 +1472,7 @@
         "links": [
             "cb239dde075cdc6b"
         ],
-        "x": 1495,
+        "x": 1335,
         "y": 400,
         "wires": []
     },
@@ -1603,7 +1503,7 @@
         "links": [
             "cc1e309cb2e18d5d"
         ],
-        "x": 1495,
+        "x": 1335,
         "y": 440,
         "wires": []
     },
@@ -1621,7 +1521,7 @@
         "y": 840,
         "wires": [
             [
-                "c93a5ad257d40bf7"
+                "57cc05efbb79cc77"
             ]
         ]
     },
@@ -1756,8 +1656,8 @@
         "event": "update_energy_prices",
         "data": "msg.dynamic.data_all",
         "dataType": "jsonata",
-        "x": 900,
-        "y": 960,
+        "x": 1120,
+        "y": 920,
         "wires": [
             []
         ]
@@ -1918,6 +1818,189 @@
         ]
     },
     {
+        "id": "e6254201aae26ee3",
+        "type": "api-current-state",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
+        "name": "Threshold delta",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_dynamic_threshold_delta",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.min_delta_cents",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 600,
+        "y": 880,
+        "wires": [
+            [
+                "4a9518f70862ed8c"
+            ]
+        ]
+    },
+    {
+        "id": "4a9518f70862ed8c",
+        "type": "api-current-state",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
+        "name": "Cheapest N hrs",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_dynamic_cheapest_hrs",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.cheapest_hrs",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 600,
+        "y": 920,
+        "wires": [
+            [
+                "95346a4ab49638b8"
+            ]
+        ]
+    },
+    {
+        "id": "95346a4ab49638b8",
+        "type": "api-current-state",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
+        "name": "Expensive N hrs",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_dynamic_expensive_hrs",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.expensive_hrs",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 600,
+        "y": 960,
+        "wires": [
+            [
+                "74cfa360edc4c60f"
+            ]
+        ]
+    },
+    {
+        "id": "57d8a02127936f91",
+        "type": "inject",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
+        "name": "Clear cache",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "10 13 * * *",
+        "once": false,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 390,
+        "y": 420,
+        "wires": [
+            [
+                "df2f545ecd40a29b"
+            ]
+        ]
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
         "name": "Home Assistant",
@@ -1932,7 +2015,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "f70922e6e61eb226",
+        "id": "d40bac020cc5d080",
         "type": "global-config",
         "env": [],
         "modules": {

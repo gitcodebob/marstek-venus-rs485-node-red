@@ -635,7 +635,7 @@ views:
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.8.2)*'
+        content: '### Home Battery Control *(v4.9.0)*'
         text_only: true
     cards: []
   - type: sections
@@ -805,7 +805,7 @@ views:
             icon: mdi:information-slab-circle
             heading: Charge until
             heading_style: subtitle
-            tap_action:
+            tap_action: &ref_0
               action: url
               url_path: >-
                 https://docs.homebatterycontrol.com/03-strategies.html#charge-from-grid
@@ -947,6 +947,14 @@ views:
               - condition: state
                 entity: input_select.house_battery_strategy_charge_goal
                 state: solar forecast
+          - type: heading
+            icon: mdi:information-slab-circle
+            heading: When done charging, switch to strategy
+            heading_style: subtitle
+            tap_action: *ref_0
+          - type: entities
+            entities:
+              - entity: input_select.house_battery_strategy_charge_goal_reached
           - type: markdown
             content: >-
               <font color=grey>_'Reserve' is usable energy in your batteries
@@ -992,7 +1000,7 @@ views:
             icon: mdi:information-slab-circle
             heading: Sell until
             heading_style: subtitle
-            tap_action:
+            tap_action: &ref_1
               action: url
               url_path: >-
                 https://docs.homebatterycontrol.com/03-strategies.html#charge-from-grid
@@ -1013,6 +1021,14 @@ views:
                   entity: input_number.house_battery_strategy_sell_target_soc
             show_header_toggle: false
             state_color: false
+          - type: heading
+            icon: mdi:information-slab-circle
+            heading: When done, switch to strategy
+            heading_style: subtitle
+            tap_action: *ref_1
+          - type: entities
+            entities:
+              - entity: input_select.house_battery_strategy_sell_goal_reached
           - type: markdown
             content: >-
               <font color=grey>_'Reserve' is usable energy in your batteries
@@ -2286,8 +2302,19 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: FEAT | Dynamic strategy 2,  multi-peak
+            heading: FEAT | Dynamic strategy v2 (multi-peak support)
             heading_style: title
+          - type: markdown
+            content: |-
+              <ha-alert title="Choose strategy **Dynamic v2**">
+              To activate this lab feature</ha-alert>
+            visibility:
+              - condition: not
+                conditions:
+                  - condition: state
+                    entity: input_select.house_battery_strategy
+                    state: Dynamic 2
+            text_only: true
           - type: heading
             icon: mdi:information
             heading: Using the dynamic strategy
@@ -2390,6 +2417,8 @@ views:
             entities:
               - entity: input_select.house_battery_strategy_dynamic_cheapest
                 name: I want to use
+              - entity: input_number.house_battery_strategy_dynamic_cheapest_hrs
+                name: 'Max # cheap hrs'
           - type: heading
             icon: mdi:timeline-clock-outline
             heading: Expensive periods
@@ -2398,6 +2427,8 @@ views:
             entities:
               - entity: input_select.house_battery_strategy_dynamic_expensive
                 name: I want to use
+              - entity: input_number.house_battery_strategy_dynamic_expensive_hrs
+                name: 'Max # expensive hrs'
       - type: grid
         cards:
           - type: heading
@@ -2666,8 +2697,8 @@ views:
                 entity: update.cheapest_energy_hours_update
                 state: unknown
           - condition: state
-            entity: input_boolean.house_battery_control_is_debug_mode
-            state_not: unknown
+            entity: input_select.house_battery_strategy
+            state: Dynamic 2
     badges:
       - type: entity
         show_name: true
