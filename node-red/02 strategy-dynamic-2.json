@@ -1,23 +1,23 @@
 [
     {
-        "id": "53e17bc333a64fb6",
+        "id": "7cb2c3c95ae25465",
         "type": "tab",
-        "label": "Strategy Dynamic v4.9.0",
+        "label": "Strategy Dynamic 2 v4.9.0",
         "disabled": false,
         "info": "Dynamic contract automated management",
         "env": []
     },
     {
-        "id": "e7d0bc73bf3a0ead",
+        "id": "7b13598788444306",
         "type": "group",
-        "z": "53e17bc333a64fb6",
+        "z": "7cb2c3c95ae25465",
         "name": "Battery solutions",
         "style": {
             "label": true
         },
         "nodes": [
-            "9abc973c2c301c1a",
-            "aa3c8350bbc67f79"
+            "ade6fe6abf95b7aa",
+            "a55848cd3e5bda65"
         ],
         "x": 934,
         "y": 79,
@@ -25,17 +25,17 @@
         "h": 142
     },
     {
-        "id": "cafa7f1f83c230ca",
+        "id": "8fcdb83d7cc3c13d",
         "type": "group",
-        "z": "53e17bc333a64fb6",
+        "z": "7cb2c3c95ae25465",
         "name": "Home battery start",
         "style": {
             "label": true
         },
         "nodes": [
-            "a17f27ed077c48cc",
-            "fac117739ce0075b",
-            "d0972f3c833d9ed7"
+            "93f6b5a120a7dcdf",
+            "bb0eaafb583543ba",
+            "1f91a563ed73c3dc"
         ],
         "x": 14,
         "y": 79,
@@ -43,41 +43,41 @@
         "h": 162
     },
     {
-        "id": "f049f7345bad50fa",
+        "id": "4451d1c1a81816f6",
         "type": "group",
-        "z": "53e17bc333a64fb6",
+        "z": "7cb2c3c95ae25465",
         "name": "Plan",
         "style": {
             "label": true
         },
         "nodes": [
-            "179a6544970607a2",
-            "ca36b723377536b3",
-            "db6ccd1c80d518cb",
-            "87b9a790059c88d6",
-            "45991c4c07807d2b",
-            "42ba28a9b56c30b2",
-            "2f86c094b23107e0"
+            "0d13e00638a5326c",
+            "3c5b117b6a7db82f",
+            "6ed47e82becf22ce",
+            "7cab6b6d495144b7",
+            "23ae923fe5fcedcc",
+            "42148c9790cc8f7e",
+            "ca48b6f96b385b48"
         ],
         "x": 228,
         "y": 273,
         "w": 1384,
-        "h": 1054
+        "h": 794
     },
     {
-        "id": "82918a3adb2ac020",
+        "id": "b9013bda8ac76f05",
         "type": "group",
-        "z": "53e17bc333a64fb6",
+        "z": "7cb2c3c95ae25465",
         "name": "Execute",
         "style": {
             "label": true
         },
         "nodes": [
-            "5c6ca9a9fd93cc07",
-            "260b17641f0582b8",
-            "e410249d9426cf0b",
-            "e78a156c7e68455b",
-            "dd7c46b551d5f17d"
+            "bc3a6eb1556d60fc",
+            "0aebfb67edf9d8a4",
+            "01f1f1e9188eec11",
+            "efea5801800ec828",
+            "1c53bcd89e1eb927"
         ],
         "x": 234,
         "y": 119,
@@ -85,22 +85,22 @@
         "h": 122
     },
     {
-        "id": "ce94c0a52d303397",
+        "id": "050f67f2edd7b3f4",
         "type": "group",
-        "z": "53e17bc333a64fb6",
+        "z": "7cb2c3c95ae25465",
         "name": "Test area",
         "style": {
             "label": true
         },
         "nodes": [
-            "289e1570cefaf803",
-            "c60d7182338316ab",
-            "9ea7a1ef6bcbc029",
-            "461987165f7a3821",
-            "ddc5bcf6464e6924",
-            "cba02aef5d306923",
-            "1b8d136e5f3229e8",
-            "b10e710ca7f7a230"
+            "e3fb341e3a38df5a",
+            "26b8e60f264aa8c4",
+            "7eb21fe0bcc19498",
+            "40722c9c3e0f8680",
+            "d48d4e59fafad79f",
+            "c5e33bd84d982832",
+            "866f91bfe009ce15",
+            "20e878b7aa54c5b6"
         ],
         "x": 234,
         "y": 1479,
@@ -108,19 +108,19 @@
         "h": 162
     },
     {
-        "id": "ca7403d479c8c81b",
+        "id": "e79be4f0c2601c11",
         "type": "group",
-        "z": "53e17bc333a64fb6",
+        "z": "7cb2c3c95ae25465",
         "name": "All data",
         "style": {
             "label": true
         },
         "nodes": [
-            "98648bbd60782aaa",
-            "b18eb5e73c425699",
-            "39e219b45d46aaad",
-            "7bff3dbf95b96087",
-            "a2ee605012a06a64"
+            "266d34eb72f04a23",
+            "38a32ca6198cd9ec",
+            "2f06e941e2bebeaf",
+            "e70b70330a18e9ee",
+            "cb33c35d77179507"
         ],
         "x": 234,
         "y": 1659,
@@ -128,9 +128,9 @@
         "h": 142
     },
     {
-        "id": "bda1475e83a23e8a",
+        "id": "9fa2cde3b08ac3a4",
         "type": "group",
-        "z": "53e17bc333a64fb6",
+        "z": "7cb2c3c95ae25465",
         "name": "Unhandled exceptions",
         "style": {
             "label": true,
@@ -138,9 +138,9 @@
             "color": "#d88a8a"
         },
         "nodes": [
-            "436686495b2e5560",
-            "b31cf1870dde9df6",
-            "da75e0b76b974cd4"
+            "185d23a097c1c628",
+            "27672623f145161a",
+            "20e0c26c18e6ceef"
         ],
         "x": 24,
         "y": 279,
@@ -148,70 +148,60 @@
         "h": 82
     },
     {
-        "id": "45991c4c07807d2b",
+        "id": "23ae923fe5fcedcc",
         "type": "group",
-        "z": "53e17bc333a64fb6",
-        "g": "f049f7345bad50fa",
+        "z": "7cb2c3c95ae25465",
+        "g": "4451d1c1a81816f6",
         "name": "API call to Data Source",
         "style": {
             "label": true
         },
         "nodes": [
-            "4b93479c2371c270",
-            "26ee2c357e0a4286",
-            "966a1d5cb6df0a65",
-            "ca98cd68c1fe02a4",
-            "f6a1142b90f9375b",
-            "3050be3a905d6902",
-            "a55f3f89e2535ec5",
-            "d8e9f913929effca",
-            "d6903c124c9db00d",
-            "1c3ae6df759ff22c",
-            "62c9d509784fd2fb",
-            "0ec9dd6a1cc49382",
-            "47fee38ffe2fe3d8",
-            "e1813908c8b0ab65",
-            "8c56a16131f182ad",
-            "e516b7c55e429393",
-            "225c87c56ffcb31a",
-            "6bf235402926200b",
-            "22ea4f5769feb79b",
-            "766bd59076369230"
+            "e6f3957438107ce3",
+            "fe4291433078a78a",
+            "29dd63ca4a5e0d31",
+            "a4ab9f2f9a57b27d",
+            "cc1e309cb2e18d5d",
+            "b12c56dee2b23388",
+            "375d1b6e510b65c2",
+            "e24020f76a496335",
+            "0eb2f26bb8493a62",
+            "6bc3dbbf8388ade3",
+            "55bdfafac92e48ed"
         ],
         "x": 254,
         "y": 519,
-        "w": 752,
-        "h": 362
+        "w": 652,
+        "h": 242
     },
     {
-        "id": "42ba28a9b56c30b2",
+        "id": "42148c9790cc8f7e",
         "type": "group",
-        "z": "53e17bc333a64fb6",
-        "g": "f049f7345bad50fa",
+        "z": "7cb2c3c95ae25465",
+        "g": "4451d1c1a81816f6",
         "name": "Update when",
         "style": {
             "label": true
         },
         "nodes": [
-            "59fae181f3d2561c",
-            "e66fbf9634c454dd",
-            "a58c31baacf4f05f",
-            "59e31c5b04dc829b",
-            "6f6064f98e8bf2fa",
-            "2ed7c4edda825ad9",
-            "1d545f7631cdfed9",
-            "4c2802bfc3585e7b",
-            "ffccb2ebb9c72c30",
-            "779260a394c0b6da",
-            "9d06982e33260285",
-            "bc468039bbb56b0c",
-            "15004f5373d31bcf",
-            "c1246148f0672793",
-            "407840aa3995a9dd",
-            "dc8cc489c7694efa",
-            "f6d46a4f862cc7e9",
-            "647b842d8e337591",
-            "fa3779d04977207b"
+            "e56d4ffbc852e0db",
+            "df2f545ecd40a29b",
+            "4347418aa9b5800d",
+            "860a9e473c5843bf",
+            "63fbf4e436af63e0",
+            "0167518c7fb2da15",
+            "38cf2ee2e085e874",
+            "1d265be5e5436d5d",
+            "845440fe66e2b137",
+            "03cb769d07379249",
+            "7cd31066ad7e3d0e",
+            "dcb858affef18fd7",
+            "bd31ed23c53d88ae",
+            "1b18292ae5da8c4a",
+            "8a2264a5f6d6dfd2",
+            "eeef05a7b8913b56",
+            "be05aedb262562b7",
+            "57d8a02127936f91"
         ],
         "x": 254,
         "y": 299,
@@ -219,70 +209,65 @@
         "h": 202
     },
     {
-        "id": "2f86c094b23107e0",
+        "id": "ca48b6f96b385b48",
         "type": "group",
-        "z": "53e17bc333a64fb6",
-        "g": "f049f7345bad50fa",
+        "z": "7cb2c3c95ae25465",
+        "g": "4451d1c1a81816f6",
         "name": "Determine strategy",
         "style": {
             "label": true
         },
         "nodes": [
-            "f938d7ae2a10cc91",
-            "ba6b7df249af19c2",
-            "b9a6d72f24d59829",
-            "b92b5fb3c14f6f7c",
-            "fbc4f8fd03c24b77",
-            "90f584f6546d3c83",
-            "042152fce2ea8cbd",
-            "4ed1e8e3a482d74c",
-            "3816bb375994b9a5",
-            "3b443f1f71a15da4",
-            "0eece60aaf5b82e2",
-            "71651ebf0fad2dcf",
-            "d8efc3a0c1b29ccc",
-            "3f6a27cd4d87648a",
-            "235d981e58f5c301",
-            "24075c68effa9621"
+            "59df6507d5eb1a3d",
+            "74cfa360edc4c60f",
+            "e6cf3ebcbea69b8f",
+            "57cc05efbb79cc77",
+            "992e224d6cddac70",
+            "3945027f12d9fbf8",
+            "cb239dde075cdc6b",
+            "c5c2aa6f819a9dd3",
+            "e6254201aae26ee3",
+            "4a9518f70862ed8c",
+            "95346a4ab49638b8"
         ],
         "x": 254,
-        "y": 899,
-        "w": 872,
-        "h": 402
+        "y": 799,
+        "w": 1072,
+        "h": 242
     },
     {
-        "id": "9d06982e33260285",
+        "id": "03cb769d07379249",
         "type": "junction",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "x": 640,
         "y": 340,
         "wires": [
             [
-                "fa3779d04977207b"
+                "be05aedb262562b7"
             ]
         ]
     },
     {
-        "id": "a17f27ed077c48cc",
+        "id": "93f6b5a120a7dcdf",
         "type": "link in",
-        "z": "53e17bc333a64fb6",
-        "g": "cafa7f1f83c230ca",
-        "name": "Dynamic",
+        "z": "7cb2c3c95ae25465",
+        "g": "8fcdb83d7cc3c13d",
+        "name": "Dynamic 2",
         "links": [],
         "x": 100,
         "y": 160,
         "wires": [
             [
-                "d0972f3c833d9ed7"
+                "1f91a563ed73c3dc"
             ]
         ],
         "l": true
     },
     {
-        "id": "1fa006bdd8f470ba",
+        "id": "ae66d93a1f04133d",
         "type": "comment",
-        "z": "53e17bc333a64fb6",
+        "z": "7cb2c3c95ae25465",
         "name": "Home Battery Strategy",
         "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
         "x": 120,
@@ -290,10 +275,10 @@
         "wires": []
     },
     {
-        "id": "fac117739ce0075b",
+        "id": "bb0eaafb583543ba",
         "type": "comment",
-        "z": "53e17bc333a64fb6",
-        "g": "cafa7f1f83c230ca",
+        "z": "7cb2c3c95ae25465",
+        "g": "8fcdb83d7cc3c13d",
         "name": "Start (readme)",
         "info": "# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the <select> option configured in your\nselect_input.house_battery_strategy\n\nconfigure select options in:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select 'AcmE example'\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
         "x": 110,
@@ -301,10 +286,10 @@
         "wires": []
     },
     {
-        "id": "9abc973c2c301c1a",
+        "id": "ade6fe6abf95b7aa",
         "type": "link out",
-        "z": "53e17bc333a64fb6",
-        "g": "e7d0bc73bf3a0ead",
+        "z": "7cb2c3c95ae25465",
+        "g": "7b13598788444306",
         "name": "Return",
         "mode": "return",
         "links": [],
@@ -313,10 +298,10 @@
         "wires": []
     },
     {
-        "id": "aa3c8350bbc67f79",
+        "id": "a55848cd3e5bda65",
         "type": "comment",
-        "z": "53e17bc333a64fb6",
-        "g": "e7d0bc73bf3a0ead",
+        "z": "7cb2c3c95ae25465",
+        "g": "7b13598788444306",
         "name": "End (readme)",
         "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
         "x": 1030,
@@ -324,52 +309,10 @@
         "wires": []
     },
     {
-        "id": "4b93479c2371c270",
-        "type": "api-render-template",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
-        "name": "Cheapest",
-        "server": "176d29a.6f648d6",
-        "version": 0,
-        "template": "{}",
-        "resultsLocation": "dynamic.data_cheapest",
-        "resultsLocationType": "msg",
-        "templateLocation": "",
-        "templateLocationType": "none",
-        "x": 460,
-        "y": 660,
-        "wires": [
-            [
-                "966a1d5cb6df0a65"
-            ]
-        ]
-    },
-    {
-        "id": "26ee2c357e0a4286",
-        "type": "api-render-template",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
-        "name": "Expensive",
-        "server": "176d29a.6f648d6",
-        "version": 0,
-        "template": "",
-        "resultsLocation": "dynamic.data_expensive",
-        "resultsLocationType": "msg",
-        "templateLocation": "",
-        "templateLocationType": "none",
-        "x": 470,
-        "y": 720,
-        "wires": [
-            [
-                "ca98cd68c1fe02a4"
-            ]
-        ]
-    },
-    {
-        "id": "f938d7ae2a10cc91",
+        "id": "59df6507d5eb1a3d",
         "type": "debug",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
         "name": "Complete message",
         "active": true,
         "tosidebar": true,
@@ -379,80 +322,38 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 910,
-        "y": 1220,
+        "x": 1110,
+        "y": 960,
         "wires": []
     },
     {
-        "id": "966a1d5cb6df0a65",
-        "type": "json",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
-        "name": "",
-        "property": "dynamic.data_cheapest",
-        "action": "obj",
-        "pretty": false,
-        "x": 555,
-        "y": 660,
-        "wires": [
-            [
-                "d8e9f913929effca"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "ca98cd68c1fe02a4",
-        "type": "json",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
-        "name": "",
-        "property": "dynamic.data_expensive",
-        "action": "obj",
-        "pretty": false,
-        "x": 575,
-        "y": 720,
-        "wires": [
-            [
-                "225c87c56ffcb31a"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "ba6b7df249af19c2",
+        "id": "74cfa360edc4c60f",
         "type": "function",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
         "name": "Determine dynamic strategy",
-        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// 1.   Input\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.value_conversion\")) || 1;\n\n// extract start/end date objects\nconst start_cheapest = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.start\"));\nconst start_expensive = new Date(RED.util.getMessageProperty(msg,\"dynamic.data_expensive.start\"));\nconst end_cheapest = new Date(RED.util.getMessageProperty(msg, \"dynamic.data_cheapest.end\"));\nconst end_expensive = new Date(RED.util.getMessageProperty(msg, \"dynamic.data_expensive.end\"));\nlet isCheapestNext = true;\n// stored price cheapest period\nlet lastCheapestPrice = context.last_cheapest_price || 0; // unit: cents/kWh\nconst nextCheapestPrice = parseInt(RED.util.getMessageProperty(msg, \"dynamic.data_cheapest.average\") / CONVERSION_RATE * 100); // unit: cents/kWh \n// average price expensive period\nconst lastExpensivePrice = parseInt(RED.util.getMessageProperty(msg, \"dynamic.data_expensive.average\") / CONVERSION_RATE * 100); // unit: cents/kWh\n// threshold rate for cheapest period\nconst cheapestThresholdCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.threshold_cheapest_cents\")) || 0; // unit: cents\n// threshold delta for expensive period\nconst deltaThresholdCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.min_delta_cents\")) || 0; // unit: cents\n\n// 1.1  Enums\nconst STRATEGY = {\n    CHEAPEST: RED.util.getMessageProperty(msg,\"dynamic.strategy_cheapest\") || \"Charge\", \n    NEUTRAL: RED.util.getMessageProperty(msg,\"dynamic.strategy_default\") || \"Charge PV\",\n    EXPENSIVE: RED.util.getMessageProperty(msg,\"dynamic.strategy_expensive\") || \"Self-consumption\"\n}\n\n// 1.2  Defaults   \nmsg.dynamic.avg_cheapest_tariff = 0;\nmsg.dynamic.avg_expensive_tariff = 0;\nmsg.dynamic.avg_delta = 0;\n\n// 2.   Tariffs\n// Check if the Date objects are valid. If 'Invalid Date', stop and warn the user.\nif (isNaN(start_cheapest.getTime()) || isNaN(start_expensive.getTime())) {\n    // warn user\n    log(this, `One or both dates are invalid. Cheap = ${start_cheapest}, Expensive = ${start_expensive}`,\"warn\");\n    node.status({fill:\"red\",shape:\"ring\",text:`One or both dates are invalid: ${start_cheapest}, ${start_expensive}`});\n    // fallback strategy\n    flow.set(\"dynamic_strategy\", STRATEGY.NEUTRAL);\n    // proceed to UI\n    return msg;\n}\n\n// Check if cheapest lies before expensive\nif (start_cheapest < start_expensive) {\n    log(this, `Cheapest moment lies before expensive moment. Cheapest moment: ${start_cheapest}, Expensive = ${start_expensive}`);\n    // store the cheapest price to compare it with future expensive rates, to determine if it's economical to discharge.\n    context.last_cheapest_price = nextCheapestPrice; // store for next iteration\n    lastCheapestPrice = nextCheapestPrice; // used for this iteration\n    log(this, `Cheapest price set to ${lastCheapestPrice} cents`);\n}\n\nif (lastCheapestPrice == 0) {\n    log(this, `I can't recall the tariff used for charging. Cheapest price set to '${lastCheapestPrice}' cents`);\n}\n\n// delta > N cents ? -> charging is economical\nconst delta = (lastExpensivePrice - lastCheapestPrice); // unit: cents\n\n// UI values\nmsg.dynamic.avg_cheapest_tariff = lastCheapestPrice;\nmsg.dynamic.avg_expensive_tariff = lastExpensivePrice;\nmsg.dynamic.avg_delta = delta;\n\n// 3.   Strategy selection logic\n// for string time\nfunction isTimeInPeriod(startStr, endStr) {\n    const now = new Date();\n    const start = new Date(startStr);\n    const end = new Date(endStr);\n    return (now >= start && now < end);\n}\n// 3.1  is_now - which period have we entered?\nconst now = new Date();\n/** @type {boolean} */\nconst cheapestIsNow = now >= start_cheapest && now <= end_cheapest;\n// const cheapestIsNow = RED.util.getMessageProperty(msg,\"dynamic.data_cheapest.is_now\");\n/** @type {boolean} */\nconst expensiveIsNow = now >= start_expensive && now <= end_expensive;\n// const expensiveIsNow = RED.util.getMessageProperty(msg, \"dynamic.data_expensive.is_now\");\n\n// 3.2  Set strategy\n// Default strategy\nmsg.dynamic.strategy = STRATEGY.NEUTRAL;\n\n// Cheapest period?\nif (cheapestIsNow && lastCheapestPrice <= cheapestThresholdCents) {\n    msg.dynamic.strategy = STRATEGY.CHEAPEST;\n    // Explain\n    log(this, `**Cheapest period is NOW**, price limit: ${lastCheapestPrice}/${cheapestThresholdCents} cents OK`);\n} else if(cheapestIsNow) {\n    // Explain why skipped\n    log(this, `**Cheapest period SKIPPED**, the cheapest period is too expensive today. Price limit: ${lastCheapestPrice}/${cheapestThresholdCents} cents.`);\n}\n\n// Expensive period?\nif (expensiveIsNow && delta >= deltaThresholdCents) {\n    msg.dynamic.strategy = STRATEGY.EXPENSIVE;\n    // Explain\n    log(this, `**Expensive period is NOW**, price delta: ${delta}>=${deltaThresholdCents} cents OK`);\n} else if(expensiveIsNow) {\n    // Explain why skipped\n    log(this, `**Expensive period SKIPPED**, price delta too small: ${lastExpensivePrice}-${lastCheapestPrice}=${delta} cents <= ${deltaThresholdCents} cents`); \n}\n\n// 3.3  Store the strategy in flow-context. The 'Execution' area will read from the flow-context.\nflow.set(\"dynamic_strategy\",msg.dynamic.strategy);\n\n// 4.   User feedback\n// Node status\nnode.status({ fill: \"blue\", shape: \"dot\", text: `${msg.dynamic.strategy}; ${cheapestIsNow} + ${expensiveIsNow} @ ${delta} cents` });\n// Explain\nlog(this, `Strategy set to **${msg.dynamic.strategy}**`);\n\n// Proceed to UI update\nreturn msg;",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// 1.  Input\nconst minDeltaCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.min_delta_cents\")) || 0;\n// Per-day caps on the number of LOW / HIGH marks, expressed in hours.\n// 0 (or missing/invalid/negative) means no limit.\nconst cheapestHrs = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.cheapest_hrs\")) || 0;\nconst expensiveHrs = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.expensive_hrs\")) || 0;\nconst dataAll = RED.util.getMessageProperty(msg, \"dynamic.data_all\");\n\nif (!dataAll || !Array.isArray(dataAll.list) || dataAll.list.length === 0) {\n    log(this, \"Price list missing or empty\", \"warn\");\n    node.status({ fill: \"red\", shape: \"ring\", text: \"No price data\" });\n    return null;\n}\n\nconst STRATEGY = {\n    HIGH: RED.util.getMessageProperty(msg, \"dynamic.strategy_expensive\") || \"Self-consumption\",\n    LOW: RED.util.getMessageProperty(msg, \"dynamic.strategy_cheapest\") || \"Charge\",\n    NEUTRAL: RED.util.getMessageProperty(msg, \"dynamic.strategy_default\") || \"Charge PV\",\n};\n\n// 2.  Build interval timestamps\n// Each datapoint covers (hours / datapoints) hours.\nconst prices = dataAll.list; // cents/kWh — already converted by \"Convert price\" node\nconst n = prices.length;\nconst startTime = new Date(dataAll.start);\nconst intervalMs = (dataAll.hours / dataAll.datapoints) * 3_600_000;\n\n// 3.  Mark intervals: pair extremes inward — independently per calendar day\n//\n// Pairing runs separately within each local calendar day, so today's marks\n// don't shift when tomorrow's prices arrive. Pair detection is one-to-one\n// (each candidate HIGH is matched against one candidate LOW), but the\n// per-day cheapest_hrs / expensive_hrs caps may suppress one side of a\n// detected pair — so the final marks can be asymmetric (e.g. 2 LOW + 1 HIGH\n// in a day if expensive_hrs caps HIGH at 1). The minDelta threshold\n// accounts for round-trip efficiency and other losses, so a pair is only\n// considered viable when its spread covers the loss.\n//\n// Method (Extreme-Pair Matching, O(n log n)):\n//   1. Sort intervals by price, keep original time-index for re-mapping.\n//   2. Two pointers walk inward from the extremes — `lo` from the cheapest\n//      unmatched, `hi` from the most-expensive unmatched.\n//   3. If the spread between them clears minDelta: mark them, advance both.\n//   4. If it does not clear minDelta: the cheapest unmatched LOW paired\n//      with the most-expensive unmatched HIGH yields the largest spread\n//      still achievable. If even that fails, no remaining pair can satisfy\n//      the threshold, so we stop.\n//\n// This algorithm prefers to mark the truly extreme\n// hours (highest-priced as HIGH, lowest-priced as LOW). On well-behaved\n// daily curves this produces the same number of pairs as \n// other algorithm variants; but in tight cases it can produce one or two fewer\n// pairs. Why choose this version? It marks the price peaks/troughs the user\n// would intuitively expect, which is good for user confidence and acceptance of the strategy. It is also efficient and straightforward to implement, without needing complex data structures or backtracking. \n// The main goal is to identify a set of HIGH and LOW intervals that are economically justified by their price spread, while keeping the logic transparent and explainable to the user.\n\n// Note:\n// It is up to the user to set minDelta appropriately for their system's efficiency and other costs, to ensure that marked cycles are truly beneficial.\n// Also the user can pick strategies that reflect their preferences for what to do during LOW and HIGH intervals, e.g. prioritising self-consumption during HIGH intervals, or selling back to the grid if allowed and profitable.\n// This makes optimisation flexible and user-configurable, while still being based on a clear economic rationale.\n// However, the algorithm does not attempt to find the optimal global pairing (which would be more complex), but rather a good local pairing that is computationally efficient and easy to understand.\n\n/**\n * @typedef {{ start: Date, end: Date, price: number, mark: 'high'|'low'|null, is_now: boolean }} Interval\n * @type {Interval[]}\n */\nconst intervals = new Array(n);\nfor (let i = 0; i < n; i++) {\n    const iStart = new Date(startTime.getTime() + i * intervalMs);\n    const iEnd = new Date(iStart.getTime() + intervalMs);\n    intervals[i] = { start: iStart, end: iEnd, price: prices[i], mark: null, is_now: false };\n}\n\n// Group interval indices by local calendar day (key = Y-M-D in local TZ).\nconst dayBuckets = new Map();\nfor (let i = 0; i < n; i++) {\n    const d = intervals[i].start;\n    const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;\n    let bucket = dayBuckets.get(key);\n    if (!bucket) { bucket = []; dayBuckets.set(key, bucket); }\n    bucket.push(i);\n}\n\n// Convert per-day hour caps to per-day interval counts.\n// intervalsPerHour = datapoints / hours (e.g. 4 for 15-min intervals).\n// 0 hrs => Infinity (no cap). Negatives are treated as 0 (no cap).\nconst intervalsPerHour = dataAll.datapoints / dataAll.hours;\nconst maxLowPerDay = cheapestHrs > 0 ? Math.round(cheapestHrs * intervalsPerHour) : Infinity;\nconst maxHighPerDay = expensiveHrs > 0 ? Math.round(expensiveHrs * intervalsPerHour) : Infinity;\n\n// Per dag de markeringen zetten.\nlet fullPairCount = 0;   // pairs where BOTH sides were marked (a complete cycle)\nlet lowMarkCount = 0;    // total LOW marks across all days\nlet highMarkCount = 0;   // total HIGH marks across all days\nfor (const dayIndices of dayBuckets.values()) {\n    // This day's indices sorted ascending by price (stable on ties).\n    const sortedIdx = [...dayIndices].sort((a, b) => prices[a] - prices[b]);\n    let lo = 0;\n    let hi = sortedIdx.length - 1;\n    let lowMarkedToday = 0;\n    let highMarkedToday = 0;\n    while (lo < hi) {\n        const loIdx = sortedIdx[lo];\n        const hiIdx = sortedIdx[hi];\n        if (prices[hiIdx] - prices[loIdx] >= minDeltaCents) {\n            const markLow = lowMarkedToday < maxLowPerDay;\n            const markHigh = highMarkedToday < maxHighPerDay;\n            // Both caps reached on this day — no more useful work here.\n            if (!markLow && !markHigh) break;\n            if (markLow) {\n                intervals[loIdx].mark = 'low';\n                lowMarkedToday++;\n                lowMarkCount++;\n            }\n            if (markHigh) {\n                intervals[hiIdx].mark = 'high';\n                highMarkedToday++;\n                highMarkCount++;\n            }\n            if (markLow && markHigh) fullPairCount++;\n            lo++; hi--;\n        } else {\n            // sortedIdx[lo] is the cheapest unmatched within this day,\n            // sortedIdx[hi] the most-expensive. Their spread is the largest\n            // still possible today — if it falls below minDelta, no further\n            // pair on this day can satisfy the threshold.\n            break;\n        }\n    }\n}\n\n// 4.  Determine current strategy\nconst now = new Date();\nconst currentInterval = intervals.find(iv => now >= iv.start && now < iv.end);\nif (currentInterval) currentInterval.is_now = true;\nconst currentMark = currentInterval ? currentInterval.mark : null;\n\nconst strategy =\n    currentMark === 'high' ? STRATEGY.HIGH :\n        currentMark === 'low' ? STRATEGY.LOW :\n            STRATEGY.NEUTRAL;\n\nconst strategyMark = \n    currentMark === 'high' ? 'Expensive' :\n        currentMark === 'low' ? 'Cheap' :\n            'Regular';\n\n\n// 5.  Store results\nRED.util.setMessageProperty(msg,\"dynamic.data_all.list_marked\",intervals,true);\nRED.util.setMessageProperty(msg, \"dynamic.data_all.mark_now\", strategyMark, true);\nRED.util.setMessageProperty(msg,\"dynamic.strategy\",strategy);\nflow.set(\"dynamic_strategy\", strategy); // this is the strategy executed when dynamic strategy is active, see the 'Execute' section of this flow.\n\n// 6.  Explain\n// Gross spread: sum over all marked intervals of (+price for HIGH, -price for LOW), in cents/kWh.\n//               With symmetric caps this equals the sum of (high - low) over paired cycles;\n//               with asymmetric caps it also includes unpaired single-side marks.\n// Net spread:   minus round-trip losses on complete cycles (one minDelta per full pair).\n//               Half-pairs (one side suppressed by a cap) incur no round-trip loss here.\nconst grossSpread = Math.round(intervals\n    .filter(iv => iv.mark !== null)\n    .reduce((sum, iv) => sum + (iv.mark === 'high' ? iv.price : -iv.price), 0));\nconst netSpread = grossSpread - fullPairCount * minDeltaCents;\nconst markedCount = lowMarkCount + highMarkCount;\n\nnode.status({\n    fill: \"blue\", shape: \"dot\",\n    text: `${strategy} | ${fullPairCount} cycle${fullPairCount === 1 ? '' : 's'} | net Σ${netSpread}¢`\n});\nlog(this, `Strategy: **${strategy}** | cycles=${fullPairCount} low=${lowMarkCount} high=${highMarkCount} unmarked=${n - markedCount} | gross=${grossSpread}¢ net=${netSpread}¢ minDelta=${minDeltaCents}¢ caps=L${cheapestHrs}h/H${expensiveHrs}h`);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 620,
-        "y": 1140,
+        "x": 840,
+        "y": 960,
         "wires": [
             [
-                "f938d7ae2a10cc91",
-                "b9a6d72f24d59829",
-                "b92b5fb3c14f6f7c",
-                "fbc4f8fd03c24b77",
-                "90f584f6546d3c83",
-                "042152fce2ea8cbd",
-                "4ed1e8e3a482d74c",
-                "3816bb375994b9a5",
-                "3b443f1f71a15da4"
+                "59df6507d5eb1a3d",
+                "e6cf3ebcbea69b8f",
+                "c5c2aa6f819a9dd3"
             ]
         ]
     },
     {
-        "id": "5c6ca9a9fd93cc07",
+        "id": "bc3a6eb1556d60fc",
         "type": "change",
-        "z": "53e17bc333a64fb6",
-        "g": "82918a3adb2ac020",
+        "z": "7cb2c3c95ae25465",
+        "g": "b9013bda8ac76f05",
         "name": "Set strategy",
         "rules": [
             {
@@ -472,15 +373,15 @@
         "y": 200,
         "wires": [
             [
-                "dd7c46b551d5f17d"
+                "1c53bcd89e1eb927"
             ]
         ]
     },
     {
-        "id": "260b17641f0582b8",
+        "id": "0aebfb67edf9d8a4",
         "type": "link call",
-        "z": "53e17bc333a64fb6",
-        "g": "82918a3adb2ac020",
+        "z": "7cb2c3c95ae25465",
+        "g": "b9013bda8ac76f05",
         "name": "Sub-strategy",
         "links": [],
         "linkType": "dynamic",
@@ -489,144 +390,16 @@
         "y": 180,
         "wires": [
             [
-                "9abc973c2c301c1a"
+                "ade6fe6abf95b7aa"
             ]
         ]
     },
     {
-        "id": "b9a6d72f24d59829",
-        "type": "api-call-service",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
-        "name": "Cheapest Start",
-        "server": "176d29a.6f648d6",
-        "version": 7,
-        "debugenabled": false,
-        "action": "input_datetime.set_datetime",
-        "floorId": [],
-        "areaId": [],
-        "deviceId": [],
-        "entityId": [
-            "input_datetime.house_battery_strategy_dynamic_cheapest_start"
-        ],
-        "labelId": [],
-        "data": "{\t    \"datetime\": $moment($$.dynamic.data_cheapest.start).format('YYYY-MM-DD HH:mm:ss')\t}",
-        "dataType": "jsonata",
-        "mergeContext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "blockInputOverrides": true,
-        "domain": "input_datetime",
-        "service": "set_datetime",
-        "x": 900,
-        "y": 940,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b92b5fb3c14f6f7c",
-        "type": "api-call-service",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
-        "name": "Cheapest End",
-        "server": "176d29a.6f648d6",
-        "version": 7,
-        "debugenabled": false,
-        "action": "input_datetime.set_datetime",
-        "floorId": [],
-        "areaId": [],
-        "deviceId": [],
-        "entityId": [
-            "input_datetime.house_battery_strategy_dynamic_cheapest_end"
-        ],
-        "labelId": [],
-        "data": "{\t    \"datetime\": $moment($$.dynamic.data_cheapest.end).format('YYYY-MM-DD HH:mm:ss')\t}",
-        "dataType": "jsonata",
-        "mergeContext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "blockInputOverrides": true,
-        "domain": "input_datetime",
-        "service": "set_datetime",
-        "x": 900,
-        "y": 980,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "fbc4f8fd03c24b77",
-        "type": "api-call-service",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
-        "name": "Expensive Start",
-        "server": "176d29a.6f648d6",
-        "version": 7,
-        "debugenabled": false,
-        "action": "input_datetime.set_datetime",
-        "floorId": [],
-        "areaId": [],
-        "deviceId": [],
-        "entityId": [
-            "input_datetime.house_battery_strategy_dynamic_expensive_start"
-        ],
-        "labelId": [],
-        "data": "{\t    \"datetime\": $moment($$.dynamic.data_expensive.start).format('YYYY-MM-DD HH:mm:ss')\t}",
-        "dataType": "jsonata",
-        "mergeContext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "blockInputOverrides": true,
-        "domain": "input_datetime",
-        "service": "set_datetime",
-        "x": 900,
-        "y": 1020,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "90f584f6546d3c83",
-        "type": "api-call-service",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
-        "name": "Expensive End",
-        "server": "176d29a.6f648d6",
-        "version": 7,
-        "debugenabled": false,
-        "action": "input_datetime.set_datetime",
-        "floorId": [],
-        "areaId": [],
-        "deviceId": [],
-        "entityId": [
-            "input_datetime.house_battery_strategy_dynamic_expensive_end"
-        ],
-        "labelId": [],
-        "data": "{\t    \"datetime\": $moment($$.dynamic.data_expensive.end).format('YYYY-MM-DD HH:mm:ss')\t}",
-        "dataType": "jsonata",
-        "mergeContext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "blockInputOverrides": true,
-        "domain": "input_datetime",
-        "service": "set_datetime",
-        "x": 900,
-        "y": 1060,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "59fae181f3d2561c",
+        "id": "e56d4ffbc852e0db",
         "type": "inject",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
-        "name": "Every 60 min",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
+        "name": "Clear cache",
         "props": [
             {
                 "p": "payload"
@@ -637,25 +410,25 @@
             }
         ],
         "repeat": "",
-        "crontab": "0 0-23 * * *",
+        "crontab": "00 15 * * *",
         "once": false,
         "onceDelay": "3",
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 380,
+        "x": 370,
         "y": 420,
         "wires": [
             [
-                "e66fbf9634c454dd"
+                "df2f545ecd40a29b"
             ]
         ]
     },
     {
-        "id": "e410249d9426cf0b",
+        "id": "01f1f1e9188eec11",
         "type": "switch",
-        "z": "53e17bc333a64fb6",
-        "g": "82918a3adb2ac020",
+        "z": "7cb2c3c95ae25465",
+        "g": "b9013bda8ac76f05",
         "name": "Has strategy",
         "property": "dynamic_strategy",
         "propertyType": "flow",
@@ -674,18 +447,18 @@
         "y": 180,
         "wires": [
             [
-                "e78a156c7e68455b"
+                "efea5801800ec828"
             ],
             [
-                "5c6ca9a9fd93cc07"
+                "bc3a6eb1556d60fc"
             ]
         ]
     },
     {
-        "id": "e78a156c7e68455b",
+        "id": "efea5801800ec828",
         "type": "change",
-        "z": "53e17bc333a64fb6",
-        "g": "82918a3adb2ac020",
+        "z": "7cb2c3c95ae25465",
+        "g": "b9013bda8ac76f05",
         "name": "Set Full stop",
         "rules": [
             {
@@ -705,15 +478,15 @@
         "y": 160,
         "wires": [
             [
-                "dd7c46b551d5f17d"
+                "1c53bcd89e1eb927"
             ]
         ]
     },
     {
-        "id": "c60d7182338316ab",
+        "id": "26b8e60f264aa8c4",
         "type": "inject",
-        "z": "53e17bc333a64fb6",
-        "g": "ce94c0a52d303397",
+        "z": "7cb2c3c95ae25465",
+        "g": "050f67f2edd7b3f4",
         "name": "Test",
         "props": [
             {
@@ -735,15 +508,15 @@
         "y": 1520,
         "wires": [
             [
-                "289e1570cefaf803"
+                "e3fb341e3a38df5a"
             ]
         ]
     },
     {
-        "id": "289e1570cefaf803",
+        "id": "e3fb341e3a38df5a",
         "type": "api-render-template",
-        "z": "53e17bc333a64fb6",
-        "g": "ce94c0a52d303397",
+        "z": "7cb2c3c95ae25465",
+        "g": "050f67f2edd7b3f4",
         "name": "Cheapest",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -756,15 +529,15 @@
         "y": 1520,
         "wires": [
             [
-                "9ea7a1ef6bcbc029"
+                "7eb21fe0bcc19498"
             ]
         ]
     },
     {
-        "id": "9ea7a1ef6bcbc029",
+        "id": "7eb21fe0bcc19498",
         "type": "json",
-        "z": "53e17bc333a64fb6",
-        "g": "ce94c0a52d303397",
+        "z": "7cb2c3c95ae25465",
+        "g": "050f67f2edd7b3f4",
         "name": "",
         "property": "cheapest",
         "action": "obj",
@@ -773,16 +546,16 @@
         "y": 1520,
         "wires": [
             [
-                "461987165f7a3821"
+                "40722c9c3e0f8680"
             ]
         ],
         "l": false
     },
     {
-        "id": "461987165f7a3821",
+        "id": "40722c9c3e0f8680",
         "type": "api-render-template",
-        "z": "53e17bc333a64fb6",
-        "g": "ce94c0a52d303397",
+        "z": "7cb2c3c95ae25465",
+        "g": "050f67f2edd7b3f4",
         "name": "Expensive",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -795,15 +568,15 @@
         "y": 1520,
         "wires": [
             [
-                "ddc5bcf6464e6924"
+                "d48d4e59fafad79f"
             ]
         ]
     },
     {
-        "id": "ddc5bcf6464e6924",
+        "id": "d48d4e59fafad79f",
         "type": "json",
-        "z": "53e17bc333a64fb6",
-        "g": "ce94c0a52d303397",
+        "z": "7cb2c3c95ae25465",
+        "g": "050f67f2edd7b3f4",
         "name": "",
         "property": "expensive",
         "action": "obj",
@@ -812,18 +585,18 @@
         "y": 1520,
         "wires": [
             [
-                "cba02aef5d306923",
-                "1b8d136e5f3229e8",
-                "b10e710ca7f7a230"
+                "c5e33bd84d982832",
+                "866f91bfe009ce15",
+                "20e878b7aa54c5b6"
             ]
         ],
         "l": false
     },
     {
-        "id": "cba02aef5d306923",
+        "id": "c5e33bd84d982832",
         "type": "debug",
-        "z": "53e17bc333a64fb6",
-        "g": "ce94c0a52d303397",
+        "z": "7cb2c3c95ae25465",
+        "g": "050f67f2edd7b3f4",
         "name": "Cheap",
         "active": true,
         "tosidebar": false,
@@ -838,10 +611,10 @@
         "wires": []
     },
     {
-        "id": "1b8d136e5f3229e8",
+        "id": "866f91bfe009ce15",
         "type": "debug",
-        "z": "53e17bc333a64fb6",
-        "g": "ce94c0a52d303397",
+        "z": "7cb2c3c95ae25465",
+        "g": "050f67f2edd7b3f4",
         "name": "Expensive",
         "active": true,
         "tosidebar": false,
@@ -856,10 +629,10 @@
         "wires": []
     },
     {
-        "id": "98648bbd60782aaa",
+        "id": "266d34eb72f04a23",
         "type": "api-render-template",
-        "z": "53e17bc333a64fb6",
-        "g": "ca7403d479c8c81b",
+        "z": "7cb2c3c95ae25465",
+        "g": "e79be4f0c2601c11",
         "name": "All Zonneplan",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -872,15 +645,15 @@
         "y": 1700,
         "wires": [
             [
-                "39e219b45d46aaad"
+                "2f06e941e2bebeaf"
             ]
         ]
     },
     {
-        "id": "b18eb5e73c425699",
+        "id": "38a32ca6198cd9ec",
         "type": "inject",
-        "z": "53e17bc333a64fb6",
-        "g": "ca7403d479c8c81b",
+        "z": "7cb2c3c95ae25465",
+        "g": "e79be4f0c2601c11",
         "name": "Fetch",
         "props": [
             {
@@ -902,15 +675,15 @@
         "y": 1700,
         "wires": [
             [
-                "98648bbd60782aaa"
+                "266d34eb72f04a23"
             ]
         ]
     },
     {
-        "id": "39e219b45d46aaad",
+        "id": "2f06e941e2bebeaf",
         "type": "json",
-        "z": "53e17bc333a64fb6",
-        "g": "ca7403d479c8c81b",
+        "z": "7cb2c3c95ae25465",
+        "g": "e79be4f0c2601c11",
         "name": "",
         "property": "all_data",
         "action": "obj",
@@ -919,17 +692,17 @@
         "y": 1700,
         "wires": [
             [
-                "7bff3dbf95b96087",
-                "a2ee605012a06a64"
+                "e70b70330a18e9ee",
+                "cb33c35d77179507"
             ]
         ],
         "l": false
     },
     {
-        "id": "e66fbf9634c454dd",
+        "id": "df2f545ecd40a29b",
         "type": "delay",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "",
         "pauseType": "delay",
         "timeout": "1",
@@ -947,15 +720,15 @@
         "y": 420,
         "wires": [
             [
-                "407840aa3995a9dd"
+                "1b18292ae5da8c4a"
             ]
         ]
     },
     {
-        "id": "a58c31baacf4f05f",
+        "id": "4347418aa9b5800d",
         "type": "api-current-state",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "Source",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -994,19 +767,19 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1000,
+        "x": 980,
         "y": 380,
         "wires": [
             [
-                "4c2802bfc3585e7b"
+                "38cf2ee2e085e874"
             ]
         ]
     },
     {
-        "id": "f6a1142b90f9375b",
+        "id": "e6f3957438107ce3",
         "type": "function",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
+        "z": "7cb2c3c95ae25465",
+        "g": "23ae923fe5fcedcc",
         "name": "Data source settings",
         "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n/*    From cheapes-energy-hours macro\n      See: https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings\n\n      - None (default selection)\n      - Zonneplan\n      - Amber Electric\n      - EasyEnergy, EnergyZero (core)\n      - ENTSO-E\n      - Frank Energie\n      - GE-Spot\n      - Tibber, Nordpool (core)\n      - Tibber (custom)\n      - Nordpool (custom)\n      - PVPC (Spain)\n      - Octopus Energy\n      - Omie\n*/\n\nswitch (msg.dynamic.data_source) {\n      case \"None\":\n            // Handle the 'None' case (e.g., no supplier selected or data is unavailable)\n            log(this,\"No data source selected.\");\n            // Add config here...\n            break;\n\n      case \"Zonneplan\":\n            // Code for Zonneplan (a Dutch energy supplier)\n            log(this,\"Processing Zonneplan data.\");\n            // Add config here...\n            msg.dynamic.sensor='sensor.zonneplan_current_electricity_tariff'; // when using: https://github.com/fsaris/home-assistant-zonneplan-one\n            msg.dynamic.source_settings='zonneplan'\n            // msg.dynamic.attr_all='forecast';\n            // msg.dynamic.value_key='electricity_price';\n            msg.dynamic.value_conversion = 10000000; // whole currency / kWh\n            break;\n\n      case \"Amber Electric\":\n            // Code for Amber Electric (Australian energy retailer)\n            log(this,\"Processing Amber Electric data.\");\n            // Add config here...\n            msg.dynamic.attr_all='forecasts'; \n            msg.dynamic.time_key='start_time'; \n            msg.dynamic.value_key='per_kwh';\n            break;\n\n      case \"EasyEnergy, EnergyZero (core)\":\n            // Code for EasyEnergy and EnergyZero (core/default implementation)\n            log(this,\"Processing EasyEnergy/EnergyZero core data.\");\n            // Add config here...\n            break;\n\n      case \"ENTSO-E\":\n            // Code for ENTSO-E (European Network of Transmission System Operators for Electricity)\n            log(this,\"Processing ENTSO-E data.\");\n            // Add config here...\n            msg.dynamic.attr_today='prices_today'; \n            msg.dynamic.attr_tomorrow='prices_tomorrow'; \n            msg.dynamic.time_key='time';\n            msg.dynamic.value_key='price';\n            break;\n\n      case \"Frank Energie\":\n            // Code for Frank Energie (Dutch energy supplier)\n            log(this,\"Processing Frank Energie data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.frank_energie_prijzen_gemiddelde_elektriciteitsprijs_alle_uren_all_in'; // when using: https://github.com/HiDiHo01/home-assistant-frank_energie\n            msg.dynamic.attr_all = 'prices'; \n            msg.dynamic.time_key = 'from'; \n            msg.dynamic.value_key = 'price';\n            break;\n\n      case \"GE-Spot\":\n            // Code for GE-Spot (Global Electric Spot price)\n            log(this,\"Processing GE-Spot data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today_hourly_prices'; // using the hourly version. today_interval_prices is per 15 mins\n            msg.dynamic.attr_tomorrow = 'tomorrow_hourly_prices'; // using the hourly version\n            msg.dynamic.time_key = 'time'; \n            msg.dynamic.value_key = 'value';\n            break;\n\n      case \"Nordpool (core)\":\n            // Code for Nordpool (core/default implementation)\n            log(this, \"Processing Nordpool core data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.nordpool_ceh_prices';\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.time_key = 'start';\n            msg.dynamic.value_key = 'value';\n            msg.dynamic.datetime_in_data = true; // datetime is in the data\n            break;\n\n      case \"Tibber (core)\":\n            // Code for Tibber (core/default implementation)\n            log(this,\"Processing Tibber core data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.tibber_ceh_prices';\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.time_key = 'start';\n            msg.dynamic.value_key = 'value';\n            msg.dynamic.datetime_in_data = true; // datetime is in the data\n            break;\n\n      case \"Tibber (custom)\":\n            // Code for a custom Tibber setup/configuration\n            log(this,\"Processing Tibber custom data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.datetime_in_data = false;\n            break;\n\n      case \"Nordpool (custom)\":\n            // Code for a custom Nordpool setup/configuration\n            log(this,\"Processing Nordpool custom data.\");\n            // Add config here...\n            break;\n\n      case \"PVPC (Spain)\":\n            // Code for PVPC (Voluntary Price for Small Consumers in Spain)\n            log(this,\"Processing Spanish PVPC data.\");\n            // Add config here...\n            break;\n\n      case \"Octopus Energy\":\n            // Code for Octopus Energy (UK/international energy supplier)\n            log(this,\"Processing Octopus Energy data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'rates'; \n            msg.dynamic.value_key = 'value_incl_vat';\n            break;\n\n      case \"Omie\":\n            // Code for Omie (Iberian Energy Market Operator)\n            log(this,\"Processing Omie data.\");\n            // Add config here...\n            break;\n\n      default:\n            // Code to execute if the supplier does not match any of the above cases\n            node.warn(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            log(this,`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            // Add default error handling...\n}\n\nlog(this, \"Performing API calls...\");\n\nreturn msg;",
         "outputs": 1,
@@ -1019,118 +792,16 @@
         "y": 600,
         "wires": [
             [
-                "3050be3a905d6902"
+                "fe4291433078a78a"
             ]
         ]
     },
     {
-        "id": "59e31c5b04dc829b",
-        "type": "api-current-state",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
-        "name": "Cheapest N hrs",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_number.house_battery_strategy_dynamic_cheapest_hrs",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "dynamic.cheapest_hrs",
-                "propertyType": "msg",
-                "value": "number",
-                "valueType": "entityState"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 1240,
-        "y": 380,
-        "wires": [
-            [
-                "6f6064f98e8bf2fa"
-            ]
-        ]
-    },
-    {
-        "id": "6f6064f98e8bf2fa",
-        "type": "api-current-state",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
-        "name": "Expensive N hrs",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_number.house_battery_strategy_dynamic_expensive_hrs",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "dynamic.expensive_hrs",
-                "propertyType": "msg",
-                "value": "number",
-                "valueType": "entityState"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 1240,
-        "y": 420,
-        "wires": [
-            [
-                "bc468039bbb56b0c"
-            ]
-        ]
-    },
-    {
-        "id": "2ed7c4edda825ad9",
+        "id": "860a9e473c5843bf",
         "type": "inject",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
-        "name": "Check period",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
+        "name": "Update strat",
         "props": [
             {
                 "p": "payload"
@@ -1151,17 +822,38 @@
         "y": 380,
         "wires": [
             [
-                "fa3779d04977207b"
+                "be05aedb262562b7"
             ]
         ]
     },
     {
-        "id": "3050be3a905d6902",
+        "id": "63fbf4e436af63e0",
         "type": "function",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
+        "name": "Init",
+        "func": "if(msg.payload !== \"Dynamic 2\") {\n    node.status({fill:\"red\",shape:\"ring\",text:\"Strategy not selected\"});\n    return null;\n}\nnode.status({fill:\"green\",shape:\"dot\",text:\"Ok\"});\n\n// Init\nmsg.dynamic = {};\nmsg.log = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 360,
+        "wires": [
+            [
+                "4347418aa9b5800d"
+            ]
+        ]
+    },
+    {
+        "id": "fe4291433078a78a",
+        "type": "function",
+        "z": "7cb2c3c95ae25465",
+        "g": "23ae923fe5fcedcc",
         "name": "Generate templates",
-        "func": "// final template initialization\nmsg.dynamic.template_cheapest = \"\";\nmsg.dynamic.template_expensive = \"\";\n\n// temporary template parts\nlet template_start = \"\";\nlet template_common = [];\nlet template_cheapest = [];\nlet template_expensive = [];\nlet template_all = [];\nlet template_end = \"\";\n\n// 1. IMPROVEMENT: Use radix 10 and Logical OR (||) for cleaner default handling\nconst cheapest_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.cheapest_hrs\"), 10) || 1;\nconst expensive_hrs = parseInt(RED.util.getMessageProperty(msg,\"dynamic.expensive_hrs\"), 10) || 1;\n\n// load the macro\ntemplate_start = `{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n`;\ntemplate_end = `) | to_json }}`;\n\n// collect arguments | strings\nconst stringKeys = [\n    'sensor',\n    'attr_all',\n    'value_key',\n    'attr_today',\n    'attr_tomorrow',\n    'time_key',\n    'source_settings'\n];\n\nstringKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}='${msg.dynamic[key]}'`);\n    }\n});\n\n// collect arguments | boolean, integer\nconst otherKeys = [\n    'datetime_in_data',\n    'data_minutes',\n];\n\notherKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}=${msg.dynamic[key]}`);\n    }\n});\n\n// copy common items\ntemplate_cheapest = [...template_common];\ntemplate_expensive = [...template_common];\ntemplate_all = [...template_common];\n\n// collect arguments | cheapest specific\ntemplate_cheapest.push(`hours=${cheapest_hrs}`);\n// template_cheapest.push(`include_tomorrow=true`);\ntemplate_cheapest.push(`mode=\"all\"`);\n\n// collect arguments | expensive specific\ntemplate_expensive.push(`hours=${expensive_hrs}`);\n// template_expensive.push(`include_tomorrow=true`);\ntemplate_expensive.push(`lowest=false`);\ntemplate_expensive.push(`mode=\"all\"`);\n\n// collect all hours | via extra call\ntemplate_all.push(`hours=\"all\"`);\ntemplate_all.push(`include_tomorrow=true`);\ntemplate_all.push(`mode=\"all\"`);\n\n/**\n * Formats an array of strings into a single string:\n * - Each item starts with 4 spaces.\n * - Each item ends with a comma, except the last one.\n * - Items are separated by a newline.\n */\nfunction formatTemplateArray(array) {\n    if (!array || array.length === 0) {\n        return \"\";\n    }\n\n    const indent = \"    \"; \n\n    const formatted_lines = array.map((element, index) => {\n        const suffix = (index < array.length - 1) ? \",\" : \"\";\n        return `${indent}${element}${suffix}`;\n    });\n\n    return formatted_lines.join('\\n');\n}\n\n// generate string templates\nconst template_cheapest_string = formatTemplateArray(template_cheapest);\nconst template_expensive_string = formatTemplateArray(template_expensive);\nconst template_all_string = formatTemplateArray(template_all);\n\n// done\nmsg.dynamic.template_cheapest = `${template_start}${template_cheapest_string}${template_end}`;\nmsg.dynamic.template_expensive = `${template_start}${template_expensive_string}${template_end}`;\nmsg.dynamic.template_all = `${template_start}${template_all_string}${template_end}`;\n\nreturn msg;",
+        "func": "// final template initialization\nmsg.dynamic.template_all = \"\";\n\n// temporary template parts\nlet template_start = \"\";\nlet template_common = [];\nlet template_all = [];\nlet template_end = \"\";\n\n// load the macro\ntemplate_start = `{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n`;\ntemplate_end = `) | to_json }}`;\n\n// collect arguments | strings\nconst stringKeys = [\n    'sensor',\n    'attr_all',\n    'value_key',\n    'attr_today',\n    'attr_tomorrow',\n    'time_key',\n    'source_settings'\n];\n\nstringKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}='${msg.dynamic[key]}'`);\n    }\n});\n\n// collect arguments | boolean, integer\nconst otherKeys = [\n    'datetime_in_data',\n    'data_minutes',\n];\n\notherKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}=${msg.dynamic[key]}`);\n    }\n});\n\n// copy common items\ntemplate_all = [...template_common];\n\n// collect all hours | via extra call\ntemplate_all.push(`hours=\"all\"`);\ntemplate_all.push(`include_tomorrow=true`);\ntemplate_all.push(`mode=\"all\"`);\n\n/**\n * Formats an array of strings into a single string:\n * - Each item starts with 4 spaces.\n * - Each item ends with a comma, except the last one.\n * - Items are separated by a newline.\n */\nfunction formatTemplateArray(array) {\n    if (!array || array.length === 0) {\n        return \"\";\n    }\n\n    const indent = \"    \"; \n\n    const formatted_lines = array.map((element, index) => {\n        const suffix = (index < array.length - 1) ? \",\" : \"\";\n        return `${indent}${element}${suffix}`;\n    });\n\n    return formatted_lines.join('\\n');\n}\n\n// generate string templates\nconst template_all_string = formatTemplateArray(template_all);\n\n// done\nmsg.dynamic.template_all = `${template_start}${template_all_string}${template_end}`;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1172,110 +864,16 @@
         "y": 600,
         "wires": [
             [
-                "62c9d509784fd2fb",
-                "0ec9dd6a1cc49382",
-                "a55f3f89e2535ec5",
-                "6bf235402926200b"
+                "6bc3dbbf8388ade3",
+                "0eb2f26bb8493a62"
             ]
         ]
     },
     {
-        "id": "62c9d509784fd2fb",
-        "type": "debug",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
-        "name": "Template cheapest",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "dynamic.template_cheapest",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 850,
-        "y": 620,
-        "wires": []
-    },
-    {
-        "id": "0ec9dd6a1cc49382",
-        "type": "debug",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
-        "name": "Template expensive",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "dynamic.template_expensive",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 860,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "a55f3f89e2535ec5",
+        "id": "29dd63ca4a5e0d31",
         "type": "change",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
-        "name": "Set",
-        "rules": [
-            {
-                "t": "set",
-                "p": "template",
-                "pt": "msg",
-                "to": "dynamic.template_cheapest",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 330,
-        "y": 660,
-        "wires": [
-            [
-                "4b93479c2371c270"
-            ]
-        ]
-    },
-    {
-        "id": "d8e9f913929effca",
-        "type": "change",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
-        "name": "Set",
-        "rules": [
-            {
-                "t": "set",
-                "p": "template",
-                "pt": "msg",
-                "to": "dynamic.template_expensive",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 330,
-        "y": 720,
-        "wires": [
-            [
-                "26ee2c357e0a4286"
-            ]
-        ]
-    },
-    {
-        "id": "d6903c124c9db00d",
-        "type": "change",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
+        "z": "7cb2c3c95ae25465",
+        "g": "23ae923fe5fcedcc",
         "name": "Cleanup",
         "rules": [
             {
@@ -1290,18 +888,18 @@
         "to": "",
         "reg": false,
         "x": 340,
-        "y": 840,
+        "y": 720,
         "wires": [
             [
-                "1c3ae6df759ff22c"
+                "a4ab9f2f9a57b27d"
             ]
         ]
     },
     {
-        "id": "042152fce2ea8cbd",
+        "id": "e6cf3ebcbea69b8f",
         "type": "debug",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
         "name": "Log: activate 'debug mode' first",
         "active": true,
         "tosidebar": true,
@@ -1311,15 +909,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 950,
-        "y": 1260,
+        "x": 1150,
+        "y": 1000,
         "wires": []
     },
     {
-        "id": "1d545f7631cdfed9",
+        "id": "0167518c7fb2da15",
         "type": "server-state-changed",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "User input",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -1375,15 +973,15 @@
         "y": 340,
         "wires": [
             [
-                "9d06982e33260285"
+                "03cb769d07379249"
             ]
         ]
     },
     {
-        "id": "4c2802bfc3585e7b",
+        "id": "38cf2ee2e085e874",
         "type": "switch",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "Source selected?",
         "property": "dynamic.data_source",
         "propertyType": "msg",
@@ -1400,23 +998,23 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1105,
+        "x": 1085,
         "y": 380,
         "wires": [
             [
-                "779260a394c0b6da"
+                "845440fe66e2b137"
             ],
             [
-                "59e31c5b04dc829b"
+                "7cd31066ad7e3d0e"
             ]
         ],
         "l": false
     },
     {
-        "id": "ffccb2ebb9c72c30",
+        "id": "1d265be5e5436d5d",
         "type": "debug",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "Not set",
         "active": true,
         "tosidebar": false,
@@ -1431,157 +1029,10 @@
         "wires": []
     },
     {
-        "id": "4ed1e8e3a482d74c",
-        "type": "api-call-service",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
-        "name": "Avg cheap tariff",
-        "server": "176d29a.6f648d6",
-        "version": 7,
-        "debugenabled": false,
-        "action": "input_number.set_value",
-        "floorId": [],
-        "areaId": [],
-        "deviceId": [],
-        "entityId": [
-            "input_number.house_battery_strategy_dynamic_cheapest_avg_tariff"
-        ],
-        "labelId": [],
-        "data": "{\"value\": $$.dynamic.avg_cheapest_tariff }",
-        "dataType": "jsonata",
-        "mergeContext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "blockInputOverrides": true,
-        "domain": "input_number",
-        "service": "set_value",
-        "x": 900,
-        "y": 1100,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "3816bb375994b9a5",
-        "type": "api-call-service",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
-        "name": "Avg expensive tariff",
-        "server": "176d29a.6f648d6",
-        "version": 7,
-        "debugenabled": false,
-        "action": "input_number.set_value",
-        "floorId": [],
-        "areaId": [],
-        "deviceId": [],
-        "entityId": [
-            "input_number.house_battery_strategy_dynamic_expensive_avg_tariff"
-        ],
-        "labelId": [],
-        "data": "{\"value\": $$.dynamic.avg_expensive_tariff}",
-        "dataType": "jsonata",
-        "mergeContext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "blockInputOverrides": true,
-        "domain": "input_number",
-        "service": "set_value",
-        "x": 910,
-        "y": 1140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "3b443f1f71a15da4",
-        "type": "api-call-service",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
-        "name": "Avg delta",
-        "server": "176d29a.6f648d6",
-        "version": 7,
-        "debugenabled": false,
-        "action": "input_number.set_value",
-        "floorId": [],
-        "areaId": [],
-        "deviceId": [],
-        "entityId": [
-            "input_number.house_battery_strategy_dynamic_expensive_avg_delta"
-        ],
-        "labelId": [],
-        "data": "{\"value\": $$.dynamic.avg_delta}",
-        "dataType": "jsonata",
-        "mergeContext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "blockInputOverrides": true,
-        "domain": "input_number",
-        "service": "set_value",
-        "x": 880,
-        "y": 1180,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "0eece60aaf5b82e2",
-        "type": "api-current-state",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
-        "name": "Threshold delta",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_number.house_battery_strategy_dynamic_threshold_delta",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "dynamic.min_delta_cents",
-                "propertyType": "msg",
-                "value": "number",
-                "valueType": "entityState"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 360,
-        "y": 1020,
-        "wires": [
-            [
-                "d8efc3a0c1b29ccc"
-            ]
-        ]
-    },
-    {
-        "id": "779260a394c0b6da",
+        "id": "845440fe66e2b137",
         "type": "change",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "Set dynamic strategy to null",
         "rules": [
             {
@@ -1601,15 +1052,15 @@
         "y": 340,
         "wires": [
             [
-                "ffccb2ebb9c72c30"
+                "1d265be5e5436d5d"
             ]
         ]
     },
     {
-        "id": "7bff3dbf95b96087",
+        "id": "e70b70330a18e9ee",
         "type": "debug",
-        "z": "53e17bc333a64fb6",
-        "g": "ca7403d479c8c81b",
+        "z": "7cb2c3c95ae25465",
+        "g": "e79be4f0c2601c11",
         "name": "All data",
         "active": true,
         "tosidebar": true,
@@ -1624,10 +1075,10 @@
         "wires": []
     },
     {
-        "id": "b10e710ca7f7a230",
+        "id": "20e878b7aa54c5b6",
         "type": "debug",
-        "z": "53e17bc333a64fb6",
-        "g": "ce94c0a52d303397",
+        "z": "7cb2c3c95ae25465",
+        "g": "050f67f2edd7b3f4",
         "name": "Complete msg",
         "active": true,
         "tosidebar": true,
@@ -1642,10 +1093,10 @@
         "wires": []
     },
     {
-        "id": "d0972f3c833d9ed7",
+        "id": "1f91a563ed73c3dc",
         "type": "change",
-        "z": "53e17bc333a64fb6",
-        "g": "cafa7f1f83c230ca",
+        "z": "7cb2c3c95ae25465",
+        "g": "8fcdb83d7cc3c13d",
         "name": "Trace",
         "rules": [
             {
@@ -1665,16 +1116,16 @@
         "y": 200,
         "wires": [
             [
-                "e410249d9426cf0b"
+                "01f1f1e9188eec11"
             ]
         ],
         "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     },
     {
-        "id": "dd7c46b551d5f17d",
+        "id": "1c53bcd89e1eb927",
         "type": "function",
-        "z": "53e17bc333a64fb6",
-        "g": "82918a3adb2ac020",
+        "z": "7cb2c3c95ae25465",
+        "g": "b9013bda8ac76f05",
         "name": "Selected",
         "func": "// Logger\nconst log = global.get(\"logger\");\nlog(this,`${msg.target} strategy`);\n\n// Status\nnode.status({fill:\"green\",shape:\"dot\",text:`${msg.target}`});\n\nreturn msg;",
         "outputs": 1,
@@ -1687,15 +1138,15 @@
         "y": 180,
         "wires": [
             [
-                "260b17641f0582b8"
+                "0aebfb67edf9d8a4"
             ]
         ]
     },
     {
-        "id": "436686495b2e5560",
+        "id": "185d23a097c1c628",
         "type": "catch",
-        "z": "53e17bc333a64fb6",
-        "g": "bda1475e83a23e8a",
+        "z": "7cb2c3c95ae25465",
+        "g": "9fa2cde3b08ac3a4",
         "name": "",
         "scope": null,
         "uncaught": true,
@@ -1703,16 +1154,16 @@
         "y": 320,
         "wires": [
             [
-                "b31cf1870dde9df6"
+                "27672623f145161a"
             ]
         ],
         "l": false
     },
     {
-        "id": "b31cf1870dde9df6",
+        "id": "27672623f145161a",
         "type": "function",
-        "z": "53e17bc333a64fb6",
-        "g": "bda1475e83a23e8a",
+        "z": "7cb2c3c95ae25465",
+        "g": "9fa2cde3b08ac3a4",
         "name": "Unhandled Exception",
         "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
@@ -1725,16 +1176,16 @@
         "y": 320,
         "wires": [
             [
-                "da75e0b76b974cd4"
+                "20e0c26c18e6ceef"
             ]
         ],
         "l": false
     },
     {
-        "id": "da75e0b76b974cd4",
+        "id": "20e0c26c18e6ceef",
         "type": "link out",
-        "z": "53e17bc333a64fb6",
-        "g": "bda1475e83a23e8a",
+        "z": "7cb2c3c95ae25465",
+        "g": "9fa2cde3b08ac3a4",
         "name": "link out 5",
         "mode": "return",
         "links": [],
@@ -1743,61 +1194,10 @@
         "wires": []
     },
     {
-        "id": "71651ebf0fad2dcf",
+        "id": "57cc05efbb79cc77",
         "type": "api-current-state",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
-        "name": "Threshold cheapest",
-        "server": "176d29a.6f648d6",
-        "version": 3,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_number.house_battery_strategy_dynamic_threshold_cheapest_period",
-        "state_type": "str",
-        "blockInputOverrides": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            },
-            {
-                "property": "dynamic.threshold_cheapest_cents",
-                "propertyType": "msg",
-                "value": "number",
-                "valueType": "entityState"
-            }
-        ],
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "override_topic": false,
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "x": 370,
-        "y": 980,
-        "wires": [
-            [
-                "0eece60aaf5b82e2"
-            ]
-        ]
-    },
-    {
-        "id": "d8efc3a0c1b29ccc",
-        "type": "api-current-state",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
         "name": "Strategy default",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1837,18 +1237,18 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 360,
-        "y": 1060,
+        "y": 880,
         "wires": [
             [
-                "3f6a27cd4d87648a"
+                "992e224d6cddac70"
             ]
         ]
     },
     {
-        "id": "3f6a27cd4d87648a",
+        "id": "992e224d6cddac70",
         "type": "api-current-state",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
         "name": "Strategy cheapest",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1888,18 +1288,18 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 370,
-        "y": 1100,
+        "y": 920,
         "wires": [
             [
-                "235d981e58f5c301"
+                "3945027f12d9fbf8"
             ]
         ]
     },
     {
-        "id": "235d981e58f5c301",
+        "id": "3945027f12d9fbf8",
         "type": "api-current-state",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
         "name": "Strategy expensive",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1939,18 +1339,18 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 370,
-        "y": 1140,
+        "y": 960,
         "wires": [
             [
-                "ba6b7df249af19c2"
+                "e6254201aae26ee3"
             ]
         ]
     },
     {
-        "id": "1c3ae6df759ff22c",
+        "id": "a4ab9f2f9a57b27d",
         "type": "function",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
+        "z": "7cb2c3c95ae25465",
+        "g": "23ae923fe5fcedcc",
         "name": "Cache data source",
         "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\nconst dynamicData = msg.dynamic;\n\n// Helper to check for errors in the object\nconst isInvalid = (data) => {\n    if (!data) return true;\n    // Check if the stringified object contains \"error\"\n    return JSON.stringify(data).toLowerCase().includes(\"error\");\n};\n\nif (isInvalid(dynamicData)) {\n    // Explain issue\n    log(this, \"Invalid data received, clearing cache\", \"warn\");\n    // Clear cache\n    flow.set(\"cached_dynamic_data\", undefined);\n} else {\n    // Cache on success\n    log(this, \"Caching `msg.dynamic`\");\n    // Save the entire object to flow context\n    flow.set(\"cached_dynamic_data\", dynamicData);\n}\n\nreturn msg;",
         "outputs": 1,
@@ -1960,18 +1360,18 @@
         "finalize": "",
         "libs": [],
         "x": 510,
-        "y": 840,
+        "y": 720,
         "wires": [
             [
-                "e1813908c8b0ab65"
+                "b12c56dee2b23388"
             ]
         ]
     },
     {
-        "id": "179a6544970607a2",
+        "id": "0d13e00638a5326c",
         "type": "catch",
-        "z": "53e17bc333a64fb6",
-        "g": "f049f7345bad50fa",
+        "z": "7cb2c3c95ae25465",
+        "g": "4451d1c1a81816f6",
         "name": "Catch group",
         "scope": "group",
         "uncaught": false,
@@ -1979,15 +1379,15 @@
         "y": 580,
         "wires": [
             [
-                "87b9a790059c88d6"
+                "7cab6b6d495144b7"
             ]
         ]
     },
     {
-        "id": "ca36b723377536b3",
+        "id": "3c5b117b6a7db82f",
         "type": "debug",
-        "z": "53e17bc333a64fb6",
-        "g": "f049f7345bad50fa",
+        "z": "7cb2c3c95ae25465",
+        "g": "4451d1c1a81816f6",
         "name": "Strategy errors",
         "active": true,
         "tosidebar": true,
@@ -2002,10 +1402,10 @@
         "wires": []
     },
     {
-        "id": "db6ccd1c80d518cb",
+        "id": "6ed47e82becf22ce",
         "type": "comment",
-        "z": "53e17bc333a64fb6",
-        "g": "f049f7345bad50fa",
+        "z": "7cb2c3c95ae25465",
+        "g": "4451d1c1a81816f6",
         "name": "Cheapest Energy Hours - errors",
         "info": "\"No valid sensor found\" if price_data is none and not valid_sensor,\n\"No valid data in {}\".format(sensor) if price_data is none and data == [] and valid_sensor,\n\"No valid data in provided price_data\" if price_data is not none and not valid_price_data,\n\"Time key '{}' not found in data\".format(time_key) if data and time_key not in data[0],\n\"Value key '{}' not found in data\".format(value_key) if data and value_key not in data[0],\n\"Invalid mode '{}' selected\".format(mode) if mode not in modes,\n\"Boolean input expected for include_today, '{}' can not be processed as a boolean\".format(include_today) if include_today | bool(\"\") is not boolean,\n\"Boolean input expected for include_tomorrow, '{}' can not be processed as a boolean\".format(include_tomorrow) if include_tomorrow | bool(\"\") is not boolean,\n\"Boolean input expected for look_ahead, '{}' can not be processed as a boolean\".format(look_ahead) if look_ahead | bool(\"\") is not boolean,\n\"Boolean input expected for lowest, '{}' can not be processed as a boolean\".format(lowest) if lowest | bool(\"\") is not boolean,\n\"Boolean input expected for latest_possible, '{}' can not be processed as a boolean\".format(latest_possible) if latest_possible | bool(\"\") is not boolean,\n\"Numeric input or percentage expected for price_tolerance, '{}' can not be processed as a float or percentage\".format(price_tolerance) if not valid_pt,\n\"Numeric input expected for kwh, '{}' can not be processed as a float\".format(kwh) if kwh is not none and not kwh | is_number,\n\"Selected program '{}' is not available or has no data\".format(program) if program is not none and w is none,\n\"Selected start parameter is after the end parameter\" if start_end and data,\n\"{} hours between start and end, where {} hours are required\".format(end_start, h | round(3)) if not start_end and end_start < h | round(3) and data,\n\"Invalid combination of source data points per hour '{}' and number of weight points '{}'\".format(dp, dph) if all_keys and not wp_check",
         "x": 1150,
@@ -2013,10 +1413,10 @@
         "wires": []
     },
     {
-        "id": "87b9a790059c88d6",
+        "id": "7cab6b6d495144b7",
         "type": "function",
-        "z": "53e17bc333a64fb6",
-        "g": "f049f7345bad50fa",
+        "z": "7cb2c3c95ae25465",
+        "g": "4451d1c1a81816f6",
         "name": "Unhandled Exception",
         "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
         "outputs": 1,
@@ -2029,32 +1429,32 @@
         "y": 580,
         "wires": [
             [
-                "ca36b723377536b3"
+                "3c5b117b6a7db82f"
             ]
         ],
         "l": false
     },
     {
-        "id": "bc468039bbb56b0c",
+        "id": "7cd31066ad7e3d0e",
         "type": "function",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "Cache check",
-        "func": "// Check if cache can be used or a new call to Data Source is required\nconst log = global.get('logger');\n\n// Retrieve stored data from flow context\nconst previousValues = flow.get(\"previous_sensor_values\") || {};\nconst cachedData = flow.get(\"cached_dynamic_data\");\n\n// Create a string or object to represent current state\nconst currentValues = {\n    src: msg.dynamic.data_source,\n    hc: msg.dynamic.cheapest_hrs,\n    he: msg.dynamic.expensive_hrs\n};\n\n// Compare current with previous (JSON stringify is a quick way to compare objects)\nconst inputsMatch = JSON.stringify(currentValues) === JSON.stringify(previousValues);\n\n// Determine cache hit\nif (inputsMatch && cachedData){\n    // Cache HIT\n    node.status({ fill: \"green\", shape: \"dot\", text: `Cache hit` });\n    log(this,`*CACHE HIT* using stored tariff data`);\n\n    // Attach cached data to the message so following nodes can use it\n    msg.dynamic = cachedData;\n\n    // Output #1\n    return [msg, null];\n\n} else {\n    // Cache MISS\n    node.status({ fill: \"green\", shape: \"ring\", text: `Cache miss: ${JSON.stringify(currentValues) }` });\n\n    // Save current values for the next run\n    flow.set(\"previous_sensor_values\", currentValues);\n    \n    // Output #2\n    return [null, msg];\n}",
+        "func": "// Check if cache can be used or a new call to Data Source is required\nconst log = global.get('logger');\n\n// Retrieve stored data from flow context\nconst cachedData = flow.get(\"cached_dynamic_data\");\n\n// Determine cache hit\nif (cachedData){\n    // Cache HIT\n    node.status({ fill: \"green\", shape: \"dot\", text: `Cache hit` });\n    log(this,`*CACHE HIT* using stored tariff data`);\n\n    // Attach cached data to the message so following nodes can use it\n    msg.dynamic = cachedData;\n\n    // Output #1\n    return [msg, null];\n\n} else {\n    // Cache MISS\n    node.status({ fill: \"green\", shape: \"ring\", text: `Cache miss }` });\n\n    // Output #2\n    return [null, msg];\n}",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1410,
+        "x": 1230,
         "y": 420,
         "wires": [
             [
-                "15004f5373d31bcf"
+                "dcb858affef18fd7"
             ],
             [
-                "c1246148f0672793"
+                "bd31ed23c53d88ae"
             ]
         ],
         "outputLabels": [
@@ -2063,87 +1463,87 @@
         ]
     },
     {
-        "id": "15004f5373d31bcf",
+        "id": "dcb858affef18fd7",
         "type": "link out",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "from Cache Check ok",
         "mode": "link",
         "links": [
-            "24075c68effa9621"
+            "cb239dde075cdc6b"
         ],
-        "x": 1515,
+        "x": 1335,
         "y": 400,
         "wires": []
     },
     {
-        "id": "47fee38ffe2fe3d8",
+        "id": "cc1e309cb2e18d5d",
         "type": "link in",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
+        "z": "7cb2c3c95ae25465",
+        "g": "23ae923fe5fcedcc",
         "name": "link Fetch from Data Source",
         "links": [
-            "c1246148f0672793"
+            "bd31ed23c53d88ae"
         ],
         "x": 295,
         "y": 560,
         "wires": [
             [
-                "f6a1142b90f9375b"
+                "e6f3957438107ce3"
             ]
         ]
     },
     {
-        "id": "c1246148f0672793",
+        "id": "bd31ed23c53d88ae",
         "type": "link out",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "from Cache Check NoK",
         "mode": "link",
         "links": [
-            "47fee38ffe2fe3d8"
+            "cc1e309cb2e18d5d"
         ],
-        "x": 1515,
+        "x": 1335,
         "y": 440,
         "wires": []
     },
     {
-        "id": "24075c68effa9621",
+        "id": "cb239dde075cdc6b",
         "type": "link in",
-        "z": "53e17bc333a64fb6",
-        "g": "2f86c094b23107e0",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
         "name": "link Determine Strategy",
         "links": [
-            "e1813908c8b0ab65",
-            "15004f5373d31bcf"
+            "b12c56dee2b23388",
+            "dcb858affef18fd7"
         ],
         "x": 295,
-        "y": 940,
+        "y": 840,
         "wires": [
             [
-                "71651ebf0fad2dcf"
+                "57cc05efbb79cc77"
             ]
         ]
     },
     {
-        "id": "e1813908c8b0ab65",
+        "id": "b12c56dee2b23388",
         "type": "link out",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
+        "z": "7cb2c3c95ae25465",
+        "g": "23ae923fe5fcedcc",
         "name": "link out 12",
         "mode": "link",
         "links": [
-            "24075c68effa9621"
+            "cb239dde075cdc6b"
         ],
         "x": 635,
-        "y": 840,
+        "y": 720,
         "wires": []
     },
     {
-        "id": "407840aa3995a9dd",
+        "id": "1b18292ae5da8c4a",
         "type": "function",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "Clear Cache",
         "func": "// Clear cache\nflow.set(\"cached_dynamic_data\", undefined);\nreturn msg;",
         "outputs": 1,
@@ -2156,16 +1556,16 @@
         "y": 420,
         "wires": [
             [
-                "fa3779d04977207b"
+                "be05aedb262562b7"
             ]
         ],
         "l": false
     },
     {
-        "id": "a2ee605012a06a64",
+        "id": "cb33c35d77179507",
         "type": "ha-fire-event",
-        "z": "53e17bc333a64fb6",
-        "g": "ca7403d479c8c81b",
+        "z": "7cb2c3c95ae25465",
+        "g": "e79be4f0c2601c11",
         "name": "",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -2179,10 +1579,10 @@
         ]
     },
     {
-        "id": "8c56a16131f182ad",
+        "id": "375d1b6e510b65c2",
         "type": "api-render-template",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
+        "z": "7cb2c3c95ae25465",
+        "g": "23ae923fe5fcedcc",
         "name": "All",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -2192,37 +1592,36 @@
         "templateLocation": "",
         "templateLocationType": "none",
         "x": 450,
-        "y": 780,
+        "y": 660,
         "wires": [
             [
-                "e516b7c55e429393"
+                "e24020f76a496335"
             ]
         ]
     },
     {
-        "id": "e516b7c55e429393",
+        "id": "e24020f76a496335",
         "type": "json",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
+        "z": "7cb2c3c95ae25465",
+        "g": "23ae923fe5fcedcc",
         "name": "",
         "property": "dynamic.data_all",
         "action": "obj",
         "pretty": false,
         "x": 535,
-        "y": 780,
+        "y": 660,
         "wires": [
             [
-                "d6903c124c9db00d",
-                "22ea4f5769feb79b"
+                "55bdfafac92e48ed"
             ]
         ],
         "l": false
     },
     {
-        "id": "225c87c56ffcb31a",
+        "id": "0eb2f26bb8493a62",
         "type": "change",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
+        "z": "7cb2c3c95ae25465",
+        "g": "23ae923fe5fcedcc",
         "name": "Set",
         "rules": [
             {
@@ -2239,35 +1638,35 @@
         "to": "",
         "reg": false,
         "x": 330,
-        "y": 780,
+        "y": 660,
         "wires": [
             [
-                "8c56a16131f182ad"
+                "375d1b6e510b65c2"
             ]
         ]
     },
     {
-        "id": "766bd59076369230",
+        "id": "c5c2aa6f819a9dd3",
         "type": "ha-fire-event",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
         "name": "Update energy prices",
         "server": "176d29a.6f648d6",
         "version": 0,
         "event": "update_energy_prices",
         "data": "msg.dynamic.data_all",
         "dataType": "jsonata",
-        "x": 860,
-        "y": 780,
+        "x": 1120,
+        "y": 920,
         "wires": [
             []
         ]
     },
     {
-        "id": "6bf235402926200b",
+        "id": "6bc3dbbf8388ade3",
         "type": "debug",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
+        "z": "7cb2c3c95ae25465",
+        "g": "23ae923fe5fcedcc",
         "name": "Template all",
         "active": false,
         "tosidebar": true,
@@ -2277,36 +1676,36 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 830,
-        "y": 660,
+        "x": 790,
+        "y": 600,
         "wires": []
     },
     {
-        "id": "22ea4f5769feb79b",
+        "id": "55bdfafac92e48ed",
         "type": "function",
-        "z": "53e17bc333a64fb6",
-        "g": "45991c4c07807d2b",
+        "z": "7cb2c3c95ae25465",
+        "g": "23ae923fe5fcedcc",
         "name": "Convert price",
-        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.value_conversion\")) || 1;\n\n// Check if the list exists and is an array to prevent errors\nif (msg.dynamic && msg.dynamic.data_all && Array.isArray(msg.dynamic.data_all.list)) {\n    \n    // Create a new array where each value is multiplied\n    if (Array.isArray(msg.dynamic.data_all?.list)) {\n        msg.dynamic.data_all.list = msg.dynamic.data_all.list.map(v => v / CONVERSION_RATE * 100); // cents\n    }\n\n    // Update other fields\n    if (msg.dynamic.data_all?.average) {\n        msg.dynamic.data_all.average = parseInt(msg.dynamic.data_all.average / CONVERSION_RATE * 100); // cents\n    }\n} else {\n    // Do not continue\n    log(this,\"*price data not updated* price data missing\");\n    return null;\n}\n\nreturn msg;",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.value_conversion\")) || 1;\n\n// Check if the list exists and is an array to prevent errors\nif (msg.dynamic && msg.dynamic.data_all && Array.isArray(msg.dynamic.data_all.list)) {\n    \n    // Create a new array where each value is multiplied\n    if (Array.isArray(msg.dynamic.data_all?.list)) {\n        msg.dynamic.data_all.list = msg.dynamic.data_all.list.map(v => v / CONVERSION_RATE * 100); // cents\n    }\n\n    // Update other fields\n    if (msg.dynamic.data_all?.average) {\n        msg.dynamic.data_all.average = parseInt(msg.dynamic.data_all.average / CONVERSION_RATE * 100); // cents\n    }\n    if (msg.dynamic.data_all?.weighted_average){\n        msg.dynamic.data_all.weighted_average = parseInt(msg.dynamic.data_all.weighted_average / CONVERSION_RATE * 100); // cents\n    }\n    if (msg.dynamic.data_all?.min) {\n        msg.dynamic.data_all.min = parseInt(msg.dynamic.data_all.min / CONVERSION_RATE * 100); // cents\n    }\n    if (msg.dynamic.data_all?.max) {\n        msg.dynamic.data_all.max = parseInt(msg.dynamic.data_all.max / CONVERSION_RATE * 100); // cents\n    }\n} else {\n    // Do not continue\n    log(this,\"*price data not updated* price data missing\");\n    return null;\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 670,
-        "y": 780,
+        "x": 650,
+        "y": 660,
         "wires": [
             [
-                "766bd59076369230"
+                "29dd63ca4a5e0d31"
             ]
         ]
     },
     {
-        "id": "dc8cc489c7694efa",
+        "id": "8a2264a5f6d6dfd2",
         "type": "inject",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "Test",
         "props": [
             {
@@ -2328,15 +1727,15 @@
         "y": 460,
         "wires": [
             [
-                "f6d46a4f862cc7e9"
+                "eeef05a7b8913b56"
             ]
         ]
     },
     {
-        "id": "f6d46a4f862cc7e9",
+        "id": "eeef05a7b8913b56",
         "type": "api-call-service",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "Debug ON",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -2369,36 +1768,15 @@
         "y": 460,
         "wires": [
             [
-                "407840aa3995a9dd"
+                "1b18292ae5da8c4a"
             ]
         ]
     },
     {
-        "id": "647b842d8e337591",
-        "type": "function",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
-        "name": "Init",
-        "func": "if(msg.payload === \"Dynamic 2\") {\n    node.status({fill:\"red\",shape:\"ring\",text:\"Lab feature has control\"});\n    return null;\n}\nnode.status({fill:\"green\",shape:\"dot\",text:\"Ok\"});\n\n// Init\nmsg.dynamic = {};\nmsg.log = [];\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 870,
-        "y": 380,
-        "wires": [
-            [
-                "a58c31baacf4f05f"
-            ]
-        ]
-    },
-    {
-        "id": "fa3779d04977207b",
+        "id": "be05aedb262562b7",
         "type": "api-current-state",
-        "z": "53e17bc333a64fb6",
-        "g": "42ba28a9b56c30b2",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
         "name": "Strat",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -2431,11 +1809,194 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 750,
+        "x": 730,
         "y": 380,
         "wires": [
             [
-                "647b842d8e337591"
+                "63fbf4e436af63e0"
+            ]
+        ]
+    },
+    {
+        "id": "e6254201aae26ee3",
+        "type": "api-current-state",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
+        "name": "Threshold delta",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_dynamic_threshold_delta",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.min_delta_cents",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 600,
+        "y": 880,
+        "wires": [
+            [
+                "4a9518f70862ed8c"
+            ]
+        ]
+    },
+    {
+        "id": "4a9518f70862ed8c",
+        "type": "api-current-state",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
+        "name": "Cheapest N hrs",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_dynamic_cheapest_hrs",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.cheapest_hrs",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 600,
+        "y": 920,
+        "wires": [
+            [
+                "95346a4ab49638b8"
+            ]
+        ]
+    },
+    {
+        "id": "95346a4ab49638b8",
+        "type": "api-current-state",
+        "z": "7cb2c3c95ae25465",
+        "g": "ca48b6f96b385b48",
+        "name": "Expensive N hrs",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_strategy_dynamic_expensive_hrs",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "dynamic.expensive_hrs",
+                "propertyType": "msg",
+                "value": "number",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 600,
+        "y": 960,
+        "wires": [
+            [
+                "74cfa360edc4c60f"
+            ]
+        ]
+    },
+    {
+        "id": "57d8a02127936f91",
+        "type": "inject",
+        "z": "7cb2c3c95ae25465",
+        "g": "42148c9790cc8f7e",
+        "name": "Clear cache",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "10 13 * * *",
+        "once": false,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 390,
+        "y": 420,
+        "wires": [
+            [
+                "df2f545ecd40a29b"
             ]
         ]
     },
@@ -2454,7 +2015,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "aafd38de2faa0ded",
+        "id": "d40bac020cc5d080",
         "type": "global-config",
         "env": [],
         "modules": {

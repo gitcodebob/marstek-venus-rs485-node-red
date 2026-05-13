@@ -1,6 +1,31 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.9.0
+- **Feat: "After goal reached" strategy switch for Charge and Sell**
+  * When the Charge strategy reaches its target (SoC, kWh, or solar forecast), it now automatically switches to a configurable follow-up strategy: `Charge PV` (default), `Self-consumption`, or `Full stop`.
+  * Same for the Sell strategy: once the discharge floor is hit, it switches to a configurable follow-up.
+  * Requires two new `input_select` entities in Home Assistant — add them from `house_battery_control.yaml` and add the selector to the dashboard.
+
+- **Feat: Dynamic v2 — per-interval price matching with configurable hour caps (Lab feature)**
+  * Lab feature: this feature is experimental and may disappear or be adopted in the future. Use at your own discretion. 
+  * Improves the fixed "cheapest N hours / expensive M hours" approach.
+    * The algorithm captures both a morning and an evening price peak in the same day — v1 could only pick one.
+  * `Max cheap hrs / day` and `Max expensive hrs / day` cap how many hours per day are marked.
+  * Configurable strategy per period: cheap, regular, and expensive intervals.
+  * Price data tables and a Apexchart for review.
+  * See the [Dynamic v2 guide](https://docs.homebatterycontrol.com/05-dynamic-v2.html) for quick-start steps, use-case configurations, and algorithm internals.
+
+- **Tweak: cheapest/expensive hrs**
+  * Resolution increased to per 15 mins
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-charge.json`
+  - `node-red/02 strategy-dynamic-2.json`
+  - `node-red/02 strategy-sell.json`
+
 ## 4.8.2
 - **Feat: High load detection reduces update rate**
   * When excessive system load is detected, the control loop update rate is automatically throttled down.

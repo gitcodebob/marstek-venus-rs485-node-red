@@ -440,9 +440,9 @@ input_number:
   house_battery_strategy_dynamic_cheapest_hrs:
     name: Cheapest hours
     icon: mdi:clock-outline
-    min: 1 # Select at least 1 hour
+    min: 0 # Select at least 1 hour
     max: 8 # Using more than 4 hrs is usualy not advised
-    step: 1 # Whole hour steps
+    step: 0.25 # 15 minute steps
     unit_of_measurement: "h"
     mode: box
 
@@ -450,9 +450,9 @@ input_number:
   house_battery_strategy_dynamic_expensive_hrs:
     name: Expensive hours
     icon: mdi:clock-outline
-    min: 1 # Select at least 1 hour
+    min: 0 # Select at least 1 hour
     max: 23 # Using more than 4 hrs is usualy not advised
-    step: 1 # Whole hour steps
+    step: 0.25 # 15 minute steps
     unit_of_measurement: "h"
     mode: box
 
@@ -665,6 +665,7 @@ input_select:
       - Self-consumption # Use your own solar production. Don't buy or sell. Target grid consumption = 0, e.g. "Nul op de meter (NoM)" in Dutch.
       - Timed # Configure which strategy should be active during given periods of the day.
       - Dynamic # Requires a dynamic tariff contract and the Cheapest Hours HACS add-on
+      - Dynamic 2 # Requires a dynamic tariff contract and the Cheapest Hours HACS add-on
       - Charge # Uses self-consumption strategy with smart settings and target grid consumption > 0
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
       - Sell # Discharge batteries
@@ -779,6 +780,15 @@ input_select:
       - solar forecast
     icon: mdi:battery-charging-80
 
+  # Charge strategy | strategy after reaching goal
+  house_battery_strategy_charge_goal_reached:
+    name: Then use
+    options:
+      - Charge PV # Charge when surplus PV is available, batteries will not discharge
+      - Full stop # Deactivate batteries
+      - Self-consumption # Target grid consumption = 0
+    icon: mdi:checkerboard
+
   # Sell strategy | goal setting
   house_battery_strategy_sell_goal:
     name: Sell until
@@ -787,6 +797,15 @@ input_select:
       - state of charge
       - energy reserve
     icon: mdi:cash-multiple
+
+  # Sell strategy | strategy after reaching goal
+  house_battery_strategy_sell_goal_reached:
+    name: Then use
+    options:
+      - Charge PV # Charge when surplus PV is available, batteries will not discharge
+      - Full stop # Deactivate batteries
+      - Self-consumption # Target grid consumption = 0
+    icon: mdi:checkerboard
 
 ###########################################################################################################
 # TEMPLATE SENSORS
@@ -1107,6 +1126,8 @@ template:
         unit_of_measurement: "cents/kWh"
         attributes:
           prices: "{{ trigger.event.data.list | default([]) }}"
+          marks: "{{ trigger.event.data.list_marked | default([]) }}"
+          mark_now: "{{ trigger.event.data.mark_now | default('Unknown')}}"
           start: "{{ trigger.event.data.start | default('Unknown') }}"
           datapoints_per_hour: "{{ trigger.event.data.datapoints_per_hour | default(0) }}"
 
@@ -1124,7 +1145,7 @@ recorder:
       # PID control signals (updated every 2-40 seconds during operation)
       - input_number.house_battery_control_*_term
       - input_number.house_battery_control_*_deviation
-      - input_number.house_battery_control_error_signal
+      # - input_number.house_battery_control_error_signal
       # - input_number.house_battery_control_pid_output  # optional: this is useful for debugging
       - input_number.house_battery_control_debug
       # Dynamic strategy calculated values (updated hourly)

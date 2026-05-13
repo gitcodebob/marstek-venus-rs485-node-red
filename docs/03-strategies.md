@@ -74,9 +74,15 @@ Charges batteries from the grid. You can configure when to start and stop chargi
 - **State of charge:** Charge to a fixed SoC percentage
 - **Solar forecast:** Automatically calculate how much grid charging is needed based on today's solar forecast. See [Solar Forecast Setup](04-setup-solar-forecast.md).
 
-**Power options:**
+**Strategy after goal reached:**
+Once the charge goal is met, the strategy automatically switches to whatever you pick in the  selector on the dashboard.
+- `Charge PV` *(default)* — keep topping up from solar surplus.
+- `Self-consumption` — start using the stored energy to cover home loads.
+- `Full stop` — hold the charge for later (e.g. a known peak this evening).
+
+**Power options:** *see settings tab*
 - **Maximum power:** Charges at full battery capacity for fastest charging
-- **Regulated power:** Uses PID-controller to charge at a controlled rate, useful to prevent overloading your grid connection. Require battery specific charging limits? Review the settings tab.
+- **Grid power limit:** Uses PID-controller to charge at a controlled rate, useful to prevent overloading your grid connection. Require battery specific charging limits? Review the settings tab.
 
 **Ideal for:** Preparing for power outages or charging before expensive rate periods.
 
@@ -92,17 +98,23 @@ Charges batteries from the grid. You can configure when to start and stop chargi
 ### Sell (Discharge to grid)
 Discharges batteries to the grid for profit during high electricity prices. You can configure when to start and stop based on battery State of Charge (SoC) or Energy levels (kWh).
 
-**Power options:**
-- **Maximum power:** Discharges at full battery capacity for maximum export
-- **Regulated power:** Uses PID-controller to discharge at a controlled rate
-
-**Ideal for:** Selling stored energy during peak price periods or when compensated for grid export.
-
 **Dashboard settings:**
 - Stop discharge when: all have reached their minimum state of charge (SoC)
 - Stop discharge at: average SoC percentage over all batteries (per battery SoC limits are stil obeyed)
 - Stop discharge at: Energy kWh (avoid depleting battery completely)
 - Choose maximum or regulated power mode
+
+**Strategy after goal reached:**
+Once the discharge floor is hit, the strategy automatically switches to whatever you pick in the selector on the dashboard.
+- `Charge PV` *(default)* — refill from solar surplus.
+- `Self-consumption` — use any remaining capacity for home loads.
+- `Full stop` — keep the battery idle until you change strategy manually.   
+
+**Power options:** *see settings tab*
+- **Maximum power:** Discharges at full battery capacity for maximum export
+- **Grid power limit:** Uses PID-controller to discharge at a controlled rate
+
+**Ideal for:** Selling stored energy during peak price periods or when compensated for grid export.
 
 **Flow:** `02 strategy-sell.json`
 
