@@ -669,7 +669,7 @@ input_select:
       - Charge # Uses self-consumption strategy with smart settings and target grid consumption > 0
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
       - Sell # Discharge batteries
-      - Discharge only # Discharge on house loads, batteries will not charge on surplus PV
+      - Zero import # Use battery to prevent grid import, surplus PV exports to grid
       - Standby / peak shave # Standby, peak shave only. Requires power limits to be set!
     icon: mdi:home-battery
 
@@ -682,7 +682,7 @@ input_select:
       - Charge # Uses self-consumption strategy with smart settings and target grid consumption > 0
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
       - Sell
-      - Discharge only # Discharge on house loads, batteries will not charge on surplus PV
+      - Zero import # Use battery to prevent grid import, surplus PV exports to grid
       - Standby / peak shave # Standby, peak shave only. Requires power limits to be set!
 
   # How often is battery priority cycled automatically?
@@ -755,7 +755,7 @@ input_select:
     options:
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
       - Self-consumption # Target grid consumption = 0
-      - Discharge only # Discharge on house loads, batteries will not charge on surplus PV
+      - Zero import # Use battery to prevent grid import, surplus PV exports to grid
       - Standby / peak shave # Standby, peak shave only. Requires power limits to be set!
       - Full stop # Deactivate batteries
     icon: mdi:strategy
@@ -775,7 +775,7 @@ input_select:
     options:
       - Self-consumption
       - Sell
-      - Discharge only # Discharge on house loads, batteries will not charge on surplus PV
+      - Zero import # Use battery to prevent grid import, surplus PV exports to grid
       - Standby / peak shave # Standby, peak shave only. Requires power limits to be set!
     icon: mdi:strategy
 
@@ -796,7 +796,7 @@ input_select:
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
       - Full stop # Deactivate batteries
       - Self-consumption # Target grid consumption = 0
-      - Discharge only # Discharge on house loads, batteries will not charge on surplus PV
+      - Zero import # Use battery to prevent grid import, surplus PV exports to grid
       - Standby / peak shave # Standby, peak shave only. Requires power limits to be set!
     icon: mdi:checkerboard
 
@@ -816,7 +816,7 @@ input_select:
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
       - Full stop # Deactivate batteries
       - Self-consumption # Target grid consumption = 0
-      - Discharge only # Discharge on house loads, batteries will not charge on surplus PV
+      - Zero import # Use battery to prevent grid import, surplus PV exports to grid
       - Standby / peak shave # Standby, peak shave only. Requires power limits to be set!
     icon: mdi:checkerboard
 

@@ -18,7 +18,7 @@
     {
         "id": "d2201e0d5e01232e",
         "type": "tab",
-        "label": "Home Battery Start v4.9.0",
+        "label": "Home Battery Start v4.10.0",
         "disabled": false,
         "info": "# Home battery control\r\nConsists of three flows:\r\n 1.  Start flow\r\n 1.  Control flow\r\n 1.  Master switch flow\r\n\r\n## Start flow\r\nThis is the starting point of your home battery control.\r\n\r\nIt starts with P1 measurement as a trigger.\r\nIt allows you to connect your battery sensors to the flow.\r\nIt ends with a function node, mapping your batteries to a battery_array\r\n\r\nThe battery_array is passed on to the control flow.\r\n\r\nWhen the control flow has calculated the desired corrections,\r\nit is passed back to this flow and applied to your batteries.",
         "env": []
@@ -26,7 +26,7 @@
     {
         "id": "1ae53b821b8673a2",
         "type": "tab",
-        "label": "Strategy Partials v4.9.0",
+        "label": "Strategy Partials v4.10.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -34,7 +34,7 @@
     {
         "id": "99eff0d7f113607a",
         "type": "tab",
-        "label": "Strategy Charge v4.9.0",
+        "label": "Strategy Charge v4.10.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -42,7 +42,7 @@
     {
         "id": "95b48858cf703d61",
         "type": "tab",
-        "label": "Strategy Dynamic v4.9.0",
+        "label": "Strategy Dynamic v4.10.0",
         "disabled": false,
         "info": "Dynamic contract automated management",
         "env": []
@@ -50,7 +50,7 @@
     {
         "id": "2dd943d0761a85c7",
         "type": "tab",
-        "label": "Strategy Dynamic 2 v4.9.0",
+        "label": "Strategy Dynamic 2 v4.10.0",
         "disabled": false,
         "info": "Dynamic contract automated management",
         "env": []
@@ -58,7 +58,7 @@
     {
         "id": "5128f468b69007b0",
         "type": "tab",
-        "label": "Strategy Full stop v4.9.0",
+        "label": "Strategy Full stop v4.10.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -66,7 +66,7 @@
     {
         "id": "2f9bda0694aceedd",
         "type": "tab",
-        "label": "Strategy Self-consumption v4.9.0",
+        "label": "Strategy Self-consumption v4.10.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -74,7 +74,7 @@
     {
         "id": "0dfb1129bc105c75",
         "type": "tab",
-        "label": "Strategy Sell v4.9.0",
+        "label": "Strategy Sell v4.10.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -82,7 +82,7 @@
     {
         "id": "8d0491603ed3b4b0",
         "type": "tab",
-        "label": "Strategy Timed v4.9.0",
+        "label": "Strategy Timed v4.10.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -6272,7 +6272,7 @@
         "type": "link in",
         "z": "1ae53b821b8673a2",
         "g": "41c3dc51d46570c3",
-        "name": "Discharge only",
+        "name": "Zero import",
         "links": [],
         "x": 120,
         "y": 200,
@@ -6288,8 +6288,8 @@
         "type": "function",
         "z": "1ae53b821b8673a2",
         "g": "50dde0e0168dbaab",
-        "name": "Discharge only",
-        "func": "// explain\nconst log = global.get(\"logger\");\nlog(this,\"Using self-consumption to discharge only\")\n\n// use the self consumption strategy to discharge only\nmsg.target = \"Self-consumption\";\n\n// tell that strategy to disallow charging\nconst CHARGE_DISABLED = true;\nRED.util.setMessageProperty(msg,\"advanced_settings.charge_disabled\",CHARGE_DISABLED,true);\n\n\nreturn msg;",
+        "name": "Zero import",
+        "func": "// explain\nconst log = global.get(\"logger\");\nlog(this,\"Using self-consumption with charging disabled (Zero import)\")\n\n// use the self consumption strategy with charging disabled (Zero import)\nmsg.target = \"Self-consumption\";\n\n// tell that strategy to disallow charging\nconst CHARGE_DISABLED = true;\nRED.util.setMessageProperty(msg,\"advanced_settings.charge_disabled\",CHARGE_DISABLED,true);\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -6337,7 +6337,7 @@
             },
             {
                 "t": "eq",
-                "v": "Discharge only",
+                "v": "Zero import",
                 "vt": "str"
             },
             {
@@ -6442,7 +6442,7 @@
         "type": "debug",
         "z": "1ae53b821b8673a2",
         "g": "50dde0e0168dbaab",
-        "name": "Discharge only count",
+        "name": "Zero import count",
         "active": true,
         "tosidebar": false,
         "console": false,

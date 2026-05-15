@@ -2,7 +2,7 @@
     {
         "id": "1ae53b821b8673a2",
         "type": "tab",
-        "label": "Strategy Partials v4.9.0",
+        "label": "Strategy Partials v4.10.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -450,7 +450,7 @@
         "type": "link in",
         "z": "1ae53b821b8673a2",
         "g": "41c3dc51d46570c3",
-        "name": "Discharge only",
+        "name": "Zero import",
         "links": [],
         "x": 120,
         "y": 200,
@@ -466,8 +466,8 @@
         "type": "function",
         "z": "1ae53b821b8673a2",
         "g": "50dde0e0168dbaab",
-        "name": "Discharge only",
-        "func": "// explain\nconst log = global.get(\"logger\");\nlog(this,\"Using self-consumption to discharge only\")\n\n// use the self consumption strategy to discharge only\nmsg.target = \"Self-consumption\";\n\n// tell that strategy to disallow charging\nconst CHARGE_DISABLED = true;\nRED.util.setMessageProperty(msg,\"advanced_settings.charge_disabled\",CHARGE_DISABLED,true);\n\n\nreturn msg;",
+        "name": "Zero import",
+        "func": "// explain\nconst log = global.get(\"logger\");\nlog(this,\"Using self-consumption with charging disabled (Zero import)\")\n\n// use the self consumption strategy with charging disabled (Zero import)\nmsg.target = \"Self-consumption\";\n\n// tell that strategy to disallow charging\nconst CHARGE_DISABLED = true;\nRED.util.setMessageProperty(msg,\"advanced_settings.charge_disabled\",CHARGE_DISABLED,true);\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -515,7 +515,7 @@
             },
             {
                 "t": "eq",
-                "v": "Discharge only",
+                "v": "Zero import",
                 "vt": "str"
             },
             {
@@ -620,7 +620,7 @@
         "type": "debug",
         "z": "1ae53b821b8673a2",
         "g": "50dde0e0168dbaab",
-        "name": "Discharge only count",
+        "name": "Zero import count",
         "active": true,
         "tosidebar": false,
         "console": false,

@@ -1,6 +1,15 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.10.0
+- Feat: Add Zero import and Standby/peak shave strategies; consolidate partial flows; deprecate strategy-charge-pv.json
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-partials.json`
+  - `node-red/all-flows-in-one-file.json`
+
 ## 4.9.0
 - **Feat: "After goal reached" strategy switch for Charge and Sell**
   * When the Charge strategy reaches its target (SoC, kWh, or solar forecast), it now automatically switches to a configurable follow-up strategy: `Charge PV` (default), `Self-consumption`, or `Full stop`.
