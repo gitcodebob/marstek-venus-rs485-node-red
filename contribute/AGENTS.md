@@ -81,13 +81,42 @@ Increments the version across all relevant files.
 
 ---
 
+### `release.ps1` — Post-merge tag + GitHub release
+
+Owner-only. Runs the deterministic part of the release flow *after* the
+release-prep PR has been squash-merged on GitHub. Driven by the `/release`
+slash command, which handles PR creation and waits for the human merge.
+
+**Usage:**
+```powershell
+.\contribute\release.ps1 -Theme "Zero import & peak shave"
+.\contribute\release.ps1 -Theme "x" -FeatureBranch fix/peak-shave
+.\contribute\release.ps1 -Theme "x" -DryRun
+```
+
+**What it does:**
+1. Switches to `main` (or `-BaseBranch`) and `git pull --ff-only`.
+2. Reads the current version from `node-red/01 start-flow.json`.
+3. Validates `## <version>` exists in `RELEASE_NOTES.md`.
+4. Refuses to proceed if `v<version>` already exists locally or on origin.
+5. Creates and pushes the tag `v<version>`.
+6. Extracts the RELEASE_NOTES section and injects the Buy Me A Battery
+   support block immediately before `- **Files Changed:**` (idempotent —
+   skipped if the block is already present).
+7. Runs `gh release create v<version> --title "v<version> - <Theme>" --latest`.
+8. (Optional) Deletes the local + remote feature branch if `-FeatureBranch`
+   is given. Uses `git branch -d` (safe — refuses unmerged branches).
+
+**When to use (AI agent):**
+- Only via the `/release` slash command, after the user confirms the PR was
+  squash-merged. Do not invoke directly.
+
+---
+
 ## Recommended agent workflow for a release
 
 ```
-1.  User decides bump type (patch / minor / major)
-2.  Run:  .\contribute\check.ps1                     (validate current state)
-3.  Run:  .\contribute\bump-version.ps1 -Type <type>
-4.  User authors RELEASE_NOTES.md entry
-5.  Run:  .\contribute\check.ps1                     (verify bump + release notes)
-6.  Stage, commit, push per copilot-instructions
+1.  /release-prep        (bump, release-notes stub, commit, push)
+2.  User expands the RELEASE_NOTES.md stub into proper sub-bullets
+3.  /release             (PR -> user squash-merges -> tag -> GH release)
 ```
