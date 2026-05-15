@@ -10,31 +10,31 @@ Pick the strategy that matches what you want the battery to do today — switch 
 
 ## Pick by goal
 
-| I want to… | Use |
-|---|---|
-| Use my own energy, keep grid meter at 0 Watt | [**Self-consumption**](#self-consumption) |
-| Save money on a dynamic / hourly tariff | [**Dynamic**](#dynamic) (or [**Dynamic v2**](#dynamic-v2) lab) |
-| Charge/discharge on a fixed clock | [**Timed**](#timed) |
-| Fill the battery now (outage, cheap window) | [**Charge**](#charge) |
-| Sell stored energy at a price peak | [**Sell**](#sell) |
-| Soak up solar surplus only | [**Charge PV**](#charge-pv) |
-| Never import from the grid | [**Zero import**](#zero-import) |
-| Stay idle, only act on grid peaks (capacity tariff) | [**Standby / peak shave**](#standby-peak-shave) |
-| Halt all battery activity | [**Full stop**](#full-stop) |
+| I want to… | Use | Setup |
+|---|---|---|
+| Use my own energy, keep grid meter at 0 Watt | [**Self-consumption**](#self-consumption) | [Setup](/04-setup-self-consumption) |
+| Save money on a dynamic / hourly tariff | [**Dynamic**](#dynamic) (or [**Dynamic v2**](#dynamic-v2) lab) | [Setup](/05-setup-dynamic) |
+| Charge/discharge on a fixed clock | [**Timed**](#timed) | – |
+| Fill the battery now (outage, cheap window) | [**Charge**](#charge) | [Setup](/04-setup-solar-forecast) |
+| Sell stored energy at a price peak | [**Sell**](#sell) | – |
+| Soak up solar surplus only | [**Charge PV**](#charge-pv) | – |
+| Never import from the grid | [**Zero import**](#zero-import) | – |
+| Stay idle, only act on grid peaks (capacity tariff) | [**Standby / peak shave**](#standby-peak-shave) | [Setup](/06-advanced-features#grid-power-limits) |
+| Halt all battery activity | [**Full stop**](#full-stop) | – |
 
 ## At a glance — capabilities
 
-| Strategy | Grid→Bat | PV→Bat | Bat→Home | Bat→Grid | Needs PV | Needs price feed | Setup |
-|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| Self-consumption | – | ✅ | ✅ | – | recommended | – | [Setup](/04-setup-self-consumption) |
-| Dynamic | ⚙️ | ⚙️ | ⚙️ | ⚙️ | – | ✅ | [Setup](/05-setup-dynamic) |
-| Timed | ✅ | ✅ | ✅ | ✅ | – | – | – |
-| Charge | ✅ | ✅ | – | – | – | – | [Setup](/04-setup-solar-forecast) |
-| Sell | – | – | – | ✅ | – | recommended | – |
-| Charge PV | – | ✅ | – | – | ✅ | – | – |
-| Zero import | – | – | ✅ | – | – | – | – |
-| Standby / peak shave | only on peak | only on peak | only on peak | only on peak | – | – | [Setup](/06-advanced-features#grid-power-limits) |
-| Full stop | – | – | – | – | – | – | – |
+| Strategy | Grid→Bat | PV→Bat | Bat→Home | Bat→Grid | Needs PV | Needs price feed |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|
+| Self-consumption | – | ✅ | ✅ | – | recommended | – |
+| Dynamic | ⚙️ | ⚙️ | ⚙️ | ⚙️ | – | ✅ |
+| Timed | ✅ | ✅ | ✅ | ✅ | – | – |
+| Charge | ✅ | ✅ | – | – | – | – |
+| Sell | – | – | – | ✅ | – | recommended |
+| Charge PV | – | ✅ | – | – | ✅ | – |
+| Zero import | – | – | ✅ | – | – | – |
+| Standby / peak shave | only on peak | only on peak | only on peak | only on peak | – | – |
+| Full stop | – | – | – | – | – | – |
 
 *⚙️ = depends on the sub-strategy selected for that period.*
 
@@ -53,8 +53,8 @@ All strategies are selectable from the Home Battery Control dashboard. Most sett
 ### 🔋 Self-consumption *(mandatory)* {#self-consumption}
 *Maintains ~0 W grid power with a PID controller: battery charges from solar surplus and discharges to cover home loads.*
 
-**Best for:** the baseline "use my own energy" mode — also the engine other strategies build on.
-**Setup:** PID tuning recommended — see [Self-consumption Setup Guide](/04-setup-self-consumption).
+**Best for:** the baseline "use my own energy" mode — also the engine other strategies build on. \
+**Setup:** PID tuning recommended — see [Self-consumption Setup Guide](/04-setup-self-consumption). \
 **Flow:** `02 strategy-self-consumption.json`
 
 - Always configure this one — it is used internally by Charge PV, Zero import, Dynamic, and Timed.
@@ -66,8 +66,8 @@ All strategies are selectable from the Home Battery Control dashboard. Most sett
 ### 🎯 Charge *(from grid)* {#charge}
 *Forces the battery to charge from the grid until a configurable goal is met, then switches to a follow-up strategy.*
 
-**Best for:** preparing for power outages, pre-charging before expensive hours, or topping up on a cheap night tariff.
-**Setup:** Dashboard. Solar-forecast goal: see [Solar Forecast Setup](/04-setup-solar-forecast).
+**Best for:** preparing for power outages, pre-charging before expensive hours, or topping up on a cheap night tariff. \
+**Setup:** Dashboard. Solar-forecast goal: see [Solar Forecast Setup](/04-setup-solar-forecast). \
 **Flow:** `02 strategy-charge.json`
 
 **Charge goals** *(pick one)*
@@ -87,8 +87,8 @@ All strategies are selectable from the Home Battery Control dashboard. Most sett
 ### 🎯 Sell *(to grid)* {#sell}
 *Discharges the battery to the grid for profit during high prices, until a configurable floor is reached.*
 
-**Best for:** dynamic-tariff users with a price peak, or anyone compensated for grid export.
-**Setup:** Dashboard.
+**Best for:** dynamic-tariff users with a price peak, or anyone compensated for grid export. \
+**Setup:** Dashboard. \
 **Flow:** `02 strategy-sell.json`
 
 **Stop conditions** *(pick one)*
@@ -111,8 +111,8 @@ All strategies are selectable from the Home Battery Control dashboard. Most sett
 ### 💶 Dynamic {#dynamic}
 *Picks a sub-strategy per period based on hourly tariffs: a cheapest block, an expensive block, and the regular hours in between.*
 
-**Best for:** dynamic / hourly energy contracts where you want to capture the daily price spread.
-**Setup:** Cheapest Energy Hours integration + a price data source — see [Dynamic Strategy Setup](/05-setup-dynamic).
+**Best for:** dynamic / hourly energy contracts where you want to capture the daily price spread. \
+**Setup:** Cheapest Energy Hours integration + a price data source — see [Dynamic Strategy Setup](/05-setup-dynamic). \
 **Flow:** `02 strategy-dynamic.json`
 
 | Period | Default | Configurable options |
@@ -125,8 +125,8 @@ Smart activation: the cheapest block only fires below a configurable tariff thre
 
 ### 💶 Dynamic v2 — *lab feature* {#dynamic-v2}
 
-<div style="background:#fff8c5;padding:0.6em 0.9em;border-left:4px solid #d4a72c;margin:0.6em 0;">
-A redesigned Dynamic strategy that evaluates <strong>every price interval individually</strong> instead of fixed N-hour blocks. Lab feature — behavior may change between releases. Full guide: <a href="/05-dynamic-v2"><strong>Dynamic Strategy v2</strong></a>.
+<div style="background:#3a2e14;padding:0.6em 0.9em;border-left:4px solid #e6b800;color:#ffe9a8;margin:0.6em 0;border-radius:2px;">
+🧪 A redesigned Dynamic strategy that evaluates <strong style="color:#fff3c4;">every price interval individually</strong> instead of fixed N-hour blocks. Lab feature — behavior may change between releases. Full guide: <a href="/05-dynamic-v2" style="color:#ffd866;text-decoration:underline;"><strong>Dynamic Strategy v2</strong></a>.
 </div>
 
 **Flow:** `02 strategy-dynamic-2.json`
@@ -138,8 +138,8 @@ A redesigned Dynamic strategy that evaluates <strong>every price interval indivi
 ### ⏰ Timed {#timed}
 *Charges or discharges according to a fixed daily schedule with up to three configurable time windows.*
 
-**Best for:** time-of-use tariffs and predictable daily routines (cheap night rate, expensive evening peak).
-**Setup:** Dashboard — set the time windows.
+**Best for:** time-of-use tariffs and predictable daily routines (cheap night rate, expensive evening peak). \
+**Setup:** Dashboard — set the time windows. \
 **Flow:** `02 strategy-timed.json`
 
 - Each window can independently charge, discharge, or idle.
@@ -154,8 +154,8 @@ These three strategies share a single Node-RED flow (`02 strategy-partials.json`
 ### ☀️ Charge PV {#charge-pv}
 *Charges the battery only when surplus solar is available — never draws from the grid, never discharges.*
 
-**Best for:** sunny days when you just want to soak up free solar without grid round-tripping.
-**Setup:** None.
+**Best for:** sunny days when you just want to soak up free solar without grid round-tripping. \
+**Setup:** None. \
 **Flow:** `02 strategy-partials.json`
 
 - Battery **never discharges** in this mode — any grid imports are not buffered.
@@ -165,8 +165,8 @@ These three strategies share a single Node-RED flow (`02 strategy-partials.json`
 ### ☀️ Zero import {#zero-import}
 *Uses stored energy to cover home loads while blocking grid imports; surplus PV exports as usual.*
 
-**Best for:** maximizing self-reliance — capacity tariffs, post-saldering tariffs, or anywhere imports are penalized.
-**Setup:** None.
+**Best for:** maximizing self-reliance — capacity tariffs, post-saldering tariffs, or anywhere imports are penalized. \
+**Setup:** None. \
 **Flow:** `02 strategy-partials.json`
 
 - Charging is **disabled** — surplus PV always exports, never to the battery.
@@ -176,8 +176,8 @@ These three strategies share a single Node-RED flow (`02 strategy-partials.json`
 ### ☀️ Standby / peak shave {#standby-peak-shave}
 *Battery idles by default; activates only when grid power exceeds the configured import or export limit, then peak-shaves until the grid drops back.*
 
-**Best for:** capacity-tariff contracts (CAPTAR) and homes near their connection limit — minimizes battery wear by acting only on peaks.
-**Setup:** Dashboard — set the import / export power limits.
+**Best for:** capacity-tariff contracts (CAPTAR) and homes near their connection limit — minimizes battery wear by acting only on peaks. \
+**Setup:** Dashboard — set the import / export power limits. \
 **Flow:** `02 strategy-partials.json`
 
 - Thresholds: import limit and export limit (W), each independently toggleable. See [Grid Power Limits](/06-advanced-features#grid-power-limits).
@@ -191,8 +191,8 @@ These three strategies share a single Node-RED flow (`02 strategy-partials.json`
 ### ⏹ Full stop {#full-stop}
 *Halts all battery operations.*
 
-**Best for:** maintenance, testing, emergency situations.
-**Setup:** None.
+**Best for:** maintenance, testing, emergency situations. \
+**Setup:** None. \
 **Flow:** `02 strategy-full-stop.json`
 
 - Takes precedence over Peak Shaving — the battery stays idle.
