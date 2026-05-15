@@ -805,7 +805,7 @@ views:
             icon: mdi:information-slab-circle
             heading: Charge until
             heading_style: subtitle
-            tap_action: &ref_0
+            tap_action:
               action: url
               url_path: >-
                 https://docs.homebatterycontrol.com/03-strategies.html#charge-from-grid
@@ -951,7 +951,10 @@ views:
             icon: mdi:information-slab-circle
             heading: When done charging, switch to strategy
             heading_style: subtitle
-            tap_action: *ref_0
+            tap_action:
+              action: url
+              url_path: >-
+                https://docs.homebatterycontrol.com/03-strategies.html#charge-from-grid
           - type: entities
             entities:
               - entity: input_select.house_battery_strategy_charge_goal_reached
@@ -1000,7 +1003,7 @@ views:
             icon: mdi:information-slab-circle
             heading: Sell until
             heading_style: subtitle
-            tap_action: &ref_1
+            tap_action:
               action: url
               url_path: >-
                 https://docs.homebatterycontrol.com/03-strategies.html#charge-from-grid
@@ -1025,7 +1028,10 @@ views:
             icon: mdi:information-slab-circle
             heading: When done, switch to strategy
             heading_style: subtitle
-            tap_action: *ref_1
+            tap_action:
+              action: url
+              url_path: >-
+                https://docs.homebatterycontrol.com/03-strategies.html#charge-from-grid
           - type: entities
             entities:
               - entity: input_select.house_battery_strategy_sell_goal_reached
@@ -2317,12 +2323,11 @@ views:
             text_only: true
           - type: heading
             icon: mdi:information
-            heading: Using the dynamic strategy
+            heading: Using the dynamic v2 strategy
             heading_style: subtitle
             tap_action:
               action: url
-              url_path: >-
-                https://docs.homebatterycontrol.com/05-setup-dynamic.html#use-the-dynamic-strategy
+              url_path: https://docs.homebatterycontrol.com/05-dynamic-v2.html
             visibility:
               - condition: not
                 conditions:

@@ -1,0 +1,675 @@
+[
+    {
+        "id": "1ae53b821b8673a2",
+        "type": "tab",
+        "label": "Strategy Partials v4.9.0",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c6383283baa3eca9",
+        "type": "group",
+        "z": "1ae53b821b8673a2",
+        "name": "Battery solutions",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "089f1be10dd5119e",
+            "7ecd167b8a0ef282"
+        ],
+        "x": 1324,
+        "y": 59,
+        "w": 192,
+        "h": 142
+    },
+    {
+        "id": "41c3dc51d46570c3",
+        "type": "group",
+        "z": "1ae53b821b8673a2",
+        "name": "Start",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "9af40f0f2774e4f5",
+            "7b42629f8d5210d6",
+            "1da12a6e80d6b69f",
+            "2feee1f902f4e380",
+            "7a8a7d0b62d4862a"
+        ],
+        "x": 14,
+        "y": 79,
+        "w": 252,
+        "h": 242
+    },
+    {
+        "id": "0afc49979e6c60f5",
+        "type": "group",
+        "z": "1ae53b821b8673a2",
+        "name": "Unhandled exceptions",
+        "style": {
+            "label": true,
+            "stroke": "#d88a8a",
+            "color": "#d88a8a"
+        },
+        "nodes": [
+            "f7f94a9f558f31be",
+            "7f66b964b186cec7",
+            "11fd97a5bb225f2c"
+        ],
+        "x": 14,
+        "y": 359,
+        "w": 182,
+        "h": 82
+    },
+    {
+        "id": "33016f62501cc207",
+        "type": "group",
+        "z": "1ae53b821b8673a2",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "b899358dd1b2a8d6",
+            "1f2951775f90f952",
+            "a71fdc10c42378e2"
+        ],
+        "x": 804,
+        "y": 19,
+        "w": 482,
+        "h": 82
+    },
+    {
+        "id": "6e72815f5b5e92d2",
+        "type": "group",
+        "z": "1ae53b821b8673a2",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "a72fdf5a352dfbf5",
+            "a3db8289590f43f5",
+            "611c1e75bb981159",
+            "9f3287c6fb694258"
+        ],
+        "x": 644,
+        "y": 319,
+        "w": 642,
+        "h": 82
+    },
+    {
+        "id": "50dde0e0168dbaab",
+        "type": "group",
+        "z": "1ae53b821b8673a2",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "71cc87bd04f35a62",
+            "6bc4be797addbe45",
+            "2d9983acd4663cdf"
+        ],
+        "x": 804,
+        "y": 119,
+        "w": 482,
+        "h": 82
+    },
+    {
+        "id": "08e6f44118b19003",
+        "type": "group",
+        "z": "1ae53b821b8673a2",
+        "style": {
+            "stroke": "#565656",
+            "stroke-opacity": "1",
+            "fill": "#3a3a3a",
+            "fill-opacity": "0.5",
+            "label": true,
+            "label-position": "nw",
+            "color": "#cccccc"
+        },
+        "nodes": [
+            "a20302bf1fc4b744",
+            "2175d488277aa571",
+            "c9f4155d20d6535a"
+        ],
+        "x": 804,
+        "y": 219,
+        "w": 482,
+        "h": 82
+    },
+    {
+        "id": "9af40f0f2774e4f5",
+        "type": "link in",
+        "z": "1ae53b821b8673a2",
+        "g": "41c3dc51d46570c3",
+        "name": "Charge PV",
+        "links": [],
+        "x": 100,
+        "y": 160,
+        "wires": [
+            [
+                "1da12a6e80d6b69f"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "f93701168e2141c0",
+        "type": "comment",
+        "z": "1ae53b821b8673a2",
+        "name": "Home Battery Strategy",
+        "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
+        "x": 120,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7b42629f8d5210d6",
+        "type": "comment",
+        "z": "1ae53b821b8673a2",
+        "g": "41c3dc51d46570c3",
+        "name": "Start (readme)",
+        "info": "# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the <select> option configured in your\nselect_input.house_battery_strategy\n\nconfigure select options in:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select 'AcmE example'\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
+        "x": 110,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "089f1be10dd5119e",
+        "type": "link out",
+        "z": "1ae53b821b8673a2",
+        "g": "c6383283baa3eca9",
+        "name": "Return",
+        "mode": "return",
+        "links": [],
+        "x": 1365,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "7ecd167b8a0ef282",
+        "type": "comment",
+        "z": "1ae53b821b8673a2",
+        "g": "c6383283baa3eca9",
+        "name": "End (readme)",
+        "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
+        "x": 1420,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b899358dd1b2a8d6",
+        "type": "function",
+        "z": "1ae53b821b8673a2",
+        "g": "33016f62501cc207",
+        "name": "Charge PV",
+        "func": "// explain\nconst log = global.get(\"logger\");\nlog(this,\"Using `Self-consumption` to charge with surplus PV\")\n\n// use the self consumption strategy to charge when there is PV surplus\nmsg.target = \"Self-consumption\";\n\n// tell that strategy to disallow discharging\nconst DISCHARGE_DISABLED = true;\nRED.util.setMessageProperty(msg,\"advanced_settings.discharge_disabled\",DISCHARGE_DISABLED,true);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 60,
+        "wires": [
+            [
+                "1f2951775f90f952",
+                "a71fdc10c42378e2"
+            ]
+        ]
+    },
+    {
+        "id": "1f2951775f90f952",
+        "type": "link call",
+        "z": "1ae53b821b8673a2",
+        "g": "33016f62501cc207",
+        "name": "Self-consumption",
+        "links": [],
+        "linkType": "dynamic",
+        "timeout": "5",
+        "x": 1170,
+        "y": 60,
+        "wires": [
+            [
+                "089f1be10dd5119e"
+            ]
+        ]
+    },
+    {
+        "id": "1da12a6e80d6b69f",
+        "type": "change",
+        "z": "1ae53b821b8673a2",
+        "g": "41c3dc51d46570c3",
+        "name": "Trace",
+        "rules": [
+            {
+                "t": "set",
+                "p": "strategy.trace",
+                "pt": "msg",
+                "to": "[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 90,
+        "y": 240,
+        "wires": [
+            [
+                "06e56c44976f669c"
+            ]
+        ],
+        "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
+    },
+    {
+        "id": "f7f94a9f558f31be",
+        "type": "catch",
+        "z": "1ae53b821b8673a2",
+        "g": "0afc49979e6c60f5",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 55,
+        "y": 400,
+        "wires": [
+            [
+                "7f66b964b186cec7"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "7f66b964b186cec7",
+        "type": "function",
+        "z": "1ae53b821b8673a2",
+        "g": "0afc49979e6c60f5",
+        "name": "Unhandled Exception",
+        "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 105,
+        "y": 400,
+        "wires": [
+            [
+                "11fd97a5bb225f2c"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "11fd97a5bb225f2c",
+        "type": "link out",
+        "z": "1ae53b821b8673a2",
+        "g": "0afc49979e6c60f5",
+        "name": "link out 4",
+        "mode": "return",
+        "links": [],
+        "x": 155,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "06e56c44976f669c",
+        "type": "function",
+        "z": "1ae53b821b8673a2",
+        "name": "Mode selection",
+        "func": "/* Mode selection \n * \n * Peak shaving can be triggered by:\n * - Grid power exceeds the import/export limit set by the user\n * \n * Peak shaving will persist while:\n * - Grid power exceeds the import/export limit set by the user\n * - Batteries are applied to keep system below the limit set by the user\n * \n * The first is checked in this node.\n * The latter is checked in the last function node of the Peak Shaving flow.\n * Both set the `last_power_limit_violation` flow variable to Date.now() to persist peak shaving.\n * \n * PEAK_SHAVING_TIMEOUT_SEC is advised to be kept above atleast 3-5 seconds, to account for rate limiters and other power saving options.\n*/\n\n// Timestamp\nconst now = Date.now();\n\n// Logger\nconst log = global.get(\"logger\");\n\n// Configuration & State recovery\nconst PEAK_SHAVING_TIMEOUT_SEC = 10;\nlet isPeakShaving = flow.get(\"is_peak_shaving\") ?? false;\nlet lastPowerLimitViolation = flow.get(\"last_power_limit_violation\") ?? now;\nlet isPowerLimitViolation = false;\nlet powerLimit = 0;\n\n// Input data | grid\nconst P1_power = parseInt(RED.util.getMessageProperty(msg, \"grid_power\") || 0);\n// Input data | Charge PV\nconst hasImportLimit = RED.util.getMessageProperty(msg, \"grid_power_has_limit_import\") || false;\nconst importLimit = parseInt(RED.util.getMessageProperty(msg, \"grid_power_limit_import\") || 0);\n// Input data | Sell PV\nconst hasExportLimit = RED.util.getMessageProperty(msg, \"grid_power_has_limit_export\") || false;\nconst exportLimit = parseInt(RED.util.getMessageProperty(msg, \"grid_power_limit_export\") || 0);\n\n\n// ACTIVATE shaving\nif (hasImportLimit && (P1_power > importLimit)) {\n    isPeakShaving = true;\n    isPowerLimitViolation = true;\n    // powerLimit = importLimit;\n}\nif (hasExportLimit && (P1_power < exportLimit)) {\n    isPeakShaving = true;\n    isPowerLimitViolation = true;\n    // powerLimit = exportLimit;\n}\n\n// Export or Import\nRED.util.setMessageProperty(msg, \"strategy.peak_direction\", P1_power > 0 ? \"import\":\"export\", true);\n\n// UPDATE timer or continue\nif (isPowerLimitViolation) lastPowerLimitViolation = now;\n\n// CALCULATE release logic\n// Seconds since the last time the power limit was exceeded\nlet secondsSinceLastViolation = Math.floor((now - lastPowerLimitViolation) / 1000);\n\n// RELEASE shaving logic\n// Only release if we are currently shaving AND the timeout has passed\nif (isPeakShaving && (secondsSinceLastViolation >= PEAK_SHAVING_TIMEOUT_SEC)) {\n    isPeakShaving = false;\n    log(this,\"Peak Shaving released, resume normal operation\");\n}\n\n// UI & OUTPUT Logic\nif (isPeakShaving) {\n    // Timeout progress\n    const secondsRemaining = PEAK_SHAVING_TIMEOUT_SEC - secondsSinceLastViolation;\n    // Set grid power limit\n    msg.payload = P1_power > 0 ? importLimit : exportLimit;\n    // UI\n    node.status({\n        fill: \"yellow\",\n        shape: \"dot\",\n        text: isPowerLimitViolation ? `Peak Shaving` :`Peak Shaving: release in ${secondsRemaining}s`\n    });\n} else {\n    // UI\n    node.status({\n        fill: \"green\",\n        shape: \"dot\",\n        text: `Grid OK - ${msg.target}`\n    });\n}\n\n// Persist state for next run\nflow.set(\"is_peak_shaving\", isPeakShaving); \nif (isPowerLimitViolation) flow.set(\"last_power_limit_violation\", now); // Power limit exceeded. Update the lastPowerLimitViolation timestamp to current time\n\n// Finalize msg\nRED.util.setMessageProperty(msg, \"strategy.is_peak_shaving\", isPeakShaving, true);\n\n// OUTPUT\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 240,
+        "wires": [
+            [
+                "2d969cd093869f3f"
+            ]
+        ]
+    },
+    {
+        "id": "2d969cd093869f3f",
+        "type": "switch",
+        "z": "1ae53b821b8673a2",
+        "name": "Operating mode",
+        "property": "strategy.is_peak_shaving",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 560,
+        "y": 240,
+        "wires": [
+            [
+                "790e790e05eb8859"
+            ],
+            [
+                "a3db8289590f43f5"
+            ]
+        ]
+    },
+    {
+        "id": "a3db8289590f43f5",
+        "type": "function",
+        "z": "1ae53b821b8673a2",
+        "g": "6e72815f5b5e92d2",
+        "name": "Peak shaving",
+        "func": "// Logger\nconst log = global.get(\"logger\");\n\n// Explain\nlog(this,`**Peak shaving mode** postponing '${msg.target}' strategy`);\nnode.status({ fill: \"green\", shape: \"dot\", text: `postponing '${msg.target}' strategy`});\n\n// Original target\nconst ORIGINAL_TARGET = msg.target;\n\n// Use the PID controller strategy\nmsg.target = \"Self-consumption\";\n// Set the grid power limit\nmsg.house_target_grid_consumption_in_w = msg.payload;\n\n// Type of peak shave\nconst peakDirection = RED.util.getMessageProperty(msg, \"strategy.peak_direction\");\nconst DISABLED = true;\n\nswitch (peakDirection) {\n    case \"import\":\n        // Ask PID to help shave import peak\n        RED.util.setMessageProperty(msg, \"advanced_settings.charge_disabled\", DISABLED, true);    \n        break;\n    case \"export\":\n        // Ask PID to help shave export peak\n        RED.util.setMessageProperty(msg, \"advanced_settings.discharge_disabled\", DISABLED, true);\n        break;\n    default:\n        log(this, `Unknow peak type ${peakDirection}, peak shave failed`, \"warn\");       \n        node.status({ fill: \"red\", shape: \"dot\", text: `peak type ${peakDirection}, peak shave failed`});\n        // Set a safe value\n        msg.house_target_grid_consumption_in_w = 0;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 360,
+        "wires": [
+            [
+                "611c1e75bb981159"
+            ]
+        ]
+    },
+    {
+        "id": "611c1e75bb981159",
+        "type": "link call",
+        "z": "1ae53b821b8673a2",
+        "g": "6e72815f5b5e92d2",
+        "name": "Self-consumption",
+        "links": [],
+        "linkType": "dynamic",
+        "timeout": "5",
+        "x": 940,
+        "y": 360,
+        "wires": [
+            [
+                "a72fdf5a352dfbf5"
+            ]
+        ]
+    },
+    {
+        "id": "a72fdf5a352dfbf5",
+        "type": "function",
+        "z": "1ae53b821b8673a2",
+        "g": "6e72815f5b5e92d2",
+        "name": "Peak check",
+        "func": "// Logger\nconst log = global.get(\"logger\");\n\n// INPUT\nconst PID_assigned = msg.pid?.load_assigned ?? 0; // calculated battery power delivery, see footnote_1 why this is 0 by default\nconst isCharging = msg.batteries_charging || false;\n\n// HOLD peak shave when:\nif(PID_assigned > 0 && !isCharging) {\n    // The batteries are still required to reduce the power peak\n    log(this,`**Peak shaving continues**, batteries still required for peak reduction`);\n    // Reset timeout timer\n    flow.set(\"last_power_limit_violation\", Date.now()); \n    // UI\n    node.status({fill:\"yellow\",shape:\"dot\",text:`Holding peak shave, batteries still required for ${PID_assigned} W`});\n} else {\n    // No solution or batteries not required - let timer run out\n    node.status({fill:\"green\",shape:\"dot\",text:`Relax`});\n}\n\nreturn msg;\n\n// FOOTNOTE_1: \n// Self-consumption won't return `msg.solutions` nor `msg.pid.load_assigned` when:\n// - P1 is near or at it's target grid consumption (aka inside deadband)\n// - when a non-blocking error occurs\n// \n// This code does not specifically account for these cases, but applies a TIMEOUT mechanism instead.\n// As PID_assigned is kept 0, the timer won't be updated and runs out.",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 360,
+        "wires": [
+            [
+                "089f1be10dd5119e",
+                "9f3287c6fb694258"
+            ]
+        ]
+    },
+    {
+        "id": "2feee1f902f4e380",
+        "type": "link in",
+        "z": "1ae53b821b8673a2",
+        "g": "41c3dc51d46570c3",
+        "name": "Discharge only",
+        "links": [],
+        "x": 120,
+        "y": 200,
+        "wires": [
+            [
+                "1da12a6e80d6b69f"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "71cc87bd04f35a62",
+        "type": "function",
+        "z": "1ae53b821b8673a2",
+        "g": "50dde0e0168dbaab",
+        "name": "Discharge only",
+        "func": "// explain\nconst log = global.get(\"logger\");\nlog(this,\"Using self-consumption to discharge only\")\n\n// use the self consumption strategy to discharge only\nmsg.target = \"Self-consumption\";\n\n// tell that strategy to disallow charging\nconst CHARGE_DISABLED = true;\nRED.util.setMessageProperty(msg,\"advanced_settings.charge_disabled\",CHARGE_DISABLED,true);\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 160,
+        "wires": [
+            [
+                "6bc4be797addbe45",
+                "2d9983acd4663cdf"
+            ]
+        ]
+    },
+    {
+        "id": "6bc4be797addbe45",
+        "type": "link call",
+        "z": "1ae53b821b8673a2",
+        "g": "50dde0e0168dbaab",
+        "name": "Self-consumption",
+        "links": [],
+        "linkType": "dynamic",
+        "timeout": "5",
+        "x": 1170,
+        "y": 160,
+        "wires": [
+            [
+                "089f1be10dd5119e"
+            ]
+        ]
+    },
+    {
+        "id": "790e790e05eb8859",
+        "type": "switch",
+        "z": "1ae53b821b8673a2",
+        "name": "Strat",
+        "property": "target",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Charge PV",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Discharge only",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Standby / peak shave",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 720,
+        "y": 160,
+        "wires": [
+            [
+                "b899358dd1b2a8d6"
+            ],
+            [
+                "71cc87bd04f35a62"
+            ],
+            [
+                "a20302bf1fc4b744"
+            ]
+        ]
+    },
+    {
+        "id": "7a8a7d0b62d4862a",
+        "type": "link in",
+        "z": "1ae53b821b8673a2",
+        "g": "41c3dc51d46570c3",
+        "name": "Standby / peak shave",
+        "links": [],
+        "x": 140,
+        "y": 280,
+        "wires": [
+            [
+                "1da12a6e80d6b69f"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "a20302bf1fc4b744",
+        "type": "function",
+        "z": "1ae53b821b8673a2",
+        "g": "08e6f44118b19003",
+        "name": "Standby",
+        "func": "// explain\nconst log = global.get(\"logger\");\nlog(this,\"Using self-consumption to standby for peak shaving\")\n\n// use the self consumption strategy\nmsg.target = \"Self-consumption\";\n\n// clamp a zero solution, allowing soft stop of batteries (no click clack)\nRED.util.setMessageProperty(msg,\"advanced_settings.charge_disabled\",true,true);\nRED.util.setMessageProperty(msg,\"advanced_settings.discharge_disabled\",true,true);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 260,
+        "wires": [
+            [
+                "2175d488277aa571",
+                "c9f4155d20d6535a"
+            ]
+        ]
+    },
+    {
+        "id": "2175d488277aa571",
+        "type": "link call",
+        "z": "1ae53b821b8673a2",
+        "g": "08e6f44118b19003",
+        "name": "Self-consumption",
+        "links": [],
+        "linkType": "dynamic",
+        "timeout": "5",
+        "x": 1170,
+        "y": 260,
+        "wires": [
+            [
+                "089f1be10dd5119e"
+            ]
+        ]
+    },
+    {
+        "id": "a71fdc10c42378e2",
+        "type": "debug",
+        "z": "1ae53b821b8673a2",
+        "g": "33016f62501cc207",
+        "name": "Charge PV count",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 1035,
+        "y": 60,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "2d9983acd4663cdf",
+        "type": "debug",
+        "z": "1ae53b821b8673a2",
+        "g": "50dde0e0168dbaab",
+        "name": "Discharge only count",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 1035,
+        "y": 160,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "c9f4155d20d6535a",
+        "type": "debug",
+        "z": "1ae53b821b8673a2",
+        "g": "08e6f44118b19003",
+        "name": "Standby count",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 1035,
+        "y": 260,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "9f3287c6fb694258",
+        "type": "debug",
+        "z": "1ae53b821b8673a2",
+        "g": "6e72815f5b5e92d2",
+        "name": "Peak shave count",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 1225,
+        "y": 360,
+        "wires": [],
+        "l": false
+    }
+]
