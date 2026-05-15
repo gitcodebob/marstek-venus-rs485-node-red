@@ -9,11 +9,13 @@ nav_order: 5
 The `dynamic` flow is provided for automated charging/discharging based on changing hourly rates. This is only relevant if you have a dynamic/hourly contract.
 
 ## How it works
-The strategy will periodically check for new tariff data from your supplier.
-You can configure which strategy to use during:
-- **Cheapest hours**: Choose between `Charge` (from grid) or `Charge PV` (solar only)
-- **Expensive hours**: Choose between `Self-consumption` or `Sell` (to grid)
-- **Regular hours**: Choose between `Charge PV` (default), `Self-consumption`, or `Full stop`
+The strategy will periodically check for new tariff data from your supplier and applies a sub-strategy per period:
+
+| Period | Default | Configurable options |
+|---|---|---|
+| Cheapest | `Charge` *(from grid)* | `Charge`, `Charge PV` |
+| Expensive | `Self-consumption` | `Self-consumption`, `Sell`, `Zero import` |
+| Regular | `Charge PV` | `Charge PV`, `Self-consumption`, `Zero import`, `Full stop` |
 
 Smart thresholds ensure periods only activate when economically beneficial.
 
