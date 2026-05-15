@@ -96,6 +96,12 @@ Controls grid import/export thresholds for `peak shaving` functionality.
 - **Export limit:** Maximum power to feed back to the grid (example: 3000W if grid connection has export limits)
 - **Configuration:** Adjust from the "Settings" tab in the Home Assistant dashboard
 
+### Charge / Sell Power Mode
+The Charge and Sell strategies offer two power modes — set per strategy on the Settings tab:
+
+- **Maximum power** — runs at the battery's full charge/discharge capacity for the fastest result.
+- **Grid power limit** — uses the PID controller to charge or discharge at a controlled rate, useful for preventing grid overload or staying within an export cap. Per-battery limits can still be configured in the Settings tab.
+
 ## Peak Shaving
 Peak Shaving helps reduce import and export peaks on your grid connection by intelligently using your battery capacity. This is particularly valuable for customers on capacity tariff contracts (CAPTAR, capaciteitstarief).
 

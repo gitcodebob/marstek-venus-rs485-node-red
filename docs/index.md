@@ -18,6 +18,7 @@ Open-source battery control for Home Assistant & Node-RED. Control your home bat
 - **[Self-Consumption Setup](/04-setup-self-consumption)** - PID controller tuning guide
 - **[Solar Forecast Setup](/04-setup-solar-forecast)** - Charge using solar predictions
 - **[Dynamic Strategy Setup](/05-setup-dynamic)** - Price-based automation
+- 🧪 **[Dynamic Strategy v2](/05-dynamic-v2)** - *Lab feature* — per-interval price matching
 
 ### 🔧 Advanced Topics
 - **[Advanced Features](/06-advanced-features)** - EV trigger, multi-battery, 3-phase
@@ -31,7 +32,7 @@ Open-source battery control for Home Assistant & Node-RED. Control your home bat
 ## About This Project
 
 Home Battery Control provides ready-to-use Node-RED flows and Home Assistant configurations for:
-- **Multiple control strategies** - Self-consumption, timed, dynamic, charge, sell, solar-only, and more
+- **Multiple control strategies** - Self-consumption, timed, dynamic (+ v2 lab), charge, sell, Charge PV, Zero import, Standby / peak shave, and more
 - **Advanced PID control** - Fine-tuned battery management
 - **Easy customization** - Adapt to your specific hardware and needs
 - **Community-driven** - Open source and actively maintained
