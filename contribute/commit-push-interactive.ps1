@@ -140,9 +140,12 @@ function Update-ReleaseNotes {
         return
     }
 
+    # Format matches the convention used by earlier releases: a bold headline
+    # per change with indented '*' sub-bullets. The script emits only the bold
+    # headline; user adds details before publishing.
     $section = @()
     $section += "## $Version"
-    $section += "- $BulletMessage"
+    $section += "- **$BulletMessage**"
     $section += ""
     $section += "- **Files Changed:**"
     foreach ($f in $Files) { $section += "  - ``$f``" }
@@ -294,8 +297,9 @@ Invoke-OrDryRun "git commit -m `"$message`"" {
 # ─────────────────────────────────────────────────────────────────────────────
 if (Read-YesNo "Push to origin now?" -Default $false) {
     Write-Step "Pushing to origin"
-    Invoke-OrDryRun "git push" {
-        git push
+    # '-u origin HEAD' so the first push on a new branch sets upstream.
+    Invoke-OrDryRun "git push -u origin HEAD" {
+        git push -u origin HEAD
         if ($LASTEXITCODE -ne 0) { throw "git push failed" }
     }
 }

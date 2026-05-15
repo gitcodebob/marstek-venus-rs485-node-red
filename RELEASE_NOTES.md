@@ -2,7 +2,20 @@
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
 ## 4.10.0
-- Feat: Add Zero import and Standby/peak shave strategies; consolidate partial flows; deprecate strategy-charge-pv.json
+- **Feat: New "Zero import" strategy**
+  * Uses the battery to cover house loads while preventing grid import. Charging is disabled, so any surplus PV exports to the grid instead of being stored.
+  * Available in the main strategy selector, as a sub-strategy, in dynamic cheap/expensive, and as an after-goal option.
+
+- **Feat: New "Standby / peak shave" strategy**
+  * Keeps the battery idle (no charge, no discharge) unless grid power exceeds the configured import or export limit — then it peak-shaves until the grid returns under the limit.
+  * Requires the import/export power limits to be set in the dashboard.
+
+- **Refactor: Consolidate "partial" strategies into one flow**
+  * `Charge PV`, `Zero import`, and `Standby / peak shave` now share a single `02 strategy-partials.json` flow with a common Peak Shaving sub-mode.
+  * The standalone `02 strategy-charge-pv.json` is **deprecated** and moved to `node-red/deprecated/`. **Action required**: import the new `02 strategy-partials.json` and remove the old `Strategy Charge PV` tab from Node-RED after updating.
+
+- **Fix: Export peak shaving was not capping discharge**
+  * Property-name typo (`advanced_settings.dicharge_disabled`) meant the export-side of peak shaving did not actually disable discharging. Corrected to `discharge_disabled`. Import-side was unaffected.
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`

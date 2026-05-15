@@ -43,9 +43,14 @@ needs (commit message + bump type) and invoke it.
   if the user explicitly asks for a different list.
 - You may suggest README or docs updates if the changes warrant it, but
   **don't push for them** — users generally prefer minimal doc churn.
-- The script excludes `.claude/` from staging. If a slash command, skill, or
-  setting in `.claude/` needs to ship with this release, stage it explicitly
-  before running the script (`git add .claude/commands/<name>.md`).
+- The release notes section the script writes is a stub (`- **<message>**`
+  + Files Changed list). The convention in `RELEASE_NOTES.md` is one bold
+  headline per change with indented `*` sub-bullets. After the script writes
+  the stub, offer to help expand the headline into proper sub-bullets before
+  the user publishes.
+- `.claude/` paths are staged like any other change (per `.gitignore` rules —
+  `settings.local.json` and `sessions/` are kept local). No special handling
+  needed to ship a slash command or skill alongside a release.
 - For a plain commit without bumping the version, use `-VersionBump none`.
   That path is supported but is **not** the primary purpose of this command —
   for everyday commits, just give Claude a natural-language request instead.

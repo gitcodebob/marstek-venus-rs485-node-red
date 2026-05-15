@@ -175,10 +175,17 @@ function Update-ReleaseNotes {
         return
     }
 
-    # Build new section
+    # Build new section.
+    # Format matches the convention used by earlier releases:
+    #   - **<Type>: <Headline>**
+    #     * <detail bullet>
+    # The script emits a single bold headline derived from the commit message;
+    # the user is expected to expand it with sub-bullets before publishing
+    # (check.ps1 issues a warning if the section is missing, but does not
+    # validate its content).
     $section = @()
     $section += "## $Version"
-    $section += "- $BulletMessage"
+    $section += "- **$BulletMessage**"
     $section += ""
     $section += "- **Files Changed:**"
     foreach ($f in $Files) { $section += "  - ``$f``" }
@@ -300,8 +307,10 @@ Invoke-OrDryRun "git commit -m `"$Message`"" {
 # ─────────────────────────────────────────────────────────────────────────────
 if ($Push) {
     Write-Step "Pushing to origin"
-    Invoke-OrDryRun "git push" {
-        git push
+    # Use 'git push -u origin HEAD' so the first push on a new branch sets
+    # upstream tracking. On subsequent pushes it is a no-op for tracking.
+    Invoke-OrDryRun "git push -u origin HEAD" {
+        git push -u origin HEAD
         if ($LASTEXITCODE -ne 0) { throw "git push failed" }
     }
 }
