@@ -1,6 +1,25 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.10.1
+- **Fix: Midnight price rollover in Dynamic 2 strategy**
+  * At midnight, tomorrow's prices were not being promoted to today's prices, causing the strategy to use stale data on the new day.
+  * Corrected so the price table rolls over cleanly at the day boundary.
+
+- **Fix: Decimal kWh values for Charge / Sell target energy**
+  * The `Charge until reserve is` and `Keep energy in reserve` input fields snapped to whole kWh because no `step` was set (Home Assistant defaults to `1`).
+  * Added `step: 0.1` to both `input_number` entities so fractional kWh targets are accepted.
+
+- **Docs: Growing Anker SOLIX support**
+  * Added an "Anker SOLIX growing support" section to the Modbus Setup guide covering SolarBank 3 Pro, SolarBank 4 Pro, SolarBank Max AC and Smartplug Gen 2.
+  * References the community Anker-to-M1 mapping example by @Jos1958 and the official Anker SOLIX HA integration.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-dynamic-2.json`
+  - `node-red/all-flows-in-one-file.json`
+
 ## 4.10.0
 - **Feat: New "Zero import" strategy**
   * Uses the battery to cover house loads while preventing grid import. Charging is disabled, so any surplus PV exports to the grid instead of being stored.
