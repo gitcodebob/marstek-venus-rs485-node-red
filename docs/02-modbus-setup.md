@@ -10,10 +10,10 @@ Home Assistant speaks "ModBus language" to communicate with your Battery and vis
 Use the configurations on this page and HomeBatteryControl will work out of the box.
 
 ### Review the available connectors on your battery: 
-- **A**) Four string ModBus wire 
-  - Use an **EspHome** or **RTU bridge device** - communicates via Wifi to HA.
 - **B**) RJ45 *Ethernet* port 
   - Use a **regular network cable**, no extras needed.
+- **A**) Four string ModBus wire 
+  - Use an **EspHome** or **RTU bridge device** - communicates via Wifi to HA.
 - **C**) RJ45 *ModBus* port 
   - Confusingly looks like an Ethernet port, but isn't. Use **Elfin EW11** to communicate via Wifi. 
 
@@ -43,7 +43,6 @@ Reading tip | this [Marstek topic on Tweakers.net](https://gathering.tweakers.ne
 
     > Copy the YAML to `/config/packages/` in Home Assistant folder
 
-
 ## Important notice
 > Home Battery Control assumes the sensor and entity names used in the `Fonske` projects above. 
 >
@@ -52,3 +51,28 @@ Reading tip | this [Marstek topic on Tweakers.net](https://gathering.tweakers.ne
 > Altering the mapping in the Node-RED flows is also possible, but less advised as this makes updating later on very cumbersome.
 
 Special thanks to [Fonske](https://github.com/fonske) for his work and efforts to the project.
+
+
+## Anker SOLIX growing support
+
+Several HBC-tweakers have started support for the Anker SolarBank 3 Pro in addition to the: 
+- Anker SOLIX SolarBank 4 Pro
+- Anker SOLIX SolarBank Max AC 
+- Anker SOLIX Smartplug Gen 2
+
+You can find the progress in the this issue started and maintained by @exuberant_maypole_48572 
+* GitHub issue: https://github.com/gitcodebob/marstek-venus-rs485-node-red/issues/126
+* Or join our discord and search for the Anker channel for more info: [community](https://homebatterycontrol.com/community/)
+
+The official HA integration by Anker SOLIX 
+* HA integration: https://github.com/anker-charging/ha-anker-solix-official
+* This will make HA entities available. To let HBC use them, follow the example below.
+
+Review the documentation in this Anker to *Anker to HBC example* made by jos
+* https://github.com/Jos1958/marstek-venus-rs485-node-red/blob/main/home%20assistant/packages/anker_to_m1_marstek.yaml
+
+### Anker SolarBank 3 PRO configs
+* Anker SolarBank 3 PRO: [read the documentation in this yaml](https://github.com/Jos1958/marstek-venus-rs485-node-red/blob/main/home%20assistant/packages/anker_to_m1_marstek.yaml)
+  * 3 PRO is not supported in the official HA integration
+  * Thanks to Jos1958
+  
