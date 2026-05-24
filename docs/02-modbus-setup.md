@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Modbus Setup
+title: Battery connection
 nav_order: 2
 ---
 
@@ -23,7 +23,15 @@ Decide wether you go WiFi or cable.
 
 Reading tip | this [Marstek topic on Tweakers.net](https://gathering.tweakers.net/forum/list_messages/2282240/0) (NL/BE) for detailed info curated by SuperDuper1969
 
-## Ready to use config for Marstek are found here
+**Brands**
+* [Marstek](#marstek)
+* [Anker](#anker-solix)
+* [Other](#an-overview-of-available-connection-schemas)
+
+## Marstek
+![Marstek](https://cdn.homebatterycontrol.com/img/banner-marstek.jpg)
+
+Ready to use config for Marstek are found here
 
 ### Ethernet cable (Venus V3 and Venus A/D only):
 * Ethernet port RJ45 (not modbus RTU RJ45 port) : [https://github.com/fonske/MarstekVenusV3-modbus-TCP-IP/tree/main](https://github.com/fonske/MarstekVenusV3-modbus-TCP-IP/tree/main)
@@ -53,7 +61,8 @@ Reading tip | this [Marstek topic on Tweakers.net](https://gathering.tweakers.ne
 Special thanks to [Fonske](https://github.com/fonske) for his work and efforts to the project.
 
 
-## Anker SOLIX growing support
+## Anker SOLIX
+![Anker SOLIX](https://cdn.homebatterycontrol.com/img/banner-anker-solix.jpg)
 
 Several HBC-tweakers have started support for the Anker SolarBank 3 Pro in addition to the: 
 - Anker SOLIX SolarBank 4 Pro
@@ -76,3 +85,79 @@ Review the documentation in this Anker to *Anker to HBC example* made by jos
   * 3 PRO is not supported in the official HA integration
   * Thanks to Jos1958
   
+## An overview of available connection schemas
+![Marstek](https://cdn.homebatterycontrol.com/img/hbc-with-other-battery.jpg)
+
+### Table
+
+<table>
+  <thead>
+    <tr>
+      <th>Asset</th>
+      <th>Connection</th>
+      <th>Communication</th>
+      <th>HA integrations</th>
+      <th>HA config</th>
+      <th>HBC interface</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>P1 Meter</td>
+      <td>Direct USB or LAN</td>
+      <td>USB or local (TCP-IP)</td>
+      <td>HomeWizard Integration / Other P1 Integrations</td>
+      <td>—</td>
+      <td rowspan="6">
+        <strong>Fonske entity naming schema</strong><br>
+        ↓<br>
+        <strong>Home Assistant</strong><br>
+        • HA Add-Ons (Node-RED)<br>
+        • HA HBC Package (YAML) — Home Battery Control + Config<br>
+        • HA HBC Dashboard (YAML)<br>
+        ↓<br>
+        <strong>HBC Strategy Flows (Bob)</strong><br>
+        ↓<br>
+        <strong>HBC Dashboard (Bob)</strong><br>
+      </td>
+    </tr>
+    <tr>
+      <td>Marstek Venus V3</td>
+      <td>Direct LAN / Wifi</td>
+      <td>modbus (TCP-IP)</td>
+      <td>—</td>
+      <td>Marstek Package (YAML) — MarstekVenusV3-modbus-TCP-IP (Fonske)</td>
+    </tr>
+    <tr>
+      <td>Marstek Venus V1/2/3</td>
+      <td>via LilyGo, M5stack, Elfin</td>
+      <td>modbus (RS485)</td>
+      <td>—</td>
+      <td>Marstek Package (YAML) — MarstekVenus-ESPHome (Fonske)</td>
+    </tr>
+    <tr>
+      <td>Anker SolarBank 3</td>
+      <td>via Anker Cloud</td>
+      <td>Anker Cloud (TCP-IP)</td>
+      <td>HA-Anker-Solix (thomluther)</td>
+      <td>Cloud Anker to Marstek Package (YAML) — Anker to M1 Marstek (Jos)</td>
+    </tr>
+    <tr>
+      <td>Anker SolarBank 4 &amp; Max AC</td>
+      <td>Direct LAN</td>
+      <td>modbus (TCP-IP)</td>
+      <td>HA-Anker-Solix-Official (anker) <em>[support](https://github.com/anker-charging/ha-anker-solix-official#supported-devices)</em></td>
+      <td>Local Anker to Marstek Package (YAML) — Anker to M1 Marstek <em>(Future)</em> (*)</td>
+    </tr>
+    <tr>
+      <td>Other Battery</td>
+      <td>Any</td>
+      <td>Any</td>
+      <td>Other Battery Integration</td>
+      <td>Other Battery to Marstek Package (YAML) — Other to M1 Marstek <em>(Future)</em> (*)</td>
+    </tr>
+  </tbody>
+</table>
+
+<sub>(*) Use the Anker to M1 Marstek as a template for the other Batteries.</sub>
+
