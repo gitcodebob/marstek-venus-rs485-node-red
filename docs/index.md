@@ -11,7 +11,7 @@ Open-source battery control for Home Assistant & Node-RED. Control your home bat
 
 ### 🚀 Getting Started
 - **[Installation Guide](/01-getting-started)** - Step-by-step setup instructions
-- **[Modbus Setup](/02-modbus-setup)** - Connect your batteries to Home Assistant
+- **[Battery connection](/02-modbus-setup)** - Connect your batteries to Home Assistant
 
 ### ⚡ Control Strategies
 - **[Strategy Overview](/03-strategies)** - Compare all available strategies
