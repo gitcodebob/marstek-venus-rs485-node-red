@@ -914,6 +914,11 @@ template:
           {# Marstek uses negative power when delivering power, positive when charging. This is inverse from what HA expects.#}
           {{ (total_power * -1) | round(2) }}
 
+      # Battery-side phase interaction totals.
+      # Optional grid-side phase meter aliases are configured in
+      # house_battery_control_config.yaml as sensor.p1_meter_l1_power,
+      # sensor.p1_meter_l2_power and sensor.p1_meter_l3_power.
+
       # Live battery power on phase L1
       - name: "House Battery L1 Power"
         unique_id: "house_battery_l1_power_kw"

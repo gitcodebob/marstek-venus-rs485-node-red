@@ -410,7 +410,7 @@ views:
               columns: full
               rows: 1
           - type: heading
-            heading: Phase power
+            heading: Battery Phase Interaction
             heading_style: subtitle
             icon: mdi:transmission-tower
           - type: glance
@@ -436,8 +436,6 @@ views:
                 name: M1 SoC
               - entity: sensor.marstek_m1_ac_power
                 name: M1 Power
-              - entity: input_select.marstek_m1_phase
-                name: Phase
               - entity: number.marstek_m1_max_charge_power
                 name: Max Charge
               - entity: number.marstek_m1_max_discharge_power
@@ -465,8 +463,6 @@ views:
                 name: M2 SoC
               - entity: sensor.marstek_m2_ac_power
                 name: M2 Power
-              - entity: input_select.marstek_m2_phase
-                name: Phase
               - entity: number.marstek_m2_max_charge_power
                 name: Max Charge
               - entity: number.marstek_m2_max_discharge_power
@@ -499,8 +495,6 @@ views:
                 name: M3 SoC
               - entity: sensor.marstek_m3_ac_power
                 name: M3 Power
-              - entity: input_select.marstek_m3_phase
-                name: Phase
               - entity: number.marstek_m3_max_charge_power
                 name: Max Charge
               - entity: number.marstek_m3_max_discharge_power
@@ -533,8 +527,6 @@ views:
                 name: M4 SoC
               - entity: sensor.marstek_m4_ac_power
                 name: M4 Power
-              - entity: input_select.marstek_m4_phase
-                name: Phase
               - entity: number.marstek_m4_max_charge_power
                 name: Max Charge
               - entity: number.marstek_m4_max_discharge_power
@@ -567,8 +559,6 @@ views:
                 name: M5 SoC
               - entity: sensor.marstek_m5_ac_power
                 name: M5 Power
-              - entity: input_select.marstek_m5_phase
-                name: Phase
               - entity: number.marstek_m5_max_charge_power
                 name: Max Charge
               - entity: number.marstek_m5_max_discharge_power
@@ -601,8 +591,6 @@ views:
                 name: M6 SoC
               - entity: sensor.marstek_m6_ac_power
                 name: M6 Power
-              - entity: input_select.marstek_m6_phase
-                name: Phase
               - entity: number.marstek_m6_max_charge_power
                 name: Max Charge
               - entity: number.marstek_m6_max_discharge_power
