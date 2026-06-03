@@ -3109,7 +3109,7 @@
         "z": "419f395a5f52024b",
         "g": "a7c766e9d6b9fce6",
         "name": "Mapping",
-        "func": "// Map to batteries array\nmsg.batteries.push({\n    id: `M${msg.battery_index}`,\n    power: parseInt(msg.battery_power,10),\n    charging_max: parseInt(msg.max_charge_power,10),\n    discharging_max: parseInt(msg.max_discharge_power,10),\n    soc: parseInt(msg.battery_state_of_charge,10),\n    soc_max: parseInt(msg.charging_cutoff_capacity,10),\n    soc_min: parseInt(msg.discharging_cutoff_capacity,10),\n    inverter: String(msg.inverter_state),\n    energy: Number(msg.battery_remaining_capacity),\n    energy_max: Number(msg.battery_total_energy),\n    rs485: String(msg.rs485_control_mode)\n    });\n\n// Continue\nreturn msg;",
+        "func": "// Normalize optional phase assignment\nconst normalizedPhase = String(msg.battery_phase || \"\").trim().toUpperCase();\nconst phase = [\"L1\", \"L2\", \"L3\"].includes(normalizedPhase) ? normalizedPhase : \"unassigned\";\n\n// Map to batteries array\nmsg.batteries.push({\n    id: `M${msg.battery_index}`,\n    phase: phase,\n    power: parseInt(msg.battery_power,10),\n    charging_max: parseInt(msg.max_charge_power,10),\n    discharging_max: parseInt(msg.max_discharge_power,10),\n    soc: parseInt(msg.battery_state_of_charge,10),\n    soc_max: parseInt(msg.charging_cutoff_capacity,10),\n    soc_min: parseInt(msg.discharging_cutoff_capacity,10),\n    inverter: String(msg.inverter_state),\n    energy: Number(msg.battery_remaining_capacity),\n    energy_max: Number(msg.battery_total_energy),\n    rs485: String(msg.rs485_control_mode)\n    });\n\n// Continue\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4366,7 +4366,7 @@
         "y": 500,
         "wires": [
             [
-                "fea927e3388ed2c9"
+                "9eaf5b01ad50102a"
             ]
         ]
     },
@@ -4376,7 +4376,7 @@
         "z": "419f395a5f52024b",
         "g": "a7c766e9d6b9fce6",
         "name": "Loop end",
-        "func": "// cleanup \ndelete msg.battery_index;\n\ndelete msg.battery_power;\ndelete msg.max_charge_power;\ndelete msg.max_discharge_power;\ndelete msg.battery_state_of_charge;\ndelete msg.charging_cutoff_capacity;\ndelete msg.discharging_cutoff_capacity;\ndelete msg.inverter_state;\ndelete msg.battery_remaining_capacity;\ndelete msg.battery_total_energy;\ndelete msg.rs485_control_mode;\n\nreturn msg;",
+        "func": "// cleanup \ndelete msg.battery_index;\n\ndelete msg.battery_power;\ndelete msg.max_charge_power;\ndelete msg.max_discharge_power;\ndelete msg.battery_state_of_charge;\ndelete msg.charging_cutoff_capacity;\ndelete msg.discharging_cutoff_capacity;\ndelete msg.inverter_state;\ndelete msg.battery_remaining_capacity;\ndelete msg.battery_total_energy;\ndelete msg.rs485_control_mode;\ndelete msg.battery_phase;\ndelete msg.template;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5696,7 +5696,7 @@
         "y": 1040,
         "wires": [
             [
-                "2c2ed88ff158d0b7"
+                "9eaf5b01ad50102c"
             ]
         ]
     },
@@ -16037,5 +16037,89 @@
         "x": 165,
         "y": 320,
         "wires": []
+    },
+    {
+        "id": "9eaf5b01ad50102a",
+        "type": "function",
+        "z": "419f395a5f52024b",
+        "g": "261b10d232e1c04e",
+        "name": "Phase template",
+        "func": "// Prepare optional battery phase helper lookup\nmsg.template = `{{ states('input_select.marstek_m${msg.battery_index}_phase') }}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1760,
+        "y": 500,
+        "wires": [
+            [
+                "9eaf5b01ad50102b"
+            ]
+        ]
+    },
+    {
+        "id": "9eaf5b01ad50102b",
+        "type": "api-render-template",
+        "z": "419f395a5f52024b",
+        "g": "261b10d232e1c04e",
+        "name": "Phase",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "",
+        "resultsLocation": "battery_phase",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 1920,
+        "y": 500,
+        "wires": [
+            [
+                "fea927e3388ed2c9"
+            ]
+        ]
+    },
+    {
+        "id": "9eaf5b01ad50102c",
+        "type": "api-render-template",
+        "z": "419f395a5f52024b",
+        "g": "79e4b4f8fef66565",
+        "name": "Max phase power",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{{ states('input_number.house_battery_control_max_phase_power') | float(5500) }}",
+        "resultsLocation": "grid_power_limit_phase",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 880,
+        "y": 1040,
+        "wires": [
+            [
+                "9eaf5b01ad50102d"
+            ]
+        ]
+    },
+    {
+        "id": "9eaf5b01ad50102d",
+        "type": "function",
+        "z": "419f395a5f52024b",
+        "g": "79e4b4f8fef66565",
+        "name": "Normalize phase limit",
+        "func": "const phaseLimit = Number(RED.util.getMessageProperty(msg, \"grid_power_limit_phase\"));\nRED.util.setMessageProperty(\n    msg,\n    \"grid_power_limit_phase\",\n    Number.isFinite(phaseLimit) && phaseLimit > 0 ? phaseLimit : 5500,\n    true\n);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 1040,
+        "wires": [
+            [
+                "2c2ed88ff158d0b7"
+            ]
+        ]
     }
 ]

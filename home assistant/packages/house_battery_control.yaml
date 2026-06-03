@@ -388,6 +388,17 @@ input_number:
     mode: box
     icon: mdi:home-export-outline
 
+  # Peak shaving | per-phase threshold for custom/future phase-aware strategies
+  house_battery_control_max_phase_power:
+    name: Max phase power
+    min: 500
+    max: 25000
+    initial: 5500
+    step: 1
+    unit_of_measurement: "W"
+    mode: box
+    icon: mdi:transmission-tower
+
   # Strategy charge | desired energy reserve (effective energy available excl. cut-off energies)
   # old name: house_battery_strategy_timed_target_energy
   house_battery_strategy_charge_target_energy:
@@ -659,6 +670,41 @@ input_select:
       - Full control # Full control over the battery, no Marstek control
     icon: mdi:battery-heart
 
+  # Battery phase assignments
+  marstek_m1_phase:
+    name: "Marstek M1 Phase"
+    options: &BatteryPhaseOptions
+      - Unassigned
+      - L1
+      - L2
+      - L3
+    icon: mdi:transmission-tower
+
+  marstek_m2_phase:
+    name: "Marstek M2 Phase"
+    options: *BatteryPhaseOptions
+    icon: mdi:transmission-tower
+
+  marstek_m3_phase:
+    name: "Marstek M3 Phase"
+    options: *BatteryPhaseOptions
+    icon: mdi:transmission-tower
+
+  marstek_m4_phase:
+    name: "Marstek M4 Phase"
+    options: *BatteryPhaseOptions
+    icon: mdi:transmission-tower
+
+  marstek_m5_phase:
+    name: "Marstek M5 Phase"
+    options: *BatteryPhaseOptions
+    icon: mdi:transmission-tower
+
+  marstek_m6_phase:
+    name: "Marstek M6 Phase"
+    options: *BatteryPhaseOptions
+    icon: mdi:transmission-tower
+
   # Master strategy
   house_battery_strategy:
     name: House Battery Strategy
@@ -867,6 +913,93 @@ template:
           {% set total_power = available_powers | sum %}
           {# Marstek uses negative power when delivering power, positive when charging. This is inverse from what HA expects.#}
           {{ (total_power * -1) | round(2) }}
+
+      # Live battery power on phase L1
+      - name: "House Battery L1 Power"
+        unique_id: "house_battery_l1_power_kw"
+        state_class: measurement
+        device_class: "power"
+        unit_of_measurement: "kW"
+        icon: mdi:transmission-tower
+        state: >
+          {% set total_w = namespace(value=0) %}
+          {% if states('input_select.marstek_m1_phase') == 'L1' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m1_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m2_phase') == 'L1' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m2_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m3_phase') == 'L1' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m3_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m4_phase') == 'L1' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m4_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m5_phase') == 'L1' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m5_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m6_phase') == 'L1' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m6_battery_power') | float(0)) %}
+          {% endif %}
+          {{ ((total_w.value * -1) / 1000) | round(2) }}
+
+      # Live battery power on phase L2
+      - name: "House Battery L2 Power"
+        unique_id: "house_battery_l2_power_kw"
+        state_class: measurement
+        device_class: "power"
+        unit_of_measurement: "kW"
+        icon: mdi:transmission-tower
+        state: >
+          {% set total_w = namespace(value=0) %}
+          {% if states('input_select.marstek_m1_phase') == 'L2' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m1_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m2_phase') == 'L2' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m2_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m3_phase') == 'L2' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m3_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m4_phase') == 'L2' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m4_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m5_phase') == 'L2' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m5_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m6_phase') == 'L2' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m6_battery_power') | float(0)) %}
+          {% endif %}
+          {{ ((total_w.value * -1) / 1000) | round(2) }}
+
+      # Live battery power on phase L3
+      - name: "House Battery L3 Power"
+        unique_id: "house_battery_l3_power_kw"
+        state_class: measurement
+        device_class: "power"
+        unit_of_measurement: "kW"
+        icon: mdi:transmission-tower
+        state: >
+          {% set total_w = namespace(value=0) %}
+          {% if states('input_select.marstek_m1_phase') == 'L3' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m1_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m2_phase') == 'L3' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m2_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m3_phase') == 'L3' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m3_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m4_phase') == 'L3' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m4_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m5_phase') == 'L3' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m5_battery_power') | float(0)) %}
+          {% endif %}
+          {% if states('input_select.marstek_m6_phase') == 'L3' %}
+            {% set total_w.value = total_w.value + (states('sensor.marstek_m6_battery_power') | float(0)) %}
+          {% endif %}
+          {{ ((total_w.value * -1) / 1000) | round(2) }}
 
       # Time Remaining
       - name: "Battery time remaining"
