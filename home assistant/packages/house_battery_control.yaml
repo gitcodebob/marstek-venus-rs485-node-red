@@ -1097,6 +1097,18 @@ template:
           {{ [max_available - filled, 0] | max | round(2) if max_available > 0 else 0 }}
 
   - binary_sensor:
+      # Battery phase assignments | has any battery been assigned to a phase?
+      - name: "House Battery Has Phase Assignment"
+        unique_id: house_battery_has_phase_assignment
+        icon: mdi:transmission-tower
+        state: >
+          {{ states('input_select.marstek_m1_phase') in ['L1', 'L2', 'L3'] or
+            states('input_select.marstek_m2_phase') in ['L1', 'L2', 'L3'] or
+            states('input_select.marstek_m3_phase') in ['L1', 'L2', 'L3'] or
+            states('input_select.marstek_m4_phase') in ['L1', 'L2', 'L3'] or
+            states('input_select.marstek_m5_phase') in ['L1', 'L2', 'L3'] or
+            states('input_select.marstek_m6_phase') in ['L1', 'L2', 'L3'] }}
+
       # Strategy dynamic | is the avg tariff low enough to call this a 'cheap period'
       - name: "Is below threshold cheapest period tariff"
         unique_id: house_battery_strategy_dynamic_is_below_threshold_cheapest_tariff

@@ -413,6 +413,10 @@ views:
             heading: Battery Phase Interaction
             heading_style: subtitle
             icon: mdi:transmission-tower
+            visibility:
+              - condition: state
+                entity: binary_sensor.house_battery_has_phase_assignment
+                state: 'on'
           - type: glance
             entities:
               - entity: sensor.house_battery_l1_power
@@ -422,6 +426,10 @@ views:
               - entity: sensor.house_battery_l3_power
                 name: L3
             columns: 3
+            visibility:
+              - condition: state
+                entity: binary_sensor.house_battery_has_phase_assignment
+                state: 'on'
           - type: markdown
             content: >-
               ### Marstek M1{% set phase = states('input_select.marstek_m1_phase') %}{% if phase == 'L1' %} - Phase 1{% elif phase == 'L2' %} - Phase 2{% elif phase == 'L3' %} - Phase 3{% endif %}
