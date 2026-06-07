@@ -101,7 +101,7 @@ Controls grid import/export thresholds for `peak shaving` functionality.
 - **Import limit:** Maximum power to draw from the grid (example: 16A × 230V = 3680W for CAPTAR contracts)
 - **Export limit:** Maximum power to feed back to the grid (example: 3000W if grid connection has export limits)
 - **Max phase power:** Shared per-phase safety threshold. This value is exposed to Node-RED as `msg.grid_power_limit_phase` and is used by per-phase peak shaving when enabled.
-- **Per-phase peak shaving:** Optional protection that uses configured L1/L2/L3 grid power sensors and battery phase assignments to reduce an overloaded phase. Missing phase sensors, unassigned batteries, or the feature being disabled keep the existing aggregate-only behavior. Unavailable batteries are treated as 0W assignable capacity, so remaining batteries on the same phase are asked to carry the correction.
+- **Per-phase peak shaving:** Optional protection that uses configured L1/L2/L3 grid power sensors and battery phase assignments to reduce an overloaded phase before any strategy except Full stop is executed. Phase meter aliases must report power in watts; current-only sensors must be converted in `house_battery_control_config.yaml`. Missing phase sensors, unassigned batteries, or the feature being disabled keep the existing aggregate-only behavior. Unavailable batteries are treated as 0W assignable capacity, so remaining batteries on the same phase are asked to carry the correction.
 - **Configuration:** Adjust from the "Settings" tab in the Home Assistant dashboard
 
 ### Charge / Sell Power Mode
