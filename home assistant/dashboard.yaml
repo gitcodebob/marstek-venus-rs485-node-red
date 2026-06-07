@@ -1882,9 +1882,16 @@ views:
                 name: Max phase power
           - type: markdown
             content: >-
-              <font color=grey><i>When enabled, peak shaving also considers
-              configured L1/L2/L3 grid power sensors and phase-assigned
-              batteries. Leave disabled for aggregate-only behavior.</i></font>
+              <font color=grey><i>When enabled, configured L1/L2/L3 grid power
+              sensors and phase-assigned batteries are used for per-phase
+              protection. (Dis)charge throttling is applied by
+              Self-consumption, Charge PV, Charge, Sell, and Dynamic/Dynamic 2
+              whenever they select those strategies. Forced phase relief
+              applies before every selected strategy except Full stop when the
+              phase overload is not caused by battery interaction. Custom
+              strategies that write battery commands directly must opt into the
+              shared phase command limits themselves. Leave disabled for
+              aggregate-only behavior.</i></font>
             text_only: true
             grid_options:
               columns: full
