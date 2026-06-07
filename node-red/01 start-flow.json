@@ -2,7 +2,7 @@
     {
         "id": "cf69560481408644",
         "type": "tab",
-        "label": "Home Battery Start v4.10.1",
+        "label": "Home Battery Start v4.11.0",
         "disabled": false,
         "info": "# Home battery control\r\nConsists of three flows:\r\n 1.  Start flow\r\n 1.  Control flow\r\n 1.  Master switch flow\r\n\r\n## Start flow\r\nThis is the starting point of your home battery control.\r\n\r\nIt starts with P1 measurement as a trigger.\r\nIt allows you to connect your battery sensors to the flow.\r\nIt ends with a function node, mapping your batteries to a battery_array\r\n\r\nThe battery_array is passed on to the control flow.\r\n\r\nWhen the control flow has calculated the desired corrections,\r\nit is passed back to this flow and applied to your batteries.",
         "env": []
@@ -42,7 +42,8 @@
             "e0172f5ef06fa881",
             "10aa27fe189fa07e",
             "f7e09807696115eb",
-            "15830b3ade1b15be"
+            "15830b3ade1b15be",
+            "a6d4c6fd4b772001"
         ],
         "x": 34,
         "y": 1099,
@@ -555,7 +556,7 @@
         "z": "cf69560481408644",
         "g": "6373da5467ce39eb",
         "name": "Strategy selection",
-        "func": "// Logger\nconst logger = global.get(\"logger\");\n\n// INFLOW\nlet strategy = flow.get(\"house_battery_strategy\");\n\n// Configure msg.strategy object\nRED.util.setMessageProperty(msg,\"strategy.selected\",strategy,true); // by user\nRED.util.setMessageProperty(msg,\"strategy.trace\",[],true); // init trace: which flows have been executed\n\n// stop on error\nif(msg.batteries === undefined) {\n    logger(this, \"Battery configuration undefined\", \"error\");\n    return null;\n}\nif(strategy === undefined) {\n    logger(this, \"Battery strategy undefined\", \"error\");\n    return null;\n}\n\n// Default | select target flow based on the input_select `house_battery_strategy`\nmsg.target = `${strategy}`;\n\n// full stop trigger overrules ALL selected strategies\nconst stopTrigger = RED.util.getMessageProperty(msg,\"full_stop_trigger\");\nif(stopTrigger == \"on\" || stopTrigger === true || stopTrigger === 1) {\n    msg.target = 'Full stop';\n    // Explain\n    logger(this, `**Full Stop** strategy selected, due to (EV) stop trigger: '${stopTrigger}'`);\n}\n\n// add execution marker\nRED.util.setMessageProperty(msg,\"strategy.execution_start\",Date.now()); // when do we start executing the selected strategy\n\n// OUTPUT\nnode.status({fill:\"grey\",shape:\"dot\",text:msg.target});\nreturn msg;",
+        "func": "// Logger\nconst logger = global.get(\"logger\");\n\n// INFLOW\nlet strategy = flow.get(\"house_battery_strategy\");\n\n// Configure msg.strategy object\nRED.util.setMessageProperty(msg,\"strategy.selected\",strategy,true); // by user\nRED.util.setMessageProperty(msg,\"strategy.trace\",[],true); // init trace: which flows have been executed\n\n// stop on error\nif(msg.batteries === undefined) {\n    logger(this, \"Battery configuration undefined\", \"error\");\n    return null;\n}\nif(strategy === undefined) {\n    logger(this, \"Battery strategy undefined\", \"error\");\n    return null;\n}\n\n// Default | select target flow based on the input_select `house_battery_strategy`\nmsg.target = `${strategy}`;\n\n// EV stop trigger overrules selected strategies, except a manual Full stop.\nconst stopTrigger = RED.util.getMessageProperty(msg,\"full_stop_trigger\");\nconst isStopTriggerActive = stopTrigger == \"on\" || stopTrigger === true || stopTrigger === 1;\nif(isStopTriggerActive && strategy !== \"Full stop\") {\n    const stopTriggerStrategy = RED.util.getMessageProperty(msg,\"ev_stop_trigger_strategy\") || \"Full stop\";\n    msg.target = stopTriggerStrategy;\n    // Explain\n    logger(this, `**${stopTriggerStrategy}** strategy selected, due to EV stop trigger: '${stopTrigger}'`);\n}\n\n// add execution marker\nRED.util.setMessageProperty(msg,\"strategy.execution_start\",Date.now()); // when do we start executing the selected strategy\n\n// OUTPUT\nnode.status({fill:\"grey\",shape:\"dot\",text:msg.target});\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2279,7 +2280,7 @@
         "z": "cf69560481408644",
         "g": "b6aba79cafd27200",
         "name": "on new UI value",
-        "func": "// Block when undefined (don't update UI)\nif(msg.ui_value_current === undefined) return null;\n\n// We show the 2nd strategy in the trace (if available) on the dashboard as the 'active sub-strategy'\nconst secondTraceEntry = msg.strategy?.trace?.[1];\nif (secondTraceEntry) {\n    // Handle case where 2nd flow is present\n    msg.ui_value_new =  secondTraceEntry.flow;\n} else {\n    // Handle case where the 2nd flow is missing\n    // Get a sensible alternative\n    msg.ui_value_new = msg.strategy?.selected || \"\"; // don't use unknown or unavailable as these are reserved HA keywords\n}\n\n// Improve human readability\nif(msg.ui_value_new == \"Self-consumption\" && secondTraceEntry?.flow_settings?.discharge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (charge only)\";\n}\nif(msg.ui_value_new == \"Self-consumption\" && secondTraceEntry?.flow_settings?.charge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (no charging)\";\n}\nif(msg.strategy?.is_peak_shaving === true){\n    msg.ui_value_new = \"Peak shaving\";\n}\n\n// Node status for devs\nnode.status({fill:\"grey\",shape:\"dot\",text:`new: ${msg.ui_value_new}`});\n\n// Block when equal (don't update UI)\nif(msg.ui_value_current === msg.ui_value_new) return null;\n\n// Pass otherwise\nreturn msg;",
+        "func": "// Block when undefined (don't update UI)\nif(msg.ui_value_current === undefined) return null;\n\n// Prefer an explicit display name, then active sub-strategy, otherwise show the executed flow.\nconst firstTraceEntry = msg.strategy?.trace?.[0];\nconst secondTraceEntry = msg.strategy?.trace?.[1];\nconst displayedTraceEntry = secondTraceEntry || firstTraceEntry;\nmsg.ui_value_new = msg.strategy?.display || displayedTraceEntry?.flow || msg.target || msg.strategy?.selected || \"\"; // don't use unknown or unavailable as these are reserved HA keywords\n\n// Improve human readability when no explicit display name was provided.\nif(!msg.strategy?.display && msg.ui_value_new == \"Self-consumption\" && displayedTraceEntry?.flow_settings?.charge_disabled === true && displayedTraceEntry?.flow_settings?.discharge_disabled === true){\n    msg.ui_value_new = \"Standby / peak shave\";\n}\nif(!msg.strategy?.display && msg.ui_value_new == \"Self-consumption\" && displayedTraceEntry?.flow_settings?.discharge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (charge only)\";\n}\nif(!msg.strategy?.display && msg.ui_value_new == \"Self-consumption\" && displayedTraceEntry?.flow_settings?.charge_disabled === true){\n    msg.ui_value_new = \"Self-consumption (no charging)\";\n}\nif(msg.strategy?.is_peak_shaving === true){\n    msg.ui_value_new = \"Peak shaving\";\n}\n\n// Node status for devs\nnode.status({fill:\"grey\",shape:\"dot\",text:`new: ${msg.ui_value_new}`});\n\n// Block when equal (don't update UI)\nif(msg.ui_value_current === msg.ui_value_new) return null;\n\n// Pass otherwise\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3033,6 +3034,57 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 320,
+        "y": 1140,
+        "wires": [
+            [
+                "a6d4c6fd4b772001"
+            ]
+        ]
+    },
+    {
+        "id": "a6d4c6fd4b772001",
+        "type": "api-current-state",
+        "z": "cf69560481408644",
+        "g": "6373da5467ce39eb",
+        "name": "EV Stop Trigger Strategy",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.house_battery_strategy_ev_stop_trigger_strategy",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "ev_stop_trigger_strategy",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 520,
         "y": 1140,
         "wires": [
             [

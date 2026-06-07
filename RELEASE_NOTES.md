@@ -1,6 +1,28 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.11.0
+- **Feat: Configurable EV Stop Trigger strategy**
+  * Added a selectable EV Stop Trigger strategy: `Full stop` or `Standby / peak shave`.
+  * Manual `Full stop` in the main strategy selector now takes precedence over the EV trigger strategy.
+  * Dashboard status and executing-flow display now reflect the strategy actually being applied.
+
+- **Fix: Peak shaving direction stability**
+  * Peak shaving now latches the import/export direction and limit at the moment of the real grid-limit violation.
+  * Prevents import peak shaving from flipping into export peak shaving during the release timeout after a load step change.
+  * Added a dashboard warning for very low import peak shave limits.
+
+- **Fix: Standby display on dashboard**
+  * `Standby / peak shave` now reports its user-facing strategy name to the dashboard while still using `Self-consumption` internally.
+  * Prevents the executing-flow field from showing misleading variants such as `Self-consumption (charge only)` while standby is active.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/01 start-flow.json`
+  - `node-red/02 strategy-partials.json`
+  - `node-red/all-flows-in-one-file.json`
+
 ## 4.10.1
 - **Fix: Midnight price rollover in Dynamic 2 strategy**
   * At midnight, tomorrow's prices were not being promoted to today's prices, causing the strategy to use stale data on the new day.

@@ -7,11 +7,14 @@ nav_order: 6
 # Advanced Features
 
 ## EV Stop Trigger
-- **Electric Vehicle Charging Override:** Automatically stops all battery operations when your EV or other heavy appliance starts charging
-  - Overrules ALL active strategies to prevent power spikes and grid overload
+- **Electric Vehicle Charging Override:** Automatically changes battery behavior when your EV or other heavy appliance starts charging
+  - Overrules the active strategy to prevent unwanted battery discharge or to reserve the battery for peak shaving
   - Configure by entering the `entity_id` of an `input_boolean` or `on/off` template sensor
   - The trigger sensor should indicate when your EV or heavy appliance is actively charging
-  - When triggered, the system applies a Full Stop strategy until the sensor state returns to off
+  - Choose the trigger strategy:
+    - **Full stop:** stop battery operation until the trigger sensor returns to off
+    - **Standby / peak shave:** keep normal battery operation idle, but allow peak shaving when grid limits are exceeded
+  - Manual **Full stop** in the main strategy selector always takes precedence, even when the EV trigger strategy is set to `Standby / peak shave`
   - Useful for preventing home battery discharge during high-power EV charging sessions
   - Configurable through the Advanced Settings dashboard
 
@@ -108,6 +111,7 @@ Peak Shaving helps reduce import and export peaks on your grid connection by int
 **How it works:**
 - When grid power exceeds your configured limits, Peak Shaving activates automatically
 - Your batteries discharge (during import peaks) or charge (during export peaks) to keep grid power within limits
+- The import/export direction and matching limit are locked in when the limit violation is detected, so a short battery response overshoot does not flip an import shave into an export shave during the release timeout
 - Peak Shaving takes control across all strategies, allowing them to continue working while respecting power limits
 - Peak Shaving releases automatically once grid power returns to normal for a short duration (timeout period)
 
@@ -118,6 +122,7 @@ Peak Shaving helps reduce import and export peaks on your grid connection by int
 
 **Configuration:**
 - Set your **import limit** on the "Settings" tab (maximum power you want to draw from the grid)
+  - Very low import limits can leave little control margin. The dashboard warns below 2500 W because large load steps can still cause temporary overshoot while the battery ramps down.
 - Set your **export limit** on the "Settings" tab (maximum power you want to feed back to the grid)
   - Note: Most capacity tariff contracts only require import limiting
 - Peak Shaving integrates seamlessly with Charge, Self-consumption, Sell, Dynamic, and Timed strategies
