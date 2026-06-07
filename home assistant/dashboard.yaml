@@ -1877,13 +1877,14 @@ views:
             heading_style: subtitle
           - type: entities
             entities:
+              - entity: input_boolean.house_battery_control_has_phase_protection
               - entity: input_number.house_battery_control_max_phase_power
                 name: Max phase power
           - type: markdown
             content: >-
-              <font color=grey><i>Available for custom and future phase-aware
-              strategies. Built-in strategies do not enforce this limit
-              yet.</i></font>
+              <font color=grey><i>When enabled, peak shaving also considers
+              configured L1/L2/L3 grid power sensors and phase-assigned
+              batteries. Leave disabled for aggregate-only behavior.</i></font>
             text_only: true
             grid_options:
               columns: full

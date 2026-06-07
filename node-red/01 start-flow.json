@@ -321,11 +321,12 @@
             "9eaf5b01ad50102c",
             "9eaf5b01ad50102d",
             "9eaf5b01ad50102e",
-            "9eaf5b01ad50102f"
+            "9eaf5b01ad50102f",
+            "9eaf5b01ad501030"
         ],
         "x": 34,
         "y": 999,
-        "w": 1642,
+        "w": 1862,
         "h": 82
     },
     {
@@ -3691,6 +3692,57 @@
         "finalize": "",
         "libs": [],
         "x": 1510,
+        "y": 1040,
+        "wires": [
+            [
+                "9eaf5b01ad501030"
+            ]
+        ]
+    },
+    {
+        "id": "9eaf5b01ad501030",
+        "type": "api-current-state",
+        "z": "cf69560481408644",
+        "g": "80405532eb3f52d4",
+        "name": "Phase protection?",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.house_battery_control_has_phase_protection",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "phase_protection.enabled",
+                "propertyType": "msg",
+                "value": "$entity().state = \"on\"",
+                "valueType": "jsonata"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1730,
         "y": 1040,
         "wires": [
             [

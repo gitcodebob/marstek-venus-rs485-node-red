@@ -38,6 +38,10 @@ input_boolean:
     name: Enable export peak shaving
     icon: mdi:transmission-tower-export
 
+  house_battery_control_has_phase_protection:
+    name: Enable per-phase peak shaving
+    icon: mdi:fuse
+
   # house_battery_control_has_power_limit_during_ev_charge:
   #   name: Enable peak shaving during EV charge
   #   icon: mdi:ev-station
