@@ -15,8 +15,8 @@ class Initializer {
   }
 
   /**
-   * Run the branch-101 "Custom logger" function, which also initializes
-   * `phasePowerAllocator`, `logger`, and `unhandledException` as globals.
+   * Run the "Custom logger" function, which initializes `logger` and
+   * `unhandledException` as globals.
    */
   initialize() {
     const runner = new FunctionRunner({ captureStatus: false, captureWarnings: false, captureErrors: false, captureLogs: false });
