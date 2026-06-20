@@ -31,10 +31,15 @@ class Initializer {
 
   /**
    * Provide a no-op logger global for tests that don't need the real one.
+   * This still runs `initialize()` so that `phasePowerAllocator` and other
+   * globals created by the "Custom logger" node are available, then silences
+   * logging.
    */
   useNoopLogger() {
+    this.initialize();
     this.global.set('logger', () => {});
     this.global.set('unhandledException', () => {});
+    return this;
   }
 }
 

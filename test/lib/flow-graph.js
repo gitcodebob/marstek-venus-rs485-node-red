@@ -237,7 +237,7 @@ class FlowGraph {
   }
 
   _evalSwitch(node, msg) {
-    const property = RED.getMessageProperty(msg, node.property);
+    const property = this._getProperty(node.propertyType || 'msg', node.property, msg);
     for (let i = 0; i < (node.rules || []).length; i++) {
       const rule = node.rules[i];
       const check = this._evalSwitchRule(rule, property, msg);

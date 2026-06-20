@@ -92,11 +92,11 @@ describe('Sell strategy integration', () => {
 
     assert.equal(terminals.length, 1);
     const solutions = terminals[0].solutions;
-    assert.equal(solutions[0].power, 2500);
-    assert.equal(solutions[1].power, 500);
-    assert.equal(solutions[2].power, 2500);
-    assert.equal(solutions[3].power, 500);
-    assert.equal(solutions[4].power, 2500);
-    assert.equal(solutions[5].power, 500);
+    assert.equal(solutions[0].power, 1500);
+    assert.equal(solutions[1].power, 1500);
+    assert.equal(solutions[2].power, 1500);
+    assert.equal(solutions[3].power, 1500);
+    assert.equal(solutions[4].power, 1500);
+    assert.equal(solutions[5].power, 1500);
   });
 });

@@ -4,9 +4,9 @@
   "private": true,
   "description": "Local unit and integration tests for Home Battery Control Node-RED strategies",
   "scripts": {
-    "test": "node --test test/**/*.test.js",
-    "test:unit": "node --test test/unit/**/*.test.js",
-    "test:integration": "node --test test/integration/**/*.test.js"
+    "test": "node --test 'test/**/*.test.js'",
+    "test:unit": "node --test 'test/unit/**/*.test.js'",
+    "test:integration": "node --test 'test/integration/**/*.test.js'"
   },
   "devDependencies": {
     "@node-red/util": "^4.0.0"
