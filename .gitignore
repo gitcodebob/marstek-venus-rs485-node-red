@@ -4,9 +4,17 @@ RELEASE_NOTES_TEMP.txt
 # Ignore notes and development files
 notes/
 template_sensor_bob_battery_dashboard.yaml
+.DS_Store
 
-# Ignore SASS cache files
+# Ignore opencode local workspace
+.opencode/
+
 docs/.sass-cache
+
+# Node.js dependencies and test output
+node_modules/
+
+coverage/
 
 # Claude Code per-user state — keep local; commands/skills/agents/settings.json are shared
 .claude/settings.local.json
