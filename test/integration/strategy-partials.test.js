@@ -1,5 +1,9 @@
 'use strict';
 
+// NOTE: The `phase_protection` payload is preserved in these tests even though
+// the current `main` branch does not implement phase-aware throttling. It will
+// become relevant in the upcoming phase-protection PR, keeping future diffs small.
+
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 const { FlowGraph } = require('../lib/flow-graph');
