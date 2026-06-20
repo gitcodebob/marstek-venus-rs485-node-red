@@ -64,6 +64,12 @@ nav_order: 6
 ## Multi-Battery Management
 - **More than 6 batteries:** Override or change `input_number.house_battery_count` and you are good to go.
   - The dashboard supports 6 batteries out of the box. For 7 or more, duplicate and edit these cards or create your own dashboard.
+- **Manual phase assignment:** Assign each configured battery to `L1`, `L2`, `L3`, or `Unassigned` from the dashboard.
+  - The overview shows the assigned phase on each battery header and shows live battery AC power per phase in kW.
+  - The Node-RED battery object exposes this as `battery.phase`, so custom strategies can use the mapping.
+  - Optional per-phase grid power aliases can be configured in `packages/house_battery_control_config.yaml` as `sensor.p1_meter_l1_power`, `sensor.p1_meter_l2_power`, and `sensor.p1_meter_l3_power`. Leave them commented out if your setup is not three-phase.
+  - Node-RED exposes configured phase meter values as `msg.grid_power_phase.L1`, `.L2`, and `.L3`, with missing or unreadable values set to `null`.
+  - Built-in strategies still use aggregate control by default. Enable per-phase peak shaving to let peak shaving also react to phase-level power limits.
 - **3-Phase self-consumption:** if you require 0 W grid consumption on a per phase basis, the setup changes slightly. 
       
       Note: most homes get billed for the net total of all phases. If that is the case for you as well, ignore these instructions.
@@ -94,6 +100,8 @@ Controls grid import/export thresholds for `peak shaving` functionality.
 
 - **Import limit:** Maximum power to draw from the grid (example: 16A × 230V = 3680W for CAPTAR contracts)
 - **Export limit:** Maximum power to feed back to the grid (example: 3000W if grid connection has export limits)
+- **Max phase power:** Shared per-phase safety threshold. This value is exposed to Node-RED as `msg.grid_power_limit_phase` and is used by per-phase peak shaving when enabled.
+- **Per-phase peak shaving:** Optional protection that uses configured L1/L2/L3 grid power sensors and battery phase assignments. Charge, Sell, Charge PV, Self-consumption, and Dynamic strategies that select them cap new battery commands against available phase headroom first; if limiting battery interaction is not enough, peak shaving reduces the overloaded phase before any strategy except Full stop is executed. Phase meter aliases must report power in watts; current-only sensors must be converted in `house_battery_control_config.yaml`. Missing phase sensors, unassigned batteries, or the feature being disabled keep the existing aggregate-only behavior. Unavailable batteries are treated as 0W assignable capacity, so remaining batteries on the same phase are asked to carry the correction.
 - **Configuration:** Adjust from the "Settings" tab in the Home Assistant dashboard
 
 ### Charge / Sell Power Mode

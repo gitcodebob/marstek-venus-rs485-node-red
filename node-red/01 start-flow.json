@@ -42,7 +42,8 @@
             "e0172f5ef06fa881",
             "10aa27fe189fa07e",
             "f7e09807696115eb",
-            "15830b3ade1b15be"
+            "15830b3ade1b15be",
+            "9eaf5b01ad501031"
         ],
         "x": 34,
         "y": 1099,
@@ -317,11 +318,17 @@
             "f6f3ce29833ec4cf",
             "5ac3cdf0ad6013e3",
             "69d4aa99b46127ba",
-            "783deb36dab080de"
+            "783deb36dab080de",
+            "9eaf5b01ad50102c",
+            "9eaf5b01ad50102d",
+            "9eaf5b01ad50102e",
+            "9eaf5b01ad50102f",
+            "9eaf5b01ad501030",
+            "9eaf5b01ad501032"
         ],
         "x": 34,
         "y": 999,
-        "w": 752,
+        "w": 2106,
         "h": 82
     },
     {
@@ -567,7 +574,7 @@
         "wires": [
             [
                 "415a53493b19f461",
-                "a18697cfe0c15963"
+                "9eaf5b01ad501031"
             ]
         ]
     },
@@ -675,7 +682,7 @@
         "z": "cf69560481408644",
         "g": "98643475a97c956a",
         "name": "Mapping",
-        "func": "// Map to batteries array\nmsg.batteries.push({\n    id: `M${msg.battery_index}`,\n    power: parseInt(msg.battery_power,10),\n    charging_max: parseInt(msg.max_charge_power,10),\n    discharging_max: parseInt(msg.max_discharge_power,10),\n    soc: parseInt(msg.battery_state_of_charge,10),\n    soc_max: parseInt(msg.charging_cutoff_capacity,10),\n    soc_min: parseInt(msg.discharging_cutoff_capacity,10),\n    inverter: String(msg.inverter_state),\n    energy: Number(msg.battery_remaining_capacity),\n    energy_max: Number(msg.battery_total_energy),\n    rs485: String(msg.rs485_control_mode)\n    });\n\n// Continue\nreturn msg;",
+        "func": "// Normalize optional phase assignment\nconst normalizedPhase = String(msg.battery_phase || \"\").trim().toUpperCase();\nconst phase = [\"L1\", \"L2\", \"L3\"].includes(normalizedPhase) ? normalizedPhase : \"unassigned\";\n\nconst batteryId = `M${msg.battery_index}`;\nconst lastBatteryCommands = global.get(\"lastBatteryCommands\") || {};\nconst lastCommand = lastBatteryCommands[batteryId] || null;\n\n// Map to batteries array\nmsg.batteries.push({\n    id: batteryId,\n    phase: phase,\n    power: parseInt(msg.battery_power,10),\n    charging_max: parseInt(msg.max_charge_power,10),\n    discharging_max: parseInt(msg.max_discharge_power,10),\n    soc: parseInt(msg.battery_state_of_charge,10),\n    soc_max: parseInt(msg.charging_cutoff_capacity,10),\n    soc_min: parseInt(msg.discharging_cutoff_capacity,10),\n    inverter: String(msg.inverter_state),\n    energy: Number(msg.battery_remaining_capacity),\n    energy_max: Number(msg.battery_total_energy),\n    rs485: String(msg.rs485_control_mode),\n    last_command: lastCommand\n    });\n\n// Continue\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1247,7 +1254,7 @@
         "z": "cf69560481408644",
         "g": "d6c9e642f1579c6b",
         "name": "Set Batteries",
-        "func": "// Logger\nconst log = global.get(\"logger\");\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// Output format and target\nlet outputArray = [];\nlet solution = msg.solutions[msg.battery_index-1]; // Base-0, thus -1\nif (solution === undefined) {\n    log(this,`Can't find solution for index ${msg.battery_index - 1} in ${msg.solutions}, aborting...`,\"error\");\n    return null;\n}\nlet target = `marstek_${solution.id.toLowerCase()}`;\n\n// Safety | Id exists\nlet battery = msg.batteries.find(battery => battery.id === solution.id);\nif (battery === undefined) {\n    log(`Can't set battery ${solution.id}, aborting...`,\"error\");\n    return null;\n}\n// Safety | Power limit\nsolution.power = Math.min(solution.power, solution.mode == CMODE.CHARGE ? battery.charging_max: battery.discharging_max);\n\n// Set | Mode\nconst serviceCallMode = {\n    \"action\": \"select.select_option\",\n    \"target\": {\n        \"entity_id\": [`select.${target}_forcible_charge_discharge`]\n    },\n    \"data\": {\n         \"option\": String(solution.mode) // forced charge mode (stop, charge, discharge)\n    }\n};\n// Add topic to allow correct 'on change' filtering\noutputArray.push({payload: serviceCallMode, topic:solution.id});\n\n// Set | Power\nconst serviceCallPower = {\n    \"action\": \"number.set_value\",\n    \"target\": {\n        \"entity_id\": [\n            `number.${target}_forcible_charge_power`,\n            `number.${target}_forcible_discharge_power`\n            ]\n    },\n    \"data\": {\n        \"value\": Number(solution.power)\n    } \n};\n// Add topic to allow correct 'on change' filtering\noutputArray.push({payload: serviceCallPower, topic:solution.id});\n\n// Store service calls in msg to allow checking of loop results\nmsg.loop_result = { target, serviceCallMode, serviceCallPower };\n\n// Return msg as third output\noutputArray.push(msg);\n\n// Explain\nlog(this,`${target} ${String(solution.mode)} @ ${Number(solution.power)} Watt`);\n\n// Output\nreturn outputArray;",
+        "func": "// Logger\nconst log = global.get(\"logger\");\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// Output format and target\nlet outputArray = [];\nlet solution = msg.solutions[msg.battery_index-1]; // Base-0, thus -1\nif (solution === undefined) {\n    log(this,`Can't find solution for index ${msg.battery_index - 1} in ${msg.solutions}, aborting...`,\"error\");\n    return null;\n}\nlet target = `marstek_${solution.id.toLowerCase()}`;\n\n// Safety | Id exists\nlet battery = msg.batteries.find(battery => battery.id === solution.id);\nif (battery === undefined) {\n    log(`Can't set battery ${solution.id}, aborting...`,\"error\");\n    return null;\n}\n// Safety | Power limit\nsolution.power = Math.min(solution.power, solution.mode == CMODE.CHARGE ? battery.charging_max: battery.discharging_max);\n\nconst lastBatteryCommands = global.get(\"lastBatteryCommands\") || {};\nconst previousCommand = lastBatteryCommands[solution.id] || {};\nconst previousPower = Number(previousCommand.power);\nconst currentPower = Number(solution.power) || 0;\nconst now = Date.now();\nconst commandChanged = previousCommand.mode !== solution.mode\n    || !Number.isFinite(previousPower)\n    || Math.abs(previousPower - currentPower) > 25;\nlastBatteryCommands[solution.id] = {\n    mode: String(solution.mode),\n    power: currentPower,\n    since: commandChanged ? now : (Number(previousCommand.since) || now),\n    updated: now,\n};\nglobal.set(\"lastBatteryCommands\", lastBatteryCommands);\n\n// Set | Mode\nconst serviceCallMode = {\n    \"action\": \"select.select_option\",\n    \"target\": {\n        \"entity_id\": [`select.${target}_forcible_charge_discharge`]\n    },\n    \"data\": {\n         \"option\": String(solution.mode) // forced charge mode (stop, charge, discharge)\n    }\n};\n// Add topic to allow correct 'on change' filtering\noutputArray.push({payload: serviceCallMode, topic:solution.id});\n\n// Set | Power\nconst serviceCallPower = {\n    \"action\": \"number.set_value\",\n    \"target\": {\n        \"entity_id\": [\n            `number.${target}_forcible_charge_power`,\n            `number.${target}_forcible_discharge_power`\n            ]\n    },\n    \"data\": {\n        \"value\": Number(solution.power)\n    } \n};\n// Add topic to allow correct 'on change' filtering\noutputArray.push({payload: serviceCallPower, topic:solution.id});\n\n// Store service calls in msg to allow checking of loop results\nmsg.loop_result = { target, serviceCallMode, serviceCallPower };\n\n// Return msg as third output\noutputArray.push(msg);\n\n// Explain\nlog(this,`${target} ${String(solution.mode)} @ ${Number(solution.power)} Watt`);\n\n// Output\nreturn outputArray;",
         "outputs": 3,
         "timeout": 0,
         "noerr": 0,
@@ -1542,7 +1549,7 @@
         "z": "cf69560481408644",
         "g": "f80c67f5392fd743",
         "name": "Update battery order",
-        "func": "// Cycles battery priority as follows\n// M=1 [1,2,3,4] | M=2 [2,3,4,1] | M=3 [3,4,1,2] | etc.\n// With M the battery to prioritize\n\n// msg.batteries (original order)\nlet currentArray = msg.batteries;\n\n// Prioritize the Mth battery\nconst M = RED.util.getMessageProperty(msg,\"prioritize_battery\") || 1;\n\n// Flag wether the order may be reversed when discharging (e.g. Self-consumption utilizes this)\nconst reverseDischargePriority = RED.util.getMessageProperty(msg,\"battery_priority_cycle_interval\") !== \"Auto balance\";\nRED.util.setMessageProperty(msg, \"advanced_settings.reverse_discharge_priority\", reverseDischargePriority,true);\n\n// 1st battery has prio? Skip and continue without change\nif (M==1) return msg;\n\n// N equals the number of items to take from the front to the back of the array, effectivly rotating battery priority\nconst N = M - 1; // base-0 version of M\nnode.status({fill:\"blue\",shape:\"ring\",text:`N = ${N}`});\n\n// 1. Check if the array is valid and long enough\nif (!Array.isArray(currentArray) || currentArray.length < N) {\n    // Send an error or the original array back if the array is invalid/too short\n    node.error(`Array is not valid or shorter than ${N} items.`, msg);\n    return null;\n}\n\n// 2. Get the first N items (these will go to the back)\n// slice(0, N) retrieves elements from the start (index 0) up to index N (exclusive).\nlet firstN = currentArray.slice(0, N);\n\n// 3. Get the remaining items (these will stay at the front)\n// slice(N) retrieves elements from index N to the end of the array.\nlet remaining = currentArray.slice(N);\n\n// 4. Concatenate them: remaining items (front) + first N items (back)\nlet newArray = remaining.concat(firstN);\n\n// 5. Place the new array back into msg.batteries\nmsg.batteries = newArray;\n\nreturn msg;\n",
+        "func": "// Cycles battery priority as follows\n// M=1 [1,2,3,4] | M=2 [2,3,4,1] | M=3 [3,4,1,2] | etc.\n// With M the battery to prioritize\n\n// msg.batteries (original order)\nlet currentArray = msg.batteries;\n\n// Prioritize the Mth battery\nconst M = RED.util.getMessageProperty(msg,\"prioritize_battery\") || 1;\n\nif (Array.isArray(currentArray)) {\n    currentArray.forEach((battery) => {\n        if (battery && typeof battery === \"object\") battery.is_priority_battery = false;\n    });\n\n    const priorityBattery = currentArray[M - 1];\n    if (priorityBattery && typeof priorityBattery === \"object\") {\n        priorityBattery.is_priority_battery = true;\n        RED.util.setMessageProperty(msg, \"priority_battery_id\", priorityBattery.id, true);\n    }\n}\n\n// Flag wether the order may be reversed when discharging (e.g. Self-consumption utilizes this)\nconst reverseDischargePriority = RED.util.getMessageProperty(msg,\"battery_priority_cycle_interval\") !== \"Auto balance\";\nRED.util.setMessageProperty(msg, \"advanced_settings.reverse_discharge_priority\", reverseDischargePriority,true);\n\n// 1st battery has prio? Skip and continue without change\nif (M==1) return msg;\n\n// N equals the number of items to take from the front to the back of the array, effectivly rotating battery priority\nconst N = M - 1; // base-0 version of M\nnode.status({fill:\"blue\",shape:\"ring\",text:`N = ${N}`});\n\n// 1. Check if the array is valid and long enough\nif (!Array.isArray(currentArray) || currentArray.length < N) {\n    // Send an error or the original array back if the array is invalid/too short\n    node.error(`Array is not valid or shorter than ${N} items.`, msg);\n    return null;\n}\n\n// 2. Get the first N items (these will go to the back)\n// slice(0, N) retrieves elements from the start (index 0) up to index N (exclusive).\nlet firstN = currentArray.slice(0, N);\n\n// 3. Get the remaining items (these will stay at the front)\n// slice(N) retrieves elements from index N to the end of the array.\nlet remaining = currentArray.slice(N);\n\n// 4. Concatenate them: remaining items (front) + first N items (back)\nlet newArray = remaining.concat(firstN);\n\n// 5. Place the new array back into msg.batteries\nmsg.batteries = newArray;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1932,7 +1939,7 @@
         "y": 500,
         "wires": [
             [
-                "43bc77e1a735d1d4"
+                "9eaf5b01ad50102a"
             ]
         ]
     },
@@ -1942,7 +1949,7 @@
         "z": "cf69560481408644",
         "g": "98643475a97c956a",
         "name": "Loop end",
-        "func": "// cleanup \ndelete msg.battery_index;\n\ndelete msg.battery_power;\ndelete msg.max_charge_power;\ndelete msg.max_discharge_power;\ndelete msg.battery_state_of_charge;\ndelete msg.charging_cutoff_capacity;\ndelete msg.discharging_cutoff_capacity;\ndelete msg.inverter_state;\ndelete msg.battery_remaining_capacity;\ndelete msg.battery_total_energy;\ndelete msg.rs485_control_mode;\n\nreturn msg;",
+        "func": "// cleanup \ndelete msg.battery_index;\n\ndelete msg.battery_power;\ndelete msg.max_charge_power;\ndelete msg.max_discharge_power;\ndelete msg.battery_state_of_charge;\ndelete msg.charging_cutoff_capacity;\ndelete msg.discharging_cutoff_capacity;\ndelete msg.inverter_state;\ndelete msg.battery_remaining_capacity;\ndelete msg.battery_total_energy;\ndelete msg.rs485_control_mode;\ndelete msg.battery_phase;\ndelete msg.template;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2536,7 +2543,7 @@
         "z": "cf69560481408644",
         "g": "1d6d27611b4eda6c",
         "name": "Custom logger",
-        "func": "/**\n * Custom Logger Function\n * * Provides centralized logging, node-status updates, and message tracing.\n * Specifically designed for Home Battery Control logic within Node-RED.\n * \n * Debug dashboard updating:\n * A msg needs to reach 'Strategy Evaluation' or be passed to the \"Show on debug board\" trigger node.\n * Errors are automatically passed to the \"Show on debug board\" trigger node.\n * \n * * @param {object} callingNode - The context of the calling node (pass 'this').\n * @param {string} text - The log message/explanation.\n * @param {string} level - Log level: 'log', 'warn', 'error', or 'info' (default: 'info').\n * \n * Note: anything above 'info' will also write to the Node-RED log files \n * \n * * @usage: \n * const log = global.get(\"logger\");\n * log(this, \"Charging cycle started\");\n */\nconst customLogger = (callingNode, text, level = 'info') => {\n    \n    // Log only when debug_mode is ON\n    const debug_mode = global.get(\"debug_mode\") || false;\n    if(debug_mode == false) return null;\n\n    // Max log elements to keep\n    const MAX_ELEMENTS = 100;\n\n    // Create the YYYY-MM-DD HH:MM:SS.mmm format\n    const now = new Date();\n    const timestamp = now.getHours().toString().padStart(2, '0') + \":\" +\n                now.getMinutes().toString().padStart(2, '0') + \":\" +\n                now.getSeconds().toString().padStart(2, '0') + \".\" +\n                now.getMilliseconds().toString().padStart(3, '0');\n\n    const formattedTimeLevel = `${timestamp} [${level.toLowerCase()}]`;\n    \n    // Get the name of the node or fallback to the ID\n    const nodeName = callingNode.__node__ ? callingNode.__node__.name || callingNode.__node__.id : undefined;\n    // Get the name of the Flow/Tab\n    const flowName = callingNode.env.get(\"NR_FLOW_NAME\") || \"Unknown flow\";\n    // Explain to the Home Battery Control user what is going on\n    const formattedExplenation = `[${flowName} >> ${nodeName}]: ${text}`;\n\n    // Level icons\n    let icon = \"⚪\";\n    switch (level) {\n        case \"info\":\n            icon = \"ℹ️\";\n            break;\n        case \"log\":\n            icon = \"🔧\";\n            break;\n        case \"warn\":\n            icon = \"⚠️\";      \n            break;\n        case \"error\":\n            icon = \"❌\";\n            break;\n    }\n\n    // Enrich msg with log info\n    const msg = callingNode.msg;\n    (msg.log = msg.log || []).push({ timestamp: timestamp, level:level, flow:flowName, node:nodeName, payload: text, icon: icon});\n\n    if (msg.log.length > MAX_ELEMENTS) {\n        // Slice keeps the last X elements\n        msg.log = msg.log.slice(-MAX_ELEMENTS);\n    }\n\n    // Log to the Node-RED system log\n    switch (level) {\n        case \"log\":\n            node.log(`${formattedExplenation}`);\n            break;\n        case \"warn\":\n            node.warn(`${formattedExplenation}`);       \n            break;\n        case \"error\":\n            node.error(`${formattedExplenation}`, callingNode.msg);\n            break;\n        default:\n            // don't log to logfiles by default\n    }\n\n};\n\nglobal.set('logger', customLogger);\nglobal.set('unhandledException', \"\");\nreturn msg;",
+        "func": "/**\n * Custom Logger Function\n * * Provides centralized logging, node-status updates, and message tracing.\n * Specifically designed for Home Battery Control logic within Node-RED.\n * \n * Debug dashboard updating:\n * A msg needs to reach 'Strategy Evaluation' or be passed to the \"Show on debug board\" trigger node.\n * Errors are automatically passed to the \"Show on debug board\" trigger node.\n * \n * * @param {object} callingNode - The context of the calling node (pass 'this').\n * @param {string} text - The log message/explanation.\n * @param {string} level - Log level: 'log', 'warn', 'error', or 'info' (default: 'info').\n * \n * Note: anything above 'info' will also write to the Node-RED log files \n * \n * * @usage: \n * const log = global.get(\"logger\");\n * log(this, \"Charging cycle started\");\n */\nconst customLogger = (callingNode, text, level = 'info') => {\n    \n    // Log only when debug_mode is ON\n    const debug_mode = global.get(\"debug_mode\") || false;\n    if(debug_mode == false) return null;\n\n    // Max log elements to keep\n    const MAX_ELEMENTS = 100;\n\n    // Create the YYYY-MM-DD HH:MM:SS.mmm format\n    const now = new Date();\n    const timestamp = now.getHours().toString().padStart(2, '0') + \":\" +\n                now.getMinutes().toString().padStart(2, '0') + \":\" +\n                now.getSeconds().toString().padStart(2, '0') + \".\" +\n                now.getMilliseconds().toString().padStart(3, '0');\n\n    const formattedTimeLevel = `${timestamp} [${level.toLowerCase()}]`;\n    \n    // Get the name of the node or fallback to the ID\n    const nodeName = callingNode.__node__ ? callingNode.__node__.name || callingNode.__node__.id : undefined;\n    // Get the name of the Flow/Tab\n    const flowName = callingNode.env.get(\"NR_FLOW_NAME\") || \"Unknown flow\";\n    // Explain to the Home Battery Control user what is going on\n    const formattedExplenation = `[${flowName} >> ${nodeName}]: ${text}`;\n\n    // Level icons\n    let icon = \"⚪\";\n    switch (level) {\n        case \"info\":\n            icon = \"ℹ️\";\n            break;\n        case \"log\":\n            icon = \"🔧\";\n            break;\n        case \"warn\":\n            icon = \"⚠️\";      \n            break;\n        case \"error\":\n            icon = \"❌\";\n            break;\n    }\n\n    // Enrich msg with log info\n    const msg = callingNode.msg;\n    (msg.log = msg.log || []).push({ timestamp: timestamp, level:level, flow:flowName, node:nodeName, payload: text, icon: icon});\n\n    if (msg.log.length > MAX_ELEMENTS) {\n        // Slice keeps the last X elements\n        msg.log = msg.log.slice(-MAX_ELEMENTS);\n    }\n\n    // Log to the Node-RED system log\n    switch (level) {\n        case \"log\":\n            node.log(`${formattedExplenation}`);\n            break;\n        case \"warn\":\n            node.warn(`${formattedExplenation}`);       \n            break;\n        case \"error\":\n            node.error(`${formattedExplenation}`, callingNode.msg);\n            break;\n        default:\n            // don't log to logfiles by default\n    }\n\n};\n\nconst phasePowerAllocator = (() => {\n    const PHASES = [\"L1\", \"L2\", \"L3\"];\n    const OBSERVED_CHARGE_HEADROOM_W = 100;\n    const UNDERUSE_DETECTION_DELAY_MS = 10000;\n    const UNDERUSE_MARGIN_W = 100;\n\n    function getPhase(battery) {\n        const phase = String(battery?.phase || \"\").toUpperCase();\n        return PHASES.includes(phase) ? phase : \"unassigned\";\n    }\n\n    function getModeFromMaxPowerProperty(maxPowerProperty) {\n        return String(maxPowerProperty) === \"charging_max\" ? \"charge\" : \"discharge\";\n    }\n\n    function getObservedModePower(battery) {\n        const power = Number(battery?.power);\n        return Number.isFinite(power) ? Math.max(0, Math.abs(power)) : null;\n    }\n\n    function getLastCommand(battery) {\n        return battery?.last_command || battery?.lastCommand || null;\n    }\n\n    function getResponsivePowerLimit(battery, maxPower, mode) {\n        const requestedPower = Math.max(0, Number(maxPower) || 0);\n        if (requestedPower <= 0) return 0;\n\n        const soc = Number(battery?.soc);\n        const socMax = Number(battery?.soc_max);\n        const socMin = Number(battery?.soc_min);\n\n        if (mode === \"charge\" && Number.isFinite(soc) && Number.isFinite(socMax) && soc >= socMax) {\n            return 0;\n        }\n        if (mode === \"discharge\" && Number.isFinite(soc) && Number.isFinite(socMin) && soc <= socMin) {\n            return 0;\n        }\n        if (mode !== \"charge\") {\n            return requestedPower;\n        }\n\n        const observedPower = getObservedModePower(battery);\n        const lastCommand = getLastCommand(battery);\n        const lastMode = String(lastCommand?.mode || \"\").toLowerCase();\n        const lastPower = Number(lastCommand?.power);\n        if (observedPower === null || lastMode !== mode || !Number.isFinite(lastPower) || lastPower <= 0) {\n            return requestedPower;\n        }\n\n        const since = Number(lastCommand?.since ?? lastCommand?.updated);\n        const commandAgeMs = Number.isFinite(since) ? Math.max(0, Date.now() - since) : 0;\n        const nearSocCeiling = Number.isFinite(soc) && Number.isFinite(socMax) && soc >= Math.max(0, socMax - 5);\n        const sustainedUnderuse = commandAgeMs >= UNDERUSE_DETECTION_DELAY_MS\n            && observedPower + UNDERUSE_MARGIN_W < Math.min(lastPower, requestedPower);\n\n        if (!nearSocCeiling && !sustainedUnderuse) {\n            return requestedPower;\n        }\n\n        return Math.min(requestedPower, Math.floor(observedPower + OBSERVED_CHARGE_HEADROOM_W));\n    }\n\n    function allocateWaterFill(items, budget, getCapacity) {\n        const entries = items\n            .map((item, index) => ({\n                item,\n                index,\n                capacity: Math.max(0, Number(getCapacity(item)) || 0),\n                assignedFloat: 0,\n                assignedPower: 0,\n            }))\n            .filter((entry) => entry.capacity > 0);\n\n        const allocations = new Map(items.map((item) => [item, 0]));\n        const totalCapacity = entries.reduce((sum, entry) => sum + entry.capacity, 0);\n        const targetPower = Math.min(totalCapacity, Math.max(0, Math.floor(Number(budget) || 0)));\n\n        if (entries.length === 0 || targetPower <= 0) {\n            return allocations;\n        }\n\n        if (targetPower >= totalCapacity) {\n            entries.forEach((entry) => allocations.set(entry.item, entry.capacity));\n            return allocations;\n        }\n\n        let remainingBudget = targetPower;\n        let remainingCount = entries.length;\n        let level = 0;\n\n        [...entries]\n            .sort((a, b) => a.capacity - b.capacity)\n            .some((entry) => {\n                const candidateLevel = remainingBudget / remainingCount;\n                if (candidateLevel <= entry.capacity) {\n                    level = candidateLevel;\n                    return true;\n                }\n\n                remainingBudget -= entry.capacity;\n                remainingCount -= 1;\n                return false;\n            });\n\n        entries.forEach((entry) => {\n            entry.assignedFloat = Math.min(entry.capacity, level);\n            entry.assignedPower = Math.floor(entry.assignedFloat);\n        });\n\n        const assignedTotal = entries.reduce((sum, entry) => sum + entry.assignedPower, 0);\n        let leftover = targetPower - assignedTotal;\n\n        const remainderOrder = [...entries]\n            .filter((entry) => entry.assignedPower < entry.capacity)\n            .sort((a, b) => {\n                const fractionDiff = (b.assignedFloat - Math.floor(b.assignedFloat)) - (a.assignedFloat - Math.floor(a.assignedFloat));\n                if (fractionDiff !== 0) return fractionDiff;\n\n                const headroomDiff = (b.capacity - b.assignedPower) - (a.capacity - a.assignedPower);\n                if (headroomDiff !== 0) return headroomDiff;\n\n                return a.index - b.index;\n            });\n\n        let cursor = 0;\n        while (leftover > 0 && remainderOrder.length > 0) {\n            const entry = remainderOrder[cursor % remainderOrder.length];\n            if (entry.assignedPower < entry.capacity) {\n                entry.assignedPower += 1;\n                leftover -= 1;\n            }\n            cursor += 1;\n        }\n\n        entries.forEach((entry) => allocations.set(entry.item, entry.assignedPower));\n        return allocations;\n    }\n\n    function itemHasPriority(item) {\n        if (Array.isArray(item?.entries)) {\n            return item.entries.some((entry) => itemHasPriority(entry));\n        }\n\n        const battery = item?.battery || item?.state?.battery || item;\n        return battery?.is_priority_battery === true;\n    }\n\n    function allocatePriorityWaterFill(items, budget, getCapacity) {\n        const entries = items\n            .map((item, index) => ({\n                item,\n                index,\n                capacity: Math.max(0, Number(getCapacity(item)) || 0),\n            }))\n            .filter((entry) => entry.capacity > 0);\n\n        const allocations = new Map(items.map((item) => [item, 0]));\n        const totalCapacity = entries.reduce((sum, entry) => sum + entry.capacity, 0);\n        const targetPower = Math.min(totalCapacity, Math.max(0, Math.floor(Number(budget) || 0)));\n\n        if (entries.length === 0 || targetPower <= 0) {\n            return allocations;\n        }\n\n        const priorityEntries = entries.filter((entry) => itemHasPriority(entry.item));\n        if (priorityEntries.length === 0) {\n            return allocateWaterFill(items, targetPower, getCapacity);\n        }\n\n        const regularEntries = entries.filter((entry) => !itemHasPriority(entry.item));\n        const priorityCapacity = priorityEntries.reduce((sum, entry) => sum + entry.capacity, 0);\n        const priorityBudget = Math.min(targetPower, priorityCapacity);\n        const priorityAllocations = allocateWaterFill(priorityEntries, priorityBudget, (entry) => entry.capacity);\n        let assignedPriorityPower = 0;\n\n        priorityEntries.forEach((entry) => {\n            const assignedPower = priorityAllocations.get(entry) || 0;\n            allocations.set(entry.item, assignedPower);\n            assignedPriorityPower += assignedPower;\n        });\n\n        const regularBudget = targetPower - assignedPriorityPower;\n        if (regularBudget <= 0 || regularEntries.length === 0) {\n            return allocations;\n        }\n\n        const regularAllocations = allocateWaterFill(regularEntries, regularBudget, (entry) => entry.capacity);\n        regularEntries.forEach((entry) => {\n            allocations.set(entry.item, regularAllocations.get(entry) || 0);\n        });\n\n        return allocations;\n    }\n\n    function buildMaxPowerStates({ batteries, maxPowerProperty, phaseLimits = {}, allocationMode = \"water-fill\" }) {\n        const mode = getModeFromMaxPowerProperty(maxPowerProperty);\n        const batteryStates = (Array.isArray(batteries) ? batteries : []).map((battery) => {\n            const maxPower = Math.max(0, Number(battery?.[maxPowerProperty]) || 0);\n            return {\n                battery,\n                phase: getPhase(battery),\n                requestedPower: getResponsivePowerLimit(battery, maxPower, mode),\n                assignedPower: 0,\n            };\n        });\n\n        const statesByPhase = batteryStates.reduce((groups, state) => {\n            if (!groups[state.phase]) groups[state.phase] = [];\n            groups[state.phase].push(state);\n            return groups;\n        }, {});\n\n        Object.entries(statesByPhase).forEach(([phase, phaseStates]) => {\n            const requestedPower = phaseStates.reduce((sum, state) => sum + state.requestedPower, 0);\n            const phaseLimit = PHASES.includes(phase) ? Number(phaseLimits[phase]) : Infinity;\n            const phaseBudget = Number.isFinite(phaseLimit) ? Math.max(0, phaseLimit) : requestedPower;\n            const allocator = allocationMode === \"priority-first\" ? allocatePriorityWaterFill : allocateWaterFill;\n            const allocations = allocator(phaseStates, phaseBudget, (state) => state.requestedPower);\n\n            phaseStates.forEach((state) => {\n                state.assignedPower = allocations.get(state) || 0;\n            });\n        });\n\n        return batteryStates;\n    }\n\n    return { phases: PHASES, getPhase, getResponsivePowerLimit, allocateWaterFill, allocatePriorityWaterFill, allocatePriorityFirst: allocatePriorityWaterFill, buildMaxPowerStates };\n})();\n\nglobal.set('phasePowerAllocator', phasePowerAllocator);\n\nglobal.set('logger', customLogger);\nglobal.set('unhandledException', \"\");\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3262,7 +3269,7 @@
         "y": 1040,
         "wires": [
             [
-                "f7e09807696115eb"
+                "9eaf5b01ad50102c"
             ]
         ]
     },
@@ -3567,5 +3574,224 @@
         "modules": {
             "node-red-contrib-home-assistant-websocket": "0.80.3"
         }
+    },
+    {
+        "id": "9eaf5b01ad50102a",
+        "type": "function",
+        "z": "cf69560481408644",
+        "g": "2d7842e57b2a0b38",
+        "name": "Phase template",
+        "func": "// Prepare optional battery phase helper lookup\nmsg.template = `{{ states('input_select.marstek_m${msg.battery_index}_phase') }}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1760,
+        "y": 500,
+        "wires": [
+            [
+                "9eaf5b01ad50102b"
+            ]
+        ]
+    },
+    {
+        "id": "9eaf5b01ad50102b",
+        "type": "api-render-template",
+        "z": "cf69560481408644",
+        "g": "2d7842e57b2a0b38",
+        "name": "Phase",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "",
+        "resultsLocation": "battery_phase",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 1920,
+        "y": 500,
+        "wires": [
+            [
+                "43bc77e1a735d1d4"
+            ]
+        ]
+    },
+    {
+        "id": "9eaf5b01ad50102c",
+        "type": "api-render-template",
+        "z": "cf69560481408644",
+        "g": "80405532eb3f52d4",
+        "name": "Max phase power",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{{ states('input_number.house_battery_control_max_phase_power') | float(5500) }}",
+        "resultsLocation": "grid_power_limit_phase",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 880,
+        "y": 1040,
+        "wires": [
+            [
+                "9eaf5b01ad50102d"
+            ]
+        ]
+    },
+    {
+        "id": "9eaf5b01ad50102d",
+        "type": "function",
+        "z": "cf69560481408644",
+        "g": "80405532eb3f52d4",
+        "name": "Normalize phase limit",
+        "func": "const phaseLimit = Number(RED.util.getMessageProperty(msg, \"grid_power_limit_phase\"));\nRED.util.setMessageProperty(\n    msg,\n    \"grid_power_limit_phase\",\n    Number.isFinite(phaseLimit) && phaseLimit > 0 ? phaseLimit : 5500,\n    true\n);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 1040,
+        "wires": [
+            [
+                "9eaf5b01ad50102e"
+            ]
+        ]
+    },
+    {
+        "id": "9eaf5b01ad50102e",
+        "type": "api-render-template",
+        "z": "cf69560481408644",
+        "g": "80405532eb3f52d4",
+        "name": "Phase grid power",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{%- macro phase_power(entity_id) -%}\n{%- set raw = states(entity_id) -%}\n{%- if raw in ['unknown', 'unavailable', 'none', 'None', ''] -%}\nnull\n{%- elif is_number(raw) -%}\n{{ raw | float }}\n{%- else -%}\nnull\n{%- endif -%}\n{%- endmacro -%}\n{\"L1\": {{ phase_power('sensor.p1_meter_l1_power') }}, \"L2\": {{ phase_power('sensor.p1_meter_l2_power') }}, \"L3\": {{ phase_power('sensor.p1_meter_l3_power') }}}",
+        "resultsLocation": "grid_power_phase",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 1290,
+        "y": 1040,
+        "wires": [
+            [
+                "9eaf5b01ad50102f"
+            ]
+        ]
+    },
+    {
+        "id": "9eaf5b01ad50102f",
+        "type": "function",
+        "z": "cf69560481408644",
+        "g": "80405532eb3f52d4",
+        "name": "Normalize phase power",
+        "func": "let phasePower = RED.util.getMessageProperty(msg, \"grid_power_phase\");\n\nif (typeof phasePower === \"string\") {\n    const rawPhasePower = phasePower.trim();\n    if (rawPhasePower.length > 0) {\n        try {\n            phasePower = JSON.parse(rawPhasePower);\n        } catch (error) {\n            phasePower = {};\n        }\n    } else {\n        phasePower = {};\n    }\n}\n\nif (!phasePower || typeof phasePower !== \"object\") {\n    phasePower = {};\n}\n\nconst toNumberOrNull = (value) => {\n    const numericValue = Number(value);\n    return Number.isFinite(numericValue) ? numericValue : null;\n};\n\nRED.util.setMessageProperty(msg, \"grid_power_phase\", {\n    L1: toNumberOrNull(phasePower.L1 ?? phasePower.l1),\n    L2: toNumberOrNull(phasePower.L2 ?? phasePower.l2),\n    L3: toNumberOrNull(phasePower.L3 ?? phasePower.l3),\n}, true);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1510,
+        "y": 1040,
+        "wires": [
+            [
+                "9eaf5b01ad501030"
+            ]
+        ]
+    },
+    {
+        "id": "9eaf5b01ad501030",
+        "type": "api-current-state",
+        "z": "cf69560481408644",
+        "g": "80405532eb3f52d4",
+        "name": "Phase protection?",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.house_battery_control_has_phase_protection",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "phase_protection.enabled",
+                "propertyType": "msg",
+                "value": "$entity().state = \"on\"",
+                "valueType": "jsonata"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1730,
+        "y": 1040,
+        "wires": [
+            [
+                "9eaf5b01ad501032"
+            ]
+        ]
+    },
+    {
+        "id": "9eaf5b01ad501031",
+        "type": "function",
+        "z": "cf69560481408644",
+        "g": "6373da5467ce39eb",
+        "name": "Phase protection guard",
+        "func": "/* Global phase-protection guard\n *\n * Selected strategies like Charge, Sell, and Dynamic 2 sub-strategies can\n * produce direct battery setpoints without passing through the peak-shaving\n * partial. Per-phase protection must be able to preempt them, except Full stop.\n */\nconst log = global.get(\"logger\");\nconst PHASES = [\"L1\", \"L2\", \"L3\"];\nconst toNumberOrNull = (value) => {\n    const numericValue = Number(value);\n    return Number.isFinite(numericValue) ? numericValue : null;\n};\nconst sumValues = (values) => values.reduce((sum, value) => sum + value, 0);\n\nconst originalTarget = String(msg.target || \"\");\nif (originalTarget === \"Full stop\") {\n    return msg;\n}\n\nconst phaseProtectionEnabled = RED.util.getMessageProperty(msg, \"phase_protection.enabled\") === true;\nconst phasePower = RED.util.getMessageProperty(msg, \"grid_power_phase\") || {};\nconst phaseLimit = toNumberOrNull(RED.util.getMessageProperty(msg, \"grid_power_limit_phase\"));\nconst batteries = Array.isArray(msg.batteries) ? msg.batteries : [];\nconst assignedPhases = new Set(\n    batteries\n        .map((battery) => String(battery.phase || \"\").toUpperCase())\n        .filter((phase) => PHASES.includes(phase))\n);\nconst phaseReadings = PHASES.reduce((result, phase) => {\n    result[phase] = toNumberOrNull(phasePower[phase] ?? phasePower[phase.toLowerCase()]);\n    return result;\n}, {});\nconst phaseSensorsAvailable = PHASES.every((phase) => phaseReadings[phase] !== null);\nconst phaseBatteryPower = RED.util.getMessageProperty(msg, \"phase_protection.phase_battery_power\") || {};\nconst phaseBatteryChargePower = phaseBatteryPower.charge || {};\nconst phaseBatteryDischargePower = phaseBatteryPower.discharge || {};\nconst phaseLimitAvailable = phaseLimit !== null && phaseLimit > 0;\nconst phaseProtectionAvailable = phaseProtectionEnabled && phaseSensorsAvailable && phaseLimitAvailable && assignedPhases.size > 0;\n\nfunction getPhaseRequirements(direction) {\n    if (!phaseProtectionAvailable) {\n        return { requiredByPhase: { L1: 0, L2: 0, L3: 0 }, activePhases: [] };\n    }\n\n    const requiredByPhase = { L1: 0, L2: 0, L3: 0 };\n    PHASES.forEach((phase) => {\n        const reading = phaseReadings[phase];\n        const currentChargePower = direction === \"import\"\n            ? (toNumberOrNull(phaseBatteryChargePower[phase]) ?? 0)\n            : 0;\n        const currentDischargePower = direction === \"export\"\n            ? (toNumberOrNull(phaseBatteryDischargePower[phase]) ?? 0)\n            : 0;\n        const excess = direction === \"import\"\n            ? reading - currentChargePower - phaseLimit\n            : (reading * -1) - currentDischargePower - phaseLimit;\n\n        if (excess > 0 && assignedPhases.has(phase)) {\n            requiredByPhase[phase] = Math.ceil(excess);\n        }\n    });\n\n    return {\n        requiredByPhase,\n        activePhases: PHASES.filter((phase) => requiredByPhase[phase] > 0),\n    };\n}\n\nconst importPhase = getPhaseRequirements(\"import\");\nconst exportPhase = getPhaseRequirements(\"export\");\nconst importRequired = sumValues(Object.values(importPhase.requiredByPhase));\nconst exportRequired = sumValues(Object.values(exportPhase.requiredByPhase));\n\nif (importRequired > 0 || exportRequired > 0) {\n    // Import has priority because it protects loads drawing through the phase breaker.\n    const direction = importRequired > 0 ? \"import\" : \"export\";\n    const activePhases = importRequired > 0 ? importPhase.activePhases : exportPhase.activePhases;\n    const requiredPower = importRequired > 0 ? importRequired : exportRequired;\n\n    RED.util.setMessageProperty(msg, \"phase_protection.preempted_strategy\", originalTarget, true);\n    msg.target = \"Standby / peak shave\";\n\n    log(this, `**Per-phase peak protection** overrides ${originalTarget}: ${direction} ${activePhases.join(\", \")} requires ${requiredPower} W`);\n    node.status({ fill: \"yellow\", shape: \"dot\", text: `Phase peak -> Standby / peak shave` });\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 1100,
+        "wires": [
+            [
+                "a18697cfe0c15963"
+            ]
+        ]
+    },
+    {
+        "id": "9eaf5b01ad501032",
+        "type": "function",
+        "z": "cf69560481408644",
+        "g": "80405532eb3f52d4",
+        "name": "Phase command limits",
+        "func": "const PHASES = [\"L1\", \"L2\", \"L3\"];\nconst toNumberOrNull = (value) => {\n    const numericValue = Number(value);\n    return Number.isFinite(numericValue) ? numericValue : null;\n};\n\nconst phaseProtectionEnabled = RED.util.getMessageProperty(msg, \"phase_protection.enabled\") === true;\nconst phasePower = RED.util.getMessageProperty(msg, \"grid_power_phase\") || {};\nconst phaseLimit = toNumberOrNull(RED.util.getMessageProperty(msg, \"grid_power_limit_phase\"));\nconst batteries = Array.isArray(msg.batteries) ? msg.batteries : [];\n\nconst phaseReadings = PHASES.reduce((result, phase) => {\n    result[phase] = toNumberOrNull(phasePower[phase] ?? phasePower[phase.toLowerCase()]);\n    return result;\n}, {});\nconst phaseBatteryPower = {\n    signed: { L1: 0, L2: 0, L3: 0 },\n    charge: { L1: 0, L2: 0, L3: 0 },\n    discharge: { L1: 0, L2: 0, L3: 0 },\n};\n\nbatteries.forEach((battery) => {\n    const phase = String(battery.phase || \"\").toUpperCase();\n    if (!PHASES.includes(phase)) return;\n\n    const power = Number(battery.power);\n    if (!Number.isFinite(power)) return;\n\n    phaseBatteryPower.signed[phase] += power;\n    if (power > 0) phaseBatteryPower.charge[phase] += power;\n    if (power < 0) phaseBatteryPower.discharge[phase] += Math.abs(power);\n});\n\nconst phaseSensorsAvailable = PHASES.every((phase) => phaseReadings[phase] !== null);\nconst phaseLimitAvailable = phaseLimit !== null && phaseLimit > 0;\nconst commandLimitsAvailable = phaseProtectionEnabled && phaseSensorsAvailable && phaseLimitAvailable;\nconst commandLimits = { charge: {}, discharge: {} };\n\nPHASES.forEach((phase) => {\n    if (!commandLimitsAvailable) {\n        commandLimits.charge[phase] = null;\n        commandLimits.discharge[phase] = null;\n        return;\n    }\n\n    // Remove the batteries' current signed contribution from the phase\n    // reading so the next command is capped against the underlying phase load.\n    const nonBatteryPhasePower = phaseReadings[phase] - phaseBatteryPower.signed[phase];\n    commandLimits.charge[phase] = Math.max(0, Math.floor(phaseLimit - nonBatteryPhasePower));\n    commandLimits.discharge[phase] = Math.max(0, Math.floor(nonBatteryPhasePower + phaseLimit));\n});\n\nRED.util.setMessageProperty(msg, \"phase_protection.command_limits_available\", commandLimitsAvailable, true);\nRED.util.setMessageProperty(msg, \"phase_protection.command_limit_by_phase\", commandLimits, true);\nRED.util.setMessageProperty(msg, \"phase_protection.phase_battery_power\", phaseBatteryPower, true);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1960,
+        "y": 1040,
+        "wires": [
+            [
+                "f7e09807696115eb"
+            ]
+        ]
     }
 ]
