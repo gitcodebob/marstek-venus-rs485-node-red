@@ -65,7 +65,7 @@ nav_order: 6
 - **More than 6 batteries:** Override or change `input_number.house_battery_count` and you are good to go.
   - The dashboard supports 6 batteries out of the box. For 7 or more, duplicate and edit these cards or create your own dashboard.
 - **Manual phase assignment:** Assign each configured battery to `L1`, `L2`, `L3`, or `Unassigned` from the dashboard.
-  - The overview shows the assigned phase on each battery header and shows live battery power per phase in kW.
+  - The overview shows the assigned phase on each battery header and shows live battery AC power per phase in kW.
   - The Node-RED battery object exposes this as `battery.phase`, so custom strategies can use the mapping.
   - Optional per-phase grid power aliases can be configured in `packages/house_battery_control_config.yaml` as `sensor.p1_meter_l1_power`, `sensor.p1_meter_l2_power`, and `sensor.p1_meter_l3_power`. Leave them commented out if your setup is not three-phase.
   - Node-RED exposes configured phase meter values as `msg.grid_power_phase.L1`, `.L2`, and `.L3`, with missing or unreadable values set to `null`.
