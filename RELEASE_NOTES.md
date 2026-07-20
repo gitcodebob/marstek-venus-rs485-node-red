@@ -2,7 +2,29 @@
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
 ## 4.11.0
-- **Feat: Dynamic v2 becomes the standard Dynamic strategy; deprecate v1 flow (v4.11.0)**
+- **Feat: Dynamic v2 is now the standard Dynamic strategy**
+  * The per-interval "Extreme-Pair Matching" algorithm (previously the "Dynamic 2" lab feature) replaces the old fixed "cheapest N hours / expensive M hours" block algorithm as the one and only Dynamic strategy.
+  * It evaluates every price interval individually, so it captures both a morning and an evening price peak in the same day, and guarantees a minimum spread per marked cycle.
+  * The single `Dynamic` strategy selector now runs the v2 flow (`02 strategy-dynamic-2.json`); the separate `Dynamic 2` selector option has been removed.
+
+- **Feat: HBC now resends the control mode every 5 mins**
+  * Some people report their battery switching to inpropper control modes due to external factors. HBC will try to correct this periodically.
+
+- **Fix: Battery priority rounding errors**
+  * Some people report that battery priority drifting to a non-integer number, e.g. 1.0001 or 2.00001. This is now fixed.
+
+- **Refactor: Deprecate the v1 Dynamic flow**
+  * `02 strategy-dynamic.json` has been moved to `node-red/deprecated/` for reference only.
+  * **Action required**: import the `02 strategy-dynamic-2.json` flow and re-import `dashboard.yaml`, then remove the old `Strategy Dynamic` (v1) tab from Node-RED.
+
+- **Tweak: Consolidate the Dynamic dashboard and remove v1-only entities**
+  * Dynamic now lives in the main `Timed/Dynamic` dashboard tab (the separate "Lab features" tab is gone).
+  * Removed v1-only Home Assistant entities: `Cheapest avg tariff is below` threshold, the `Avg cheapest tariff` / `Avg expensive tariff` / `Avg delta` inputs, the `Estimated profit per kWh` sensor, and the cheapest/spread threshold helper sensors.
+
+- **Docs: Restructure the Dynamic documentation**
+  * `05-setup-dynamic` is now the single, leading Dynamic guide — quick start, dashboard controls, use-case configurations, algorithm internals, and current limitations.
+  * `05-dynamic-v2` is kept as a redirect stub so existing links (dashboard, release notes) keep working.
+  * Added a new `For Integrators & Developers` page (`09-for-integrators.md`) covering the entities HBC expects from a battery and how to integrate other brands.
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
