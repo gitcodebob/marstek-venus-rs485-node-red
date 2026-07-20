@@ -1,23 +1,23 @@
 [
     {
-        "id": "bdbd06f2d55d48a6",
+        "id": "3dba6900d8defee7",
         "type": "tab",
-        "label": "Strategy Dynamic 2 v4.10.1",
+        "label": "Strategy Dynamic v4.11.0",
         "disabled": false,
         "info": "Dynamic contract automated management",
         "env": []
     },
     {
-        "id": "d00edbf2769626eb",
+        "id": "e501db96c8a785ee",
         "type": "group",
-        "z": "bdbd06f2d55d48a6",
+        "z": "3dba6900d8defee7",
         "name": "Battery solutions",
         "style": {
             "label": true
         },
         "nodes": [
-            "43b27b0b89b99948",
-            "4fb736509068cca7"
+            "eec9ba3c0de23064",
+            "82d6913699f18e6c"
         ],
         "x": 934,
         "y": 79,
@@ -25,39 +25,40 @@
         "h": 142
     },
     {
-        "id": "873e2f613f37f464",
+        "id": "f361132b640e6a45",
         "type": "group",
-        "z": "bdbd06f2d55d48a6",
+        "z": "3dba6900d8defee7",
         "name": "Home battery start",
         "style": {
             "label": true
         },
         "nodes": [
-            "b1fcfef81c6d21f1",
-            "8de3c4b40457701d",
-            "7095a6612a81b3f3"
+            "5aa318f69401ae91",
+            "ea18f808f7334aa4",
+            "13fb091a2a85dcd5",
+            "3cf10f4282535021"
         ],
         "x": 14,
         "y": 79,
         "w": 192,
-        "h": 162
+        "h": 202
     },
     {
-        "id": "29a32a7ec3fb9dfa",
+        "id": "c085d9d123ac3ac6",
         "type": "group",
-        "z": "bdbd06f2d55d48a6",
+        "z": "3dba6900d8defee7",
         "name": "Plan",
         "style": {
             "label": true
         },
         "nodes": [
-            "b42490650e9c334e",
-            "0665029a9d16fd83",
-            "c640a2f5df5666cf",
-            "8c41d911472df3f4",
-            "e8f5ca6298baa1a5",
-            "98098c51fcd3210a",
-            "8fc7aed868d7a2df"
+            "a44da11169473ca9",
+            "608ea4f679fdcc9b",
+            "92f102aad45c7b6f",
+            "41f7e8d8c076c429",
+            "194eca2b806e1d36",
+            "68c5e0734b7d3e6e",
+            "12dd7cecad71bf3c"
         ],
         "x": 228,
         "y": 273,
@@ -65,19 +66,19 @@
         "h": 794
     },
     {
-        "id": "34203f6eaa61ae78",
+        "id": "644d3b5f53fa5152",
         "type": "group",
-        "z": "bdbd06f2d55d48a6",
+        "z": "3dba6900d8defee7",
         "name": "Execute",
         "style": {
             "label": true
         },
         "nodes": [
-            "7614e6093f516aac",
-            "f08a9396057e185e",
-            "7a710742d8c7867c",
-            "666e85cfef2b647a",
-            "b7507e056facb520"
+            "d8373023e97ac1b2",
+            "4fe408b6786948ca",
+            "87d00a6031efdf67",
+            "5285731c07911bb6",
+            "3aaf46e0b6792fbf"
         ],
         "x": 234,
         "y": 119,
@@ -85,22 +86,22 @@
         "h": 122
     },
     {
-        "id": "82621ba0d05390fa",
+        "id": "db8df15f0e37b085",
         "type": "group",
-        "z": "bdbd06f2d55d48a6",
+        "z": "3dba6900d8defee7",
         "name": "Test area",
         "style": {
             "label": true
         },
         "nodes": [
-            "9d556635f0e1519a",
-            "cd236d4dba4e11d8",
-            "93a203c1ebfe3f98",
-            "14bf22f0d2c3abd1",
-            "5b05f30c091ca096",
-            "2772d194dd5f5c85",
-            "68a936f6bc73db20",
-            "b9ea4de355537694"
+            "c126e7c7cba967b7",
+            "6d1a3c274c27b28e",
+            "14359475eb05f01a",
+            "e36dc1f22d7879a0",
+            "b582a50419a9bc4e",
+            "e9d73dbc35ce3d3f",
+            "f328652b96930594",
+            "65719f256aa63e61"
         ],
         "x": 234,
         "y": 1479,
@@ -108,19 +109,19 @@
         "h": 162
     },
     {
-        "id": "09c5fddd190cd4b0",
+        "id": "dbfc23caed61a2db",
         "type": "group",
-        "z": "bdbd06f2d55d48a6",
+        "z": "3dba6900d8defee7",
         "name": "All data",
         "style": {
             "label": true
         },
         "nodes": [
-            "7c2cfb2293191ddc",
-            "2c20b2cc3d851939",
-            "9e960fe47d74698d",
-            "3f634413e8fbadf6",
-            "e41cfbaa1ada19b6"
+            "cf896eda3711d182",
+            "a464feef26b22ec7",
+            "2173849df3927f4f",
+            "8b491efe72945864",
+            "5da9c47bac73500c"
         ],
         "x": 234,
         "y": 1659,
@@ -128,9 +129,9 @@
         "h": 142
     },
     {
-        "id": "803d76ec23ced7d9",
+        "id": "8bf9c63a4abe230b",
         "type": "group",
-        "z": "bdbd06f2d55d48a6",
+        "z": "3dba6900d8defee7",
         "name": "Unhandled exceptions",
         "style": {
             "label": true,
@@ -138,9 +139,9 @@
             "color": "#d88a8a"
         },
         "nodes": [
-            "35b26d7b468f1fd0",
-            "ebc24bfe05743d79",
-            "9f62f6c89cea7330"
+            "fb3139046f82fe3d",
+            "104210e56dd24e26",
+            "e707b8efdc13c2f0"
         ],
         "x": 24,
         "y": 279,
@@ -148,26 +149,26 @@
         "h": 82
     },
     {
-        "id": "e8f5ca6298baa1a5",
+        "id": "194eca2b806e1d36",
         "type": "group",
-        "z": "bdbd06f2d55d48a6",
-        "g": "29a32a7ec3fb9dfa",
+        "z": "3dba6900d8defee7",
+        "g": "c085d9d123ac3ac6",
         "name": "API call to Data Source",
         "style": {
             "label": true
         },
         "nodes": [
-            "867b42a173862517",
-            "afe8960d93c21e2f",
-            "f8cf685e5813563c",
-            "fb8d043c23a5bd82",
-            "f450d9d3e2bddd44",
-            "8cc1926a29fedf7b",
-            "7d3f1b43daee6193",
-            "9e5d04478eeac327",
-            "c2c3cf5fb2cae520",
-            "c22f8847fc131f70",
-            "182e4d75a4c9dbba"
+            "6f72073c2f2dd20c",
+            "149826c3375276bb",
+            "21abf40649db10c5",
+            "7ea7d87ca84a4668",
+            "e98a8deea78f0a34",
+            "89a97c7a5620c746",
+            "8194289c3f9b46e9",
+            "7684963eabfa753e",
+            "be5fbe2ff5c43f17",
+            "8c2920c35906babf",
+            "e8f6e2b325d7ee45"
         ],
         "x": 254,
         "y": 519,
@@ -175,34 +176,34 @@
         "h": 242
     },
     {
-        "id": "98098c51fcd3210a",
+        "id": "68c5e0734b7d3e6e",
         "type": "group",
-        "z": "bdbd06f2d55d48a6",
-        "g": "29a32a7ec3fb9dfa",
+        "z": "3dba6900d8defee7",
+        "g": "c085d9d123ac3ac6",
         "name": "Update when",
         "style": {
             "label": true
         },
         "nodes": [
-            "7cb5691033c9501e",
-            "af002e6d0cf16c34",
-            "b632269687e7f5d5",
-            "137343108443b1f1",
-            "3b0a9286b7d26aae",
-            "e57dc61a891889be",
-            "445ffc9ded3a2691",
-            "518c61dc242c6356",
-            "59ecc77acbd9cafa",
-            "92d1f09dfed473c4",
-            "ca2b745599f1156d",
-            "ac194de56255d6a6",
-            "6b97322874ecbef1",
-            "74c2178d55d06602",
-            "fb939e165ae91ee7",
-            "c746a4e3cead6f4e",
-            "5d02cf12e178fdc6",
-            "dfa1161fe163528e",
-            "a6cbff1ac5cf5fe0"
+            "207733c00bcc1209",
+            "a6b6ab168302721f",
+            "7d117593f88173e0",
+            "c1093dfd10902866",
+            "792a32d1667c5a5b",
+            "7b265d4231c789ae",
+            "f5edbea1fa702a76",
+            "8d345925aa497793",
+            "0022092ab462f0cf",
+            "802e9415a0bca36b",
+            "409fda12a8a29eb5",
+            "3be9995322945fc4",
+            "10b32d0198a54191",
+            "671f5b14500c14c2",
+            "a69ba0ef27727bcb",
+            "839e6cd5b9d49b84",
+            "cf35065a34f4d116",
+            "42f906afe53fcf05",
+            "f3be1da5f2b7b033"
         ],
         "x": 254,
         "y": 299,
@@ -210,26 +211,26 @@
         "h": 202
     },
     {
-        "id": "8fc7aed868d7a2df",
+        "id": "12dd7cecad71bf3c",
         "type": "group",
-        "z": "bdbd06f2d55d48a6",
-        "g": "29a32a7ec3fb9dfa",
+        "z": "3dba6900d8defee7",
+        "g": "c085d9d123ac3ac6",
         "name": "Determine strategy",
         "style": {
             "label": true
         },
         "nodes": [
-            "879a5fa648a96042",
-            "8f528f8818641c87",
-            "42645b4b52a54d26",
-            "552943cb3f64b6e0",
-            "4f5debe1069a0d4e",
-            "61692dbfbc36591e",
-            "baef7c9ef1d76dec",
-            "f06909c4d490b7cb",
-            "d10758a4c021c27f",
-            "2157188cf3542812",
-            "70083d5f7a16065e"
+            "caa87a9265e0fb45",
+            "96783d7bb1ea299f",
+            "1fbc073896dd6759",
+            "c0fe48a4cb2f0c04",
+            "7fd0f31c72ffce2f",
+            "c79237fa0b38d5d3",
+            "fe4125bd83733dc3",
+            "9cff2e52187565b1",
+            "eaa74beb9082aa91",
+            "1924a50570a0ca1a",
+            "7d322e1eafa50a99"
         ],
         "x": 254,
         "y": 799,
@@ -237,38 +238,39 @@
         "h": 242
     },
     {
-        "id": "92d1f09dfed473c4",
+        "id": "802e9415a0bca36b",
         "type": "junction",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "x": 640,
         "y": 340,
         "wires": [
             [
-                "5d02cf12e178fdc6"
+                "cf35065a34f4d116"
             ]
         ]
     },
     {
-        "id": "b1fcfef81c6d21f1",
+        "id": "5aa318f69401ae91",
         "type": "link in",
-        "z": "bdbd06f2d55d48a6",
-        "g": "873e2f613f37f464",
+        "z": "3dba6900d8defee7",
+        "g": "f361132b640e6a45",
         "name": "Dynamic 2",
         "links": [],
         "x": 100,
         "y": 160,
         "wires": [
             [
-                "7095a6612a81b3f3"
+                "13fb091a2a85dcd5"
             ]
         ],
-        "l": true
+        "l": true,
+        "info": "This is a backwards compatibility node"
     },
     {
-        "id": "567ddad4de3f76d2",
+        "id": "5bcadbc94a8426df",
         "type": "comment",
-        "z": "bdbd06f2d55d48a6",
+        "z": "3dba6900d8defee7",
         "name": "Home Battery Strategy",
         "info": "The `Home Battery Start` flow will call this strategy flow\nby matching the strategy name with the Link In name.\n\nConfigure the Link In node in the Start group.\n\nDon't modify other parts of the Start and End groups.\nThey handle the calling and returning for you.",
         "x": 120,
@@ -276,10 +278,10 @@
         "wires": []
     },
     {
-        "id": "8de3c4b40457701d",
+        "id": "ea18f808f7334aa4",
         "type": "comment",
-        "z": "bdbd06f2d55d48a6",
-        "g": "873e2f613f37f464",
+        "z": "3dba6900d8defee7",
+        "g": "f361132b640e6a45",
         "name": "Start (readme)",
         "info": "# Setting up your battery strategy flow\n\n## Setup\nName the `Link In node` in this start group exactly after the <select> option configured in your\nselect_input.house_battery_strategy\n\nconfigure select options in:\ninput_select_house_battery_control.yaml\n\n### example\n`house_battery_strategy:\n  name: House Battery Strategy\n  options:\n    - AcmE example`\n\nThe above creates a select option, allowing user to select 'AcmE example'\n\nWhen selected, battery control will search for a flow containing a Link In node\ncalled 'AcmE example' (case sensitive).",
         "x": 110,
@@ -287,10 +289,10 @@
         "wires": []
     },
     {
-        "id": "43b27b0b89b99948",
+        "id": "eec9ba3c0de23064",
         "type": "link out",
-        "z": "bdbd06f2d55d48a6",
-        "g": "d00edbf2769626eb",
+        "z": "3dba6900d8defee7",
+        "g": "e501db96c8a785ee",
         "name": "Return",
         "mode": "return",
         "links": [],
@@ -299,10 +301,10 @@
         "wires": []
     },
     {
-        "id": "4fb736509068cca7",
+        "id": "82d6913699f18e6c",
         "type": "comment",
-        "z": "bdbd06f2d55d48a6",
-        "g": "d00edbf2769626eb",
+        "z": "3dba6900d8defee7",
+        "g": "e501db96c8a785ee",
         "name": "End (readme)",
         "info": "Should return a solution_array of battery objects\n\n## battery object format\n`{{id: string|number, mode: string, power: number}} battery solution`\n- id is an arbitrary battery ID\n- mode is \"stop\", \"charge\", \"discharge\" for Marstek\n- power in Watts\n\n### example array\nreturn this type of solution_array via msg.solutions\n` \nlet solution_array = [];\nsolution_array.push({id:\"M1\", mode: \"charge\", power: 100}); // per battery\nreturn {solutions: solution_array};\n` ",
         "x": 1030,
@@ -310,10 +312,10 @@
         "wires": []
     },
     {
-        "id": "879a5fa648a96042",
+        "id": "caa87a9265e0fb45",
         "type": "debug",
-        "z": "bdbd06f2d55d48a6",
-        "g": "8fc7aed868d7a2df",
+        "z": "3dba6900d8defee7",
+        "g": "12dd7cecad71bf3c",
         "name": "Complete message",
         "active": true,
         "tosidebar": true,
@@ -328,12 +330,12 @@
         "wires": []
     },
     {
-        "id": "8f528f8818641c87",
+        "id": "96783d7bb1ea299f",
         "type": "function",
-        "z": "bdbd06f2d55d48a6",
-        "g": "8fc7aed868d7a2df",
+        "z": "3dba6900d8defee7",
+        "g": "12dd7cecad71bf3c",
         "name": "Determine dynamic strategy",
-        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// 1.  Input\nconst minDeltaCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.min_delta_cents\")) || 0;\n// Per-day caps on the number of LOW / HIGH marks, expressed in hours.\n// 0 (or missing/invalid/negative) means no limit.\nconst cheapestHrs = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.cheapest_hrs\")) || 0;\nconst expensiveHrs = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.expensive_hrs\")) || 0;\nconst dataAll = RED.util.getMessageProperty(msg, \"dynamic.data_all\");\n\nif (!dataAll || !Array.isArray(dataAll.list) || dataAll.list.length === 0) {\n    log(this, \"Price list missing or empty\", \"warn\");\n    node.status({ fill: \"red\", shape: \"ring\", text: \"No price data\" });\n    return null;\n}\n\nconst STRATEGY = {\n    HIGH: RED.util.getMessageProperty(msg, \"dynamic.strategy_expensive\") || \"Self-consumption\",\n    LOW: RED.util.getMessageProperty(msg, \"dynamic.strategy_cheapest\") || \"Charge\",\n    NEUTRAL: RED.util.getMessageProperty(msg, \"dynamic.strategy_default\") || \"Charge PV\",\n};\n\n// 2.  Build interval timestamps\n// Each datapoint covers (hours / datapoints) hours.\nconst prices = dataAll.list; // cents/kWh — already converted by \"Convert price\" node\nconst n = prices.length;\nconst startTime = new Date(dataAll.start);\nconst intervalMs = (dataAll.hours / dataAll.datapoints) * 3_600_000;\n\n// 3.  Mark intervals: pair extremes inward — independently per calendar day\n//\n// Pairing runs separately within each local calendar day, so today's marks\n// don't shift when tomorrow's prices arrive. Pair detection is one-to-one\n// (each candidate HIGH is matched against one candidate LOW), but the\n// per-day cheapest_hrs / expensive_hrs caps may suppress one side of a\n// detected pair — so the final marks can be asymmetric (e.g. 2 LOW + 1 HIGH\n// in a day if expensive_hrs caps HIGH at 1). The minDelta threshold\n// accounts for round-trip efficiency and other losses, so a pair is only\n// considered viable when its spread covers the loss.\n//\n// Method (Extreme-Pair Matching, O(n log n)):\n//   1. Sort intervals by price, keep original time-index for re-mapping.\n//   2. Two pointers walk inward from the extremes — `lo` from the cheapest\n//      unmatched, `hi` from the most-expensive unmatched.\n//   3. If the spread between them clears minDelta: mark them, advance both.\n//   4. If it does not clear minDelta: the cheapest unmatched LOW paired\n//      with the most-expensive unmatched HIGH yields the largest spread\n//      still achievable. If even that fails, no remaining pair can satisfy\n//      the threshold, so we stop.\n//\n// This algorithm prefers to mark the truly extreme\n// hours (highest-priced as HIGH, lowest-priced as LOW). On well-behaved\n// daily curves this produces the same number of pairs as \n// other algorithm variants; but in tight cases it can produce one or two fewer\n// pairs. Why choose this version? It marks the price peaks/troughs the user\n// would intuitively expect, which is good for user confidence and acceptance of the strategy. It is also efficient and straightforward to implement, without needing complex data structures or backtracking. \n// The main goal is to identify a set of HIGH and LOW intervals that are economically justified by their price spread, while keeping the logic transparent and explainable to the user.\n\n// Note:\n// It is up to the user to set minDelta appropriately for their system's efficiency and other costs, to ensure that marked cycles are truly beneficial.\n// Also the user can pick strategies that reflect their preferences for what to do during LOW and HIGH intervals, e.g. prioritising self-consumption during HIGH intervals, or selling back to the grid if allowed and profitable.\n// This makes optimisation flexible and user-configurable, while still being based on a clear economic rationale.\n// However, the algorithm does not attempt to find the optimal global pairing (which would be more complex), but rather a good local pairing that is computationally efficient and easy to understand.\n\n/**\n * @typedef {{ start: Date, end: Date, price: number, mark: 'high'|'low'|null, is_now: boolean }} Interval\n * @type {Interval[]}\n */\nconst intervals = new Array(n);\nfor (let i = 0; i < n; i++) {\n    const iStart = new Date(startTime.getTime() + i * intervalMs);\n    const iEnd = new Date(iStart.getTime() + intervalMs);\n    intervals[i] = { start: iStart, end: iEnd, price: prices[i], mark: null, is_now: false };\n}\n\n// Group interval indices by local calendar day (key = Y-M-D in local TZ).\nconst dayBuckets = new Map();\nfor (let i = 0; i < n; i++) {\n    const d = intervals[i].start;\n    const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;\n    let bucket = dayBuckets.get(key);\n    if (!bucket) { bucket = []; dayBuckets.set(key, bucket); }\n    bucket.push(i);\n}\n\n// Convert per-day hour caps to per-day interval counts.\n// intervalsPerHour = datapoints / hours (e.g. 4 for 15-min intervals).\n// 0 hrs => Infinity (no cap). Negatives are treated as 0 (no cap).\nconst intervalsPerHour = dataAll.datapoints / dataAll.hours;\nconst maxLowPerDay = cheapestHrs > 0 ? Math.round(cheapestHrs * intervalsPerHour) : Infinity;\nconst maxHighPerDay = expensiveHrs > 0 ? Math.round(expensiveHrs * intervalsPerHour) : Infinity;\n\n// Per dag de markeringen zetten.\nlet fullPairCount = 0;   // pairs where BOTH sides were marked (a complete cycle)\nlet lowMarkCount = 0;    // total LOW marks across all days\nlet highMarkCount = 0;   // total HIGH marks across all days\nfor (const dayIndices of dayBuckets.values()) {\n    // This day's indices sorted ascending by price (stable on ties).\n    const sortedIdx = [...dayIndices].sort((a, b) => prices[a] - prices[b]);\n    let lo = 0;\n    let hi = sortedIdx.length - 1;\n    let lowMarkedToday = 0;\n    let highMarkedToday = 0;\n    while (lo < hi) {\n        const loIdx = sortedIdx[lo];\n        const hiIdx = sortedIdx[hi];\n        if (prices[hiIdx] - prices[loIdx] >= minDeltaCents) {\n            const markLow = lowMarkedToday < maxLowPerDay;\n            const markHigh = highMarkedToday < maxHighPerDay;\n            // Both caps reached on this day — no more useful work here.\n            if (!markLow && !markHigh) break;\n            if (markLow) {\n                intervals[loIdx].mark = 'low';\n                lowMarkedToday++;\n                lowMarkCount++;\n            }\n            if (markHigh) {\n                intervals[hiIdx].mark = 'high';\n                highMarkedToday++;\n                highMarkCount++;\n            }\n            if (markLow && markHigh) fullPairCount++;\n            lo++; hi--;\n        } else {\n            // sortedIdx[lo] is the cheapest unmatched within this day,\n            // sortedIdx[hi] the most-expensive. Their spread is the largest\n            // still possible today — if it falls below minDelta, no further\n            // pair on this day can satisfy the threshold.\n            break;\n        }\n    }\n}\n\n// 4.  Determine current strategy\nconst now = new Date();\nconst currentInterval = intervals.find(iv => now >= iv.start && now < iv.end);\nif (currentInterval) currentInterval.is_now = true;\nconst currentMark = currentInterval ? currentInterval.mark : null;\n\nconst strategy =\n    currentMark === 'high' ? STRATEGY.HIGH :\n        currentMark === 'low' ? STRATEGY.LOW :\n            STRATEGY.NEUTRAL;\n\nconst strategyMark = \n    currentMark === 'high' ? 'Expensive' :\n        currentMark === 'low' ? 'Cheap' :\n            'Regular';\n\n\n// 5.  Store results\nRED.util.setMessageProperty(msg,\"dynamic.data_all.list_marked\",intervals,true);\nRED.util.setMessageProperty(msg, \"dynamic.data_all.mark_now\", strategyMark, true);\nRED.util.setMessageProperty(msg,\"dynamic.strategy\",strategy);\nflow.set(\"dynamic_strategy\", strategy); // this is the strategy executed when dynamic strategy is active, see the 'Execute' section of this flow.\n\n// 6.  Explain\n// Gross spread: sum over all marked intervals of (+price for HIGH, -price for LOW), in cents/kWh.\n//               With symmetric caps this equals the sum of (high - low) over paired cycles;\n//               with asymmetric caps it also includes unpaired single-side marks.\n// Net spread:   minus round-trip losses on complete cycles (one minDelta per full pair).\n//               Half-pairs (one side suppressed by a cap) incur no round-trip loss here.\nconst grossSpread = Math.round(intervals\n    .filter(iv => iv.mark !== null)\n    .reduce((sum, iv) => sum + (iv.mark === 'high' ? iv.price : -iv.price), 0));\nconst netSpread = grossSpread - fullPairCount * minDeltaCents;\nconst markedCount = lowMarkCount + highMarkCount;\n\nnode.status({\n    fill: \"blue\", shape: \"dot\",\n    text: `${strategy} | ${fullPairCount} cycle${fullPairCount === 1 ? '' : 's'} | net Σ${netSpread}¢`\n});\nlog(this, `Strategy: **${strategy}** | cycles=${fullPairCount} low=${lowMarkCount} high=${highMarkCount} unmarked=${n - markedCount} | gross=${grossSpread}¢ net=${netSpread}¢ minDelta=${minDeltaCents}¢ caps=L${cheapestHrs}h/H${expensiveHrs}h`);\n\nreturn msg;",
+        "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// 1.  Input\nconst minDeltaCents = parseInt(RED.util.getMessageProperty(msg, \"dynamic.min_delta_cents\")) || 0;\n// Per-day caps on the number of LOW / HIGH marks, expressed in hours.\n// 0 (or missing/invalid/negative) means no limit.\nconst cheapestHrs = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.cheapest_hrs\")) || 0;\nconst expensiveHrs = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.expensive_hrs\")) || 0;\nconst dataAll = RED.util.getMessageProperty(msg, \"dynamic.data_all\");\n\nif (!dataAll || !Array.isArray(dataAll.list) || dataAll.list.length === 0) {\n    log(this, \"Price list missing or empty\", \"warn\");\n    node.status({ fill: \"red\", shape: \"ring\", text: \"No price data\" });\n    return null;\n}\n\nconst STRATEGY = {\n    HIGH: RED.util.getMessageProperty(msg, \"dynamic.strategy_expensive\") || \"Self-consumption\",\n    LOW: RED.util.getMessageProperty(msg, \"dynamic.strategy_cheapest\") || \"Charge\",\n    NEUTRAL: RED.util.getMessageProperty(msg, \"dynamic.strategy_default\") || \"Charge PV\",\n};\n\n// 2.  Build interval timestamps\n// Each datapoint covers (hours / datapoints) hours.\nconst prices = dataAll.list; // cents/kWh — already converted by \"Convert price\" node\nconst n = prices.length;\nconst startTime = new Date(dataAll.start);\nconst intervalMs = (dataAll.hours / dataAll.datapoints) * 3_600_000;\n\n// 3.  Mark intervals: pair extremes inward — independently per calendar day\n//\n// Pairing runs separately within each local calendar day, so today's marks\n// don't shift when tomorrow's prices arrive. Pair detection is one-to-one\n// (each candidate HIGH is matched against one candidate LOW), but the\n// per-day cheapest_hrs / expensive_hrs caps may suppress one side of a\n// detected pair — so the final marks can be asymmetric (e.g. 2 LOW + 1 HIGH\n// in a day if expensive_hrs caps HIGH at 1). The minDelta threshold\n// accounts for round-trip efficiency and other losses, so a pair is only\n// considered viable when its spread covers the loss.\n//\n// Method (Extreme-Pair Matching, O(n log n)):\n//   1. Sort intervals by price, keep original time-index for re-mapping.\n//   2. Two pointers walk inward from the extremes — `lo` from the cheapest\n//      unmatched, `hi` from the most-expensive unmatched.\n//   3. If the spread between them clears minDelta: mark them, advance both.\n//   4. If it does not clear minDelta: the cheapest unmatched LOW paired\n//      with the most-expensive unmatched HIGH yields the largest spread\n//      still achievable. If even that fails, no remaining pair can satisfy\n//      the threshold, so we stop.\n//\n// This algorithm prefers to mark the truly extreme\n// hours (highest-priced as HIGH, lowest-priced as LOW). On well-behaved\n// daily curves this produces the same number of pairs as \n// other algorithm variants; but in tight cases it can produce one or two fewer\n// pairs. Why choose this version? It marks the price peaks/troughs the user\n// would intuitively expect, which is good for user confidence and acceptance of the strategy. It is also efficient and straightforward to implement, without needing complex data structures or backtracking. \n// The main goal is to identify a set of HIGH and LOW intervals that are economically justified by their price spread, while keeping the logic transparent and explainable to the user.\n\n// Note:\n// It is up to the user to set minDelta appropriately for their system's efficiency and other costs, to ensure that marked cycles are truly beneficial.\n// Also the user can pick strategies that reflect their preferences for what to do during LOW and HIGH intervals, e.g. prioritising self-consumption during HIGH intervals, or selling back to the grid if allowed and profitable.\n// This makes optimisation flexible and user-configurable, while still being based on a clear economic rationale.\n// However, the algorithm does not attempt to find the optimal global pairing (which would be more complex), but rather a good local pairing that is computationally efficient and easy to understand.\n\n/**\n * @typedef {{ start: Date, end: Date, price: number, mark: 'high'|'low'|null, is_now: boolean }} Interval\n * @type {Interval[]}\n */\nconst intervals = new Array(n);\nfor (let i = 0; i < n; i++) {\n    const iStart = new Date(startTime.getTime() + i * intervalMs);\n    const iEnd = new Date(iStart.getTime() + intervalMs);\n    intervals[i] = { start: iStart, end: iEnd, price: prices[i], mark: null, is_now: false };\n}\n\n// Group interval indices by local calendar day (key = Y-M-D in local TZ).\nconst dayBuckets = new Map();\nfor (let i = 0; i < n; i++) {\n    const d = intervals[i].start;\n    const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;\n    let bucket = dayBuckets.get(key);\n    if (!bucket) { bucket = []; dayBuckets.set(key, bucket); }\n    bucket.push(i);\n}\n\n// Convert per-day hour caps to per-day interval counts.\n// intervalsPerHour = datapoints / hours (e.g. 4 for 15-min intervals).\n// 0 hrs => Infinity (no cap). Negatives are treated as 0 (no cap).\nconst intervalsPerHour = dataAll.datapoints / dataAll.hours;\nconst maxLowPerDay = cheapestHrs > 0 ? Math.round(cheapestHrs * intervalsPerHour) : Infinity;\nconst maxHighPerDay = expensiveHrs > 0 ? Math.round(expensiveHrs * intervalsPerHour) : Infinity;\n\n// Per dag de markeringen zetten.\nlet fullPairCount = 0;   // pairs where BOTH sides were marked (a complete cycle)\nlet lowMarkCount = 0;    // total LOW marks across all days\nlet highMarkCount = 0;   // total HIGH marks across all days\nfor (const dayIndices of dayBuckets.values()) {\n    // This day's indices sorted ascending by price (stable on ties).\n    const sortedIdx = [...dayIndices].sort((a, b) => prices[a] - prices[b]);\n    let lo = 0;\n    let hi = sortedIdx.length - 1;\n    let lowMarkedToday = 0;\n    let highMarkedToday = 0;\n    while (lo < hi) {\n        const loIdx = sortedIdx[lo];\n        const hiIdx = sortedIdx[hi];\n        if (prices[hiIdx] - prices[loIdx] >= minDeltaCents) {\n            const markLow = lowMarkedToday < maxLowPerDay;\n            const markHigh = highMarkedToday < maxHighPerDay;\n            // Both caps reached on this day — no more useful work here.\n            if (!markLow && !markHigh) break;\n            if (markLow) {\n                intervals[loIdx].mark = 'low';\n                lowMarkedToday++;\n                lowMarkCount++;\n            }\n            if (markHigh) {\n                intervals[hiIdx].mark = 'high';\n                highMarkedToday++;\n                highMarkCount++;\n            }\n            if (markLow && markHigh) fullPairCount++;\n            lo++; hi--;\n        } else {\n            // sortedIdx[lo] is the cheapest unmatched within this day,\n            // sortedIdx[hi] the most-expensive. Their spread is the largest\n            // still possible today — if it falls below minDelta, no further\n            // pair on this day can satisfy the threshold.\n            break;\n        }\n    }\n}\n\n// 4.  Determine current strategy\nconst now = new Date();\nconst currentInterval = intervals.find(iv => now >= iv.start && now < iv.end);\nif (currentInterval) currentInterval.is_now = true;\nconst currentMark = currentInterval ? currentInterval.mark : null;\n\nconst strategy =\n    currentMark === 'high' ? STRATEGY.HIGH :\n        currentMark === 'low' ? STRATEGY.LOW :\n            STRATEGY.NEUTRAL;\n\nconst strategyMark = \n    currentMark === 'high' ? 'Expensive' :\n        currentMark === 'low' ? 'Cheap' :\n            'Regular';\n\n\n// 5.  Store results\nRED.util.setMessageProperty(msg,\"dynamic.data_all.list_marked\",intervals,true);\nRED.util.setMessageProperty(msg, \"dynamic.data_all.mark_now\", strategyMark, true);\nRED.util.setMessageProperty(msg,\"dynamic.strategy\",strategy);\nflow.set(\"dynamic_strategy\", strategy); // this is the strategy executed when dynamic strategy is active, see the 'Execute' section of this flow.\n\n// 6.  Explain\n// Extract and sort marked intervals to pair them correctly for profit analysis\nconst lowPrices = intervals\n    .filter(iv => iv.mark === 'low')\n    .map(iv => iv.price)\n    .sort((a, b) => a - b); // Cheapest first\nconst highPrices = intervals\n    .filter(iv => iv.mark === 'high')\n    .map(iv => iv.price)\n    .sort((a, b) => b - a); // Most expensive first\n\n// Only calculate spread over actual completed cycles (pairs)\nlet grossSpread = 0;\nfor (let i = 0; i < fullPairCount; i++) {\n    grossSpread += (highPrices[i] - lowPrices[i]);\n}\nconst netSpread = grossSpread - (fullPairCount * minDeltaCents);\nconst markedCount = lowMarkCount + highMarkCount;\n\n// 6a. Average spread per full cycle (pair) today\nconst avgGrossSpread = fullPairCount > 0 ? Math.round(grossSpread / fullPairCount) : 0;\nconst avgNetSpread = fullPairCount > 0 ? Math.round(netSpread / fullPairCount) : 0;\nRED.util.setMessageProperty(msg, \"dynamic.data_all.gross_spread_avg\", avgGrossSpread, true);\nRED.util.setMessageProperty(msg, \"dynamic.data_all.net_spread_avg\", avgNetSpread, true);\n\n// 6b.\nnode.status({\n    fill: \"blue\", shape: \"dot\",\n    text: `${strategy} | ${fullPairCount} cycle${fullPairCount === 1 ? '' : 's'} | net Σ${avgNetSpread}¢`\n});\nlog(this, `Strategy: **${strategy}** | cycles=${fullPairCount} low=${lowMarkCount} high=${highMarkCount} unmarked=${n - markedCount} | gross=${grossSpread}¢ net=${avgNetSpread}¢ minDelta=${minDeltaCents}¢ caps=L${cheapestHrs}h/H${expensiveHrs}h`);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -344,17 +346,17 @@
         "y": 960,
         "wires": [
             [
-                "879a5fa648a96042",
-                "42645b4b52a54d26",
-                "f06909c4d490b7cb"
+                "caa87a9265e0fb45",
+                "1fbc073896dd6759",
+                "9cff2e52187565b1"
             ]
         ]
     },
     {
-        "id": "7614e6093f516aac",
+        "id": "d8373023e97ac1b2",
         "type": "change",
-        "z": "bdbd06f2d55d48a6",
-        "g": "34203f6eaa61ae78",
+        "z": "3dba6900d8defee7",
+        "g": "644d3b5f53fa5152",
         "name": "Set strategy",
         "rules": [
             {
@@ -374,15 +376,15 @@
         "y": 200,
         "wires": [
             [
-                "b7507e056facb520"
+                "3aaf46e0b6792fbf"
             ]
         ]
     },
     {
-        "id": "f08a9396057e185e",
+        "id": "4fe408b6786948ca",
         "type": "link call",
-        "z": "bdbd06f2d55d48a6",
-        "g": "34203f6eaa61ae78",
+        "z": "3dba6900d8defee7",
+        "g": "644d3b5f53fa5152",
         "name": "Sub-strategy",
         "links": [],
         "linkType": "dynamic",
@@ -391,15 +393,15 @@
         "y": 180,
         "wires": [
             [
-                "43b27b0b89b99948"
+                "eec9ba3c0de23064"
             ]
         ]
     },
     {
-        "id": "7cb5691033c9501e",
+        "id": "207733c00bcc1209",
         "type": "inject",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Clear cache",
         "props": [
             {
@@ -421,15 +423,15 @@
         "y": 420,
         "wires": [
             [
-                "af002e6d0cf16c34"
+                "a6b6ab168302721f"
             ]
         ]
     },
     {
-        "id": "7a710742d8c7867c",
+        "id": "87d00a6031efdf67",
         "type": "switch",
-        "z": "bdbd06f2d55d48a6",
-        "g": "34203f6eaa61ae78",
+        "z": "3dba6900d8defee7",
+        "g": "644d3b5f53fa5152",
         "name": "Has strategy",
         "property": "dynamic_strategy",
         "propertyType": "flow",
@@ -448,18 +450,18 @@
         "y": 180,
         "wires": [
             [
-                "666e85cfef2b647a"
+                "5285731c07911bb6"
             ],
             [
-                "7614e6093f516aac"
+                "d8373023e97ac1b2"
             ]
         ]
     },
     {
-        "id": "666e85cfef2b647a",
+        "id": "5285731c07911bb6",
         "type": "change",
-        "z": "bdbd06f2d55d48a6",
-        "g": "34203f6eaa61ae78",
+        "z": "3dba6900d8defee7",
+        "g": "644d3b5f53fa5152",
         "name": "Set Full stop",
         "rules": [
             {
@@ -479,15 +481,15 @@
         "y": 160,
         "wires": [
             [
-                "b7507e056facb520"
+                "3aaf46e0b6792fbf"
             ]
         ]
     },
     {
-        "id": "cd236d4dba4e11d8",
+        "id": "6d1a3c274c27b28e",
         "type": "inject",
-        "z": "bdbd06f2d55d48a6",
-        "g": "82621ba0d05390fa",
+        "z": "3dba6900d8defee7",
+        "g": "db8df15f0e37b085",
         "name": "Test",
         "props": [
             {
@@ -509,15 +511,15 @@
         "y": 1520,
         "wires": [
             [
-                "9d556635f0e1519a"
+                "c126e7c7cba967b7"
             ]
         ]
     },
     {
-        "id": "9d556635f0e1519a",
+        "id": "c126e7c7cba967b7",
         "type": "api-render-template",
-        "z": "bdbd06f2d55d48a6",
-        "g": "82621ba0d05390fa",
+        "z": "3dba6900d8defee7",
+        "g": "db8df15f0e37b085",
         "name": "Cheapest",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -530,15 +532,15 @@
         "y": 1520,
         "wires": [
             [
-                "93a203c1ebfe3f98"
+                "14359475eb05f01a"
             ]
         ]
     },
     {
-        "id": "93a203c1ebfe3f98",
+        "id": "14359475eb05f01a",
         "type": "json",
-        "z": "bdbd06f2d55d48a6",
-        "g": "82621ba0d05390fa",
+        "z": "3dba6900d8defee7",
+        "g": "db8df15f0e37b085",
         "name": "",
         "property": "cheapest",
         "action": "obj",
@@ -547,16 +549,16 @@
         "y": 1520,
         "wires": [
             [
-                "14bf22f0d2c3abd1"
+                "e36dc1f22d7879a0"
             ]
         ],
         "l": false
     },
     {
-        "id": "14bf22f0d2c3abd1",
+        "id": "e36dc1f22d7879a0",
         "type": "api-render-template",
-        "z": "bdbd06f2d55d48a6",
-        "g": "82621ba0d05390fa",
+        "z": "3dba6900d8defee7",
+        "g": "db8df15f0e37b085",
         "name": "Expensive",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -569,15 +571,15 @@
         "y": 1520,
         "wires": [
             [
-                "5b05f30c091ca096"
+                "b582a50419a9bc4e"
             ]
         ]
     },
     {
-        "id": "5b05f30c091ca096",
+        "id": "b582a50419a9bc4e",
         "type": "json",
-        "z": "bdbd06f2d55d48a6",
-        "g": "82621ba0d05390fa",
+        "z": "3dba6900d8defee7",
+        "g": "db8df15f0e37b085",
         "name": "",
         "property": "expensive",
         "action": "obj",
@@ -586,18 +588,18 @@
         "y": 1520,
         "wires": [
             [
-                "2772d194dd5f5c85",
-                "68a936f6bc73db20",
-                "b9ea4de355537694"
+                "e9d73dbc35ce3d3f",
+                "f328652b96930594",
+                "65719f256aa63e61"
             ]
         ],
         "l": false
     },
     {
-        "id": "2772d194dd5f5c85",
+        "id": "e9d73dbc35ce3d3f",
         "type": "debug",
-        "z": "bdbd06f2d55d48a6",
-        "g": "82621ba0d05390fa",
+        "z": "3dba6900d8defee7",
+        "g": "db8df15f0e37b085",
         "name": "Cheap",
         "active": true,
         "tosidebar": false,
@@ -612,10 +614,10 @@
         "wires": []
     },
     {
-        "id": "68a936f6bc73db20",
+        "id": "f328652b96930594",
         "type": "debug",
-        "z": "bdbd06f2d55d48a6",
-        "g": "82621ba0d05390fa",
+        "z": "3dba6900d8defee7",
+        "g": "db8df15f0e37b085",
         "name": "Expensive",
         "active": true,
         "tosidebar": false,
@@ -630,10 +632,10 @@
         "wires": []
     },
     {
-        "id": "7c2cfb2293191ddc",
+        "id": "cf896eda3711d182",
         "type": "api-render-template",
-        "z": "bdbd06f2d55d48a6",
-        "g": "09c5fddd190cd4b0",
+        "z": "3dba6900d8defee7",
+        "g": "dbfc23caed61a2db",
         "name": "All Zonneplan",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -646,15 +648,15 @@
         "y": 1700,
         "wires": [
             [
-                "9e960fe47d74698d"
+                "2173849df3927f4f"
             ]
         ]
     },
     {
-        "id": "2c20b2cc3d851939",
+        "id": "a464feef26b22ec7",
         "type": "inject",
-        "z": "bdbd06f2d55d48a6",
-        "g": "09c5fddd190cd4b0",
+        "z": "3dba6900d8defee7",
+        "g": "dbfc23caed61a2db",
         "name": "Fetch",
         "props": [
             {
@@ -676,15 +678,15 @@
         "y": 1700,
         "wires": [
             [
-                "7c2cfb2293191ddc"
+                "cf896eda3711d182"
             ]
         ]
     },
     {
-        "id": "9e960fe47d74698d",
+        "id": "2173849df3927f4f",
         "type": "json",
-        "z": "bdbd06f2d55d48a6",
-        "g": "09c5fddd190cd4b0",
+        "z": "3dba6900d8defee7",
+        "g": "dbfc23caed61a2db",
         "name": "",
         "property": "all_data",
         "action": "obj",
@@ -693,17 +695,17 @@
         "y": 1700,
         "wires": [
             [
-                "3f634413e8fbadf6",
-                "e41cfbaa1ada19b6"
+                "8b491efe72945864",
+                "5da9c47bac73500c"
             ]
         ],
         "l": false
     },
     {
-        "id": "af002e6d0cf16c34",
+        "id": "a6b6ab168302721f",
         "type": "delay",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "",
         "pauseType": "delay",
         "timeout": "1",
@@ -721,15 +723,15 @@
         "y": 420,
         "wires": [
             [
-                "74c2178d55d06602"
+                "671f5b14500c14c2"
             ]
         ]
     },
     {
-        "id": "b632269687e7f5d5",
+        "id": "7d117593f88173e0",
         "type": "api-current-state",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Source",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -772,15 +774,15 @@
         "y": 380,
         "wires": [
             [
-                "445ffc9ded3a2691"
+                "f5edbea1fa702a76"
             ]
         ]
     },
     {
-        "id": "867b42a173862517",
+        "id": "6f72073c2f2dd20c",
         "type": "function",
-        "z": "bdbd06f2d55d48a6",
-        "g": "e8f5ca6298baa1a5",
+        "z": "3dba6900d8defee7",
+        "g": "194eca2b806e1d36",
         "name": "Data source settings",
         "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n/*    From cheapes-energy-hours macro\n      See: https://github.com/TheFes/cheapest-energy-hours/blob/main/documentation/1-source_data.md#data-provider-settings\n\n      - None (default selection)\n      - Zonneplan\n      - Amber Electric\n      - EasyEnergy, EnergyZero (core)\n      - ENTSO-E\n      - Frank Energie\n      - GE-Spot\n      - Tibber, Nordpool (core)\n      - Tibber (custom)\n      - Nordpool (custom)\n      - PVPC (Spain)\n      - Octopus Energy\n      - Omie\n*/\n\nswitch (msg.dynamic.data_source) {\n      case \"None\":\n            // Handle the 'None' case (e.g., no supplier selected or data is unavailable)\n            log(this,\"No data source selected.\");\n            // Add config here...\n            break;\n\n      case \"Zonneplan\":\n            // Code for Zonneplan (a Dutch energy supplier)\n            log(this,\"Processing Zonneplan data.\");\n            // Add config here...\n            msg.dynamic.sensor='sensor.zonneplan_current_electricity_tariff'; // when using: https://github.com/fsaris/home-assistant-zonneplan-one\n            msg.dynamic.source_settings='zonneplan'\n            // msg.dynamic.attr_all='forecast';\n            // msg.dynamic.value_key='electricity_price';\n            msg.dynamic.value_conversion = 10000000; // whole currency / kWh\n            break;\n\n      case \"Amber Electric\":\n            // Code for Amber Electric (Australian energy retailer)\n            log(this,\"Processing Amber Electric data.\");\n            // Add config here...\n            msg.dynamic.attr_all='forecasts'; \n            msg.dynamic.time_key='start_time'; \n            msg.dynamic.value_key='per_kwh';\n            break;\n\n      case \"EasyEnergy, EnergyZero (core)\":\n            // Code for EasyEnergy and EnergyZero (core/default implementation)\n            log(this,\"Processing EasyEnergy/EnergyZero core data.\");\n            // Add config here...\n            break;\n\n      case \"ENTSO-E\":\n            // Code for ENTSO-E (European Network of Transmission System Operators for Electricity)\n            log(this,\"Processing ENTSO-E data.\");\n            // Add config here...\n            msg.dynamic.attr_today='prices_today'; \n            msg.dynamic.attr_tomorrow='prices_tomorrow'; \n            msg.dynamic.time_key='time';\n            msg.dynamic.value_key='price';\n            break;\n\n      case \"Frank Energie\":\n            // Code for Frank Energie (Dutch energy supplier)\n            log(this,\"Processing Frank Energie data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.frank_energie_prijzen_gemiddelde_elektriciteitsprijs_alle_uren_all_in'; // when using: https://github.com/HiDiHo01/home-assistant-frank_energie\n            msg.dynamic.attr_all = 'prices'; \n            msg.dynamic.time_key = 'from'; \n            msg.dynamic.value_key = 'price';\n            break;\n\n      case \"GE-Spot\":\n            // Code for GE-Spot (Global Electric Spot price)\n            log(this,\"Processing GE-Spot data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today_hourly_prices'; // using the hourly version. today_interval_prices is per 15 mins\n            msg.dynamic.attr_tomorrow = 'tomorrow_hourly_prices'; // using the hourly version\n            msg.dynamic.time_key = 'time'; \n            msg.dynamic.value_key = 'value';\n            break;\n\n      case \"Nordpool (core)\":\n            // Code for Nordpool (core/default implementation)\n            log(this, \"Processing Nordpool core data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.nordpool_ceh_prices';\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.time_key = 'start';\n            msg.dynamic.value_key = 'value';\n            msg.dynamic.datetime_in_data = true; // datetime is in the data\n            break;\n\n      case \"Tibber (core)\":\n            // Code for Tibber (core/default implementation)\n            log(this,\"Processing Tibber core data.\");\n            // Add config here...\n            msg.dynamic.sensor = 'sensor.tibber_ceh_prices';\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.time_key = 'start';\n            msg.dynamic.value_key = 'value';\n            msg.dynamic.datetime_in_data = true; // datetime is in the data\n            break;\n\n      case \"Tibber (custom)\":\n            // Code for a custom Tibber setup/configuration\n            log(this,\"Processing Tibber custom data.\");\n            // Add config here...\n            msg.dynamic.attr_today = 'today';\n            msg.dynamic.attr_tomorrow = 'tomorrow';\n            msg.dynamic.datetime_in_data = false;\n            break;\n\n      case \"Nordpool (custom)\":\n            // Code for a custom Nordpool setup/configuration\n            log(this,\"Processing Nordpool custom data.\");\n            // Add config here...\n            break;\n\n      case \"PVPC (Spain)\":\n            // Code for PVPC (Voluntary Price for Small Consumers in Spain)\n            log(this,\"Processing Spanish PVPC data.\");\n            // Add config here...\n            break;\n\n      case \"Octopus Energy\":\n            // Code for Octopus Energy (UK/international energy supplier)\n            log(this,\"Processing Octopus Energy data.\");\n            // Add config here...\n            msg.dynamic.attr_all = 'rates'; \n            msg.dynamic.value_key = 'value_incl_vat';\n            break;\n\n      case \"Omie\":\n            // Code for Omie (Iberian Energy Market Operator)\n            log(this,\"Processing Omie data.\");\n            // Add config here...\n            break;\n\n      default:\n            // Code to execute if the supplier does not match any of the above cases\n            node.warn(`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            log(this,`Unknown supplier: ${msg.dynamic.data_source}. Using default logic.`);\n            // Add default error handling...\n}\n\nlog(this, \"Performing API calls...\");\n\nreturn msg;",
         "outputs": 1,
@@ -793,15 +795,15 @@
         "y": 600,
         "wires": [
             [
-                "afe8960d93c21e2f"
+                "149826c3375276bb"
             ]
         ]
     },
     {
-        "id": "137343108443b1f1",
+        "id": "c1093dfd10902866",
         "type": "inject",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Update strat",
         "props": [
             {
@@ -823,17 +825,17 @@
         "y": 380,
         "wires": [
             [
-                "5d02cf12e178fdc6"
+                "cf35065a34f4d116"
             ]
         ]
     },
     {
-        "id": "3b0a9286b7d26aae",
+        "id": "792a32d1667c5a5b",
         "type": "function",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Init",
-        "func": "if(msg.payload !== \"Dynamic 2\") {\n    node.status({fill:\"red\",shape:\"ring\",text:\"Strategy not selected\"});\n    return null;\n}\nnode.status({fill:\"green\",shape:\"dot\",text:\"Ok\"});\n\n// Init\nmsg.dynamic = {};\nmsg.log = [];\nreturn msg;",
+        "func": "// Init\nmsg.dynamic = {};\nmsg.log = [];\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -841,18 +843,18 @@
         "finalize": "",
         "libs": [],
         "x": 850,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
-                "b632269687e7f5d5"
+                "7d117593f88173e0"
             ]
         ]
     },
     {
-        "id": "afe8960d93c21e2f",
+        "id": "149826c3375276bb",
         "type": "function",
-        "z": "bdbd06f2d55d48a6",
-        "g": "e8f5ca6298baa1a5",
+        "z": "3dba6900d8defee7",
+        "g": "194eca2b806e1d36",
         "name": "Generate templates",
         "func": "// final template initialization\nmsg.dynamic.template_all = \"\";\n\n// temporary template parts\nlet template_start = \"\";\nlet template_common = [];\nlet template_all = [];\nlet template_end = \"\";\n\n// load the macro\ntemplate_start = `{% from 'cheapest_energy_hours.jinja' import cheapest_energy_hours %}\n{{ cheapest_energy_hours(\n`;\ntemplate_end = `) | to_json }}`;\n\n// collect arguments | strings\nconst stringKeys = [\n    'sensor',\n    'attr_all',\n    'value_key',\n    'attr_today',\n    'attr_tomorrow',\n    'time_key',\n    'source_settings'\n];\n\nstringKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}='${msg.dynamic[key]}'`);\n    }\n});\n\n// collect arguments | boolean, integer\nconst otherKeys = [\n    'datetime_in_data',\n    'data_minutes',\n];\n\notherKeys.forEach(key => {\n    if (msg.dynamic[key] !== undefined) {\n        template_common.push(`${key}=${msg.dynamic[key]}`);\n    }\n});\n\n// copy common items\ntemplate_all = [...template_common];\n\n// collect all hours | via extra call\ntemplate_all.push(`hours=\"all\"`);\ntemplate_all.push(`include_tomorrow=true`);\ntemplate_all.push(`mode=\"all\"`);\n\n/**\n * Formats an array of strings into a single string:\n * - Each item starts with 4 spaces.\n * - Each item ends with a comma, except the last one.\n * - Items are separated by a newline.\n */\nfunction formatTemplateArray(array) {\n    if (!array || array.length === 0) {\n        return \"\";\n    }\n\n    const indent = \"    \"; \n\n    const formatted_lines = array.map((element, index) => {\n        const suffix = (index < array.length - 1) ? \",\" : \"\";\n        return `${indent}${element}${suffix}`;\n    });\n\n    return formatted_lines.join('\\n');\n}\n\n// generate string templates\nconst template_all_string = formatTemplateArray(template_all);\n\n// done\nmsg.dynamic.template_all = `${template_start}${template_all_string}${template_end}`;\n\nreturn msg;",
         "outputs": 1,
@@ -865,16 +867,16 @@
         "y": 600,
         "wires": [
             [
-                "c22f8847fc131f70",
-                "c2c3cf5fb2cae520"
+                "8c2920c35906babf",
+                "be5fbe2ff5c43f17"
             ]
         ]
     },
     {
-        "id": "f8cf685e5813563c",
+        "id": "21abf40649db10c5",
         "type": "change",
-        "z": "bdbd06f2d55d48a6",
-        "g": "e8f5ca6298baa1a5",
+        "z": "3dba6900d8defee7",
+        "g": "194eca2b806e1d36",
         "name": "Cleanup",
         "rules": [
             {
@@ -892,15 +894,15 @@
         "y": 720,
         "wires": [
             [
-                "fb8d043c23a5bd82"
+                "7ea7d87ca84a4668"
             ]
         ]
     },
     {
-        "id": "42645b4b52a54d26",
+        "id": "1fbc073896dd6759",
         "type": "debug",
-        "z": "bdbd06f2d55d48a6",
-        "g": "8fc7aed868d7a2df",
+        "z": "3dba6900d8defee7",
+        "g": "12dd7cecad71bf3c",
         "name": "Log: activate 'debug mode' first",
         "active": true,
         "tosidebar": true,
@@ -915,10 +917,10 @@
         "wires": []
     },
     {
-        "id": "e57dc61a891889be",
+        "id": "7b265d4231c789ae",
         "type": "server-state-changed",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "User input",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -930,7 +932,6 @@
                 "input_number.house_battery_strategy_dynamic_expensive_hrs",
                 "input_select.house_battery_strategy_dynamic_data_source",
                 "input_number.house_battery_strategy_dynamic_threshold_delta",
-                "input_number.house_battery_strategy_dynamic_threshold_cheapest_period",
                 "input_select.house_battery_strategy"
             ],
             "substring": [],
@@ -974,15 +975,15 @@
         "y": 340,
         "wires": [
             [
-                "92d1f09dfed473c4"
+                "802e9415a0bca36b"
             ]
         ]
     },
     {
-        "id": "445ffc9ded3a2691",
+        "id": "f5edbea1fa702a76",
         "type": "switch",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Source selected?",
         "property": "dynamic.data_source",
         "propertyType": "msg",
@@ -1003,19 +1004,19 @@
         "y": 380,
         "wires": [
             [
-                "59ecc77acbd9cafa"
+                "0022092ab462f0cf"
             ],
             [
-                "ca2b745599f1156d"
+                "409fda12a8a29eb5"
             ]
         ],
         "l": false
     },
     {
-        "id": "518c61dc242c6356",
+        "id": "8d345925aa497793",
         "type": "debug",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Not set",
         "active": true,
         "tosidebar": false,
@@ -1030,10 +1031,10 @@
         "wires": []
     },
     {
-        "id": "59ecc77acbd9cafa",
+        "id": "0022092ab462f0cf",
         "type": "change",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Set dynamic strategy to null",
         "rules": [
             {
@@ -1053,15 +1054,15 @@
         "y": 340,
         "wires": [
             [
-                "518c61dc242c6356"
+                "8d345925aa497793"
             ]
         ]
     },
     {
-        "id": "3f634413e8fbadf6",
+        "id": "8b491efe72945864",
         "type": "debug",
-        "z": "bdbd06f2d55d48a6",
-        "g": "09c5fddd190cd4b0",
+        "z": "3dba6900d8defee7",
+        "g": "dbfc23caed61a2db",
         "name": "All data",
         "active": true,
         "tosidebar": true,
@@ -1076,10 +1077,10 @@
         "wires": []
     },
     {
-        "id": "b9ea4de355537694",
+        "id": "65719f256aa63e61",
         "type": "debug",
-        "z": "bdbd06f2d55d48a6",
-        "g": "82621ba0d05390fa",
+        "z": "3dba6900d8defee7",
+        "g": "db8df15f0e37b085",
         "name": "Complete msg",
         "active": true,
         "tosidebar": true,
@@ -1094,10 +1095,10 @@
         "wires": []
     },
     {
-        "id": "7095a6612a81b3f3",
+        "id": "13fb091a2a85dcd5",
         "type": "change",
-        "z": "bdbd06f2d55d48a6",
-        "g": "873e2f613f37f464",
+        "z": "3dba6900d8defee7",
+        "g": "f361132b640e6a45",
         "name": "Trace",
         "rules": [
             {
@@ -1117,16 +1118,16 @@
         "y": 200,
         "wires": [
             [
-                "7a710742d8c7867c"
+                "87d00a6031efdf67"
             ]
         ],
         "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
     },
     {
-        "id": "b7507e056facb520",
+        "id": "3aaf46e0b6792fbf",
         "type": "function",
-        "z": "bdbd06f2d55d48a6",
-        "g": "34203f6eaa61ae78",
+        "z": "3dba6900d8defee7",
+        "g": "644d3b5f53fa5152",
         "name": "Selected",
         "func": "// Logger\nconst log = global.get(\"logger\");\nlog(this,`${msg.target} strategy`);\n\n// Status\nnode.status({fill:\"green\",shape:\"dot\",text:`${msg.target}`});\n\nreturn msg;",
         "outputs": 1,
@@ -1139,15 +1140,15 @@
         "y": 180,
         "wires": [
             [
-                "f08a9396057e185e"
+                "4fe408b6786948ca"
             ]
         ]
     },
     {
-        "id": "35b26d7b468f1fd0",
+        "id": "fb3139046f82fe3d",
         "type": "catch",
-        "z": "bdbd06f2d55d48a6",
-        "g": "803d76ec23ced7d9",
+        "z": "3dba6900d8defee7",
+        "g": "8bf9c63a4abe230b",
         "name": "",
         "scope": null,
         "uncaught": true,
@@ -1155,16 +1156,16 @@
         "y": 320,
         "wires": [
             [
-                "ebc24bfe05743d79"
+                "104210e56dd24e26"
             ]
         ],
         "l": false
     },
     {
-        "id": "ebc24bfe05743d79",
+        "id": "104210e56dd24e26",
         "type": "function",
-        "z": "bdbd06f2d55d48a6",
-        "g": "803d76ec23ced7d9",
+        "z": "3dba6900d8defee7",
+        "g": "8bf9c63a4abe230b",
         "name": "Unhandled Exception",
         "func": "// Log unhandled exception\nconst handle = global.get('unhandledException');\nif(handle) handle(this);\n\n// Check origin of msg execution\nif (msg._linkSource) {\n    return msg; // Origin: some other flow\n} else {\n    return null; // Origin: this flow. Stop to prevent 'Missing return' warning\n}",
         "outputs": 1,
@@ -1177,16 +1178,16 @@
         "y": 320,
         "wires": [
             [
-                "9f62f6c89cea7330"
+                "e707b8efdc13c2f0"
             ]
         ],
         "l": false
     },
     {
-        "id": "9f62f6c89cea7330",
+        "id": "e707b8efdc13c2f0",
         "type": "link out",
-        "z": "bdbd06f2d55d48a6",
-        "g": "803d76ec23ced7d9",
+        "z": "3dba6900d8defee7",
+        "g": "8bf9c63a4abe230b",
         "name": "link out 5",
         "mode": "return",
         "links": [],
@@ -1195,10 +1196,10 @@
         "wires": []
     },
     {
-        "id": "552943cb3f64b6e0",
+        "id": "c0fe48a4cb2f0c04",
         "type": "api-current-state",
-        "z": "bdbd06f2d55d48a6",
-        "g": "8fc7aed868d7a2df",
+        "z": "3dba6900d8defee7",
+        "g": "12dd7cecad71bf3c",
         "name": "Strategy default",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1241,15 +1242,15 @@
         "y": 880,
         "wires": [
             [
-                "4f5debe1069a0d4e"
+                "7fd0f31c72ffce2f"
             ]
         ]
     },
     {
-        "id": "4f5debe1069a0d4e",
+        "id": "7fd0f31c72ffce2f",
         "type": "api-current-state",
-        "z": "bdbd06f2d55d48a6",
-        "g": "8fc7aed868d7a2df",
+        "z": "3dba6900d8defee7",
+        "g": "12dd7cecad71bf3c",
         "name": "Strategy cheapest",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1292,15 +1293,15 @@
         "y": 920,
         "wires": [
             [
-                "61692dbfbc36591e"
+                "c79237fa0b38d5d3"
             ]
         ]
     },
     {
-        "id": "61692dbfbc36591e",
+        "id": "c79237fa0b38d5d3",
         "type": "api-current-state",
-        "z": "bdbd06f2d55d48a6",
-        "g": "8fc7aed868d7a2df",
+        "z": "3dba6900d8defee7",
+        "g": "12dd7cecad71bf3c",
         "name": "Strategy expensive",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1343,15 +1344,15 @@
         "y": 960,
         "wires": [
             [
-                "d10758a4c021c27f"
+                "eaa74beb9082aa91"
             ]
         ]
     },
     {
-        "id": "fb8d043c23a5bd82",
+        "id": "7ea7d87ca84a4668",
         "type": "function",
-        "z": "bdbd06f2d55d48a6",
-        "g": "e8f5ca6298baa1a5",
+        "z": "3dba6900d8defee7",
+        "g": "194eca2b806e1d36",
         "name": "Cache data source",
         "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\nconst dynamicData = msg.dynamic;\n\n// Helper to check for errors in the object\nconst isInvalid = (data) => {\n    if (!data) return true;\n    // Check if the stringified object contains \"error\"\n    return JSON.stringify(data).toLowerCase().includes(\"error\");\n};\n\nif (isInvalid(dynamicData)) {\n    // Explain issue\n    log(this, \"Invalid data received, clearing cache\", \"warn\");\n    // Clear cache\n    flow.set(\"cached_dynamic_data\", undefined);\n} else {\n    // Cache on success\n    log(this, \"Caching `msg.dynamic`\");\n    // Save the entire object to flow context\n    flow.set(\"cached_dynamic_data\", dynamicData);\n}\n\nreturn msg;",
         "outputs": 1,
@@ -1364,15 +1365,15 @@
         "y": 720,
         "wires": [
             [
-                "8cc1926a29fedf7b"
+                "89a97c7a5620c746"
             ]
         ]
     },
     {
-        "id": "b42490650e9c334e",
+        "id": "a44da11169473ca9",
         "type": "catch",
-        "z": "bdbd06f2d55d48a6",
-        "g": "29a32a7ec3fb9dfa",
+        "z": "3dba6900d8defee7",
+        "g": "c085d9d123ac3ac6",
         "name": "Catch group",
         "scope": "group",
         "uncaught": false,
@@ -1380,15 +1381,15 @@
         "y": 580,
         "wires": [
             [
-                "8c41d911472df3f4"
+                "41f7e8d8c076c429"
             ]
         ]
     },
     {
-        "id": "0665029a9d16fd83",
+        "id": "608ea4f679fdcc9b",
         "type": "debug",
-        "z": "bdbd06f2d55d48a6",
-        "g": "29a32a7ec3fb9dfa",
+        "z": "3dba6900d8defee7",
+        "g": "c085d9d123ac3ac6",
         "name": "Strategy errors",
         "active": true,
         "tosidebar": true,
@@ -1403,10 +1404,10 @@
         "wires": []
     },
     {
-        "id": "c640a2f5df5666cf",
+        "id": "92f102aad45c7b6f",
         "type": "comment",
-        "z": "bdbd06f2d55d48a6",
-        "g": "29a32a7ec3fb9dfa",
+        "z": "3dba6900d8defee7",
+        "g": "c085d9d123ac3ac6",
         "name": "Cheapest Energy Hours - errors",
         "info": "\"No valid sensor found\" if price_data is none and not valid_sensor,\n\"No valid data in {}\".format(sensor) if price_data is none and data == [] and valid_sensor,\n\"No valid data in provided price_data\" if price_data is not none and not valid_price_data,\n\"Time key '{}' not found in data\".format(time_key) if data and time_key not in data[0],\n\"Value key '{}' not found in data\".format(value_key) if data and value_key not in data[0],\n\"Invalid mode '{}' selected\".format(mode) if mode not in modes,\n\"Boolean input expected for include_today, '{}' can not be processed as a boolean\".format(include_today) if include_today | bool(\"\") is not boolean,\n\"Boolean input expected for include_tomorrow, '{}' can not be processed as a boolean\".format(include_tomorrow) if include_tomorrow | bool(\"\") is not boolean,\n\"Boolean input expected for look_ahead, '{}' can not be processed as a boolean\".format(look_ahead) if look_ahead | bool(\"\") is not boolean,\n\"Boolean input expected for lowest, '{}' can not be processed as a boolean\".format(lowest) if lowest | bool(\"\") is not boolean,\n\"Boolean input expected for latest_possible, '{}' can not be processed as a boolean\".format(latest_possible) if latest_possible | bool(\"\") is not boolean,\n\"Numeric input or percentage expected for price_tolerance, '{}' can not be processed as a float or percentage\".format(price_tolerance) if not valid_pt,\n\"Numeric input expected for kwh, '{}' can not be processed as a float\".format(kwh) if kwh is not none and not kwh | is_number,\n\"Selected program '{}' is not available or has no data\".format(program) if program is not none and w is none,\n\"Selected start parameter is after the end parameter\" if start_end and data,\n\"{} hours between start and end, where {} hours are required\".format(end_start, h | round(3)) if not start_end and end_start < h | round(3) and data,\n\"Invalid combination of source data points per hour '{}' and number of weight points '{}'\".format(dp, dph) if all_keys and not wp_check",
         "x": 1150,
@@ -1414,10 +1415,10 @@
         "wires": []
     },
     {
-        "id": "8c41d911472df3f4",
+        "id": "41f7e8d8c076c429",
         "type": "function",
-        "z": "bdbd06f2d55d48a6",
-        "g": "29a32a7ec3fb9dfa",
+        "z": "3dba6900d8defee7",
+        "g": "c085d9d123ac3ac6",
         "name": "Unhandled Exception",
         "func": "const handle = global.get('unhandledException');\n\nhandle(this);\n\nreturn msg;",
         "outputs": 1,
@@ -1430,16 +1431,16 @@
         "y": 580,
         "wires": [
             [
-                "0665029a9d16fd83"
+                "608ea4f679fdcc9b"
             ]
         ],
         "l": false
     },
     {
-        "id": "ca2b745599f1156d",
+        "id": "409fda12a8a29eb5",
         "type": "function",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Cache check",
         "func": "// Check if cache can be used or a new call to Data Source is required\nconst log = global.get('logger');\n\n// Retrieve stored data from flow context\nconst cachedData = flow.get(\"cached_dynamic_data\");\n\n// Determine cache hit\nif (cachedData){\n    // Cache HIT\n    node.status({ fill: \"green\", shape: \"dot\", text: `Cache hit` });\n    log(this,`*CACHE HIT* using stored tariff data`);\n\n    // Attach cached data to the message so following nodes can use it\n    msg.dynamic = cachedData;\n\n    // Output #1\n    return [msg, null];\n\n} else {\n    // Cache MISS\n    node.status({ fill: \"green\", shape: \"ring\", text: `Cache miss }` });\n\n    // Output #2\n    return [null, msg];\n}",
         "outputs": 2,
@@ -1452,10 +1453,10 @@
         "y": 420,
         "wires": [
             [
-                "ac194de56255d6a6"
+                "3be9995322945fc4"
             ],
             [
-                "6b97322874ecbef1"
+                "10b32d0198a54191"
             ]
         ],
         "outputLabels": [
@@ -1464,87 +1465,87 @@
         ]
     },
     {
-        "id": "ac194de56255d6a6",
+        "id": "3be9995322945fc4",
         "type": "link out",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "from Cache Check ok",
         "mode": "link",
         "links": [
-            "baef7c9ef1d76dec"
+            "fe4125bd83733dc3"
         ],
         "x": 1335,
         "y": 400,
         "wires": []
     },
     {
-        "id": "f450d9d3e2bddd44",
+        "id": "e98a8deea78f0a34",
         "type": "link in",
-        "z": "bdbd06f2d55d48a6",
-        "g": "e8f5ca6298baa1a5",
+        "z": "3dba6900d8defee7",
+        "g": "194eca2b806e1d36",
         "name": "link Fetch from Data Source",
         "links": [
-            "6b97322874ecbef1"
+            "10b32d0198a54191"
         ],
         "x": 295,
         "y": 560,
         "wires": [
             [
-                "867b42a173862517"
+                "6f72073c2f2dd20c"
             ]
         ]
     },
     {
-        "id": "6b97322874ecbef1",
+        "id": "10b32d0198a54191",
         "type": "link out",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "from Cache Check NoK",
         "mode": "link",
         "links": [
-            "f450d9d3e2bddd44"
+            "e98a8deea78f0a34"
         ],
         "x": 1335,
         "y": 440,
         "wires": []
     },
     {
-        "id": "baef7c9ef1d76dec",
+        "id": "fe4125bd83733dc3",
         "type": "link in",
-        "z": "bdbd06f2d55d48a6",
-        "g": "8fc7aed868d7a2df",
+        "z": "3dba6900d8defee7",
+        "g": "12dd7cecad71bf3c",
         "name": "link Determine Strategy",
         "links": [
-            "8cc1926a29fedf7b",
-            "ac194de56255d6a6"
+            "89a97c7a5620c746",
+            "3be9995322945fc4"
         ],
         "x": 295,
         "y": 840,
         "wires": [
             [
-                "552943cb3f64b6e0"
+                "c0fe48a4cb2f0c04"
             ]
         ]
     },
     {
-        "id": "8cc1926a29fedf7b",
+        "id": "89a97c7a5620c746",
         "type": "link out",
-        "z": "bdbd06f2d55d48a6",
-        "g": "e8f5ca6298baa1a5",
+        "z": "3dba6900d8defee7",
+        "g": "194eca2b806e1d36",
         "name": "link out 12",
         "mode": "link",
         "links": [
-            "baef7c9ef1d76dec"
+            "fe4125bd83733dc3"
         ],
         "x": 635,
         "y": 720,
         "wires": []
     },
     {
-        "id": "74c2178d55d06602",
+        "id": "671f5b14500c14c2",
         "type": "function",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Clear Cache",
         "func": "// Clear cache\nflow.set(\"cached_dynamic_data\", undefined);\nreturn msg;",
         "outputs": 1,
@@ -1557,16 +1558,16 @@
         "y": 420,
         "wires": [
             [
-                "5d02cf12e178fdc6"
+                "cf35065a34f4d116"
             ]
         ],
         "l": false
     },
     {
-        "id": "e41cfbaa1ada19b6",
+        "id": "5da9c47bac73500c",
         "type": "ha-fire-event",
-        "z": "bdbd06f2d55d48a6",
-        "g": "09c5fddd190cd4b0",
+        "z": "3dba6900d8defee7",
+        "g": "dbfc23caed61a2db",
         "name": "",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -1580,10 +1581,10 @@
         ]
     },
     {
-        "id": "7d3f1b43daee6193",
+        "id": "8194289c3f9b46e9",
         "type": "api-render-template",
-        "z": "bdbd06f2d55d48a6",
-        "g": "e8f5ca6298baa1a5",
+        "z": "3dba6900d8defee7",
+        "g": "194eca2b806e1d36",
         "name": "All",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -1596,15 +1597,15 @@
         "y": 660,
         "wires": [
             [
-                "9e5d04478eeac327"
+                "7684963eabfa753e"
             ]
         ]
     },
     {
-        "id": "9e5d04478eeac327",
+        "id": "7684963eabfa753e",
         "type": "json",
-        "z": "bdbd06f2d55d48a6",
-        "g": "e8f5ca6298baa1a5",
+        "z": "3dba6900d8defee7",
+        "g": "194eca2b806e1d36",
         "name": "",
         "property": "dynamic.data_all",
         "action": "obj",
@@ -1613,16 +1614,16 @@
         "y": 660,
         "wires": [
             [
-                "182e4d75a4c9dbba"
+                "e8f6e2b325d7ee45"
             ]
         ],
         "l": false
     },
     {
-        "id": "c2c3cf5fb2cae520",
+        "id": "be5fbe2ff5c43f17",
         "type": "change",
-        "z": "bdbd06f2d55d48a6",
-        "g": "e8f5ca6298baa1a5",
+        "z": "3dba6900d8defee7",
+        "g": "194eca2b806e1d36",
         "name": "Set",
         "rules": [
             {
@@ -1642,15 +1643,15 @@
         "y": 660,
         "wires": [
             [
-                "7d3f1b43daee6193"
+                "8194289c3f9b46e9"
             ]
         ]
     },
     {
-        "id": "f06909c4d490b7cb",
+        "id": "9cff2e52187565b1",
         "type": "ha-fire-event",
-        "z": "bdbd06f2d55d48a6",
-        "g": "8fc7aed868d7a2df",
+        "z": "3dba6900d8defee7",
+        "g": "12dd7cecad71bf3c",
         "name": "Update energy prices",
         "server": "176d29a.6f648d6",
         "version": 0,
@@ -1664,10 +1665,10 @@
         ]
     },
     {
-        "id": "c22f8847fc131f70",
+        "id": "8c2920c35906babf",
         "type": "debug",
-        "z": "bdbd06f2d55d48a6",
-        "g": "e8f5ca6298baa1a5",
+        "z": "3dba6900d8defee7",
+        "g": "194eca2b806e1d36",
         "name": "Template all",
         "active": false,
         "tosidebar": true,
@@ -1682,10 +1683,10 @@
         "wires": []
     },
     {
-        "id": "182e4d75a4c9dbba",
+        "id": "e8f6e2b325d7ee45",
         "type": "function",
-        "z": "bdbd06f2d55d48a6",
-        "g": "e8f5ca6298baa1a5",
+        "z": "3dba6900d8defee7",
+        "g": "194eca2b806e1d36",
         "name": "Convert price",
         "func": "// logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// Conversion\nconst CONVERSION_RATE = parseFloat(RED.util.getMessageProperty(msg, \"dynamic.value_conversion\")) || 1;\n\n// Check if the list exists and is an array to prevent errors\nif (msg.dynamic && msg.dynamic.data_all && Array.isArray(msg.dynamic.data_all.list)) {\n    \n    // Create a new array where each value is multiplied\n    if (Array.isArray(msg.dynamic.data_all?.list)) {\n        msg.dynamic.data_all.list = msg.dynamic.data_all.list.map(v => v / CONVERSION_RATE * 100); // cents\n    }\n\n    // Update other fields\n    if (msg.dynamic.data_all?.average) {\n        msg.dynamic.data_all.average = parseInt(msg.dynamic.data_all.average / CONVERSION_RATE * 100); // cents\n    }\n    if (msg.dynamic.data_all?.weighted_average){\n        msg.dynamic.data_all.weighted_average = parseInt(msg.dynamic.data_all.weighted_average / CONVERSION_RATE * 100); // cents\n    }\n    if (msg.dynamic.data_all?.min) {\n        msg.dynamic.data_all.min = parseInt(msg.dynamic.data_all.min / CONVERSION_RATE * 100); // cents\n    }\n    if (msg.dynamic.data_all?.max) {\n        msg.dynamic.data_all.max = parseInt(msg.dynamic.data_all.max / CONVERSION_RATE * 100); // cents\n    }\n} else {\n    // Do not continue\n    log(this,\"*price data not updated* price data missing\");\n    return null;\n}\n\nreturn msg;",
         "outputs": 1,
@@ -1698,15 +1699,15 @@
         "y": 660,
         "wires": [
             [
-                "f8cf685e5813563c"
+                "21abf40649db10c5"
             ]
         ]
     },
     {
-        "id": "fb939e165ae91ee7",
+        "id": "a69ba0ef27727bcb",
         "type": "inject",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Test",
         "props": [
             {
@@ -1728,15 +1729,15 @@
         "y": 460,
         "wires": [
             [
-                "c746a4e3cead6f4e"
+                "839e6cd5b9d49b84"
             ]
         ]
     },
     {
-        "id": "c746a4e3cead6f4e",
+        "id": "839e6cd5b9d49b84",
         "type": "api-call-service",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Debug ON",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -1769,15 +1770,15 @@
         "y": 460,
         "wires": [
             [
-                "74c2178d55d06602"
+                "671f5b14500c14c2"
             ]
         ]
     },
     {
-        "id": "5d02cf12e178fdc6",
+        "id": "cf35065a34f4d116",
         "type": "api-current-state",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Strat",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1814,15 +1815,15 @@
         "y": 380,
         "wires": [
             [
-                "3b0a9286b7d26aae"
+                "792a32d1667c5a5b"
             ]
         ]
     },
     {
-        "id": "d10758a4c021c27f",
+        "id": "eaa74beb9082aa91",
         "type": "api-current-state",
-        "z": "bdbd06f2d55d48a6",
-        "g": "8fc7aed868d7a2df",
+        "z": "3dba6900d8defee7",
+        "g": "12dd7cecad71bf3c",
         "name": "Threshold delta",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1865,15 +1866,15 @@
         "y": 880,
         "wires": [
             [
-                "2157188cf3542812"
+                "1924a50570a0ca1a"
             ]
         ]
     },
     {
-        "id": "2157188cf3542812",
+        "id": "1924a50570a0ca1a",
         "type": "api-current-state",
-        "z": "bdbd06f2d55d48a6",
-        "g": "8fc7aed868d7a2df",
+        "z": "3dba6900d8defee7",
+        "g": "12dd7cecad71bf3c",
         "name": "Cheapest N hrs",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1916,15 +1917,15 @@
         "y": 920,
         "wires": [
             [
-                "70083d5f7a16065e"
+                "7d322e1eafa50a99"
             ]
         ]
     },
     {
-        "id": "70083d5f7a16065e",
+        "id": "7d322e1eafa50a99",
         "type": "api-current-state",
-        "z": "bdbd06f2d55d48a6",
-        "g": "8fc7aed868d7a2df",
+        "z": "3dba6900d8defee7",
+        "g": "12dd7cecad71bf3c",
         "name": "Expensive N hrs",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -1967,15 +1968,15 @@
         "y": 960,
         "wires": [
             [
-                "8f528f8818641c87"
+                "96783d7bb1ea299f"
             ]
         ]
     },
     {
-        "id": "dfa1161fe163528e",
+        "id": "42f906afe53fcf05",
         "type": "inject",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Clear cache",
         "props": [
             {
@@ -1997,15 +1998,15 @@
         "y": 420,
         "wires": [
             [
-                "af002e6d0cf16c34"
+                "a6b6ab168302721f"
             ]
         ]
     },
     {
-        "id": "a6cbff1ac5cf5fe0",
+        "id": "f3be1da5f2b7b033",
         "type": "inject",
-        "z": "bdbd06f2d55d48a6",
-        "g": "98098c51fcd3210a",
+        "z": "3dba6900d8defee7",
+        "g": "68c5e0734b7d3e6e",
         "name": "Midnight",
         "props": [
             {
@@ -2027,9 +2028,25 @@
         "y": 420,
         "wires": [
             [
-                "af002e6d0cf16c34"
+                "a6b6ab168302721f"
             ]
         ]
+    },
+    {
+        "id": "3cf10f4282535021",
+        "type": "link in",
+        "z": "3dba6900d8defee7",
+        "g": "f361132b640e6a45",
+        "name": "Dynamic",
+        "links": [],
+        "x": 100,
+        "y": 240,
+        "wires": [
+            [
+                "13fb091a2a85dcd5"
+            ]
+        ],
+        "l": true
     },
     {
         "id": "176d29a.6f648d6",
@@ -2046,7 +2063,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "8ce69660cd55bc44",
+        "id": "1e654def1efcb41a",
         "type": "global-config",
         "env": [],
         "modules": {

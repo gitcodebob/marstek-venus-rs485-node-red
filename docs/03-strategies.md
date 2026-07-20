@@ -13,7 +13,7 @@ Pick the strategy that matches what you want the battery to do today — switch 
 | I want to… | Use | Setup |
 |---|---|---|
 | Use my own energy, keep grid meter at 0 Watt | [**Self-consumption**](#self-consumption) | [Setup](/04-setup-self-consumption) |
-| Save money on a dynamic / hourly tariff | [**Dynamic**](#dynamic) (or [**Dynamic v2**](#dynamic-v2) lab) | [Setup](/05-setup-dynamic) |
+| Save money on a dynamic / hourly tariff | [**Dynamic**](#dynamic) | [Setup](/05-setup-dynamic) |
 | Charge/discharge on a fixed clock | [**Timed**](#timed) | – |
 | Fill the battery now (outage, cheap window) | [**Charge**](#charge) | [Setup](/04-setup-solar-forecast) |
 | Sell stored energy at a price peak | [**Sell**](#sell) | – |
@@ -109,27 +109,19 @@ All strategies are selectable from the Home Battery Control dashboard. Most sett
 ## 💶 Price-driven
 
 ### 💶 Dynamic {#dynamic}
-*Picks a sub-strategy per period based on hourly tariffs: a cheapest block, an expensive block, and the regular hours in between.*
+*Evaluates every price interval individually — marks the cheapest intervals to charge and the most expensive to discharge — and applies a sub-strategy per mark.*
 
 **Best for:** dynamic / hourly energy contracts where you want to capture the daily price spread. \
 **Setup:** Cheapest Energy Hours integration + a price data source — see [Dynamic Strategy Setup](/05-setup-dynamic). \
-**Flow:** `02 strategy-dynamic.json`
+**Flow:** `02 strategy-dynamic-2.json`
 
 | Period | Default | Configurable options |
 |---|---|---|
-| Cheapest | `Charge` | `Charge`, `Charge PV` |
-| Expensive | `Self-consumption` | `Self-consumption`, `Sell`, `Zero import` |
-| Regular | `Charge PV` | `Charge PV`, `Self-consumption`, `Zero import`, `Full stop` |
+| Low (cheap intervals) | `Charge` | `Charge`, `Charge PV`, `Self-consumption`, `Full stop` |
+| Neutral (unmarked) | `Charge PV` | `Charge PV`, `Self-consumption`, `Full stop` |
+| High (expensive intervals) | `Self-consumption` | `Self-consumption`, `Sell`, `Charge PV`, `Full stop` |
 
-Smart activation: the cheapest block only fires below a configurable tariff threshold, and the expensive block only fires when the price spread exceeds the minimum delta.
-
-### 💶 Dynamic v2 — *lab feature* {#dynamic-v2}
-
-<div style="background:#3a2e14;padding:0.6em 0.9em;border-left:4px solid #e6b800;color:#ffe9a8;margin:0.6em 0;border-radius:2px;">
-🧪 A redesigned Dynamic strategy that evaluates <strong style="color:#fff3c4;">every price interval individually</strong> instead of fixed N-hour blocks. Lab feature — behavior may change between releases. Full guide: <a href="/05-dynamic-v2" style="color:#ffd866;text-decoration:underline;"><strong>Dynamic Strategy v2</strong></a>.
-</div>
-
-**Flow:** `02 strategy-dynamic-2.json`
+Because it works per interval instead of on a single fixed block, it captures **both** a morning and an evening price peak in the same day. A pair of intervals is only marked when its price spread exceeds the configurable minimum delta, so cycles only fire when economically beneficial.
 
 ---
 

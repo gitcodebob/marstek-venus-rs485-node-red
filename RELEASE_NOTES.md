@@ -1,6 +1,18 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.11.0
+- **Feat: Dynamic v2 becomes the standard Dynamic strategy; deprecate v1 flow (v4.11.0)**
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/00 master-switch-flow.json`
+  - `node-red/01 start-flow.json`
+  - `node-red/02 strategy-dynamic-2.json`
+  - `node-red/all-flows-in-one-file.json`
+  - `node-red/deprecated/02 strategy-dynamic.json`
+
 ## 4.10.1
 - **Fix: Midnight price rollover in Dynamic 2 strategy**
   * At midnight, tomorrow's prices were not being promoted to today's prices, causing the strategy to use stale data on the new day.
