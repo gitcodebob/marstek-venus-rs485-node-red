@@ -2,7 +2,10 @@
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
 ## 4.12.0
-- **Feat: Timed strategy expands from 3 to 5 time periods (v4.12.0)**
+- **Feat: Timed strategy expands from 3 to 5 time periods**
+  * The Timed strategy now supports up to five daily time windows (periods A–E) instead of three, each with its own sub-strategy, on top of the baseline default strategy.
+  * Periods are added and removed sequentially from the dashboard — enable D before E, remove E before D — mirroring the existing A → B → C behaviour, and the priority order stays "earliest matching period wins" (A > B > C > D > E > baseline).
+  * **Action required**: re-import `02 strategy-timed.json` (or `all-flows-in-one-file.json`) into Node-RED and re-import `dashboard.yaml`. The new period D/E entities come from the updated `house_battery_control.yaml` package.
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
