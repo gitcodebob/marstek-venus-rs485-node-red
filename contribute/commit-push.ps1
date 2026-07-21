@@ -88,6 +88,22 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Silence Git's benign "LF will be replaced by CRLF" (core.safecrlf=warn) notice
+# for this process and every child script / Git call it spawns.
+#
+# On a Windows clone with core.autocrlf=true, Git writes that warning to stderr
+# for each LF-normalised file it touches (git diff/add/commit). Because this
+# script runs with $ErrorActionPreference='Stop', PowerShell promotes that
+# stderr line to a terminating NativeCommandError and aborts the release
+# mid-run. Injecting core.safecrlf=false via Git's env-config keeps autocrlf
+# normalisation intact (commits stay LF) and suppresses only the cosmetic
+# warning — no local `git config` change required on the contributor's machine.
+$safecrlfIdx = if ($env:GIT_CONFIG_COUNT) { [int]$env:GIT_CONFIG_COUNT } else { 0 }
+Set-Item "env:GIT_CONFIG_KEY_$safecrlfIdx"   'core.safecrlf'
+Set-Item "env:GIT_CONFIG_VALUE_$safecrlfIdx" 'false'
+$env:GIT_CONFIG_COUNT = [string]($safecrlfIdx + 1)
+
 $ROOT = Resolve-Path (Join-Path $PSScriptRoot '..')
 
 # ─────────────────────────────────────────────────────────────────────────────
