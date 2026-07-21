@@ -29,6 +29,14 @@ input_boolean:
     name: Enable additional period C
     icon: mdi:clock-outline
 
+  house_battery_strategy_timed_has_period_d:
+    name: Enable additional period D
+    icon: mdi:clock-outline
+
+  house_battery_strategy_timed_has_period_e:
+    name: Enable additional period E
+    icon: mdi:clock-outline
+
   # Grid power limits & Peak shaving
   house_battery_control_has_power_limit_import:
     name: Enable import peak shaving
@@ -86,6 +94,30 @@ input_datetime:
 
   house_battery_strategy_timed_period_c2:
     name: Period C stop
+    has_date: false
+    has_time: true
+    icon: mdi:clock-end
+
+  house_battery_strategy_timed_period_d1:
+    name: Period D start
+    has_date: false
+    has_time: true
+    icon: mdi:clock-start
+
+  house_battery_strategy_timed_period_d2:
+    name: Period D stop
+    has_date: false
+    has_time: true
+    icon: mdi:clock-end
+
+  house_battery_strategy_timed_period_e1:
+    name: Period E start
+    has_date: false
+    has_time: true
+    icon: mdi:clock-start
+
+  house_battery_strategy_timed_period_e2:
+    name: Period E stop
     has_date: false
     has_time: true
     icon: mdi:clock-end
@@ -603,6 +635,10 @@ input_text:
     name: "[entity_id] solar forecast sensor (kWh tomorrow)"
     icon: mdi:identifier
 
+  house_battery_strategy_timed_period_selected:
+    name: "Active period"
+    icon: mdi:strategy
+
 ###########################################################################################################
 # INPUT_SELECT
 ###########################################################################################################
@@ -684,6 +720,18 @@ input_select:
   # Timed strategy | during period C
   house_battery_strategy_timed_strat_c:
     name: During period C
+    options: *SubStrategies
+    icon: mdi:distribute-horizontal-center
+
+  # Timed strategy | during period D
+  house_battery_strategy_timed_strat_d:
+    name: During period D
+    options: *SubStrategies
+    icon: mdi:distribute-horizontal-center
+
+  # Timed strategy | during period E
+  house_battery_strategy_timed_strat_e:
+    name: During period E
     options: *SubStrategies
     icon: mdi:distribute-horizontal-center
 

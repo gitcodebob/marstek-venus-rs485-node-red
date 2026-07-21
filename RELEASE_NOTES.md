@@ -1,6 +1,17 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.12.0
+- **Feat: Timed strategy expands from 3 to 5 time periods**
+  * The Timed strategy now supports up to five daily time windows (periods A–E) instead of three, each with its own sub-strategy, on top of the baseline default strategy.
+  * Periods are added and removed via the dashboard — and the priority order stays "earliest matching period wins" (A > B > C > D > E > baseline).
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-timed.json`
+  - `node-red/all-flows-in-one-file.json`
+
 ## 4.11.0
 - **Feat: Dynamic v2 is now the standard Dynamic strategy**
   * The per-interval "Extreme-Pair Matching" algorithm (previously the "Dynamic 2" lab feature) replaces the old fixed "cheapest N hours / expensive M hours" block algorithm as the one and only Dynamic strategy.

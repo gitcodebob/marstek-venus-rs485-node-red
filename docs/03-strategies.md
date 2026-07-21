@@ -128,7 +128,7 @@ Because it works per interval instead of on a single fixed block, it captures **
 ## ⏰ Time-driven
 
 ### ⏰ Timed {#timed}
-*Charges or discharges according to a fixed daily schedule with up to three configurable time windows.*
+*Charges or discharges according to a fixed daily schedule with up to five configurable time windows.*
 
 **Best for:** time-of-use tariffs and predictable daily routines (cheap night rate, expensive evening peak). \
 **Setup:** Dashboard — set the time windows. \
