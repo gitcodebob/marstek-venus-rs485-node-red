@@ -247,9 +247,31 @@ views:
               - condition: state
                 entity: input_select.marstek_master_battery_mode
                 state: Full control
+              - condition: state
+                entity: input_select.house_battery_strategy_ev_stop_trigger_strategy
+                state: Full stop
             entity: sensor.ev_is_charging
             name: EV is charging - Full Stop strategy is active
             color: red
+            hide_state: true
+            vertical: false
+            features_position: bottom
+          - type: tile
+            grid_options:
+              columns: full
+            visibility:
+              - condition: state
+                entity: sensor.ev_is_charging
+                state: 'on'
+              - condition: state
+                entity: input_select.marstek_master_battery_mode
+                state: Full control
+              - condition: state
+                entity: input_select.house_battery_strategy_ev_stop_trigger_strategy
+                state: Standby / peak shave
+            entity: sensor.ev_is_charging
+            name: EV is charging - Standby / peak shave strategy is active
+            color: amber
             hide_state: true
             vertical: false
             features_position: bottom
@@ -635,7 +657,7 @@ views:
     header:
       card:
         type: markdown
-        content: '### Home Battery Control *(v4.12.0)*'
+        content: '### Home Battery Control *(v4.13.0)*'
         text_only: true
     cards: []
   - type: sections
@@ -1846,10 +1868,14 @@ views:
             entities:
               - entity: input_text.house_battery_strategy_ev_sensor_entity_id
                 secondary_info: none
+              - entity: input_select.house_battery_strategy_ev_stop_trigger_strategy
+                name: Trigger strategy
           - type: markdown
             content: >-
               <font color=grey>Enter the `entity_id` of an `input_boolean` or
-              `on/off template_sensor` in the field above</font>
+              `on/off template_sensor` in the field above. Choose whether an
+              active trigger should fully stop the batteries or keep them in
+              standby for peak shaving.</font>
             text_only: true
           - type: tile
             grid_options:
@@ -1861,8 +1887,8 @@ views:
           - type: markdown
             content: >-
               <font color=grey>The `EV stop trigger` should now indicate whether
-              an all stop has been triggered. Stop trigger 'on' = batteries
-              'Full stop'.</font>
+              the trigger is active. Stop trigger 'on' = selected trigger
+              strategy is applied.</font>
             text_only: true
       - type: grid
         cards:
@@ -1914,6 +1940,22 @@ views:
                   type: input-number-entity
                   entity: input_number.house_battery_control_power_limit_import
                   icon: mdi:home-import-outline
+          - type: markdown
+            content: >-
+              {% set limit =
+              states('input_number.house_battery_control_power_limit_import') |
+              int(0) %} {% if
+              is_state('input_boolean.house_battery_control_has_power_limit_import',
+              'on') and limit > 0 and limit < 2500 %}
+
+              <ha-alert alert-type="warning">Import peak shave limit is very
+              low. Battery response and appliance step changes can cause
+              overshoot near this limit.</ha-alert>
+
+              {% endif %}
+            text_only: true
+            grid_options:
+              columns: full
           - type: markdown
             content: >-
               <font color=grey><i>This also determines **Charge strategy**
