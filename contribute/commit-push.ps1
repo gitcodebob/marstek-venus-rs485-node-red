@@ -38,14 +38,27 @@
     Optional explicit list of paths for the RELEASE_NOTES.md 'Files Changed'
     section. If omitted, the script computes the list via Get-DefaultFilesChanged.
 
+.PARAMETER Branch
+    Optional branch to commit on. If supplied and different from the current
+    branch, the script creates it (or checks it out if it already exists),
+    carrying the working-tree changes along, before staging/committing. Use
+    this to keep release-prep work on a PR branch (e.g. 'release/v4.11.0')
+    instead of committing straight to the base branch.
+
+.PARAMETER AllowMainCommit
+    Escape hatch: permit a version-bump run to commit directly on the base
+    branch (main/master). Without this, a bump run on the base branch and no
+    -Branch is refused (release-prep belongs on a PR branch). Plain commits
+    (-VersionBump none) are never blocked — those may go straight to main.
+
 .EXAMPLE
     # Plain commit, no bump
     .\contribute\commit-push.ps1 -Message "Fix: typo in peak shave" -VersionBump none
 
 .EXAMPLE
-    # Minor bump + push
+    # Minor bump + push, on a fresh PR branch
     .\contribute\commit-push.ps1 -Message "Feat: Zero import strategy" `
-        -VersionBump minor -Push
+        -VersionBump minor -Branch release/v4.11.0 -Push
 
 .EXAMPLE
     # Preview without writing anything
@@ -62,6 +75,10 @@ param(
     [string]$VersionBump,
 
     [string[]]$FilesChangedOverride,
+
+    [string]$Branch,
+
+    [switch]$AllowMainCommit,
 
     [switch]$Push,
 
@@ -230,6 +247,37 @@ Write-Host ""
 # ─────────────────────────────────────────────────────────────────────────────
 if (-not (Get-PorcelainStatus)) {
     Write-Fail "No changes to commit."
+    exit 1
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Pre-flight: branch selection + base-branch guard
+#
+#   - A version-bump run is a release-prep and belongs on a PR branch.
+#   - Plain commits (-VersionBump none) are the everyday path and may go
+#     straight to the base branch (main/master) — they are never blocked.
+# ─────────────────────────────────────────────────────────────────────────────
+$baseBranches = @('main', 'master')
+$currentBranch = (git rev-parse --abbrev-ref HEAD).Trim()
+
+if ($Branch -and $Branch -ne $currentBranch) {
+    $exists = @(git branch --list $Branch).Count -gt 0
+    $checkoutLabel = if ($exists) { "git checkout $Branch" } else { "git checkout -b $Branch" }
+    Write-Step "Switching to branch '$Branch'"
+    Invoke-OrDryRun $checkoutLabel {
+        if ($exists) { git checkout $Branch } else { git checkout -b $Branch }
+        if ($LASTEXITCODE -ne 0) { throw "branch checkout failed" }
+    }
+    # Reflect the intended branch for the guard below (in DryRun no switch happened).
+    $currentBranch = $Branch
+}
+
+if (($VersionBump -ne 'none') -and ($baseBranches -contains $currentBranch) -and (-not $AllowMainCommit)) {
+    Write-Fail "Refusing to run a version-bump release-prep directly on '$currentBranch'."
+    Write-Host "  A release-prep belongs on a PR branch. Either:" -ForegroundColor Yellow
+    Write-Host "    - re-run via /release-prep (it creates 'release/v<new-version>' for you), or" -ForegroundColor Yellow
+    Write-Host "    - pass -Branch release/v<new-version> to this script, or" -ForegroundColor Yellow
+    Write-Host "    - pass -AllowMainCommit to intentionally commit on '$currentBranch'." -ForegroundColor Yellow
     exit 1
 }
 

@@ -23,16 +23,30 @@ needs (commit message + bump type) and invoke it.
    - `minor` — new features, backward-compatible
    - `major` — breaking changes
 
-4. If the changes are large or unusual, suggest a **dry-run first**:
-   `.\contribute\commit-push.ps1 -Message "<msg>" -VersionBump <type> -DryRun`
+4. **Pick the PR branch** (a version-bump release-prep must not land straight
+   on the base branch — `/release` needs a branch to open a PR from):
+   - Check the current branch: `git rev-parse --abbrev-ref HEAD`.
+   - If it is `main` (or `master`): compute the new version from the current
+     version + the chosen bump type, and use `-Branch release/v<new-version>`
+     (e.g. `release/v4.11.0`). The script creates it and carries the working
+     changes over before committing.
+   - If already on a non-base branch: no `-Branch` needed — commit there.
+
+   `commit-push.ps1` enforces this: a bump run on `main`/`master` without
+   `-Branch` is refused (with an `-AllowMainCommit` escape hatch for the rare
+   intentional direct-to-main release). Don't reach for `-AllowMainCommit`
+   unless the user explicitly wants no PR.
+
+5. If the changes are large or unusual, suggest a **dry-run first**:
+   `.\contribute\commit-push.ps1 -Message "<msg>" -VersionBump <type> [-Branch release/v<new>] -DryRun`
 
    Inspect the dry-run output (especially the computed "Files Changed" list)
    before continuing.
 
-5. After approval, invoke the real run with `-Push`:
-   `.\contribute\commit-push.ps1 -Message "<msg>" -VersionBump <type> -Push`
+6. After approval, invoke the real run with `-Push`:
+   `.\contribute\commit-push.ps1 -Message "<msg>" -VersionBump <type> [-Branch release/v<new>] -Push`
 
-6. If `check.ps1` or `bump-version.ps1` fails, **report the error verbatim
+7. If `check.ps1` or `bump-version.ps1` fails, **report the error verbatim
    and stop** — do not bypass with `--no-verify`, `-Force`, or similar.
    Investigate the root cause and fix it before retrying.
 
@@ -54,3 +68,6 @@ needs (commit message + bump type) and invoke it.
 - For a plain commit without bumping the version, use `-VersionBump none`.
   That path is supported but is **not** the primary purpose of this command —
   for everyday commits, just give Claude a natural-language request instead.
+  Plain (`none`) commits are **not** branch-guarded — they may go straight to
+  `main`, matching how trivial `chore`/`docs` commits already land in history.
+  Only version-bump runs are steered onto a `release/v<new-version>` branch.
