@@ -28,7 +28,7 @@
 modbus:
   - name: anker_max_ac_m1
     type: tcp
-    host: [YOUR_IP_ADDRESS]
+    host: 10.0.60.8
     port: 502
     delay: 1
     message_wait_milliseconds: 50
@@ -58,9 +58,10 @@ modbus:
         state_class: measurement
         precision: 0
 
-      # Battery power: positive = discharging, negative = charging
-      - name: "Marstek m1 Battery Power"
-        unique_id: marstek_m1_battery_power
+      # Battery power (Anker raw): positive = discharging, negative = charging
+      # HBC/Marstek expects the opposite sign — see template sensor below.
+      - name: "Marstek m1 Battery Power Anker Raw"
+        unique_id: marstek_m1_battery_power_anker_raw
         address: 10008
         slave: 1
         scan_interval: 2
@@ -71,12 +72,12 @@ modbus:
         state_class: measurement
         precision: 0
 
-      # Load / house AC power
-      - name: "Marstek m1 AC Power"
-        unique_id: marstek_m1_ac_power
+      # House load (Anker 10010) — not used as HBC "M1 Power"
+      - name: "Marstek m1 Load Power"
+        unique_id: marstek_m1_load_power
         address: 10010
         slave: 1
-        scan_interval: 2
+        scan_interval: 5
         input_type: input
         data_type: int32
         unit_of_measurement: W
@@ -318,8 +319,18 @@ script:
           max_discharge_hbc: "{{ states('input_number.marstek_m1_anker_max_ac_max_discharge_power') | int(800) }}"
           max_charge_dev: "{{ states('sensor.marstek_m1_max_charge_power_number') | int(3500) }}"
           max_discharge_dev: "{{ states('sensor.marstek_m1_max_discharge_power_number') | int(3500) }}"
-          max_charge: "{{ [max_charge_hbc, max_charge_dev] | min }}"
-          max_discharge: "{{ [max_discharge_hbc, max_discharge_dev] | min }}"
+          max_charge: "{{ [max_charge_hbc | int, max_charge_dev | int] | min }}"
+          max_discharge: "{{ [max_discharge_hbc | int, max_discharge_dev | int] | min }}"
+          setpoint: >-
+            {% if control != 'enable' %}
+              0
+            {% elif forcible == 'charge' %}
+              {{ (0 - ([charge_req | int, max_charge | int] | min)) | int }}
+            {% elif forcible == 'discharge' %}
+              {{ [discharge_req | int, max_discharge | int] | min }}
+            {% else %}
+              0
+            {% endif %}
       - choose:
           - conditions:
               - condition: template
@@ -353,7 +364,7 @@ script:
                       - service: script.anker_max_ac_m1_write_int32
                         data:
                           address: 10071
-                          value: "{{ (0 - ([charge_req, max_charge] | min)) | int }}"
+                          value: "{{ setpoint | int }}"
                   - conditions:
                       - condition: template
                         value_template: "{{ forcible == 'discharge' }}"
@@ -361,7 +372,7 @@ script:
                       - service: script.anker_max_ac_m1_write_int32
                         data:
                           address: 10071
-                          value: "{{ [discharge_req, max_discharge] | min }}"
+                          value: "{{ setpoint | int }}"
                 default:
                   - service: script.anker_max_ac_m1_write_int32
                     data:
@@ -377,6 +388,35 @@ template:
         unique_id: marstek_m1_device_name
         icon: mdi:rename-box
         state: "Anker Solarbank Max AC"
+
+      # HBC: charging = positive, discharging = negative (invert Anker register 10008)
+      - name: "Marstek m1 Battery Power"
+        unique_id: marstek_m1_battery_power
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        state: >
+          {% set raw = states('sensor.marstek_m1_battery_power_anker_raw') %}
+          {% if raw in ['unknown', 'unavailable', ''] %}
+            unknown
+          {% else %}
+            {{ (0 - (raw | int(0))) | int }}
+          {% endif %}
+
+      # Dashboard "M1 Power" uses this entity. Map to battery AC contribution
+      # (Anker polarity: +discharge / -charge), not house load register 10010.
+      - name: "Marstek m1 AC Power"
+        unique_id: marstek_m1_ac_power
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        state: >
+          {% set raw = states('sensor.marstek_m1_battery_power_anker_raw') %}
+          {% if raw in ['unknown', 'unavailable', ''] %}
+            unknown
+          {% else %}
+            {{ raw | int(0) }}
+          {% endif %}
 
       # Voltage not exposed on Max AC Modbus map used here
       - name: "Marstek m1 Battery Voltage"
@@ -585,6 +625,8 @@ homeassistant:
     sensor.marstek_m1_device_name:
       icon: mdi:rename
     sensor.marstek_m1_battery_power:
+      icon: mdi:battery
+    sensor.marstek_m1_battery_power_anker_raw:
       icon: mdi:battery
     sensor.marstek_m1_ac_power:
       icon: mdi:home-lightning-bolt
