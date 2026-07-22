@@ -1,5 +1,6 @@
 # -----------------------------------------------------------------
-# Home Assistant — Anker SOLIX Solarbank Max AC (Modbus TCP)
+# Home Assistant — Anker SOLIX Solarbank (Modbus TCP) for HBC
+# Supported: Solarbank Max AC, Solarbank 4 E5000 Pro (same register map)
 # Exposes the Fonske / HBC Marstek m1 entity contract
 # -----------------------------------------------------------------
 # Prerequisites:
@@ -8,17 +9,20 @@
 # 3. Replace [YOUR_IP_ADDRESS] below with that IP
 # 4. Copy this file to /config/packages/ (same folder as HBC packages)
 #    Do NOT also load a Marstek m1 Modbus package — entity IDs would clash
-# 5. Ensure configuration.yaml loads packages via !include_dir_named
-# 6. Restart Home Assistant (or reload Modbus + Template + Input helpers)
+# 5. Optionally set input_text.marstek_m1_anker_solarbank_product_name
+#    (e.g. "Anker Solarbank Max AC" or "Anker SOLIX Solarbank 4 E5000 Pro")
+# 6. Ensure configuration.yaml loads packages via !include_dir_named
+# 7. Restart Home Assistant (or reload Modbus + Template + Input helpers)
 #
-# Register map source:
-# https://github.com/anker-charging/ha-anker-solix-official/blob/main/custom_components/anker_solix_official/config/8fcbb87c685781b1d70d784a79eb923098955df2aaf199095ce7767bb70b913d.yaml
+# Register map sources (identical control/sensor addresses):
+# - Max AC: https://github.com/anker-charging/ha-anker-solix-official/blob/main/custom_components/anker_solix_official/config/8fcbb87c685781b1d70d784a79eb923098955df2aaf199095ce7767bb70b913d.yaml
+# - Solarbank 4: https://github.com/anker-charging/ha-anker-solix-official/blob/main/custom_components/anker_solix_official/config/58f0132b5f7979b2cfa43a0eb1fca770053288032386ff6a4da5ed2d72d4ea35.yaml
 #
 # Control model (third-party):
 # - Holding 10064 = operating mode (3 = third_party_control, 0 = self_consumption)
 # - Holding 10071 = signed INT32 power setpoint (negative = charge, positive = discharge, 0 = stop)
 #
-# Device rating: Max Charge / Max Discharge up to 3500 W (Solarbank Max AC).
+# Power limits: helpers max 3500 W. Device max from registers 10036/10038 still clamps writes.
 # Defaults start at 800 W for safer first bring-up.
 # -----------------------------------------------------------------
 
@@ -26,9 +30,9 @@
 # MODBUS
 # ------
 modbus:
-  - name: anker_max_ac_m1
+  - name: anker_solarbank_m1
     type: tcp
-    host: 10.0.60.8
+    host: [YOUR_IP_ADDRESS]
     port: 502
     delay: 1
     message_wait_milliseconds: 50
@@ -190,16 +194,16 @@ modbus:
 # (optimistic state for HBC; Anker setpoint is write-oriented)
 # -------------------------
 input_select:
-  marstek_m1_anker_max_ac_rs485_control_mode:
-    name: Marstek m1 Anker Max AC RS485 Control Mode Helper
+  marstek_m1_anker_solarbank_rs485_control_mode:
+    name: Marstek m1 Anker Solarbank RS485 Control Mode Helper
     options:
       - disable
       - enable
     initial: disable
     icon: mdi:connection
 
-  marstek_m1_anker_max_ac_forcible_charge_discharge:
-    name: Marstek m1 Anker Max AC Forcible Charge/Discharge Helper
+  marstek_m1_anker_solarbank_forcible_charge_discharge:
+    name: Marstek m1 Anker Solarbank Forcible Charge/Discharge Helper
     options:
       - stop
       - charge
@@ -207,8 +211,8 @@ input_select:
     initial: stop
     icon: mdi:arrow-up-down
 
-  marstek_m1_anker_max_ac_user_work_mode:
-    name: Marstek m1 Anker Max AC User Work Mode Helper
+  marstek_m1_anker_solarbank_user_work_mode:
+    name: Marstek m1 Anker Solarbank User Work Mode Helper
     options:
       - manual
       - anti-feed
@@ -216,8 +220,8 @@ input_select:
     initial: manual
     icon: mdi:auto-mode
 
-  marstek_m1_anker_max_ac_backup_function:
-    name: Marstek m1 Anker Max AC Backup Function Helper
+  marstek_m1_anker_solarbank_backup_function:
+    name: Marstek m1 Anker Solarbank Backup Function Helper
     options:
       - enable
       - disable
@@ -225,8 +229,8 @@ input_select:
     icon: mdi:battery-lock
 
 input_number:
-  marstek_m1_anker_max_ac_forcible_charge_power:
-    name: Marstek m1 Anker Max AC Forcible Charge Power Helper
+  marstek_m1_anker_solarbank_forcible_charge_power:
+    name: Marstek m1 Anker Solarbank Forcible Charge Power Helper
     min: 0
     max: 3500
     step: 1
@@ -235,8 +239,8 @@ input_number:
     mode: box
     icon: mdi:tune-variant
 
-  marstek_m1_anker_max_ac_forcible_discharge_power:
-    name: Marstek m1 Anker Max AC Forcible Discharge Power Helper
+  marstek_m1_anker_solarbank_forcible_discharge_power:
+    name: Marstek m1 Anker Solarbank Forcible Discharge Power Helper
     min: 0
     max: 3500
     step: 1
@@ -245,8 +249,8 @@ input_number:
     mode: box
     icon: mdi:tune-variant
 
-  marstek_m1_anker_max_ac_max_charge_power:
-    name: Marstek m1 Anker Max AC Max Charge Power Helper
+  marstek_m1_anker_solarbank_max_charge_power:
+    name: Marstek m1 Anker Solarbank Max Charge Power Helper
     min: 0
     max: 3500
     step: 1
@@ -255,8 +259,8 @@ input_number:
     mode: box
     icon: mdi:battery-charging-high
 
-  marstek_m1_anker_max_ac_max_discharge_power:
-    name: Marstek m1 Anker Max AC Max Discharge Power Helper
+  marstek_m1_anker_solarbank_max_discharge_power:
+    name: Marstek m1 Anker Solarbank Max Discharge Power Helper
     min: 0
     max: 3500
     step: 1
@@ -265,8 +269,8 @@ input_number:
     mode: box
     icon: mdi:battery-arrow-down
 
-  marstek_m1_anker_max_ac_charge_to_soc:
-    name: Marstek m1 Anker Max AC Charge To SOC Helper
+  marstek_m1_anker_solarbank_charge_to_soc:
+    name: Marstek m1 Anker Solarbank Charge To SOC Helper
     min: 0
     max: 100
     step: 1
@@ -275,12 +279,19 @@ input_number:
     mode: box
     icon: mdi:battery-sync
 
+input_text:
+  marstek_m1_anker_solarbank_product_name:
+    name: Marstek m1 Anker Solarbank Product Name
+    max: 64
+    initial: "Anker SOLIX Solarbank"
+    icon: mdi:rename-box
+
 # -------------------------
 # APPLY CONTROL TO DEVICE
 # -------------------------
 script:
-  anker_max_ac_m1_write_int32:
-    alias: Anker Max AC M1 write signed INT32 holding register
+  anker_solarbank_m1_write_int32:
+    alias: Anker Solarbank M1 write signed INT32 holding register
     mode: queued
     max: 20
     fields:
@@ -296,27 +307,27 @@ script:
           lo: "{{ ((unsigned | int) % 65536) | int }}"
       - service: modbus.write_register
         data:
-          hub: anker_max_ac_m1
+          hub: anker_solarbank_m1
           slave: 1
           address: "{{ address | int }}"
           value:
             - "{{ hi | int }}"
             - "{{ lo | int }}"
 
-  anker_max_ac_m1_apply_control:
-    alias: Anker Max AC M1 apply HBC control to Modbus
+  anker_solarbank_m1_apply_control:
+    alias: Anker Solarbank M1 apply HBC control to Modbus
     mode: restart
     sequence:
       # Allow HBC to settle mode + power helpers that arrive nearly together
       - delay:
           milliseconds: 300
       - variables:
-          control: "{{ states('input_select.marstek_m1_anker_max_ac_rs485_control_mode') }}"
-          forcible: "{{ states('input_select.marstek_m1_anker_max_ac_forcible_charge_discharge') }}"
-          charge_req: "{{ states('input_number.marstek_m1_anker_max_ac_forcible_charge_power') | int(0) }}"
-          discharge_req: "{{ states('input_number.marstek_m1_anker_max_ac_forcible_discharge_power') | int(0) }}"
-          max_charge_hbc: "{{ states('input_number.marstek_m1_anker_max_ac_max_charge_power') | int(800) }}"
-          max_discharge_hbc: "{{ states('input_number.marstek_m1_anker_max_ac_max_discharge_power') | int(800) }}"
+          control: "{{ states('input_select.marstek_m1_anker_solarbank_rs485_control_mode') }}"
+          forcible: "{{ states('input_select.marstek_m1_anker_solarbank_forcible_charge_discharge') }}"
+          charge_req: "{{ states('input_number.marstek_m1_anker_solarbank_forcible_charge_power') | int(0) }}"
+          discharge_req: "{{ states('input_number.marstek_m1_anker_solarbank_forcible_discharge_power') | int(0) }}"
+          max_charge_hbc: "{{ states('input_number.marstek_m1_anker_solarbank_max_charge_power') | int(800) }}"
+          max_discharge_hbc: "{{ states('input_number.marstek_m1_anker_solarbank_max_discharge_power') | int(800) }}"
           max_charge_dev: "{{ states('sensor.marstek_m1_max_charge_power_number') | int(3500) }}"
           max_discharge_dev: "{{ states('sensor.marstek_m1_max_discharge_power_number') | int(3500) }}"
           max_charge: "{{ [max_charge_hbc | int, max_charge_dev | int] | min }}"
@@ -338,11 +349,11 @@ script:
             sequence:
               - service: modbus.write_register
                 data:
-                  hub: anker_max_ac_m1
+                  hub: anker_solarbank_m1
                   slave: 1
                   address: 10064
                   value: 0
-              - service: script.anker_max_ac_m1_write_int32
+              - service: script.anker_solarbank_m1_write_int32
                 data:
                   address: 10071
                   value: 0
@@ -352,7 +363,7 @@ script:
             sequence:
               - service: modbus.write_register
                 data:
-                  hub: anker_max_ac_m1
+                  hub: anker_solarbank_m1
                   slave: 1
                   address: 10064
                   value: 3
@@ -361,7 +372,7 @@ script:
                       - condition: template
                         value_template: "{{ forcible == 'charge' }}"
                     sequence:
-                      - service: script.anker_max_ac_m1_write_int32
+                      - service: script.anker_solarbank_m1_write_int32
                         data:
                           address: 10071
                           value: "{{ setpoint | int }}"
@@ -369,12 +380,12 @@ script:
                       - condition: template
                         value_template: "{{ forcible == 'discharge' }}"
                     sequence:
-                      - service: script.anker_max_ac_m1_write_int32
+                      - service: script.anker_solarbank_m1_write_int32
                         data:
                           address: 10071
                           value: "{{ setpoint | int }}"
                 default:
-                  - service: script.anker_max_ac_m1_write_int32
+                  - service: script.anker_solarbank_m1_write_int32
                     data:
                       address: 10071
                       value: 0
@@ -387,7 +398,7 @@ template:
       - name: "Marstek m1 Device Name"
         unique_id: marstek_m1_device_name
         icon: mdi:rename-box
-        state: "Anker Solarbank Max AC"
+        state: "{{ states('input_text.marstek_m1_anker_solarbank_product_name') }}"
 
       # HBC: charging = positive, discharging = negative (invert Anker register 10008)
       - name: "Marstek m1 Battery Power"
@@ -418,7 +429,7 @@ template:
             {{ raw | int(0) }}
           {% endif %}
 
-      # Voltage not exposed on Max AC Modbus map used here
+      # Voltage not exposed on Anker Solarbank Modbus map used here
       - name: "Marstek m1 Battery Voltage"
         unique_id: marstek_m1_battery_voltage
         unit_of_measurement: V
@@ -481,27 +492,27 @@ template:
         unique_id: marstek_m1_rs485_control_mode
         icon: mdi:connection
         options: "{{ ['disable', 'enable'] }}"
-        state: "{{ states('input_select.marstek_m1_anker_max_ac_rs485_control_mode') }}"
+        state: "{{ states('input_select.marstek_m1_anker_solarbank_rs485_control_mode') }}"
         optimistic: true
         select_option:
           - service: input_select.select_option
             target:
-              entity_id: input_select.marstek_m1_anker_max_ac_rs485_control_mode
+              entity_id: input_select.marstek_m1_anker_solarbank_rs485_control_mode
             data:
               option: "{{ option }}"
-          - service: script.anker_max_ac_m1_apply_control
+          - service: script.anker_solarbank_m1_apply_control
 
       # HBC expects manual; Anker third-party control is the real control plane
       - name: Marstek m1 User Work Mode
         unique_id: marstek_m1_user_work_mode
         icon: mdi:auto-mode
         options: "{{ ['manual', 'anti-feed', 'ai'] }}"
-        state: "{{ states('input_select.marstek_m1_anker_max_ac_user_work_mode') }}"
+        state: "{{ states('input_select.marstek_m1_anker_solarbank_user_work_mode') }}"
         optimistic: true
         select_option:
           - service: input_select.select_option
             target:
-              entity_id: input_select.marstek_m1_anker_max_ac_user_work_mode
+              entity_id: input_select.marstek_m1_anker_solarbank_user_work_mode
             data:
               option: "{{ option }}"
 
@@ -509,26 +520,26 @@ template:
         unique_id: marstek_m1_forcible_charge_discharge
         icon: mdi:arrow-up-down
         options: "{{ ['stop', 'charge', 'discharge'] }}"
-        state: "{{ states('input_select.marstek_m1_anker_max_ac_forcible_charge_discharge') }}"
+        state: "{{ states('input_select.marstek_m1_anker_solarbank_forcible_charge_discharge') }}"
         optimistic: true
         select_option:
           - service: input_select.select_option
             target:
-              entity_id: input_select.marstek_m1_anker_max_ac_forcible_charge_discharge
+              entity_id: input_select.marstek_m1_anker_solarbank_forcible_charge_discharge
             data:
               option: "{{ option }}"
-          - service: script.anker_max_ac_m1_apply_control
+          - service: script.anker_solarbank_m1_apply_control
 
       - name: Marstek m1 Backup Function
         unique_id: marstek_m1_backup_function
         icon: mdi:battery-lock
         options: "{{ ['enable', 'disable'] }}"
-        state: "{{ states('input_select.marstek_m1_anker_max_ac_backup_function') }}"
+        state: "{{ states('input_select.marstek_m1_anker_solarbank_backup_function') }}"
         optimistic: true
         select_option:
           - service: input_select.select_option
             target:
-              entity_id: input_select.marstek_m1_anker_max_ac_backup_function
+              entity_id: input_select.marstek_m1_anker_solarbank_backup_function
             data:
               option: "{{ option }}"
 
@@ -541,14 +552,14 @@ template:
         max: 3500
         step: 1
         optimistic: true
-        state: "{{ states('input_number.marstek_m1_anker_max_ac_forcible_charge_power') | float(0) }}"
+        state: "{{ states('input_number.marstek_m1_anker_solarbank_forcible_charge_power') | float(0) }}"
         set_value:
           - service: input_number.set_value
             target:
-              entity_id: input_number.marstek_m1_anker_max_ac_forcible_charge_power
+              entity_id: input_number.marstek_m1_anker_solarbank_forcible_charge_power
             data:
               value: "{{ value }}"
-          - service: script.anker_max_ac_m1_apply_control
+          - service: script.anker_solarbank_m1_apply_control
 
       - name: Marstek m1 Forcible discharge Power
         unique_id: marstek_m1_forcible_discharge_power
@@ -558,14 +569,14 @@ template:
         max: 3500
         step: 1
         optimistic: true
-        state: "{{ states('input_number.marstek_m1_anker_max_ac_forcible_discharge_power') | float(0) }}"
+        state: "{{ states('input_number.marstek_m1_anker_solarbank_forcible_discharge_power') | float(0) }}"
         set_value:
           - service: input_number.set_value
             target:
-              entity_id: input_number.marstek_m1_anker_max_ac_forcible_discharge_power
+              entity_id: input_number.marstek_m1_anker_solarbank_forcible_discharge_power
             data:
               value: "{{ value }}"
-          - service: script.anker_max_ac_m1_apply_control
+          - service: script.anker_solarbank_m1_apply_control
 
       - name: Marstek m1 Charge To SOC
         unique_id: marstek_m1_charge_to_soc
@@ -575,11 +586,11 @@ template:
         max: 100
         step: 1
         optimistic: true
-        state: "{{ states('input_number.marstek_m1_anker_max_ac_charge_to_soc') | float(100) }}"
+        state: "{{ states('input_number.marstek_m1_anker_solarbank_charge_to_soc') | float(100) }}"
         set_value:
           - service: input_number.set_value
             target:
-              entity_id: input_number.marstek_m1_anker_max_ac_charge_to_soc
+              entity_id: input_number.marstek_m1_anker_solarbank_charge_to_soc
             data:
               value: "{{ value }}"
 
@@ -592,14 +603,14 @@ template:
         max: 3500
         step: 1
         optimistic: true
-        state: "{{ states('input_number.marstek_m1_anker_max_ac_max_charge_power') | float(800) }}"
+        state: "{{ states('input_number.marstek_m1_anker_solarbank_max_charge_power') | float(800) }}"
         set_value:
           - service: input_number.set_value
             target:
-              entity_id: input_number.marstek_m1_anker_max_ac_max_charge_power
+              entity_id: input_number.marstek_m1_anker_solarbank_max_charge_power
             data:
               value: "{{ value }}"
-          - service: script.anker_max_ac_m1_apply_control
+          - service: script.anker_solarbank_m1_apply_control
 
       - name: Marstek m1 Max. Discharge Power
         unique_id: marstek_m1_max_discharge_power
@@ -609,14 +620,14 @@ template:
         max: 3500
         step: 1
         optimistic: true
-        state: "{{ states('input_number.marstek_m1_anker_max_ac_max_discharge_power') | float(800) }}"
+        state: "{{ states('input_number.marstek_m1_anker_solarbank_max_discharge_power') | float(800) }}"
         set_value:
           - service: input_number.set_value
             target:
-              entity_id: input_number.marstek_m1_anker_max_ac_max_discharge_power
+              entity_id: input_number.marstek_m1_anker_solarbank_max_discharge_power
             data:
               value: "{{ value }}"
-          - service: script.anker_max_ac_m1_apply_control
+          - service: script.anker_solarbank_m1_apply_control
 
 homeassistant:
   customize:
