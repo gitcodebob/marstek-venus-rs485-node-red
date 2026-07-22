@@ -667,6 +667,14 @@ input_select:
       - Standby / peak shave # Standby, peak shave only. Requires power limits to be set!
     icon: mdi:home-battery
 
+  # EV stop trigger strategy
+  house_battery_strategy_ev_stop_trigger_strategy:
+    name: EV Stop Trigger Strategy
+    options:
+      - Full stop # Stop (dis)charging and disengage grid relay
+      - Standby / peak shave # Standby, peak shave only. Requires power limits to be set!
+    icon: mdi:power-plug-off
+
   # Available sub-strategies for timed / smart
   house_battery_strategy_timed_substrat_list:
     name: Sub-strategies

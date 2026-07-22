@@ -1,6 +1,31 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.13.0
+_Contributed by [@joma999](https://github.com/joma999) — [#141](https://github.com/gitcodebob/marstek-venus-rs485-node-red/pull/141)._
+
+- **Feat: Configurable EV Stop Trigger strategy**
+  * Added a selectable EV Stop Trigger strategy: `Full stop` or `Standby / peak shave`.
+  * Manual `Full stop` in the main strategy selector now takes precedence over the EV trigger strategy.
+  * Dashboard status and executing-flow display now reflect the strategy actually being applied.
+
+- **Fix: Peak shaving direction stability**
+  * Peak shaving now latches the import/export direction and limit at the moment of the real grid-limit violation.
+  * Prevents import peak shaving from flipping into export peak shaving during the release timeout after a load step change.
+  * Added a dashboard warning for very low import peak shave limits.
+
+- **Fix: Standby display on dashboard**
+  * `Standby / peak shave` now reports its user-facing strategy name to the dashboard while still using `Self-consumption` internally.
+  * Prevents the executing-flow field from showing misleading variants such as `Self-consumption (charge only)` while standby is active.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/01 start-flow.json`
+  - `node-red/02 strategy-partials.json`
+  - `node-red/all-flows-in-one-file.json`
+  - `docs/06-advanced-features.md`
+
 ## 4.12.0
 - **Feat: Timed strategy expands from 3 to 5 time periods**
   * The Timed strategy now supports up to five daily time windows (periods A–E) instead of three, each with its own sub-strategy, on top of the baseline default strategy.
