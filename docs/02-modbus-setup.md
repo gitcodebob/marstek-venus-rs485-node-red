@@ -64,27 +64,41 @@ Special thanks to [Fonske](https://github.com/fonske) for his work and efforts t
 ## Anker SOLIX
 ![Anker SOLIX](https://cdn.homebatterycontrol.com/img/banner-anker-solix.jpg)
 
-Several HBC-tweakers have started support for the Anker SolarBank 3 Pro in addition to the: 
+Several HBC-tweakers have started support for Anker SOLIX batteries:
+- Anker SOLIX SolarBank 3 Pro (cloud bridge)
 - Anker SOLIX SolarBank 4 Pro
-- Anker SOLIX SolarBank Max AC 
+- Anker SOLIX SolarBank Max AC (local Modbus TCP)
 - Anker SOLIX Smartplug Gen 2
 
-You can find the progress in the this issue started and maintained by @exuberant_maypole_48572 
+Track progress and discussion:
 * GitHub issue: https://github.com/gitcodebob/marstek-venus-rs485-node-red/issues/126
-* Or join our discord and search for the Anker channel for more info: [community](https://homebatterycontrol.com/community/)
+* Discord Anker channel: [community](https://homebatterycontrol.com/community/)
 
-The official HA integration by Anker SOLIX 
-* HA integration: https://github.com/anker-charging/ha-anker-solix-official
-* This will make HA entities available. To let HBC use them, follow the example below.
+### Anker Solarbank Max AC (recommended — local Modbus TCP)
 
-Review the documentation in this Anker to *Anker to HBC example* made by jos
-* https://github.com/Jos1958/marstek-venus-rs485-node-red/blob/main/home%20assistant/packages/anker_to_m1_marstek.yaml
+Native Modbus TCP package that exposes the Fonske `marstek_m1_*` entity names so HBC works without changing Node-RED flows.
 
-### Anker SolarBank 3 PRO configs
-* Anker SolarBank 3 PRO: [read the documentation in this yaml](https://github.com/Jos1958/marstek-venus-rs485-node-red/blob/main/home%20assistant/packages/anker_to_m1_marstek.yaml)
-  * 3 PRO is not supported in the official HA integration
-  * Thanks to Jos1958
-  
+1. In the Anker app: **Settings → Third-Party Control Setting → enable Modbus TCP**. Note the device IP (port **502**).
+2. Copy [`home assistant/other-batteries/Anker-Max-AC/anker_max_ac_m1_modbus_tcp.yaml`](../home%20assistant/other-batteries/Anker-Max-AC/anker_max_ac_m1_modbus_tcp.yaml) to `/config/packages/`.
+3. Set `host:` to your device IP (replace `[YOUR_IP_ADDRESS]`).
+4. Do **not** also load a Marstek m1 Modbus package (entity IDs would clash).
+5. Restart Home Assistant, then validate with the checklist in the [Max AC README](../home%20assistant/other-batteries/Anker-Max-AC/README.md).
+6. Defaults start at **800 W** max charge/discharge (device rating up to **3500 W**).
+
+Register map reference: [official Anker Max AC Modbus config](https://github.com/anker-charging/ha-anker-solix-official/blob/main/custom_components/anker_solix_official/config/8fcbb87c685781b1d70d784a79eb923098955df2aaf199095ce7767bb70b913d.yaml).
+
+### Anker SolarBank 3 PRO (cloud)
+
+* Package: [Anker to M1 Marstek (Jos1958)](https://github.com/Jos1958/marstek-venus-rs485-node-red/blob/main/home%20assistant/packages/anker_to_m1_marstek.yaml)
+* Uses the community cloud integration ([thomluther/ha-anker-solix](https://github.com/thomluther/ha-anker-solix)), not local Modbus
+* Self-consumption / PID is not practical (cloud command rate limits)
+* Thanks to Jos1958
+
+### Official Anker HA integration (optional)
+
+* https://github.com/anker-charging/ha-anker-solix-official — local Modbus entities in HA
+* For HBC you can either use the **native Max AC package above** (preferred) or map official entities onto `marstek_m1_*` names as described in [For Integrators](09-for-integrators.md)
+ 
 ## An overview of available connection schemas
 ![Marstek](https://cdn.homebatterycontrol.com/img/hbc-with-other-battery.jpg)
 
@@ -108,7 +122,7 @@ Review the documentation in this Anker to *Anker to HBC example* made by jos
       <td>USB or local (TCP-IP)</td>
       <td>HomeWizard Integration / Other P1 Integrations</td>
       <td>—</td>
-      <td rowspan="6">
+      <td rowspan="7">
         <strong>Fonske entity naming schema</strong><br>
         ↓<br>
         <strong>Home Assistant</strong><br>
@@ -143,11 +157,18 @@ Review the documentation in this Anker to *Anker to HBC example* made by jos
       <td>Cloud Anker to Marstek Package (YAML) — Anker to M1 Marstek (Jos)</td>
     </tr>
     <tr>
-      <td>Anker SolarBank 4 &amp; Max AC</td>
+      <td>Anker Solarbank Max AC</td>
+      <td>Direct LAN / Wi‑Fi</td>
+      <td>modbus (TCP-IP)</td>
+      <td>— (native package) or HA-Anker-Solix-Official (optional)</td>
+      <td>Native Modbus Package (YAML) — <a href="../home%20assistant/other-batteries/Anker-Max-AC/anker_max_ac_m1_modbus_tcp.yaml">Anker Max AC m1</a></td>
+    </tr>
+    <tr>
+      <td>Anker SolarBank 4 Pro</td>
       <td>Direct LAN</td>
       <td>modbus (TCP-IP)</td>
       <td>HA-Anker-Solix-Official (anker) <em>[support](https://github.com/anker-charging/ha-anker-solix-official#supported-devices)</em></td>
-      <td>Local Anker to Marstek Package (YAML) — Anker to M1 Marstek <em>(Future)</em> (*)</td>
+      <td>Adapt Max AC package or official entities → Marstek names (*)</td>
     </tr>
     <tr>
       <td>Other Battery</td>
@@ -159,5 +180,5 @@ Review the documentation in this Anker to *Anker to HBC example* made by jos
   </tbody>
 </table>
 
-<sub>(*) Use the Anker to M1 Marstek as a template for the other Batteries.</sub>
+<sub>(*) Use the <a href="../home%20assistant/other-batteries/Anker-Max-AC/">Anker Max AC native Modbus package</a> or Jos’s Anker-to-M1 template as a starting point for other batteries.</sub>
 

@@ -1,0 +1,590 @@
+# -----------------------------------------------------------------
+# Home Assistant — Anker SOLIX Solarbank Max AC (Modbus TCP)
+# Exposes the Fonske / HBC Marstek m1 entity contract
+# -----------------------------------------------------------------
+# Prerequisites:
+# 1. In the Anker app: Settings → Third-Party Control → enable Modbus TCP
+# 2. Note the device IP (same LAN as Home Assistant), port 502, unit id 1
+# 3. Replace [YOUR_IP_ADDRESS] below with that IP
+# 4. Copy this file to /config/packages/ (same folder as HBC packages)
+#    Do NOT also load a Marstek m1 Modbus package — entity IDs would clash
+# 5. Ensure configuration.yaml loads packages via !include_dir_named
+# 6. Restart Home Assistant (or reload Modbus + Template + Input helpers)
+#
+# Register map source:
+# https://github.com/anker-charging/ha-anker-solix-official/blob/main/custom_components/anker_solix_official/config/8fcbb87c685781b1d70d784a79eb923098955df2aaf199095ce7767bb70b913d.yaml
+#
+# Control model (third-party):
+# - Holding 10064 = operating mode (3 = third_party_control, 0 = self_consumption)
+# - Holding 10071 = signed INT32 power setpoint (negative = charge, positive = discharge, 0 = stop)
+#
+# Device rating: Max Charge / Max Discharge up to 3500 W (Solarbank Max AC).
+# Defaults start at 800 W for safer first bring-up.
+# -----------------------------------------------------------------
+
+# ------
+# MODBUS
+# ------
+modbus:
+  - name: anker_max_ac_m1
+    type: tcp
+    host: [YOUR_IP_ADDRESS]
+    port: 502
+    delay: 1
+    message_wait_milliseconds: 50
+    timeout: 10
+
+    sensors:
+      # Battery status (Anker): 0 standby, 1 charging, 2 discharging, 3 sleep
+      - name: "Marstek m1 Battery Status Number"
+        unique_id: marstek_m1_battery_status_number
+        address: 10001
+        slave: 1
+        scan_interval: 5
+        input_type: input
+        data_type: uint16
+        state_class: measurement
+
+      # PV power (PCS)
+      - name: "Marstek m1 PV Power"
+        unique_id: marstek_m1_pv_power
+        address: 10002
+        slave: 1
+        scan_interval: 5
+        input_type: input
+        data_type: int32
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        precision: 0
+
+      # Battery power: positive = discharging, negative = charging
+      - name: "Marstek m1 Battery Power"
+        unique_id: marstek_m1_battery_power
+        address: 10008
+        slave: 1
+        scan_interval: 2
+        input_type: input
+        data_type: int32
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        precision: 0
+
+      # Load / house AC power
+      - name: "Marstek m1 AC Power"
+        unique_id: marstek_m1_ac_power
+        address: 10010
+        slave: 1
+        scan_interval: 2
+        input_type: input
+        data_type: int32
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        precision: 0
+
+      # Grid power: positive = import, negative = export
+      - name: "Marstek m1 Grid Power"
+        unique_id: marstek_m1_grid_power
+        address: 10012
+        slave: 1
+        scan_interval: 5
+        input_type: input
+        data_type: int32
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        precision: 0
+
+      - name: "Marstek m1 Battery State Of Charge"
+        unique_id: marstek_m1_battery_state_of_charge
+        address: 10014
+        slave: 1
+        scan_interval: 5
+        input_type: input
+        data_type: uint16
+        unit_of_measurement: "%"
+        device_class: battery
+        state_class: measurement
+
+      # Device max charge capability (read-only on Anker)
+      - name: "Marstek m1 Max Charge Power Number"
+        unique_id: marstek_m1_max_charge_power_number
+        address: 10036
+        slave: 1
+        scan_interval: 30
+        input_type: input
+        data_type: int32
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        precision: 0
+
+      # Device max discharge capability (read-only on Anker)
+      - name: "Marstek m1 Max Discharge Power Number"
+        unique_id: marstek_m1_max_discharge_power_number
+        address: 10038
+        slave: 1
+        scan_interval: 30
+        input_type: input
+        data_type: int32
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        precision: 0
+
+      # Rated energy; Anker gain 10 → kWh
+      - name: "Marstek m1 Battery Total Energy"
+        unique_id: marstek_m1_battery_total_energy
+        address: 10250
+        slave: 1
+        scan_interval: 300
+        input_type: input
+        data_type: uint32
+        unit_of_measurement: kWh
+        device_class: energy_storage
+        state_class: measurement
+        scale: 0.1
+        precision: 2
+
+      - name: "Marstek m1 Lifetime Charging Energy"
+        unique_id: marstek_m1_lifetime_charging_energy
+        address: 10262
+        slave: 1
+        scan_interval: 60
+        input_type: input
+        data_type: uint32
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        scale: 0.1
+        precision: 2
+
+      - name: "Marstek m1 Lifetime Discharging Energy"
+        unique_id: marstek_m1_lifetime_discharging_energy
+        address: 10264
+        slave: 1
+        scan_interval: 60
+        input_type: input
+        data_type: uint32
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        scale: 0.1
+        precision: 2
+
+      # Operating mode (holding): 0 self_consumption, 3 third_party_control, …
+      - name: "Marstek m1 Operating Mode Number"
+        unique_id: marstek_m1_operating_mode_number
+        address: 10064
+        slave: 1
+        scan_interval: 5
+        input_type: holding
+        data_type: uint16
+        state_class: measurement
+
+# -------------------------
+# LOCAL CONTROL HELPERS
+# (optimistic state for HBC; Anker setpoint is write-oriented)
+# -------------------------
+input_select:
+  marstek_m1_anker_max_ac_rs485_control_mode:
+    name: Marstek m1 Anker Max AC RS485 Control Mode Helper
+    options:
+      - disable
+      - enable
+    initial: disable
+    icon: mdi:connection
+
+  marstek_m1_anker_max_ac_forcible_charge_discharge:
+    name: Marstek m1 Anker Max AC Forcible Charge/Discharge Helper
+    options:
+      - stop
+      - charge
+      - discharge
+    initial: stop
+    icon: mdi:arrow-up-down
+
+  marstek_m1_anker_max_ac_user_work_mode:
+    name: Marstek m1 Anker Max AC User Work Mode Helper
+    options:
+      - manual
+      - anti-feed
+      - ai
+    initial: manual
+    icon: mdi:auto-mode
+
+  marstek_m1_anker_max_ac_backup_function:
+    name: Marstek m1 Anker Max AC Backup Function Helper
+    options:
+      - enable
+      - disable
+    initial: disable
+    icon: mdi:battery-lock
+
+input_number:
+  marstek_m1_anker_max_ac_forcible_charge_power:
+    name: Marstek m1 Anker Max AC Forcible Charge Power Helper
+    min: 0
+    max: 3500
+    step: 1
+    initial: 0
+    unit_of_measurement: W
+    mode: box
+    icon: mdi:tune-variant
+
+  marstek_m1_anker_max_ac_forcible_discharge_power:
+    name: Marstek m1 Anker Max AC Forcible Discharge Power Helper
+    min: 0
+    max: 3500
+    step: 1
+    initial: 0
+    unit_of_measurement: W
+    mode: box
+    icon: mdi:tune-variant
+
+  marstek_m1_anker_max_ac_max_charge_power:
+    name: Marstek m1 Anker Max AC Max Charge Power Helper
+    min: 0
+    max: 3500
+    step: 1
+    initial: 800
+    unit_of_measurement: W
+    mode: box
+    icon: mdi:battery-charging-high
+
+  marstek_m1_anker_max_ac_max_discharge_power:
+    name: Marstek m1 Anker Max AC Max Discharge Power Helper
+    min: 0
+    max: 3500
+    step: 1
+    initial: 800
+    unit_of_measurement: W
+    mode: box
+    icon: mdi:battery-arrow-down
+
+  marstek_m1_anker_max_ac_charge_to_soc:
+    name: Marstek m1 Anker Max AC Charge To SOC Helper
+    min: 0
+    max: 100
+    step: 1
+    initial: 100
+    unit_of_measurement: "%"
+    mode: box
+    icon: mdi:battery-sync
+
+# -------------------------
+# APPLY CONTROL TO DEVICE
+# -------------------------
+script:
+  anker_max_ac_m1_write_int32:
+    alias: Anker Max AC M1 write signed INT32 holding register
+    mode: queued
+    max: 20
+    fields:
+      address:
+        required: true
+      value:
+        required: true
+    sequence:
+      - variables:
+          signed: "{{ value | int(0) }}"
+          unsigned: "{{ signed if signed >= 0 else (signed + 4294967296) }}"
+          hi: "{{ ((unsigned | int) // 65536) | int }}"
+          lo: "{{ ((unsigned | int) % 65536) | int }}"
+      - service: modbus.write_register
+        data:
+          hub: anker_max_ac_m1
+          slave: 1
+          address: "{{ address | int }}"
+          value:
+            - "{{ hi | int }}"
+            - "{{ lo | int }}"
+
+  anker_max_ac_m1_apply_control:
+    alias: Anker Max AC M1 apply HBC control to Modbus
+    mode: restart
+    sequence:
+      # Allow HBC to settle mode + power helpers that arrive nearly together
+      - delay:
+          milliseconds: 300
+      - variables:
+          control: "{{ states('input_select.marstek_m1_anker_max_ac_rs485_control_mode') }}"
+          forcible: "{{ states('input_select.marstek_m1_anker_max_ac_forcible_charge_discharge') }}"
+          charge_req: "{{ states('input_number.marstek_m1_anker_max_ac_forcible_charge_power') | int(0) }}"
+          discharge_req: "{{ states('input_number.marstek_m1_anker_max_ac_forcible_discharge_power') | int(0) }}"
+          max_charge_hbc: "{{ states('input_number.marstek_m1_anker_max_ac_max_charge_power') | int(800) }}"
+          max_discharge_hbc: "{{ states('input_number.marstek_m1_anker_max_ac_max_discharge_power') | int(800) }}"
+          max_charge_dev: "{{ states('sensor.marstek_m1_max_charge_power_number') | int(3500) }}"
+          max_discharge_dev: "{{ states('sensor.marstek_m1_max_discharge_power_number') | int(3500) }}"
+          max_charge: "{{ [max_charge_hbc, max_charge_dev] | min }}"
+          max_discharge: "{{ [max_discharge_hbc, max_discharge_dev] | min }}"
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ control != 'enable' }}"
+            sequence:
+              - service: modbus.write_register
+                data:
+                  hub: anker_max_ac_m1
+                  slave: 1
+                  address: 10064
+                  value: 0
+              - service: script.anker_max_ac_m1_write_int32
+                data:
+                  address: 10071
+                  value: 0
+          - conditions:
+              - condition: template
+                value_template: "{{ control == 'enable' }}"
+            sequence:
+              - service: modbus.write_register
+                data:
+                  hub: anker_max_ac_m1
+                  slave: 1
+                  address: 10064
+                  value: 3
+              - choose:
+                  - conditions:
+                      - condition: template
+                        value_template: "{{ forcible == 'charge' }}"
+                    sequence:
+                      - service: script.anker_max_ac_m1_write_int32
+                        data:
+                          address: 10071
+                          value: "{{ (0 - ([charge_req, max_charge] | min)) | int }}"
+                  - conditions:
+                      - condition: template
+                        value_template: "{{ forcible == 'discharge' }}"
+                    sequence:
+                      - service: script.anker_max_ac_m1_write_int32
+                        data:
+                          address: 10071
+                          value: "{{ [discharge_req, max_discharge] | min }}"
+                default:
+                  - service: script.anker_max_ac_m1_write_int32
+                    data:
+                      address: 10071
+                      value: 0
+
+# -------------------------
+# TEMPLATES (HBC contract)
+# -------------------------
+template:
+  - sensor:
+      - name: "Marstek m1 Device Name"
+        unique_id: marstek_m1_device_name
+        icon: mdi:rename-box
+        state: "Anker Solarbank Max AC"
+
+      # Voltage not exposed on Max AC Modbus map used here
+      - name: "Marstek m1 Battery Voltage"
+        unique_id: marstek_m1_battery_voltage
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        state: "0"
+
+      # Map Anker battery_status → Marstek inverter state numbers
+      # Anker: 0 standby, 1 charging, 2 discharging, 3 sleep
+      # Marstek: 0 Sleep, 1 Standby, 2 Charge, 3 Discharge
+      - name: "Marstek m1 Inverter State Number"
+        unique_id: marstek_m1_inverter_state_number
+        icon: mdi:state-machine
+        state: >
+          {% set raw = states('sensor.marstek_m1_battery_status_number') %}
+          {% if raw in ['unknown', 'unavailable', ''] %}
+            unknown
+          {% else %}
+            {% set mapping = {0: 1, 1: 2, 2: 3, 3: 0} %}
+            {{ mapping.get(raw | int, 4) }}
+          {% endif %}
+
+      - name: "Marstek m1 Inverter State"
+        unique_id: marstek_m1_inverter_state
+        icon: mdi:state-machine
+        state: >
+          {% set raw = states('sensor.marstek_m1_inverter_state_number') %}
+          {% set mapping = {
+            0: 'Sleep',
+            1: 'Standby',
+            2: 'Charge',
+            3: 'Discharge',
+            4: 'Fault',
+            5: 'Idle',
+            6: 'AC bypass'
+          } %}
+          {% if raw not in ['unknown', 'unavailable', ''] %}
+            {{ mapping.get(raw | int, 'Unknown state') }}
+          {% else %}
+            unknown
+          {% endif %}
+
+      - name: "Marstek m1 Battery Remaining Capacity"
+        unique_id: marstek_m1_battery_remaining_capacity
+        icon: mdi:battery-arrow-down-outline
+        unit_of_measurement: kWh
+        state_class: measurement
+        device_class: energy_storage
+        state: >
+          {% set maxbat = states('sensor.marstek_m1_battery_total_energy') %}
+          {% set soc = states('sensor.marstek_m1_battery_state_of_charge') %}
+          {% if maxbat not in ['unknown', 'unavailable', ''] and soc not in ['unknown', 'unavailable', ''] %}
+            {{ ((soc | float(0)) / 100 * (maxbat | float(0))) | round(2) }}
+          {% else %}
+            unknown
+          {% endif %}
+
+  - select:
+      - name: Marstek m1 RS485 Control Mode
+        unique_id: marstek_m1_rs485_control_mode
+        icon: mdi:connection
+        options: "{{ ['disable', 'enable'] }}"
+        state: "{{ states('input_select.marstek_m1_anker_max_ac_rs485_control_mode') }}"
+        optimistic: true
+        select_option:
+          - service: input_select.select_option
+            target:
+              entity_id: input_select.marstek_m1_anker_max_ac_rs485_control_mode
+            data:
+              option: "{{ option }}"
+          - service: script.anker_max_ac_m1_apply_control
+
+      # HBC expects manual; Anker third-party control is the real control plane
+      - name: Marstek m1 User Work Mode
+        unique_id: marstek_m1_user_work_mode
+        icon: mdi:auto-mode
+        options: "{{ ['manual', 'anti-feed', 'ai'] }}"
+        state: "{{ states('input_select.marstek_m1_anker_max_ac_user_work_mode') }}"
+        optimistic: true
+        select_option:
+          - service: input_select.select_option
+            target:
+              entity_id: input_select.marstek_m1_anker_max_ac_user_work_mode
+            data:
+              option: "{{ option }}"
+
+      - name: Marstek m1 Forcible Charge/Discharge
+        unique_id: marstek_m1_forcible_charge_discharge
+        icon: mdi:arrow-up-down
+        options: "{{ ['stop', 'charge', 'discharge'] }}"
+        state: "{{ states('input_select.marstek_m1_anker_max_ac_forcible_charge_discharge') }}"
+        optimistic: true
+        select_option:
+          - service: input_select.select_option
+            target:
+              entity_id: input_select.marstek_m1_anker_max_ac_forcible_charge_discharge
+            data:
+              option: "{{ option }}"
+          - service: script.anker_max_ac_m1_apply_control
+
+      - name: Marstek m1 Backup Function
+        unique_id: marstek_m1_backup_function
+        icon: mdi:battery-lock
+        options: "{{ ['enable', 'disable'] }}"
+        state: "{{ states('input_select.marstek_m1_anker_max_ac_backup_function') }}"
+        optimistic: true
+        select_option:
+          - service: input_select.select_option
+            target:
+              entity_id: input_select.marstek_m1_anker_max_ac_backup_function
+            data:
+              option: "{{ option }}"
+
+  - number:
+      - name: Marstek m1 Forcible charge Power
+        unique_id: marstek_m1_forcible_charge_power
+        icon: mdi:tune-variant
+        unit_of_measurement: W
+        min: 0
+        max: 3500
+        step: 1
+        optimistic: true
+        state: "{{ states('input_number.marstek_m1_anker_max_ac_forcible_charge_power') | float(0) }}"
+        set_value:
+          - service: input_number.set_value
+            target:
+              entity_id: input_number.marstek_m1_anker_max_ac_forcible_charge_power
+            data:
+              value: "{{ value }}"
+          - service: script.anker_max_ac_m1_apply_control
+
+      - name: Marstek m1 Forcible discharge Power
+        unique_id: marstek_m1_forcible_discharge_power
+        icon: mdi:tune-variant
+        unit_of_measurement: W
+        min: 0
+        max: 3500
+        step: 1
+        optimistic: true
+        state: "{{ states('input_number.marstek_m1_anker_max_ac_forcible_discharge_power') | float(0) }}"
+        set_value:
+          - service: input_number.set_value
+            target:
+              entity_id: input_number.marstek_m1_anker_max_ac_forcible_discharge_power
+            data:
+              value: "{{ value }}"
+          - service: script.anker_max_ac_m1_apply_control
+
+      - name: Marstek m1 Charge To SOC
+        unique_id: marstek_m1_charge_to_soc
+        icon: mdi:tune-variant
+        unit_of_measurement: "%"
+        min: 0
+        max: 100
+        step: 1
+        optimistic: true
+        state: "{{ states('input_number.marstek_m1_anker_max_ac_charge_to_soc') | float(100) }}"
+        set_value:
+          - service: input_number.set_value
+            target:
+              entity_id: input_number.marstek_m1_anker_max_ac_charge_to_soc
+            data:
+              value: "{{ value }}"
+
+      # Local HBC clamps (Anker device max is read-only via sensors above)
+      - name: Marstek m1 Max. Charge Power
+        unique_id: marstek_m1_max_charge_power
+        icon: mdi:tune-variant
+        unit_of_measurement: W
+        min: 0
+        max: 3500
+        step: 1
+        optimistic: true
+        state: "{{ states('input_number.marstek_m1_anker_max_ac_max_charge_power') | float(800) }}"
+        set_value:
+          - service: input_number.set_value
+            target:
+              entity_id: input_number.marstek_m1_anker_max_ac_max_charge_power
+            data:
+              value: "{{ value }}"
+          - service: script.anker_max_ac_m1_apply_control
+
+      - name: Marstek m1 Max. Discharge Power
+        unique_id: marstek_m1_max_discharge_power
+        icon: mdi:tune-variant
+        unit_of_measurement: W
+        min: 0
+        max: 3500
+        step: 1
+        optimistic: true
+        state: "{{ states('input_number.marstek_m1_anker_max_ac_max_discharge_power') | float(800) }}"
+        set_value:
+          - service: input_number.set_value
+            target:
+              entity_id: input_number.marstek_m1_anker_max_ac_max_discharge_power
+            data:
+              value: "{{ value }}"
+          - service: script.anker_max_ac_m1_apply_control
+
+homeassistant:
+  customize:
+    sensor.marstek_m1_battery_state_of_charge:
+      icon: mdi:power-plug-battery-outline
+    sensor.marstek_m1_device_name:
+      icon: mdi:rename
+    sensor.marstek_m1_battery_power:
+      icon: mdi:battery
+    sensor.marstek_m1_ac_power:
+      icon: mdi:home-lightning-bolt
