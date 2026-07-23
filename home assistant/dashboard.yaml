@@ -1833,6 +1833,8 @@ views:
               - entity: input_number.house_battery_control_prioritize_battery
                 name: 'Battery #'
               - entity: input_select.house_battery_control_priority_change_interval
+              - entity: input_number.house_battery_control_soc_balance_hysteresis
+                name: SoC hyst.
             state_color: false
             columns: 3
           - type: heading

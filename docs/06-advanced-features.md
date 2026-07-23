@@ -39,12 +39,14 @@ nav_order: 6
 
      | Option | Behaviour |
      |---|---|
-     | **Auto balance** | Rotates priority every 30 minutes throughout the day. Spreads energy reserve more evenly across all batteries, maximizing combined charge and discharge power delivery. Best for multi-battery setups where keeping batteries at similar SoC matters. |
+     | **SoC balance** | On every control cycle, charges the lowest-SoC battery first and discharges the highest-SoC battery first, so all batteries stay at roughly the same SoC. Uses a configurable **SoC balance hysteresis** (default 3%) so priority does not chatter when SoCs are close. Especially helpful if you have batteries with **different energy storage capacity** (mixed kWh sizes), because balancing by % SoC keeps reserve levels aligned even when absolute Wh rates differ. The **Battery #** priority helper is unused in this mode. |
+     | **Auto balance** | Rotates priority every 30 minutes throughout the day. Spreads energy reserve more evenly across all batteries, maximizing combined charge and discharge power delivery. Best for multi-battery setups where a simple time-based rotation is enough. |
      | **Daily** | Rotates once per day at 02:00. |
      | **Weekly** | Rotates once per week on Sunday at 02:00. |
      | **Never** | Keeps the manually set priority. No automatic cycling. |
 
-   - **Auto balance** automatically disables the _reverse discharge priority_ optimization, since that feature is designed for batteries at different SoC levels and conflicts with balanced operation.
+   - **SoC balance** and **Auto balance** automatically disable the _reverse discharge priority_ optimization, since that feature is designed for batteries at different SoC levels and conflicts with balanced operation.
+   - After updating the Home Assistant package, reload helpers (or re-select Cycle) if the new **SoC balance** option does not appear yet.
    - **Tip:** For single-battery setups, cycling has no effect — any setting works.
 - **Controller Output Protection:** Software protection based on battery maximum charge/discharge values
   - Adjusts control output to stay within configured battery capabilities

@@ -171,6 +171,17 @@ input_number:
     mode: box
     icon: mdi:battery-arrow-up
 
+  # SoC balance | Minimum SoC gap (%) before priority between batteries may change
+  house_battery_control_soc_balance_hysteresis:
+    name: "SoC balance hysteresis"
+    min: 0
+    max: 20
+    step: 1
+    initial: 3
+    unit_of_measurement: "%"
+    mode: box
+    icon: mdi:battery-sync
+
   # Totals | Total usable energy in batteries
   house_battery_total_available_energy:
     name: "Total available energy"
@@ -691,6 +702,7 @@ input_select:
   house_battery_control_priority_change_interval:
     name: "Cycle"
     options:
+      - SoC balance
       - Auto balance
       - Weekly
       - Daily
