@@ -23,7 +23,7 @@
 # - Holding 10071 = signed INT32 power setpoint (negative = charge, positive = discharge, 0 = stop)
 #
 # Power limits: helpers max 3500 W. Device max from registers 10036/10038 still clamps writes.
-# Defaults start at 800 W for safer first bring-up.
+# Max charge/discharge helpers omit initial so HA restores the last value after restart.
 # -----------------------------------------------------------------
 
 # ------
@@ -35,8 +35,8 @@ modbus:
     host: [YOUR_IP_ADDRESS]
     port: 502
     delay: 1
-    message_wait_milliseconds: 50
-    timeout: 10
+    message_wait_milliseconds: 150
+    timeout: 3
 
     sensors:
       # Battery status (Anker): 0 standby, 1 charging, 2 discharging, 3 sleep
@@ -44,7 +44,7 @@ modbus:
         unique_id: marstek_m1_battery_status_number
         address: 10001
         slave: 1
-        scan_interval: 5
+        scan_interval: 2
         input_type: input
         data_type: uint16
         state_class: measurement
@@ -54,7 +54,7 @@ modbus:
         unique_id: marstek_m1_pv_power
         address: 10002
         slave: 1
-        scan_interval: 5
+        scan_interval: 30
         input_type: input
         data_type: int32
         unit_of_measurement: W
@@ -81,7 +81,7 @@ modbus:
         unique_id: marstek_m1_load_power
         address: 10010
         slave: 1
-        scan_interval: 5
+        scan_interval: 30
         input_type: input
         data_type: int32
         unit_of_measurement: W
@@ -94,7 +94,7 @@ modbus:
         unique_id: marstek_m1_grid_power
         address: 10012
         slave: 1
-        scan_interval: 5
+        scan_interval: 30
         input_type: input
         data_type: int32
         unit_of_measurement: W
@@ -106,7 +106,7 @@ modbus:
         unique_id: marstek_m1_battery_state_of_charge
         address: 10014
         slave: 1
-        scan_interval: 5
+        scan_interval: 2
         input_type: input
         data_type: uint16
         unit_of_measurement: "%"
@@ -118,7 +118,7 @@ modbus:
         unique_id: marstek_m1_max_charge_power_number
         address: 10036
         slave: 1
-        scan_interval: 30
+        scan_interval: 60
         input_type: input
         data_type: int32
         unit_of_measurement: W
@@ -131,7 +131,7 @@ modbus:
         unique_id: marstek_m1_max_discharge_power_number
         address: 10038
         slave: 1
-        scan_interval: 30
+        scan_interval: 60
         input_type: input
         data_type: int32
         unit_of_measurement: W
@@ -157,7 +157,7 @@ modbus:
         unique_id: marstek_m1_lifetime_charging_energy
         address: 10262
         slave: 1
-        scan_interval: 60
+        scan_interval: 300
         input_type: input
         data_type: uint32
         unit_of_measurement: kWh
@@ -170,7 +170,7 @@ modbus:
         unique_id: marstek_m1_lifetime_discharging_energy
         address: 10264
         slave: 1
-        scan_interval: 60
+        scan_interval: 300
         input_type: input
         data_type: uint32
         unit_of_measurement: kWh
@@ -184,7 +184,7 @@ modbus:
         unique_id: marstek_m1_operating_mode_number
         address: 10064
         slave: 1
-        scan_interval: 5
+        scan_interval: 15
         input_type: holding
         data_type: uint16
         state_class: measurement
@@ -254,7 +254,6 @@ input_number:
     min: 0
     max: 3500
     step: 1
-    initial: 800
     unit_of_measurement: W
     mode: box
     icon: mdi:battery-charging-high
@@ -264,7 +263,6 @@ input_number:
     min: 0
     max: 3500
     step: 1
-    initial: 800
     unit_of_measurement: W
     mode: box
     icon: mdi:battery-arrow-down

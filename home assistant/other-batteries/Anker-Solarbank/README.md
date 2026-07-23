@@ -49,7 +49,7 @@ Dashboard **M1 Power** uses `sensor.marstek_m1_ac_power`, which is mapped to tha
 ## Safety
 
 - Helper / number **max** is **3500 W**. Device registers `10036` / `10038` still clamp writes.
-- Defaults start at **800 W**; raise the HBC max helpers when ready.
+- Max charge/discharge helpers **persist across Home Assistant restarts** (no `initial` forced reset). On first install, set them yourself (e.g. **800 W** for a cautious start), then raise when ready.
 - Only enable third-party Modbus on a trusted private network.
 - You are responsible for safe operation; have a way to disable third-party control in the Anker app.
 
@@ -57,6 +57,8 @@ Dashboard **M1 Power** uses `sensor.marstek_m1_ac_power`, which is mapped to tha
 
 - **Self-consumption enables third-party mode but never charge/discharge:** check HBC PID gains (`Kp` / `Ki` / `Kd`). If all are `0`, the controller is disabled and HBC keeps forcible mode at `stop` @ `0 W` even when P1 shows import/export. Pick a PID preset (e.g. **very safe**) on the HBC dashboard. (Older Anker Solarbank 3 cloud guides suggested forcing PID to 0 — that does **not** apply to local Modbus Max AC / Solarbank 4.)
 - **Charge / Sell work but Self-consumption does not:** same PID check first; those strategies do not rely on the PID loop the same way.
+- **Use one Modbus client only:** do not run `ha-anker-solix-official` (or any other Modbus poller) against the same device IP while this package is loaded. Anker devices typically allow a single busy TCP client; a second client causes timeouts and flaky sensors.
+- **Dashboard M1 Power drops to 0 while the battery keeps charging/discharging:** usually a **read timeout**, not a lost setpoint (the device keeps the last `10071` write). This package spaces polls gently (`message_wait` 150 ms; battery power/SoC/status every 2 s; non-critical sensors slower). If zeros persist, check for a second Modbus client or weak Wi‑Fi.
 
 ## Hardware validation checklist
 

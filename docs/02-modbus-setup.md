@@ -83,7 +83,7 @@ Native Modbus TCP package for **Max AC** and **Solarbank 4 E5000 Pro** (identica
 3. Set `host:` to your device IP (replace `[YOUR_IP_ADDRESS]`).
 4. Do **not** also load a Marstek m1 Modbus package (entity IDs would clash).
 5. Restart Home Assistant, then validate with the checklist in the [Anker Solarbank README](../home%20assistant/other-batteries/Anker-Solarbank/README.md).
-6. Defaults start at **800 W** max charge/discharge (helper max **3500 W**; device registers still clamp).
+6. Set max charge/discharge helpers as needed (helper max **3500 W**; values persist across HA restarts; device registers still clamp).
 7. Optionally set `input_text.marstek_m1_anker_solarbank_product_name` to your model name.
 
 Register map references:
