@@ -1543,7 +1543,7 @@
         "z": "d606df74d35deb5a",
         "g": "c6cd7e90429c2d54",
         "name": "Update battery order",
-        "func": "// Cycles battery priority as follows\n// M=1 [1,2,3,4] | M=2 [2,3,4,1] | M=3 [3,4,1,2] | etc.\n// With M the battery to prioritize\n\n// msg.batteries (original order)\nlet currentArray = msg.batteries;\n\n// Prioritize the Mth battery\nconst M = RED.util.getMessageProperty(msg,\"prioritize_battery\") || 1;\n\n// Flag wether the order may be reversed when discharging (e.g. Self-consumption utilizes this)\nconst reverseDischargePriority = RED.util.getMessageProperty(msg,\"battery_priority_cycle_interval\") !== \"Auto balance\";\nRED.util.setMessageProperty(msg, \"advanced_settings.reverse_discharge_priority\", reverseDischargePriority,true);\n\n// 1st battery has prio? Skip and continue without change\nif (M==1) return msg;\n\n// N equals the number of items to take from the front to the back of the array, effectivly rotating battery priority\nconst N = M - 1; // base-0 version of M\nnode.status({fill:\"blue\",shape:\"ring\",text:`N = ${N}`});\n\n// 1. Check if the array is valid and long enough\nif (!Array.isArray(currentArray) || currentArray.length < N) {\n    // Send an error or the original array back if the array is invalid/too short\n    node.error(`Array is not valid or shorter than ${N} items.`, msg);\n    return null;\n}\n\n// 2. Get the first N items (these will go to the back)\n// slice(0, N) retrieves elements from the start (index 0) up to index N (exclusive).\nlet firstN = currentArray.slice(0, N);\n\n// 3. Get the remaining items (these will stay at the front)\n// slice(N) retrieves elements from index N to the end of the array.\nlet remaining = currentArray.slice(N);\n\n// 4. Concatenate them: remaining items (front) + first N items (back)\nlet newArray = remaining.concat(firstN);\n\n// 5. Place the new array back into msg.batteries\nmsg.batteries = newArray;\n\nreturn msg;\n",
+        "func": "// Cycles battery priority as follows\n// M=1 [1,2,3,4] | M=2 [2,3,4,1] | M=3 [3,4,1,2] | etc.\n// With M the battery to prioritize\n\n// msg.batteries (original order)\nlet currentArray = msg.batteries;\n\n// Prioritize the Mth battery\nconst M = RED.util.getMessageProperty(msg,\"prioritize_battery\") || 1;\n\n// Normalize SoC balance hysteresis (default 3%)\nconst hystRaw = Number(RED.util.getMessageProperty(msg, \"soc_balance_hysteresis\"));\nRED.util.setMessageProperty(msg, \"soc_balance_hysteresis\", Number.isFinite(hystRaw) ? hystRaw : 3, true);\n\nconst cycleInterval = RED.util.getMessageProperty(msg,\"battery_priority_cycle_interval\");\n\n// Flag whether the order may be reversed when discharging (e.g. Self-consumption utilizes this)\n// Disabled for Auto balance and SoC balance (both aim for balanced multi-battery SoC)\nconst reverseDischargePriority = cycleInterval !== \"Auto balance\" && cycleInterval !== \"SoC balance\";\nRED.util.setMessageProperty(msg, \"advanced_settings.reverse_discharge_priority\", reverseDischargePriority,true);\n\n// SoC balance: keep mapped order; Load distribution sorts by SoC\nif (cycleInterval === \"SoC balance\") {\n    node.status({fill:\"green\",shape:\"dot\",text:\"SoC balance\"});\n    return msg;\n}\n\n// 1st battery has prio? Skip and continue without change\nif (M==1) return msg;\n\n// N equals the number of items to take from the front to the back of the array, effectivly rotating battery priority\nconst N = M - 1; // base-0 version of M\nnode.status({fill:\"blue\",shape:\"ring\",text:`N = ${N}`});\n\n// 1. Check if the array is valid and long enough\nif (!Array.isArray(currentArray) || currentArray.length < N) {\n    // Send an error or the original array back if the array is invalid/too short\n    node.error(`Array is not valid or shorter than ${N} items.`, msg);\n    return null;\n}\n\n// 2. Get the first N items (these will go to the back)\n// slice(0, N) retrieves elements from the start (index 0) up to index N (exclusive).\nlet firstN = currentArray.slice(0, N);\n\n// 3. Get the remaining items (these will stay at the front)\n// slice(N) retrieves elements from index N to the end of the array.\nlet remaining = currentArray.slice(N);\n\n// 4. Concatenate them: remaining items (front) + first N items (back)\nlet newArray = remaining.concat(firstN);\n\n// 5. Place the new array back into msg.batteries\nmsg.batteries = newArray;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1794,7 +1794,7 @@
         "z": "d606df74d35deb5a",
         "g": "c6cd7e90429c2d54",
         "name": "Check interval ",
-        "func": "// Manual priority, never pass\nif(msg.payload == \"Never\") {\n    node.status({fill:\"yellow\",shape:\"dot\",text:\"Auto cycle disabled\"});\n    return null;\n}\n\nconst now = new Date();\n\n// Auto balance: pass every 30 min trigger\nif(msg.payload == \"Auto balance\") {\n    node.status({ fill: \"green\", shape: \"dot\", text: `Auto balance` });\n    return msg;\n}\n\n// Daily interval: pass at 02:00\nif(msg.payload == \"Daily\") {\n    if (now.getHours() === 2 && now.getMinutes() === 0) {\n        node.status({ fill: \"green\", shape: \"dot\", text: `Daily at 02:00` });\n        return msg;\n    } else {\n        node.status({ fill: \"yellow\", shape: \"dot\", text: `Halted, not 02:00` });\n        return null;\n    }\n}\n\n// Weekly interval\nconst dayOfWeek = now.getDay();\n\nif (dayOfWeek === 0 && now.getHours() === 2 && now.getMinutes() === 0) {\n    node.status({ fill: \"green\", shape: \"dot\", text: `Passed on Sunday` });\n    return msg;\n} else {\n    node.status({ fill: \"yellow\", shape: \"dot\", text: `Halted, not Sunday 02:00` });\n    return null;\n}",
+        "func": "// Manual priority, never pass\nif(msg.payload == \"Never\") {\n    node.status({fill:\"yellow\",shape:\"dot\",text:\"Auto cycle disabled\"});\n    return null;\n}\n\n// SoC balance: ordering is handled in Load distribution, no time-based rotate\nif(msg.payload == \"SoC balance\") {\n    node.status({fill:\"yellow\",shape:\"dot\",text:\"SoC balance \u2014 no time rotate\"});\n    return null;\n}\n\nconst now = new Date();\n\n// Auto balance: pass every 30 min trigger\nif(msg.payload == \"Auto balance\") {\n    node.status({ fill: \"green\", shape: \"dot\", text: `Auto balance` });\n    return msg;\n}\n\n// Daily interval: pass at 02:00\nif(msg.payload == \"Daily\") {\n    if (now.getHours() === 2 && now.getMinutes() === 0) {\n        node.status({ fill: \"green\", shape: \"dot\", text: `Daily at 02:00` });\n        return msg;\n    } else {\n        node.status({ fill: \"yellow\", shape: \"dot\", text: `Halted, not 02:00` });\n        return null;\n    }\n}\n\n// Weekly interval\nconst dayOfWeek = now.getDay();\n\nif (dayOfWeek === 0 && now.getHours() === 2 && now.getMinutes() === 0) {\n    node.status({ fill: \"green\", shape: \"dot\", text: `Passed on Sunday` });\n    return msg;\n} else {\n    node.status({ fill: \"yellow\", shape: \"dot\", text: `Halted, not Sunday 02:00` });\n    return null;\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2537,7 +2537,7 @@
         "z": "d606df74d35deb5a",
         "g": "b0a8ca89b99e2ff3",
         "name": "Custom logger",
-        "func": "/**\n * Custom Logger Function\n * * Provides centralized logging, node-status updates, and message tracing.\n * Specifically designed for Home Battery Control logic within Node-RED.\n * \n * Debug dashboard updating:\n * A msg needs to reach 'Strategy Evaluation' or be passed to the \"Show on debug board\" trigger node.\n * Errors are automatically passed to the \"Show on debug board\" trigger node.\n * \n * * @param {object} callingNode - The context of the calling node (pass 'this').\n * @param {string} text - The log message/explanation.\n * @param {string} level - Log level: 'log', 'warn', 'error', or 'info' (default: 'info').\n * \n * Note: anything above 'info' will also write to the Node-RED log files \n * \n * * @usage: \n * const log = global.get(\"logger\");\n * log(this, \"Charging cycle started\");\n */\nconst customLogger = (callingNode, text, level = 'info') => {\n    \n    // Log only when debug_mode is ON\n    const debug_mode = global.get(\"debug_mode\") || false;\n    if(debug_mode == false) return null;\n\n    // Max log elements to keep\n    const MAX_ELEMENTS = 100;\n\n    // Create the YYYY-MM-DD HH:MM:SS.mmm format\n    const now = new Date();\n    const timestamp = now.getHours().toString().padStart(2, '0') + \":\" +\n                now.getMinutes().toString().padStart(2, '0') + \":\" +\n                now.getSeconds().toString().padStart(2, '0') + \".\" +\n                now.getMilliseconds().toString().padStart(3, '0');\n\n    const formattedTimeLevel = `${timestamp} [${level.toLowerCase()}]`;\n    \n    // Get the name of the node or fallback to the ID\n    const nodeName = callingNode.__node__ ? callingNode.__node__.name || callingNode.__node__.id : undefined;\n    // Get the name of the Flow/Tab\n    const flowName = callingNode.env.get(\"NR_FLOW_NAME\") || \"Unknown flow\";\n    // Explain to the Home Battery Control user what is going on\n    const formattedExplenation = `[${flowName} >> ${nodeName}]: ${text}`;\n\n    // Level icons\n    let icon = \"⚪\";\n    switch (level) {\n        case \"info\":\n            icon = \"ℹ️\";\n            break;\n        case \"log\":\n            icon = \"🔧\";\n            break;\n        case \"warn\":\n            icon = \"⚠️\";      \n            break;\n        case \"error\":\n            icon = \"❌\";\n            break;\n    }\n\n    // Enrich msg with log info\n    const msg = callingNode.msg;\n    (msg.log = msg.log || []).push({ timestamp: timestamp, level:level, flow:flowName, node:nodeName, payload: text, icon: icon});\n\n    if (msg.log.length > MAX_ELEMENTS) {\n        // Slice keeps the last X elements\n        msg.log = msg.log.slice(-MAX_ELEMENTS);\n    }\n\n    // Log to the Node-RED system log\n    switch (level) {\n        case \"log\":\n            node.log(`${formattedExplenation}`);\n            break;\n        case \"warn\":\n            node.warn(`${formattedExplenation}`);       \n            break;\n        case \"error\":\n            node.error(`${formattedExplenation}`, callingNode.msg);\n            break;\n        default:\n            // don't log to logfiles by default\n    }\n\n};\n\nglobal.set('logger', customLogger);\nglobal.set('unhandledException', \"\");\nreturn msg;",
+        "func": "/**\n * Custom Logger Function\n * * Provides centralized logging, node-status updates, and message tracing.\n * Specifically designed for Home Battery Control logic within Node-RED.\n * \n * Debug dashboard updating:\n * A msg needs to reach 'Strategy Evaluation' or be passed to the \"Show on debug board\" trigger node.\n * Errors are automatically passed to the \"Show on debug board\" trigger node.\n * \n * * @param {object} callingNode - The context of the calling node (pass 'this').\n * @param {string} text - The log message/explanation.\n * @param {string} level - Log level: 'log', 'warn', 'error', or 'info' (default: 'info').\n * \n * Note: anything above 'info' will also write to the Node-RED log files \n * \n * * @usage: \n * const log = global.get(\"logger\");\n * log(this, \"Charging cycle started\");\n */\nconst customLogger = (callingNode, text, level = 'info') => {\n    \n    // Log only when debug_mode is ON\n    const debug_mode = global.get(\"debug_mode\") || false;\n    if(debug_mode == false) return null;\n\n    // Max log elements to keep\n    const MAX_ELEMENTS = 100;\n\n    // Create the YYYY-MM-DD HH:MM:SS.mmm format\n    const now = new Date();\n    const timestamp = now.getHours().toString().padStart(2, '0') + \":\" +\n                now.getMinutes().toString().padStart(2, '0') + \":\" +\n                now.getSeconds().toString().padStart(2, '0') + \".\" +\n                now.getMilliseconds().toString().padStart(3, '0');\n\n    const formattedTimeLevel = `${timestamp} [${level.toLowerCase()}]`;\n    \n    // Get the name of the node or fallback to the ID\n    const nodeName = callingNode.__node__ ? callingNode.__node__.name || callingNode.__node__.id : undefined;\n    // Get the name of the Flow/Tab\n    const flowName = callingNode.env.get(\"NR_FLOW_NAME\") || \"Unknown flow\";\n    // Explain to the Home Battery Control user what is going on\n    const formattedExplenation = `[${flowName} >> ${nodeName}]: ${text}`;\n\n    // Level icons\n    let icon = \"\u26aa\";\n    switch (level) {\n        case \"info\":\n            icon = \"\u2139\ufe0f\";\n            break;\n        case \"log\":\n            icon = \"\ud83d\udd27\";\n            break;\n        case \"warn\":\n            icon = \"\u26a0\ufe0f\";      \n            break;\n        case \"error\":\n            icon = \"\u274c\";\n            break;\n    }\n\n    // Enrich msg with log info\n    const msg = callingNode.msg;\n    (msg.log = msg.log || []).push({ timestamp: timestamp, level:level, flow:flowName, node:nodeName, payload: text, icon: icon});\n\n    if (msg.log.length > MAX_ELEMENTS) {\n        // Slice keeps the last X elements\n        msg.log = msg.log.slice(-MAX_ELEMENTS);\n    }\n\n    // Log to the Node-RED system log\n    switch (level) {\n        case \"log\":\n            node.log(`${formattedExplenation}`);\n            break;\n        case \"warn\":\n            node.warn(`${formattedExplenation}`);       \n            break;\n        case \"error\":\n            node.error(`${formattedExplenation}`, callingNode.msg);\n            break;\n        default:\n            // don't log to logfiles by default\n    }\n\n};\n\nglobal.set('logger', customLogger);\nglobal.set('unhandledException', \"\");\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3591,6 +3591,57 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 340,
+        "y": 940,
+        "wires": [
+            [
+                "a1b2c3d4e5f60718"
+            ]
+        ]
+    },
+    {
+        "id": "a1b2c3d4e5f60718",
+        "type": "api-current-state",
+        "z": "d606df74d35deb5a",
+        "g": "c6cd7e90429c2d54",
+        "name": "SoC balance hysteresis",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_number.house_battery_control_soc_balance_hysteresis",
+        "state_type": "num",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "soc_balance_hysteresis",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 440,
         "y": 940,
         "wires": [
             [

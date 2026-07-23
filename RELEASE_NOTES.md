@@ -1,6 +1,14 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## Unreleased
+- **Feat: SoC balance battery priority cycle**
+  * New **SoC balance** Cycle option: charge lowest-SoC first / discharge highest-SoC first on every control cycle so batteries stay at similar SoC.
+  * Configurable **SoC balance hysteresis** (default 3%) prevents continuous priority switching when SoCs are close; set to 0 for pure SoC sort every cycle.
+  * Especially helpful for mixed-capacity setups (batteries with different kWh), where balancing by % SoC keeps reserve levels aligned.
+  * Existing **Auto balance** (30-minute round-robin) is unchanged.
+  * After package reload, re-select Cycle if the new option is missing from the helper.
+
 ## 4.13.0
 _Contributed by [@joma999](https://github.com/joma999) — [#141](https://github.com/gitcodebob/marstek-venus-rs485-node-red/pull/141)._
 
