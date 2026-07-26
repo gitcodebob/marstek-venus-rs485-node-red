@@ -8,6 +8,9 @@ template_sensor_bob_battery_dashboard.yaml
 # Ignore SASS cache files
 docs/.sass-cache
 
+# macOS metadata
+.DS_Store
+
 # Claude Code per-user state — keep local; commands/skills/agents/settings.json are shared
 .claude/settings.local.json
 .claude/sessions/

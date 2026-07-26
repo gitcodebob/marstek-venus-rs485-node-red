@@ -1,6 +1,6 @@
 [
     {
-        "id": "60b5d8044cd240a3",
+        "id": "52df3fb663e70ff9",
         "type": "tab",
         "label": "Home Battery Master Switch",
         "disabled": false,
@@ -8,52 +8,54 @@
         "env": []
     },
     {
-        "id": "d608a4a32e0df080",
+        "id": "7044607f89419528",
         "type": "group",
-        "z": "60b5d8044cd240a3",
+        "z": "52df3fb663e70ff9",
         "name": "Marstek master control switch",
         "style": {
             "label": true
         },
         "nodes": [
-            "b49db4d0a798f164",
-            "5321fe5ab7f757a6",
-            "3cc99e704b42536a",
-            "052a65658a9d42a7",
-            "880b4bd707f6cd0b"
+            "24c4b3fa2a227363",
+            "688d8c7eb428050a",
+            "aeb14de44d787218",
+            "07082c82cfd36025",
+            "730e5d19c3435b1c",
+            "3d96dbaf23e664c8",
+            "f18d8e745824326f"
         ],
         "x": 34,
-        "y": 19,
-        "w": 898,
-        "h": 382
+        "y": 39,
+        "w": 932,
+        "h": 342
     },
     {
-        "id": "880b4bd707f6cd0b",
+        "id": "730e5d19c3435b1c",
         "type": "group",
-        "z": "60b5d8044cd240a3",
-        "g": "d608a4a32e0df080",
+        "z": "52df3fb663e70ff9",
+        "g": "7044607f89419528",
         "name": "Loop",
         "style": {
             "label": true
         },
         "nodes": [
-            "1457af64557f3041",
-            "b3a11a0e32755bcc",
-            "0d5735b73237bcd7",
-            "dacfd8968c7ae3a0",
-            "bc51a1a250c21426",
-            "9d1fca88cd539df4"
+            "a7840368d3be9b44",
+            "52364a8614623eda",
+            "ec1615324aa327a2",
+            "3d036e16bd02cca9",
+            "2b8c7a7192b2d563",
+            "f1de4cb6fb5e2919"
         ],
-        "x": 414,
-        "y": 99,
+        "x": 434,
+        "y": 79,
         "w": 492,
         "h": 222
     },
     {
-        "id": "b49db4d0a798f164",
+        "id": "24c4b3fa2a227363",
         "type": "api-current-state",
-        "z": "60b5d8044cd240a3",
-        "g": "d608a4a32e0df080",
+        "z": "52df3fb663e70ff9",
+        "g": "7044607f89419528",
         "name": "Your battery count",
         "server": "176d29a.6f648d6",
         "version": 3,
@@ -92,19 +94,19 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 350,
-        "y": 60,
+        "x": 170,
+        "y": 160,
         "wires": [
             [
-                "5321fe5ab7f757a6"
+                "688d8c7eb428050a"
             ]
         ]
     },
     {
-        "id": "1457af64557f3041",
+        "id": "a7840368d3be9b44",
         "type": "function",
-        "z": "60b5d8044cd240a3",
-        "g": "880b4bd707f6cd0b",
+        "z": "52df3fb663e70ff9",
+        "g": "730e5d19c3435b1c",
         "name": "Set RS485 and Work Modes",
         "func": "// array for output \nlet outputArray = [];\n\n// battery to target\nconst target = `marstek_m${msg.battery_index}`;\n\n// Set | work mode\nconst workModeAction = {\n    \"action\": \"select.select_option\",\n    \"target\": {\n        \"entity_id\": [`select.${target}_user_work_mode`]\n    },\n    \"data\": {\n         \"option\": String(msg.work_mode)\n    }\n};\n// Add to output array. Set null for no action.\noutputArray.push(msg.work_mode ? { payload: workModeAction, topic:\"user_work_mode\"}: null);\n\n// Set | rs485\nconst rs485Action = {\n    \"action\": \"select.select_option\",\n    \"target\": {\n        \"entity_id\": [`select.${target}_rs485_control_mode`]\n    },\n    \"data\": {\n         \"option\": String(msg.rs485)\n    }\n};\n// Add to output array. Set null for no action.\noutputArray.push(msg.rs485 ? { payload: rs485Action, topic: \"rs485_control_mode\" } : null);\n\n// Store calls in msg to allow checking of loop results\nmsg.loop_result = { target, workModeAction, rs485Action };\n\n// Return msg as third output\noutputArray.push(msg);\n\n// Outputs\nreturn outputArray;",
         "outputs": 3,
@@ -113,25 +115,25 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 560,
-        "y": 180,
+        "x": 580,
+        "y": 160,
         "wires": [
             [
-                "b3a11a0e32755bcc"
+                "52364a8614623eda"
             ],
             [
-                "0d5735b73237bcd7"
+                "ec1615324aa327a2"
             ],
             [
-                "bc51a1a250c21426"
+                "2b8c7a7192b2d563"
             ]
         ]
     },
     {
-        "id": "5321fe5ab7f757a6",
+        "id": "688d8c7eb428050a",
         "type": "function",
-        "z": "60b5d8044cd240a3",
-        "g": "d608a4a32e0df080",
+        "z": "52df3fb663e70ff9",
+        "g": "7044607f89419528",
         "name": "Loop start",
         "func": "// loop through the number of batteries set by the user\nmsg.battery_index = 1; // base-1\n\n// configurables\nlet workMode = null; // manual, anti-feed, ai, null = don't set or alter this setting\nlet rs485 = null;  // enable, disable, null = don't set or alter this setting\n\n// mode select\nswitch (msg.marstek_master_battery_mode) {\n    case \"Manual control\":\n        workMode = \"manual\";\n        rs485 = \"disable\";\n        break;\n    case \"Marstek control\":\n        // the user should select a work mode via the Marstek App or via select.marstek_mX_user_work_mode\n        rs485 = \"disable\";\n        break;\n    case \"Full control\":\n        rs485 = \"enable\";\n        break;\n    default:\n        node.status({fill:\"red\",shape:\"ring\",text:`Unhandled mode: ${msg.marstek_master_battery_mode}`});\n        return null; // stop flow\n}\n\n// Continue\nmsg.work_mode = workMode;\nmsg.rs485 = rs485;\nreturn msg;",
         "outputs": 1,
@@ -140,19 +142,19 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
-        "y": 180,
+        "x": 340,
+        "y": 160,
         "wires": [
             [
-                "1457af64557f3041"
+                "a7840368d3be9b44"
             ]
         ]
     },
     {
-        "id": "bc51a1a250c21426",
+        "id": "2b8c7a7192b2d563",
         "type": "function",
-        "z": "60b5d8044cd240a3",
-        "g": "880b4bd707f6cd0b",
+        "z": "52df3fb663e70ff9",
+        "g": "730e5d19c3435b1c",
         "name": "Loop step",
         "func": "// Step index down\nmsg.battery_index += 1;\n\n// Continue\nreturn msg;",
         "outputs": 1,
@@ -161,20 +163,20 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
-        "y": 240,
+        "x": 520,
+        "y": 220,
         "wires": [
             [
-                "dacfd8968c7ae3a0",
-                "9d1fca88cd539df4"
+                "3d036e16bd02cca9",
+                "f1de4cb6fb5e2919"
             ]
         ]
     },
     {
-        "id": "dacfd8968c7ae3a0",
+        "id": "3d036e16bd02cca9",
         "type": "switch",
-        "z": "60b5d8044cd240a3",
-        "g": "880b4bd707f6cd0b",
+        "z": "52df3fb663e70ff9",
+        "g": "730e5d19c3435b1c",
         "name": "Loop until",
         "property": "battery_index",
         "propertyType": "msg",
@@ -191,22 +193,22 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 640,
-        "y": 240,
+        "x": 660,
+        "y": 220,
         "wires": [
             [
-                "1457af64557f3041"
+                "a7840368d3be9b44"
             ],
             [
-                "3cc99e704b42536a"
+                "aeb14de44d787218"
             ]
         ]
     },
     {
-        "id": "b3a11a0e32755bcc",
+        "id": "52364a8614623eda",
         "type": "api-call-service",
-        "z": "60b5d8044cd240a3",
-        "g": "880b4bd707f6cd0b",
+        "z": "52df3fb663e70ff9",
+        "g": "730e5d19c3435b1c",
         "name": "Set work mode",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -226,17 +228,17 @@
         "blockInputOverrides": false,
         "domain": "input_text",
         "service": "set_value",
-        "x": 800,
-        "y": 140,
+        "x": 820,
+        "y": 120,
         "wires": [
             []
         ]
     },
     {
-        "id": "0d5735b73237bcd7",
+        "id": "ec1615324aa327a2",
         "type": "api-call-service",
-        "z": "60b5d8044cd240a3",
-        "g": "880b4bd707f6cd0b",
+        "z": "52df3fb663e70ff9",
+        "g": "730e5d19c3435b1c",
         "name": "Set RS485",
         "server": "176d29a.6f648d6",
         "version": 7,
@@ -256,17 +258,17 @@
         "blockInputOverrides": false,
         "domain": "input_text",
         "service": "set_value",
-        "x": 790,
-        "y": 180,
+        "x": 810,
+        "y": 160,
         "wires": [
             []
         ]
     },
     {
-        "id": "9d1fca88cd539df4",
+        "id": "f1de4cb6fb5e2919",
         "type": "debug",
-        "z": "60b5d8044cd240a3",
-        "g": "880b4bd707f6cd0b",
+        "z": "52df3fb663e70ff9",
+        "g": "730e5d19c3435b1c",
         "name": "Loop result",
         "active": false,
         "tosidebar": true,
@@ -276,15 +278,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 510,
-        "y": 280,
+        "x": 530,
+        "y": 260,
         "wires": []
     },
     {
-        "id": "3cc99e704b42536a",
+        "id": "aeb14de44d787218",
         "type": "debug",
-        "z": "60b5d8044cd240a3",
-        "g": "d608a4a32e0df080",
+        "z": "52df3fb663e70ff9",
+        "g": "7044607f89419528",
         "name": "Done",
         "active": true,
         "tosidebar": false,
@@ -294,15 +296,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 830,
-        "y": 360,
+        "x": 870,
+        "y": 340,
         "wires": []
     },
     {
-        "id": "052a65658a9d42a7",
+        "id": "07082c82cfd36025",
         "type": "server-state-changed",
-        "z": "60b5d8044cd240a3",
-        "g": "d608a4a32e0df080",
+        "z": "52df3fb663e70ff9",
+        "g": "7044607f89419528",
         "name": "Master control mode",
         "server": "176d29a.6f648d6",
         "version": 6,
@@ -333,7 +335,7 @@
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "",
+                "value": "string",
                 "valueType": "entityState"
             },
             {
@@ -351,15 +353,96 @@
             {
                 "property": "marstek_master_battery_mode",
                 "propertyType": "msg",
-                "value": "",
+                "value": "string",
                 "valueType": "entityState"
             }
         ],
-        "x": 150,
-        "y": 60,
+        "x": 170,
+        "y": 200,
         "wires": [
             [
-                "b49db4d0a798f164"
+                "24c4b3fa2a227363"
+            ]
+        ]
+    },
+    {
+        "id": "3d96dbaf23e664c8",
+        "type": "inject",
+        "z": "52df3fb663e70ff9",
+        "g": "7044607f89419528",
+        "name": "Check work modes periodically",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 80,
+        "wires": [
+            [
+                "f18d8e745824326f"
+            ]
+        ]
+    },
+    {
+        "id": "f18d8e745824326f",
+        "type": "api-current-state",
+        "z": "52df3fb663e70ff9",
+        "g": "7044607f89419528",
+        "name": "Master control mode",
+        "server": "176d29a.6f648d6",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.marstek_master_battery_mode",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "marstek_master_battery_mode",
+                "propertyType": "msg",
+                "value": "string",
+                "valueType": "entityState"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 180,
+        "y": 120,
+        "wires": [
+            [
+                "24c4b3fa2a227363"
             ]
         ]
     },
@@ -369,7 +452,7 @@
         "name": "Home Assistant",
         "addon": true,
         "rejectUnauthorizedCerts": true,
-        "ha_boolean": "",
+        "ha_boolean": [],
         "connectionDelay": false,
         "cacheJson": false,
         "heartbeat": false,
@@ -378,7 +461,7 @@
         "enableGlobalContextStore": false
     },
     {
-        "id": "4600b0f7cd141a4d",
+        "id": "455435b07bccbec8",
         "type": "global-config",
         "env": [],
         "modules": {

@@ -1,6 +1,76 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.13.0
+_Contributed by [@joma999](https://github.com/joma999) — [#141](https://github.com/gitcodebob/marstek-venus-rs485-node-red/pull/141)._
+
+- **Feat: Configurable EV Stop Trigger strategy**
+  * Added a selectable EV Stop Trigger strategy: `Full stop` or `Standby / peak shave`.
+  * Manual `Full stop` in the main strategy selector now takes precedence over the EV trigger strategy.
+  * Dashboard status and executing-flow display now reflect the strategy actually being applied.
+
+- **Fix: Peak shaving direction stability**
+  * Peak shaving now latches the import/export direction and limit at the moment of the real grid-limit violation.
+  * Prevents import peak shaving from flipping into export peak shaving during the release timeout after a load step change.
+  * Added a dashboard warning for very low import peak shave limits.
+
+- **Fix: Standby display on dashboard**
+  * `Standby / peak shave` now reports its user-facing strategy name to the dashboard while still using `Self-consumption` internally.
+  * Prevents the executing-flow field from showing misleading variants such as `Self-consumption (charge only)` while standby is active.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/01 start-flow.json`
+  - `node-red/02 strategy-partials.json`
+  - `node-red/all-flows-in-one-file.json`
+  - `docs/06-advanced-features.md`
+
+## 4.12.0
+- **Feat: Timed strategy expands from 3 to 5 time periods**
+  * The Timed strategy now supports up to five daily time windows (periods A–E) instead of three, each with its own sub-strategy, on top of the baseline default strategy.
+  * Periods are added and removed via the dashboard — and the priority order stays "earliest matching period wins" (A > B > C > D > E > baseline).
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/02 strategy-timed.json`
+  - `node-red/all-flows-in-one-file.json`
+
+## 4.11.0
+- **Feat: Dynamic v2 is now the standard Dynamic strategy**
+  * The per-interval "Extreme-Pair Matching" algorithm (previously the "Dynamic 2" lab feature) replaces the old fixed "cheapest N hours / expensive M hours" block algorithm as the one and only Dynamic strategy.
+  * It evaluates every price interval individually, so it captures both a morning and an evening price peak in the same day, and guarantees a minimum spread per marked cycle.
+  * The single `Dynamic` strategy selector now runs the v2 flow (`02 strategy-dynamic-2.json`); the separate `Dynamic 2` selector option has been removed.
+
+- **Feat: HBC now resends the control mode every 5 mins**
+  * Some people report their battery switching to inpropper control modes due to external factors. HBC will try to correct this periodically.
+
+- **Fix: Battery priority rounding errors**
+  * Some people report that battery priority drifting to a non-integer number, e.g. 1.0001 or 2.00001. This is now fixed.
+
+- **Refactor: Deprecate the v1 Dynamic flow**
+  * `02 strategy-dynamic.json` has been moved to `node-red/deprecated/` for reference only.
+  * **Action required**: import the `02 strategy-dynamic-2.json` flow and re-import `dashboard.yaml`, then remove the old `Strategy Dynamic` (v1) tab from Node-RED.
+
+- **Tweak: Consolidate the Dynamic dashboard and remove v1-only entities**
+  * Dynamic now lives in the main `Timed/Dynamic` dashboard tab (the separate "Lab features" tab is gone).
+  * Removed v1-only Home Assistant entities: `Cheapest avg tariff is below` threshold, the `Avg cheapest tariff` / `Avg expensive tariff` / `Avg delta` inputs, the `Estimated profit per kWh` sensor, and the cheapest/spread threshold helper sensors.
+
+- **Docs: Restructure the Dynamic documentation**
+  * `05-setup-dynamic` is now the single, leading Dynamic guide — quick start, dashboard controls, use-case configurations, algorithm internals, and current limitations.
+  * `05-dynamic-v2` is kept as a redirect stub so existing links (dashboard, release notes) keep working.
+  * Added a new `For Integrators & Developers` page (`09-for-integrators.md`) covering the entities HBC expects from a battery and how to integrate other brands.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/00 master-switch-flow.json`
+  - `node-red/01 start-flow.json`
+  - `node-red/02 strategy-dynamic-2.json`
+  - `node-red/all-flows-in-one-file.json`
+  - `node-red/deprecated/02 strategy-dynamic.json`
+
 ## 4.10.1
 - **Fix: Midnight price rollover in Dynamic 2 strategy**
   * At midnight, tomorrow's prices were not being promoted to today's prices, causing the strategy to use stale data on the new day.
