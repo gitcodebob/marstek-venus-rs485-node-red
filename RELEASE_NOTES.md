@@ -1,6 +1,14 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.13.1
+- **fix(strategy-sell): preserve fractional threshold energy in sell reserve**
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `node-red/02 strategy-sell.json`
+  - `node-red/all-flows-in-one-file.json`
+
 ## 4.13.0
 _Contributed by [@joma999](https://github.com/joma999) — [#141](https://github.com/gitcodebob/marstek-venus-rs485-node-red/pull/141)._
 
