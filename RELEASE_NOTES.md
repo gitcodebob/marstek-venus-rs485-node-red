@@ -2,7 +2,10 @@
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
 ## 4.13.1
-- **fix(strategy-sell): preserve fractional threshold energy in sell reserve**
+- **Fix: Sell strategy no longer rounds down the energy reserve**
+  * The reserve threshold in the Sell strategy used a bitwise `|` instead of a logical `||`, which silently truncated the configured value to a whole number of kWh.
+  * A reserve of e.g. `2.5` kWh was applied as `2` kWh, and any reserve below `1` kWh was applied as `0` — so the battery discharged further than intended.
+  * Fractional reserves are now honoured exactly; the fallback to `0` only applies when no value is configured.
 
 - **Files Changed:**
   - `home assistant/dashboard.yaml`
