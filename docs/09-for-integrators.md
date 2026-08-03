@@ -10,7 +10,11 @@ This page is for those who want to connect a battery brand that is **not** Marst
 
 HBC is brand-agnostic at its core: the strategy flows and dashboards don't talk to your battery directly — they read from and write to a fixed set of **Home Assistant entities**. As long as your setup exposes those entities with the expected names and behaviour, HBC works out of the box.
 
-> The reference naming follows the [`Fonske`](https://github.com/fonske) projects for the Marstek Venus (the `m1` device). To integrate another brand, map your hardware's values onto these same entity names — see the [Anker SOLIX example](/02-modbus-setup#anker-solix) for a worked template.
+> The reference naming follows the [`Fonske`](https://github.com/fonske) projects for the Marstek Venus (the `m1` device). To integrate another brand, map your hardware's values onto these same entity names — see the [Anker SOLIX section](/02-modbus-setup#anker-solix).
+>
+> **Local Modbus reference:** [Anker Solarbank native package](../home%20assistant/other-batteries/Anker-Solarbank/anker_solarbank_m1_modbus_tcp.yaml) (Max AC + Solarbank 4) — Fonske-style Modbus TCP that exposes the `marstek_m1_*` contract directly (no vendor HA integration required).
+>
+> **Cloud / entity-bridge reference:** [Anker SolarBank 3 Pro → M1 (Jos)](https://github.com/Jos1958/marstek-venus-rs485-node-red/blob/main/home%20assistant/packages/anker_to_m1_marstek.yaml).
 
 ---
 
@@ -57,8 +61,9 @@ The table below lists every entity HBC reads or writes for a single battery (`m1
 
 If your battery is exposed under different entity names, you have two options:
 
-1. **Create Home Assistant helper/template entities** (recommended) that map your hardware's values onto the expected entity names above. This keeps the HBC flows untouched, so updating HBC later stays simple. See the [Anker to M1 Marstek package](https://github.com/Jos1958/marstek-venus-rs485-node-red/blob/main/home%20assistant/packages/anker_to_m1_marstek.yaml) by Jos for a complete, working template.
-2. **Alter the mapping inside the Node-RED flows.** Possible, but **less advised** — it makes updating HBC later cumbersome.
+1. **Native Modbus package** (preferred when the battery has a documented local Modbus map): expose `marstek_m1_*` entities from HA `modbus:` + templates, like the [Anker Solarbank package](../home%20assistant/other-batteries/Anker-Solarbank/anker_solarbank_m1_modbus_tcp.yaml) (Max AC + Solarbank 4).
+2. **Helper/template bridge** onto entities from an existing HA integration: see the [Anker to M1 Marstek package](https://github.com/Jos1958/marstek-venus-rs485-node-red/blob/main/home%20assistant/packages/anker_to_m1_marstek.yaml) by Jos.
+3. **Alter the mapping inside the Node-RED flows.** Possible, but **less advised** — it makes updating HBC later cumbersome.
 
 For the bigger picture of how data flows from your meter and battery through Home Assistant into the HBC strategy flows and dashboard, see the [connection schema overview](/02-modbus-setup#an-overview-of-available-connection-schemas).
 
