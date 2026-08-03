@@ -68,6 +68,8 @@ Check the [release notes](RELEASE_NOTES.md) to see which files have changed. In 
 ## Credits
 The Node-RED + HA control schema is based on the approach by Ruald Ordelman. And the easy to use Modbus to HA boards by Fonske. Many thanks for sharing your work and ideas with the community!
 
+Battery packages contributed by the community: [Jos1958](https://github.com/Jos1958) (Anker SolarBank 3 Pro, cloud) and [@wouterbouvy](https://github.com/wouterbouvy) (Anker SOLIX Solarbank Max AC / Solarbank 4, local Modbus TCP).
+
 ## Contributing
 For major changes, please open an issue first to discuss what you would like to change.
 

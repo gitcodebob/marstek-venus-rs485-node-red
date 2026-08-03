@@ -1,6 +1,13 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.15.0
+- **feat(other-batteries): add Anker SOLIX Solarbank native Modbus TCP package**
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `home assistant/other-batteries/Anker-Solarbank/README.md`
+
 ## 4.14.0
 - **Feat: Zonneplan quarter-hourly (15 min) prices**
   * The Dynamic strategy now uses Zonneplan's quarter-hourly tariffs, giving four times the resolution to find price peaks and troughs.

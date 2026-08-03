@@ -90,6 +90,8 @@ Register map references:
 * [Max AC](https://github.com/anker-charging/ha-anker-solix-official/blob/main/custom_components/anker_solix_official/config/8fcbb87c685781b1d70d784a79eb923098955df2aaf199095ce7767bb70b913d.yaml)
 * [Solarbank 4 E5000 Pro](https://github.com/anker-charging/ha-anker-solix-official/blob/main/custom_components/anker_solix_official/config/58f0132b5f7979b2cfa43a0eb1fca770053288032386ff6a4da5ed2d72d4ea35.yaml)
 
+Thanks to [@wouterbouvy](https://github.com/wouterbouvy) for building and hardware-validating this package.
+
 ### Anker SolarBank 3 PRO (cloud)
 
 * Package: [Anker to M1 Marstek (Jos1958)](https://github.com/Jos1958/marstek-venus-rs485-node-red/blob/main/home%20assistant/packages/anker_to_m1_marstek.yaml)

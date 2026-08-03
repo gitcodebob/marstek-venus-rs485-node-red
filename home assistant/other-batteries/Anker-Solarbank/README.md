@@ -23,15 +23,6 @@ No Anker cloud integration and no `ha-anker-solix-official` dependency.
 6. Optionally set `input_text.marstek_m1_anker_solarbank_product_name` to e.g. `Anker Solarbank Max AC` or `Anker SOLIX Solarbank 4 E5000 Pro` (shown as M1 device name on the HBC dashboard).
 7. Install / keep using HBC Node-RED flows and HA packages as documented upstream.
 
-### Migrating from the older Max-AC-only package
-
-If you previously used `Anker-Max-AC/anker_max_ac_m1_modbus_tcp.yaml`:
-
-1. Replace it with this file (and remove the old package).
-2. Re-set the device IP and product name helper.
-3. Re-apply HBC max charge/discharge helpers if needed (entity IDs for helpers changed from `anker_max_ac` → `anker_solarbank`).
-4. Restart HA / reload packages.
-
 ## How control works
 
 | HBC action | Anker Modbus |
