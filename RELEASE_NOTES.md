@@ -1,6 +1,21 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.14.0
+- **Feat: Zonneplan quarter-hourly (15 min) prices**
+  * The Dynamic strategy now uses Zonneplan's quarter-hourly tariffs, giving four times the resolution to find price peaks and troughs.
+  * Nothing to configure: keep `Zonneplan` selected as data source and import the flow. No template sensor, no `template.yaml`, no dashboard change.
+  * The flow reads `sensor.zonneplan_current_quarter_hourly_electricity_tariff` and reshapes its `forecast` attribute itself — the price is nested in `price_tax_included.amount`, which cannot be addressed with a plain `value_key`. The reshaped list is handed to Cheapest Energy Hours through its `price_data` input.
+  * Falls back to the hourly `sensor.zonneplan_current_electricity_tariff` automatically when the quarter-hourly entity is not available, so older Zonneplan integrations keep working and upgrade by themselves later.
+  * **Requires Cheapest Energy Hours v6.0.0 or newer** — `price_data` does not exist in older versions and the template will report an unknown-argument error.
+  * Price table and ApexChart follow the resolution automatically; `Max cheap/expensive hours per day` keep counting in hours.
+  * Thanks to Mike da Spike and all Discord members for reporting this and providing a first work arounds.
+
+- **Files Changed:**
+  - `home assistant/dashboard.yaml`
+  - `node-red/02 strategy-dynamic-2.json`
+  - `node-red/all-flows-in-one-file.json`
+
 ## 4.13.1
 - **Fix: Sell strategy no longer rounds down the energy reserve**
   * The reserve threshold in the Sell strategy used a bitwise `|` instead of a logical `||`, which silently truncated the configured value to a whole number of kWh.
