@@ -225,6 +225,26 @@ The algorithm identifies *economically valid candidates*; it does not enforce ph
 6. Replace this sensor name in the Node-RED flow for the Dynamic strategy: go to Node-RED, select the `Strategy Dynamic` tab, double-click `Data Source Settings`.
 7. Probably you have to wait some time until data is loaded.
 
+### Zonneplan — including quarter-hourly (15 min) prices
+
+1. Install the Zonneplan One integration [(link)](https://github.com/fsaris/home-assistant-zonneplan-one).
+2. Make sure Cheapest Energy Hours is **v6.0.0 or newer** [(link)](https://github.com/TheFes/cheapest-energy-hours). This is the only requirement — older versions do not have the `price_data` input the flow uses and will report an unknown-argument error.
+3. Select `Zonneplan` as the data source in the dashboard dropdown.
+
+That is all. No template sensor and no `template.yaml` entry are needed.
+
+The flow reads `sensor.zonneplan_current_quarter_hourly_electricity_tariff` and reshapes its
+`forecast` attribute itself, because the price sits nested in `price_tax_included.amount` and
+cannot be addressed with a plain `value_key`. If that entity is not available — for example on
+an older version of the integration — it falls back to the hourly
+`sensor.zonneplan_current_electricity_tariff` automatically. So quarter-hourly prices are used
+as soon as your integration provides them, without any action on your side.
+
+With quarter-hourly data the price table and the ApexChart switch to 15-minute rows on their
+own; they follow the `datapoints_per_hour` value that Cheapest Energy Hours reports. `Max cheap
+hours / day` and `Max expensive hours / day` keep counting in hours — see the tweaker note
+[above](#dashboard-controls) for how those map onto 15-minute intervals.
+
 ---
 
 ## Feedback

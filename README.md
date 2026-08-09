@@ -66,7 +66,12 @@ This project is designed for hobbyists who want full control over their home bat
 Check the [release notes](RELEASE_NOTES.md) to see which files have changed. In most cases your `Battery Start` flow stays unchanged (contains your custom settings). Copy the other files and import Node-RED flows as per the **[How to Update guide](docs/08-how-to-update.md)**.
 
 ## Credits
-The Node-RED + HA control schema is based on the approach by Ruald Ordelman. And the easy to use Modbus to HA boards by Fonske. Many thanks for sharing your work and ideas with the community!
+The Node-RED + HA control schema is based on the approach by Ruald Ordelman. And the easy to use Modbus to HA boards by [Fonske](https://github.com/fonske). Many thanks for sharing your work and ideas with the community!
+
+Battery packages contributed by the community:
+- [Fonske](https://github.com/fonske) — Marstek Venus packages over [Modbus TCP-IP](https://github.com/fonske/MarstekVenusV3-modbus-TCP-IP) and RS485 ([Lilygo](https://github.com/fonske/MarstekVenus-LilygoRS485) / [M5Stack](https://github.com/fonske/MarstekVenus-M5stackRS485)), and the reference `marstek_m1_*` entity naming that every other package maps onto
+- [Jos1958](https://github.com/Jos1958) — Anker SolarBank 3 Pro (cloud bridge)
+- [@wouterbouvy](https://github.com/wouterbouvy) — Anker SOLIX Solarbank Max AC / Solarbank 4 (local Modbus TCP)
 
 ## Contributing
 For major changes, please open an issue first to discuss what you would like to change.

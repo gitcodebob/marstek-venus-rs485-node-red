@@ -3,6 +3,7 @@ RELEASE_NOTES_TEMP.txt
 
 # Ignore notes and development files
 notes/
+temp/
 template_sensor_bob_battery_dashboard.yaml
 
 # Ignore SASS cache files
