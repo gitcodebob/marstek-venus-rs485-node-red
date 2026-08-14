@@ -36,3 +36,28 @@ template:
         unit_of_measurement: "W"
         device_class: "power"
         state_class: "measurement"
+
+      # House battery control | Optional per-phase grid power
+      # Uncomment these aliases if your three-phase meter exposes net power per phase.
+      # Positive = import from grid, negative = export to grid.
+      # Leave these blocks commented out if you do not have a three-phase setup.
+      # - name: "P1 Meter L1 Power"
+      #   unique_id: "p1_meter_l1_power"
+      #   state: "{{ states('sensor.your_l1_phase_power_sensor') }}" # << SET YOUR L1 PHASE POWER SENSOR HERE
+      #   unit_of_measurement: "W"
+      #   device_class: "power"
+      #   state_class: "measurement"
+
+      # - name: "P1 Meter L2 Power"
+      #   unique_id: "p1_meter_l2_power"
+      #   state: "{{ states('sensor.your_l2_phase_power_sensor') }}" # << SET YOUR L2 PHASE POWER SENSOR HERE
+      #   unit_of_measurement: "W"
+      #   device_class: "power"
+      #   state_class: "measurement"
+
+      # - name: "P1 Meter L3 Power"
+      #   unique_id: "p1_meter_l3_power"
+      #   state: "{{ states('sensor.your_l3_phase_power_sensor') }}" # << SET YOUR L3 PHASE POWER SENSOR HERE
+      #   unit_of_measurement: "W"
+      #   device_class: "power"
+      #   state_class: "measurement"
