@@ -1871,11 +1871,21 @@ views:
               - entity: input_select.house_battery_strategy_ev_stop_trigger_strategy
                 name: Trigger strategy
           - type: markdown
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_ev_stop_trigger_strategy
+                state: Charge
+            content: >-
+              <ha-alert alert-type="warning">The <b>Charge</b> trigger strategy
+              requires sufficient grid capacity and/or EV charger load balancing.
+              Otherwise EV and battery charging can overload the grid connection.</ha-alert>
+          - type: markdown
             content: >-
               <font color=grey>Enter the `entity_id` of an `input_boolean` or
               `on/off template_sensor` in the field above. Choose whether an
-              active trigger should fully stop the batteries or keep them in
-              standby for peak shaving.</font>
+              active trigger should fully stop the batteries, keep them in
+              standby for peak shaving, or charge. Select `Disabled` to retain
+              the configured sensor without changing the active battery strategy.</font>
             text_only: true
           - type: tile
             grid_options:
