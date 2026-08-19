@@ -12,9 +12,13 @@ nav_order: 6
   - Configure by entering the `entity_id` of an `input_boolean` or `on/off` template sensor
   - The trigger sensor should indicate when your EV or heavy appliance is actively charging
   - Choose the trigger strategy:
+    - **Disabled:** retain the configured sensor but do not override the active battery strategy
     - **Full stop:** stop battery operation until the trigger sensor returns to off
     - **Standby / peak shave:** keep normal battery operation idle, but allow peak shaving when grid limits are exceeded
-  - Manual **Full stop** in the main strategy selector always takes precedence, even when the EV trigger strategy is set to `Standby / peak shave`
+    - **Charge PV:** charge only from surplus solar while the trigger is active
+    - **Charge:** charge using the configured Charge strategy while the trigger is active
+      - Requires sufficient grid capacity and/or EV charger load balancing. Otherwise simultaneous EV and battery charging can overload the grid connection.
+  - Manual **Full stop** in the main strategy selector always takes precedence over the EV trigger strategy
   - Useful for preventing home battery discharge during high-power EV charging sessions
   - Configurable through the Advanced Settings dashboard
 
@@ -126,6 +130,7 @@ Peak Shaving helps reduce import and export peaks on your grid connection by int
 - Set your **export limit** on the "Settings" tab (maximum power you want to feed back to the grid)
   - Note: Most capacity tariff contracts only require import limiting
 - Peak Shaving integrates seamlessly with Charge, Self-consumption, Sell, Dynamic, and Timed strategies
+- During **Charge**, the battery's measured charging power is excluded from import-peak detection. Regulated Charge uses the configured import limit as its PID target, filling only the remaining grid headroom; peak shaving still activates when the non-battery load itself exceeds the limit.
 - Full Stop strategy takes precedence and will not be overridden by peak shaving
 
 **Limitations to understand:**

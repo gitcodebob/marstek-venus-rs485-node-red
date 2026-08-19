@@ -75,6 +75,8 @@ The Dynamic controls live in the `Timed/Dynamic` tab of the Home Battery Control
 | **Regular period strategy** | Action during neutral (unmarked) intervals. Choices: `Charge PV`, `Self-consumption`, `Full stop`. |
 | **High period strategy** | Action during `high`-marked intervals. Choices: `Self-consumption`, `Sell`, `Charge PV`, `Full stop`. |
 
+Changes to any of these period strategies take effect immediately. If the current price interval is low, neutral, or high, Dynamic re-evaluates that interval and switches to the newly selected sub-strategy without needing to stop and restart Dynamic.
+
 > **Tip:** the underlying `Charge` / `Sell` strategies can be configured with solar forecast, peak-shaving reserves, etc. Dynamic respects those settings.
 
 The price-data table (today and tomorrow with marks) and an ApexChart for review are visible in the same tab when debug/insights mode is enabled.
