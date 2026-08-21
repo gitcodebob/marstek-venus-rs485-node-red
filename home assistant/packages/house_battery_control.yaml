@@ -958,6 +958,93 @@ template:
           {% set filled = [target, available] | max if target is not none else available %}
           {{ [max_available - filled, 0] | max | round(2) if max_available > 0 else 0 }}
 
+  - trigger:
+      - trigger: homeassistant
+        event: start
+      - trigger: state
+        entity_id: input_number.house_battery_count
+      - trigger: time_pattern
+        minutes: "/1"
+    binary_sensor:
+      # Onboarding | are all configured batteries exposing the HBC entity contract?
+      - name: "HBC Battery Contract Ready"
+        unique_id: house_battery_control_battery_contract_ready
+        icon: mdi:battery-check-outline
+        state: >
+          {% set required = {
+            'sensor': [
+              'device_name',
+              'battery_state_of_charge',
+              'battery_power',
+              'ac_power',
+              'battery_total_energy',
+              'battery_remaining_capacity',
+              'inverter_state'
+            ],
+            'number': [
+              'max_charge_power',
+              'max_discharge_power',
+              'forcible_charge_power',
+              'forcible_discharge_power'
+            ],
+            'select': [
+              'rs485_control_mode',
+              'user_work_mode',
+              'forcible_charge_discharge'
+            ]
+          } %}
+          {% set count = states('input_number.house_battery_count') | int(1) %}
+          {% set ns = namespace(missing=[]) %}
+          {% for index in range(1, count + 1) %}
+            {% for domain, suffixes in required.items() %}
+              {% for suffix in suffixes %}
+                {% set entity_id = domain ~ '.marstek_m' ~ index ~ '_' ~ suffix %}
+                {% if states(entity_id) in ['unknown', 'unavailable', ''] %}
+                  {% set ns.missing = ns.missing + [entity_id] %}
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+          {% endfor %}
+          {{ ns.missing | count == 0 }}
+        attributes:
+          missing_entities: >
+            {% set required = {
+              'sensor': [
+                'device_name',
+                'battery_state_of_charge',
+                'battery_power',
+                'ac_power',
+                'battery_total_energy',
+                'battery_remaining_capacity',
+                'inverter_state'
+              ],
+              'number': [
+                'max_charge_power',
+                'max_discharge_power',
+                'forcible_charge_power',
+                'forcible_discharge_power'
+              ],
+              'select': [
+                'rs485_control_mode',
+                'user_work_mode',
+                'forcible_charge_discharge'
+              ]
+            } %}
+            {% set count = states('input_number.house_battery_count') | int(1) %}
+            {% set ns = namespace(missing=[]) %}
+            {% for index in range(1, count + 1) %}
+              {% for domain, suffixes in required.items() %}
+                {% for suffix in suffixes %}
+                  {% set entity_id = domain ~ '.marstek_m' ~ index ~ '_' ~ suffix %}
+                  {% if states(entity_id) in ['unknown', 'unavailable', ''] %}
+                    {% set ns.missing = ns.missing + [entity_id] %}
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            {% endfor %}
+            {{ ns.missing }}
+          last_checked: "{{ now().isoformat() }}"
+
   - binary_sensor:
       # Strategy charge | can PV surplus cover the full battery capacity today?
       - name: "Solar surplus covers battery capacity"

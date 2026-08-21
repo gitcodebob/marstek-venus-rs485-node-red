@@ -51,6 +51,7 @@ nav_order: 1
      - Configuration files are organized using the package-based structure:
        - `packages/house_battery_control.yaml` contains all input entities (booleans, datetimes, numbers, selects) and template sensors for battery control. This file is what you usually update.
        - `packages/house_battery_control_config.yaml` contains configuration-related entities specific for your install. Customize it. Don't overwrite at each update.
+       - If your battery uses different entity names, copy `custom_components/hbc_battery_mapper` to `/config/custom_components/hbc_battery_mapper`. The dashboard will guide you through its entity-picker setup after Home Assistant restarts.
      - The main `configuration.yaml` automatically loads all package files from the `packages/` directory
        - Tip: you can add your own package files to the `packages/` folder as well. They will be loaded automatically.
      - This package-based structure provides better organization, easier maintenance, and improved configuration sharing.
@@ -60,6 +61,7 @@ nav_order: 1
    - In Home Assistant import `dashboard.yaml` to create a dashboard.
    - Follow the **additional guidance** on this interactive dashboard.
       1. Set your desired number of batteries (the system can handle any number of batteries, but the dash is designed for max. 4)
+      1. Confirm that every battery exposes the required entities. Use the Battery Mapper when your integration does not use the `marstek_m1_*` names. After adding or changing a mapper entry, wait up to one minute for this check to refresh. If it stays red, Step 2 lists the exact missing or unavailable entities.
       1. Set your P1 sensor (`/packages/house_battery_control_config.yaml`)
          - Examples for 1 and 3 phase sensors are available. 
          - Examples of singular (+/-) and split (+production/+consumption) sensors are available.

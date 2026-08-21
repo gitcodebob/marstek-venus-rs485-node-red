@@ -22,6 +22,48 @@ views:
             text_only: true
           - type: markdown
             content: >-
+              <ha-alert title="Connect battery entities">One or more batteries
+              do not expose the entity names required by Home Battery Control.
+              {% set missing =
+              state_attr('binary_sensor.hbc_battery_contract_ready',
+              'missing_entities') | default([], true) %}
+              {% if missing %}Missing or unavailable:
+              {% for entity_id in missing %}`{{ entity_id }}`{% if not
+              loop.last %}, {% endif %}{% endfor %}
+              {% else %}The contract check has not completed yet. Wait one
+              minute after restarting Home Assistant.{% endif %}</ha-alert>
+
+              If your battery integration uses different names, open **HBC
+              Battery Mapper** below and correct the listed mappings.
+            visibility:
+              - condition: state
+                entity: binary_sensor.hbc_battery_contract_ready
+                state_not: 'on'
+          - type: heading
+            icon: mdi:connection
+            heading: Configure battery entity mapping
+            heading_style: subtitle
+            tap_action:
+              action: navigate
+              navigation_path: >-
+                /config/integrations/dashboard/add?domain=hbc_battery_mapper
+            visibility:
+              - condition: state
+                entity: binary_sensor.hbc_battery_contract_ready
+                state_not: 'on'
+          - type: markdown
+            content: >-
+              <ha-alert title="Battery entities"
+              alert-type="success">Configured</ha-alert>
+            visibility:
+              - condition: state
+                entity: binary_sensor.hbc_battery_contract_ready
+                state: 'on'
+          - type: markdown
+            content: '### Step 3'
+            text_only: true
+          - type: markdown
+            content: >-
               <ha-alert title="Setup Grid Power Sensor">Configure your P1 power
               sensor</ha-alert>
 
@@ -64,7 +106,7 @@ views:
               action: navigate
               navigation_path: /core_configurator
           - type: markdown
-            content: '### Step 3'
+            content: '### Step 4'
             text_only: true
           - type: markdown
             content: >-
@@ -83,7 +125,7 @@ views:
                 entity: input_boolean.house_battery_control_has_node_red
                 state: 'on'
           - type: markdown
-            content: '### Step 4'
+            content: '### Step 5'
             text_only: true
           - type: markdown
             content: >-
@@ -129,7 +171,7 @@ views:
                     entity: input_boolean.house_battery_control_has_power_limit_export
                     state: 'on'
           - type: markdown
-            content: '### Step 5'
+            content: '### Step 6'
             text_only: true
           - type: markdown
             content: >-
@@ -143,6 +185,9 @@ views:
             content: '### Done'
             text_only: true
             visibility:
+              - condition: state
+                entity: binary_sensor.hbc_battery_contract_ready
+                state: 'on'
               - condition: state
                 entity: input_boolean.house_battery_control_has_node_red
                 state: 'on'
@@ -168,6 +213,9 @@ views:
               action: toggle
             visibility:
               - condition: state
+                entity: binary_sensor.hbc_battery_contract_ready
+                state: 'on'
+              - condition: state
                 entity: input_boolean.house_battery_control_has_node_red
                 state: 'on'
               - condition: not
@@ -191,6 +239,9 @@ views:
               Hide onboarding
             visibility:
               - condition: state
+                entity: binary_sensor.hbc_battery_contract_ready
+                state: 'on'
+              - condition: state
                 entity: input_boolean.house_battery_control_has_node_red
                 state: 'on'
               - condition: not
@@ -212,6 +263,9 @@ views:
               rows: auto
             text_only: true
             visibility:
+              - condition: state
+                entity: binary_sensor.hbc_battery_contract_ready
+                state: 'on'
               - condition: state
                 entity: input_boolean.house_battery_control_has_node_red
                 state: 'on'
@@ -1784,6 +1838,22 @@ views:
           - type: entities
             entities:
               - entity: input_number.house_battery_count
+          - type: heading
+            icon: mdi:connection
+            heading: Add battery entity mapping
+            heading_style: subtitle
+            tap_action:
+              action: navigate
+              navigation_path: >-
+                /config/integrations/dashboard/add?domain=hbc_battery_mapper
+          - type: heading
+            icon: mdi:battery-sync-outline
+            heading: Change or remove battery mappings
+            heading_style: subtitle
+            tap_action:
+              action: navigate
+              navigation_path: >-
+                /config/integrations/integration/hbc_battery_mapper
           - type: tile
             visibility:
               - condition: state

@@ -1,0 +1,10 @@
+{
+  "domain": "hbc_battery_mapper",
+  "name": "Home Battery Control Battery Mapper",
+  "config_flow": true,
+  "documentation": "https://docs.homebatterycontrol.com/09-for-integrators.html",
+  "integration_type": "helper",
+  "iot_class": "calculated",
+  "requirements": [],
+  "version": "0.1.2"
+}
