@@ -432,9 +432,30 @@ views:
               columns: full
               rows: 1
           - type: heading
-            heading: Marstek M1
+            heading: Battery Phase Interaction
             heading_style: subtitle
-            icon: ''
+            icon: mdi:transmission-tower
+            visibility:
+              - condition: state
+                entity: binary_sensor.house_battery_has_phase_assignment
+                state: 'on'
+          - type: glance
+            entities:
+              - entity: sensor.house_battery_l1_power
+                name: L1
+              - entity: sensor.house_battery_l2_power
+                name: L2
+              - entity: sensor.house_battery_l3_power
+                name: L3
+            columns: 3
+            visibility:
+              - condition: state
+                entity: binary_sensor.house_battery_has_phase_assignment
+                state: 'on'
+          - type: markdown
+            content: >-
+              ### Marstek M1{% set phase = states('input_select.marstek_m1_phase') %}{% if phase == 'L1' %} - Phase 1{% elif phase == 'L2' %} - Phase 2{% elif phase == 'L3' %} - Phase 3{% endif %}
+            text_only: true
             visibility:
               - condition: state
                 entity: sensor.marstek_m1_device_name
@@ -453,10 +474,10 @@ views:
               - condition: state
                 entity: sensor.marstek_m1_device_name
                 state_not: unknown
-          - type: heading
-            heading: Marstek M2
-            heading_style: subtitle
-            icon: ''
+          - type: markdown
+            content: >-
+              ### Marstek M2{% set phase = states('input_select.marstek_m2_phase') %}{% if phase == 'L1' %} - Phase 1{% elif phase == 'L2' %} - Phase 2{% elif phase == 'L3' %} - Phase 3{% endif %}
+            text_only: true
             visibility:
               - condition: and
                 conditions:
@@ -485,10 +506,10 @@ views:
                   - condition: numeric_state
                     entity: input_number.house_battery_count
                     above: 1
-          - type: heading
-            heading: Marstek M3
-            heading_style: subtitle
-            icon: ''
+          - type: markdown
+            content: >-
+              ### Marstek M3{% set phase = states('input_select.marstek_m3_phase') %}{% if phase == 'L1' %} - Phase 1{% elif phase == 'L2' %} - Phase 2{% elif phase == 'L3' %} - Phase 3{% endif %}
+            text_only: true
             visibility:
               - condition: and
                 conditions:
@@ -517,10 +538,10 @@ views:
                   - condition: numeric_state
                     entity: input_number.house_battery_count
                     above: 2
-          - type: heading
-            heading: Marstek M4
-            heading_style: subtitle
-            icon: ''
+          - type: markdown
+            content: >-
+              ### Marstek M4{% set phase = states('input_select.marstek_m4_phase') %}{% if phase == 'L1' %} - Phase 1{% elif phase == 'L2' %} - Phase 2{% elif phase == 'L3' %} - Phase 3{% endif %}
+            text_only: true
             visibility:
               - condition: and
                 conditions:
@@ -549,10 +570,10 @@ views:
                   - condition: numeric_state
                     entity: input_number.house_battery_count
                     above: 3
-          - type: heading
-            heading: Marstek M5
-            heading_style: subtitle
-            icon: ''
+          - type: markdown
+            content: >-
+              ### Marstek M5{% set phase = states('input_select.marstek_m5_phase') %}{% if phase == 'L1' %} - Phase 1{% elif phase == 'L2' %} - Phase 2{% elif phase == 'L3' %} - Phase 3{% endif %}
+            text_only: true
             visibility:
               - condition: and
                 conditions:
@@ -581,10 +602,10 @@ views:
                   - condition: numeric_state
                     entity: input_number.house_battery_count
                     above: 4
-          - type: heading
-            heading: Marstek M6
-            heading_style: subtitle
-            icon: ''
+          - type: markdown
+            content: >-
+              ### Marstek M6{% set phase = states('input_select.marstek_m6_phase') %}{% if phase == 'L1' %} - Phase 1{% elif phase == 'L2' %} - Phase 2{% elif phase == 'L3' %} - Phase 3{% endif %}
+            text_only: true
             visibility:
               - condition: and
                 conditions:
@@ -1994,6 +2015,49 @@ views:
       - type: grid
         cards:
           - type: heading
+            icon: mdi:fuse
+            heading: Per-phase safety limit
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: input_boolean.house_battery_control_has_phase_protection
+              - entity: input_number.house_battery_control_max_phase_power
+                name: Hard phase ceiling
+              - entity: input_number.house_battery_control_phase_target
+                name: Phase operating target
+              - entity: input_number.house_battery_control_phase_hysteresis
+                name: Target hysteresis (± W)
+              - entity: input_number.house_battery_control_recovery_delay
+                name: Recovery delay (phase and whole house)
+              - entity: input_number.house_battery_control_recovery_rate
+                name: Recovery rate (phase and whole house)
+          - type: markdown
+            content: >-
+              <font color=grey><i>When enabled, configured L1/L2/L3 grid power
+              sensors and phase-assigned batteries are used for per-phase
+              protection. All strategies returning battery solutions use shared
+              command protection; Full stop takes precedence. Reductions needed
+              for protection directly set the charge power that fits beneath the
+              operating target. With a 5750 W ceiling, a 5500 W target and ±100 W
+              hysteresis hold output steady from 5400–5600 W. The target plus
+              hysteresis must be below the ceiling. Invalid settings retain the
+              last valid pair, or use a conservative fallback at startup.
+              Recovery waits for stable headroom
+              (default 10 seconds), then changes at most 100 W/s per phase,
+              shared by its batteries. Whole-house protection shares the same
+              rate across the installation. Missing readings pause recovery.
+              Leave enough reserve above the band for other controllers: a
+              5400 W target with ±100 W leaves 250 W below a 5750 W ceiling,
+              enough for a nominal 230 W (1 A) EV recovery step.
+              These recovery settings also apply with per-phase protection
+              disabled when whole-house limits are enabled. Custom strategies
+              writing directly to devices bypass shared protection.</i></font>
+            text_only: true
+            grid_options:
+              columns: full
+      - type: grid
+        cards:
+          - type: heading
             icon: mdi:car-electric
             heading: Home Energy Control
             heading_style: subtitle
@@ -2033,6 +2097,10 @@ views:
             icon: mdi:power-plug-battery
             heading: Marstek M1
             heading_style: title
+          - type: entities
+            entities:
+              - entity: input_select.marstek_m1_phase
+                name: Phase
           - type: vertical-stack
             cards:
               - type: markdown
@@ -2102,6 +2170,10 @@ views:
             icon: mdi:power-plug-battery
             heading: Marstek M2
             heading_style: title
+          - type: entities
+            entities:
+              - entity: input_select.marstek_m2_phase
+                name: Phase
           - type: vertical-stack
             cards:
               - type: markdown
@@ -2167,6 +2239,10 @@ views:
             icon: mdi:power-plug-battery
             heading: Marstek M3
             heading_style: title
+          - type: entities
+            entities:
+              - entity: input_select.marstek_m3_phase
+                name: Phase
           - type: vertical-stack
             cards:
               - type: markdown
@@ -2232,6 +2308,10 @@ views:
             icon: mdi:power-plug-battery
             heading: Marstek M4
             heading_style: title
+          - type: entities
+            entities:
+              - entity: input_select.marstek_m4_phase
+                name: Phase
           - type: vertical-stack
             cards:
               - type: markdown
@@ -2297,6 +2377,10 @@ views:
             icon: mdi:power-plug-battery
             heading: Marstek M5
             heading_style: title
+          - type: entities
+            entities:
+              - entity: input_select.marstek_m5_phase
+                name: Phase
           - type: vertical-stack
             cards:
               - type: markdown
@@ -2362,6 +2446,10 @@ views:
             icon: mdi:power-plug-battery
             heading: Marstek M6
             heading_style: title
+          - type: entities
+            entities:
+              - entity: input_select.marstek_m6_phase
+                name: Phase
           - type: vertical-stack
             cards:
               - type: markdown

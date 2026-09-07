@@ -76,6 +76,16 @@ It shows *known issues*, but is not a full debug tool. Some unforeseen errors st
 - Check battery max (dis)charge values. Are these correct?
 - If your converter/batteries allows over 15kW of charging, adjust the limits in `home assistant\input_numbers\input_number_house_battery_control.yaml`
 
+#### I get an error `"HomeAssistantError: expected float at 'value'"` on a Usable energy / totals node
+- This happened when one battery was briefly `unavailable` or `unknown` — an RS485 dropout,
+  a Modbus integration reload, or a Home Assistant restart. A single unreadable battery used
+  to turn the whole cumulative total into `NaN`, which reaches Home Assistant as `null`.
+- Fixed: unreadable telemetry is now mapped to `null` per battery, the totals skip what did
+  not report, and the dashboard holds its last good value until every battery reports again.
+- In debug mode you will see `Totals are incomplete, telemetry unavailable for: M2` naming
+  the battery that dropped out. If it keeps recurring for the same battery, check its RS485
+  wiring and Modbus polling.
+
 #### Modbus error function code: 0x3 exception: 2 (or similar)
 - Update the latest firmware on your battery. 
 
