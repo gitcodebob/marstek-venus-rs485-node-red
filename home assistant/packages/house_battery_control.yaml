@@ -1,4 +1,3 @@
-# yaml-language-server: $schema=http://schemas.home-assistant.io/configuration
 # This file contains the core entities of the House Battery Control.
 # It should be included in the main configuration.yaml file as a `package` via `!include_dir_named` https://www.home-assistant.io/docs/configuration/packages/.
 # Replace this file when updating `House Battery Control`.

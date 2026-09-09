@@ -1,6 +1,16 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.15.1
+- **Fix: Await battery write completion to stop overlapping Modbus writes**
+
+- **Files Changed:**
+  - `.gitignore`
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/01 start-flow.json`
+  - `node-red/all-flows-in-one-file.json`
+
 ## 4.15.0
 _Contributed by [@wouterbouvy](https://github.com/wouterbouvy) — [#158](https://github.com/gitcodebob/marstek-venus-rs485-node-red/pull/158)._
 
