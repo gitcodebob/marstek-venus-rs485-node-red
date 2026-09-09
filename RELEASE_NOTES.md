@@ -16,10 +16,6 @@ _Fixes [#171](https://github.com/gitcodebob/marstek-venus-rs485-node-red/issues/
 - **Fix: Remove obsolete yaml-language-server schema URL**
   * The `schemas.home-assistant.io` endpoint has been discontinued, which caused `Unable to load schema: No content` errors in VS Code. Home Assistant itself was never affected.
 
-- **Note: re-import your flows**
-  * The Set Batteries section was rebuilt, so the node IDs in `01 start-flow.json` changed. Import the fresh flows as usual.
-  * `all-flows-in-one-file.json` also carries the previous start flow on a **disabled** `Home Battery Start - deprecated` tab, kept for reference. It does not run alongside the new one; delete it once you are happy with the update.
-
 - **Files Changed:**
   - `.gitignore`
   - `home assistant/dashboard.yaml`
