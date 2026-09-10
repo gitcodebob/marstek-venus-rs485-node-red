@@ -59,11 +59,27 @@ The table below lists every entity HBC reads or writes for a single battery (`m1
 
 ## Mapping another brand
 
-If your battery is exposed under different entity names, you have two options:
+If your battery is exposed under different entity names, you have three options:
 
-1. **Native Modbus package** (preferred when the battery has a documented local Modbus map): expose `marstek_m1_*` entities from HA `modbus:` + templates, like the [Anker Solarbank package](../home%20assistant/other-batteries/Anker-Solarbank/anker_solarbank_m1_modbus_tcp.yaml) (Max AC + Solarbank 4).
-2. **Helper/template bridge** onto entities from an existing HA integration: see the [Anker to M1 Marstek package](https://github.com/Jos1958/marstek-venus-rs485-node-red/blob/main/home%20assistant/packages/anker_to_m1_marstek.yaml) by Jos.
-3. **Alter the mapping inside the Node-RED flows.** Possible, but **less advised** — it makes updating HBC later cumbersome.
+1. **HBC Battery Mapper** for an existing Home Assistant integration. It provides entity pickers, unit and polarity conversion, vendor option mapping, and clean removal. See the setup below.
+2. **Native Modbus package** when the battery has a documented local Modbus map. Expose `marstek_m1_*` entities from HA `modbus:` and templates, like the [Anker Solarbank package](../home%20assistant/other-batteries/Anker-Solarbank/anker_solarbank_m1_modbus_tcp.yaml) for Max AC and Solarbank 4.
+3. **Alter the mapping inside the Node-RED flows.** This works, but every HBC update becomes a manual merge.
+
+### HBC Battery Mapper setup
+
+The mapper works with Marstek integrations that use different names and with other batteries that expose equivalent writable controls.
+
+1. Copy the complete `home assistant/custom_components/hbc_battery_mapper` directory from this repository to `/config/custom_components/hbc_battery_mapper` in Home Assistant.
+2. Restart Home Assistant.
+3. Open **Settings > Devices & services > Add integration** and select **Home Battery Control Battery Mapper**.
+4. Choose slot M1 for the first battery, M2 for the second, and so on.
+5. Pick the source readings and writable controls from your existing battery integration. The wizard calculates remaining energy and inverter state when you leave those optional fields empty.
+6. Check the power polarity shown by your source. HBC requires charging to be positive and discharging to be negative.
+7. Match your battery integration's mode labels to `enable`, `disable`, `stop`, `charge`, and `discharge`. The wizard preselects common labels.
+8. Repeat for each battery. Set **Number of batteries** on the HBC dashboard to the same count.
+9. Keep **Master Battery Mode** out of `Full control` until the onboarding battery check is green and you have tested low power commands.
+
+To change a mapping, open the integration entry and choose **Reconfigure**. To clean up a retired or incorrect mapping, delete that battery's integration entry. Home Assistant then removes all mapper entities for the entry. Do not map a slot that already has Fonske-compatible entities.
 
 For the bigger picture of how data flows from your meter and battery through Home Assistant into the HBC strategy flows and dashboard, see the [connection schema overview](/02-modbus-setup#an-overview-of-available-connection-schemas).
 

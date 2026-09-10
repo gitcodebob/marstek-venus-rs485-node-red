@@ -1,0 +1,85 @@
+{
+  "title": "Home Battery Control Battery Mapper",
+  "config": {
+    "flow_title": "Battery mapper: {name}",
+    "step": {
+      "user": {
+        "title": "Choose the HBC battery slot",
+        "description": "Create the standard marstek_m1 to marstek_m6 entities that Home Battery Control expects. Do not use a slot that already has Fonske-compatible entities.",
+        "data": {
+          "battery_index": "HBC battery slot",
+          "battery_name": "Battery name",
+          "power_sign": "Battery power polarity",
+          "ac_power_sign": "AC power polarity",
+          "soc_scale": "State of charge scale"
+        },
+        "data_description": {
+          "power_sign": "HBC uses positive values while charging and negative values while discharging.",
+          "ac_power_sign": "Choose the polarity of the optional AC power source. The mapped dashboard entity uses positive values while discharging.",
+          "soc_scale": "Choose how your source reports state of charge."
+        }
+      },
+      "reconfigure": {
+        "title": "Update battery settings",
+        "description": "Change conversion rules or continue to replace mapped entities.",
+        "data": {
+          "battery_name": "Battery name",
+          "power_sign": "Battery power polarity",
+          "ac_power_sign": "AC power polarity",
+          "soc_scale": "State of charge scale"
+        }
+      },
+      "sensors": {
+        "title": "Map battery readings",
+        "description": "Pick the entities from your existing battery integration. Remaining energy, AC power, voltage, and inverter state are optional. The mapper calculates safe fallbacks when you leave them empty.",
+        "data": {
+          "state_of_charge_entity": "State of charge",
+          "battery_power_entity": "Battery power",
+          "total_energy_entity": "Total battery capacity",
+          "remaining_energy_entity": "Remaining battery energy",
+          "ac_power_entity": "AC power",
+          "voltage_entity": "Battery voltage",
+          "inverter_state_entity": "Inverter state"
+        }
+      },
+      "controls": {
+        "title": "Map writable battery controls",
+        "description": "These entities receive commands from Node-RED. External control may be a select or an on/off switch. Work mode is optional only when your battery stays in manual/external control without it.",
+        "data": {
+          "max_charge_power_entity": "Maximum charge power",
+          "max_discharge_power_entity": "Maximum discharge power",
+          "forced_charge_power_entity": "Forced charge power",
+          "forced_discharge_power_entity": "Forced discharge power",
+          "control_mode_entity": "External or RS485 control",
+          "work_mode_entity": "User work mode",
+          "force_mode_entity": "Stop, charge, or discharge mode"
+        }
+      },
+      "option_map": {
+        "title": "Match your battery's mode names",
+        "description": "Map each HBC command to the option used by your battery integration.",
+        "data": {
+          "control_disable_option": "Disable external control",
+          "control_enable_option": "Enable external control",
+          "work_manual_option": "Manual work mode",
+          "work_anti_feed_option": "Anti-feed work mode",
+          "work_ai_option": "AI work mode",
+          "force_stop_option": "Stop",
+          "force_charge_option": "Charge",
+          "force_discharge_option": "Discharge"
+        }
+      }
+    },
+    "error": {
+      "target_entities_exist": "This slot already has one or more marstek_m entities. Remove the old mapper or choose another slot.",
+      "entity_not_found": "The selected entity is not loaded.",
+      "recursive_mapping": "Select an original battery entity, not a marstek_m mapper output.",
+      "select_has_no_options": "One of the selected mode entities is unavailable or has no options.",
+      "duplicate_options": "Use a different source option for every command in a group: stop/charge/discharge, enable/disable, and each configured work mode."
+    },
+    "abort": {
+      "already_configured": "This HBC battery slot is already configured.",
+      "reconfigure_successful": "The battery mapping was updated."
+    }
+  }
+}

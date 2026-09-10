@@ -15,6 +15,7 @@ This project is designed for hobbyists who want full control over their home bat
 - **You don't need to be a programmer**
 - **Node-RED Control Flows:** Easy to import and use control flows for battery charge/discharge ([node-red/](node-red/))
 - **Home Assistant Integration:** Premade dashboard for onboarding and control. Example configuration files included. ([home assistant/](home%20assistant/))
+- **Battery Entity Mapper:** UI-based mapping from alternate Marstek or other battery integrations to the entity contract expected by HBC
 - **Customizable:** Tweakers? Adapt the flows and configuration to your specific battery hardware and automation needs
 - **Multiple Strategies:** [Self-consumption](docs/04-setup-self-consumption.md) (use your own energy), [Timed](node-red/02%20strategy-timed.json), [Dynamic](docs/05-setup-dynamic.md) (price-based), [Charge](node-red/02%20strategy-charge.json), [Sell](node-red/02%20strategy-sell.json), [Charge PV](node-red/02%20strategy-charge-pv.json) (solar-only), [Full Stop](node-red/02%20strategy-full-stop.json). Easily add your own. See [all strategies](docs/03-strategies.md).
 - **Easy Updates:** Grab the latest control flow without losing your personal configurations
