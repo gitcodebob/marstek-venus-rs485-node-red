@@ -185,7 +185,6 @@ input_number:
     name: "Max. available energy"
     min: -10
     max: 1000
-    initial: 0
     unit_of_measurement: "kWh"
     mode: box
     icon: mdi:power-plug-battery
@@ -205,7 +204,6 @@ input_number:
     name: "Max. charge power"
     min: 0
     max: 15000
-    initial: 0
     unit_of_measurement: "W"
     mode: box
     icon: mdi:power-plug-battery
@@ -215,7 +213,6 @@ input_number:
     name: "Max. discharge power"
     min: 0
     max: 15000
-    initial: 0
     unit_of_measurement: "W"
     mode: box
     icon: mdi:power-plug-battery
