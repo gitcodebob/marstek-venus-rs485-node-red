@@ -932,6 +932,9 @@
                 "input_number.house_battery_strategy_dynamic_expensive_hrs",
                 "input_select.house_battery_strategy_dynamic_data_source",
                 "input_number.house_battery_strategy_dynamic_threshold_delta",
+                "input_select.house_battery_strategy_dynamic_default",
+                "input_select.house_battery_strategy_dynamic_cheapest",
+                "input_select.house_battery_strategy_dynamic_expensive",
                 "input_select.house_battery_strategy"
             ],
             "substring": [],

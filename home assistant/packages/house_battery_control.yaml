@@ -670,8 +670,11 @@ input_select:
   house_battery_strategy_ev_stop_trigger_strategy:
     name: EV Stop Trigger Strategy
     options:
+      - Disabled # Keep the configured trigger sensor without overriding the active battery strategy
       - Full stop # Stop (dis)charging and disengage grid relay
       - Standby / peak shave # Standby, peak shave only. Requires power limits to be set!
+      - Charge PV # Charge only when surplus PV is available
+      - Charge # Charge from the grid using the configured Charge strategy
     icon: mdi:power-plug-off
 
   # Available sub-strategies for timed / smart
