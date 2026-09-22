@@ -259,6 +259,93 @@ template:
             {{ ns.n }}
 
       # ---------------------------------------------------------------------------------------------
+      # The price of the interval we are in RIGHT NOW, straight out of HBC's own price data.
+      #
+      # This is the number the price-marks table highlights in blue - same source, same
+      # interval, same cents - so the dashboard cannot show two different "current prices".
+      # HBC publishes the list but no entity for the single value, so this package brings one,
+      # the same way it brings the fleet SoC above.
+      #
+      # `marks` is [{start, end, price, mark, is_now}]. is_now is HBC's own flag and is what
+      # the apexcharts card colours the current column from; the timestamp comparison is only
+      # a fallback for a payload that arrives without it. Anything else - no data, no matching
+      # interval - is `unknown`, so the dashboard shows a dash instead of a made-up 0 cents.
+      #
+      # Re-renders every minute because of now(), but the STATE only moves on an interval
+      # boundary (~96 rows a day). No state_class on purpose: a market price is not a
+      # measurement of this house, and its long-term statistics belong to the energy
+      # dashboard rather than to a battery package.
+      # ---------------------------------------------------------------------------------------------
+      # The NAME is a template, which is how the dashboard row ends up reading
+      # "Current ENTSO-E price" - a Lovelace entities row cannot template its own
+      # label, but a template entity can template its friendly name, so the label is
+      # produced here and the row simply shows it (no `name:` override on that row).
+      # Switching input_select.house_battery_strategy_dynamic_data_source re-labels the
+      # row on the next render, with no dashboard edit.
+      #
+      # The " (core)" / " (custom)" suffix on some options names the integration, not the
+      # tariff, so it is dropped: "Tibber (custom)" reads as "Current Tibber price".
+      # No source selected (or HBC not answering yet) falls back to the plain wording
+      # rather than "Current None price".
+      #
+      # NOTE: entity_id is fixed at first creation and derives from whatever the name
+      # rendered to THEN. This sensor was added with the static name "HBC energy price
+      # now", so if it already exists its entity_id stays sensor.hbc_energy_price_now and
+      # only the label changes. If it is created for the first time with this template in
+      # place, HA will derive the id from the rendered label instead - see the note in
+      # the reply; rename it in Settings > Entities if that happens.
+      - name: >-
+          {%- set src = states('input_select.house_battery_strategy_dynamic_data_source') -%}
+          {%- if src in ['unknown', 'unavailable', 'None', ''] -%}
+            Current price
+          {%- else -%}
+            Current {{ src.split(' (')[0] }} price
+          {%- endif -%}
+        unique_id: hbc_energy_price_now
+        unit_of_measurement: "cents/kWh"
+        icon: mdi:transmission-tower-import
+        availability: "{{ has_value('sensor.hbc_energy_prices_data') }}"
+        state: >-
+          {%- set now_ts = as_timestamp(now()) -%}
+          {%- set marks = state_attr('sensor.hbc_energy_prices_data', 'marks') or [] -%}
+          {%- set ns = namespace(p=none) -%}
+          {%- for iv in marks -%}
+            {%- if iv.is_now | default(false) -%}
+              {%- set ns.p = iv.price -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if ns.p is none -%}
+            {%- for iv in marks -%}
+              {%- if as_timestamp(iv.start, 0) > 0 and as_timestamp(iv.start, 0) <= now_ts
+                     and now_ts < as_timestamp(iv.end, 0) -%}
+                {%- set ns.p = iv.price -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+          {{ (ns.p | float(0)) | round(2) if ns.p is not none else 'unknown' }}
+        attributes:
+          # 'low' / 'high' / whatever HBC marked this interval, for a conditional row or an
+          # automation that wants the classification rather than the number.
+          mark: >-
+            {%- set now_ts = as_timestamp(now()) -%}
+            {%- set marks = state_attr('sensor.hbc_energy_prices_data', 'marks') or [] -%}
+            {%- set ns = namespace(m=none) -%}
+            {%- for iv in marks -%}
+              {%- if iv.is_now | default(false) -%}
+                {%- set ns.m = iv.mark -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if ns.m is none -%}
+              {%- for iv in marks -%}
+                {%- if as_timestamp(iv.start, 0) > 0 and as_timestamp(iv.start, 0) <= now_ts
+                       and now_ts < as_timestamp(iv.end, 0) -%}
+                  {%- set ns.m = iv.mark -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+            {{ ns.m if ns.m is not none else 'unknown' }}
+
+      # ---------------------------------------------------------------------------------------------
       # Every period marked cheap that is still ahead of us TODAY, as merged runs.
       #
       # Split out from the window sensor because with "Cheapest hours" the window is DERIVED
@@ -338,6 +425,73 @@ template:
                       'price': r.p | round(2),
                       'minutes': ((be - bs) / 60) | round(0) | int }] -%}
               {%- endif -%}
+            {%- endfor -%}
+            {{ ns.out }}
+
+      # ---------------------------------------------------------------------------------------------
+      # The same merged runs as sensor.deadline_cheap_blocks above, but for TOMORROW instead
+      # of today, and never clipped to 'now' - none of tomorrow has happened yet. Split out
+      # as its own sensor (rather than folded into the 'planned window' sensors' rollover
+      # branch) so every continuation row can share ONE computation instead of five, the same
+      # way sensor.deadline_cheap_blocks already backs today's rows.
+      #
+      # Empty (empty list, before ~13:00) until tomorrow's prices are published - the two
+      # 'planned window' sensors already handle that gap with their own 'No cheap hours left
+      # today' / 'Not defined' text, so this sensor does not need to.
+      #
+      # State = total minutes (parity with deadline_cheap_blocks; nothing reads it).
+      # Attribute `blocks` = [{start, end, price, minutes}], time order, HH:MM:SS strings.
+      # ---------------------------------------------------------------------------------------------
+      - name: "Deadline cheap blocks tomorrow"
+        unique_id: house_battery_deadline_cheap_blocks_tomorrow
+        unit_of_measurement: "min"
+        icon: mdi:cash-clock
+        state: >-
+          {%- set tomorrow = (now() + timedelta(days=1)).strftime('%Y-%m-%d') -%}
+          {%- set ns = namespace(total=0) -%}
+          {%- for iv in (state_attr('sensor.hbc_energy_prices_data', 'marks') or [])
+                | selectattr('mark', 'eq', 'low') | list -%}
+            {%- if as_timestamp(iv.start, 0) > 0 and as_timestamp(iv.end, 0) > as_timestamp(iv.start, 0)
+                   and (as_timestamp(iv.start, 0) | timestamp_custom('%Y-%m-%d', true)) == tomorrow -%}
+              {%- set ns.total = ns.total + (as_timestamp(iv.end, 0) - as_timestamp(iv.start, 0)) / 60 -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {{ (ns.total / 60) | round(0) | int }}
+        attributes:
+          blocks: >-
+            {%- set tomorrow = (now() + timedelta(days=1)).strftime('%Y-%m-%d') -%}
+            {%- set lows = (state_attr('sensor.hbc_energy_prices_data', 'marks') or [])
+                  | selectattr('mark', 'eq', 'low')
+                  | selectattr('start', 'defined') | rejectattr('start', 'none')
+                  | selectattr('end', 'defined') | rejectattr('end', 'none')
+                  | sort(attribute='start') | list -%}
+            {%- set ns = namespace(runs=[], out=[], cs=none, ce=none, psum=0, pmin=0) -%}
+            {%- for iv in lows -%}
+              {%- if as_timestamp(iv.start, 0) > 0 and as_timestamp(iv.end, 0) > as_timestamp(iv.start, 0)
+                     and (as_timestamp(iv.start, 0) | timestamp_custom('%Y-%m-%d', true)) == tomorrow -%}
+                {%- set m = (as_timestamp(iv.end, 0) - as_timestamp(iv.start, 0)) / 60 -%}
+                {%- if ns.cs is not none and iv.start == ns.ce -%}
+                  {%- set ns.ce = iv.end -%}
+                  {%- set ns.psum = ns.psum + (iv.price | float(0)) * m -%}
+                  {%- set ns.pmin = ns.pmin + m -%}
+                {%- else -%}
+                  {%- if ns.cs is not none -%}
+                    {%- set ns.runs = ns.runs + [{'s': ns.cs, 'e': ns.ce, 'p': ns.psum / ns.pmin}] -%}
+                  {%- endif -%}
+                  {%- set ns.cs = iv.start -%}{%- set ns.ce = iv.end -%}
+                  {%- set ns.psum = (iv.price | float(0)) * m -%}{%- set ns.pmin = m -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if ns.cs is not none -%}
+              {%- set ns.runs = ns.runs + [{'s': ns.cs, 'e': ns.ce, 'p': ns.psum / ns.pmin}] -%}
+            {%- endif -%}
+            {%- for r in ns.runs -%}
+              {%- set ns.out = ns.out + [{
+                    'start': as_timestamp(r.s, 0) | timestamp_custom('%H:%M:%S', true),
+                    'end': as_timestamp(r.e, 0) | timestamp_custom('%H:%M:%S', true),
+                    'price': r.p | round(2),
+                    'minutes': ((as_timestamp(r.e, 0) - as_timestamp(r.s, 0)) / 60) | round(0) | int }] -%}
             {%- endfor -%}
             {{ ns.out }}
 
@@ -499,8 +653,8 @@ template:
       # In every case the window is clamped to the current day - the point of the strategy
       # is to have the batteries full for the night.
       #
-      # The state reads "HH:MM - HH:MM (N min)", where N is the wall-clock minutes left to
-      # the end of the window; the card shows it as "Charge (cheap hours)" or
+      # The state reads "HH:MM - HH:MM (HH:MM)", where the trailing HH:MM is the wall-clock
+      # duration left to the end of the window; the card shows it as "Charge (cheap hours)" or
       # "Charge (Time slot)" depending on the pacing.
       #
       # Attributes:
@@ -522,21 +676,44 @@ template:
         icon: mdi:calendar-clock
         state: >-
           {%- set pacing = states('sensor.deadline_pacing') -%}
-          {%- set b = (state_attr('sensor.deadline_cheap_blocks', 'blocks') if pacing == 'Cheapest hours'
-                       else state_attr('sensor.deadline_pacing', 'slots') if pacing == 'Time slot'
-                       else []) or [] -%}
-          {%- if pacing in ['Cheapest hours', 'Time slot'] -%}
+          {%- if pacing == 'Cheapest hours' -%}
+            {#- 'blocks' is already clipped to [now, end of day] and a run underway starts
+                at 'now', so b|first is already the block still ahead (or under way) - a
+                first-to-last span is not needed here the way it once was; the card shows
+                the rest of today's blocks as separate rows, sharing
+                sensor.deadline_planned_cheap_window's sibling entities directly. -#}
+            {%- set b = state_attr('sensor.deadline_cheap_blocks', 'blocks') or [] -%}
             {%- if b | count == 0 -%}
-              {{ 'No cheap hours left today' if pacing == 'Cheapest hours' else 'No Charge Deadline period set' }}
+              No cheap hours left today
             {%- else -%}
               {%- set s = (b | first).start -%}
-              {%- set e = (b | last).end -%}
+              {%- set e = (b | first).end -%}
               {%- set t = now().strftime('%H:%M:%S') -%}
               {%- if t >= e -%}
                 {{ s[:5] }} - {{ e[:5] }} (closed)
               {%- else -%}
-                {{ s[:5] }} - {{ e[:5] }} ({{ [((as_timestamp(today_at(e)) - as_timestamp(now())) / 60) | round(0) | int, 0] | max }} min)
+                {%- set m = [((as_timestamp(today_at(e)) - as_timestamp(now())) / 60) | round(0) | int, 0] | max -%}
+                {{ s[:5] }} - {{ e[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
               {%- endif -%}
+            {%- endif -%}
+          {%- elif pacing == 'Time slot' -%}
+            {#- Unlike Cheapest hours' 'blocks' (already clipped to [now, end of day]),
+                'slots' is the configured period times as-is, finished ones included. A
+                first-to-last span would read a finished first period against a later one
+                that is running right now as '(closed)' while Charge Deadline is actively
+                charging - so this shows the first period still ahead (or under way,
+                clipped to 'now'), same as sensor.deadline_planned_timed_window's row 1;
+                rows 2-5 on the card reuse that sensor's sibling entities directly. -#}
+            {%- set sl = state_attr('sensor.deadline_pacing', 'slots') or [] -%}
+            {%- set t = now().strftime('%H:%M:%S') -%}
+            {%- set left = sl | selectattr('end', 'gt', t) | list -%}
+            {%- if left | count == 0 -%}
+              No Charge Deadline period set
+            {%- else -%}
+              {%- set s = left | first -%}
+              {%- set st = [s.start, t] | max -%}
+              {%- set m = ((as_timestamp(today_at(s.end)) - as_timestamp(today_at(st))) / 60) | round(0) | int -%}
+              {{ st[:5] }} - {{ s.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
             {%- endif -%}
           {%- else -%}
             {%- set s_raw = states('input_datetime.house_battery_deadline_start') -%}
@@ -549,7 +726,8 @@ template:
               {%- if t >= e_eff -%}
                 {{ s_raw[:5] }} - {{ e_eff[:5] }} (closed)
               {%- else -%}
-                {{ s_raw[:5] }} - {{ e_eff[:5] }} ({{ [((as_timestamp(today_at(e_eff)) - as_timestamp(now())) / 60) | round(0) | int, 0] | max }} min)
+                {%- set m = [((as_timestamp(today_at(e_eff)) - as_timestamp(now())) / 60) | round(0) | int, 0] | max -%}
+                {{ s_raw[:5] }} - {{ e_eff[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
               {%- endif -%}
             {%- endif -%}
           {%- endif -%}
@@ -721,7 +899,7 @@ template:
       #
       # Both are pure display sensors: nothing in the Node-RED flow reads them.
       #
-      # State = the NEXT block that can still be charged in, as "HH:MM - HH:MM (N min)" -
+      # State = the NEXT block that can still be charged in, as "HH:MM - HH:MM (HH:MM)" -
       # not the whole span from the first start to the last end. The span was misleading:
       # with two cheap blocks either side of an expensive afternoon it read as one long
       # window that does not exist, and it never shrank as blocks went by.
@@ -730,8 +908,8 @@ template:
       #   'Not defined'                     the route is not configured to dispatch
       #                                     Charge Deadline at all - nothing is planned,
       #                                     ever.
-      #   'HH:MM - HH:MM (N min)'           the next block today, N being its own length.
-      #   'Tomorrow HH:MM - HH:MM (N min)'  configured, but everything today is behind
+      #   'HH:MM - HH:MM (HH:MM)'           the next block today, the trailing HH:MM being its own length.
+      #   'Tomorrow HH:MM - HH:MM (HH:MM)'  configured, but everything today is behind
       #                                     us - the first block of TOMORROW instead.
       #                                     Timed periods repeat daily, so that is simply
       #                                     the earliest configured slot at full length.
@@ -764,35 +942,21 @@ template:
             Not defined
           {%- elif cb | count > 0 -%}
             {%- set b = cb | first -%}
-            {{ b.start[:5] }} - {{ b.end[:5] }} ({{ b.minutes | round(0) | int }} min)
+            {%- set m = b.minutes | round(0) | int -%}
+            {{ b.start[:5] }} - {{ b.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
           {%- else -%}
-            {#- Nothing left today: show tomorrow's FIRST cheap run instead, from the same
-                source marks the blocks sensor reads. Adjacent low intervals are glued the
-                same way (start == previous end); the list is sorted, so once adjacency
-                breaks nothing later can extend the first run again. Tomorrow's prices
-                arrive around 13:00 - before that there are no tomorrow marks and the
-                state falls through to the old text. -#}
-            {%- set tomorrow = (now() + timedelta(days=1)).strftime('%Y-%m-%d') -%}
-            {%- set lows = (state_attr('sensor.hbc_energy_prices_data', 'marks') or [])
-                  | selectattr('mark', 'eq', 'low')
-                  | selectattr('start', 'defined') | rejectattr('start', 'none')
-                  | selectattr('end', 'defined') | rejectattr('end', 'none')
-                  | sort(attribute='start') | list -%}
-            {%- set ns = namespace(s=none, e=none) -%}
-            {%- for iv in lows -%}
-              {%- if as_timestamp(iv.start, 0) > 0 and as_timestamp(iv.end, 0) > as_timestamp(iv.start, 0)
-                     and (as_timestamp(iv.start, 0) | timestamp_custom('%Y-%m-%d', true)) == tomorrow -%}
-                {%- if ns.s is none -%}
-                  {%- set ns.s = iv.start -%}{%- set ns.e = iv.end -%}
-                {%- elif iv.start == ns.e -%}
-                  {%- set ns.e = iv.end -%}
-                {%- endif -%}
-              {%- endif -%}
-            {%- endfor -%}
-            {%- if ns.s is none -%}
+            {#- Nothing left today: show tomorrow's FIRST cheap run instead, from
+                sensor.deadline_cheap_blocks_tomorrow (rows 2-5 on the card show the rest of
+                tomorrow's runs from that same sensor). Tomorrow's prices arrive around
+                13:00 - before that it holds no blocks and the state falls through to the
+                old text. -#}
+            {%- set tb = state_attr('sensor.deadline_cheap_blocks_tomorrow', 'blocks') or [] -%}
+            {%- if tb | count == 0 -%}
               No cheap hours left today
             {%- else -%}
-              Tomorrow {{ as_timestamp(ns.s) | timestamp_custom('%H:%M', true) }} - {{ as_timestamp(ns.e) | timestamp_custom('%H:%M', true) }} ({{ ((as_timestamp(ns.e) - as_timestamp(ns.s)) / 60) | round(0) | int }} min)
+              {%- set b = tb | first -%}
+              {%- set m = b.minutes | round(0) | int -%}
+              Tomorrow {{ b.start[:5] }} - {{ b.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
             {%- endif -%}
           {%- endif -%}
         attributes:
@@ -846,11 +1010,13 @@ template:
                 window is simply the earliest configured slot ('slots' is merged in start
                 order) at its full length - no clipping, tomorrow hasn't started yet. -#}
             {%- set s = sl | first -%}
-            Tomorrow {{ s.start[:5] }} - {{ s.end[:5] }} ({{ s.minutes | round(0) | int }} min)
+            {%- set m = s.minutes | round(0) | int -%}
+            Tomorrow {{ s.start[:5] }} - {{ s.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
           {%- else -%}
             {%- set s = left | first -%}
             {%- set st = [s.start, t] | max -%}
-            {{ st[:5] }} - {{ s.end[:5] }} ({{ ((as_timestamp(today_at(s.end)) - as_timestamp(today_at(st))) / 60) | round(0) | int }} min)
+            {%- set m = ((as_timestamp(today_at(s.end)) - as_timestamp(today_at(st))) / 60) | round(0) | int -%}
+            {{ st[:5] }} - {{ s.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
           {%- endif -%}
         attributes:
           configured: >-
@@ -890,6 +1056,304 @@ template:
             {{ ns.m | round(0) | int }}
 
       # ---------------------------------------------------------------------------------------------
+      # Continuation rows for the 'Charge Deadline schedule' card: each continuous cheap-hour
+      # block / Timed period left today, past the first one, as its own entity so the
+      # dashboard can show it as its own row (old-style row conditionals only test an
+      # ENTITY's state, not an attribute - hence separate sensors here rather than extra
+      # attributes on the two sensors above). Empty string = that row does not exist, and the
+      # card hides it. No tomorrow rollover here - that stays on line 1 above; a second row
+      # only ever describes something left TODAY.
+      # ---------------------------------------------------------------------------------------------
+      - name: "Deadline planned cheap window 2"
+        unique_id: house_battery_deadline_planned_cheap_window_2
+        icon: mdi:cash-clock
+        # Row 2: today's (2)th remaining block, or - once today has none left and
+        # row 1 has already rolled over to 'Tomorrow ...' - tomorrow's (2)th glued
+        # cheap-hour run, from sensor.deadline_cheap_blocks_tomorrow.
+        state: >-
+          {%- set on = states('input_select.house_battery_strategy_dynamic_cheapest') == 'Charge Deadline' -%}
+          {%- set cb = state_attr('sensor.deadline_cheap_blocks', 'blocks') or [] -%}
+          {%- if on and cb | count > 1 -%}
+            {%- set b = cb[1] -%}
+            {%- set m = b.minutes | round(0) | int -%}
+            {{ b.start[:5] }} - {{ b.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+          {%- elif on and cb | count == 0 -%}
+            {%- set tb = state_attr('sensor.deadline_cheap_blocks_tomorrow', 'blocks') or [] -%}
+            {%- if tb | count > 1 -%}
+              {%- set b = tb[1] -%}
+              {%- set m = b.minutes | round(0) | int -%}
+              Tomorrow {{ b.start[:5] }} - {{ b.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+            {%- endif -%}
+          {%- endif -%}
+
+      - name: "Deadline planned cheap window 3"
+        unique_id: house_battery_deadline_planned_cheap_window_3
+        icon: mdi:cash-clock
+        # Row 3: today's (3)th remaining block, or - once today has none left and
+        # row 1 has already rolled over to 'Tomorrow ...' - tomorrow's (3)th glued
+        # cheap-hour run, from sensor.deadline_cheap_blocks_tomorrow.
+        state: >-
+          {%- set on = states('input_select.house_battery_strategy_dynamic_cheapest') == 'Charge Deadline' -%}
+          {%- set cb = state_attr('sensor.deadline_cheap_blocks', 'blocks') or [] -%}
+          {%- if on and cb | count > 2 -%}
+            {%- set b = cb[2] -%}
+            {%- set m = b.minutes | round(0) | int -%}
+            {{ b.start[:5] }} - {{ b.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+          {%- elif on and cb | count == 0 -%}
+            {%- set tb = state_attr('sensor.deadline_cheap_blocks_tomorrow', 'blocks') or [] -%}
+            {%- if tb | count > 2 -%}
+              {%- set b = tb[2] -%}
+              {%- set m = b.minutes | round(0) | int -%}
+              Tomorrow {{ b.start[:5] }} - {{ b.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+            {%- endif -%}
+          {%- endif -%}
+
+      - name: "Deadline planned cheap window 4"
+        unique_id: house_battery_deadline_planned_cheap_window_4
+        icon: mdi:cash-clock
+        # Row 4: today's (4)th remaining block, or - once today has none left and
+        # row 1 has already rolled over to 'Tomorrow ...' - tomorrow's (4)th glued
+        # cheap-hour run, from sensor.deadline_cheap_blocks_tomorrow.
+        state: >-
+          {%- set on = states('input_select.house_battery_strategy_dynamic_cheapest') == 'Charge Deadline' -%}
+          {%- set cb = state_attr('sensor.deadline_cheap_blocks', 'blocks') or [] -%}
+          {%- if on and cb | count > 3 -%}
+            {%- set b = cb[3] -%}
+            {%- set m = b.minutes | round(0) | int -%}
+            {{ b.start[:5] }} - {{ b.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+          {%- elif on and cb | count == 0 -%}
+            {%- set tb = state_attr('sensor.deadline_cheap_blocks_tomorrow', 'blocks') or [] -%}
+            {%- if tb | count > 3 -%}
+              {%- set b = tb[3] -%}
+              {%- set m = b.minutes | round(0) | int -%}
+              Tomorrow {{ b.start[:5] }} - {{ b.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+            {%- endif -%}
+          {%- endif -%}
+
+      - name: "Deadline planned cheap window 5"
+        unique_id: house_battery_deadline_planned_cheap_window_5
+        icon: mdi:cash-clock
+        # Row 5: today's (5)th remaining block, or - once today has none left and
+        # row 1 has already rolled over to 'Tomorrow ...' - tomorrow's (5)th glued
+        # cheap-hour run, from sensor.deadline_cheap_blocks_tomorrow.
+        state: >-
+          {%- set on = states('input_select.house_battery_strategy_dynamic_cheapest') == 'Charge Deadline' -%}
+          {%- set cb = state_attr('sensor.deadline_cheap_blocks', 'blocks') or [] -%}
+          {%- if on and cb | count > 4 -%}
+            {%- set b = cb[4] -%}
+            {%- set m = b.minutes | round(0) | int -%}
+            {{ b.start[:5] }} - {{ b.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+          {%- elif on and cb | count == 0 -%}
+            {%- set tb = state_attr('sensor.deadline_cheap_blocks_tomorrow', 'blocks') or [] -%}
+            {%- if tb | count > 4 -%}
+              {%- set b = tb[4] -%}
+              {%- set m = b.minutes | round(0) | int -%}
+              Tomorrow {{ b.start[:5] }} - {{ b.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+            {%- endif -%}
+          {%- endif -%}
+
+      - name: "Deadline planned timed window 2"
+        unique_id: house_battery_deadline_planned_timed_window_2
+        icon: mdi:calendar-clock
+        # Row 2: today's (2)th remaining period, or - once today has none left and
+        # row 1 has already rolled over to 'Tomorrow ...' - tomorrow's (2)th period.
+        # Periods repeat daily, so 'sl' (today's merged periods, unclipped) doubles as
+        # tomorrow's list; no clipping to 'now' since none of tomorrow has happened yet.
+        state: >-
+          {%- set sl = state_attr('sensor.deadline_pacing', 'slots') or [] -%}
+          {%- set t = now().strftime('%H:%M:%S') -%}
+          {%- set left = sl | selectattr('end', 'gt', t) | list -%}
+          {%- if left | count > 1 -%}
+            {%- set s = left[1] -%}
+            {%- set st = [s.start, t] | max -%}
+            {%- set m = ((as_timestamp(today_at(s.end)) - as_timestamp(today_at(st))) / 60) | round(0) | int -%}
+            {{ st[:5] }} - {{ s.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+          {%- elif left | count == 0 and sl | count > 1 -%}
+            {%- set s = sl[1] -%}
+            {%- set m = s.minutes | round(0) | int -%}
+            Tomorrow {{ s.start[:5] }} - {{ s.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+          {%- endif -%}
+
+      - name: "Deadline planned timed window 3"
+        unique_id: house_battery_deadline_planned_timed_window_3
+        icon: mdi:calendar-clock
+        # Row 3: today's (3)th remaining period, or - once today has none left and
+        # row 1 has already rolled over to 'Tomorrow ...' - tomorrow's (3)th period.
+        # Periods repeat daily, so 'sl' (today's merged periods, unclipped) doubles as
+        # tomorrow's list; no clipping to 'now' since none of tomorrow has happened yet.
+        state: >-
+          {%- set sl = state_attr('sensor.deadline_pacing', 'slots') or [] -%}
+          {%- set t = now().strftime('%H:%M:%S') -%}
+          {%- set left = sl | selectattr('end', 'gt', t) | list -%}
+          {%- if left | count > 2 -%}
+            {%- set s = left[2] -%}
+            {%- set st = [s.start, t] | max -%}
+            {%- set m = ((as_timestamp(today_at(s.end)) - as_timestamp(today_at(st))) / 60) | round(0) | int -%}
+            {{ st[:5] }} - {{ s.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+          {%- elif left | count == 0 and sl | count > 2 -%}
+            {%- set s = sl[2] -%}
+            {%- set m = s.minutes | round(0) | int -%}
+            Tomorrow {{ s.start[:5] }} - {{ s.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+          {%- endif -%}
+
+      - name: "Deadline planned timed window 4"
+        unique_id: house_battery_deadline_planned_timed_window_4
+        icon: mdi:calendar-clock
+        # Row 4: today's (4)th remaining period, or - once today has none left and
+        # row 1 has already rolled over to 'Tomorrow ...' - tomorrow's (4)th period.
+        # Periods repeat daily, so 'sl' (today's merged periods, unclipped) doubles as
+        # tomorrow's list; no clipping to 'now' since none of tomorrow has happened yet.
+        state: >-
+          {%- set sl = state_attr('sensor.deadline_pacing', 'slots') or [] -%}
+          {%- set t = now().strftime('%H:%M:%S') -%}
+          {%- set left = sl | selectattr('end', 'gt', t) | list -%}
+          {%- if left | count > 3 -%}
+            {%- set s = left[3] -%}
+            {%- set st = [s.start, t] | max -%}
+            {%- set m = ((as_timestamp(today_at(s.end)) - as_timestamp(today_at(st))) / 60) | round(0) | int -%}
+            {{ st[:5] }} - {{ s.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+          {%- elif left | count == 0 and sl | count > 3 -%}
+            {%- set s = sl[3] -%}
+            {%- set m = s.minutes | round(0) | int -%}
+            Tomorrow {{ s.start[:5] }} - {{ s.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+          {%- endif -%}
+
+      - name: "Deadline planned timed window 5"
+        unique_id: house_battery_deadline_planned_timed_window_5
+        icon: mdi:calendar-clock
+        # Row 5: today's (5)th remaining period, or - once today has none left and
+        # row 1 has already rolled over to 'Tomorrow ...' - tomorrow's (5)th period.
+        # Periods repeat daily, so 'sl' (today's merged periods, unclipped) doubles as
+        # tomorrow's list; no clipping to 'now' since none of tomorrow has happened yet.
+        state: >-
+          {%- set sl = state_attr('sensor.deadline_pacing', 'slots') or [] -%}
+          {%- set t = now().strftime('%H:%M:%S') -%}
+          {%- set left = sl | selectattr('end', 'gt', t) | list -%}
+          {%- if left | count > 4 -%}
+            {%- set s = left[4] -%}
+            {%- set st = [s.start, t] | max -%}
+            {%- set m = ((as_timestamp(today_at(s.end)) - as_timestamp(today_at(st))) / 60) | round(0) | int -%}
+            {{ st[:5] }} - {{ s.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+          {%- elif left | count == 0 and sl | count > 4 -%}
+            {%- set s = sl[4] -%}
+            {%- set m = s.minutes | round(0) | int -%}
+            Tomorrow {{ s.start[:5] }} - {{ s.end[:5] }} ({{ '%02d:%02d' | format(m // 60, m % 60) }})
+          {%- endif -%}
+
+      # ---------------------------------------------------------------------------------------------
+      # NOT a mirror, unlike the three below it: the average power needed from NOW to the
+      # DEADLINE to still reach the target.
+      #
+      #   required_W = energy_still_needed_kWh * 1000 / (minutes_to_end / 60)
+      #
+      # It is computed here rather than read from Node-RED on purpose. The helper the flow
+      # writes is its PLAN, not the requirement, and the two differ in every case that made
+      # this row read 0 W:
+      #   * "Leave room for forecast PV" on -> the flow subtracts today's forecast surplus
+      #     and can plan 0 W while the requirement is unchanged;
+      #   * pacing across cheap blocks    -> the flow paces over the cheap minutes, not over
+      #     the minutes to the deadline;
+      #   * idle / hold / fallback        -> the flow writes nothing and the helper freezes
+      #     at its last value, or sits at 0.
+      # The requirement itself does not care about any of that, so this sensor answers the
+      # question the row asks: what does it take, on average, to still make the deadline.
+      # The flow's number is kept as the `planned` attribute so nothing is lost.
+      #
+      # Everything it reads is maintained by HBC's start flow whichever strategy is running,
+      # so the value stays live even when Charge Deadline is not the active strategy.
+      #
+      # `unknown` (a dash on the card) rather than a number in the two cases where no
+      # average exists: no window configured, and a deadline that has already passed with
+      # energy still to go - a finite watt figure there would be a lie.
+      #
+      # Shown on both Charge Deadline cards - the runtime one and the "currently not
+      # active" one - because it is valid in both states.
+      # ---------------------------------------------------------------------------------------------
+      - name: "Deadline required power"
+        unique_id: house_battery_deadline_required_power_sensor
+        unit_of_measurement: "W"
+        device_class: power
+        state_class: measurement
+        icon: mdi:flash-outline
+        state: >-
+          {%- set goal = states('input_select.house_battery_deadline_goal') -%}
+          {%- if goal == 'energy reserve' -%}
+            {%- set remaining = [(states('input_number.house_battery_deadline_target_energy') | float(0))
+                                 - (states('input_number.house_battery_total_available_energy') | float(0)), 0] | max -%}
+          {%- else -%}
+            {#- The packs stop at their charging cutoff, not at 100 %, so "batteries are
+                full" means the average cutoff - the same ceiling sensor.deadline_estimated_soc
+                measures against. Without it a fleet that tops out at 97 % would report a
+                requirement it can never satisfy, right up to the deadline. -#}
+            {%- set cutoffs = expand([
+              'input_number.marstek_m1_charging_cutoff_capacity',
+              'input_number.marstek_m2_charging_cutoff_capacity',
+              'input_number.marstek_m3_charging_cutoff_capacity',
+              'input_number.marstek_m4_charging_cutoff_capacity',
+              'input_number.marstek_m5_charging_cutoff_capacity',
+              'input_number.marstek_m6_charging_cutoff_capacity',
+            ]) | selectattr('state', 'is_number') | map(attribute='state') | map('float', 100) | list -%}
+            {%- set ceiling = ((cutoffs | sum) / (cutoffs | count)) if (cutoffs | count) > 0 else 100 -%}
+            {%- set target = [100 if goal == 'batteries are full'
+                              else states('input_number.house_battery_deadline_target_soc') | float(0),
+                              ceiling] | min -%}
+            {%- set soc = states('sensor.hbc_battery_fleet_soc') | float(0) -%}
+            {%- set capacity = states('input_number.house_battery_total_max_available_energy') | float(0) -%}
+            {%- set remaining = [(target - soc) / 100 * capacity, 0] | max -%}
+          {%- endif -%}
+          {%- set mins = state_attr('sensor.deadline_window', 'minutes_to_end') | float(0) -%}
+          {%- if remaining <= 0.05 -%}
+            0
+          {%- elif not state_attr('sensor.deadline_window', 'configured') | bool(false) or mins <= 0 -%}
+            unknown
+          {%- else -%}
+            {#- Quantised to 50 W. This sensor follows sensor.deadline_window, so it
+                re-renders every minute and both of its inputs drift continuously: at 10 W
+                that is a recorder row a minute, all day, for a difference nobody can read
+                off the row. 50 W still resolves every meaningful change in the plan. -#}
+            {{ ((remaining * 1000 / (mins / 60)) / 50) | round(0) | int * 50 }}
+          {%- endif -%}
+        attributes:
+          # What the Node-RED flow is actually asking for right now - the plan after the PV
+          # reservation, the pacing and the pack limit. Compare with the state to see how
+          # much of the requirement the plan is deliberately leaving to something else.
+          planned: >-
+            {{ ((states('input_number.house_battery_deadline_required_power') | float(0)) / 10)
+               | round(0) | int * 10 }}
+          # The two inputs of the sum, so the row can be explained without opening the flow.
+          remaining_energy: >-
+            {%- set goal = states('input_select.house_battery_deadline_goal') -%}
+            {%- if goal == 'energy reserve' -%}
+              {{ [(states('input_number.house_battery_deadline_target_energy') | float(0))
+                  - (states('input_number.house_battery_total_available_energy') | float(0)), 0] | max | round(2) }}
+            {%- else -%}
+              {%- set cutoffs = expand([
+                'input_number.marstek_m1_charging_cutoff_capacity',
+                'input_number.marstek_m2_charging_cutoff_capacity',
+                'input_number.marstek_m3_charging_cutoff_capacity',
+                'input_number.marstek_m4_charging_cutoff_capacity',
+                'input_number.marstek_m5_charging_cutoff_capacity',
+                'input_number.marstek_m6_charging_cutoff_capacity',
+              ]) | selectattr('state', 'is_number') | map(attribute='state') | map('float', 100) | list -%}
+              {%- set ceiling = ((cutoffs | sum) / (cutoffs | count)) if (cutoffs | count) > 0 else 100 -%}
+              {%- set target = [100 if goal == 'batteries are full'
+                                else states('input_number.house_battery_deadline_target_soc') | float(0),
+                                ceiling] | min -%}
+              {{ [(target - (states('sensor.hbc_battery_fleet_soc') | float(0))) / 100
+                  * (states('input_number.house_battery_total_max_available_energy') | float(0)), 0]
+                 | max | round(2) }}
+            {%- endif -%}
+          minutes_to_deadline: >-
+            {{ state_attr('sensor.deadline_window', 'minutes_to_end') | int(0) }}
+          # What the packs can physically take, so the requirement can be read against a
+          # ceiling: a state above this means the deadline is unreachable at any pacing.
+          # Deliberately NOT a computed "exceeds" flag - an attribute that reads this
+          # sensor's own state renders against the PREVIOUS one and would lag by a cycle.
+          # binary_sensor.deadline_at_risk already carries that verdict.
+          max_charge_power: >-
+            {{ states('input_number.house_battery_total_max_charge_power') | float(0) | round(0) | int }}
+
+      # ---------------------------------------------------------------------------------------------
       # Recorded twins of the Charge Deadline analytics.
       # Node-RED writes the input_number helpers (it can only set helpers), but helpers
       # carry no state_class and so produce NO long-term statistics - once the recorder
@@ -899,16 +1363,10 @@ template:
       # costs no extra rows. Point dashboards at these sensors, not the helpers.
       # Quantised to 10 W: at watt resolution these change on nearly every write and
       # each change is a recorder row, for a difference no one can see on a bar.
+      #
+      # These three ARE mirrors: they report what is measured to be happening right now.
+      # "Deadline required power" above them is not - it is computed here.
       # ---------------------------------------------------------------------------------------------
-      - name: "Deadline required power"
-        unique_id: house_battery_deadline_required_power_sensor
-        unit_of_measurement: "W"
-        device_class: power
-        state_class: measurement
-        icon: mdi:flash-outline
-        availability: "{{ has_value('input_number.house_battery_deadline_required_power') }}"
-        state: "{{ ((states('input_number.house_battery_deadline_required_power') | float(0)) / 10) | round(0) | int * 10 }}"
-
       - name: "Deadline PV power"
         unique_id: house_battery_deadline_pv_power_sensor
         unit_of_measurement: "W"

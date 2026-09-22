@@ -171,12 +171,41 @@ input_number:
     mode: box
     icon: mdi:battery-arrow-up
 
+  # -------------------------------------------------------------------------------------------------------
+  # Totals, all written by the "Batteries (totals)" function in Node-RED's start flow.
+  #
+  # NO `initial:` ON ANY OF THESE - deliberately. Home Assistant re-applies `initial:` on
+  # EVERY restart, not just the first, so it does not mean "the value before anything has
+  # written one", it means "zero these on every restart". Without it HA restores the last
+  # stored value, which is the correct behaviour for a helper an automation owns.
+  #
+  # That mattered because the flow writes each of these through an `rbe` ("On change")
+  # filter. The two energy/power MAXIMA are static - they only move when a charge or
+  # discharge cutoff changes, or when a pack drops off the bus - so after an HA Core
+  # restart the sequence was:
+  #
+  #   HA restarts -> `initial: 0` zeroes the helper -> Node-RED keeps running, so its rbe
+  #   still holds the last value it sent -> the unchanged value is filtered out and never
+  #   re-sent -> the helper sits at 0 until the underlying number genuinely changes.
+  #
+  # Anything reading it then computed against a zero capacity. sensor.deadline_required_power
+  # is the case that surfaced it: (target - soc) / 100 * 0 = 0, so "Required average power to
+  # deadline" read 0 W with a real deadline and a 28 % fleet.
+  #
+  # The two live totals (available energy, current power) never showed it because they drift
+  # every cycle and so always pass the rbe.
+  #
+  # NOTE: dropping `initial:` stops the RESET, but it does not by itself push a value into a
+  # helper that is already stuck at 0 - the rbe still has to release one. After deploying
+  # this, redeploy the Node-RED flow once (that clears the rbe state) or set the helper by
+  # hand in Developer Tools -> States.
+  # -------------------------------------------------------------------------------------------------------
+
   # Totals | Total usable energy in batteries
   house_battery_total_available_energy:
     name: "Total available energy"
     min: -10
     max: 1000
-    initial: 0
     unit_of_measurement: "kWh"
     mode: box
     icon: mdi:power-plug-battery
@@ -186,7 +215,6 @@ input_number:
     name: "Max. available energy"
     min: -10
     max: 1000
-    initial: 0
     unit_of_measurement: "kWh"
     mode: box
     icon: mdi:power-plug-battery
@@ -196,7 +224,6 @@ input_number:
     name: "Total battery power"
     min: -25000
     max: 25000
-    initial: 0
     unit_of_measurement: "W"
     mode: box
     icon: mdi:power-plug-battery
@@ -206,7 +233,6 @@ input_number:
     name: "Max. charge power"
     min: 0
     max: 15000
-    initial: 0
     unit_of_measurement: "W"
     mode: box
     icon: mdi:power-plug-battery
@@ -216,7 +242,6 @@ input_number:
     name: "Max. discharge power"
     min: 0
     max: 15000
-    initial: 0
     unit_of_measurement: "W"
     mode: box
     icon: mdi:power-plug-battery
@@ -756,6 +781,7 @@ input_select:
       - ENTSO-E
       - Frank Energie
       - GE-Spot
+      - Grid Clock
       - Tibber (core)
       - Tibber (custom)
       - Nordpool (core)
