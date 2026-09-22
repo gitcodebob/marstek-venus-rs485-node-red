@@ -1,0 +1,834 @@
+[
+    {
+        "id": "dlc1a2b3c4d5e6f0",
+        "type": "tab",
+        "label": "Strategy Charge Deadline v4.15.0",
+        "disabled": false,
+        "info": "Charge to a target before a deadline, cheaply.\nThe window never runs past midnight, so the batteries are full for the night.\nThe pacing follows the strategy that dispatches Charge Deadline: cheap periods under\nDynamic, the Timed period's own times under Timed, the deadline helpers otherwise.\nPV first (NoM), grid tops up. Peak shaving stays active.\n\nSee the '📖 How this flow works' comment node for the full documentation.",
+        "env": []
+    },
+    {
+        "id": "dlc_g_config",
+        "type": "group",
+        "z": "dlc1a2b3c4d5e6f0",
+        "name": "Configuration",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "dlc_readme",
+            "dlc_linkin",
+            "dlc_trace"
+        ],
+        "x": 14,
+        "y": 59,
+        "w": 372,
+        "h": 142
+    },
+    {
+        "id": "dlc_g_read",
+        "type": "group",
+        "z": "dlc1a2b3c4d5e6f0",
+        "name": "Settings (off the control path)",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "dlc_cfg_tick",
+            "dlc_cfg_sub",
+            "dlc_cfg_tpl",
+            "dlc_cfg_json",
+            "dlc_cfg_set"
+        ],
+        "x": 14,
+        "y": 339,
+        "w": 272,
+        "h": 332
+    },
+    {
+        "id": "dlc_g_plan",
+        "type": "group",
+        "z": "dlc1a2b3c4d5e6f0",
+        "name": "Compute plan",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "dlc_plan",
+            "dlc_switch"
+        ],
+        "x": 314,
+        "y": 579,
+        "w": 372,
+        "h": 82
+    },
+    {
+        "id": "dlc_g_delegate",
+        "type": "group",
+        "z": "dlc1a2b3c4d5e6f0",
+        "name": "Delegate to sub-strategy",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "dlc_fn_charge",
+            "dlc_fn_fallback",
+            "dlc_linkcall",
+            "dlc_gotoend"
+        ],
+        "x": 714,
+        "y": 519,
+        "w": 592,
+        "h": 142
+    },
+    {
+        "id": "dlc_g_ui",
+        "type": "group",
+        "z": "dlc1a2b3c4d5e6f0",
+        "name": "UI / analytics",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "dlc_ui_gate",
+            "dlc_ui_req",
+            "dlc_ui_grid",
+            "dlc_ui_pv",
+            "dlc_ui_energy",
+            "dlc_ui_remain",
+            "dlc_ui_status",
+            "dlc_ui_short"
+        ],
+        "x": 414,
+        "y": 59,
+        "w": 412,
+        "h": 442
+    },
+    {
+        "id": "dlc_g_end",
+        "type": "group",
+        "z": "dlc1a2b3c4d5e6f0",
+        "name": "End",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "dlc_endin",
+            "dlc_return"
+        ],
+        "x": 1064,
+        "y": 419,
+        "w": 242,
+        "h": 82
+    },
+    {
+        "id": "dlc_g_exc",
+        "type": "group",
+        "z": "dlc1a2b3c4d5e6f0",
+        "name": "Unhandled exceptions",
+        "style": {
+            "label": true,
+            "stroke": "#d88a8a",
+            "color": "#d88a8a"
+        },
+        "nodes": [
+            "dlc_catch",
+            "dlc_exc_fn",
+            "dlc_exc_out"
+        ],
+        "x": 14,
+        "y": 239,
+        "w": 182,
+        "h": 82
+    },
+    {
+        "id": "dlc_readme",
+        "type": "comment",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_config",
+        "name": "Home Battery Strategy — Charge Deadline",
+        "info": "Charge to a target before a deadline. See the **How this flow works** comment at the\nbottom of the tab for the full documentation.\n\nSettings are cached in flow context by the Settings group and never read on the control\npath. Compute plan decides the mode: `charge` / `idle` (waiting for cheap hours) /\n`hold` (target reached, keep it) / `fallback`.",
+        "x": 200,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "dlc_linkin",
+        "type": "link in",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_config",
+        "name": "Charge Deadline",
+        "links": [],
+        "x": 120,
+        "y": 160,
+        "wires": [
+            [
+                "dlc_trace"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "dlc_trace",
+        "type": "change",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_config",
+        "name": "Trace",
+        "rules": [
+            {
+                "t": "set",
+                "p": "strategy.trace",
+                "pt": "msg",
+                "to": "[\t   strategy.trace,\t   {\t       \"flow\": target,\t       \"flow_settings\": advanced_settings,\t       \"timestamp\": $now()\t   } \t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 160,
+        "wires": [
+            [
+                "dlc_plan"
+            ]
+        ],
+        "info": "Attaches a breadcrumb trace to the msg."
+    },
+    {
+        "id": "dlc_plan",
+        "type": "function",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_plan",
+        "name": "Compute plan",
+        "func": "// Charge Deadline - place the energy the target needs inside the user's window.\n//\n// The window is ALWAYS input_datetime start -> end, clamped to the current day by\n// sensor.deadline_window. The pacing choice only decides WHERE inside that window the\n// energy goes, so the deadline is honoured either way.\n//\n// All settings come from flow context, refreshed by the \"Settings\" group whenever one\n// of them changes (and once a minute as a repair). Nothing is read from Home Assistant\n// on this path - it runs on every P1 update, up to ~1 Hz.\nconst log = global.get('logger');\nconst cfg = flow.get('deadline_cfg') || {};\nconst d = msg.deadline || {};\n\n// The settings snapshot is refreshed on every change and once every 30 s as a repair.\n// If it ever stops arriving - HA restarting, the template failing, the websocket down -\n// this loop must NOT keep commanding a charge from settings that may no longer be true.\n// Anything older than five minutes is treated as \"no settings\", which lands in the\n// fallback strategy, the same place an unconfigured window lands.\nconst CFG_MAX_AGE_MS = 5 * 60 * 1000;\nconst cfgAge = Number(cfg.stamp) ? (Date.now() - Number(cfg.stamp)) : Infinity;\nconst cfgStale = !cfg.window || cfgAge > CFG_MAX_AGE_MS;\nif (cfgStale) {\n    // Warn at most once a minute so a long outage does not fill the log.\n    const lastWarn = Number(context.get('stale_warned')) || 0;\n    if (Date.now() - lastWarn > 60000) {\n        context.set('stale_warned', Date.now());\n        node.warn(`[Deadline] settings snapshot is ${Number.isFinite(cfgAge) ? Math.round(cfgAge / 1000) + ' s old' : 'missing'} - falling back`);\n    }\n} else if (context.get('stale_warned')) {\n    context.set('stale_warned', 0);\n}\n\n// ---------------------------------------------------------------------------------\n// Settings\n// ---------------------------------------------------------------------------------\nconst wAttr = (cfg.window && cfg.window.attributes) || {};\nconst bool = (v, dflt) => (v === undefined || v === null || v === '') ? dflt\n    : (v === true || v === 'true' || v === 'on' || v === 'True');\n\nconst goal         = cfg.goal || \"state of charge\";\nconst alwaysFull   = (goal === \"batteries are full\");\nconst targetSoc    = alwaysFull ? 100 : Number(cfg.target_soc);\nconst targetEnergy = Number(cfg.target_energy);\nconst fallback     = cfg.fallback || \"Self-consumption\";\nconst pacing       = String(wAttr.pacing || \"Spread evenly\");\nconst holdAfter    = bool(cfg.hold_after_target, true);   // default ON\nconst reservePv    = bool(cfg.reserve_pv, false);         // default OFF\nconst pvForecastWh = Math.max(0, (Number(cfg.pv_forecast_kwh) || 0) * 1000);\n\n// Window facts, all decided by Home Assistant so the Node-RED container's timezone\n// cannot shift the window (this flow no longer parses a clock time itself).\nconst configuredWin = bool(wAttr.configured, false);\nconst inWindow      = bool(wAttr.in_window, false);\nconst minutesLeft   = Math.max(0, Number(wAttr.minutes_left) || 0);\n// Only trust a well-formed HH:MM:SS; block boundaries are compared as strings.\nconst rawNow        = String(wAttr.now_hms || \"\");\nconst nowHms        = /^\\d{2}:\\d{2}:\\d{2}$/.test(rawNow) ? rawNow : \"\";\n// Drop anything malformed rather than letting one bad entry skew the pacing.\nconst blocks        = (Array.isArray(wAttr.blocks) ? wAttr.blocks : []).filter(b =>\n    b && /^\\d{2}:\\d{2}:\\d{2}$/.test(String(b.start)) && /^\\d{2}:\\d{2}:\\d{2}$/.test(String(b.end))\n    && Number(b.minutes) > 0);\n\n// Live power and limits, already on the message from the Start flow.\nconst hasImportLimit = msg.grid_power_has_limit_import === true;\nconst importLimit    = Number(msg.grid_power_limit_import) || 0;\nconst maxChargeW     = Number(msg.batteries_max_charge_power) || 0;\nconst batteries      = Array.isArray(msg.batteries) ? msg.batteries : [];\nconst batteryChargeW = Number(msg.batteries_total_power) || 0;\nconst gridPowerW     = Number(msg.grid_power) || 0;\n// grid = load - PV + battery_charge   ->   PV - load = battery_charge - grid\nconst pvSurplusW = batteryChargeW - gridPowerW;\n\n// ---------------------------------------------------------------------------------\n// Energy still required to reach the target\n// ---------------------------------------------------------------------------------\nlet remainingWh = 0;\nif (goal === \"energy reserve\") {\n    const availE = Number(msg.batteries_available_energy) || 0;   // kWh\n    remainingWh = Math.max(0, (targetEnergy - availE)) * 1000;\n} else {\n    batteries.forEach(b => {\n        const soc = Number(b.soc) || 0;\n        const socMax = Number(b.soc_max) || 100;\n        const eMax = Number(b.energy_max) || 0;\n        const tgt = Math.min(targetSoc, socMax);\n        remainingWh += (Math.max(0, tgt - soc) / 100) * eMax * 1000;\n    });\n}\nconst remainingKwh = remainingWh / 1000;\n\n// ---------------------------------------------------------------------------------\n// \"Target reached\" is LATCHED, not re-tested every tick.\n//\n// Without this the flow hands over to the fallback the instant the target is met, the\n// fallback discharges to cover the house, one second of that puts the shortfall back\n// above tolerance, and the next tick charges it again - a ping-pong that runs for the\n// rest of the window and buys the same energy over and over.\n//\n// The latch is keyed on the window + goal, so changing any of them starts a fresh\n// deadline, and it clears when the window closes so tomorrow starts clean.\n//   hold_after_target ON  -> stays reached for the rest of the window (a reserve built\n//                            at 03:00 is still there at the 07:00 deadline).\n//   hold_after_target OFF -> old behaviour, but with 0.30 kWh of hysteresis so it still\n//                            cannot oscillate at tick rate.\n// ---------------------------------------------------------------------------------\nconst REENTER_KWH = 0.30;\nconst winKey = [wAttr.start, wAttr.end, goal, targetSoc, targetEnergy].join('|');\nconst st = flow.get('deadline_state') || {};\nif (st.key !== winKey || !inWindow) { st.key = winKey; st.reached = false; }\nif (!st.reached && remainingKwh <= 0.05) st.reached = true;\nif (st.reached && !holdAfter && remainingKwh > REENTER_KWH) st.reached = false;\nflow.set('deadline_state', st);\nconst targetReached = st.reached;\n\n// ---------------------------------------------------------------------------------\n// Cheapest-hours selection.\n//\n// EVERY period marked cheap inside the window is used - not just enough of them to\n// cover the energy. What the price-marks visualisation shows is exactly what gets\n// charged, and the energy is paced across all of them, so the power per block (and the\n// load on the grid connection) is as low as the deadline allows.\n//\n// Computed even when we are NOT charging, so the dashboard can show tonight's plan\n// while it is still afternoon. Blocks are already clipped to [now, window end] on the\n// current day, so every minute listed is a minute still ahead of us.\n// ---------------------------------------------------------------------------------\nconst perMinWh = (maxChargeW > 0 ? maxChargeW : 0) / 60;\n// Both paced modes work off wAttr.blocks, which Home Assistant has already clipped to\n// the minutes still ahead of us: the cheap periods under Dynamic, the Charge Deadline\n// periods under Timed. \"Spread evenly\" (a manual window) has no blocks and paces on the\n// wall clock instead.\nconst paced = (pacing === \"Cheapest hours\" || pacing === \"Time slot\");\nconst chosen = [];\nlet chosenMin = 0, capacityWh = 0;\nif (paced && configuredWin) {\n    for (const b of blocks) {\n        const m = Math.max(0, Number(b.minutes) || 0);\n        chosen.push(b); chosenMin += m; capacityWh += perMinWh * m;\n    }\n}\n// +1 Wh of slack so a block that covers it exactly is not rejected by float noise.\nconst cheapEnough = chosenMin > 0 && (capacityWh + 1) >= remainingWh;\nconst inNow = b => nowHms && String(b.start) <= nowHms && nowHms < String(b.end);\nconst inChosen = chosen.some(inNow);\n\n// ---------------------------------------------------------------------------------\n// Mode\n// ---------------------------------------------------------------------------------\nlet mode = \"charge\";\nlet requiredW = 0, gridTargetW = 0, pvShareW = 0, gridShareW = 0, shortageW = 0;\nlet statusText = \"\", dischargeDisabled = false, atMaxPower = false, planNote = \"\";\n\nconst goalConfigOk = (goal === \"energy reserve\") ? (targetEnergy > 0) : (targetSoc > 0);\nconst configOk = !cfgStale && goalConfigOk && batteries.length > 0 && configuredWin;\nconst targetLabel = (goal === \"energy reserve\") ? `${targetEnergy} kWh`\n    : alwaysFull ? 'full (100%)' : `${targetSoc}%`;\n\nif (cfgStale || !configOk || !inWindow || targetReached) {\n    if (cfgStale) {\n        mode = \"fallback\"; statusText = `Settings unavailable - ${fallback}`;\n    } else if (!configuredWin) {\n        mode = \"fallback\"; statusText = `No charge window set - ${fallback}`;\n    } else if (!configOk) {\n        mode = \"fallback\"; statusText = `Not configured - ${fallback}`;\n    } else if (targetReached) {\n        // Holding keeps discharge disabled, otherwise the reserve we just built is the\n        // first thing the fallback spends.\n        mode = holdAfter ? \"hold\" : \"fallback\";\n        dischargeDisabled = holdAfter;\n        statusText = holdAfter\n            ? `Target ${targetLabel} reached - holding until deadline`\n            : `Target ${targetLabel} reached - ${fallback}`;\n    } else {\n        mode = \"fallback\"; statusText = `Outside window - ${fallback}`;\n    }\n} else {\n    // ------------------------------------------------------------------------------\n    // Inside the window with energy still to add. Decide how much time we are allowed\n    // to spread it over.\n    // ------------------------------------------------------------------------------\n    let planMinutes = minutesLeft;      // minutes we intend to charge in\n    let waiting = false;                // in a gap between cheap blocks\n\n    if (pacing === \"Cheapest hours\") {\n        if (!cheapEnough) {\n            // The cheap hours in this window cannot carry it. The deadline wins over the\n            // price: spread the whole thing across the rest of the window instead.\n            planNote = chosenMin > 0 ? \" - cheap hours too short, spreading\" : \" - no cheap hours, spreading\";\n        } else if (inChosen) {\n            planMinutes = chosenMin;           // pace across the cheap minutes only\n            planNote = ` - ${chosen.length} cheap block${chosen.length === 1 ? '' : 's'}`;\n        } else {\n            waiting = true;                    // cheap hours are enough, just not now\n        }\n    } else if (pacing === \"Time slot\") {\n        // The Timed strategy only dispatches Charge Deadline while one of ITS OWN periods\n        // is running, so the minutes between two periods can never be charged in. Pacing\n        // over the wall clock to the end of the last period spreads the energy across\n        // those dead minutes: the rate inside each period comes out too low, nothing makes\n        // up for it in the gap, and the whole shortfall lands on the final period - at max\n        // power, or missed. So pace over the period minutes still ahead instead, exactly\n        // as Cheapest hours paces over its blocks.\n        //\n        // No 'cheapEnough' test and no waiting, which is where this differs from cheap\n        // hours. If the periods cannot carry the energy there is no cheaper alternative to\n        // fall back to - requiredW is clamped to the pack limit below and the shortage is\n        // reported, which is the honest answer. And this flow only runs while a period is\n        // active, so a tick outside one means the times moved under us: spreading over the\n        // window is a better guess than idling against a deadline.\n        if (chosenMin > 0) {\n            planMinutes = chosenMin;\n            planNote = ` - ${chosen.length} period${chosen.length === 1 ? '' : 's'}`;\n        } else {\n            planNote = \" - no period time left, spreading\";\n        }\n    }\n\n    if (waiting) {\n        // Hand back to the fallback until the next cheap block opens. Discharge stays\n        // allowed: anything the house takes now is simply re-bought at the cheap price,\n        // and the plan recomputes from the real shortfall on every tick.\n        mode = \"idle\";\n        const nextBlock = blocks\n            .filter(b => nowHms && String(b.start) > nowHms)\n            .sort((a, b) => String(a.start) < String(b.start) ? -1 : 1)[0];\n        statusText = nextBlock\n            ? `Waiting for cheap hours (${String(nextBlock.start).slice(0, 5)}) - ${remainingKwh.toFixed(1)} kWh to go`\n            : `Waiting for cheap hours - ${remainingKwh.toFixed(1)} kWh to go`;\n    } else {\n        mode = \"charge\";\n        dischargeDisabled = true;             // don't fight the fill\n\n        // Optionally let the PV that is still forecast for today do part of the work,\n        // instead of buying it now and having no room left when the sun arrives.\n        // Only while there is real slack: once the job barely fits in the time left at\n        // full power, plan for all of it and let measured PV reduce the grid draw.\n        const feasibleWh = maxChargeW > 0 ? maxChargeW * (minutesLeft / 60) : 0;\n        let planWh = remainingWh;\n        if (reservePv && pvForecastWh > 0 && feasibleWh > 0 && remainingWh < feasibleWh * 0.6) {\n            const reserved = Math.min(pvForecastWh, remainingWh);\n            planWh = Math.max(0, remainingWh - reserved);\n            if (reserved > 50) planNote += ` - ${(reserved / 1000).toFixed(1)} kWh left to PV`;\n        }\n\n        requiredW = planMinutes > 0 ? planWh / (planMinutes / 60) : 0;\n        if (maxChargeW > 0 && requiredW > maxChargeW) { requiredW = maxChargeW; atMaxPower = true; }\n\n        // Grid setpoint for the Self-consumption PID: B = G + PV_surplus.\n        gridTargetW = Math.max(0, requiredW - pvSurplusW);\n        if (maxChargeW > 0) gridTargetW = Math.min(gridTargetW, maxChargeW);\n        if (hasImportLimit && importLimit > 0) gridTargetW = Math.min(gridTargetW, importLimit);\n\n        // Measured split of the charge actually happening.\n        const actualChargeW = Math.max(0, batteryChargeW);\n        pvShareW = Math.max(0, Math.min(pvSurplusW, actualChargeW));\n        gridShareW = Math.max(0, actualChargeW - pvShareW);\n\n        // \"Shortage\" means: we are already against a limit and still below plan. Below\n        // the limits a gap is just the PID catching up, so it is not reported.\n        // NOTE: pvShare + gridShare = the ACTUAL charge power. It only adds up to\n        // requiredW while a limit is binding - the bar shows what is happening, not\n        // what was planned.\n        const CAP_TOL_W = 50;\n        const importCapped = hasImportLimit && importLimit > 0 && gridPowerW >= (importLimit - CAP_TOL_W);\n        const chargeCapped = maxChargeW > 0 && actualChargeW >= (maxChargeW - CAP_TOL_W);\n        shortageW = (importCapped || chargeCapped) ? Math.max(0, requiredW - actualChargeW) : 0;\n\n        const r10 = v => Math.round(v / 10) * 10;\n        requiredW = r10(requiredW);   // 10 W: keeps the status string (and the change gate) still\n        gridTargetW = Math.round(gridTargetW);\n        pvShareW = r10(pvShareW); gridShareW = r10(gridShareW); shortageW = r10(shortageW);\n\n        const rH = Math.floor(planMinutes / 60), rM = Math.round(planMinutes % 60);\n        statusText = `Charging ${remainingKwh.toFixed(1)} kWh in ${rH}h${String(rM).padStart(2, '0')} @ ${requiredW} W`;\n        if (shortageW > 0) statusText += ` - short ${shortageW} W`;\n        if (atMaxPower) statusText += ' - at max power';\n        statusText += planNote;\n        log(this, `[Deadline] ${remainingKwh.toFixed(2)} kWh, ${planMinutes} min of charge time, avg ${requiredW} W, PV surplus ${Math.round(pvSurplusW)} W -> grid target ${gridTargetW} W${planNote}`);\n    }\n}\n\n// ---------------------------------------------------------------------------------\n// Store for delegation + UI. Everything written to an input_number is clamped to its\n// configured range - an out-of-range set_value throws and would abort the strategy.\n// ---------------------------------------------------------------------------------\nconst clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, Number(v) || 0));\n\nd.mode = mode;\nd.pacing = pacing;\nd.discharge_disabled = dischargeDisabled;\nd.fallback = fallback;\nd.grid_target = clamp(gridTargetW, 0, 25000);\nd.required_power = clamp(requiredW, 0, 25000);\nd.grid_share = clamp(gridShareW, 0, 25000);\nd.pv_share = clamp(pvShareW, 0, 25000);\nd.shortage = clamp(shortageW, 0, 25000);\nd.pv_surplus = Math.round(pvSurplusW);\nd.battery_power = Math.round(batteryChargeW);\nd.grid_power = Math.round(gridPowerW);\nd.remaining_energy = clamp(Math.round(remainingKwh * 100) / 100, 0, 1000);\n// Minutes left to the DEADLINE (not to the end of the cheap blocks): the dashboard's\n// \"Charge completed at\" and the at-risk sensor both measure against the deadline.\nd.remaining_minutes = clamp(Math.round(mode === \"fallback\" && !inWindow ? 0 : minutesLeft), 0, 1440);\nd.status = String(statusText).slice(0, 255);\nmsg.deadline = d;\n\nnode.status({\n    fill: mode === \"charge\" ? \"green\" : mode === \"idle\" ? \"blue\" : mode === \"hold\" ? \"yellow\" : \"grey\",\n    shape: \"dot\", text: statusText\n});\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 620,
+        "wires": [
+            [
+                "dlc_switch",
+                "dlc_ui_gate"
+            ]
+        ]
+    },
+    {
+        "id": "dlc_switch",
+        "type": "switch",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_plan",
+        "name": "Mode",
+        "property": "deadline.mode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "charge",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 620,
+        "wires": [
+            [
+                "dlc_fn_charge"
+            ],
+            [
+                "dlc_fn_fallback"
+            ]
+        ]
+    },
+    {
+        "id": "dlc_fn_charge",
+        "type": "function",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_delegate",
+        "name": "Regulated charge",
+        "func": "const log = global.get('logger');\nconst d = msg.deadline || {};\n// Drive the Self-consumption PID to the computed grid setpoint\nmsg.target = \"Self-consumption\";\nmsg.house_target_grid_consumption_in_w = Number(d.grid_target) || 0;\n// Don't discharge while we are trying to fill the battery\nRED.util.setMessageProperty(msg, \"advanced_settings.discharge_disabled\", true, true);\n// Show \"Charge Deadline\" on the HBC strategy display instead of the sub-strategy\nRED.util.setMessageProperty(msg, \"strategy.display\", \"Charge Deadline\", true);\nlog(this, `**Charge Deadline** -> grid target ${msg.house_target_grid_consumption_in_w} W`);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 560,
+        "wires": [
+            [
+                "dlc_linkcall"
+            ]
+        ]
+    },
+    {
+        "id": "dlc_fn_fallback",
+        "type": "function",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_delegate",
+        "name": "Idle / hold / fallback",
+        "func": "const log = global.get('logger');\nconst d = msg.deadline || {};\nconst fb = d.fallback || \"Self-consumption\";\nmsg.target = fb;\n// For NoM fallback, force target grid consumption to 0 (avoid a stale setpoint)\nif (fb === \"Self-consumption\") { msg.house_target_grid_consumption_in_w = 0; }\n\n// HOLD: the target was reached before the deadline. Hand the house back to the fallback\n// strategy but keep discharge blocked, otherwise the reserve we just built is the first\n// thing that gets spent - and the old code then re-bought it, tick after tick.\n// IDLE: \"Cheapest hours\" pacing, waiting for the next cheap block. Discharge stays\n// allowed there; whatever the house takes now is simply re-bought at the cheap price.\nif (d.discharge_disabled) {\n    RED.util.setMessageProperty(msg, \"advanced_settings.discharge_disabled\", true, true);\n}\n// Keep showing who is in charge while holding or waiting; a plain fallback (outside the\n// window, or not configured) is more informative as the sub-strategy's own name.\nif (d.mode === \"hold\" || d.mode === \"idle\") {\n    RED.util.setMessageProperty(msg, \"strategy.display\", \"Charge Deadline\", true);\n}\nlog(this, `**Charge Deadline** ${d.mode || 'fallback'} -> ${fb}`);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 620,
+        "wires": [
+            [
+                "dlc_linkcall"
+            ]
+        ]
+    },
+    {
+        "id": "dlc_linkcall",
+        "type": "link call",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_delegate",
+        "name": "Run sub-strategy",
+        "links": [],
+        "linkType": "dynamic",
+        "timeout": "30",
+        "x": 1050,
+        "y": 600,
+        "wires": [
+            [
+                "dlc_gotoend"
+            ]
+        ]
+    },
+    {
+        "id": "dlc_gotoend",
+        "type": "link out",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_delegate",
+        "name": "go to End",
+        "mode": "link",
+        "links": [
+            "dlc_endin"
+        ],
+        "x": 1220,
+        "y": 600,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "dlc_endin",
+        "type": "link in",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_end",
+        "name": "link to End",
+        "links": [
+            "dlc_gotoend"
+        ],
+        "x": 1105,
+        "y": 460,
+        "wires": [
+            [
+                "dlc_return"
+            ]
+        ]
+    },
+    {
+        "id": "dlc_return",
+        "type": "link out",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_end",
+        "name": "Return",
+        "mode": "return",
+        "links": [],
+        "x": 1265,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "dlc_ui_gate",
+        "type": "function",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_ui",
+        "name": "Write when changed",
+        "func": "// Throttle the writes to Home Assistant.\n// The strategy runs on every P1 update (up to 1x/s). Writing seven input_number helpers\n// that often floods the recorder, so only write when something actually changed, and at\n// most once per gate interval.\n//\n// The values are QUANTISED before comparing. Without that the gate never matched: the\n// status string carried two decimals of kWh and a watt-resolution power figure, so the\n// snapshot differed on practically every tick and the rate limit was the only thing\n// throttling anything - about 5 000 service calls an hour, every one of them recorded.\n//\n// TWO GATES:\n//   output 1 (fast, 1 s)  - PV share / grid share / shortage. These three drive the\n//                           `distribution` bar on the Charge Deadline view, which should\n//                           track the PID live. Exclude them from the recorder\n//                           (see configuration.yaml) or the database pays for it.\n//   output 2 (slow, 10 s) - required power, remaining energy/minutes and status. These\n//                           are planning figures; a 1 s cadence buys nothing.\n// A mode change is written out on both gates immediately, regardless of interval.\nconst FAST_MIN_INTERVAL_MS = 1000;\nconst SLOW_MIN_INTERVAL_MS = 10000;\n\nconst d = msg.deadline || {};\nconst q = (v, step) => Math.round((Number(v) || 0) / step) * step;\n\nconst fastSnapshot = JSON.stringify([\n    d.mode,\n    q(d.pv_share, 25), q(d.grid_share, 25), q(d.shortage, 25)\n]);\nconst slowSnapshot = JSON.stringify([\n    d.mode, d.status,\n    q(d.required_power, 25),\n    q(d.remaining_energy, 0.05), q(d.remaining_minutes, 1)\n]);\n\nconst nowMs = Date.now();\n\n// A mode change bypasses both intervals.\nconst lastMode = context.get('ui_last_mode');\nconst modeChanged = lastMode === undefined || lastMode !== d.mode;\ncontext.set('ui_last_mode', d.mode);\n\n// Generic gate: returns true when this branch should write.\nconst due = (key, snapshot, interval) => {\n    if (context.get('ui_last_' + key) === snapshot) return false;      // nothing changed\n    const lastTime = Number(context.get('ui_last_time_' + key)) || 0;\n    if (!modeChanged && (nowMs - lastTime) < interval) return false;   // too soon\n    context.set('ui_last_' + key, snapshot);\n    context.set('ui_last_time_' + key, nowMs);\n    return true;\n};\n\nconst fastDue = due('fast', fastSnapshot, FAST_MIN_INTERVAL_MS);\nconst slowDue = due('slow', slowSnapshot, SLOW_MIN_INTERVAL_MS);\n\nif (!fastDue && !slowDue) return null;\n\nnode.status({\n    fill: \"blue\", shape: \"dot\",\n    text: `${fastDue ? \"bar\" : \"\"}${fastDue && slowDue ? \" + \" : \"\"}${slowDue ? \"plan\" : \"\"} ${new Date(nowMs).toLocaleTimeString()}`\n});\n\nreturn [\n    fastDue ? RED.util.cloneMessage(msg) : null,\n    slowDue ? RED.util.cloneMessage(msg) : null\n];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 460,
+        "wires": [
+            [
+                "dlc_ui_grid",
+                "dlc_ui_pv",
+                "dlc_ui_short"
+            ],
+            [
+                "dlc_ui_req",
+                "dlc_ui_remain",
+                "dlc_ui_energy",
+                "dlc_ui_status"
+            ]
+        ],
+        "outputLabels": [
+            "bar (1 s)",
+            "plan (10 s)"
+        ]
+    },
+    {
+        "id": "dlc_ui_req",
+        "type": "api-call-service",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_ui",
+        "name": "Required power",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_deadline_required_power"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.deadline.required_power}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 720,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dlc_ui_grid",
+        "type": "api-call-service",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_ui",
+        "name": "Grid share",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_deadline_grid_power"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.deadline.grid_share}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 730,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dlc_ui_pv",
+        "type": "api-call-service",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_ui",
+        "name": "PV share",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_deadline_pv_power"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.deadline.pv_share}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 740,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dlc_ui_energy",
+        "type": "api-call-service",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_ui",
+        "name": "Remaining energy",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_deadline_remaining_energy"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.deadline.remaining_energy}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 710,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dlc_ui_remain",
+        "type": "api-call-service",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_ui",
+        "name": "Remaining minutes",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_deadline_remaining_minutes"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.deadline.remaining_minutes}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 710,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dlc_ui_short",
+        "type": "api-call-service",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_ui",
+        "name": "Shortage",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_number.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_number.house_battery_deadline_shortage_power"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.deadline.shortage}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_number",
+        "service": "set_value",
+        "x": 740,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dlc_ui_status",
+        "type": "api-call-service",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_ui",
+        "name": "Status",
+        "server": "176d29a.6f648d6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "input_text.set_value",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_text.house_battery_deadline_status"
+        ],
+        "labelId": [],
+        "data": "{\"value\": $$.deadline.status}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "input_text",
+        "service": "set_value",
+        "x": 750,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dlc_catch",
+        "type": "catch",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_exc",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 55,
+        "y": 280,
+        "wires": [
+            [
+                "dlc_exc_fn"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "dlc_exc_fn",
+        "type": "function",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_exc",
+        "name": "Unhandled Exception",
+        "func": "const handle = global.get('unhandledException');\nif (handle) handle(this);\nnode.status({ fill: 'red', shape: 'dot', text: `${(msg.error && msg.error.message) || 'error'} @ ${new Date().toLocaleTimeString()}` });\n// Only a link-call can be returned to; anything else (the settings group) stops here.\nif (msg._linkSource) { return msg; }\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 105,
+        "y": 280,
+        "wires": [
+            [
+                "dlc_exc_out"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "dlc_exc_out",
+        "type": "link out",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_exc",
+        "name": "exc return",
+        "mode": "return",
+        "links": [],
+        "x": 155,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "dlc_cfg_tick",
+        "type": "inject",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_read",
+        "name": "every 30 s + on start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "30",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 380,
+        "wires": [
+            [
+                "dlc_cfg_tpl"
+            ]
+        ]
+    },
+    {
+        "id": "dlc_cfg_sub",
+        "type": "server-state-changed",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_read",
+        "name": "a setting changed",
+        "server": "176d29a.6f648d6",
+        "version": 6,
+        "outputs": 1,
+        "exposeAsEntityConfig": "",
+        "entities": {
+            "entity": [
+                "sensor.deadline_window",
+                "input_select.house_battery_deadline_goal",
+                "sensor.deadline_pacing",
+                "input_number.house_battery_deadline_target_soc",
+                "input_number.house_battery_deadline_target_energy",
+                "input_select.house_battery_deadline_reached",
+                "input_boolean.house_battery_deadline_hold_after_target",
+                "input_boolean.house_battery_deadline_reserve_pv"
+            ],
+            "substring": [],
+            "regex": []
+        },
+        "outputInitially": true,
+        "stateType": "str",
+        "ifState": "",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": false,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 160,
+        "y": 440,
+        "wires": [
+            [
+                "dlc_cfg_tpl"
+            ]
+        ]
+    },
+    {
+        "id": "dlc_cfg_tpl",
+        "type": "api-render-template",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_read",
+        "name": "Render settings",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{% set w = 'sensor.deadline_window' %}\n{{ {\n  'goal': states('input_select.house_battery_deadline_goal'),\n  'target_soc': states('input_number.house_battery_deadline_target_soc') | float(0),\n  'target_energy': states('input_number.house_battery_deadline_target_energy') | float(0),\n  'fallback': states('input_select.house_battery_deadline_reached'),\n  'hold_after_target': is_state('input_boolean.house_battery_deadline_hold_after_target', 'on'),\n  'reserve_pv': is_state('input_boolean.house_battery_deadline_reserve_pv', 'on'),\n  'pv_forecast_kwh': states('sensor.solar_forecast_surplus_today') | float(0),\n  'window': {'attributes': {\n      'pacing': state_attr(w, 'pacing'),\n      'configured': state_attr(w, 'configured'),\n      'in_window': state_attr(w, 'in_window'),\n      'minutes_left': state_attr(w, 'minutes_left') | int(0),\n      'start': state_attr(w, 'start'),\n      'end': state_attr(w, 'end'),\n      'blocks': state_attr(w, 'blocks') or [],\n      'now_hms': now().strftime('%H:%M:%S')\n  }}\n} | to_json }}",
+        "resultsLocation": "deadline_cfg",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 160,
+        "y": 510,
+        "wires": [
+            [
+                "dlc_cfg_json"
+            ]
+        ]
+    },
+    {
+        "id": "dlc_cfg_json",
+        "type": "json",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_read",
+        "name": "",
+        "property": "deadline_cfg",
+        "action": "obj",
+        "pretty": false,
+        "x": 160,
+        "y": 570,
+        "wires": [
+            [
+                "dlc_cfg_set"
+            ]
+        ]
+    },
+    {
+        "id": "dlc_cfg_set",
+        "type": "function",
+        "z": "dlc1a2b3c4d5e6f0",
+        "g": "dlc_g_read",
+        "name": "Cache settings",
+        "func": "// Publish the settings snapshot to flow context.\n// The control path reads ONLY this - it runs on every P1 update (up to ~1 Hz) and used to\n// walk seven api-current-state nodes in series to fetch values that change when the user\n// touches a dashboard, i.e. almost never.\n//\n// A bad render keeps the PREVIOUS snapshot rather than blanking it, so one failed refresh\n// is harmless; Compute plan gives up on its own once the snapshot goes stale (5 minutes).\nconst cfg = msg.deadline_cfg;\nconst ok = cfg && typeof cfg === 'object' && cfg.window\n    && typeof cfg.window === 'object' && cfg.window.attributes;\nif (!ok) {\n    node.status({ fill: 'red', shape: 'ring', text: `settings render failed ${new Date().toLocaleTimeString()}` });\n    node.warn('[Deadline] settings template returned nothing usable - keeping the previous snapshot');\n    return null;\n}\ncfg.stamp = Date.now();\nflow.set('deadline_cfg', cfg);\nconst a = cfg.window.attributes;\nnode.status({ fill: 'grey', shape: 'dot', text: `${cfg.goal || '?'} / ${a.pacing || '?'} @ ${new Date().toLocaleTimeString()}` });\nreturn null;                         // a settings refresh never continues into the flow\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 160,
+        "y": 630,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dlc_doc",
+        "type": "comment",
+        "z": "dlc1a2b3c4d5e6f0",
+        "name": "📖 How this flow works (open the Info sidebar)",
+        "info": "# Charge Deadline\n\nCharge the batteries to a target **before a deadline**, as cheaply as the window allows,\nwithout taking over the battery control loop. The actual battery command is always delegated\nto an existing sub-strategy; this tab only decides *how much grid power to ask for*.\n\nRuns on **every P1 update (up to ~1 Hz)** via the `Charge Deadline` link-in, dispatched by the\nStart flow when `input_select.house_battery_strategy` is set to *Charge Deadline*.\n\n---\n\n## Layout\n\n| Group | Runs | Does |\n|---|---|---|\n| **Configuration** | every tick | link-in, breadcrumb trace |\n| **Settings (off the control path)** | on change + every 30 s | one `render_template` call -> `flow.deadline_cfg` |\n| **Compute plan** | every tick | decides the mode and the grid setpoint |\n| **Delegate to sub-strategy** | every tick | hands the msg to Self-consumption or the fallback |\n| **UI / analytics** | at most every 10 s | writes the helpers the dashboard reads |\n| **Unhandled exceptions** | on error | red node status, returns to the caller |\n\nThe control path is `link in -> Trace -> Compute plan -> Mode -> (Regulated charge \\| Idle) ->\nRun sub-strategy -> End`. It performs **no entity lookups**: every setting comes from flow\ncontext. An earlier version walked seven `api-current-state` nodes in series on every tick to\nfetch values that change only when someone touches a dashboard.\n\n## Settings cache\n\n`Render settings` asks Home Assistant for one JSON blob (goal, targets, fallback, both\nbooleans, the PV forecast, and `sensor.deadline_window`'s attributes) and `Cache settings`\nstores it in `flow.deadline_cfg` with a `stamp`.\n\n* A failed render **keeps the previous snapshot** - one bad refresh is harmless.\n* `Compute plan` treats a snapshot older than **5 minutes** as no settings at all and falls\n  back, rather than commanding a charge from settings that may no longer be true. It warns at\n  most once a minute while that lasts.\n* Because Home Assistant computes `in_window` and `now_hms`, this flow never parses a clock\n  time, so the Node-RED container's timezone cannot shift the window.\n\n## Modes (`msg.deadline.mode`)\n\n| Mode | When | Effect |\n|---|---|---|\n| `charge` | inside the window, energy still needed | Self-consumption PID driven to `grid_target`, discharge disabled |\n| `idle` | *Cheapest hours* pacing, waiting for the next cheap period | fallback strategy, discharge allowed - anything used now is re-bought cheaply |\n| `hold` | target reached and *hold* is on | fallback strategy but discharge stays disabled, so the reserve survives to the deadline |\n| `fallback` | outside the window, unconfigured, or stale settings | fallback strategy, nothing held |\n\n**Target reached is latched**, keyed on window + goal, and cleared when the window closes.\nWithout the latch the fallback discharges the moment the target is met, the shortfall crosses\nthe tolerance again, and the next tick re-buys the same energy - a ping-pong that runs for the\nrest of the window. With *hold* off the latch becomes 0.30 kWh of hysteresis instead.\n\n## The plan\n\n```\nrequired_W = energy_still_needed / charge_time_left\ngrid_target = clamp(required_W - measured_PV_surplus, 0, pack_limit, import_limit)\n```\n\n* `charge_time_left` is the sum of the periods that can still be charged in - every cheap\n  period under **Cheapest hours** (all of them, not just enough to cover the energy), every\n  Charge Deadline period still ahead under **Time slot**. Only a manual window paces on the\n  wall clock, because there every minute to the deadline is a minute it may charge in.\n  Under Timed the gaps between periods are dead minutes: the Timed strategy does not\n  dispatch Charge Deadline in them, so pacing across them would under-charge inside the\n  periods and dump the catch-up on the last one.\n* If the cheap periods cannot carry it in time, the **deadline wins**: the whole amount is\n  spread over the rest of the window and the status says so.\n* `reserve_pv` subtracts today's forecast surplus so a sunny afternoon is not pre-empted by\n  morning grid charging - and switches itself off once the job barely fits at full power.\n* Recomputed from the *remaining* energy and time every tick, so it self-corrects: more sun\n  means less grid next tick.\n\n## Message contract\n\n**Reads** (put on the msg by the Start flow - never looked up here):\n`batteries[]`, `batteries_total_power`, `batteries_max_charge_power`,\n`batteries_available_energy`, `grid_power`, `grid_power_has_limit_import`,\n`grid_power_limit_import`.\n\n**Sets:** `msg.target` (the sub-strategy to run), `msg.house_target_grid_consumption_in_w`,\n`advanced_settings.discharge_disabled`, `strategy.display`, and `msg.deadline.*` for the UI.\n\n## UI writes\n\n`Write when changed` quantises before comparing (25 W, 0.05 kWh) and rate-limits to 10 s.\nWithout the quantisation the status string moved on nearly every tick and the gate never\nmatched - about 5 000 service calls an hour, all of them recorded. In practice it now writes\nroughly once a minute while charging.\n\n## What lives in Home Assistant, not here\n\nThe window, the cheap periods and everything the dashboard shows are template entities in\n`house_battery_deadline_charge.yaml`: `sensor.deadline_cheap_blocks` merges adjacent price\nmarks into runs, `sensor.deadline_window` derives the window from them (or from the two\n`input_datetime` helpers under *Manual window*), and `sensor.deadline_pacing` decides which\nof the two it is from the active strategy. Those are deliberately **not** written by this\nflow: a helper written from Node-RED freezes at its last value the moment another strategy\ntakes over.\n\n## Failure behaviour\n\nEvery path below ends in the fallback strategy, never in an uncommanded charge: no settings\nyet, stale settings, no window configured, no goal configured, no batteries on the msg,\nmalformed price blocks, or an unreadable clock.\n",
+        "x": 190,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "176d29a.6f648d6",
+        "type": "server",
+        "name": "HA System",
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": [],
+        "connectionDelay": true,
+        "cacheJson": false,
+        "heartbeat": true,
+        "heartbeatInterval": "30",
+        "statusSeparator": "",
+        "enableGlobalContextStore": false
+    },
+    {
+        "id": "02bcd04215f0459d",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-home-assistant-websocket": "0.80.3"
+        }
+    }
+]

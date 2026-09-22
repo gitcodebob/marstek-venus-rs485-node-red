@@ -170,12 +170,41 @@ input_number:
     mode: box
     icon: mdi:battery-arrow-up
 
+  # -------------------------------------------------------------------------------------------------------
+  # Totals, all written by the "Batteries (totals)" function in Node-RED's start flow.
+  #
+  # NO `initial:` ON ANY OF THESE - deliberately. Home Assistant re-applies `initial:` on
+  # EVERY restart, not just the first, so it does not mean "the value before anything has
+  # written one", it means "zero these on every restart". Without it HA restores the last
+  # stored value, which is the correct behaviour for a helper an automation owns.
+  #
+  # That mattered because the flow writes each of these through an `rbe` ("On change")
+  # filter. The two energy/power MAXIMA are static - they only move when a charge or
+  # discharge cutoff changes, or when a pack drops off the bus - so after an HA Core
+  # restart the sequence was:
+  #
+  #   HA restarts -> `initial: 0` zeroes the helper -> Node-RED keeps running, so its rbe
+  #   still holds the last value it sent -> the unchanged value is filtered out and never
+  #   re-sent -> the helper sits at 0 until the underlying number genuinely changes.
+  #
+  # Anything reading it then computed against a zero capacity. sensor.deadline_required_power
+  # is the case that surfaced it: (target - soc) / 100 * 0 = 0, so "Required average power to
+  # deadline" read 0 W with a real deadline and a 28 % fleet.
+  #
+  # The two live totals (available energy, current power) never showed it because they drift
+  # every cycle and so always pass the rbe.
+  #
+  # NOTE: dropping `initial:` stops the RESET, but it does not by itself push a value into a
+  # helper that is already stuck at 0 - the rbe still has to release one. After deploying
+  # this, redeploy the Node-RED flow once (that clears the rbe state) or set the helper by
+  # hand in Developer Tools -> States.
+  # -------------------------------------------------------------------------------------------------------
+
   # Totals | Total usable energy in batteries
   house_battery_total_available_energy:
     name: "Total available energy"
     min: -10
     max: 1000
-    initial: 0
     unit_of_measurement: "kWh"
     mode: box
     icon: mdi:power-plug-battery
@@ -185,7 +214,6 @@ input_number:
     name: "Max. available energy"
     min: -10
     max: 1000
-    initial: 0
     unit_of_measurement: "kWh"
     mode: box
     icon: mdi:power-plug-battery
@@ -195,7 +223,6 @@ input_number:
     name: "Total battery power"
     min: -25000
     max: 25000
-    initial: 0
     unit_of_measurement: "W"
     mode: box
     icon: mdi:power-plug-battery
@@ -205,7 +232,6 @@ input_number:
     name: "Max. charge power"
     min: 0
     max: 15000
-    initial: 0
     unit_of_measurement: "W"
     mode: box
     icon: mdi:power-plug-battery
@@ -215,7 +241,6 @@ input_number:
     name: "Max. discharge power"
     min: 0
     max: 15000
-    initial: 0
     unit_of_measurement: "W"
     mode: box
     icon: mdi:power-plug-battery
@@ -661,6 +686,7 @@ input_select:
       - Dynamic # Requires a dynamic tariff contract and the Cheapest Hours HACS add-on
       - Charge # Uses self-consumption strategy with smart settings and target grid consumption > 0
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
+      - Charge Deadline # Requires SoC and window to be set!
       - Sell # Discharge batteries
       - Zero import # Use battery to prevent grid import, surplus PV exports to grid
       - Standby / peak shave # Standby, peak shave only. Requires power limits to be set!
@@ -682,6 +708,7 @@ input_select:
       - Self-consumption # Target grid consumption = 0
       - Charge # Uses self-consumption strategy with smart settings and target grid consumption > 0
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
+      - Charge Deadline # Requires SoC and window to be set!
       - Sell
       - Zero import # Use battery to prevent grid import, surplus PV exports to grid
       - Standby / peak shave # Standby, peak shave only. Requires power limits to be set!
@@ -753,6 +780,7 @@ input_select:
       - ENTSO-E
       - Frank Energie
       - GE-Spot
+      - Grid Clock
       - Tibber (core)
       - Tibber (custom)
       - Nordpool (core)
@@ -779,6 +807,7 @@ input_select:
     options:
       - Charge
       - Charge PV
+      - Charge Deadline # Charge to the target SoC before the deadline. Requires SoC and window to be set!
       - Standby / peak shave # Standby, peak shave only. Requires power limits to be set!
     icon: mdi:strategy
 
@@ -801,12 +830,13 @@ input_select:
       - energy reserve
       - solar forecast
     icon: mdi:battery-charging-80
-
+    
   # Charge strategy | strategy after reaching goal
   house_battery_strategy_charge_goal_reached:
     name: Then use
     options:
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
+      - Charge Deadline # Requires SoC and window to be set!
       - Full stop # Deactivate batteries
       - Self-consumption # Target grid consumption = 0
       - Zero import # Use battery to prevent grid import, surplus PV exports to grid
@@ -827,6 +857,7 @@ input_select:
     name: Then use
     options:
       - Charge PV # Charge when surplus PV is available, batteries will not discharge
+      - Charge Deadline # Requires SoC and window to be set!
       - Full stop # Deactivate batteries
       - Self-consumption # Target grid consumption = 0
       - Zero import # Use battery to prevent grid import, surplus PV exports to grid
@@ -883,8 +914,15 @@ template:
       - name: "Battery time remaining"
         unique_id: house_battery_time_remaining
         state: >
-          {# this value is calculated in the template sensor above #}
-          {% set power = max(0, states('sensor.house_total_battery_power_in_w') | float(0)) %}
+          {# this value is calculated in the template sensor above.
+             NOTE: the entity_id of that sensor comes from its `name:` ("House Total Battery
+             Power") -> sensor.house_total_battery_power. Its `unique_id:` is
+             house_total_battery_power_in_w, which does NOT set the entity_id. Both spellings
+             are tried below so this keeps working if the entity is renamed. #}
+          {% set bat_ent = ['sensor.house_total_battery_power',
+                            'sensor.house_total_battery_power_in_w']
+                           | select('has_value') | first | default('') %}
+          {% set power = max(0, states(bat_ent) | float(0)) %}
           {# this input_number is calculated in the Node-RED flows #}
           {% set capacity_kwh = states('input_number.house_battery_total_available_energy') | float(0) %}
           {# display #}
@@ -1138,6 +1176,17 @@ recorder:
       # Debug sensors (updated frequently when debug mode is active)
       - sensor.home_battery_control_trace
       - sensor.home_battery_control_log
+      # NOTE: sensor.deadline_estimated_soc is deliberately NOT excluded. It has
+      # state_class: measurement, so it earns permanent hourly long-term statistics
+      # for ~24 rows/day. It is rounded to whole percent instead, which keeps the
+      # raw state changes rare. Excluding an entity also blocks its statistics.
+      # All of these use now(), so HA re-renders them every minute by design. None carries
+      # state_class, so nothing of statistical value is lost by keeping them out of the DB.
+      - sensor.deadline_charged_at
+      - sensor.deadline_window
+      - sensor.deadline_cheap_blocks
+      # Display string that follows SoC, so it changes constantly and means nothing as history
+      - sensor.deadline_goal_progress
     entity_globs:
       # PID control signals (updated every 2-40 seconds during operation)
       - input_number.house_battery_control_*_term
@@ -1150,3 +1199,7 @@ recorder:
       # Status fields (updated frequently)
       - input_number.house_battery_total_available_energy
       - sensor.battery_time_remaining
+      # Charge Deadline analytics: mirrored 1:1 by sensor.deadline_*_power template
+      # sensors that carry state_class and therefore keep permanent statistics.
+      # Recording both would just double the rows.
+      - input_number.house_battery_deadline_*_power

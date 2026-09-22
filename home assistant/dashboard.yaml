@@ -640,7 +640,7 @@ views:
               navigation_path: /home-battery/4
             heading: Problem solver
           - type: markdown
-            content: '-----'
+            content: -----
             text_only: true
           - type: heading
             icon: mdi:star-check-outline
@@ -798,6 +798,15 @@ views:
         entity: input_text.house_battery_strategy_active_sub_strategy
         show_entity_picture: false
         name: Executing
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.worldclock_sensor
+        show_entity_picture: false
+        name: Time
+        tap_action:
+          action: none
     header:
       layout: center
       badges_position: top
@@ -1076,6 +1085,447 @@ views:
 
               </i></font>
             text_only: true
+      - cards:
+          - heading: Charge Deadline strategy
+            heading_style: title
+            icon: mdi:battery-clock
+            type: heading
+          - heading: Charge Deadline until
+            heading_style: subtitle
+            icon: mdi:information-slab-circle
+            tap_action:
+              action: url
+              url_path: https://docs.homebatterycontrol.com/03-strategies.html
+            type: heading
+          - entities:
+              - entity: input_select.house_battery_deadline_goal
+                name: Charge until
+              - conditions:
+                  - entity: input_select.house_battery_deadline_goal
+                    state: state of charge
+                row:
+                  entity: input_number.house_battery_deadline_target_soc
+                  name: Target SoC
+                type: conditional
+              - conditions:
+                  - entity: input_select.house_battery_deadline_goal
+                    state: energy reserve
+                row:
+                  entity: input_number.house_battery_deadline_target_energy
+                  name: Target energy reserve
+                type: conditional
+            show_header_toggle: false
+            state_color: false
+            type: entities
+          - heading: Charge Deadline estimation
+            heading_style: subtitle
+            icon: mdi:information-slab-circle
+            type: heading
+            visibility:
+              - condition: state
+                entity: input_text.house_battery_strategy_active_sub_strategy
+                state: Charge Deadline
+          - entities:
+              - color: amber
+                entity: sensor.deadline_pv_power
+                name: PV surplus
+              - color: '#488fc2'
+                entity: sensor.deadline_grid_power
+                name: Grid charge
+              - color: red
+                entity: sensor.deadline_shortage_power
+                name: Short (at limit)
+            grid_options:
+              columns: full
+              rows: auto
+            type: distribution
+            visibility:
+              - condition: state
+                entity: input_text.house_battery_strategy_active_sub_strategy
+                state: Charge Deadline
+          - entities:
+              - conditions:
+                  - entity: input_select.house_battery_deadline_goal
+                    state_not: energy reserve
+                row:
+                  entity: sensor.deadline_goal_progress
+                  name: Current SoC
+                  type: simple-entity
+                type: conditional
+              - conditions:
+                  - entity: input_select.house_battery_deadline_goal
+                    state: energy reserve
+                row:
+                  entity: sensor.deadline_goal_progress
+                  name: Current energy reserve
+                  type: simple-entity
+                type: conditional
+              - type: attribute
+                entity: sensor.deadline_completion_indicator
+                attribute: eta
+                name: Estimated charge completion
+                icon: mdi:clock-outline
+              - entity: sensor.deadline_estimated_soc
+                name: Estimated SoC at deadline
+                type: simple-entity
+              - entity: sensor.hbc_energy_price_now
+                icon: mdi:transmission-tower-import
+                type: simple-entity
+              - conditions:
+                  - entity: binary_sensor.deadline_at_risk
+                    state: 'on'
+                row:
+                  entity: binary_sensor.deadline_at_risk
+                  name: Deadline will be missed
+                  type: simple-entity
+                type: conditional
+            show_header_toggle: false
+            state_color: true
+            type: entities
+            visibility:
+              - condition: state
+                entity: input_text.house_battery_strategy_active_sub_strategy
+                state: Charge Deadline
+          - heading: Charge Deadline window
+            heading_style: subtitle
+            icon: mdi:information-slab-circle
+            type: heading
+            visibility:
+              - condition: state
+                entity: input_text.house_battery_strategy_active_sub_strategy
+                state: Charge Deadline
+          - color: none
+            entities:
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Cheapest hours
+                row:
+                  entity: sensor.deadline_window
+                  name: Dynamic cheap block 1
+                  icon: mdi:cash-clock
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Cheapest hours
+                  - entity: sensor.deadline_planned_cheap_window_2
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_cheap_window_2
+                  name: Dynamic cheap block 2
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Cheapest hours
+                  - entity: sensor.deadline_planned_cheap_window_3
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_cheap_window_3
+                  name: Dynamic cheap block 3
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Cheapest hours
+                  - entity: sensor.deadline_planned_cheap_window_4
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_cheap_window_4
+                  name: Dynamic cheap block 4
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Cheapest hours
+                  - entity: sensor.deadline_planned_cheap_window_5
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_cheap_window_5
+                  name: Dynamic cheap block 5
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Time slot
+                row:
+                  entity: sensor.deadline_window
+                  name: Timed period 1
+                  icon: mdi:calendar-clock
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Time slot
+                  - entity: sensor.deadline_planned_timed_window_2
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_timed_window_2
+                  name: Timed period 2
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Time slot
+                  - entity: sensor.deadline_planned_timed_window_3
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_timed_window_3
+                  name: Timed period 3
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Time slot
+                  - entity: sensor.deadline_planned_timed_window_4
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_timed_window_4
+                  name: Timed period 4
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Time slot
+                  - entity: sensor.deadline_planned_timed_window_5
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_timed_window_5
+                  name: Timed period 5
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Manual window
+                row:
+                  entity: sensor.deadline_window
+                  name: Timing (manual)
+                  type: simple-entity
+              - entity: sensor.deadline_required_power
+                name: Required average power to deadline
+                type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Manual window
+                row:
+                  entity: input_datetime.house_battery_deadline_start
+                  name: Start charging at
+              - type: conditional
+                conditions:
+                  - entity: sensor.deadline_pacing
+                    state: Manual window
+                row:
+                  entity: input_datetime.house_battery_deadline_end
+                  name: Deadline
+            show_header_toggle: false
+            type: entities
+            visibility:
+              - condition: state
+                entity: input_text.house_battery_strategy_active_sub_strategy
+                state: Charge Deadline
+          - heading: When done, switch to strategy
+            heading_style: subtitle
+            icon: mdi:information-slab-circle
+            tap_action:
+              action: url
+              url_path: https://docs.homebatterycontrol.com/03-strategies.html
+            type: heading
+          - entities:
+              - entity: input_select.house_battery_deadline_reached
+              - entity: input_boolean.house_battery_deadline_hold_after_target
+                name: Hold the target until the deadline
+              - entity: input_boolean.house_battery_deadline_reserve_pv
+                name: Leave room for forecast PV
+            show_header_toggle: false
+            state_color: false
+            type: entities
+          - heading: Next Charge Deadline window
+            heading_style: subtitle
+            icon: mdi:battery-clock-outline
+            type: heading
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: input_text.house_battery_strategy_active_sub_strategy
+                    state_not: Charge Deadline
+                  - condition: or
+                    conditions:
+                      - condition: and
+                        conditions:
+                          - condition: state
+                            entity: input_select.house_battery_strategy
+                            state: Dynamic
+                          - condition: state
+                            entity: >-
+                              input_select.house_battery_strategy_dynamic_cheapest
+                            state: Charge Deadline
+                      - condition: and
+                        conditions:
+                          - condition: state
+                            entity: input_select.house_battery_strategy
+                            state: Timed
+                          - condition: state
+                            entity: sensor.deadline_planned_timed_window
+                            state_not: Not defined
+          - color: none
+            entities:
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy
+                    state: Dynamic
+                row:
+                  entity: sensor.deadline_planned_cheap_window
+                  name: Dynamic cheap block 1
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy
+                    state: Dynamic
+                  - entity: sensor.deadline_planned_cheap_window_2
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_cheap_window_2
+                  name: Dynamic cheap block 2
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy
+                    state: Dynamic
+                  - entity: sensor.deadline_planned_cheap_window_3
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_cheap_window_3
+                  name: Dynamic cheap block 3
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy
+                    state: Dynamic
+                  - entity: sensor.deadline_planned_cheap_window_4
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_cheap_window_4
+                  name: Dynamic cheap block 4
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy
+                    state: Dynamic
+                  - entity: sensor.deadline_planned_cheap_window_5
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_cheap_window_5
+                  name: Dynamic cheap block 5
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy
+                    state: Timed
+                row:
+                  entity: sensor.deadline_planned_timed_window
+                  name: Timed period 1
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy
+                    state: Timed
+                  - entity: sensor.deadline_planned_timed_window_2
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_timed_window_2
+                  name: Timed period 2
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy
+                    state: Timed
+                  - entity: sensor.deadline_planned_timed_window_3
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_timed_window_3
+                  name: Timed period 3
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy
+                    state: Timed
+                  - entity: sensor.deadline_planned_timed_window_4
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_timed_window_4
+                  name: Timed period 4
+                  type: simple-entity
+              - type: conditional
+                conditions:
+                  - entity: input_select.house_battery_strategy
+                    state: Timed
+                  - entity: sensor.deadline_planned_timed_window_5
+                    state_not: ''
+                row:
+                  entity: sensor.deadline_planned_timed_window_5
+                  name: Timed period 5
+                  type: simple-entity
+            show_header_toggle: false
+            type: entities
+            visibility:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: input_text.house_battery_strategy_active_sub_strategy
+                    state_not: Charge Deadline
+                  - condition: or
+                    conditions:
+                      - condition: and
+                        conditions:
+                          - condition: state
+                            entity: input_select.house_battery_strategy
+                            state: Dynamic
+                          - condition: state
+                            entity: >-
+                              input_select.house_battery_strategy_dynamic_cheapest
+                            state: Charge Deadline
+                      - condition: and
+                        conditions:
+                          - condition: state
+                            entity: input_select.house_battery_strategy
+                            state: Timed
+                          - condition: state
+                            entity: sensor.deadline_planned_timed_window
+                            state_not: Not defined
+          - type: markdown
+            content: >-
+              <font color=grey>_'Reserve' is usable energy in your batteries
+              (e.g. above 11% SoC)_
+
+              </font>
+            text_only: true
+            visibility:
+              - condition: state
+                entity: input_select.house_battery_strategy_sell_goal
+                state: energy reserve
+          - type: markdown
+            content: >-
+              <font color=grey>_'Leave room for forecast PV' subtracts the solar
+              surplus still forecast for today from the energy bought from the
+              grid, so an expected sunny afternoon is not paid for in advance.
+              It steps aside once the target only just fits before the deadline,
+              and the grid charge is recalculated continuously as real sun
+              arrives._
+
+              </font>
+            text_only: true
+          - type: markdown
+            content: >-
+              <font color=grey><i>Visit the '<ha-icon
+              icon="mdi:cog-outline"></ha-icon>settings tab' for fine-grained
+              control **per battery**
+
+              </i></font>
+            text_only: true
+        type: grid
     icon: mdi:transmission-tower-export
     cards: []
     badges:
@@ -1094,6 +1544,15 @@ views:
         entity: input_text.house_battery_strategy_active_sub_strategy
         show_entity_picture: false
         name: Executing
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.worldclock_sensor
+        show_entity_picture: false
+        name: Time
+        tap_action:
+          action: none
     header:
       layout: center
       badges_position: top
@@ -1628,6 +2087,15 @@ views:
         entity: input_text.house_battery_strategy_active_sub_strategy
         show_entity_picture: false
         name: Executing
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.worldclock_sensor
+        show_entity_picture: false
+        name: Time
+        tap_action:
+          action: none
     header:
       layout: center
       badges_position: top
@@ -1768,6 +2236,15 @@ views:
         entity: input_text.house_battery_strategy_active_sub_strategy
         show_entity_picture: false
         name: Executing
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.worldclock_sensor
+        show_entity_picture: false
+        name: Time
+        tap_action:
+          action: none
     cards: []
   - type: sections
     max_columns: 3
@@ -1942,6 +2419,15 @@ views:
                   icon: mdi:home-import-outline
           - type: markdown
             content: >-
+              <font color=grey><i>This also determines **Charge strategy**
+              speed</i>
+
+              </font>
+            text_only: true
+            grid_options:
+              columns: full
+          - type: markdown
+            content: >-
               {% set limit =
               states('input_number.house_battery_control_power_limit_import') |
               int(0) %} {% if
@@ -1953,15 +2439,6 @@ views:
               overshoot near this limit.</ha-alert>
 
               {% endif %}
-            text_only: true
-            grid_options:
-              columns: full
-          - type: markdown
-            content: >-
-              <font color=grey><i>This also determines **Charge strategy**
-              speed</i>
-
-              </font>
             text_only: true
             grid_options:
               columns: full
@@ -2438,6 +2915,15 @@ views:
         entity: input_text.house_battery_strategy_active_sub_strategy
         show_entity_picture: false
         name: Executing
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.worldclock_sensor
+        show_entity_picture: false
+        name: Time
+        tap_action:
+          action: none
     header:
       layout: center
       badges_position: top
