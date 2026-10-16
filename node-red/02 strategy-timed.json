@@ -2,10 +2,231 @@
     {
         "id": "08784a7d4ebd8fe8",
         "type": "tab",
-        "label": "Strategy Timed v4.15.1",
+        "label": "Strategy Timed v4.15.0",
         "disabled": false,
         "info": "",
         "env": []
+    },
+    {
+        "id": "tmd_g_pick",
+        "type": "group",
+        "z": "08784a7d4ebd8fe8",
+        "name": "Pick period (fast path, 2026-10-16)",
+        "style": {
+            "label": true,
+            "stroke": "#7fb7df",
+            "color": "#7fb7df"
+        },
+        "nodes": [
+            "tmd_pick"
+        ],
+        "x": 254,
+        "y": 1379,
+        "w": 252,
+        "h": 82
+    },
+    {
+        "id": "tmd_pick",
+        "type": "function",
+        "z": "08784a7d4ebd8fe8",
+        "g": "tmd_g_pick",
+        "name": "Pick period",
+        "func": "// Pick period (2026-10-16) - replaces, on the hot path, the chain of 20 api-current-state\n// reads, 5 config functions, 5 time-range switches and ~15 change/switch nodes that ran in\n// series on every P1 update. Same decision, same order:\n//   * period A is always checked; B is checked only if 'has period B' is on, C only if B AND\n//     C are on, and so on - the old chain stopped at the first period that was switched off;\n//   * the first period whose window contains 'now' wins; none -> the baseline strategy;\n//   * a window is [start, end) to the second; end before start runs past midnight; start ==\n//     end is an empty period (exactly how node-red-contrib-time-range-switch 1.2.0 decides).\n// 'now' is Home Assistant's local time (UTC + HA's offset from the settings snapshot), so\n// this flow and the HA sensors that describe the Timed periods agree on the clock even when\n// the Node-RED container runs in another timezone.\n//\n// Outputs: 1 -> Sub strategy (the hot path, no fan-out so the msg is not cloned)\n//          2 -> Update UI, ONLY when the period changes, after a pause (Timed was not the\n//               active strategy and the UI may say 'not timed'), or every 10 min as a repair\n//          3 -> the old read chain, used only when there is no fresh settings snapshot\nconst log = global.get('logger');\nconst cfg = flow.get('timed_cfg');\nconst MAX_AGE_MS = 5 * 60 * 1000;\nconst nowMs = Date.now();\nconst age = (cfg && Number(cfg.stamp)) ? nowMs - Number(cfg.stamp) : Infinity;\n\nif (!cfg || age > MAX_AGE_MS) {\n    const lastWarn = Number(context.get('stale_warned')) || 0;\n    if (nowMs - lastWarn > 60000) {\n        context.set('stale_warned', nowMs);\n        node.warn(`[Timed] settings snapshot ${Number.isFinite(age) ? Math.round(age / 1000) + ' s old' : 'missing'} - using the old read chain`);\n    }\n    node.status({ fill: 'yellow', shape: 'ring', text: 'no fresh settings - old read chain' });\n    context.set('last_run', nowMs);\n    return [null, null, msg];\n}\n\nconst toSec = v => {\n    const m = /^(\\d{1,2}):(\\d{2})(?::(\\d{2}))?/.exec(String(v));\n    return m ? Number(m[1]) * 3600 + Number(m[2]) * 60 + Number(m[3] || 0) : null;\n};\nconst nowS = (((Math.floor(nowMs / 1000) + Number(cfg.utc_offset_s)) % 86400) + 86400) % 86400;\nconst inRange = (s, e) => s < e ? (nowS >= s && nowS < e)\n                        : s > e ? (nowS >= s || nowS < e)\n                        : false;\n\nlet period = 'Default';\nlet strat = cfg.strat_0;\nfor (const p of cfg.periods) {\n    if (!p.enabled) break;                         // same cascade as the old chain\n    const s = toSec(p.start), e = toSec(p.end);\n    if (s === null || e === null) {\n        // The old time-range switch errored out on an unreadable time; skip the period instead.\n        const lastBad = Number(context.get('bad_warned')) || 0;\n        if (nowMs - lastBad > 60000) {\n            context.set('bad_warned', nowMs);\n            node.warn(`[Timed] period ${p.id} has an unreadable time (${p.start} - ${p.end}) - skipped`);\n        }\n        continue;\n    }\n    if (inRange(s, e)) { period = p.id; strat = p.strat; break; }\n}\n\n// Same message properties the old chain left behind.\nmsg.timed_strategy = strat;\nmsg.target = strat;\nmsg.timed_period = period;\n\n// UI write, throttled.\nconst lastRun = Number(context.get('last_run')) || 0;\nconst lastUi = Number(context.get('ui_time')) || 0;\nconst resumed = nowMs - lastRun > 10000;           // Timed was not running for a while\nconst uiDue = context.get('ui_period') !== period || resumed || (nowMs - lastUi) > 10 * 60 * 1000;\ncontext.set('last_run', nowMs);\nlet ui = null;\nif (uiDue) {\n    context.set('ui_period', period);\n    context.set('ui_time', nowMs);\n    ui = { timed_period: period };\n}\n\nconst hh = String(Math.floor(nowS / 3600)).padStart(2, '0'), mm = String(Math.floor(nowS / 60) % 60).padStart(2, '0');\nnode.status({ fill: 'green', shape: 'dot', text: `${hh}:${mm} ${period} -> ${strat}` });\nreturn [msg, ui, null];\n",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "outputLabels": [
+            "to sub strategy",
+            "UI (on change)",
+            "old read chain (no settings)"
+        ],
+        "x": 380,
+        "y": 1420,
+        "wires": [
+            [
+                "eb5daf69f2ea7117"
+            ],
+            [
+                "f3997895a0b6167b"
+            ],
+            [
+                "501d349b3f06d950"
+            ]
+        ]
+    },
+    {
+        "id": "tmd_g_read",
+        "type": "group",
+        "z": "08784a7d4ebd8fe8",
+        "name": "Timed settings cache",
+        "style": {
+            "label": true,
+            "stroke": "#7fb7df",
+            "color": "#7fb7df"
+        },
+        "nodes": [
+            "tmd_cfg_tick",
+            "tmd_cfg_sub",
+            "tmd_cfg_tpl",
+            "tmd_cfg_json",
+            "tmd_cfg_set"
+        ],
+        "x": 534,
+        "y": 1379,
+        "w": 752,
+        "h": 122
+    },
+    {
+        "id": "tmd_cfg_tick",
+        "type": "inject",
+        "z": "08784a7d4ebd8fe8",
+        "g": "tmd_g_read",
+        "name": "every 30 s + on start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "30",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 660,
+        "y": 1420,
+        "wires": [
+            [
+                "tmd_cfg_tpl"
+            ]
+        ]
+    },
+    {
+        "id": "tmd_cfg_sub",
+        "type": "server-state-changed",
+        "z": "08784a7d4ebd8fe8",
+        "g": "tmd_g_read",
+        "name": "a Timed setting changed",
+        "server": "176d29a.6f648d6",
+        "version": 6,
+        "outputs": 1,
+        "exposeAsEntityConfig": "",
+        "entities": {
+            "entity": [
+                "input_datetime.house_battery_strategy_timed_period_a1",
+                "input_datetime.house_battery_strategy_timed_period_a2",
+                "input_datetime.house_battery_strategy_timed_period_b1",
+                "input_datetime.house_battery_strategy_timed_period_b2",
+                "input_datetime.house_battery_strategy_timed_period_c1",
+                "input_datetime.house_battery_strategy_timed_period_c2",
+                "input_datetime.house_battery_strategy_timed_period_d1",
+                "input_datetime.house_battery_strategy_timed_period_d2",
+                "input_datetime.house_battery_strategy_timed_period_e1",
+                "input_datetime.house_battery_strategy_timed_period_e2",
+                "input_select.house_battery_strategy_timed_strat_0",
+                "input_select.house_battery_strategy_timed_strat_a",
+                "input_select.house_battery_strategy_timed_strat_b",
+                "input_select.house_battery_strategy_timed_strat_c",
+                "input_select.house_battery_strategy_timed_strat_d",
+                "input_select.house_battery_strategy_timed_strat_e",
+                "input_boolean.house_battery_strategy_timed_has_period_b",
+                "input_boolean.house_battery_strategy_timed_has_period_c",
+                "input_boolean.house_battery_strategy_timed_has_period_d",
+                "input_boolean.house_battery_strategy_timed_has_period_e"
+            ],
+            "substring": [],
+            "regex": []
+        },
+        "outputInitially": true,
+        "stateType": "str",
+        "ifState": "",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 670,
+        "y": 1460,
+        "wires": [
+            [
+                "tmd_cfg_tpl"
+            ]
+        ]
+    },
+    {
+        "id": "tmd_cfg_tpl",
+        "type": "api-render-template",
+        "z": "08784a7d4ebd8fe8",
+        "g": "tmd_g_read",
+        "name": "Render settings",
+        "server": "176d29a.6f648d6",
+        "version": 0,
+        "template": "{{ {\n  'utc_offset_s': now().utcoffset().total_seconds() | int,\n  'strat_0': states('input_select.house_battery_strategy_timed_strat_0'),\n  'periods': [\n    {'id': 'A', 'enabled': true,\n     'start': states('input_datetime.house_battery_strategy_timed_period_a1'),\n     'end': states('input_datetime.house_battery_strategy_timed_period_a2'),\n     'strat': states('input_select.house_battery_strategy_timed_strat_a')},\n    {'id': 'B', 'enabled': is_state('input_boolean.house_battery_strategy_timed_has_period_b', 'on'),\n     'start': states('input_datetime.house_battery_strategy_timed_period_b1'),\n     'end': states('input_datetime.house_battery_strategy_timed_period_b2'),\n     'strat': states('input_select.house_battery_strategy_timed_strat_b')},\n    {'id': 'C', 'enabled': is_state('input_boolean.house_battery_strategy_timed_has_period_c', 'on'),\n     'start': states('input_datetime.house_battery_strategy_timed_period_c1'),\n     'end': states('input_datetime.house_battery_strategy_timed_period_c2'),\n     'strat': states('input_select.house_battery_strategy_timed_strat_c')},\n    {'id': 'D', 'enabled': is_state('input_boolean.house_battery_strategy_timed_has_period_d', 'on'),\n     'start': states('input_datetime.house_battery_strategy_timed_period_d1'),\n     'end': states('input_datetime.house_battery_strategy_timed_period_d2'),\n     'strat': states('input_select.house_battery_strategy_timed_strat_d')},\n    {'id': 'E', 'enabled': is_state('input_boolean.house_battery_strategy_timed_has_period_e', 'on'),\n     'start': states('input_datetime.house_battery_strategy_timed_period_e1'),\n     'end': states('input_datetime.house_battery_strategy_timed_period_e2'),\n     'strat': states('input_select.house_battery_strategy_timed_strat_e')}\n  ]\n} | to_json }}",
+        "resultsLocation": "timed_cfg",
+        "resultsLocationType": "msg",
+        "templateLocation": "",
+        "templateLocationType": "none",
+        "x": 880,
+        "y": 1440,
+        "wires": [
+            [
+                "tmd_cfg_json"
+            ]
+        ]
+    },
+    {
+        "id": "tmd_cfg_json",
+        "type": "json",
+        "z": "08784a7d4ebd8fe8",
+        "g": "tmd_g_read",
+        "name": "",
+        "property": "timed_cfg",
+        "action": "obj",
+        "pretty": false,
+        "x": 1030,
+        "y": 1440,
+        "wires": [
+            [
+                "tmd_cfg_set"
+            ]
+        ]
+    },
+    {
+        "id": "tmd_cfg_set",
+        "type": "function",
+        "z": "08784a7d4ebd8fe8",
+        "g": "tmd_g_read",
+        "name": "Cache settings",
+        "func": "// Publish the Timed settings snapshot to flow context (2026-10-16).\n// 'Pick period' runs on every P1 update (~1 Hz) and reads ONLY this snapshot. The 20\n// api-current-state reads it replaces fetched values that change only when someone edits a\n// period on the dashboard. Refreshed on every change of one of those helpers, and every 30 s\n// as a repair (that also picks up a daylight-saving change in utc_offset_s).\n// A bad render keeps the PREVIOUS snapshot; Pick period falls back to the old read chain on\n// its own once the snapshot is more than 5 minutes old.\nconst cfg = msg.timed_cfg;\nconst ok = cfg && typeof cfg === 'object' && Array.isArray(cfg.periods) && cfg.periods.length === 5\n    && Number.isFinite(Number(cfg.utc_offset_s));\nif (!ok) {\n    node.status({ fill: 'red', shape: 'ring', text: `settings render failed ${new Date().toLocaleTimeString()}` });\n    node.warn('[Timed] settings template returned nothing usable - keeping the previous snapshot');\n    return null;\n}\ncfg.stamp = Date.now();\nflow.set('timed_cfg', cfg);\nconst on = cfg.periods.filter(x => x.enabled).map(x => x.id).join('');\nnode.status({ fill: 'grey', shape: 'dot', text: `periods ${on || '-'} @ ${new Date().toLocaleTimeString()}` });\nreturn null;                         // a settings refresh never continues into the flow\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1180,
+        "y": 1440,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "aaf2c6ac25712991",
@@ -1587,7 +1808,7 @@
         "y": 200,
         "wires": [
             [
-                "501d349b3f06d950"
+                "tmd_pick"
             ]
         ],
         "info": "Attaches a breadcrumb trace to the msg\r\nso the user can reconstruct which route has\r\nbeen traveled"
