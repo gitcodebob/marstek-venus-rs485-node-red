@@ -1093,7 +1093,7 @@
         "heartbeat": false,
         "heartbeatInterval": "",
         "statusSeparator": "",
-        "enableGlobalContextStore": false
+        "enableGlobalContextStore": true
     },
     {
         "id": "dbdb042c676a1dfb",

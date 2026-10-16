@@ -780,8 +780,9 @@ input_select:
       - EasyEnergy, EnergyZero (core)
       - ENTSO-E
       - Frank Energie
+      - Grid Clock BE
+      - Grid Clock NL
       - GE-Spot
-      - Grid Clock
       - Tibber (core)
       - Tibber (custom)
       - Nordpool (core)

@@ -2776,7 +2776,7 @@
         "heartbeat": false,
         "heartbeatInterval": "",
         "statusSeparator": "",
-        "enableGlobalContextStore": false
+        "enableGlobalContextStore": true
     },
     {
         "id": "2ede76567d185269",

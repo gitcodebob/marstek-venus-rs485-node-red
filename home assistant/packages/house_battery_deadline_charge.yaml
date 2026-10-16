@@ -66,6 +66,19 @@ input_number:
     mode: box
     icon: mdi:battery-charging
 
+  # Charge Deadline v2 - price-weighted pacing (Cheapest hours only).
+  # How much harder the cheapest cheap quarter charges than the priciest cheap quarter:
+  #   1.0 = flat, every cheap minute at the same power (v1 behaviour)
+  #   3.0 = the cheapest quarter charges 3x as hard as the priciest one
+  # No 'initial:' on purpose - it is re-applied on every restart and would reset the choice.
+  house_battery_deadline_price_ratio:
+    name: Deadline price ratio
+    min: 1
+    max: 5
+    step: 0.5
+    mode: slider
+    icon: mdi:scale-unbalanced
+
   # Output: average charge power required to hit the target in time
   house_battery_deadline_required_power:
     name: Deadline required average power
@@ -124,7 +137,8 @@ input_number:
     mode: box
     icon: mdi:battery-clock
 
-  # Output: minutes left until the deadline
+  # Output: charge minutes left until the deadline (sum of the cheap blocks / periods ahead,
+  # not the wall clock - the gaps between blocks are not charge time)
   house_battery_deadline_remaining_minutes:
     name: Deadline remaining minutes
     min: 0
@@ -428,6 +442,32 @@ template:
             {%- endfor -%}
             {{ ns.out }}
 
+          # Charge Deadline v2: every cheap quarter of TODAY, unmerged and NOT clipped to 'now',
+          # each with its own price. The v2 flow takes the day-wide price range from this list
+          # (so a quarter keeps its weight all day) and drops finished quarters itself.
+          # A quarter without a usable price is skipped, never read as 0 (= 'cheapest').
+          # This sensor is excluded from the recorder, so the longer attribute costs no rows.
+          quarters: >-
+            {%- set today = now().strftime('%Y-%m-%d') -%}
+            {%- set eod = as_timestamp(today_at('23:59:59')) -%}
+            {%- set ns = namespace(out=[]) -%}
+            {%- for iv in (state_attr('sensor.hbc_energy_prices_data', 'marks') or [])
+                  | selectattr('mark', 'eq', 'low')
+                  | selectattr('start', 'defined') | rejectattr('start', 'none')
+                  | selectattr('end', 'defined') | rejectattr('end', 'none')
+                  | sort(attribute='start') -%}
+              {%- set s = as_timestamp(iv.start, 0) -%}
+              {%- set e = [as_timestamp(iv.end, 0), eod] | min -%}
+              {%- set p = (iv.price | float(none)) if iv.price is defined else none -%}
+              {%- if s > 0 and e > s and p is not none
+                     and (s | timestamp_custom('%Y-%m-%d', true)) == today -%}
+                {%- set ns.out = ns.out + [{
+                      'start': s | timestamp_custom('%H:%M:%S', true),
+                      'end': e | timestamp_custom('%H:%M:%S', true),
+                      'price': p | round(4) }] -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {{ ns.out }}
       # ---------------------------------------------------------------------------------------------
       # The same merged runs as sensor.deadline_cheap_blocks above, but for TOMORROW instead
       # of today, and never clipped to 'now' - none of tomorrow has happened yet. Split out
@@ -666,6 +706,7 @@ template:
       #   minutes_left  wall-clock minutes from now to the end (0 OUTSIDE the window)
       #                 -- the flow paces on this, so it must stay 0 outside
       #   minutes_to_end  minutes from now to the end, also before the window opens (display)
+      #   charge_minutes  SUM of the blocks still ahead - the time we can actually charge in
       #   blocks        the runs the plan may CHARGE IN, always clipped to [now, end] and
       #                 with the finished ones dropped (empty for Manual window). The flow
       #                 paces the energy over the minutes in here, so a run that is half
@@ -765,6 +806,14 @@ template:
             {%- else -%}
               {{ [] }}
             {%- endif -%}
+          # Charge Deadline v2: the unmerged cheap quarters with their price, passed through
+          # for the price-weighted pacing. Only under Cheapest hours; [] otherwise.
+          quarters: >-
+            {%- if states('sensor.deadline_pacing') == 'Cheapest hours' -%}
+              {{ state_attr('sensor.deadline_cheap_blocks', 'quarters') or [] }}
+            {%- else -%}
+              {{ [] }}
+            {%- endif -%}
           configured: >-
             {%- set pacing = states('sensor.deadline_pacing') -%}
             {%- if pacing in ['Cheapest hours', 'Time slot'] -%}
@@ -859,6 +908,37 @@ template:
                 {%- else -%}
                   {{ [((as_timestamp(today_at(e_eff)) - as_timestamp(now())) / 60) | round(0) | int, 0] | max }}
                 {%- endif -%}
+              {%- endif -%}
+            {%- endif -%}
+          # Minutes we may actually CHARGE in from now to the deadline: the SUM of the cheap
+          # blocks / Charge Deadline periods still ahead (a run underway counts from 'now'),
+          # not the wall clock to the end of the last one. With two blocks and an expensive
+          # gap between them, minutes_to_end counts the gap too and every average built on it
+          # comes out too low. Manual window has no blocks, so there it equals minutes_to_end.
+          # Counts before the window opens too (display), like minutes_to_end.
+          charge_minutes: >-
+            {%- set t = now().strftime('%H:%M:%S') -%}
+            {%- set pacing = states('sensor.deadline_pacing') -%}
+            {%- if pacing == 'Cheapest hours' -%}
+              {{ (state_attr('sensor.deadline_cheap_blocks', 'blocks') or [])
+                 | map(attribute='minutes') | map('float', 0) | sum | round(0) | int }}
+            {%- elif pacing == 'Time slot' -%}
+              {%- set ns = namespace(m=0) -%}
+              {%- for s in (state_attr('sensor.deadline_pacing', 'slots') or []) -%}
+                {%- if s.end > t -%}
+                  {%- set st = [s.start, t] | max -%}
+                  {%- set ns.m = ns.m + (as_timestamp(today_at(s.end)) - as_timestamp(today_at(st))) / 60 -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {{ [ns.m | round(0) | int, 0] | max }}
+            {%- else -%}
+              {%- set s_raw = states('input_datetime.house_battery_deadline_start') -%}
+              {%- set e_raw = states('input_datetime.house_battery_deadline_end') -%}
+              {%- if s_raw in ['unknown', 'unavailable', 'none', ''] or e_raw in ['unknown', 'unavailable', 'none', ''] or s_raw == e_raw -%}
+                0
+              {%- else -%}
+                {%- set e_eff = '23:59:59' if e_raw < s_raw else e_raw -%}
+                {{ 0 if t >= e_eff else [((as_timestamp(today_at(e_eff)) - as_timestamp(now())) / 60) | round(0) | int, 0] | max }}
               {%- endif -%}
             {%- endif -%}
           # Minutes to the end of the window whether or not it has opened yet - this is the
@@ -1244,7 +1324,11 @@ template:
       # NOT a mirror, unlike the three below it: the average power needed from NOW to the
       # DEADLINE to still reach the target.
       #
-      #   required_W = energy_still_needed_kWh * 1000 / (minutes_to_end / 60)
+      #   required_W = energy_still_needed_kWh * 1000 / (charge_minutes / 60)
+      #
+      # charge_minutes is the SUM of the cheap blocks / periods still ahead, not the wall
+      # clock to the end of the last one (2026-10-07: minutes_to_end counted the expensive
+      # gaps between blocks and made this read too low on days with several blocks).
       #
       # It is computed here rather than read from Node-RED on purpose. The helper the flow
       # writes is its PLAN, not the requirement, and the two differ in every case that made
@@ -1281,27 +1365,25 @@ template:
             {%- set remaining = [(states('input_number.house_battery_deadline_target_energy') | float(0))
                                  - (states('input_number.house_battery_total_available_energy') | float(0)), 0] | max -%}
           {%- else -%}
-            {#- The packs stop at their charging cutoff, not at 100 %, so "batteries are
-                full" means the average cutoff - the same ceiling sensor.deadline_estimated_soc
-                measures against. Without it a fleet that tops out at 97 % would report a
-                requirement it can never satisfy, right up to the deadline. -#}
-            {%- set cutoffs = expand([
-              'input_number.marstek_m1_charging_cutoff_capacity',
-              'input_number.marstek_m2_charging_cutoff_capacity',
-              'input_number.marstek_m3_charging_cutoff_capacity',
-              'input_number.marstek_m4_charging_cutoff_capacity',
-              'input_number.marstek_m5_charging_cutoff_capacity',
-              'input_number.marstek_m6_charging_cutoff_capacity',
-            ]) | selectattr('state', 'is_number') | map(attribute='state') | map('float', 100) | list -%}
-            {%- set ceiling = ((cutoffs | sum) / (cutoffs | count)) if (cutoffs | count) > 0 else 100 -%}
-            {%- set target = [100 if goal == 'batteries are full'
-                              else states('input_number.house_battery_deadline_target_soc') | float(0),
-                              ceiling] | min -%}
-            {%- set soc = states('sensor.hbc_battery_fleet_soc') | float(0) -%}
-            {%- set capacity = states('input_number.house_battery_total_max_available_energy') | float(0) -%}
-            {%- set remaining = [(target - soc) / 100 * capacity, 0] | max -%}
+            {#- Per pack, exactly as the Node-RED plan counts it: (min(target, cutoff) - SoC) % of
+                that pack's TOTAL energy. Not (target - fleet SoC) x 'max available energy':
+                that helper is only the band between the discharge and charge cutoffs, and a
+                SoC percentage is a share of the whole pack, so the product came out short by
+                the discharge-cutoff share (2026-10-16). -#}
+            {%- set tgt_goal = 100 if goal == 'batteries are full'
+                               else states('input_number.house_battery_deadline_target_soc') | float(0) -%}
+            {%- set ns = namespace(r=0) -%}
+            {%- for i in range(1, 7) -%}
+              {%- set soc_i = states('sensor.marstek_m' ~ i ~ '_battery_state_of_charge') -%}
+              {%- set cap_i = states('sensor.marstek_m' ~ i ~ '_battery_total_energy') -%}
+              {%- if is_number(soc_i) and is_number(cap_i) -%}
+                {%- set cut_i = states('input_number.marstek_m' ~ i ~ '_charging_cutoff_capacity') | float(100) -%}
+                {%- set ns.r = ns.r + [([tgt_goal, cut_i] | min) - (soc_i | float(0)), 0] | max / 100 * (cap_i | float(0)) -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- set remaining = ns.r -%}
           {%- endif -%}
-          {%- set mins = state_attr('sensor.deadline_window', 'minutes_to_end') | float(0) -%}
+          {%- set mins = state_attr('sensor.deadline_window', 'charge_minutes') | float(0) -%}
           {%- if remaining <= 0.05 -%}
             0
           {%- elif not state_attr('sensor.deadline_window', 'configured') | bool(false) or mins <= 0 -%}
@@ -1327,24 +1409,28 @@ template:
               {{ [(states('input_number.house_battery_deadline_target_energy') | float(0))
                   - (states('input_number.house_battery_total_available_energy') | float(0)), 0] | max | round(2) }}
             {%- else -%}
-              {%- set cutoffs = expand([
-                'input_number.marstek_m1_charging_cutoff_capacity',
-                'input_number.marstek_m2_charging_cutoff_capacity',
-                'input_number.marstek_m3_charging_cutoff_capacity',
-                'input_number.marstek_m4_charging_cutoff_capacity',
-                'input_number.marstek_m5_charging_cutoff_capacity',
-                'input_number.marstek_m6_charging_cutoff_capacity',
-              ]) | selectattr('state', 'is_number') | map(attribute='state') | map('float', 100) | list -%}
-              {%- set ceiling = ((cutoffs | sum) / (cutoffs | count)) if (cutoffs | count) > 0 else 100 -%}
-              {%- set target = [100 if goal == 'batteries are full'
-                                else states('input_number.house_battery_deadline_target_soc') | float(0),
-                                ceiling] | min -%}
-              {{ [(target - (states('sensor.hbc_battery_fleet_soc') | float(0))) / 100
-                  * (states('input_number.house_battery_total_max_available_energy') | float(0)), 0]
-                 | max | round(2) }}
+            {#- Per pack, exactly as the Node-RED plan counts it: (min(target, cutoff) - SoC) % of
+                that pack's TOTAL energy. Not (target - fleet SoC) x 'max available energy':
+                that helper is only the band between the discharge and charge cutoffs, and a
+                SoC percentage is a share of the whole pack, so the product came out short by
+                the discharge-cutoff share (2026-10-16). -#}
+            {%- set tgt_goal = 100 if goal == 'batteries are full'
+                               else states('input_number.house_battery_deadline_target_soc') | float(0) -%}
+            {%- set ns = namespace(r=0) -%}
+            {%- for i in range(1, 7) -%}
+              {%- set soc_i = states('sensor.marstek_m' ~ i ~ '_battery_state_of_charge') -%}
+              {%- set cap_i = states('sensor.marstek_m' ~ i ~ '_battery_total_energy') -%}
+              {%- if is_number(soc_i) and is_number(cap_i) -%}
+                {%- set cut_i = states('input_number.marstek_m' ~ i ~ '_charging_cutoff_capacity') | float(100) -%}
+                {%- set ns.r = ns.r + [([tgt_goal, cut_i] | min) - (soc_i | float(0)), 0] | max / 100 * (cap_i | float(0)) -%}
+              {%- endif -%}
+            {%- endfor -%}
+              {{ ns.r | round(2) }}
             {%- endif -%}
           minutes_to_deadline: >-
             {{ state_attr('sensor.deadline_window', 'minutes_to_end') | int(0) }}
+          charge_minutes: >-
+            {{ state_attr('sensor.deadline_window', 'charge_minutes') | int(0) }}
           # What the packs can physically take, so the requirement can be read against a
           # ceiling: a state above this means the deadline is unreachable at any pacing.
           # Deliberately NOT a computed "exceeds" flag - an attribute that reads this
@@ -1440,21 +1526,50 @@ template:
       - name: "Deadline charged at"
         unique_id: house_battery_deadline_charged_at
         icon: mdi:clock-outline
+        # Under Cheapest hours / Time slot the batteries only charge INSIDE the blocks, so the
+        # ETA walks the blocks still ahead at the current power (2026-10-16: it used to assume
+        # non-stop charging from now, which put the ETA in the middle of an expensive gap or,
+        # at a low spreading power, right on the deadline). The bracket is the wall-clock time
+        # from now to the ETA. Manual window keeps the non-stop estimate - it has no blocks.
         state: >-
           {%- set remaining = states('input_number.house_battery_deadline_remaining_energy') | float(0) -%}
           {%- set power = states('input_number.house_battery_total_battery_power') | float(0) -%}
+          {%- set pacing = states('sensor.deadline_pacing') -%}
+          {%- set blocks = state_attr('sensor.deadline_window', 'blocks') or [] -%}
+          {%- set ns = namespace(left=remaining, eta=none) -%}
+          {%- if pacing in ['Cheapest hours', 'Time slot'] and blocks | count > 0 and power > 0 -%}
+            {#- Charging only happens inside the blocks, so walk them in order at the current
+                power and find the moment the energy runs out. Blocks are already clipped to
+                [now, end] by sensor.deadline_window. -#}
+            {%- for b in blocks if ns.eta is none -%}
+              {%- set bs = [as_timestamp(today_at(b.start)), as_timestamp(now())] | max -%}
+              {%- set be = as_timestamp(today_at(b.end)) -%}
+              {%- set need_s = ns.left / (power / 1000) * 3600 -%}
+              {#- 0.05 kWh of slack, the same 'reached' tolerance the flow uses: the plan is
+                  rounded to 10 W, so an exact fit would otherwise miss by a few Wh. -#}
+              {%- if be > bs and ns.left - (power / 1000) * (be - bs) / 3600 <= 0.05 -%}
+                {%- set ns.eta = [bs + need_s, be] | min -%}
+              {%- elif be > bs -%}
+                {%- set ns.left = ns.left - (power / 1000) * (be - bs) / 3600 -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- set walked = true -%}
+          {%- else -%}
+            {%- set walked = false -%}
+            {%- if power > 0 -%}{%- set ns.eta = as_timestamp(now()) + remaining / (power / 1000) * 3600 -%}{%- endif -%}
+          {%- endif -%}
           {%- if remaining <= 0.05 -%}
             Target reached
           {%- elif power <= 0 -%}
             Not charging
+          {%- elif ns.eta is none -%}
+            After last block ({{ (ns.left | round(1)) }} kWh short)
           {%- else -%}
-            {%- set hours = remaining / (power / 1000) -%}
-            {%- if hours > 48 -%}
+            {%- set mins = ((ns.eta - as_timestamp(now())) / 60) | round(0) | int -%}
+            {%- if mins > 48 * 60 -%}
               > 48 h
             {%- else -%}
-              {%- set h = hours | int -%}
-              {%- set m = ((hours - h) * 60) | round(0) | int -%}
-              {{ (now() + timedelta(hours=h, minutes=m)).strftime('%H:%M') }} ({{ h }}:{{ '%02d' % m }})
+              {{ ns.eta | timestamp_custom('%H:%M', true) }} ({{ mins // 60 }}:{{ '%02d' % (mins % 60) }})
             {%- endif -%}
           {%- endif -%}
         attributes:
@@ -1470,24 +1585,52 @@ template:
           # that counts as past the deadline; a target already reached counts as before it.
           # sensor.deadline_completion_indicator turns this into the 0/100 the icon colours from.
           #
-          # Measured against minutes_to_end, NOT minutes_left: minutes_left is 0 until the
+          # Measured against charge_minutes (the block minutes still ahead; equals minutes_to_end
+          # for a manual window), NOT minutes_left: minutes_left is 0 until the
           # window opens (the flow paces on it and must not spend time it does not have yet),
           # and judging an ETA against 0 minutes makes every estimate late. Charging from PV
           # at 15:00 with a 22:00 deadline is early, not late.
+          # Same block walk as the state: late = the energy does not run out inside the blocks.
           late: >-
             {%- set remaining = states('input_number.house_battery_deadline_remaining_energy') | float(0) -%}
             {%- set power = states('input_number.house_battery_total_battery_power') | float(0) -%}
-            {%- set mins = state_attr('sensor.deadline_window', 'minutes_to_end') | float(0) -%}
+            {%- set mins = state_attr('sensor.deadline_window', 'charge_minutes') | float(0) -%}
+            {%- set pacing = states('sensor.deadline_pacing') -%}
+            {%- set blocks = state_attr('sensor.deadline_window', 'blocks') or [] -%}
+            {%- set ns = namespace(left=remaining, eta=none) -%}
+            {%- if pacing in ['Cheapest hours', 'Time slot'] and blocks | count > 0 and power > 0 -%}
+              {#- Charging only happens inside the blocks, so walk them in order at the current
+                  power and find the moment the energy runs out. Blocks are already clipped to
+                  [now, end] by sensor.deadline_window. -#}
+              {%- for b in blocks if ns.eta is none -%}
+                {%- set bs = [as_timestamp(today_at(b.start)), as_timestamp(now())] | max -%}
+                {%- set be = as_timestamp(today_at(b.end)) -%}
+                {%- set need_s = ns.left / (power / 1000) * 3600 -%}
+                {#- 0.05 kWh of slack, the same 'reached' tolerance the flow uses: the plan is
+                    rounded to 10 W, so an exact fit would otherwise miss by a few Wh. -#}
+                {%- if be > bs and ns.left - (power / 1000) * (be - bs) / 3600 <= 0.05 -%}
+                  {%- set ns.eta = [bs + need_s, be] | min -%}
+                {%- elif be > bs -%}
+                  {%- set ns.left = ns.left - (power / 1000) * (be - bs) / 3600 -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {%- set walked = true -%}
+            {%- else -%}
+              {%- set walked = false -%}
+              {%- if power > 0 -%}{%- set ns.eta = as_timestamp(now()) + remaining / (power / 1000) * 3600 -%}{%- endif -%}
+            {%- endif -%}
             {%- if remaining <= 0.05 -%}
               {{ false }}
             {%- elif power <= 0 -%}
               {{ true }}
+            {%- elif walked -%}
+              {{ ns.eta is none }}
             {%- else -%}
               {{ (remaining / (power / 1000)) * 60 > mins }}
             {%- endif -%}
 
       # Extrapolated State of Charge at the deadline, assuming the CURRENT charge
-      # power is held for the whole remaining window:
+      # power is held through the cheap blocks / periods still ahead:
       #   SoC_deadline = SoC_now + (power_kW * hours_left) / usable_capacity_kWh * 100
       #
       # Compare it with the target SoC to see at a glance whether the current
@@ -1524,7 +1667,11 @@ template:
             {{ soc | round(0) | int }}
           {%- else -%}
             {%- set power = states('input_number.house_battery_total_battery_power') | float(0) -%}
-            {%- set minutes = states('input_number.house_battery_deadline_remaining_minutes') | float(0) -%}
+            {#- The cheap-block / period minutes still ahead (wall clock for a manual window),
+                read live from the window sensor. The flow's remaining_minutes helper switched
+                to the WALL CLOCK whenever it judged the cheap hours too short, which counted
+                the expensive gaps as charge time and pinned this at 100 % (2026-10-16). -#}
+            {%- set minutes = state_attr('sensor.deadline_window', 'charge_minutes') | float(0) -%}
             {%- set minutes = 0 if minutes < 0 else minutes -%}
             {%- set added = (power / 1000) * (minutes / 60) / capacity * 100 -%}
             {#- Ceiling: the packs stop at their charging cutoff, not at 100 %.

@@ -458,7 +458,7 @@
         "heartbeat": false,
         "heartbeatInterval": "",
         "statusSeparator": "",
-        "enableGlobalContextStore": false
+        "enableGlobalContextStore": true
     },
     {
         "id": "455435b07bccbec8",

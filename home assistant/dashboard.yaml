@@ -1338,6 +1338,8 @@ views:
                 name: Hold the target until the deadline
               - entity: input_boolean.house_battery_deadline_reserve_pv
                 name: Leave room for forecast PV
+              - entity: input_number.house_battery_deadline_price_ratio
+                name: Favour cheapest quarters (1 = flat)
             show_header_toggle: false
             state_color: false
             type: entities
@@ -1654,6 +1656,7 @@ views:
             unit: cent / kWh
             attribute: gross_spread
           - type: custom:apexcharts-card
+            update_interval: 1min
             header:
               show: true
               show_states: false
@@ -1696,13 +1699,18 @@ views:
                 data_generator: |
                   const marks = entity.attributes.marks || [];
                   const colours = { high: '#ff9800', low: '#4caf50' };
-                  return marks.map(iv => ({
-                    x: new Date(iv.start).getTime(),
-                    y: iv.price,
-                    fillColor: iv.is_now
-                      ? '#009ac7'
-                      : (colours[iv.mark] || '#9e9e9e')
-                  }));
+                  const now = Date.now();
+                  return marks.map(iv => {
+                    const s = new Date(iv.start).getTime();
+                    const e = new Date(iv.end).getTime();
+                    return {
+                      x: s,
+                      y: iv.price,
+                      fillColor: (now >= s && now < e)
+                        ? '#009ac7'
+                        : (colours[iv.mark] || '#9e9e9e')
+                    };
+                  });
           - type: heading
             icon: mdi:information
             heading_style: subtitle

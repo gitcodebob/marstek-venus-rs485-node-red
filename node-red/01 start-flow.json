@@ -46,9 +46,9 @@
             "a6d4c6fd4b772001"
         ],
         "x": 34,
-        "y": 1099,
-        "w": 852,
-        "h": 162
+        "y": 1319,
+        "w": 992,
+        "h": 262
     },
     {
         "id": "addfdb5d932c3069",
@@ -68,8 +68,8 @@
             "4c07cedc6c4c714a",
             "73525c1c8b92b3a0"
         ],
-        "x": 34,
-        "y": 379,
+        "x": 24,
+        "y": 459,
         "w": 1678,
         "h": 242
     },
@@ -87,8 +87,8 @@
             "1c3b6f8d0002b083",
             "087b5da53e552e7e"
         ],
-        "x": 1294,
-        "y": 19,
+        "x": 1114,
+        "y": -1,
         "w": 592,
         "h": 82
     },
@@ -109,10 +109,10 @@
             "f8c4c99343bc8523",
             "2322cf04987574c4"
         ],
-        "x": 34,
-        "y": 1279,
-        "w": 858,
-        "h": 342
+        "x": 44,
+        "y": 1593,
+        "w": 882,
+        "h": 388
     },
     {
         "id": "c6cd7e90429c2d54",
@@ -132,12 +132,13 @@
             "77e8e8a5290084ac",
             "ecf68f4aa2389978",
             "b52406f3a530e1f3",
-            "23a9da6f7e8bcb2e"
+            "23a9da6f7e8bcb2e",
+            "st_fast_sw2"
         ],
         "x": 34,
-        "y": 899,
+        "y": 1059,
         "w": 2012,
-        "h": 82
+        "h": 142
     },
     {
         "id": "44a5fa990d1aa71c",
@@ -148,12 +149,14 @@
             "label": true
         },
         "nodes": [
-            "8b1d8aa61984d35e"
+            "8b1d8aa61984d35e",
+            "st_fast_sw1",
+            "7bb44953c30a4f6e"
         ],
         "x": 34,
-        "y": 639,
-        "w": 212,
-        "h": 82
+        "y": 819,
+        "w": 512,
+        "h": 142
     },
     {
         "id": "c225afb7fad059b6",
@@ -175,9 +178,9 @@
             "628ec4c46f42f50d",
             "c36a68dbf8b0d350"
         ],
-        "x": 34,
+        "x": 24,
         "y": 219,
-        "w": 1382,
+        "w": 1422,
         "h": 122
     },
     {
@@ -197,8 +200,8 @@
             "4c43c962d00bda02",
             "80a24133639f0ff7"
         ],
-        "x": 1234,
-        "y": 1479,
+        "x": 1074,
+        "y": 1599,
         "w": 632,
         "h": 202
     },
@@ -223,10 +226,10 @@
             "b63d1c5b1bede244",
             "f7d323697d7bf572"
         ],
-        "x": 1474,
-        "y": 639,
-        "w": 432,
-        "h": 242
+        "x": 654,
+        "y": 719,
+        "w": 452,
+        "h": 322
     },
     {
         "id": "a074477615f1fa41",
@@ -242,8 +245,8 @@
             "2de79f2b5f31ce93",
             "a94478d982872146"
         ],
-        "x": 1254,
-        "y": 1179,
+        "x": 1074,
+        "y": 1419,
         "w": 632,
         "h": 82
     },
@@ -265,7 +268,7 @@
         ],
         "x": 34,
         "y": 119,
-        "w": 892,
+        "w": 882,
         "h": 82
     },
     {
@@ -281,7 +284,7 @@
             "e2e2060eb289297a",
             "e1d21bbf83668ba7"
         ],
-        "x": 1634,
+        "x": 1454,
         "y": 119,
         "w": 252,
         "h": 142
@@ -301,7 +304,7 @@
             "bbace8f95194f095",
             "ef2ca2b60bde5323"
         ],
-        "x": 1704,
+        "x": 1524,
         "y": 279,
         "w": 182,
         "h": 82
@@ -321,7 +324,7 @@
             "07ba25e57b984a93"
         ],
         "x": 34,
-        "y": 999,
+        "y": 1219,
         "w": 752,
         "h": 82
     },
@@ -346,8 +349,8 @@
             "d525e1bc44d842fc",
             "5f243e134ce5c924"
         ],
-        "x": 74,
-        "y": 459,
+        "x": 64,
+        "y": 539,
         "w": 1612,
         "h": 82
     },
@@ -369,20 +372,20 @@
             "8ae1fb3a3efd5c40",
             "b6975906740647a3"
         ],
-        "x": 314,
-        "y": 1319,
-        "w": 552,
-        "h": 222
+        "x": 324,
+        "y": 1619,
+        "w": 562,
+        "h": 282
     },
     {
         "id": "7c850df57b20168e",
         "type": "junction",
         "z": "d606df74d35deb5a",
         "x": 40,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
-                "9936537e2686ac2f"
+                "st_fast_read"
             ]
         ]
     },
@@ -390,8 +393,8 @@
         "id": "ae82b054e73c8a65",
         "type": "junction",
         "z": "d606df74d35deb5a",
-        "x": 1380,
-        "y": 680,
+        "x": 540,
+        "y": 760,
         "wires": [
             [
                 "ce4703d43cfa5ea0",
@@ -563,8 +566,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 510,
-        "y": 1140,
+        "x": 570,
+        "y": 1420,
         "wires": [
             [
                 "88743efd1be39ac0",
@@ -581,8 +584,8 @@
         "links": [],
         "linkType": "dynamic",
         "timeout": "1",
-        "x": 510,
-        "y": 1180,
+        "x": 570,
+        "y": 1480,
         "wires": [
             [
                 "8c87362300f9e8a9",
@@ -604,8 +607,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 720,
-        "y": 1140,
+        "x": 860,
+        "y": 1380,
         "wires": []
     },
     {
@@ -622,8 +625,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 740,
-        "y": 1180,
+        "x": 880,
+        "y": 1460,
         "wires": []
     },
     {
@@ -639,8 +642,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 510,
-        "y": 1220,
+        "x": 570,
+        "y": 1540,
         "wires": [
             [
                 "db5cbde46c062d05",
@@ -662,8 +665,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
-        "y": 420,
+        "x": 310,
+        "y": 500,
         "wires": [
             [
                 "736f67c78b32da01"
@@ -683,8 +686,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 140,
-        "y": 580,
+        "x": 130,
+        "y": 660,
         "wires": [
             [
                 "4c07cedc6c4c714a"
@@ -712,8 +715,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 420,
-        "y": 580,
+        "x": 410,
+        "y": 660,
         "wires": [
             [
                 "736f67c78b32da01"
@@ -737,8 +740,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 770,
-        "y": 580,
+        "x": 760,
+        "y": 660,
         "wires": []
     },
     {
@@ -784,8 +787,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 150,
-        "y": 420,
+        "x": 140,
+        "y": 500,
         "wires": [
             [
                 "bad46ba72b001194"
@@ -835,8 +838,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 180,
-        "y": 500,
+        "x": 170,
+        "y": 580,
         "wires": [
             [
                 "4969cbfc3dc0a89a"
@@ -886,8 +889,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 870,
-        "y": 500,
+        "x": 860,
+        "y": 580,
         "wires": [
             [
                 "d525e1bc44d842fc"
@@ -937,8 +940,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1290,
-        "y": 500,
+        "x": 1280,
+        "y": 580,
         "wires": [
             [
                 "c8049cf6bbed3ddd"
@@ -988,8 +991,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 700,
-        "y": 500,
+        "x": 690,
+        "y": 580,
         "wires": [
             [
                 "890ea7952ecec205"
@@ -1039,8 +1042,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1440,
-        "y": 500,
+        "x": 1430,
+        "y": 580,
         "wires": [
             [
                 "8e3a7fd1bcc42d78"
@@ -1090,8 +1093,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 490,
-        "y": 500,
+        "x": 480,
+        "y": 580,
         "wires": [
             [
                 "be7ae7c230c68764"
@@ -1141,8 +1144,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 330,
-        "y": 500,
+        "x": 320,
+        "y": 580,
         "wires": [
             [
                 "89642e6446ca2dad"
@@ -1175,8 +1178,8 @@
         "blockInputOverrides": false,
         "domain": "input_boolean",
         "service": "turn_on",
-        "x": 1760,
-        "y": 60,
+        "x": 1580,
+        "y": 40,
         "wires": [
             []
         ]
@@ -1203,8 +1206,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 1410,
-        "y": 60,
+        "x": 1230,
+        "y": 40,
         "wires": [
             [
                 "087b5da53e552e7e",
@@ -1236,8 +1239,8 @@
         "blockInputOverrides": false,
         "domain": "input_text",
         "service": "set_value",
-        "x": 660,
-        "y": 1360,
+        "x": 680,
+        "y": 1660,
         "wires": [
             []
         ]
@@ -1248,15 +1251,15 @@
         "z": "d606df74d35deb5a",
         "g": "26a023e0b0ddaa91",
         "name": "Set Batteries",
-        "func": "// Logger\nconst log = global.get(\"logger\");\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// Output format and target\nlet outputArray = [];\nlet solution = msg.solutions[msg.battery_index-1]; // Base-0, thus -1\nif (solution === undefined) {\n    log(this,`Can't find solution for index ${msg.battery_index - 1} in ${msg.solutions}, aborting...`,\"error\");\n    return null;\n}\nlet target = `marstek_${solution.id.toLowerCase()}`;\n\n// Safety | Id exists\nlet battery = msg.batteries.find(battery => battery.id === solution.id);\nif (battery === undefined) {\n    log(`Can't set battery ${solution.id}, aborting...`,\"error\");\n    return null;\n}\n// Safety | Power limit\nsolution.power = Math.min(solution.power, solution.mode == CMODE.CHARGE ? battery.charging_max: battery.discharging_max);\n\n// Set | Mode\nconst serviceCallMode = {\n    \"action\": \"select.select_option\",\n    \"target\": {\n        \"entity_id\": [`select.${target}_forcible_charge_discharge`]\n    },\n    \"data\": {\n         \"option\": String(solution.mode) // forced charge mode (stop, charge, discharge)\n    }\n};\n// Add topic to allow correct 'on change' filtering\noutputArray.push({payload: serviceCallMode, topic:solution.id});\n\n// Set | Power\nconst serviceCallPower = {\n    \"action\": \"number.set_value\",\n    \"target\": {\n        \"entity_id\": [\n            `number.${target}_forcible_charge_power`,\n            `number.${target}_forcible_discharge_power`\n            ]\n    },\n    \"data\": {\n        \"value\": Number(solution.power)\n    } \n};\n// Add topic to allow correct 'on change' filtering\noutputArray.push({payload: serviceCallPower, topic:solution.id});\n\n// Store service calls in msg to allow checking of loop results\nmsg.loop_result = { target, serviceCallMode, serviceCallPower };\n\n// Return msg as third output\noutputArray.push(msg);\n\n// Explain\nlog(this,`${target} ${String(solution.mode)} @ ${Number(solution.power)} Watt`);\n\n// Output\nreturn outputArray;",
+        "func": "// Logger\nconst log = global.get(\"logger\");\n\n// enums\nconst CMODE = {\n    STOP: \"stop\", // Marstek batteries disconnect a relay when this is set or Power is 0W\n    CHARGE: \"charge\",\n    DISCHARGE: \"discharge\"\n}\n\n// Output format and target\nlet outputArray = [];\nlet solution = msg.solutions[msg.battery_index-1]; // Base-0, thus -1\nif (solution === undefined) {\n    log(this,`Can't find solution for index ${msg.battery_index - 1} in ${msg.solutions}, aborting...`,\"error\");\n    return null;\n}\nlet target = `marstek_${solution.id.toLowerCase()}`;\n\n// Safety | Id exists\nlet battery = msg.batteries.find(battery => battery.id === solution.id);\nif (battery === undefined) {\n    log(`Can't set battery ${solution.id}, aborting...`,\"error\");\n    return null;\n}\n// Safety | Power limit\nsolution.power = Math.min(solution.power, solution.mode == CMODE.CHARGE ? battery.charging_max: battery.discharging_max);\n\n// Set | Mode\nconst serviceCallMode = {\n    \"action\": \"select.select_option\",\n    \"target\": {\n        \"entity_id\": [`select.${target}_forcible_charge_discharge`]\n    },\n    \"data\": {\n         \"option\": String(solution.mode) // forced charge mode (stop, charge, discharge)\n    }\n};\n// Only write the mode when it changes, plus a keep-alive re-write every 60 s.\n// (Previously written on EVERY tick for every battery = constant Modbus traffic.)\nconst MODE_REFRESH_MS = 60000;\nconst nowMs = Date.now();\nconst modeSent = context.get(\"mode_sent\") || {};\nconst prevMode = modeSent[solution.id];\nconst writeMode = !prevMode || prevMode.mode !== solution.mode || (nowMs - prevMode.ts) >= MODE_REFRESH_MS;\nif (writeMode) {\n    modeSent[solution.id] = { mode: solution.mode, ts: nowMs };\n    context.set(\"mode_sent\", modeSent);\n}\noutputArray.push(writeMode ? {payload: serviceCallMode, topic:solution.id} : null);\n\n// Set | Power\nconst serviceCallPower = {\n    \"action\": \"number.set_value\",\n    \"target\": {\n        // only the register that is in use (was: both charge AND discharge every time)\n        \"entity_id\": [\n            solution.mode == CMODE.DISCHARGE\n                ? `number.${target}_forcible_discharge_power`\n                : `number.${target}_forcible_charge_power`\n            ]\n    },\n    \"data\": {\n        \"value\": Number(solution.power)\n    } \n};\n// Add topic to allow correct 'on change' filtering.\n// In 'stop' the power register is irrelevant, so nothing is written.\noutputArray.push(solution.mode == CMODE.STOP ? null : {payload: serviceCallPower, topic:solution.id});\n\n// Store service calls in msg to allow checking of loop results\nmsg.loop_result = { target, serviceCallMode, serviceCallPower };\n\n// Return msg as third output\noutputArray.push(msg);\n\n// Explain\nlog(this,`${target} ${String(solution.mode)} @ ${Number(solution.power)} Watt`);\n\n// Output\nreturn outputArray;",
         "outputs": 3,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
-        "y": 1400,
+        "x": 420,
+        "y": 1720,
         "wires": [
             [
                 "9dd9bc4a74fdc69e"
@@ -1290,8 +1293,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 120,
-        "y": 1400,
+        "x": 150,
+        "y": 1760,
         "wires": [
             [
                 "b6db2e7eef3272a5"
@@ -1319,8 +1322,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 740,
-        "y": 1460,
+        "x": 760,
+        "y": 1800,
         "wires": [
             [
                 "b6db2e7eef3272a5"
@@ -1344,7 +1347,7 @@
         "finalize": "",
         "libs": [],
         "x": 580,
-        "y": 1460,
+        "y": 1800,
         "wires": [
             [
                 "c5d13c1ccdb3ea57",
@@ -1376,8 +1379,8 @@
         "blockInputOverrides": false,
         "domain": "input_text",
         "service": "set_value",
-        "x": 760,
-        "y": 1400,
+        "x": 780,
+        "y": 1720,
         "wires": [
             []
         ]
@@ -1395,8 +1398,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 130,
-        "y": 1360,
+        "x": 150,
+        "y": 1700,
         "wires": [
             [
                 "8a4bb137d9ead801"
@@ -1426,8 +1429,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 150,
-        "y": 1320,
+        "x": 160,
+        "y": 1640,
         "wires": [
             [
                 "2322cf04987574c4"
@@ -1450,8 +1453,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 130,
-        "y": 1580,
+        "x": 610,
+        "y": 1940,
         "wires": [
             [
                 "f8c4c99343bc8523",
@@ -1474,7 +1477,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 750,
-        "y": 1500,
+        "y": 1860,
         "wires": []
     },
     {
@@ -1490,8 +1493,8 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 590,
-        "y": 1400,
+        "x": 600,
+        "y": 1720,
         "wires": [
             [
                 "e62709008db44e4b"
@@ -1512,8 +1515,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 270,
-        "y": 1580,
+        "x": 830,
+        "y": 1940,
         "wires": []
     },
     {
@@ -1529,8 +1532,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 580,
+        "x": 270,
+        "y": 660,
         "wires": [
             [
                 "d60f886f9c9c0fef"
@@ -1551,10 +1554,10 @@
         "finalize": "",
         "libs": [],
         "x": 540,
-        "y": 940,
+        "y": 1100,
         "wires": [
             [
-                "1b34a65fbb9cc71e"
+                "st_fast_sw2"
             ]
         ]
     },
@@ -1581,7 +1584,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 780,
-        "y": 940,
+        "y": 1100,
         "wires": [
             [
                 "77e8e8a5290084ac"
@@ -1602,7 +1605,7 @@
         "finalize": "",
         "libs": [],
         "x": 1700,
-        "y": 940,
+        "y": 1100,
         "wires": [
             [
                 "99b07830d0772ec0"
@@ -1653,7 +1656,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1510,
-        "y": 940,
+        "y": 1100,
         "wires": [
             [
                 "0a99b834d8c63143"
@@ -1704,7 +1707,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 150,
-        "y": 940,
+        "y": 1100,
         "wires": [
             [
                 "23a9da6f7e8bcb2e"
@@ -1738,7 +1741,7 @@
         "domain": "input_number",
         "service": "set_value",
         "x": 1910,
-        "y": 940,
+        "y": 1100,
         "wires": [
             []
         ]
@@ -1781,7 +1784,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 960,
-        "y": 940,
+        "y": 1100,
         "wires": [
             [
                 "ecf68f4aa2389978"
@@ -1802,7 +1805,7 @@
         "finalize": "",
         "libs": [],
         "x": 1140,
-        "y": 940,
+        "y": 1100,
         "wires": [
             [
                 "b52406f3a530e1f3"
@@ -1853,7 +1856,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 1320,
-        "y": 940,
+        "y": 1100,
         "wires": [
             [
                 "2df3e0c6f87a880d"
@@ -1874,12 +1877,12 @@
         "finalize": "",
         "libs": [],
         "x": 140,
-        "y": 680,
+        "y": 860,
         "wires": [
             [
                 "ae82b054e73c8a65",
                 "7bb44953c30a4f6e",
-                "7bfa36a58c2e58c4"
+                "st_fast_sw1"
             ]
         ],
         "inputLabels": [
@@ -1929,8 +1932,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1590,
-        "y": 500,
+        "x": 1580,
+        "y": 580,
         "wires": [
             [
                 "6a615ed6c35dc0e2"
@@ -1950,8 +1953,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 580,
-        "y": 580,
+        "x": 570,
+        "y": 660,
         "wires": [
             [
                 "c68fdfcf95cea6e2",
@@ -1985,8 +1988,8 @@
         "blockInputOverrides": true,
         "domain": "input_number",
         "service": "set_value",
-        "x": 1740,
-        "y": 680,
+        "x": 940,
+        "y": 760,
         "wires": [
             []
         ]
@@ -2004,8 +2007,8 @@
         "septopics": false,
         "property": "batteries_available_energy",
         "topi": "topic",
-        "x": 1570,
-        "y": 680,
+        "x": 750,
+        "y": 760,
         "wires": [
             [
                 "59cedad23c2c732f"
@@ -2031,7 +2034,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 640,
+        "x": 660,
         "y": 280,
         "wires": [
             [
@@ -2060,7 +2063,7 @@
         "drop": true,
         "allowrate": true,
         "outputs": 2,
-        "x": 960,
+        "x": 1000,
         "y": 280,
         "wires": [
             [
@@ -2095,7 +2098,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 800,
+        "x": 840,
         "y": 300,
         "wires": [
             [
@@ -2123,7 +2126,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 810,
+        "x": 850,
         "y": 260,
         "wires": [
             [
@@ -2144,7 +2147,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
+        "x": 460,
         "y": 280,
         "wires": [
             [
@@ -2165,7 +2168,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1250,
+        "x": 1290,
         "y": 280,
         "wires": [
             [
@@ -2187,8 +2190,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 750,
-        "y": 1220,
+        "x": 890,
+        "y": 1540,
         "wires": []
     },
     {
@@ -2217,8 +2220,8 @@
         "blockInputOverrides": true,
         "domain": "input_text",
         "service": "set_value",
-        "x": 1760,
-        "y": 1220,
+        "x": 1580,
+        "y": 1460,
         "wires": [
             []
         ]
@@ -2266,8 +2269,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1360,
-        "y": 1220,
+        "x": 1180,
+        "y": 1460,
         "wires": [
             [
                 "a94478d982872146"
@@ -2287,8 +2290,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1560,
-        "y": 1220,
+        "x": 1380,
+        "y": 1460,
         "wires": [
             [
                 "2de79f2b5f31ce93"
@@ -2306,8 +2309,8 @@
         "event": "update_trace_sensor",
         "data": "{\t   \"trace\": $$.strategy.trace ? $$.strategy.trace : [],\t   \"start\": $$.strategy.execution_start ? $$.strategy.execution_start : 0,\t   \"end\": $$.strategy.execution_end ? $$.strategy.execution_end : 0,\t   \"log\": $$.log ? $$.log : []\t}",
         "dataType": "jsonata",
-        "x": 1740,
-        "y": 1580,
+        "x": 1580,
+        "y": 1700,
         "wires": [
             []
         ]
@@ -2379,8 +2382,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1540,
-        "y": 1580,
+        "x": 1380,
+        "y": 1700,
         "wires": [
             [
                 "be111186eaf794bf"
@@ -2523,8 +2526,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1580,
-        "y": 60,
+        "x": 1400,
+        "y": 40,
         "wires": [
             [
                 "7509ce6c0fe3ff6f"
@@ -2544,7 +2547,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1740,
+        "x": 1560,
         "y": 160,
         "wires": [
             [
@@ -2572,7 +2575,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1090,
+        "x": 1130,
         "y": 300,
         "wires": [
             [
@@ -2601,7 +2604,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1090,
+        "x": 1130,
         "y": 260,
         "wires": [
             [
@@ -2620,8 +2623,8 @@
             "2322cf04987574c4",
             "ef2ca2b60bde5323"
         ],
-        "x": 1395,
-        "y": 1520,
+        "x": 1235,
+        "y": 1640,
         "wires": [
             [
                 "7c4a68a5bd4dc494",
@@ -2639,7 +2642,7 @@
         "links": [
             "f7c07e4ba00a750a"
         ],
-        "x": 1375,
+        "x": 1405,
         "y": 280,
         "wires": []
     },
@@ -2654,8 +2657,8 @@
             "e1d21bbf83668ba7"
         ],
         "uncaught": false,
-        "x": 1340,
-        "y": 1640,
+        "x": 1180,
+        "y": 1760,
         "wires": [
             [
                 "7c4a68a5bd4dc494",
@@ -2677,8 +2680,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "counter",
-        "x": 1520,
-        "y": 1640,
+        "x": 1360,
+        "y": 1760,
         "wires": []
     },
     {
@@ -2695,8 +2698,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "counter",
-        "x": 1520,
-        "y": 1520,
+        "x": 1360,
+        "y": 1640,
         "wires": []
     },
     {
@@ -2709,8 +2712,8 @@
         "links": [
             "f7c07e4ba00a750a"
         ],
-        "x": 285,
-        "y": 1320,
+        "x": 295,
+        "y": 1640,
         "wires": []
     },
     {
@@ -2808,8 +2811,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1000,
-        "y": 500,
+        "x": 990,
+        "y": 580,
         "wires": [
             [
                 "5f243e134ce5c924"
@@ -2859,8 +2862,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 1140,
-        "y": 500,
+        "x": 1130,
+        "y": 580,
         "wires": [
             [
                 "f1fa1fe62fd71e22"
@@ -2880,7 +2883,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1760,
+        "x": 1580,
         "y": 220,
         "wires": [
             []
@@ -2894,7 +2897,7 @@
         "name": "",
         "scope": null,
         "uncaught": true,
-        "x": 1745,
+        "x": 1565,
         "y": 320,
         "wires": [
             [
@@ -2916,7 +2919,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1795,
+        "x": 1615,
         "y": 320,
         "wires": [
             [
@@ -2935,7 +2938,7 @@
         "links": [
             "f7c07e4ba00a750a"
         ],
-        "x": 1845,
+        "x": 1665,
         "y": 320,
         "wires": []
     },
@@ -2983,7 +2986,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 140,
-        "y": 1140,
+        "y": 1360,
         "wires": [
             [
                 "e02a401687cca8f7"
@@ -3034,7 +3037,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 320,
-        "y": 1140,
+        "y": 1360,
         "wires": [
             [
                 "a6d4c6fd4b772001"
@@ -3084,8 +3087,8 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 520,
-        "y": 1140,
+        "x": 550,
+        "y": 1360,
         "wires": [
             [
                 "0a18a9afc72f1d32"
@@ -3136,7 +3139,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 150,
-        "y": 1040,
+        "y": 1260,
         "wires": [
             [
                 "eed0b5dee8490ee6"
@@ -3187,7 +3190,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 350,
-        "y": 1040,
+        "y": 1260,
         "wires": [
             [
                 "21837d8c8d1ed4d2"
@@ -3260,7 +3263,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 530,
-        "y": 1040,
+        "y": 1260,
         "wires": [
             [
                 "07ba25e57b984a93"
@@ -3311,7 +3314,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 690,
-        "y": 1040,
+        "y": 1260,
         "wires": [
             [
                 "577799803f59afa3"
@@ -3331,8 +3334,8 @@
         "septopics": false,
         "property": "batteries_max_energy",
         "topi": "topic",
-        "x": 1570,
-        "y": 720,
+        "x": 750,
+        "y": 820,
         "wires": [
             [
                 "1602868e9de0f160"
@@ -3365,8 +3368,8 @@
         "blockInputOverrides": true,
         "domain": "input_number",
         "service": "set_value",
-        "x": 1750,
-        "y": 720,
+        "x": 950,
+        "y": 820,
         "wires": [
             []
         ]
@@ -3384,8 +3387,8 @@
         "septopics": false,
         "property": "batteries_total_power",
         "topi": "topic",
-        "x": 1570,
-        "y": 760,
+        "x": 750,
+        "y": 880,
         "wires": [
             [
                 "95f4cccc8c216dd2"
@@ -3418,8 +3421,8 @@
         "blockInputOverrides": true,
         "domain": "input_number",
         "service": "set_value",
-        "x": 1740,
-        "y": 760,
+        "x": 940,
+        "y": 880,
         "wires": [
             []
         ]
@@ -3437,8 +3440,8 @@
         "septopics": false,
         "property": "batteries_max_charge_power",
         "topi": "topic",
-        "x": 1570,
-        "y": 800,
+        "x": 750,
+        "y": 940,
         "wires": [
             [
                 "b07847402d226b4e"
@@ -3471,8 +3474,8 @@
         "blockInputOverrides": true,
         "domain": "input_number",
         "service": "set_value",
-        "x": 1760,
-        "y": 800,
+        "x": 960,
+        "y": 940,
         "wires": [
             []
         ]
@@ -3490,8 +3493,8 @@
         "septopics": false,
         "property": "batteries_max_discharge_power",
         "topi": "topic",
-        "x": 1570,
-        "y": 840,
+        "x": 750,
+        "y": 1000,
         "wires": [
             [
                 "f7d323697d7bf572"
@@ -3524,8 +3527,8 @@
         "blockInputOverrides": true,
         "domain": "input_number",
         "service": "set_value",
-        "x": 1770,
-        "y": 840,
+        "x": 970,
+        "y": 1000,
         "wires": [
             []
         ]
@@ -3534,6 +3537,7 @@
         "id": "7bb44953c30a4f6e",
         "type": "debug",
         "z": "d606df74d35deb5a",
+        "g": "44a5fa990d1aa71c",
         "name": "Check totals",
         "active": false,
         "tosidebar": true,
@@ -3543,8 +3547,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 370,
-        "y": 700,
+        "x": 430,
+        "y": 860,
         "wires": []
     },
     {
@@ -3591,7 +3595,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "x": 340,
-        "y": 940,
+        "y": 1100,
         "wires": [
             [
                 "7ec912ba5531ca1e"
@@ -3599,25 +3603,112 @@
         ]
     },
     {
+        "id": "st_fast_read",
+        "type": "function",
+        "z": "d606df74d35deb5a",
+        "name": "Read HA states (fast)",
+        "func": "// 2026-10-13: read every Home Assistant value this tick needs in ONE node, straight from the\n// HA states that node-red-contrib-home-assistant-websocket keeps in memory (global context,\n// server option 'Expose to global context'). Replaces ~43 'current state' nodes in series:\n// 10 per battery x battery count + 13 settings. Every one of those hops put the message back\n// in Node-RED's queue; on a busy Node-RED that alone could take seconds.\n//\n// Sets EXACTLY the same msg / flow properties, with the same type conversions, as the old\n// nodes did, and builds msg.batteries exactly like 'Mapping' did.\n//\n// Output 1 -> fast path (Batteries (totals), then straight to Update battery order and\n//             Strategy selection via the two 'fast path?' switches).\n// Output 2 -> FALLBACK: the original chain of current-state nodes, unchanged. Used when the\n//             global states are not available (option off, HA not connected yet) or an\n//             entity is missing - the old nodes then raise the same error as before.\nconst ha = global.get('homeassistant');\nlet states = null;\nif (ha && typeof ha === 'object') {\n    // keyed by the camel-cased server name; take a connected server that exposes its states\n    const servers = Object.values(ha).filter(s => s && s.states && typeof s.states === 'object');\n    const srv = servers.find(s => s.isConnected !== false) || servers[0];\n    if (srv) states = srv.states;\n}\nconst fallback = (why) => {\n    const n = (context.get('fallbacks') || 0) + 1;\n    context.set('fallbacks', n);\n    node.status({ fill: 'yellow', shape: 'ring', text: `fallback to old reads (${why}) x${n}` });\n    return [null, msg];\n};\nif (!states || Object.keys(states).length === 0) return fallback('no global HA states');\n\nconst missing = [];\nconst ent = (id) => {\n    const e = states[id];\n    if (!e) missing.push(id);\n    return e;\n};\n// type conversions as the old outputProperties did them\nconst num = (id) => { const e = ent(id); return e ? Number(e.state) : undefined; };\nconst str = (id) => { const e = ent(id); return e ? String(e.state) : undefined; };\nconst raw = (id) => { const e = ent(id); return e ? e.state : undefined; };\n\n// --- batteries (was: Your battery count, Loop start, 10 reads, Mapping, Loop step/until, Loop end)\nconst batteryCount = num('input_number.house_battery_count');\nconst batteries = [];\nlet i = 1;\ndo {   // the old loop ran the first battery before testing 'battery_index <= battery_count'\n    const p = `marstek_m${i}_`;\n    const b = {\n        rs485_control_mode:          raw(`select.${p}rs485_control_mode`),\n        battery_power:               num(`sensor.${p}battery_power`),\n        max_charge_power:            num(`number.${p}max_charge_power`),\n        max_discharge_power:         num(`number.${p}max_discharge_power`),\n        battery_state_of_charge:     num(`sensor.${p}battery_state_of_charge`),\n        discharging_cutoff_capacity: str(`input_number.${p}discharging_cutoff_capacity`),\n        charging_cutoff_capacity:    str(`input_number.${p}charging_cutoff_capacity`),\n        inverter_state:              raw(`sensor.${p}inverter_state`),\n        battery_remaining_capacity:  num(`sensor.${p}battery_remaining_capacity`),\n        battery_total_energy:        str(`sensor.${p}battery_total_energy`),\n    };\n    // 'Mapping', verbatim\n    batteries.push({\n        id: `M${i}`,\n        power: parseInt(b.battery_power, 10),\n        charging_max: parseInt(b.max_charge_power, 10),\n        discharging_max: parseInt(b.max_discharge_power, 10),\n        soc: parseInt(b.battery_state_of_charge, 10),\n        soc_max: parseInt(b.charging_cutoff_capacity, 10),\n        soc_min: parseInt(b.discharging_cutoff_capacity, 10),\n        inverter: String(b.inverter_state),\n        energy: Number(b.battery_remaining_capacity),\n        energy_max: Number(b.battery_total_energy),\n        rs485: String(b.rs485_control_mode)\n    });\n    i += 1;\n} while (i <= batteryCount && i <= 20);   // 20 = guard against a runaway count\n\n// --- settings (was: Prioritize battery M ... EV Stop Trigger Strategy)\nconst prioritize   = num('input_number.house_battery_control_prioritize_battery');\nconst cycle        = str('input_select.house_battery_control_priority_change_interval');\nconst hasImportE   = ent('input_boolean.house_battery_control_has_power_limit_import');\nconst hasExportE   = ent('input_boolean.house_battery_control_has_power_limit_export');\nconst importLimit  = num('input_number.house_battery_control_power_limit_import');\nconst exportLimit  = num('input_number.house_battery_control_power_limit_export');\nconst strategy     = str('input_select.house_battery_strategy');\nconst fullStop     = str('sensor.ev_is_charging');\nconst evStratE     = ent('input_select.house_battery_strategy_ev_stop_trigger_strategy');\n\nif (missing.length) return fallback(`not in cache: ${missing[0]}${missing.length > 1 ? ' +' + (missing.length - 1) : ''}`);\n\nmsg.battery_count = batteryCount;\nmsg.batteries = batteries;\nmsg.prioritize_battery = prioritize;\nmsg.battery_priority_cycle_interval = cycle;\nmsg.grid_power_has_limit_import = hasImportE.state === 'on';\nmsg.grid_power_has_limit_export = hasExportE.state === 'on';\nmsg.grid_power_limit_import = importLimit;\nmsg.grid_power_limit_export = exportLimit;\nflow.set('house_battery_strategy', strategy);\nmsg.full_stop_trigger = fullStop;\nmsg.ev_stop_trigger_strategy = String(evStratE.state);\n// the last old node left these behind; keep them identical for anything downstream\nmsg.payload = String(evStratE.state);\nmsg.data = { ...evStratE };\nmsg._ha_fast_read = true;\n\nnode.status({ fill: 'green', shape: 'dot', text: `fast read: ${batteries.length} batteries @ ${new Date().toLocaleTimeString('nl-NL', { timeZone: 'Europe/Amsterdam' })}` });\nreturn [msg, null];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 380,
+        "wires": [
+            [
+                "8b1d8aa61984d35e"
+            ],
+            [
+                "9936537e2686ac2f"
+            ]
+        ],
+        "outputLabels": [
+            "fast path",
+            "fallback: old reads"
+        ]
+    },
+    {
+        "id": "st_fast_sw1",
+        "type": "switch",
+        "z": "d606df74d35deb5a",
+        "g": "44a5fa990d1aa71c",
+        "name": "fast path? (skip settings reads)",
+        "property": "_ha_fast_read",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 260,
+        "y": 920,
+        "wires": [
+            [
+                "7ec912ba5531ca1e"
+            ],
+            [
+                "7bfa36a58c2e58c4"
+            ]
+        ]
+    },
+    {
+        "id": "st_fast_sw2",
+        "type": "switch",
+        "z": "d606df74d35deb5a",
+        "g": "c6cd7e90429c2d54",
+        "name": "fast path? (skip limit/strategy reads)",
+        "property": "_ha_fast_read",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 540,
+        "y": 1160,
+        "wires": [
+            [
+                "0a18a9afc72f1d32"
+            ],
+            [
+                "1b34a65fbb9cc71e"
+            ]
+        ]
+    },
+    {
         "id": "176d29a.6f648d6",
         "type": "server",
-        "name": "Home Assistant",
+        "name": "HA System",
         "addon": true,
         "rejectUnauthorizedCerts": true,
         "ha_boolean": [],
-        "connectionDelay": false,
+        "connectionDelay": true,
         "cacheJson": false,
-        "heartbeat": false,
-        "heartbeatInterval": "",
+        "heartbeat": true,
+        "heartbeatInterval": "30",
         "statusSeparator": "",
         "enableGlobalContextStore": false
     },
     {
-        "id": "811671ad5ebcb7e1",
+        "id": "b755c17c1d10501f",
         "type": "global-config",
         "env": [],
         "modules": {
-            "node-red-contrib-home-assistant-websocket": "0.80.3"
+            "node-red-contrib-home-assistant-websocket": "0.81.0"
         }
     }
 ]
