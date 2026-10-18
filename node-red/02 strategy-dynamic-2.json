@@ -2,7 +2,7 @@
     {
         "id": "20ec23eabb703f8e",
         "type": "tab",
-        "label": "Strategy Dynamic v4.15.1",
+        "label": "Strategy Dynamic v4.15.0",
         "disabled": false,
         "info": "Dynamic contract automated management",
         "env": []
@@ -1445,7 +1445,7 @@
         "z": "20ec23eabb703f8e",
         "g": "f8599c8b4feddc74",
         "name": "Cache check",
-        "func": "// Check if cache can be used or a new call to Data Source is required\nconst log = global.get('logger');\n\n// Retrieve stored data from flow context\nconst cachedData = flow.get(\"cached_dynamic_data\");\n\n// Determine cache hit\nif (cachedData){\n    // Cache HIT\n    node.status({ fill: \"green\", shape: \"dot\", text: `Cache hit` });\n    log(this,`*CACHE HIT* using stored tariff data`);\n\n    // Attach cached data to the message so following nodes can use it\n    msg.dynamic = cachedData;\n\n    // Output #1\n    return [msg, null];\n\n} else {\n    // Cache MISS\n    node.status({ fill: \"green\", shape: \"ring\", text: `Cache miss }` });\n\n    // Output #2\n    return [null, msg];\n}",
+        "func": "// Check if cache can be used or a new call to Data Source is required\nconst log = global.get('logger');\n\n// Retrieve stored data from flow context\nconst cachedData = flow.get(\"cached_dynamic_data\");\n\n// The cache holds the fetched price list itself, so it is only valid for the data\n// source it was fetched from. msg.dynamic.data_source is the CURRENT dropdown value\n// (set by the 'Source' node just before); cachedData.data_source is the value at the\n// time of caching. Without this check, switching the dropdown kept serving the old\n// source's prices until the next scheduled cache clear (00:01 / 13:15 / 15:00),\n// while the dashboard label already showed the new source.\nconst currentSource = msg.dynamic && msg.dynamic.data_source;\nconst sourceMatches = cachedData && cachedData.data_source === currentSource;\n\nif (cachedData && !sourceMatches) {\n    log(this, `*CACHE INVALID* cached source '${cachedData.data_source}' != selected '${currentSource}', refetching`);\n    flow.set(\"cached_dynamic_data\", undefined);\n}\n\n// Determine cache hit\nif (cachedData && sourceMatches){\n    // Cache HIT\n    node.status({ fill: \"green\", shape: \"dot\", text: `Cache hit (${currentSource})` });\n    log(this,`*CACHE HIT* using stored tariff data (${currentSource})`);\n\n    // Attach cached data to the message so following nodes can use it\n    msg.dynamic = cachedData;\n\n    // Output #1\n    return [msg, null];\n\n} else {\n    // Cache MISS\n    node.status({ fill: \"yellow\", shape: \"ring\", text: `Cache miss (${currentSource})` });\n\n    // Output #2\n    return [null, msg];\n}\n",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
