@@ -2,7 +2,7 @@
     {
         "id": "e31b0cf1ca8100ca",
         "type": "tab",
-        "label": "Strategy Charge v4.15.1",
+        "label": "Strategy Charge v4.15.0",
         "disabled": false,
         "info": "",
         "env": []
@@ -399,7 +399,7 @@
         "z": "e31b0cf1ca8100ca",
         "g": "64710d0b7446b478",
         "name": "Regulated power",
-        "func": "// Logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// Which sub-strategy to use\nmsg.target = \"Self-consumption\";\n\n// Grid power limit\nconst targetGridPower = parseInt(msg.grid_power_limit_import);\n\n// Set target grid consumption for the PID controller\nmsg.house_target_grid_consumption_in_w = targetGridPower;\n// tell PID to avoid discharge solutions during charging.\nRED.util.setMessageProperty(msg,\"advanced_settings.discharge_disabled\",true,true);\n\n// Finally\nlog(this, `**Regulated** charging. Target grid power: ${Math.floor(targetGridPower)} W`);\nreturn msg;",
+        "func": "// Logger, usage: log(this, \"\");\nconst log = global.get('logger');\n\n// Which sub-strategy to use\nmsg.target = \"Self-consumption\";\n\n// Grid power limit\nconst targetGridPower = parseInt(msg.grid_power_limit_import);\n\n// Set target grid consumption for the PID controller\nmsg.house_target_grid_consumption_in_w = targetGridPower;\n// tell PID to avoid discharge solutions during charging.\nRED.util.setMessageProperty(msg,\"advanced_settings.discharge_disabled\",true,true);\n\n// --- Feed-forward start (2026-10-15) ---------------------------------------------------\n// The PID only reaches the import limit through its integral term, which takes a minute or\n// more with a small Ki. When regulated charging STARTS, jump straight to the charge power\n// that should bring grid import to the limit: current battery power + (limit - grid power),\n// minus a small margin. That power is held for FF_HOLD_MS so the batteries can respond; the\n// PID step (Self-consumption flow) seeds its integral with it, then resumes normal control\n// and trims the last watts. Set FF_ENABLED = false to go back to the old behaviour.\nconst FF_ENABLED = true;\nconst FF_HOLD_MS = 10000;      // how long the start power is held (battery response time)\nconst FF_MARGIN_W = 150;       // stay this far below the import limit, PID adds the rest\nconst FF_RESTART_MS = 30000;   // a pause longer than this counts as a new charge session\n\nconst now = Date.now();\nconst lastRun = context.get(\"ff_last_run\") || 0;\nlet ff = context.get(\"ff\") || null;\n\nif (FF_ENABLED && now - lastRun > FF_RESTART_MS) {\n    const gridPower = Number(msg.grid_power) || 0;              // import positive\n    const batteryPower = Number(msg.batteries_total_power) || 0; // charging positive\n    const maxCharge = Number(msg.batteries_max_charge_power) || 0;\n    const gap = targetGridPower - gridPower;\n    let ffPower = batteryPower + gap - FF_MARGIN_W;\n    if (maxCharge > 0) ffPower = Math.min(ffPower, maxCharge);\n    ffPower = Math.round(ffPower);\n\n    if (Number.isFinite(ffPower) && ffPower > 0 && gap > FF_MARGIN_W) {\n        ff = { power: ffPower, until: now + FF_HOLD_MS };\n        log(this, `**Feed-forward start** ${ffPower} W for ${FF_HOLD_MS / 1000} s (grid ${Math.round(gridPower)} W, battery ${Math.round(batteryPower)} W, limit ${targetGridPower} W)`);\n    } else {\n        ff = null;\n    }\n}\ncontext.set(\"ff_last_run\", now);\n\nif (ff && now < ff.until) {\n    msg.pid_feedforward_w = ff.power;\n    node.status({ fill: \"blue\", shape: \"dot\", text: `feed-forward ${ff.power} W, ${Math.ceil((ff.until - now) / 1000)} s` });\n} else {\n    ff = null;\n    node.status({ fill: \"green\", shape: \"dot\", text: `regulated to ${targetGridPower} W` });\n}\ncontext.set(\"ff\", ff);\n\n// Finally\nlog(this, `**Regulated** charging. Target grid power: ${Math.floor(targetGridPower)} W`);\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1379,7 +1379,7 @@
         "heartbeat": false,
         "heartbeatInterval": "",
         "statusSeparator": "",
-        "enableGlobalContextStore": false
+        "enableGlobalContextStore": true
     },
     {
         "id": "aa9a715364ba46eb",
