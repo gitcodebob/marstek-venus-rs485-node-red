@@ -1,6 +1,28 @@
 # Release Notes
 All releases follow Semantic Versioning (SemVer). Every release provides a fresh `home assistant/dashboard.yaml` to import.
 
+## 4.15.1
+_Fixes [#171](https://github.com/gitcodebob/marstek-venus-rs485-node-red/issues/171)._
+
+- **Fix: Battery writes now wait for completion, so control cycles no longer overlap**
+  * The `Set Batteries` loop fired its `select_option` and `set_value` calls without ever looking at the result, and stepped to the next battery in the same tick. A new strategy cycle could therefore start while the previous writes were still in flight.
+  * Home Assistant dropped those overlapping calls and logged `Marstek m1 Forcible Charge/Discharge select_option: Already running`. Template entity actions run as a script in `mode: single`, which refuses a second run instead of queueing it — so the command for that cycle was silently lost.
+  * The action node outputs are now wired, so the flow knows when a write actually finished. Home Assistant's websocket `call_service` blocks until the service completes, which includes the `modbus.write_register` itself.
+  * Writes are serial **per battery** (mode, then power) but batteries still run **in parallel**. Home Assistant holds one lock per Modbus hub and there is one hub per battery, so serializing everything would have made a 4-battery cycle roughly four times longer.
+  * `Write limiter` allows one cycle at a time. A P1 update arriving during a running cycle is coalesced instead of dropped: the newest setpoint is kept in a slot of one and runs as soon as the cycle finishes. A `catch` on both action nodes and a 30-second stale-lock failsafe make sure a failed or hanging write cannot wedge the control loop.
+  * The `on change` filter in front of the power write is replaced by an explicit comparison, and the value is marked as sent only *after* the call succeeded. A failed power write is now retried on the next cycle instead of being assumed applied.
+  * The measured write time feeds the adaptive rate limiter. Its high-load cool-down previously only saw strategy compute time — milliseconds — and therefore practically never triggered, while the writes themselves can take seconds.
+
+- **Fix: Remove obsolete yaml-language-server schema URL**
+  * The `schemas.home-assistant.io` endpoint has been discontinued, which caused `Unable to load schema: No content` errors in VS Code. Home Assistant itself was never affected.
+
+- **Files Changed:**
+  - `.gitignore`
+  - `home assistant/dashboard.yaml`
+  - `home assistant/packages/house_battery_control.yaml`
+  - `node-red/01 start-flow.json`
+  - `node-red/all-flows-in-one-file.json`
+
 ## 4.15.0
 _Contributed by [@wouterbouvy](https://github.com/wouterbouvy) — [#158](https://github.com/gitcodebob/marstek-venus-rs485-node-red/pull/158)._
 
