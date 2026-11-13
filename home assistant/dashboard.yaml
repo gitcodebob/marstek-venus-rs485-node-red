@@ -2030,7 +2030,9 @@ views:
               - entity: input_number.house_battery_control_recovery_delay
                 name: Recovery delay (phase and whole house)
               - entity: input_number.house_battery_control_recovery_rate
-                name: Recovery rate (phase and whole house)
+                name: Maximum recovery rate (phase and whole house)
+              - entity: input_number.house_battery_control_recovery_factor
+                name: Recovery factor (higher is faster)
           - type: markdown
             content: >-
               <font color=grey><i>When enabled, configured L1/L2/L3 grid power
@@ -2043,8 +2045,11 @@ views:
               hysteresis must be below the ceiling. Invalid settings retain the
               last valid pair, or use a conservative fallback at startup.
               Recovery waits for stable headroom
-              (default 10 seconds), then changes at most 100 W/s per phase,
-              shared by its batteries. Whole-house protection shares the same
+              (default 5 seconds), then recovers adaptively at up to 750 W/s per phase,
+              shared by its batteries. The recovery factor (default 0.5) controls
+              how quickly remaining headroom is used; higher values recover faster.
+              Steps shrink near the target and hold inside the band.
+              Whole-house protection shares the same
               rate across the installation. Missing readings pause recovery.
               Leave enough reserve above the band for other controllers: a
               5400 W target with ±100 W leaves 250 W below a 5750 W ceiling,

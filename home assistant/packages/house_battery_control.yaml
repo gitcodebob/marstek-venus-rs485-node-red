@@ -468,14 +468,23 @@ input_number:
     icon: mdi:timer-sand
 
   house_battery_control_recovery_rate:
-    name: Protection recovery rate
+    name: Maximum protection recovery rate
     min: 10
     max: 1000
     step: 10
-    initial: 50
+    initial: 750
     unit_of_measurement: "W/s"
     mode: box
     icon: mdi:speedometer-slow
+
+  house_battery_control_recovery_factor:
+    name: Protection recovery factor
+    min: 0.05
+    max: 2
+    step: 0.05
+    initial: 0.5
+    mode: box
+    icon: mdi:tune
 
   # Strategy charge | desired energy reserve (effective energy available excl. cut-off energies)
   # old name: house_battery_strategy_timed_target_energy

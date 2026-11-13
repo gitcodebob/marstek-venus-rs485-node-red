@@ -15,7 +15,11 @@ class ProtectionRunner {
     return this.runner.run({ flowFile: 'node-red/01 start-flow.json', node: name,
       msg, flow: this.flow, global: this.global });
   }
-  prepare(msg) { return this.node('Prepare protection recovery', msg); }
+  prepare(msg) {
+    // Each simulated meter sample is fresh unless a test supplies its report time.
+    for (const b of msg.batteries || []) b.power_reported_at ??= this.time;
+    return this.node('Prepare protection recovery', msg);
+  }
   finish(msg) { return this.node('Protection recovery', msg); }
   deliver(msg) {
     // Simulate successful HA service calls, independently of physical telemetry.

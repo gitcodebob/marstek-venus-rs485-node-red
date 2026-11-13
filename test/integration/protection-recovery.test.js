@@ -15,8 +15,8 @@ function baseMessage(batteries, grid, target = 'Charge') {
 }
 
 describe('Protection across repeated strategy evaluations', () => {
-  for (const phaseTarget of [5500, 5400]) {
-  it(`settles without sawtooth at a ${phaseTarget} W target with independently cycling EV regulation`, () => {
+  for (const [phaseTarget, maxRate, ceiling = 5750] of [[5500, 100], [5400, 100], [5500, 500], [5400, 500], [5800, 500, 6000], [5400, 750], [5800, 750, 6000]]) {
+  it(`settles without sawtooth at a ${phaseTarget} W target and ${maxRate} W/s maximum with independently cycling EV regulation`, () => {
     const r = new ProtectionRunner();
     const phases = ['L1', 'L2', 'L3', 'L3'];
     let actual = [2500, 2500, 2500, 2500];
@@ -35,7 +35,9 @@ describe('Protection across repeated strategy evaluations', () => {
       const batteries = phases.map((phase, i) => makeBattery({ id: `M${i + 1}`, phase, power: actual[i],
         lastCommand: r.global.get('lastBatteryCommands')?.[`M${i + 1}`] }));
       let msg = baseMessage(batteries, grid);
-      msg.protection_recovery_settings = { phase_target_w: phaseTarget, phase_hysteresis_w: 100 };
+      msg.grid_power_limit_phase = ceiling;
+      msg.protection_recovery_settings = { phase_target_w: phaseTarget, phase_hysteresis_w: 100,
+        rate_w_per_s: maxRate, recovery_factor: 0.5, delay_s: 5 };
       r.time += 1000;
       // Exercise actual phase headroom calculation and Charge allocation, then
       // central protection, retaining all controller state between cycles.
@@ -47,13 +49,13 @@ describe('Protection across repeated strategy evaluations', () => {
       const next = out.solutions.map(signed);
       const totals = { L1: next[0], L2: next[1], L3: next[2] + next[3] };
       if (previous) for (const phase of ['L1', 'L2', 'L3']) {
-        assert.ok(totals[phase] - previous[phase] <= 100, `${phase} jumped at t=${t}: ${previous[phase]} -> ${totals[phase]}`);
+        assert.ok(totals[phase] - previous[phase] <= maxRate, `${phase} jumped at t=${t}: ${previous[phase]} -> ${totals[phase]}`);
       }
       previous = totals;
       if (t >= 450) settled.push({ grid: physicalGrid, totals, ev });
       // EV controller is independent: drop immediately to available current,
       // suspend below 6 A, and reclaim capacity at 1 A/s up to its requested 16 A.
-      const room = 5750 - 200 - Math.max(...Object.values(batteryByPhase));
+      const room = ceiling - 200 - Math.max(...Object.values(batteryByPhase));
       const requestedEV = t >= 100 && t < 180 ? 10 * 230 : t >= 300 && t < 360 ? 6 * 230 : 16 * 230;
       const available = room < 6 * 230 ? 0 : Math.min(requestedEV, Math.floor(room / 230) * 230);
       ev = available < ev ? available : Math.min(available, ev + 230);
@@ -61,11 +63,17 @@ describe('Protection across repeated strategy evaluations', () => {
       queue.push(next);
       actual = queue.shift();
     }
-    assert.ok(reachedFullEV, 'EV gets the opportunity to reclaim its full requested load');
+    // Only promise full EV recovery when the operating band leaves enough
+    // reserve for an independently controlled whole-amp (230 W) step.
+    if (ceiling - phaseTarget - 100 >= 230) {
+      assert.ok(reachedFullEV, 'EV gets the opportunity to reclaim its full requested load');
+    }
     for (const sample of settled) {
       // At 5500±100 W, a held phase near 5570 W leaves less than one
       // 230 W EV increment. The lower configurable target supplies that reserve.
-      assert.equal(sample.ev, (phaseTarget === 5500 ? 9 : 16) * 230);
+      assert.ok(sample.ev >= 6 * 230 && sample.ev <= 16 * 230);
+      assert.equal(sample.ev, settled[0].ev, 'EV load also settles');
+      if (phaseTarget === 5400) assert.equal(sample.ev, 16 * 230);
       for (const phase of ['L1', 'L2', 'L3']) {
         const atBatteryMaximum = phase !== 'L3' && sample.totals[phase] === 2500;
         assert.ok(sample.grid[phase] <= phaseTarget + 100 && (sample.grid[phase] >= phaseTarget - 100 || atBatteryMaximum),

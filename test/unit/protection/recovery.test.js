@@ -19,6 +19,36 @@ function bound(result, scope = 'L1', direction = 'import') {
 }
 
 describe('Shared protection recovery', () => {
+  it('does not label a retained self-consumption deadband command as Phase Protection', () => {
+    const r = new ProtectionRunner();
+    let m = message({ load: 300, power: -768, desired: -768 });
+    m.target = 'Self-consumption';
+    m.strategy = { display: 'Self-consumption' };
+    let out = r.run(m);
+    assert.equal(signed(out.solutions[0]), -768);
+    assert.equal(out.protection_recovery.limited, false);
+    assert.equal(out.strategy.display, 'Self-consumption');
+
+    m = message({ load: 300, power: -768, desired: -768 });
+    m.target = 'Self-consumption';
+    m.strategy = { display: 'Self-consumption' };
+    m.solutions = []; // PID deadband: retain the confirmed prior command.
+    out = r.run(m, 2);
+    assert.equal(signed(out.solutions[0]), -768);
+    assert.equal(out.protection_recovery.limited, false);
+    assert.equal(out.strategy.display, 'Self-consumption');
+  });
+
+  it('still labels a command that is actually clipped by phase protection', () => {
+    const r = new ProtectionRunner();
+    const m = message({ load: 5000, power: 2500, desired: 2500 });
+    m.strategy = { display: 'Charge' };
+    const out = r.run(m);
+    assert.ok(signed(out.solutions[0]) < 2500);
+    assert.equal(out.protection_recovery.limited, true);
+    assert.equal(out.strategy.display, 'Phase Protection');
+  });
+
   it('holds for ten seconds, then recovers at 100 W/s, capped by headroom', () => {
     const r = new ProtectionRunner();
     let m = message({ power: 2500 });
@@ -118,15 +148,14 @@ describe('Shared protection recovery', () => {
     assert.equal(signed(out.solutions[0]), 2100);
   });
 
-  it('does not bank unused allowance or ratchet up against delayed battery telemetry', () => {
+  it('does not bank unused allowance while advancing despite delayed battery telemetry', () => {
     const r = new ProtectionRunner();
     r.run(message({ load: 2500, power: 0 }));
     let out = r.run(message({ load: 2500, power: 0 }), 100);
     assert.equal(signed(out.solutions[0]), 300);
-    // The battery still has not applied the command. Another tick is not another
-    // increment on top of that unobserved command.
+    // A pending command can advance within safe headroom despite delayed output.
     out = r.run(message({ load: 2500, power: 0 }), 1);
-    assert.equal(signed(out.solutions[0]), 100);
+    assert.equal(signed(out.solutions[0]), 400);
     out = r.run(message({ load: 2500, power: 0, desired: 0 }), 100);
     assert.equal(signed(out.solutions[0]), 0);
     out = r.run(message({ load: 2500, power: 0 }), 1);
@@ -210,7 +239,7 @@ describe('Shared protection recovery', () => {
     r.run(m);
     assert.equal(signed(r.run(m, 1).solutions[0]), 250);
     m.protection_recovery_settings = { delay_s: '', rate_w_per_s: null };
-    assert.deepEqual(r.run(m, 1).protection_recovery.settings, { delay_s: 10, rate_w_per_s: 100, phase_target_w: 5500, phase_hysteresis_w: 100 });
+    assert.deepEqual(r.run(m, 1).protection_recovery.settings, { delay_s: 10, rate_w_per_s: 100, recovery_factor: 0.5, phase_target_w: 5500, phase_hysteresis_w: 100 });
   });
   it('allows normal charging to stop without inventing an export shave', () => {
     const r = new ProtectionRunner();

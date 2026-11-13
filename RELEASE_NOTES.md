@@ -4,6 +4,17 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
 ## 4.15.0
 _Contributed by [@wouterbouvy](https://github.com/wouterbouvy) — [#158](https://github.com/gitcodebob/marstek-venus-rs485-node-red/pull/158)._
 
+- **Fix: Phase Protection stalled by delayed battery responses**
+  * Recovery advances from authorized demand instead of resetting to measured output. Separate per-battery reservations prevent delayed or superseded commands from spending physical headroom twice, including after failures and Full stop.
+  * Slow batteries no longer block safe recovery on other batteries. Diagnostics identify pending batteries and elapsed response time; pending output alone does not replace the selected strategy label.
+  * Five-battery regressions cover M5 command delays of 5–30 seconds plus independent telemetry delay, a non-responsive M1, import/export recovery, shared aggregate budgets, and stale reports.
+
+- **Improvement: Adaptive Phase Protection recovery**
+  * Recovery uses an exponential approach to measured headroom, with a configurable factor (default 0.5, range 0.05–2). The existing recovery rate becomes a maximum, now defaulting to 750 W/s in the package. Steps taper near the operating target; immediate correction, stable-headroom delay, telemetry confirmation, and shared phase/whole-house budgets remain enforced.
+  * The protection sub-strategy is now displayed as **Phase Protection**. Diagnostics expose adaptive headroom, allowance, and effective rate. Package defaults are 6000 W ceiling, 5800 W target, ±100 W hysteresis, and 5 s delay; missing delay/rate helpers retain conservative 10 s / 100 W/s fallbacks.
+  * Deterministic tests cover factor tuning, import/export symmetry, telemetry pauses, processing gaps, and prolonged independent EV regulation with delayed battery responses at a 500 W/s maximum.
+  * Fixed the displayed sub-strategy so a retained Self-consumption command during PID deadband is not mislabeled as Phase Protection. Phase Protection is shown only when a protection bound changes the eligible intended command.
+
 - **Fix: Direct charge throttling and stable phase hysteresis**
   * Added a configurable phase operating target (default 5500 W) and ±100 W hysteresis, separate from the existing hard ceiling. Hold inside the band, correct directly toward the target above it, and recover gradually below it. Applies to phase import and export; aggregate limits retain their own behavior.
   * A 5000 W charge with 3680 W of non-battery load now throttles directly to 1820 W for a 5500 W target. Known same-direction updates send only the power value; pending direction handoffs tolerate delayed telemetry without repeated zero/mode resets.
