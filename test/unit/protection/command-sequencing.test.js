@@ -42,6 +42,17 @@ describe('Parallel battery command cycles', () => {
     m.solutions[0]={id:'M1',mode:'discharge',power:500};
     assert.equal(issue(m).length,3);
   });
+  it('does not interpret a small negative idle reading as a direction reversal', () => {
+    const r=new WriteRunner();previous(r,'M1','charge',2500);
+    for (const power of [-25,-17,-3,0,25]) {
+      const m=message([1900]);m.batteries[0].power=power;
+      const calls=r.complete(r.begin(m)[0]);
+      assert.ok(calls.every(c=>c.action==='number.set_value'&&c.data.value===1900),
+        `idle ${power} W must never clear power or reset the mode`);
+    }
+    const reversed=message([1900]);reversed.batteries[0].power=-2000;
+    assert.equal(r.complete(r.begin(reversed)[0]).length,3,'a real wrong-direction reading still gets a safe handoff');
+  });
   it('starts batteries in parallel and unlocks only after every battery finishes', () => {
     const r = new WriteRunner();const [a,b]=r.begin(message([100,200]));
     assert.equal(r.step(a).data.value,0);

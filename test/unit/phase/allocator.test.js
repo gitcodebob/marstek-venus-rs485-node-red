@@ -72,6 +72,16 @@ describe('phasePowerAllocator', () => {
       assert.equal(pa.getResponsivePowerLimit(battery, 2500, 'charge'), 2500);
     });
 
+    it('does not turn delayed or low DC telemetry into a periodic low-power charge cap', () => {
+      const pa = allocator();
+      for (const power of [-17, 0, 800, 2328]) for (const age of [10000, 30000, 120000]) {
+        const battery = { soc:24, soc_max:100, soc_min:10, power,
+          last_command:{mode:'charge',power:2500,since:Date.now()-age} };
+        assert.equal(pa.getResponsivePowerLimit(battery,2500,'charge'),2500,
+          `DC power ${power} W after ${age} ms must not reset charge demand`);
+      }
+    });
+
     it('ignores unrelated past command modes when deciding underuse', () => {
       const pa = allocator();
       const tenSecondsAgo = Date.now() - 10_000;

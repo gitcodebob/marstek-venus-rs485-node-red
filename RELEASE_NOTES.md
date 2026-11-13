@@ -3,6 +3,8 @@ All releases follow Semantic Versioning (SemVer). Every release provides a fresh
 
 ## 4.15.1
 
+- **Custom fix: M3 charge cycling:** Treat ±25 W as idle when checking command direction, so small negative standby readings do not trigger zero-power handoffs. Limit inferred charging taper to batteries near their SoC ceiling; delayed DC telemetry and conversion losses no longer trigger a periodic 100 W charge cap after ten seconds. Physical phase reservations remain enforced.
+
 - **Custom phase-protection integration:** Preserve phase assignments, adaptive recovery, delayed-response reservations, safe direction handoffs, and direct same-mode throttles while adopting upstream parallel-per-battery writes. Coalesced updates reread HA state and rerun strategy/protection. Completion tracking uses cycle IDs, success-only command records, write-latency feedback, and timeout quarantine until outstanding HA calls drain.
 
 _Fixes [#171](https://github.com/gitcodebob/marstek-venus-rs485-node-red/issues/171)._
