@@ -2,6 +2,7 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 const { ProtectionRunner, signed } = require('../../support/protection-runner');
+const { WriteRunner } = require('../../support/write-runner');
 const { makeBattery } = require('../../fixtures/homes');
 
 function message(load = 3680, power = 5000, desired = 5000) {
@@ -17,16 +18,13 @@ function diagnostic(out, direction = 'import') {
   return out.protection_recovery.bounds.find(d => d.scope === 'L1' && d.direction === direction);
 }
 function completeCommand(r, out, index = 1) {
-  out.battery_index = index;
-  const pending = r.node('Set Batteries', out);
-  const calls = [];
-  while (true) {
-    const [service, complete] = r.node('Next battery command', pending);
-    if (complete) break;
-    calls.push(structuredClone(service.payload));
-  }
-  r.flow.set('battery_commands_busy', false);
-  return calls;
+  const writer = new WriteRunner();
+  writer.flow = r.flow;
+  writer.global = r.global;
+  writer.time = r.time;
+  const single = structuredClone(out);
+  single.solutions = [single.solutions[index - 1]];
+  return writer.complete(writer.begin(single)[0]);
 }
 
 describe('Phase operating target and hysteresis', () => {

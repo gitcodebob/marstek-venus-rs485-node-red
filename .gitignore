@@ -22,3 +22,6 @@ coverage/
 # Claude Code per-user state — keep local; commands/skills/agents/settings.json are shared
 .claude/settings.local.json
 .claude/sessions/
+
+# Local scratch / experiments — never committed
+.scratch/
