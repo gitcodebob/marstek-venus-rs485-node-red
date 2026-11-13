@@ -30,7 +30,7 @@ function completeCommand(r, out, index = 1) {
 describe('Phase operating target and hysteresis', () => {
   it('throttles 5000 W directly to 1820 W, with no zero, stop, or mode command', () => {
     const r = new ProtectionRunner();
-    r.global.set('lastBatteryCommands', { M1: { mode: 'charge', power: 5000 } });
+    r.global.set('lastBatteryCommands', { M1: { mode: 'charge', power: 5000, mode_refreshed_at: r.time } });
     let m = r.node('Phase command limits', message());
     m = r.prepare(m);
     m = r.runner.run({ flowFile: 'node-red/02 strategy-charge.json', node: 'Max power solution', msg: m, global: r.global, flow: r.flow });
@@ -54,7 +54,7 @@ describe('Phase operating target and hysteresis', () => {
     m.solutions = m.batteries.map(b => ({ id: b.id, mode: 'charge', power: b.power }));
     m.grid_power_phase = { L1: 8680, L2: 2500, L3: 3000 };
     m.grid_power = 14180;
-    r.global.set('lastBatteryCommands', Object.fromEntries(m.solutions.map(s => [s.id, { ...s }])));
+    r.global.set('lastBatteryCommands', Object.fromEntries(m.solutions.map(s => [s.id, { ...s, mode_refreshed_at: r.time }])));
     const out = r.finish(r.prepare(m));
     assert.deepEqual(out.solutions.map(signed), [910, 910, 1200, 1400]);
     for (const index of [1, 2]) {

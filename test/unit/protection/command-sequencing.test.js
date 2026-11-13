@@ -9,7 +9,7 @@ function message(powers = [100], mode = 'charge') {
     solutions: powers.map((power,i) => ({id:`M${i+1}`,mode,power})) };
 }
 function previous(r, id='M1', mode='discharge', power=2000) {
-  r.global.set('lastBatteryCommands',{...(r.global.get('lastBatteryCommands')||{}),[id]:{mode,power}});
+  r.global.set('lastBatteryCommands',{...(r.global.get('lastBatteryCommands')||{}),[id]:{mode,power,mode_refreshed_at:r.time}});
 }
 
 describe('Parallel battery command cycles', () => {
@@ -52,6 +52,23 @@ describe('Parallel battery command cycles', () => {
     }
     const reversed=message([1900]);reversed.batteries[0].power=-2000;
     assert.equal(r.complete(r.begin(reversed)[0]).length,3,'a real wrong-direction reading still gets a safe handoff');
+  });
+  it('refreshes an unchanged active mode every ten seconds without a zero-power preamble', () => {
+    const r=new WriteRunner();previous(r,'M1','charge',2500);
+    const m=message([2500]);m.batteries[0].power=2330;
+    assert.deepEqual(r.complete(r.begin(m)[0]),[]);
+    r.time+=9000;assert.deepEqual(r.complete(r.begin(m)[0]),[]);
+    r.time+=1000;
+    const calls=r.complete(r.begin(m)[0]);
+    assert.deepEqual(calls.map(c=>[c.action,c.data]),[['select.select_option',{option:'charge'}]]);
+    assert.equal(r.global.get('lastBatteryCommands').M1.mode_refreshed_at,r.time);
+    assert.equal(r.global.get('lastBatteryCommands').M1.handoff_pending,false);
+    r.time+=5000;assert.deepEqual(r.complete(r.begin(m)[0]),[]);
+  });
+  it('refreshes the last active mode for old command records without clearing power', () => {
+    const r=new WriteRunner();r.global.set('lastBatteryCommands',{M1:{mode:'charge',power:2500}});
+    const m=message([2500]);m.batteries[0].power=-17;
+    assert.deepEqual(r.complete(r.begin(m)[0]).map(c=>[c.action,c.data]),[['select.select_option',{option:'charge'}]]);
   });
   it('starts batteries in parallel and unlocks only after every battery finishes', () => {
     const r = new WriteRunner();const [a,b]=r.begin(message([100,200]));
